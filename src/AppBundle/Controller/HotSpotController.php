@@ -13,7 +13,7 @@ use AppBundle\Entity\HotSpots;
 class HotSpotController extends Controller
 {
 	/**
-	 * @param HotSpots $spot
+	 * @param $user
 	 * @Route("/eval", name="evaluation")
 	 */
 	public function showPage(Request $r)
@@ -23,6 +23,7 @@ class HotSpotController extends Controller
 
 		return $this->render('hotspot.html.twig', array(
 			'hotspots' => $hotspots,
+			'user' => $user,
 		));
 	}
 
