@@ -25,7 +25,7 @@ class Session
 	/**
 	 * @ORM\Column(type="integer")
 	 */
-	private $caseId = 0;
+	private $case = 0;
 
 	/**
 	 * @ORM\Column(type="string", length=40)

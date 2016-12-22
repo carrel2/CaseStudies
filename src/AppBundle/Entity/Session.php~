@@ -25,7 +25,7 @@ class Session
 	/**
 	 * @ORM\Column(type="integer")
 	 */
-	private $caseId = 0;
+	private $case = 0;
 
 	/**
 	 * @ORM\Column(type="string", length=40)
@@ -142,4 +142,28 @@ class Session
 	{
 		return $this->email;
 	}
+
+    /**
+     * Set caseId
+     *
+     * @param integer $caseId
+     *
+     * @return Session
+     */
+    public function setCaseId($caseId)
+    {
+        $this->caseId = $caseId;
+
+        return $this;
+    }
+
+    /**
+     * Get caseId
+     *
+     * @return integer
+     */
+    public function getCaseId()
+    {
+        return $this->caseId;
+    }
 }

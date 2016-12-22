@@ -32,9 +32,6 @@ class DefaultController extends Controller
 			$em->persist($session);
 			$em->flush();
 
-			$repo = $this->getDoctrine()->getRepository('AppBundle:Session');
-			
-
 			return $this->forward('evaluation', array('id', $session->getId()));
 		}
 
