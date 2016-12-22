@@ -20,18 +20,15 @@ class HotSpotController extends Controller
 		$repo = $this->getDoctrine()->getRepository('AppBundle:HotSpots');
 		$hotspots = $repo->findAll();
 
-		$checkedspots = $repo->findByChecked("true");
-
 		return $this->render('hotspot.html.twig', array(
 			'hotspots' => $hotspots,
-			'checkedspots' => $checkedspots,
 		));
 	}
 
 	/**
-	 * @Route("/update/{id}", name="update")
+	 * @Route("/{session}/update/{id}", name="update")
 	 */
-	public function updatePage($id)
+	public function updatePage($session, $id)
 	{
 		$em = $this->getDoctrine()->getManager();
 		$hotspot = $em->getRepository('AppBundle:HotSpots')->find($id);

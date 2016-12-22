@@ -20,12 +20,12 @@ class Session
 	/**
 	 * @ORM\Column(type="integer")
 	 */
-	private $day;
+	private $day = 0;
 
 	/**
 	 * @ORM\Column(type="integer")
 	 */
-	private $case;
+	private $caseId = 0;
 
 	/**
 	 * @ORM\Column(type="string", length=40)
@@ -35,7 +35,7 @@ class Session
 	/**
 	 * @ORM\Column(type="string", length=30)
 	 */
-	private $email;
+	private $email = '';
 
 	/**
 	 * Get id
@@ -142,4 +142,28 @@ class Session
 	{
 		return $this->email;
 	}
+
+    /**
+     * Set caseId
+     *
+     * @param integer $caseId
+     *
+     * @return Session
+     */
+    public function setCaseId($caseId)
+    {
+        $this->caseId = $caseId;
+
+        return $this;
+    }
+
+    /**
+     * Get caseId
+     *
+     * @return integer
+     */
+    public function getCaseId()
+    {
+        return $this->caseId;
+    }
 }

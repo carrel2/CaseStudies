@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use AppBundle\Entity\Session;
 use AppBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -23,20 +24,18 @@ class DefaultController extends Controller
 
 		if( $form->isSubmitted() && $form->isValid() ) {
 			$user = $form->getData();
+			$session = new Session();
+			$session->setName($user->getName());
+			$session->setEmail($user->getEmail());
 
 			$em = $this->getDoctrine()->getManager();
-			$repo = $this->getDoctrine()->getRepository('AppBundle:User');
+			$em->persist($session);
+			$em->flush();
 
-			$u = $repo->findOneByName($user->getName());
+			$repo = $this->getDoctrine()->getRepository('AppBundle:Session');
+			
 
-			if( !$u ) {
-				$em->persist($user);
-				$em->flush();
-
-				$u = $repo->findOneByName($user->getName());
-			}
-
-			return $this->redirectToRoute('evaluation');
+			return $this->forward('evaluation', array('id', $session->getId()));
 		}
 
 		return $this->render('homepage.html.twig', array(
