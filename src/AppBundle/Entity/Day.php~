@@ -1,0 +1,39 @@
+<?php
+// src/AppBundle/Entity/Day.php
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="Days")
+ */
+class Day
+{
+        /**
+         * @ORM\Column(type="integer")
+         * @ORM\Id
+         * @ORM\GeneratedValue(strategy="AUTO")
+         */
+        private $id;
+
+	/**
+	 * @ORM\Column(type="array")
+	 */
+	private $hotspots;
+
+	/**
+	 * @ORM\Column(type="array")
+	 */
+	private $tests;
+
+	/**
+	 * @ORM\Column(type="array")
+	 */
+	private $medications;
+
+	/**
+	 * @ORM\Column(type="integer")
+	 */
+	private $number;
+}

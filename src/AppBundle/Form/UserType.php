@@ -12,6 +12,7 @@ class UserType extends AbstractType
 	{
 		$builder->add('name')
 			->add('email')
-			->add('submit', SubmitType::class);
+			->add('uin')
+			->add('start', SubmitType::class);
 	}
 }

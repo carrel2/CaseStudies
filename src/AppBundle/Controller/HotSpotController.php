@@ -13,17 +13,18 @@ use AppBundle\Entity\HotSpots;
 class HotSpotController extends Controller
 {
 	/**
-	 * @param $user
 	 * @Route("/eval", name="evaluation")
 	 */
-	public function showPage(Request $r)
+	public function showPage(Request $r, $id)
 	{
 		$repo = $this->getDoctrine()->getRepository('AppBundle:HotSpots');
 		$hotspots = $repo->findAll();
 
+		$checkedspots = $repo->findByChecked("true");
+
 		return $this->render('hotspot.html.twig', array(
 			'hotspots' => $hotspots,
-			'user' => $user,
+			'checkedspots' => $checkedspots,
 		));
 	}
 

@@ -5,9 +5,11 @@ li.true { background: yellow; }
 </style>
 
 {% for spot in hotspots %}
-	<li class="{{ spot.checked }}"><a href="{{ path('update', { 'id': spot.id }) }}">{{ spot.name }}</li>
+	<li><a href="{{ path('update', { 'id': spot.id }) }}">{{ spot.name }}</li>
 {% endfor %}
 
 <a href="{{ path('reset') }}">Reset</a>
 
-{{ user.id }}
+{% for spot in checkedspots %}
+	<li>{{ spot.name }}</li>
+{% endfor %}

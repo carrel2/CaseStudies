@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="hot_spots")
+ * @ORM\Table(name="Hotspots")
  */
 class HotSpots
 {
@@ -18,14 +18,19 @@ class HotSpots
 	private $id;
 
 	/**
+	 * @ORM\Column(type="integer")
+	 */
+	private $case;
+
+	/**
 	 * @ORM\Column(type="string", length=40)
 	 */
 	private $name;
 
 	/**
-	 * @ORM\Column(type="text", length=5)
+	 * @ORM\Column(type="text")
 	 */
-	private $checked;
+	private $info;
 
     /**
      * Get id
@@ -83,5 +88,53 @@ class HotSpots
     public function getChecked()
     {
         return $this->checked;
+    }
+
+    /**
+     * Set info
+     *
+     * @param string $info
+     *
+     * @return HotSpots
+     */
+    public function setInfo($info)
+    {
+        $this->info = $info;
+
+        return $this;
+    }
+
+    /**
+     * Get info
+     *
+     * @return string
+     */
+    public function getInfo()
+    {
+        return $this->info;
+    }
+
+    /**
+     * Set case
+     *
+     * @param integer $case
+     *
+     * @return HotSpots
+     */
+    public function setCase($case)
+    {
+        $this->case = $case;
+
+        return $this;
+    }
+
+    /**
+     * Get case
+     *
+     * @return integer
+     */
+    public function getCase()
+    {
+        return $this->case;
     }
 }

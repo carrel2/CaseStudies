@@ -33,6 +33,13 @@ class User
 	 */
 	protected $email;
 
+	/**
+	 * @ORM\Column(type="string", length=9)
+	 *
+	 * @Assert\NotBlank()
+	 */
+	protected $uin;
+
 	public function getId() {
 		return $this->id;
 	}

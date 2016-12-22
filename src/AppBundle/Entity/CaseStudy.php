@@ -1,14 +1,14 @@
 <?php
-// src/AppBundle/Entity/HotSpots.php
+// src/AppBundle/Entity/CaseStudy.php
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="Hotspots")
+ * @ORM\Table(name="Cases")
  */
-class HotSpots
+class CaseStudy
 {
 	/**
 	 * @ORM\Column(type="integer")
@@ -18,11 +18,6 @@ class HotSpots
 	private $id;
 
 	/**
-	 * @ORM\Column(type="integer")
-	 */
-	private $case;
-
-	/**
 	 * @ORM\Column(type="string", length=40)
 	 */
 	private $name;
@@ -30,7 +25,7 @@ class HotSpots
 	/**
 	 * @ORM\Column(type="text")
 	 */
-	private $info;
+	private $description;
 
     /**
      * Get id
@@ -47,7 +42,7 @@ class HotSpots
      *
      * @param string $name
      *
-     * @return HotSpots
+     * @return CaseStudy
      */
     public function setName($name)
     {
@@ -67,50 +62,26 @@ class HotSpots
     }
 
     /**
-     * Set checked
+     * Set description
      *
-     * @param boolean $checked
+     * @param string $description
      *
-     * @return HotSpots
+     * @return CaseStudy
      */
-    public function setChecked($checked)
+    public function setDescription($description)
     {
-        $this->checked = $checked;
+        $this->description = $description;
 
         return $this;
     }
 
     /**
-     * Get checked
-     *
-     * @return boolean
-     */
-    public function getChecked()
-    {
-        return $this->checked;
-    }
-
-    /**
-     * Set info
-     *
-     * @param string $info
-     *
-     * @return HotSpots
-     */
-    public function setInfo($info)
-    {
-        $this->info = $info;
-
-        return $this;
-    }
-
-    /**
-     * Get info
+     * Get description
      *
      * @return string
      */
-    public function getInfo()
+    public function getDescription()
     {
-        return $this->info;
+        return $this->description;
     }
 }

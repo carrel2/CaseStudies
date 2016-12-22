@@ -21,7 +21,7 @@ class DefaultController extends Controller
 
 		$form->handleRequest($request);
 
-		if( $form->isSubmitted() ) {
+		if( $form->isSubmitted() && $form->isValid() ) {
 			$user = $form->getData();
 
 			$em = $this->getDoctrine()->getManager();
@@ -32,11 +32,11 @@ class DefaultController extends Controller
 			if( !$u ) {
 				$em->persist($user);
 				$em->flush();
+
+				$u = $repo->findOneByName($user->getName());
 			}
 
-			$u = $repo->findOneByName($user->getName());
-
-			return $this->redirectToRoute('evaluation', array( 'user' => $u->getId() ));
+			return $this->redirectToRoute('evaluation');
 		}
 
 		return $this->render('homepage.html.twig', array(
