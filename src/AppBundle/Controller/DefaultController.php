@@ -32,7 +32,7 @@ class DefaultController extends Controller
 			$em->persist($session);
 			$em->flush();
 
-			return $this->forward('evaluation', array('id', $session->getId()));
+			return $this->redirectToRoute('evaluation', array('id', $session->getId()));
 		}
 
 		return $this->render('homepage.html.twig', array(
