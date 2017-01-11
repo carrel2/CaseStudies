@@ -24,5 +24,5 @@ security:
             http_basic: ~
             provider: db_provider
 
-        access_control:
-            - { path: ^/, roles: ROLE_ADMIN }
+    access_control:
+        - { path: ^/, roles: ROLE_ADMIN }

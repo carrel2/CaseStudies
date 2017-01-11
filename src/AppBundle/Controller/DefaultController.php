@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\UserForm;
+use AppBundle\Entity\User;
 use AppBundle\Entity\Session;
 use AppBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -16,7 +16,7 @@ class DefaultController extends Controller
 	 */
 	public function indexAction(Request $request)
 	{
-		$user = new UserForm();
+		$user = new User();
 
 		$form = $this->createForm( UserType::class, $user );
 
