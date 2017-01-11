@@ -1,15 +1,10 @@
 {# app/Resources/views/hotspot.html.twig #}
+{% extends 'base.html.twig' %}
 
-<style>
-li.true { background: yellow; }
-</style>
+{% block body %}
+	{% for spot in hotspots %}
+		<li><a href="{{ path('update', { 'id': spot.id }) }}">{{ spot.name }}</li>
+	{% endfor %}
 
-{% for spot in hotspots %}
-	<li><a href="{{ path('update', { 'id': spot.id }) }}">{{ spot.name }}</li>
-{% endfor %}
-
-<a href="{{ path('reset') }}">Reset</a>
-
-{% for spot in checkedspots %}
-	<li>{{ spot.name }}</li>
-{% endfor %}
+	<a href="{{ path('order_tests') }}">Continue</a>
+{% endblock %}

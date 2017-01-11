@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\User;
+use AppBundle\Entity\UserForm;
 use AppBundle\Entity\Session;
 use AppBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -16,7 +16,7 @@ class DefaultController extends Controller
 	 */
 	public function indexAction(Request $request)
 	{
-		$user = new User();
+		$user = new UserForm();
 
 		$form = $this->createForm( UserType::class, $user );
 
@@ -32,7 +32,7 @@ class DefaultController extends Controller
 			$em->persist($session);
 			$em->flush();
 
-			return $this->redirectToRoute('evaluation', array('id', $session->getId()));
+			return $this->redirectToRoute('evaluation');
 		}
 
 		return $this->render('homepage.html.twig', array(
