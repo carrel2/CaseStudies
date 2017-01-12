@@ -4,6 +4,7 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -14,6 +15,7 @@ class HotSpotController extends Controller
 {
 	/**
 	 * @Route("/eval", name="evaluation")
+	 * @Security("has_role('ROLE_USER')")
 	 */
 	public function showPage(Request $r, $id)
 	{
@@ -27,6 +29,7 @@ class HotSpotController extends Controller
 
 	/**
 	 * @Route("/{session}/update/{id}", name="update")
+	 * @Security("has_role('ROLE_USER')")
 	 */
 	public function updatePage($session, $id)
 	{
@@ -45,6 +48,7 @@ class HotSpotController extends Controller
 
 	/**
 	 * @Route("/reset", name="reset")
+	 * @Security("has_role('ROLE_USER')")
 	 */
 	public function resetPage()
 	{

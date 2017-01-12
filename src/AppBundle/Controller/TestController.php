@@ -4,6 +4,7 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Test;
@@ -12,6 +13,7 @@ class TestController extends Controller
 {
 	/**
 	 * @Route("/tests", name="order_tests")
+	 * @Security("has_role('ROLE_USER')")
 	 */
 	public function showPage(Request $r)
 	{

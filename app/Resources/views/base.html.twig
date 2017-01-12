@@ -9,4 +9,9 @@
     <body>
         {% block body %}{% endblock %}
     </body>
+    <footer>
+        {% block footer %}
+            <a href="{{ path('logout') }}">Logout</a>
+        {% endblock %}
+    </footer>
 </html>

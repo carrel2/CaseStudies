@@ -8,8 +8,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
+ * @ORM\Entity
  * @ORM\Table(name="app_users")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  * @UniqueEntity(fields="email", message="Email already taken")
  * @UniqueEntity(fields="username", message="Username already taken")
  */
@@ -47,6 +47,13 @@ class User implements UserInterface, \Serializable
     private $email;
 
     /**
+     * @ORM\Column(type="string", length=9, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Length(min=9, max=9)
+     */
+    private $uin;
+
+    /**
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
@@ -70,9 +77,14 @@ class User implements UserInterface, \Serializable
         return null;
     }
 
-    public function getPassword()
+    public function getPlainPassword()
     {
-        return $this->password;
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
     }
 
     public function getRoles()
@@ -119,15 +131,15 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Set username
+     * Set name
      *
-     * @param string $username
+     * @param string $name
      *
      * @return User
      */
-    public function setUsername($username)
+    public function setUsername($name)
     {
-        $this->username = $username;
+        $this->username = $name;
 
         return $this;
     }
@@ -144,6 +156,11 @@ class User implements UserInterface, \Serializable
         $this->password = $password;
 
         return $this;
+    }
+
+    public function getPassword()
+    {
+        return $this->password;
     }
 
     /**
@@ -168,6 +185,18 @@ class User implements UserInterface, \Serializable
     public function getEmail()
     {
         return $this->email;
+    }
+
+    public function setUin($uin)
+    {
+        $this->uin = $uin;
+
+        return $this;
+    }
+
+    public function getUin()
+    {
+        return $this->uin;
     }
 
     /**
