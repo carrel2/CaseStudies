@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 class RegisterController extends Controller
 {
 	/**
-	 * @Route("/register", name="registration")
+	 * @Route("/registration", name="registration")
 	 */
 	public function registerAction(Request $request)
 	{
