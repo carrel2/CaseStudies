@@ -15,6 +15,10 @@ class RegisterController extends Controller
 	 */
 	public function registerAction(Request $request)
 	{
+		if( $this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+			return $this->redirectToRoute('default');
+		}
+
 		$user = new User();
 
 		$form = $this->createForm( UserType::class, $user );
