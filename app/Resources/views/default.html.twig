@@ -1,8 +1,33 @@
 {% extends 'base.html.twig' %}
 
+{% block scripts %}
+	<script>
+		function updateCase() {
+			var xhttp = new XMLHttpRequest();
+			var id = document.getElementById("default_case").value;
+
+			xhttp.onreadystatechange = function() {
+				if( this.readyState == 4 && this.status == 200 ) {
+					document.getElementById("case").innerHTML = this.responseText;
+				}
+			};
+			xhttp.open("GET", "/getDescription/" + id, true);
+			xhttp.send();
+		}
+	</script>
+{% endblock %}
+
 {% block body %}
 	<div>
-		<div>Form</div>
-		<a href="{{ path('evaluation') }}">Start</a>
+		{{ form_start(form) }}
+			{{ form_label(form.case) }}
+			{{ form_errors(form.case) }}
+			{{ form_widget(form.case, {'attr': {'onchange': 'updateCase()'}}) }}
+
+			{{ form_rest(form) }}
+			<button type="submit">Start</button>
+		{{ form_end(form) }}
 	</div>
+	<div id="case"></div>
+	<script>updateCase()</script>
 {% endblock %}

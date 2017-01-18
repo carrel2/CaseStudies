@@ -20,7 +20,7 @@ class CaseStudy
 	/**
 	 * @ORM\Column(type="string", length=40)
 	 */
-	private $name;
+	private $title;
 
 	/**
 	 * @ORM\Column(type="text")
@@ -38,27 +38,27 @@ class CaseStudy
     }
 
     /**
-     * Set name
+     * Set title
      *
      * @param string $name
      *
      * @return CaseStudy
      */
-    public function setName($name)
+    public function setTitle($title)
     {
-        $this->name = $name;
+        $this->title = $title;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get title
      *
      * @return string
      */
-    public function getName()
+    public function getTitle()
     {
-        return $this->name;
+        return $this->title;
     }
 
     /**
