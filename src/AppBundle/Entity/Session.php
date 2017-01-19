@@ -20,7 +20,7 @@ class Session
 	/**
 	 * @ORM\Column(type="integer")
 	 */
-	private $day = 0;
+	private $dayId = 0;
 
 	/**
 	 * @ORM\Column(type="integer")
@@ -28,14 +28,9 @@ class Session
 	private $caseId = 0;
 
 	/**
-	 * @ORM\Column(type="string", length=40)
+	 * @ORM\Column(type="integer")
 	 */
-	private $name;
-
-	/**
-	 * @ORM\Column(type="string", length=30)
-	 */
-	private $email = '';
+	private $userId;
 
 	/**
 	 * Get id
@@ -47,101 +42,29 @@ class Session
 		return $this->id;
 	}
 
-	/**
-	 * Set day
-	 *
-	 * @param integer $day
-	 *
-	 * @return Session
-	 */
-	public function setDay($day)
-	{
-		$this->day = $day;
+    /**
+     * Set dayId
+     *
+     * @param integer $dayId
+     *
+     * @return Session
+     */
+    public function setDayId($dayId)
+    {
+        $this->dayId = $dayId;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Get day
-	 *
-	 * @return integer
-	 */
-	public function getDay()
-	{
-		return $this->day;
-	}
-
-	/**
-	 * Set case
-	 *
-	 * @param integer $case
-	 *
-	 * @return Session
-	 */
-	public function setCase($case)
-	{
-		$this->case = $case;
-
-		return $this;
-	}
-
-	/**
-	 * Get case
-	 *
-	 * @return integer
-	 */
-	public function getCase()
-	{
-		return $this->case;
-	}
-
-	/**
-	 * Set name
-	 *
-	 * @param string $name
-	 *
-	 * @return Session
-	 */
-	public function setName($name)
-	{
-		$this->name = $name;
-
-		return $this;
-	}
-
-	/**
-	 * Get name
-	 *
-	 * @return string
-	 */
-	public function getName()
-	{
-		return $this->name;
-	}
-
-	/**
-	 * Set email
-	 *
-	 * @param string $email
-	 *
-	 * @return Session
-	 */
-	public function setEmail($email)
-	{
-		$this->email = $email;
-
-		return $this;
-	}
-
-	/**
-	 * Get email
-	 *
-	 * @return string
-	 */
-	public function getEmail()
-	{
-		return $this->email;
-	}
+    /**
+     * Get dayId
+     *
+     * @return integer
+     */
+    public function getDayId()
+    {
+        return $this->dayId;
+    }
 
     /**
      * Set caseId
@@ -165,5 +88,29 @@ class Session
     public function getCaseId()
     {
         return $this->caseId;
+    }
+
+    /**
+     * Set userId
+     *
+     * @param integer $userId
+     *
+     * @return Session
+     */
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
+
+        return $this;
+    }
+
+    /**
+     * Get userId
+     *
+     * @return integer
+     */
+    public function getUserId()
+    {
+        return $this->userId;
     }
 }

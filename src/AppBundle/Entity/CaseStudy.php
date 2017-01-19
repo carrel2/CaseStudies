@@ -27,6 +27,18 @@ class CaseStudy
 	 */
 	private $description;
 
+    public function getCase()
+    {
+        return $this->title;
+    }
+
+    public function setCase($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
     /**
      * Get id
      *

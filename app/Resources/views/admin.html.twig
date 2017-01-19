@@ -4,14 +4,14 @@
 	<script>
 		function updateCase() {
 			var xhttp = new XMLHttpRequest();
-			var id = document.getElementById("default_case").value;
+			var id = document.getElementById("admin_case").value;
 
 			xhttp.onreadystatechange = function() {
 				if( this.readyState == 4 && this.status == 200 ) {
-					document.getElementById("case").innerHTML = this.responseText;
+					document.getElementById("description").innerHTML = this.responseText;
 				}
 			};
-			xhttp.open("GET", "/getDescription/" + id, true);
+			xhttp.open("GET", "/getCase/" + id, true);
 			xhttp.send();
 		}
 	</script>
@@ -21,12 +21,12 @@
 	{{ form_start(form) }}
 		{{ form_label(form.case) }}
 		{{ form_errors(form.case) }}
-		{{ form_widget(form.case, {'attr': {'onchange': 'updateCase()'}}) }}
+		{{ form_widget(form.case, {'attr': {'onchange': 'updateCase()'}} ) }}
 
 		{{ form_rest(form) }}
-		<button type="submit">Start</button>
-	{{ form_end(form) }}
 
-	<div id="case"></div>
-	<script>updateCase()</script>
+		<div id="description"></div>
+		<button type="submit">Submit</button>
+
+	{{ form_end(form) }}
 {% endblock %}

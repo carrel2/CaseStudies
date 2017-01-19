@@ -3,6 +3,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Form\DefaultType;
+use AppBundle\Entity\CaseStudy;
+use AppBundle\Entity\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -17,17 +19,32 @@ class DefaultController extends Controller
 	 */
 	public function defaultAction(Request $r)
 	{
+		$user = $this->getUser();
+		$case = null;
 		$form = $this->createForm( DefaultType::class );
 
 		$form->handleRequest($r);
 
 		if( $form->isSubmitted() && $form->isValid() )
 		{
+			$em = $this->getDoctrine()->getManager();
+
+			$case = $form->getData()['case'];
+			$session = new Session();
+			$repo = $em->getRepository('AppBundle:Session');
+
+			$session->setCaseId( $case->getId() );
+			$session->setUserId( $user->getId() );
+
+			$em->persist($session);
+			$em->flush();
+
 			return $this->redirectToRoute('evaluation');
 		}
 
 		return $this->render('default.html.twig', array(
 			'form' => $form->createView(),
+			'case' => $case,
 		));
 	}
 

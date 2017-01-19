@@ -2,9 +2,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	{% for spot in hotspots %}
-		<li><a href="{{ path('update', { 'id': spot.id }) }}">{{ spot.name }}</li>
-	{% endfor %}
+	{{ dump(hotspots) }}
 
 	<a href="{{ path('order_tests') }}">Continue</a>
 {% endblock %}
