@@ -30,14 +30,26 @@ class DefaultController extends Controller
 			$em = $this->getDoctrine()->getManager();
 
 			$case = $form->getData()['case'];
-			$session = new Session();
 			$repo = $em->getRepository('AppBundle:Session');
 
-			$session->setCaseId( $case->getId() );
-			$session->setUserId( $user->getId() );
+			$q = $repo->createQueryBuilder('b')
+				->where('b.caseId = :cid AND b.userId = :uid')
+				->setParameter('cid', $case->getId() )
+				->setParameter('uid', $user->getId())
+				->getQuery();
 
-			$em->persist($session);
-			$em->flush();
+			$session = $q->setMaxResults(1)->getOneOrNullResult();
+
+			if( !$session ) {
+				$session = new Session();
+				$session->setCaseId( $case->getId() );
+				$session->setUserId( $user->getId() );
+
+				$em->persist($session);
+				$em->flush();
+			}
+
+			$r->getSession()->set('session', $session->getId());
 
 			return $this->redirectToRoute('evaluation');
 		}

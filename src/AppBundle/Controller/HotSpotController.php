@@ -19,11 +19,14 @@ class HotSpotController extends Controller
 	 */
 	public function showPage(Request $r, $id)
 	{
+		$user = $this->getUser();
+		$id = $r->getSession()->get('session');
+
 		$repo = $this->getDoctrine()->getRepository('AppBundle:Session');
-		$hotspots = $repo->findAll();
+		$session = $repo->find( $id );
 
 		return $this->render('hotspot.html.twig', array(
-			'hotspots' => $hotspots,
+			'session' => $session,
 		));
 	}
 
