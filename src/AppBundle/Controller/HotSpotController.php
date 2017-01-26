@@ -62,7 +62,8 @@ class HotSpotController extends Controller
 		$day->addHotspot($hotspot);
 		$em->flush();
 
-		return new Response($hotspot->getName() . ": " . $hotspot->getInfo());
+		return $this->redirectToRoute('evaluation');
+		//return new Response($hotspot->getName() . ": " . $hotspot->getInfo());
 	}
 
 	/**

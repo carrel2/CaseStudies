@@ -4,5 +4,13 @@
 {% block body %}
 	{{ dump(session) }}
 
+	{% for spot in hotspots %}
+		<a href="{{ path('update', {'session': session.id, 'id': spot.id} ) }}">{{ spot.name }}</a>
+	{% endfor %}
+
 	<a href="{{ path('order_tests') }}">Continue</a>
+
+	{% for spot in checked %}
+		<li>{{ spot.name }}: {{ spot.info }}</li>
+	{% endfor %}
 {% endblock %}
