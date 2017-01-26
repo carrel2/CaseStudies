@@ -1,22 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block scripts %}
-	<script>
-		function updateCase() {
-			var xhttp = new XMLHttpRequest();
-			var id = document.getElementById("admin_case").value;
-
-			xhttp.onreadystatechange = function() {
-				if( this.readyState == 4 && this.status == 200 ) {
-					document.getElementById("description").innerHTML = this.responseText;
-				}
-			};
-			xhttp.open("GET", "/getCase/" + id, true);
-			xhttp.send();
-		}
-	</script>
-{% endblock %}
-
 {% block body %}
 	{{ form_start(form) }}
 		{{ form_label(form.case) }}
