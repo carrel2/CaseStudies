@@ -25,28 +25,44 @@ class HotSpotController extends Controller
 		$repo = $this->getDoctrine()->getRepository('AppBundle:Session');
 		$session = $repo->find( $id );
 
+		$repo = $this->getDoctrine()->getRepository('AppBundle:Day');
+		$day = $repo->find( $session->getDay() );
+
+		$repo = $this->getDoctrine()->getRepository('AppBundle:HotSpots');
+		$hotspots = $repo->findByCaseId( $session->getCaseId() );
+		$checked = array();
+
+		foreach( $day->getHotspots() as $hotspot ) {
+			array_push( $checked, $hotspot );
+		}
+
 		return $this->render('hotspot.html.twig', array(
 			'session' => $session,
+			'hotspots' => $hotspots,
+			'checked' => $checked,
 		));
 	}
 
 	/**
-	 * @Route("/{session}/update/{id}", name="update")
+	 * @Route("/update/{session}/{id}", name="update")
 	 * @Security("has_role('ROLE_USER')")
 	 */
-	public function updatePage($session, $id)
+	public function updatePage(Request $r, $session, $id)
 	{
 		$em = $this->getDoctrine()->getManager();
 		$hotspot = $em->getRepository('AppBundle:HotSpots')->find($id);
+
+		$session = $em->getRepository('AppBundle:Session')->find($session);
+		$day = $em->getRepository('AppBundle:Day')->find($session->getDay());
 
 		if( !$hotspot ) {
 			throw $this->createNotFoundException('No info found');
 		}
 
-		$hotspot->setChecked("true");
+		$day->addHotspot($hotspot);
 		$em->flush();
 
-		return $this->redirectToRoute('evaluation');
+		return new Response($hotspot->getName() . ": " . $hotspot->getInfo());
 	}
 
 	/**

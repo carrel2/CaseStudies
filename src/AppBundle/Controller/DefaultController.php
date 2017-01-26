@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Form\DefaultType;
 use AppBundle\Entity\CaseStudy;
 use AppBundle\Entity\Session;
+use AppBundle\Entity\Day;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -21,14 +22,22 @@ class DefaultController extends Controller
 	{
 		$user = $this->getUser();
 		$case = null;
+
+		$day = new Day();
+		$day->setNumber(1);
+
+		$em = $this->getDoctrine()->getManager();
+		$em->persist($day);
+		$em->flush();
+
+		$days = array($day,);
+
 		$form = $this->createForm( DefaultType::class );
 
 		$form->handleRequest($r);
 
 		if( $form->isSubmitted() && $form->isValid() )
 		{
-			$em = $this->getDoctrine()->getManager();
-
 			$case = $form->getData()['case'];
 			$repo = $em->getRepository('AppBundle:Session');
 
@@ -44,6 +53,7 @@ class DefaultController extends Controller
 				$session = new Session();
 				$session->setCaseId( $case->getId() );
 				$session->setUserId( $user->getId() );
+				$session->setDays($days);
 
 				$em->persist($session);
 				$em->flush();

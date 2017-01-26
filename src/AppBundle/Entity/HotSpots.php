@@ -20,7 +20,7 @@ class HotSpots
 	/**
 	 * @ORM\Column(type="integer")
 	 */
-	private $case;
+	private $caseId;
 
 	/**
 	 * @ORM\Column(type="string", length=40)
@@ -67,30 +67,6 @@ class HotSpots
     }
 
     /**
-     * Set checked
-     *
-     * @param boolean $checked
-     *
-     * @return HotSpots
-     */
-    public function setChecked($checked)
-    {
-        $this->checked = $checked;
-
-        return $this;
-    }
-
-    /**
-     * Get checked
-     *
-     * @return boolean
-     */
-    public function getChecked()
-    {
-        return $this->checked;
-    }
-
-    /**
      * Set info
      *
      * @param string $info
@@ -121,7 +97,7 @@ class HotSpots
      *
      * @return HotSpots
      */
-    public function setCase($case)
+    public function setCaseId($case)
     {
         $this->case = $case;
 
@@ -133,7 +109,7 @@ class HotSpots
      *
      * @return integer
      */
-    public function getCase()
+    public function getCaseId()
     {
         return $this->case;
     }

@@ -18,14 +18,14 @@ class Session
 	private $id;
 
 	/**
-	 * @ORM\Column(type="integer")
+	 * @ORM\Column(type="array")
 	 */
-	private $dayId = 0;
+	private $days = array();
 
 	/**
 	 * @ORM\Column(type="integer")
 	 */
-	private $caseId = 0;
+	private $caseId;
 
 	/**
 	 * @ORM\Column(type="integer")
@@ -43,27 +43,47 @@ class Session
 	}
 
     /**
-     * Set dayId
+     * Get days
      *
-     * @param integer $dayId
+     * @return array
+     */
+    public function getDays()
+    {
+        return $this->days;
+    }
+
+    /**
+     * Set days
      *
      * @return Session
      */
-    public function setDayId($dayId)
+    public function setDays($days)
     {
-        $this->dayId = $dayId;
+        $this->days = $days;
 
         return $this;
     }
 
     /**
-     * Get dayId
+     * Add day
+     *
+     * @return Session
+     */
+    public function addDay($day)
+    {
+        array_push( $this->days, $day );
+
+        return $this;
+    }
+
+    /**
+     * Get current day
      *
      * @return integer
      */
-    public function getDayId()
+    public function getDay()
     {
-        return $this->dayId;
+        return end($this->days);
     }
 
     /**

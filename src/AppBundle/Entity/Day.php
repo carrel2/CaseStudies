@@ -20,17 +20,17 @@ class Day
 	/**
 	 * @ORM\Column(type="array")
 	 */
-	private $hotspots;
+	private $hotspots = array();
 
 	/**
 	 * @ORM\Column(type="array")
 	 */
-	private $tests;
+	private $tests = array();
 
 	/**
 	 * @ORM\Column(type="array")
 	 */
-	private $medications;
+	private $medications = array();
 
 	/**
 	 * @ORM\Column(type="integer")
@@ -72,6 +72,20 @@ class Day
 	}
 
 	/**
+	 * Add hotspot
+	 *
+	 * @param integer $hotspot
+	 *
+	 * @return Day
+	 */
+	public function addHotspot($hotspot)
+	{
+		array_push($this->hotspots, $hotspot);
+
+		return $this;
+	}
+
+	/**
 	 * Set tests
 	 *
 	 * @param array $tests
@@ -96,6 +110,20 @@ class Day
 	}
 
 	/**
+	 * Add test
+	 *
+	 * @param integer $test
+	 *
+	 * @return Day
+	 */
+	public function addTest($test)
+	{
+		array_push($this->tests, $test);
+
+		return $this;
+	}
+
+	/**
 	 * Set medications
 	 *
 	 * @param array $medications
@@ -117,6 +145,20 @@ class Day
 	public function getMedications()
 	{
 		return $this->medications;
+	}
+
+	/**
+	 * Add medication
+	 *
+	 * @param integer $medication
+	 *
+	 * @return Day
+	 */
+	public function addMedication($medication)
+	{
+		array_push($this->medications, $medication);
+
+		return $this;
 	}
 
 	/**
