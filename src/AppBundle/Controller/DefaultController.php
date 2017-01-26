@@ -26,18 +26,18 @@ class DefaultController extends Controller
 		$day = new Day();
 		$day->setNumber(1);
 
-		$em = $this->getDoctrine()->getManager();
-		$em->persist($day);
-		$em->flush();
-
-		$days = array($day,);
-
 		$form = $this->createForm( DefaultType::class );
 
 		$form->handleRequest($r);
 
 		if( $form->isSubmitted() && $form->isValid() )
 		{
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($day);
+			$em->flush();
+
+			$days = array($day,);
+
 			$case = $form->getData()['case'];
 			$repo = $em->getRepository('AppBundle:Session');
 
