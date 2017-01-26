@@ -23,9 +23,6 @@ class DefaultController extends Controller
 		$user = $this->getUser();
 		$case = null;
 
-		$day = new Day();
-		$day->setNumber(1);
-
 		$form = $this->createForm( DefaultType::class );
 
 		$form->handleRequest($r);
@@ -33,10 +30,6 @@ class DefaultController extends Controller
 		if( $form->isSubmitted() && $form->isValid() )
 		{
 			$em = $this->getDoctrine()->getManager();
-			$em->persist($day);
-			$em->flush();
-
-			$days = array($day,);
 
 			$case = $form->getData()['case'];
 			$repo = $em->getRepository('AppBundle:Session');
@@ -50,6 +43,14 @@ class DefaultController extends Controller
 			$session = $q->setMaxResults(1)->getOneOrNullResult();
 
 			if( !$session ) {
+				$day = new Day();
+				$day->setNumber(1);
+
+				$em->persist($day);
+				$em->flush();
+
+				$days = array($day,);
+
 				$session = new Session();
 				$session->setCaseId( $case->getId() );
 				$session->setUserId( $user->getId() );
