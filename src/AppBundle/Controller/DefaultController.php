@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class DefaultController extends Controller
 {
@@ -23,26 +24,33 @@ class DefaultController extends Controller
 		$user = $this->getUser();
 		$case = null;
 
-		$form = $this->createForm( DefaultType::class );
+		$em = $this->getDoctrine()->getManager();
+
+		$repo = $em->getRepository('AppBundle:Session');
+
+		$q = $repo->createQueryBuilder('b')
+			->where('b.userId = :uid')
+			->setParameter('uid', $user->getId())
+			->getQuery();
+
+		$session = $q->setMaxResults(1)->getOneOrNullResult();
+
+		if( $session ) {
+			$case = $em->getRepository('AppBundle:CaseStudy')->find( $session->getCaseId() );
+			$form = $this->createFormBuilder()
+				->add('resume', SubmitType::class)
+				->getForm();
+		} else {
+			$form = $this->createForm( DefaultType::class );
+		}
 
 		$form->handleRequest($r);
 
 		if( $form->isSubmitted() && $form->isValid() )
 		{
-			$em = $this->getDoctrine()->getManager();
-
-			$case = $form->getData()['case'];
-			$repo = $em->getRepository('AppBundle:Session');
-
-			$q = $repo->createQueryBuilder('b')
-				->where('b.caseId = :cid AND b.userId = :uid')
-				->setParameter('cid', $case->getId() )
-				->setParameter('uid', $user->getId())
-				->getQuery();
-
-			$session = $q->setMaxResults(1)->getOneOrNullResult();
-
 			if( !$session ) {
+				$case = $form->getData()['case'];
+
 				$day = new Day();
 				$day->setNumber(1);
 
@@ -68,6 +76,7 @@ class DefaultController extends Controller
 		return $this->render('default.html.twig', array(
 			'form' => $form->createView(),
 			'case' => $case,
+			'session' => $session,
 		));
 	}
 

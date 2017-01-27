@@ -23,3 +23,20 @@ function updateAdminCase() {
 	xhttp.open("GET", "/getCase/" + id, true);
 	xhttp.send();
 }
+
+function updateHotspots(element) {
+	var xhttp = new XMLHttpRequest();
+
+	xhttp.onreadystatechange = function() {
+		if( this.readyState == 4 && this.status == 200 ) {
+			var li = document.createElement("LI");
+			li.innerHTML = this.responseText;
+
+			if( li.innerHTML != '' ) {
+				document.getElementById("checked").appendChild(li);
+			}
+		}
+	};
+	xhttp.open("GET", "/update/" + element.getAttribute('data-path'), true);
+	xhttp.send();
+}

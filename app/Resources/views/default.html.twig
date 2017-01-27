@@ -1,15 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	{{ form_start(form) }}
-		{{ form_label(form.case) }}
-		{{ form_errors(form.case) }}
-		{{ form_widget(form.case, {'attr': {'onchange': 'updateCase()'}}) }}
+	{% if session %}
+		<div>You have a session in progress: {{ case.title }}</div>
+		{{ form_start(form) }}
+		{{ form_widget(form) }}
+		{{ form_end(form) }}
+	{% else %}
+		{{ form_start(form) }}
+			{{ form_label(form.case) }}
+			{{ form_errors(form.case) }}
+			{{ form_widget(form.case, {'attr': {'onchange': 'updateCase()'}}) }}
 
-		{{ form_rest(form) }}
-		<button type="submit">Start</button>
-	{{ form_end(form) }}
+			{{ form_rest(form) }}
+			<button type="submit">Start</button>
+		{{ form_end(form) }}
 
-	<div id="case"></div>
-	<script>updateCase()</script>
+		<div id="case"></div>
+		<script>updateCase()</script>
+	{% endif %}
 {% endblock %}

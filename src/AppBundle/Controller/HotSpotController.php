@@ -7,7 +7,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\HotSpots;
 
@@ -59,11 +58,15 @@ class HotSpotController extends Controller
 			throw $this->createNotFoundException('No info found');
 		}
 
-		$day->addHotspot($hotspot);
-		$em->flush();
+		if( !in_array( $hotspot, $day->getHotspots() ) ) {
+			$day->addHotspot($hotspot);
+			$em->flush();
 
-		return $this->redirectToRoute('evaluation');
-		//return new Response($hotspot->getName() . ": " . $hotspot->getInfo());
+			return new Response($hotspot->getName() . ": " . $hotspot->getInfo());
+		}
+
+		//return $this->redirectToRoute('evaluation');
+		return new Response('');
 	}
 
 	/**

@@ -1,5 +1,5 @@
 <?php
-// src/AppBundle/Controller/TestController.php
+// src/AppBundle/Controller/TestsController.php
 
 namespace AppBundle\Controller;
 
@@ -8,8 +8,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Test;
+use AppBundle\Form\TestsType;
 
-class TestController extends Controller
+class TestsController extends Controller
 {
 	/**
 	 * @Route("/tests", name="order_tests")
@@ -17,17 +18,10 @@ class TestController extends Controller
 	 */
 	public function showPage(Request $r)
 	{
-		$referer = $r->headers->get('referer');
-
-		if( $referer !== 'http://127.0.0.1:8000/eval' ) {
-			throw $this->createNotFoundException();
-		} 
+		$form = $this->createForm( TestsType::class );
 
 		return $this->render('tests.html.twig', array(
-			'referer' => $r->headers->get('referer'),
+			'form' => $form->createView(),
 		));
-//		return $this->render('tests.html.twig', array(
-//			'form' => $form->createView(),
-//		));
 	}
 }

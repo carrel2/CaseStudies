@@ -1,0 +1,3 @@
+2	Nasogastric intubation	No fluid reflux. Some small amount of gas releases form stomach. No fluid obtained after siphoning from stomach tube.	0	0
+2	Rectal examination	No abnormalities found.	0	0
+2	Necropsy	Severe chronic bronchopneumonia. A large focal abcess that was alveolar in nature was found in the left thorax. Multiple nodular abscesses were also found in the caudal lungs. A positive culture for Streptococcus zooepidemicus was obtained which was sensitive to Ampillicin, Cephalothin, Furacin, Methicillin, Penicillin, and Tetracycline.	0	0

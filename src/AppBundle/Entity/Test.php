@@ -20,7 +20,7 @@ class Test
 	/**
 	 * @ORM\Column(type="integer")
 	 */
-	private $case;
+	private $caseId;
 
 	/**
 	 * @ORM\Column(type="string", length=40)
@@ -59,9 +59,9 @@ class Test
 	 *
 	 * @return Test
 	 */
-	public function setCase($case)
+	public function setCaseId($case)
 	{
-		$this->case = $case;
+		$this->caseId = $case;
 
 		return $this;
 	}
@@ -71,9 +71,9 @@ class Test
 	 *
 	 * @return integer
 	 */
-	public function getCase()
+	public function getCaseId()
 	{
-		return $this->case;
+		return $this->caseId;
 	}
 
 	/**

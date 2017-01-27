@@ -5,12 +5,14 @@
 	{{ dump(session) }}
 
 	{% for spot in hotspots %}
-		<a href="{{ path('update', {'session': session.id, 'id': spot.id} ) }}">{{ spot.name }}</a>
+		<span data-path="{{ session.id }}/{{ spot.id }}" onclick="updateHotspots(this)">{{ spot.name }}</span>
 	{% endfor %}
 
 	<a href="{{ path('order_tests') }}">Continue</a>
 
+	<div id="checked">
 	{% for spot in checked %}
 		<li>{{ spot.name }}: {{ spot.info }}</li>
 	{% endfor %}
+	</div>
 {% endblock %}
