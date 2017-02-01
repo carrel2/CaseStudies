@@ -1,0 +1,7 @@
+Cases
+Sessions
+Days
+Hotspots
+app_users
+Medications
+Tests

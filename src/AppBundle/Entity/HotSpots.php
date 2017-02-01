@@ -18,9 +18,10 @@ class HotSpots
 	private $id;
 
 	/**
-	 * @ORM\Column(type="integer")
+	 * @ORM\ManyToOne(targetEntity="CaseStudy", inversedBy="hotspots")
+	 * @ORM\JoinColumn(name="case_id", referencedColumnName="id")
 	 */
-	private $caseId;
+	private $caseStudy;
 
 	/**
 	 * @ORM\Column(type="string", length=40)
@@ -112,5 +113,29 @@ class HotSpots
     public function getCaseId()
     {
         return $this->case;
+    }
+
+    /**
+     * Set caseStudy
+     *
+     * @param \AppBundle\Entity\CaseStudy $caseStudy
+     *
+     * @return HotSpots
+     */
+    public function setCaseStudy(\AppBundle\Entity\CaseStudy $caseStudy = null)
+    {
+        $this->caseStudy = $caseStudy;
+
+        return $this;
+    }
+
+    /**
+     * Get caseStudy
+     *
+     * @return \AppBundle\Entity\CaseStudy
+     */
+    public function getCaseStudy()
+    {
+        return $this->caseStudy;
     }
 }

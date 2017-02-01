@@ -18,9 +18,10 @@ class HotSpots
 	private $id;
 
 	/**
-	 * @ORM\Column(type="integer")
+	 * @ORM\ManyToOne(targetEntity="CaseStudy", inversedBy="hotspots")
+	 * @ORM\JoinColumn(name="case_id", referencedColumnName="id")
 	 */
-	private $case;
+	private $caseStudy;
 
 	/**
 	 * @ORM\Column(type="string", length=40)
@@ -67,30 +68,6 @@ class HotSpots
     }
 
     /**
-     * Set checked
-     *
-     * @param boolean $checked
-     *
-     * @return HotSpots
-     */
-    public function setChecked($checked)
-    {
-        $this->checked = $checked;
-
-        return $this;
-    }
-
-    /**
-     * Get checked
-     *
-     * @return boolean
-     */
-    public function getChecked()
-    {
-        return $this->checked;
-    }
-
-    /**
      * Set info
      *
      * @param string $info
@@ -112,5 +89,53 @@ class HotSpots
     public function getInfo()
     {
         return $this->info;
+    }
+
+    /**
+     * Set case
+     *
+     * @param integer $case
+     *
+     * @return HotSpots
+     */
+    public function setCaseId($case)
+    {
+        $this->case = $case;
+
+        return $this;
+    }
+
+    /**
+     * Get case
+     *
+     * @return integer
+     */
+    public function getCaseId()
+    {
+        return $this->case;
+    }
+
+    /**
+     * Set caseStudy
+     *
+     * @param \AppBundle\Entity\CaseStudy $caseStudy
+     *
+     * @return HotSpots
+     */
+    public function setCaseStudy(\AppBundle\Entity\CaseStudy $caseStudy = null)
+    {
+        $this->caseStudy = $caseStudy;
+
+        return $this;
+    }
+
+    /**
+     * Get caseStudy
+     *
+     * @return \AppBundle\Entity\CaseStudy
+     */
+    public function getCaseStudy()
+    {
+        return $this->caseStudy;
     }
 }

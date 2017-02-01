@@ -23,12 +23,15 @@ class HotSpotController extends Controller
 
 		$repo = $this->getDoctrine()->getRepository('AppBundle:Session');
 		$session = $repo->find( $id );
+		$case = $session->getCaseStudy();
+		$hotspots = $case->getHotspots();
 
-		$repo = $this->getDoctrine()->getRepository('AppBundle:Day');
-		$day = $repo->find( $session->getDay() );
+//		$repo = $this->getDoctrine()->getRepository('AppBundle:Day');
+//		$day = $repo->find( $session->getDay() );
 
-		$repo = $this->getDoctrine()->getRepository('AppBundle:HotSpots');
-		$hotspots = $repo->findByCaseId( $session->getCaseId() );
+//		$repo = $this->getDoctrine()->getRepository('AppBundle:HotSpots');
+//		$hotspots = $repo->findByCaseStudy( $session->getCaseId() );
+		$day = $session->getCurrentDay();
 		$checked = array();
 
 		foreach( $day->getHotspots() as $hotspot ) {
@@ -76,11 +79,6 @@ class HotSpotController extends Controller
 	public function resetPage()
 	{
 		$em = $this->getDoctrine()->getManager();
-		$hotspots = $em->getRepository('AppBundle:HotSpots')->findAll();
-
-		foreach( $hotspots as $spot ) {
-			$spot->setChecked("false");
-		}
 
 		$em->flush();
 

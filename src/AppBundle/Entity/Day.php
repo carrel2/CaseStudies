@@ -18,6 +18,11 @@ class Day
 	private $id;
 
 	/**
+	 * @ORM\ManyToOne(targetEntity="Session", inversedBy="days")
+	 */
+	private $session;
+
+	/**
 	 * @ORM\Column(type="array")
 	 */
 	private $hotspots = array();
@@ -184,4 +189,28 @@ class Day
 	{
 		return $this->number;
 	}
+
+    /**
+     * Set session
+     *
+     * @param \AppBundle\Entity\Session $session
+     *
+     * @return Day
+     */
+    public function setSession(\AppBundle\Entity\Session $session = null)
+    {
+        $this->session = $session;
+
+        return $this;
+    }
+
+    /**
+     * Get session
+     *
+     * @return \AppBundle\Entity\Session
+     */
+    public function getSession()
+    {
+        return $this->session;
+    }
 }

@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -18,96 +19,34 @@ class Session
 	private $id;
 
 	/**
-	 * @ORM\Column(type="array")
+	 * @ORM\OneToMany(targetEntity="Day", mappedBy="session")
 	 */
-	private $days = array();
+	private $days;
 
 	/**
-	 * @ORM\Column(type="integer")
+	 * @ORM\ManyToOne(targetEntity="CaseStudy", inversedBy="sessions")
+	 * @ORM\JoinColumn(name="case_id", referencedColumnName="id")
 	 */
-	private $caseId;
+	private $caseStudy;
 
 	/**
 	 * @ORM\Column(type="integer")
 	 */
 	private $userId;
 
-	/**
-	 * Get id
-	 *
-	 * @return integer
-	 */
-	public function getId()
-	{
-		return $this->id;
-	}
-
-    /**
-     * Get days
-     *
-     * @return array
-     */
-    public function getDays()
+    public function __construct()
     {
-        return $this->days;
+        $this->days = new ArrayCollection();
     }
 
     /**
-     * Set days
-     *
-     * @return Session
-     */
-    public function setDays($days)
-    {
-        $this->days = $days;
-
-        return $this;
-    }
-
-    /**
-     * Add day
-     *
-     * @return Session
-     */
-    public function addDay($day)
-    {
-        array_push( $this->days, $day );
-
-        return $this;
-    }
-
-    /**
-     * Get current day
+     * Get id
      *
      * @return integer
      */
-    public function getDay()
+    public function getId()
     {
-        return end($this->days);
-    }
-
-    /**
-     * Set caseId
-     *
-     * @param integer $caseId
-     *
-     * @return Session
-     */
-    public function setCaseId($caseId)
-    {
-        $this->caseId = $caseId;
-
-        return $this;
-    }
-
-    /**
-     * Get caseId
-     *
-     * @return integer
-     */
-    public function getCaseId()
-    {
-        return $this->caseId;
+        return $this->id;
     }
 
     /**
@@ -132,5 +71,73 @@ class Session
     public function getUserId()
     {
         return $this->userId;
+    }
+
+    /**
+     * Set caseStudy
+     *
+     * @param \AppBundle\Entity\CaseStudy $caseStudy
+     *
+     * @return Session
+     */
+    public function setCaseStudy(\AppBundle\Entity\CaseStudy $caseStudy = null)
+    {
+        $this->caseStudy = $caseStudy;
+
+        return $this;
+    }
+
+    /**
+     * Get caseStudy
+     *
+     * @return \AppBundle\Entity\CaseStudy
+     */
+    public function getCaseStudy()
+    {
+        return $this->caseStudy;
+    }
+
+    /**
+     * Add day
+     *
+     * @param \AppBundle\Entity\Day $day
+     *
+     * @return Session
+     */
+    public function addDay(\AppBundle\Entity\Day $day)
+    {
+        $this->days[] = $day;
+
+        return $this;
+    }
+
+    /**
+     * Remove day
+     *
+     * @param \AppBundle\Entity\Day $day
+     */
+    public function removeDay(\AppBundle\Entity\Day $day)
+    {
+        $this->days->removeElement($day);
+    }
+
+    /**
+     * Get days
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDays()
+    {
+        return $this->days;
+    }
+
+    /**
+     * Get current day
+     *
+     * @return \AppBundle\Entity\Day
+     */
+    public function getCurrentDay()
+    {
+        return $this->days->last();
     }
 }

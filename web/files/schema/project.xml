@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="project" type="MySQL - 5.7.17-0ubuntu0.16.04.1">
+   <tables>
+      <table name="app_users" numRows="1" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="1" name="username" nullable="false" remarks="" size="25" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="2" name="password" nullable="false" remarks="" size="64" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="3" name="email" nullable="false" remarks="" size="60" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="4" name="is_active" nullable="false" remarks="" size="0" type="BIT"/>
+         <column autoUpdated="false" digits="0" id="5" name="uin" nullable="false" remarks="" size="9" type="VARCHAR"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="UNIQ_C2502824B34EEF18" unique="true">
+            <column ascending="true" name="uin"/>
+         </index>
+         <index name="UNIQ_C2502824E7927C74" unique="true">
+            <column ascending="true" name="email"/>
+         </index>
+         <index name="UNIQ_C2502824F85E0677" unique="true">
+            <column ascending="true" name="username"/>
+         </index>
+      </table>
+      <table name="Cases" numRows="2" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
+            <child column="case_id" foreignKey="FK_668E5F00CF10D4F5" implied="false" onDeleteCascade="false" table="Hotspots"/>
+            <child column="case_id" foreignKey="FK_6316FF45CF10D4F5" implied="false" onDeleteCascade="false" table="Sessions"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="title" nullable="false" remarks="" size="40" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="2" name="description" nullable="false" remarks="" size="2147483647" type="LONGTEXT"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="Days" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="1" name="hotspots" nullable="false" remarks="(DC2Type:array)" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="2" name="tests" nullable="false" remarks="(DC2Type:array)" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="3" name="medications" nullable="false" remarks="(DC2Type:array)" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="4" name="number" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="5" name="session_id" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_4BD65358613FECDF" implied="false" onDeleteCascade="false" table="Sessions"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_4BD65358613FECDF" unique="false">
+            <column ascending="true" name="session_id"/>
+         </index>
+      </table>
+      <table name="Hotspots" numRows="8" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="1" name="name" nullable="false" remarks="" size="40" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="2" name="info" nullable="false" remarks="" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="3" name="case_id" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_668E5F00CF10D4F5" implied="false" onDeleteCascade="false" table="Cases"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_668E5F00CF10D4F5" unique="false">
+            <column ascending="true" name="case_id"/>
+         </index>
+      </table>
+      <table name="Medications" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="1" name="case" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="2" name="name" nullable="false" remarks="" size="40" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="3" name="results" nullable="false" remarks="" size="2147483647" type="LONGTEXT"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="Sessions" numRows="1" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
+            <child column="session_id" foreignKey="FK_4BD65358613FECDF" implied="false" onDeleteCascade="false" table="Days"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="case_id" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_6316FF45CF10D4F5" implied="false" onDeleteCascade="false" table="Cases"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="user_id" nullable="false" remarks="" size="10" type="INT"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_6316FF45CF10D4F5" unique="false">
+            <column ascending="true" name="case_id"/>
+         </index>
+      </table>
+      <table name="Tests" numRows="3" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="1" name="case_id" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="2" name="name" nullable="false" remarks="" size="40" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="3" name="cost" nullable="false" remarks="" size="10" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="4" name="wait" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="5" name="results" nullable="false" remarks="" size="2147483647" type="LONGTEXT"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+   </tables>
+</database>

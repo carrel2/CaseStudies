@@ -36,7 +36,7 @@ class DefaultController extends Controller
 		$session = $q->setMaxResults(1)->getOneOrNullResult();
 
 		if( $session ) {
-			$case = $em->getRepository('AppBundle:CaseStudy')->find( $session->getCaseId() );
+			$case = $session->getCaseStudy();
 			$form = $this->createFormBuilder()
 				->add('resume', SubmitType::class)
 				->getForm();
@@ -55,14 +55,12 @@ class DefaultController extends Controller
 				$day->setNumber(1);
 
 				$em->persist($day);
-				$em->flush();
-
-				$days = array($day,);
 
 				$session = new Session();
-				$session->setCaseId( $case->getId() );
+				$session->setCaseStudy( $case );
 				$session->setUserId( $user->getId() );
-				$session->setDays($days);
+				$session->addDay($day);
+				$day->setSession($session);
 
 				$em->persist($session);
 				$em->flush();
