@@ -34,15 +34,15 @@
             <column ascending="true" name="id"/>
          </index>
       </table>
-      <table name="Days" numRows="0" remarks="" type="TABLE">
+      <table name="Days" numRows="1" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
-         <column autoUpdated="false" digits="0" id="1" name="hotspots" nullable="false" remarks="(DC2Type:array)" size="2147483647" type="LONGTEXT"/>
-         <column autoUpdated="false" digits="0" id="2" name="tests" nullable="false" remarks="(DC2Type:array)" size="2147483647" type="LONGTEXT"/>
-         <column autoUpdated="false" digits="0" id="3" name="medications" nullable="false" remarks="(DC2Type:array)" size="2147483647" type="LONGTEXT"/>
-         <column autoUpdated="false" digits="0" id="4" name="number" nullable="false" remarks="" size="10" type="INT"/>
-         <column autoUpdated="false" digits="0" id="5" name="session_id" nullable="true" remarks="" size="10" type="INT">
+         <column autoUpdated="false" digits="0" id="1" name="session_id" nullable="true" remarks="" size="10" type="INT">
             <parent column="id" foreignKey="FK_4BD65358613FECDF" implied="false" onDeleteCascade="false" table="Sessions"/>
          </column>
+         <column autoUpdated="false" digits="0" id="2" name="hotspots" nullable="false" remarks="(DC2Type:array)" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="3" name="tests" nullable="false" remarks="(DC2Type:array)" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="4" name="medications" nullable="false" remarks="(DC2Type:array)" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="5" name="number" nullable="false" remarks="" size="10" type="INT"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="PRIMARY" unique="true">
             <column ascending="true" name="id"/>
@@ -51,13 +51,13 @@
             <column ascending="true" name="session_id"/>
          </index>
       </table>
-      <table name="Hotspots" numRows="8" remarks="" type="TABLE">
+      <table name="Hotspots" numRows="0" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
-         <column autoUpdated="false" digits="0" id="1" name="name" nullable="false" remarks="" size="40" type="VARCHAR"/>
-         <column autoUpdated="false" digits="0" id="2" name="info" nullable="false" remarks="" size="2147483647" type="LONGTEXT"/>
-         <column autoUpdated="false" digits="0" id="3" name="case_id" nullable="true" remarks="" size="10" type="INT">
+         <column autoUpdated="false" digits="0" id="1" name="case_id" nullable="true" remarks="" size="10" type="INT">
             <parent column="id" foreignKey="FK_668E5F00CF10D4F5" implied="false" onDeleteCascade="false" table="Cases"/>
          </column>
+         <column autoUpdated="false" digits="0" id="2" name="name" nullable="false" remarks="" size="40" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="3" name="info" nullable="false" remarks="" size="2147483647" type="LONGTEXT"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="PRIMARY" unique="true">
             <column ascending="true" name="id"/>
@@ -92,7 +92,7 @@
             <column ascending="true" name="case_id"/>
          </index>
       </table>
-      <table name="Tests" numRows="3" remarks="" type="TABLE">
+      <table name="Tests" numRows="0" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
          <column autoUpdated="false" digits="0" id="1" name="case_id" nullable="false" remarks="" size="10" type="INT"/>
          <column autoUpdated="false" digits="0" id="2" name="name" nullable="false" remarks="" size="40" type="VARCHAR"/>
