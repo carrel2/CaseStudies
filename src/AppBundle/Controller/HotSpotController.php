@@ -23,17 +23,10 @@ class HotSpotController extends Controller
 		$session = $user->getSession();
 		$case = $session->getCaseStudy();
 		$hotspots = $case->getHotspots();
-
 		$day = $session->getCurrentDay();
-		$checked = array();
-
-		foreach( $day->getHotspots()->toArray() as $hotspot ) {
-			array_push( $checked, $hotspot );
-		}
 
 		return $this->render('hotspot.html.twig', array(
 			'session' => $session,
-			'case' => $case,
 			'hotspots' => $hotspots,
 			'checked' => $day->getHotspots(),
 		));
