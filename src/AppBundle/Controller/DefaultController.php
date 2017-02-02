@@ -22,11 +22,10 @@ class DefaultController extends Controller
 	public function defaultAction(Request $r)
 	{
 		$user = $this->getUser();
+		$session = $user->getSession();
 		$case = null;
 
 		$em = $this->getDoctrine()->getManager();
-
-		$repo = $em->getRepository('AppBundle:Session');
 
 		if( $session ) {
 			$case = $session->getCaseStudy();
