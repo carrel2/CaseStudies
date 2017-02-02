@@ -19,7 +19,7 @@ class Session
 	private $id;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="Day", mappedBy="session")
+	 * @ORM\OneToMany(targetEntity="Day", mappedBy="session", cascade={"remove"})
 	 */
 	private $days;
 
@@ -30,9 +30,9 @@ class Session
 	private $caseStudy;
 
 	/**
-	 * @ORM\Column(type="integer")
+	 * @ORM\OneToOne(targetEntity="User", mappedBy="session")
 	 */
-	private $userId;
+	private $user;
 
     public function __construct()
     {
@@ -47,30 +47,6 @@ class Session
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set userId
-     *
-     * @param integer $userId
-     *
-     * @return Session
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Get userId
-     *
-     * @return integer
-     */
-    public function getUserId()
-    {
-        return $this->userId;
     }
 
     /**
@@ -139,5 +115,29 @@ class Session
     public function getCurrentDay()
     {
         return $this->days->last();
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Session
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

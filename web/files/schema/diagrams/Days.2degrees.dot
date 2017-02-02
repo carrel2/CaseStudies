@@ -19,14 +19,27 @@ digraph "twoDegreesRelationshipsDiagram" {
   edge [
     arrowsize="0.8"
   ];
+  "app_users":"elipses":w -> "Sessions":"id":e [arrowhead=none dir=back arrowtail=teeodot];
   "Days":"session_id":w -> "Sessions":"id":e [arrowhead=none dir=back arrowtail=crowodot];
+  "Hotspots":"case_id":w -> "Cases":"elipses":e [arrowhead=none dir=back arrowtail=crowodot];
+  "Hotspots":"day_id":w -> "Days":"id.type":e [arrowhead=none dir=back arrowtail=crowodot];
   "Sessions":"case_id":w -> "Cases":"elipses":e [arrowhead=none dir=back arrowtail=crowodot];
+  "app_users" [
+    label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
+      <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">app_users</TD></TR>
+      <TR><TD PORT="elipses" COLSPAN="3" ALIGN="LEFT">...</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1 row</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+    </TABLE>>
+    URL="app_users.html"
+    tooltip="app_users"
+  ];
   "Cases" [
     label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
       <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">Cases</TD></TR>
       <TR><TD PORT="elipses" COLSPAN="3" ALIGN="LEFT">...</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">2 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">2 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">2 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">4 &gt;</TD></TR>
     </TABLE>>
     URL="Cases.html"
     tooltip="Cases"
@@ -37,14 +50,27 @@ digraph "twoDegreesRelationshipsDiagram" {
       <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">Days</TD></TR>
       <TR><TD PORT="id" COLSPAN="2" BGCOLOR="#bed1b8" ALIGN="LEFT">id</TD><TD PORT="id.type" ALIGN="LEFT">int[10]</TD></TR>
       <TR><TD PORT="session_id" COLSPAN="2" BGCOLOR="#f4f7da" ALIGN="LEFT">session_id</TD><TD PORT="session_id.type" ALIGN="LEFT">int[10]</TD></TR>
-      <TR><TD PORT="hotspots" COLSPAN="2" ALIGN="LEFT">hotspots</TD><TD PORT="hotspots.type" ALIGN="LEFT">longtext[2147483647]</TD></TR>
       <TR><TD PORT="tests" COLSPAN="2" ALIGN="LEFT">tests</TD><TD PORT="tests.type" ALIGN="LEFT">longtext[2147483647]</TD></TR>
       <TR><TD PORT="medications" COLSPAN="2" ALIGN="LEFT">medications</TD><TD PORT="medications.type" ALIGN="LEFT">longtext[2147483647]</TD></TR>
       <TR><TD PORT="number" COLSPAN="2" ALIGN="LEFT">number</TD><TD PORT="number.type" ALIGN="LEFT">int[10]</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1 row</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1 row</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1 &gt;</TD></TR>
     </TABLE>>
     URL="Days.html"
     tooltip="Days"
+  ];
+  "Hotspots" [
+    label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
+      <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">Hotspots</TD></TR>
+      <TR><TD PORT="id" COLSPAN="3" BGCOLOR="#bed1b8" ALIGN="LEFT">id</TD></TR>
+      <TR><TD PORT="case_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">case_id</TD></TR>
+      <TR><TD PORT="name" COLSPAN="3" ALIGN="LEFT">name</TD></TR>
+      <TR><TD PORT="info" COLSPAN="3" ALIGN="LEFT">info</TD></TR>
+      <TR><TD PORT="day_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">day_id</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">7 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+    </TABLE>>
+    URL="Hotspots.html"
+    tooltip="Hotspots"
   ];
   "Sessions" [
     label=<
@@ -52,8 +78,7 @@ digraph "twoDegreesRelationshipsDiagram" {
       <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">Sessions</TD></TR>
       <TR><TD PORT="id" COLSPAN="3" BGCOLOR="#bed1b8" ALIGN="LEFT">id</TD></TR>
       <TR><TD PORT="case_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">case_id</TD></TR>
-      <TR><TD PORT="user_id" COLSPAN="3" ALIGN="LEFT">user_id</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1 row</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1 row</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">2 &gt;</TD></TR>
     </TABLE>>
     URL="Sessions.html"
     tooltip="Sessions"

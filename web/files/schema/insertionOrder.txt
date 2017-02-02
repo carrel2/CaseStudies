@@ -1,7 +1,9 @@
 Cases
-Sessions
-Days
-Hotspots
-app_users
 Medications
 Tests
+Sessions
+Days
+app_users
+Hotspots
+MedicationResults
+TestResults

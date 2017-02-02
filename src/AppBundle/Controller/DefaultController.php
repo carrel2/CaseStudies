@@ -28,13 +28,6 @@ class DefaultController extends Controller
 
 		$repo = $em->getRepository('AppBundle:Session');
 
-		$q = $repo->createQueryBuilder('b')
-			->where('b.userId = :uid')
-			->setParameter('uid', $user->getId())
-			->getQuery();
-
-		$session = $q->setMaxResults(1)->getOneOrNullResult();
-
 		if( $session ) {
 			$case = $session->getCaseStudy();
 			$form = $this->createFormBuilder()
@@ -58,15 +51,16 @@ class DefaultController extends Controller
 
 				$session = new Session();
 				$session->setCaseStudy( $case );
-				$session->setUserId( $user->getId() );
+				$session->setUser( $user );
 				$session->addDay($day);
 				$day->setSession($session);
 
 				$em->persist($session);
 				$em->flush();
-			}
 
-			$r->getSession()->set('session', $session->getId());
+				$user->setSession($session);
+				$em->flush();
+			}
 
 			return $this->redirectToRoute('evaluation');
 		}

@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -23,9 +24,9 @@ class Day
 	private $session;
 
 	/**
-	 * @ORM\Column(type="array")
+	 * @ORM\OneToMany(targetEntity="HotSpots", mappedBy="day", cascade={"persist", "remove"})
 	 */
-	private $hotspots = array();
+	private $hotspots;
 
 	/**
 	 * @ORM\Column(type="array")
@@ -42,6 +43,11 @@ class Day
 	 */
 	private $number;
 
+	public function __construct()
+	{
+		$this->hotspots = new ArrayCollection();
+	}
+
 	/**
 	 * Get id
 	 *
@@ -50,44 +56,6 @@ class Day
 	public function getId()
 	{
 		return $this->id;
-	}
-
-	/**
-	 * Set hotspots
-	 *
-	 * @param array $hotspots
-	 *
-	 * @return Day
-	 */
-	public function setHotspots($hotspots)
-	{
-		$this->hotspots = $hotspots;
-
-		return $this;
-	}
-
-	/**
-	 * Get hotspots
-	 *
-	 * @return array
-	 */
-	public function getHotspots()
-	{
-		return $this->hotspots;
-	}
-
-	/**
-	 * Add hotspot
-	 *
-	 * @param integer $hotspot
-	 *
-	 * @return Day
-	 */
-	public function addHotspot($hotspot)
-	{
-		array_push($this->hotspots, $hotspot);
-
-		return $this;
 	}
 
 	/**
@@ -212,5 +180,39 @@ class Day
     public function getSession()
     {
         return $this->session;
+    }
+
+    /**
+     * Remove hotspot
+     *
+     * @param \AppBundle\Entity\HotSpots $hotspot
+     */
+    public function removeHotspot(\AppBundle\Entity\HotSpots $hotspot)
+    {
+        $this->hotspots->removeElement($hotspot);
+    }
+
+    /**
+     * Add hotspot
+     *
+     * @param \AppBundle\Entity\HotSpots $hotspot
+     *
+     * @return Day
+     */
+    public function addHotspot(\AppBundle\Entity\HotSpots $hotspot)
+    {
+        $this->hotspots[] = $hotspot;
+
+        return $this;
+    }
+
+    /**
+     * Get hotspots
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getHotspots()
+    {
+        return $this->hotspots;
     }
 }

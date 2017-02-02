@@ -2,8 +2,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	{{ dump(session) }}
-
 	{% for spot in hotspots %}
 		<span data-path="{{ session.id }}/{{ spot.id }}" onclick="updateHotspots(this)">{{ spot.name }}</span>
 	{% endfor %}

@@ -29,18 +29,30 @@ class CaseStudy
 	private $description;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="HotSpots", mappedBy="caseStudy")
+	 * @ORM\OneToMany(targetEntity="HotSpots", mappedBy="caseStudy", cascade={"persist","remove"})
 	 */
 	private $hotspots;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="Session", mappedBy="caseStudy")
+	 * @ORM\OneToMany(targetEntity="TestResults", mappedBy="caseStudy", cascade={"persist","remove"})
+	 */
+	private $testResults;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="MedicationResults", mappedBy="caseStudy", cascade={"persist","remove"})
+	 */
+	private $medicationResults;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="Session", mappedBy="caseStudy", cascade={"persist","remove"})
 	 */
 	private $sessions;
 
     public function __construct()
     {
         $this->hotspots = new ArrayCollection();
+        $this->testResults = new ArrayCollection();
+        $this->medicationResults = new ArrayCollection();
         $this->sessions = new ArrayCollection();
     }
 
@@ -180,5 +192,39 @@ class CaseStudy
     public function getSessions()
     {
         return $this->sessions;
+    }
+
+    /**
+     * Add result
+     *
+     * @param \AppBundle\Entity\TestResults $result
+     *
+     * @return CaseStudy
+     */
+    public function addResult(\AppBundle\Entity\TestResults $result)
+    {
+        $this->results[] = $result;
+
+        return $this;
+    }
+
+    /**
+     * Remove result
+     *
+     * @param \AppBundle\Entity\TestResults $result
+     */
+    public function removeResult(\AppBundle\Entity\TestResults $result)
+    {
+        $this->results->removeElement($result);
+    }
+
+    /**
+     * Get results
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getResults()
+    {
+        return $this->results;
     }
 }

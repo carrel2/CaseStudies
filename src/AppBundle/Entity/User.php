@@ -54,6 +54,12 @@ class User implements UserInterface, \Serializable
     private $uin;
 
     /**
+     * @ORM\OneToOne(targetEntity="Session", inversedBy="user")
+     * @ORM\JoinColumn(name="session_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $session;
+
+    /**
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
@@ -221,5 +227,29 @@ class User implements UserInterface, \Serializable
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * Set session
+     *
+     * @param \AppBundle\Entity\Session $session
+     *
+     * @return User
+     */
+    public function setSession(\AppBundle\Entity\Session $session = null)
+    {
+        $this->session = $session;
+
+        return $this;
+    }
+
+    /**
+     * Get session
+     *
+     * @return \AppBundle\Entity\Session
+     */
+    public function getSession()
+    {
+        return $this->session;
     }
 }

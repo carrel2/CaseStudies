@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -18,99 +19,114 @@ class Medication
 	private $id;
 
 	/**
-	 * @ORM\Column(type="integer")
-	 */
-	private $case;
-
-	/**
 	 * @ORM\Column(type="string", length=40)
 	 */
 	private $name;
 
 	/**
-	 * @ORM\Column(type="text")
+	 * @ORM\Column(type="string", length=10)
+	 */
+	private $cost;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="MedicationResults", mappedBy="medication")
 	 */
 	private $results;
 
-	/**
-	 * Get id
-	 *
-	 * @return integer
-	 */
-	public function getId()
+	public function __construct()
 	{
-		return $this->id;
+		$this->results = new ArrayCollection();
 	}
 
-	/**
-	 * Set case
-	 *
-	 * @param integer $case
-	 *
-	 * @return Medication
-	 */
-	public function setCase($case)
-	{
-		$this->case = $case;
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
-		return $this;
-	}
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Medication
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
 
-	/**
-	 * Get case
-	 *
-	 * @return integer
-	 */
-	public function getCase()
-	{
-		return $this->case;
-	}
+        return $this;
+    }
 
-	/**
-	 * Set name
-	 *
-	 * @param string $name
-	 *
-	 * @return Medication
-	 */
-	public function setName($name)
-	{
-		$this->name = $name;
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 
-		return $this;
-	}
+    /**
+     * Set cost
+     *
+     * @param string $cost
+     *
+     * @return Medication
+     */
+    public function setCost($cost)
+    {
+        $this->cost = $cost;
 
-	/**
-	 * Get name
-	 *
-	 * @return string
-	 */
-	public function getName()
-	{
-		return $this->name;
-	}
+        return $this;
+    }
 
-	/**
-	 * Set results
-	 *
-	 * @param string $results
-	 *
-	 * @return Medication
-	 */
-	public function setResults($results)
-	{
-		$this->results = $results;
+    /**
+     * Get cost
+     *
+     * @return string
+     */
+    public function getCost()
+    {
+        return $this->cost;
+    }
 
-		return $this;
-	}
+    /**
+     * Add result
+     *
+     * @param \AppBundle\Entity\MedicationResults $result
+     *
+     * @return Medication
+     */
+    public function addResult(\AppBundle\Entity\MedicationResults $result)
+    {
+        $this->results[] = $result;
 
-	/**
-	 * Get results
-	 *
-	 * @return string
-	 */
-	public function getResults()
-	{
-		return $this->results;
-	}
+        return $this;
+    }
+
+    /**
+     * Remove result
+     *
+     * @param \AppBundle\Entity\MedicationResults $result
+     */
+    public function removeResult(\AppBundle\Entity\MedicationResults $result)
+    {
+        $this->results->removeElement($result);
+    }
+
+    /**
+     * Get results
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getResults()
+    {
+        return $this->results;
+    }
 }

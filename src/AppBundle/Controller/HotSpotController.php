@@ -19,29 +19,23 @@ class HotSpotController extends Controller
 	public function showPage(Request $r, $id)
 	{
 		$user = $this->getUser();
-		$id = $r->getSession()->get('session');
 
-		$repo = $this->getDoctrine()->getRepository('AppBundle:Session');
-		$session = $repo->find( $id );
+		$session = $user->getSession();
 		$case = $session->getCaseStudy();
 		$hotspots = $case->getHotspots();
 
-//		$repo = $this->getDoctrine()->getRepository('AppBundle:Day');
-//		$day = $repo->find( $session->getDay() );
-
-//		$repo = $this->getDoctrine()->getRepository('AppBundle:HotSpots');
-//		$hotspots = $repo->findByCaseStudy( $session->getCaseId() );
 		$day = $session->getCurrentDay();
 		$checked = array();
 
-		foreach( $day->getHotspots() as $hotspot ) {
+		foreach( $day->getHotspots()->toArray() as $hotspot ) {
 			array_push( $checked, $hotspot );
 		}
 
 		return $this->render('hotspot.html.twig', array(
 			'session' => $session,
+			'case' => $case,
 			'hotspots' => $hotspots,
-			'checked' => $checked,
+			'checked' => $day->getHotspots(),
 		));
 	}
 
@@ -55,14 +49,11 @@ class HotSpotController extends Controller
 		$hotspot = $em->getRepository('AppBundle:HotSpots')->find($id);
 
 		$session = $em->getRepository('AppBundle:Session')->find($session);
-		$day = $em->getRepository('AppBundle:Day')->find($session->getDay());
+		$day = $session->getCurrentDay();
 
-		if( !$hotspot ) {
-			throw $this->createNotFoundException('No info found');
-		}
-
-		if( !in_array( $hotspot, $day->getHotspots() ) ) {
+		if( !$day->getHotspots()->contains($hotspot) ) {
 			$day->addHotspot($hotspot);
+			$hotspot->setDay($day);
 			$em->flush();
 
 			return new Response($hotspot->getName() . ": " . $hotspot->getInfo());
@@ -80,8 +71,15 @@ class HotSpotController extends Controller
 	{
 		$em = $this->getDoctrine()->getManager();
 
+		$user = $this->getUser();
+		$session = $user->getSession();
+
+		$user->setSession(null);
+
+		$em->remove($session);
+
 		$em->flush();
 
-		return $this->redirectToRoute('evaluation');
+		return $this->redirectToRoute('default');
 	}
 }

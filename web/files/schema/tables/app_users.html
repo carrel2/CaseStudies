@@ -17,7 +17,6 @@
  <ul>
   <li><a href='../index.html' title='All tables and views in the schema'>Tables</a></li>
   <li><a href='../relationships.html' title='Diagram of table relationships'>Relationships</a></li>
-  <li><a href='../utilities.html' title='View of tables with neither parents nor children'>Utility&nbsp;Tables</a></li>
   <li><a href='../constraints.html' title='Useful for diagnosing error messages that just give constraint name or number'>Constraints</a></li>
   <li><a href='../anomalies.html' title="Things that might not be quite right">Anomalies</a></li>
   <li><a href='../columns.byTable.html' title="All of the columns in the schema">Columns</a></li>
@@ -101,7 +100,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </tr>
 </thead>
 <tbody valign='top'>
-<tr class='odd'>
+<tr class='even'>
  <td class='primaryKey' title='Primary Key'>id</td>
  <td class='detail'>int</td>
  <td class='detail' align='right'>10</td>
@@ -112,7 +111,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='even'>
+<tr class='odd'>
  <td class='indexedColumn' title='Indexed'>username</td>
  <td class='detail'>varchar</td>
  <td class='detail' align='right'>25</td>
@@ -123,7 +122,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='odd'>
+<tr class='even'>
  <td class='detail'>password</td>
  <td class='detail'>varchar</td>
  <td class='detail' align='right'>64</td>
@@ -134,7 +133,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='even'>
+<tr class='odd'>
  <td class='indexedColumn' title='Indexed'>email</td>
  <td class='detail'>varchar</td>
  <td class='detail' align='right'>60</td>
@@ -145,7 +144,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='odd'>
+<tr class='even'>
  <td class='detail'>is_active</td>
  <td class='detail'>bit</td>
  <td class='detail' align='right'>0</td>
@@ -156,7 +155,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='even'>
+<tr class='odd'>
  <td class='indexedColumn' title='Indexed'>uin</td>
  <td class='detail'>varchar</td>
  <td class='detail' align='right'>9</td>
@@ -167,18 +166,39 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
+<tr class='even'>
+ <td class='indexedColumn' title='Indexed'>session_id</td>
+ <td class='detail'>int</td>
+ <td class='detail' align='right'>10</td>
+ <td class='detail' align='center' title='nullable'>&nbsp;&radic;&nbsp;</td>
+ <td class='detail' align='center'></td>
+ <td class='detail' align='right'>null</td>
+ <td class='detail'></td>
+ <td class='detail'>
+  <table border='0' width='100%' cellspacing='0' cellpadding='0'>
+   <tr class='relative even' valign='top'>
+    <td class='relatedTable detail' title="app_users.session_id refs Sessions.id via FK_C2502824613FECDF"><a href='Sessions.html'>Sessions</a><span class='relatedKey'>.id</span>
+    </td>
+    <td class='constraint detail'>FK_C2502824613FECDF<span title='Null on delete:
+ Foreign key to parent set to NULL when parent deleted'>&nbsp;N</span></td>
+   </tr>
+  </table>
+ </td>
+ <td class='comment detail'></td>
+</tr>
 </table>
-<p title='6 columns'>Table contained 1 rows at Wed Feb 01 12:51 CST 2017<p/>
+<p title='7 columns'>Table contained 1 rows at Thu Feb 02 14:12 CST 2017<p/>
 </td></tr></table>
 <div class='indent'>
 <b>Indexes:</b>
-<table class='dataTable' border='1' rules='groups'><colgroup><colgroup><colgroup><colgroup>
+<table class='dataTable' border='1' rules='groups'><colgroup><colgroup><colgroup><colgroup><colgroup>
 <thead>
  <tr>
   <th>Column(s)</th>
   <th>Type</th>
   <th>Sort</th>
   <th class='constraint' style='text-align:left;'>Constraint Name</th>
+  <th>Anomalies</th>
  </tr>
 </thead>
 <tbody>
@@ -187,27 +207,55 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
   <td class='detail'>Primary key</td>
   <td class='detail' style='text-align:left;'><span title='Ascending'>Asc</span></td>
   <td class='constraint' style='text-align:left;'>PRIMARY</td>
+  <td>&nbsp;</td>
+ </tr>
+ <tr>
+  <td class='indexedColumn'>session_id</td>
+  <td class='detail'>Must be unique</td>
+  <td class='detail' style='text-align:left;'><span title='Ascending'>Asc</span></td>
+  <td class='constraint' style='text-align:left;'>UNIQ_C2502824613FECDF</td>
+  <td class='detail'>This unique column is also nullable</td>
  </tr>
  <tr>
   <td class='indexedColumn'>uin</td>
   <td class='detail'>Must be unique</td>
   <td class='detail' style='text-align:left;'><span title='Ascending'>Asc</span></td>
   <td class='constraint' style='text-align:left;'>UNIQ_C2502824B34EEF18</td>
+  <td>&nbsp;</td>
  </tr>
  <tr>
   <td class='indexedColumn'>email</td>
   <td class='detail'>Must be unique</td>
   <td class='detail' style='text-align:left;'><span title='Ascending'>Asc</span></td>
   <td class='constraint' style='text-align:left;'>UNIQ_C2502824E7927C74</td>
+  <td>&nbsp;</td>
  </tr>
  <tr>
   <td class='indexedColumn'>username</td>
   <td class='detail'>Must be unique</td>
   <td class='detail' style='text-align:left;'><span title='Ascending'>Asc</span></td>
   <td class='constraint' style='text-align:left;'>UNIQ_C2502824F85E0677</td>
+  <td>&nbsp;</td>
  </tr>
 </table>
 </div>
+<table width='100%' border='0'><tr><td class='container'>
+<br><form action='get'><b>Close relationships</b><span class='degrees' id='degrees' title='Detail diminishes with increased separation from app_users'>
+&nbsp;within <label for='oneDegree'><input type='radio' name='degrees' id='oneDegree' checked>one</label>  <label for='twoDegrees'><input type='radio' name='degrees' id='twoDegrees'>two degrees</label> of separation</span><b>:</b></form>
+<map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
+<area shape="rect" id="node1" href="app_users.html" title="app_users" alt="" coords="197,5,409,237">
+<area shape="rect" id="node2" href="Sessions.html" title="Sessions" alt="" coords="5,152,153,259">
+</map>
+  <a name='diagram'><img id='oneDegreeImg' src='../diagrams/app_users.1degree.png' usemap='#oneDegreeRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>
+<map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
+<area shape="rect" id="node1" href="app_users.html" title="app_users" alt="" coords="379,5,591,237">
+<area shape="rect" id="node2" href="Sessions.html" title="Sessions" alt="" coords="187,204,335,311">
+<area shape="rect" id="node4" href="Cases.html" title="Cases" alt="" coords="5,228,143,311">
+<area shape="rect" id="node3" href="Days.html" title="Days" alt="" coords="411,255,559,337">
+</map>
+
+  <a name='diagram'><img id='twoDegreesImg' src='../diagrams/app_users.2degrees.png' usemap='#twoDegreesRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>
+</td></tr></table>
 </div>
 </body>
 </html>

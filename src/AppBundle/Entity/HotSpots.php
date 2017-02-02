@@ -24,6 +24,12 @@ class HotSpots
 	private $caseStudy;
 
 	/**
+	 * @ORM\ManyToOne(targetEntity="Day", inversedBy="hotspots")
+	 * @ORM\JoinColumn(name="day_id", referencedColumnName="id")
+	 */
+	private $day;
+
+	/**
 	 * @ORM\Column(type="string", length=40)
 	 */
 	private $name;
@@ -137,5 +143,29 @@ class HotSpots
     public function getCaseStudy()
     {
         return $this->caseStudy;
+    }
+
+    /**
+     * Set day
+     *
+     * @param \AppBundle\Entity\Day $day
+     *
+     * @return HotSpots
+     */
+    public function setDay(\AppBundle\Entity\Day $day = null)
+    {
+        $this->day = $day;
+
+        return $this;
+    }
+
+    /**
+     * Get day
+     *
+     * @return \AppBundle\Entity\Day
+     */
+    public function getDay()
+    {
+        return $this->day;
     }
 }

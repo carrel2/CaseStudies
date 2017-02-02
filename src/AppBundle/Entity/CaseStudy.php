@@ -29,18 +29,30 @@ class CaseStudy
 	private $description;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="HotSpots", mappedBy="caseStudy")
+	 * @ORM\OneToMany(targetEntity="HotSpots", mappedBy="caseStudy", cascade={"persist","remove"})
 	 */
 	private $hotspots;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="Session", mappedBy="caseStudy")
+	 * @ORM\OneToMany(targetEntity="TestResults", mappedBy="caseStudy", cascade={"persist","remove"})
+	 */
+	private $testResults;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="MedicationResults", mappedBy="caseStudy", cascade={"persist","remove"})
+	 */
+	private $medicationResults;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="Session", mappedBy="caseStudy", cascade={"persist","remove"})
 	 */
 	private $sessions;
 
     public function __construct()
     {
         $this->hotspots = new ArrayCollection();
+        $this->testResults = new ArrayCollection();
+        $this->medicationResults = new ArrayCollection();
         $this->sessions = new ArrayCollection();
     }
 
@@ -180,5 +192,107 @@ class CaseStudy
     public function getSessions()
     {
         return $this->sessions;
+    }
+
+    /**
+     * Add result
+     *
+     * @param \AppBundle\Entity\TestResults $result
+     *
+     * @return CaseStudy
+     */
+    public function addResult(\AppBundle\Entity\TestResults $result)
+    {
+        $this->results[] = $result;
+
+        return $this;
+    }
+
+    /**
+     * Remove result
+     *
+     * @param \AppBundle\Entity\TestResults $result
+     */
+    public function removeResult(\AppBundle\Entity\TestResults $result)
+    {
+        $this->results->removeElement($result);
+    }
+
+    /**
+     * Get results
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getResults()
+    {
+        return $this->results;
+    }
+
+    /**
+     * Add testResult
+     *
+     * @param \AppBundle\Entity\TestResults $testResult
+     *
+     * @return CaseStudy
+     */
+    public function addTestResult(\AppBundle\Entity\TestResults $testResult)
+    {
+        $this->testResults[] = $testResult;
+
+        return $this;
+    }
+
+    /**
+     * Remove testResult
+     *
+     * @param \AppBundle\Entity\TestResults $testResult
+     */
+    public function removeTestResult(\AppBundle\Entity\TestResults $testResult)
+    {
+        $this->testResults->removeElement($testResult);
+    }
+
+    /**
+     * Get testResults
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTestResults()
+    {
+        return $this->testResults;
+    }
+
+    /**
+     * Add medicationResult
+     *
+     * @param \AppBundle\Entity\MedicationResults $medicationResult
+     *
+     * @return CaseStudy
+     */
+    public function addMedicationResult(\AppBundle\Entity\MedicationResults $medicationResult)
+    {
+        $this->medicationResults[] = $medicationResult;
+
+        return $this;
+    }
+
+    /**
+     * Remove medicationResult
+     *
+     * @param \AppBundle\Entity\MedicationResults $medicationResult
+     */
+    public function removeMedicationResult(\AppBundle\Entity\MedicationResults $medicationResult)
+    {
+        $this->medicationResults->removeElement($medicationResult);
+    }
+
+    /**
+     * Get medicationResults
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMedicationResults()
+    {
+        return $this->medicationResults;
     }
 }

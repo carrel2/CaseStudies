@@ -14,7 +14,6 @@
  <ul>
   <li><a href='index.html' title='All tables and views in the schema'>Tables</a></li>
   <li><a href='relationships.html' title='Diagram of table relationships'>Relationships</a></li>
-  <li><a href='utilities.html' title='View of tables with neither parents nor children'>Utility&nbsp;Tables</a></li>
   <li id='current'><a href='constraints.html' title='Useful for diagnosing error messages that just give constraint name or number'>Constraints</a></li>
   <li><a href='anomalies.html' title="Things that might not be quite right">Anomalies</a></li>
   <li><a href='columns.byTable.html' title="All of the columns in the schema">Columns</a></li>
@@ -32,7 +31,7 @@
 <div class='indent'>
 <table width='100%'>
 <tr><td class='container' valign='bottom'><b>
-3 Foreign Key Constraints:</b>
+9 Foreign Key Constraints:</b>
 </td><td class='container' align='right'>
 <table>
   <tr><td class='container' align='right' valign='top'><a href='http://sourceforge.net' target='_blank'><img src='http://sourceforge.net/sflogo.php?group_id=137197&amp;type=1' alt='SourceForge.net' border='0' height='31' width='88'></a></td></tr>
@@ -86,8 +85,50 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
  Parent cannot be deleted if children exist'>Restrict delete&nbsp;</span></td>
  </tr>
   <tr class='even'>
+  <td class='detail'>FK_668E5F009C24126</td>
+  <td class='detail'><a href='tables/Hotspots.html'>Hotspots</a>.day_id</td>
+  <td class='detail'><a href='tables/Days.html'>Days</a>.id</td>
+  <td class='detail'><span title='Restrict delete:
+ Parent cannot be deleted if children exist'>Restrict delete&nbsp;</span></td>
+ </tr>
+  <tr class='odd'>
   <td class='detail'>FK_668E5F00CF10D4F5</td>
   <td class='detail'><a href='tables/Hotspots.html'>Hotspots</a>.case_id</td>
+  <td class='detail'><a href='tables/Cases.html'>Cases</a>.id</td>
+  <td class='detail'><span title='Restrict delete:
+ Parent cannot be deleted if children exist'>Restrict delete&nbsp;</span></td>
+ </tr>
+  <tr class='even'>
+  <td class='detail'>FK_B868B2F21E5D0459</td>
+  <td class='detail'><a href='tables/TestResults.html'>TestResults</a>.test_id</td>
+  <td class='detail'><a href='tables/Tests.html'>Tests</a>.id</td>
+  <td class='detail'><span title='Restrict delete:
+ Parent cannot be deleted if children exist'>Restrict delete&nbsp;</span></td>
+ </tr>
+  <tr class='odd'>
+  <td class='detail'>FK_B868B2F2CF10D4F5</td>
+  <td class='detail'><a href='tables/TestResults.html'>TestResults</a>.case_id</td>
+  <td class='detail'><a href='tables/Cases.html'>Cases</a>.id</td>
+  <td class='detail'><span title='Restrict delete:
+ Parent cannot be deleted if children exist'>Restrict delete&nbsp;</span></td>
+ </tr>
+  <tr class='even'>
+  <td class='detail'>FK_C2502824613FECDF</td>
+  <td class='detail'><a href='tables/app_users.html'>app_users</a>.session_id</td>
+  <td class='detail'><a href='tables/Sessions.html'>Sessions</a>.id</td>
+  <td class='detail'><span title='Null on delete:
+ Foreign key to parent set to NULL when parent deleted'>Null on delete&nbsp;</span></td>
+ </tr>
+  <tr class='odd'>
+  <td class='detail'>FK_C7C851152C4DE6DA</td>
+  <td class='detail'><a href='tables/MedicationResults.html'>MedicationResults</a>.medication_id</td>
+  <td class='detail'><a href='tables/Medications.html'>Medications</a>.id</td>
+  <td class='detail'><span title='Restrict delete:
+ Parent cannot be deleted if children exist'>Restrict delete&nbsp;</span></td>
+ </tr>
+  <tr class='even'>
+  <td class='detail'>FK_C7C85115CF10D4F5</td>
+  <td class='detail'><a href='tables/MedicationResults.html'>MedicationResults</a>.case_id</td>
   <td class='detail'><a href='tables/Cases.html'>Cases</a>.id</td>
   <td class='detail'><span title='Restrict delete:
  Parent cannot be deleted if children exist'>Restrict delete&nbsp;</span></td>

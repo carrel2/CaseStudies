@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -18,11 +19,6 @@ class Test
 	private $id;
 
 	/**
-	 * @ORM\Column(type="integer")
-	 */
-	private $caseId;
-
-	/**
 	 * @ORM\Column(type="string", length=40)
 	 */
 	private $name;
@@ -33,142 +29,104 @@ class Test
 	private $cost;
 
 	/**
-	 * @ORM\Column(type="integer")
-	 */
-	private $wait;
-
-	/**
-	 * @ORM\Column(type="text")
+	 * @ORM\OneToMany(targetEntity="TestResults", mappedBy="test")
 	 */
 	private $results;
 
-	/**
-	 * Get id
-	 *
-	 * @return integer
-	 */
-	public function getId()
+	public function __construct()
 	{
-		return $this->id;
+		$this->results = new ArrayCollection();
 	}
 
-	/**
-	 * Set case
-	 *
-	 * @param integer $case
-	 *
-	 * @return Test
-	 */
-	public function setCaseId($case)
-	{
-		$this->caseId = $case;
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
-		return $this;
-	}
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Test
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
 
-	/**
-	 * Get case
-	 *
-	 * @return integer
-	 */
-	public function getCaseId()
-	{
-		return $this->caseId;
-	}
+        return $this;
+    }
 
-	/**
-	 * Set name
-	 *
-	 * @param string $name
-	 *
-	 * @return Test
-	 */
-	public function setName($name)
-	{
-		$this->name = $name;
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 
-		return $this;
-	}
+    /**
+     * Set cost
+     *
+     * @param string $cost
+     *
+     * @return Test
+     */
+    public function setCost($cost)
+    {
+        $this->cost = $cost;
 
-	/**
-	 * Get name
-	 *
-	 * @return string
-	 */
-	public function getName()
-	{
-		return $this->name;
-	}
+        return $this;
+    }
 
-	/**
-	 * Set cost
-	 *
-	 * @param string $cost
-	 *
-	 * @return Test
-	 */
-	public function setCost($cost)
-	{
-		$this->cost = $cost;
+    /**
+     * Get cost
+     *
+     * @return string
+     */
+    public function getCost()
+    {
+        return $this->cost;
+    }
 
-		return $this;
-	}
+    /**
+     * Add result
+     *
+     * @param \AppBundle\Entity\TestResults $result
+     *
+     * @return Test
+     */
+    public function addResult(\AppBundle\Entity\TestResults $result)
+    {
+        $this->results[] = $result;
 
-	/**
-	 * Get cost
-	 *
-	 * @return string
-	 */
-	public function getCost()
-	{
-		return $this->cost;
-	}
+        return $this;
+    }
 
-	/**
-	 * Set wait
-	 *
-	 * @param integer $wait
-	 *
-	 * @return Test
-	 */
-	public function setWait($wait)
-	{
-		$this->wait = $wait;
+    /**
+     * Remove result
+     *
+     * @param \AppBundle\Entity\TestResults $result
+     */
+    public function removeResult(\AppBundle\Entity\TestResults $result)
+    {
+        $this->results->removeElement($result);
+    }
 
-		return $this;
-	}
-
-	/**
-	 * Get wait
-	 *
-	 * @return integer
-	 */
-	public function getWait()
-	{
-		return $this->wait;
-	}
-
-	/**
-	 * Set results
-	 *
-	 * @param string $results
-	 *
-	 * @return Test
-	 */
-	public function setResults($results)
-	{
-		$this->results = $results;
-
-		return $this;
-	}
-
-	/**
-	 * Get results
-	 *
-	 * @return string
-	 */
-	public function getResults()
-	{
-		return $this->results;
-	}
+    /**
+     * Get results
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getResults()
+    {
+        return $this->results;
+    }
 }
