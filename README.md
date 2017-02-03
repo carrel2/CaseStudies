@@ -12,4 +12,5 @@ VetMed case studies web project
 - [ ] Tests and Medications pages
 - [ ] Logic to advance days
 - [ ] Image hotspots
+- [ ] Authenticate against ldap server
 - [ ] Styling
