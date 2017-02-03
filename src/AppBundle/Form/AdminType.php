@@ -4,7 +4,6 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use AppBundle\Entity\CaseStudy;
 
@@ -15,14 +14,6 @@ class AdminType extends AbstractType
 		$builder
 			->add('case', EntityType::class, array(
 				'class' => 'AppBundle:CaseStudy',
-				'choice_label' => 'title',)
-			);
-	}
-
-	public function configureOptions(OptionsResolver $resolver)
-	{
-		$resolver->setDefaults(array(
-			'data_class' => CaseStudy::class,
-		));
+				'choice_label' => 'title',));
 	}
 }

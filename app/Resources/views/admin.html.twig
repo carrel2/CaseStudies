@@ -4,12 +4,12 @@
 	{{ form_start(form) }}
 		{{ form_label(form.case) }}
 		{{ form_errors(form.case) }}
-		{{ form_widget(form.case, {'attr': {'onchange': 'updateCase()'}} ) }}
+		{{ form_widget(form.case, {'attr': {'onchange': 'updateAdminCase()'}} ) }}
 
 		{{ form_rest(form) }}
 
-		<div id="description"></div>
-		<button type="submit">Submit</button>
-
 	{{ form_end(form) }}
+
+	<div id="description"></div>
+	<script>updateAdminCase()</script>
 {% endblock %}

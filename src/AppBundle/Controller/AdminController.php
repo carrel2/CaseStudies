@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\CaseStudy;
 use AppBundle\Form\AdminType;
+use AppBundle\Form\CaseType;
 
 class AdminController extends Controller
 {
@@ -17,32 +18,37 @@ class AdminController extends Controller
 	 */
 	public function adminAction(Request $r)
 	{
-		$case = new CaseStudy();
-		$form = $this->createForm( AdminType::class, $case );
+		$form = $this->createForm( AdminType::class );
+
+		return $this->render('admin.html.twig', array(
+			'form' => $form->createView(),
+		));
+	}
+
+	/**
+	 * @Route("/getCase/{id}", name="caseInfo")
+	 */
+	public function getCaseAction(Request $r, $id)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$repo = $em->getRepository('AppBundle:CaseStudy');
+		$case = $repo->find($id);
+
+		$form = $this->createForm( CaseType::class, $case );
 
 		$form->handleRequest($r);
 
 		if( $form->isSubmitted() && $form->isValid() )
 		{
-			$repo = $this->getDoctrine()->getRepository('AppBundle:CaseStudy');
+			$case = $form->getData();
+			$em->flush();
+
+			return $this->redirectToRoute('admin');
 		}
 
-		return $this->render('admin.html.twig', array(
-			'form' => $form->createView(),
-			'case' => $case,
-		));
-	}
-
-	/**
-	 * @Route("/getCase/{id}")
-	 */
-	public function getCaseAction(Request $r, $id)
-	{
-		$repo = $this->getDoctrine()->getRepository('AppBundle:CaseStudy');
-		$case = $repo->find($id);
-
 		return $this->render('caseInfo.html.twig', array(
-			'case' => $case,
+			'form' => $form->createView(),
+			'id' => $id,
 		));
 	}
 }
