@@ -20,17 +20,11 @@ class CaseType extends AbstractType
 			->add('title', TextType::class)
 			->add('description', TextareaType::class)
 			->add('hotspots', CollectionType::class, array(
-				'entry_type' => HotspotType::class,));
-
-/*		foreach( $options["data"]->getHotspots() as $hotspot ) {
-			$builder->add('name', TextType::class, array(
-					'data' => $hotspot->getName(),
-					'data_class' => HotSpots::class, ))
-				->add('info', TextareaType::class, array(
-					'data' => $hotspot->getInfo(),
-					'data_class' => HotSpots::class, ));
-		}
-*/
-		$builder->add('update', SubmitType::class);
+				'entry_type' => HotspotType::class,
+				'allow_add' => true,
+				'attr' => array('class' => 'hotspots'),))
+			->add('testResults', CollectionType::class, array(
+				'entry_type' => TestResultsType::class,))
+			->add('update', SubmitType::class);
 	}
 }
