@@ -22,6 +22,7 @@ class CaseType extends AbstractType
 			->add('hotspots', CollectionType::class, array(
 				'entry_type' => HotspotType::class,
 				'allow_add' => true,
+				'prototype_name' => '__hotspot__',
 				'attr' => array('class' => 'hotspots'),))
 			->add('testResults', CollectionType::class, array(
 				'entry_type' => TestResultsType::class,))

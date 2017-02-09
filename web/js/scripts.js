@@ -17,7 +17,15 @@ function updateAdminCase() {
 
 	xhttp.onreadystatechange = function() {
 		if( this.readyState == 4 && this.status == 200 ) {
-			document.getElementById("description").innerHTML = this.responseText;
+			document.getElementById("caseInfo").innerHTML = this.responseText;
+			document.getElementById("addHotspot").addEventListener("click", function(event){
+				event.preventDefault();
+
+				var holder = document.getElementById("case_hotspots");
+				var prototype = holder.getAttribute("data-prototype");
+
+				holder.append(prototype);
+			});
 		}
 	};
 	xhttp.open("GET", "/getCase/" + id, true);
