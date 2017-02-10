@@ -227,4 +227,72 @@ class CaseStudy
     {
         return $this->results;
     }
+
+    /**
+     * Add testResult
+     *
+     * @param \AppBundle\Entity\TestResults $testResult
+     *
+     * @return CaseStudy
+     */
+    public function addTestResult(\AppBundle\Entity\TestResults $testResult)
+    {
+        $this->testResults[] = $testResult;
+
+        return $this;
+    }
+
+    /**
+     * Remove testResult
+     *
+     * @param \AppBundle\Entity\TestResults $testResult
+     */
+    public function removeTestResult(\AppBundle\Entity\TestResults $testResult)
+    {
+        $this->testResults->removeElement($testResult);
+    }
+
+    /**
+     * Get testResults
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTestResults()
+    {
+        return $this->testResults;
+    }
+
+    /**
+     * Add medicationResult
+     *
+     * @param \AppBundle\Entity\MedicationResults $medicationResult
+     *
+     * @return CaseStudy
+     */
+    public function addMedicationResult(\AppBundle\Entity\MedicationResults $medicationResult)
+    {
+        $this->medicationResults[] = $medicationResult;
+
+        return $this;
+    }
+
+    /**
+     * Remove medicationResult
+     *
+     * @param \AppBundle\Entity\MedicationResults $medicationResult
+     */
+    public function removeMedicationResult(\AppBundle\Entity\MedicationResults $medicationResult)
+    {
+        $this->medicationResults->removeElement($medicationResult);
+    }
+
+    /**
+     * Get medicationResults
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMedicationResults()
+    {
+        return $this->medicationResults;
+    }
 }

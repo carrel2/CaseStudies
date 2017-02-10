@@ -12,24 +12,25 @@ function updateCase() {
 }
 
 function updateAdminCase() {
-	var xhttp = new XMLHttpRequest();
-	var id = document.getElementById("admin_case").value;
+	var $id = $('#admin_case').val();
 
-	xhttp.onreadystatechange = function() {
-		if( this.readyState == 4 && this.status == 200 ) {
-			document.getElementById("caseInfo").innerHTML = this.responseText;
-			document.getElementById("addHotspot").addEventListener("click", function(event){
-				event.preventDefault();
+	$('#caseInfo').load('/getCase/' + $id, function(responseTxt, statusTxt, xhr){
+		var $holder = $('#case_hotspots');
 
-				var holder = document.getElementById("case_hotspots");
-				var prototype = holder.getAttribute("data-prototype");
+		$holder.data('index', $holder.find('input[type=text]').length);
 
-				holder.append(prototype);
-			});
-		}
-	};
-	xhttp.open("GET", "/getCase/" + id, true);
-	xhttp.send();
+		$('#addHotspot').on('click', function(e) {
+			var $prototype = $holder.data('prototype');
+			var index = $holder.data('index');
+			var $newForm = $prototype.replace(/__hotspot__/g, index);
+
+			$newForm = $newForm.replace(/label__/g, '');
+
+			$holder.data('index', index + 1);
+			$holder.append($newForm);
+			$holder.find('label').remove(':contains(' + index + ')');
+		});
+	});
 }
 
 function updateHotspots(element) {

@@ -3,7 +3,11 @@
 {% block scripts %}
 	{{ parent() }}
 
-	<script src="{{ asset('js/admin.js') }}"></script>
+	<script>
+		$(function(){
+			updateAdminCase();
+		});
+	</script>
 {% endblock %}
 
 {% block body %}
@@ -17,10 +21,4 @@
 	{{ form_end(form) }}
 
 	<div id="caseInfo"></div>
-{% endblock %}
-
-{% block footer %}
-	{{ parent() }}
-
-	<script>updateAdminCase()</script>
 {% endblock %}

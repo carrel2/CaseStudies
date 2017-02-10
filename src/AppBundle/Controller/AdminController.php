@@ -43,6 +43,8 @@ class AdminController extends Controller
 			$case = $form->getData();
 			$em->flush();
 
+			$r->attributes->set('id', $case->getId());
+
 			return $this->redirectToRoute('admin');
 		}
 

@@ -32,4 +32,86 @@ class MedicationResults
 	 * @ORM\Column(type="text")
 	 */
 	private $results;
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set results
+     *
+     * @param string $results
+     *
+     * @return MedicationResults
+     */
+    public function setResults($results)
+    {
+        $this->results = $results;
+
+        return $this;
+    }
+
+    /**
+     * Get results
+     *
+     * @return string
+     */
+    public function getResults()
+    {
+        return $this->results;
+    }
+
+    /**
+     * Set caseStudy
+     *
+     * @param \AppBundle\Entity\CaseStudy $caseStudy
+     *
+     * @return MedicationResults
+     */
+    public function setCaseStudy(\AppBundle\Entity\CaseStudy $caseStudy = null)
+    {
+        $this->caseStudy = $caseStudy;
+
+        return $this;
+    }
+
+    /**
+     * Get caseStudy
+     *
+     * @return \AppBundle\Entity\CaseStudy
+     */
+    public function getCaseStudy()
+    {
+        return $this->caseStudy;
+    }
+
+    /**
+     * Set medication
+     *
+     * @param \AppBundle\Entity\Medication $medication
+     *
+     * @return MedicationResults
+     */
+    public function setMedication(\AppBundle\Entity\Medication $medication = null)
+    {
+        $this->medication = $medication;
+
+        return $this;
+    }
+
+    /**
+     * Get medication
+     *
+     * @return \AppBundle\Entity\Medication
+     */
+    public function getMedication()
+    {
+        return $this->medication;
+    }
 }
