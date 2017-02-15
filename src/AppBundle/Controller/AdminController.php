@@ -43,13 +43,12 @@ class AdminController extends Controller
 			$case = $form->getData();
 			$em->flush();
 
-			$r->attributes->set('id', $case->getId());
-
 			return $this->redirectToRoute('admin');
 		}
 
 		return $this->render('caseInfo.html.twig', array(
 			'form' => $form->createView(),
+			'case' => $case,
 			'id' => $id,
 		));
 	}

@@ -1,4 +1,4 @@
-// dot 2.38.0 on Linux 4.4.0-59-generic
+// dot 2.38.0 on Linux 4.4.0-62-generic
 // SchemaSpy rev 590
 digraph "twoDegreesRelationshipsDiagram" {
   graph [
@@ -19,24 +19,24 @@ digraph "twoDegreesRelationshipsDiagram" {
   edge [
     arrowsize="0.8"
   ];
-  "MedicationResults":"case_id":w -> "Cases":"elipses":e [arrowhead=none dir=back arrowtail=crowodot];
+  "MedicationResults":"day_id":w -> "Days":"elipses":e [arrowhead=none dir=back arrowtail=crowodot];
   "MedicationResults":"medication_id":w -> "Medications":"id.type":e [arrowhead=none dir=back arrowtail=crowodot];
-  "Cases" [
+  "Days" [
     label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
-      <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">Cases</TD></TR>
+      <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">Days</TD></TR>
       <TR><TD PORT="elipses" COLSPAN="3" ALIGN="LEFT">...</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">2 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">4 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">3 &gt;</TD></TR>
     </TABLE>>
-    URL="Cases.html"
-    tooltip="Cases"
+    URL="Days.html"
+    tooltip="Days"
   ];
   "MedicationResults" [
     label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
       <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">MedicationResults</TD></TR>
       <TR><TD PORT="id" COLSPAN="3" BGCOLOR="#bed1b8" ALIGN="LEFT">id</TD></TR>
-      <TR><TD PORT="case_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">case_id</TD></TR>
+      <TR><TD PORT="day_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">day_id</TD></TR>
       <TR><TD PORT="medication_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">medication_id</TD></TR>
       <TR><TD PORT="results" COLSPAN="3" ALIGN="LEFT">results</TD></TR>
       <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>

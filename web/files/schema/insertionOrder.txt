@@ -1,7 +1,6 @@
 Cases
 Medications
 Tests
-Sessions
 Days
 app_users
 Hotspots

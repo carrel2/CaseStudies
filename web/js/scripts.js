@@ -30,6 +30,16 @@ function updateAdminCase() {
 			$holder.append($newForm);
 			$holder.find('label').remove(':contains(' + index + ')');
 		});
+
+		$('#case_hotspots > div').each(function() {
+			$(this).append('<button type="button" class="remove-button">x</button>');
+		});
+
+		$('.remove-button').each(function() {
+			$(this).on('click', function() {
+				$(this).parent().remove();
+			});
+		});
 	});
 }
 

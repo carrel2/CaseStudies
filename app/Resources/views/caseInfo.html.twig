@@ -1,21 +1,4 @@
-{{ form_start(form, {'action': path('caseInfo', {'id': id})}) }}
-	{{ form_label(form.title) }}
-	{{ form_errors(form.title) }}
-	{{ form_widget(form.title) }}
-
-	{{ form_label(form.description) }}
-	{{ form_errors(form.description) }}
-	{{ form_widget(form.description) }}
-
-	{{ form_label(form.hotspots) }}
-	{{ form_errors(form.hotspots) }}
-	{{ form_widget(form.hotspots) }}
-
-	<button type="button" id="addHotspot">Add hotspot</button>
-
-	{{ form_label(form.testResults) }}
-	{{ form_errors(form.testResults) }}
-	{{ form_widget(form.testResults) }}
-
-	{{ form_rest(form) }}
+{{ form_start(form, {'attr': {'id': 'case'}, 'action': path('caseInfo', {'id': id})}) }}
+{{ form_widget(form) }}
+<button type="button" id="addHotspot">Add hotspot</button>
 {{ form_end(form) }}

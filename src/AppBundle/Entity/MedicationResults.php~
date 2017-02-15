@@ -18,10 +18,9 @@ class MedicationResults
 	private $id;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="CaseStudy", inversedBy="medicationResults")
-	 * @ORM\JoinColumn(name="case_id", referencedColumnName="id")
+	 * @ORM\ManyToOne(targetEntity="Day", inversedBy="medications")
 	 */
-	private $caseStudy;
+	private $day;
 
 	/**
 	 * @ORM\ManyToOne(targetEntity="Medication", inversedBy="results")
@@ -68,30 +67,6 @@ class MedicationResults
     }
 
     /**
-     * Set caseStudy
-     *
-     * @param \AppBundle\Entity\CaseStudy $caseStudy
-     *
-     * @return MedicationResults
-     */
-    public function setCaseStudy(\AppBundle\Entity\CaseStudy $caseStudy = null)
-    {
-        $this->caseStudy = $caseStudy;
-
-        return $this;
-    }
-
-    /**
-     * Get caseStudy
-     *
-     * @return \AppBundle\Entity\CaseStudy
-     */
-    public function getCaseStudy()
-    {
-        return $this->caseStudy;
-    }
-
-    /**
      * Set medication
      *
      * @param \AppBundle\Entity\Medication $medication
@@ -113,5 +88,29 @@ class MedicationResults
     public function getMedication()
     {
         return $this->medication;
+    }
+
+    /**
+     * Set day
+     *
+     * @param \AppBundle\Entity\Day $day
+     *
+     * @return MedicationResults
+     */
+    public function setDay(\AppBundle\Entity\Day $day = null)
+    {
+        $this->day = $day;
+
+        return $this;
+    }
+
+    /**
+     * Get day
+     *
+     * @return \AppBundle\Entity\Day
+     */
+    public function getDay()
+    {
+        return $this->day;
     }
 }

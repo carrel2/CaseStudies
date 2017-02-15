@@ -19,13 +19,9 @@ class CaseType extends AbstractType
 		$builder
 			->add('title', TextType::class)
 			->add('description', TextareaType::class)
-			->add('hotspots', CollectionType::class, array(
-				'entry_type' => HotspotType::class,
-				'allow_add' => true,
-				'prototype_name' => '__hotspot__',
-				'attr' => array('class' => 'hotspots'),))
-			->add('testResults', CollectionType::class, array(
-				'entry_type' => TestResultsType::class,))
-			->add('update', SubmitType::class);
+			->add('days', CollectionType::class, array(
+				'entry_type' => DayType::class,))
+			->add('update', SubmitType::class, array(
+				'attr' => array( 'form' => 'case',)));
 	}
 }

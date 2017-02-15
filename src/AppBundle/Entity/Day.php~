@@ -19,9 +19,9 @@ class Day
 	private $id;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="Session", inversedBy="days")
+	 * @ORM\ManyToOne(targetEntity="caseStudy", inversedBy="days")
 	 */
-	private $session;
+	private $caseStudy;
 
 	/**
 	 * @ORM\OneToMany(targetEntity="HotSpots", mappedBy="day", cascade={"persist", "remove"})
@@ -29,14 +29,14 @@ class Day
 	private $hotspots;
 
 	/**
-	 * @ORM\Column(type="array")
+	 * @ORM\OneToMany(targetEntity="TestResults", mappedBy="day", cascade={"persist", "remove"})
 	 */
-	private $tests = array();
+	private $tests;
 
 	/**
-	 * @ORM\Column(type="array")
+	 * @ORM\OneToMany(targetEntity="MedicationResults", mappedBy="day", cascade={"persist", "remove"})
 	 */
-	private $medications = array();
+	private $medications;
 
 	/**
 	 * @ORM\Column(type="integer")
@@ -46,6 +46,8 @@ class Day
 	public function __construct()
 	{
 		$this->hotspots = new ArrayCollection();
+		$this->tests = new ArrayCollection();
+		$this->medications = new ArrayCollection();
 	}
 
 	/**
@@ -56,82 +58,6 @@ class Day
 	public function getId()
 	{
 		return $this->id;
-	}
-
-	/**
-	 * Set tests
-	 *
-	 * @param array $tests
-	 *
-	 * @return Day
-	 */
-	public function setTests($tests)
-	{
-		$this->tests = $tests;
-
-		return $this;
-	}
-
-	/**
-	 * Get tests
-	 *
-	 * @return array
-	 */
-	public function getTests()
-	{
-		return $this->tests;
-	}
-
-	/**
-	 * Add test
-	 *
-	 * @param integer $test
-	 *
-	 * @return Day
-	 */
-	public function addTest($test)
-	{
-		array_push($this->tests, $test);
-
-		return $this;
-	}
-
-	/**
-	 * Set medications
-	 *
-	 * @param array $medications
-	 *
-	 * @return Day
-	 */
-	public function setMedications($medications)
-	{
-		$this->medications = $medications;
-
-		return $this;
-	}
-
-	/**
-	 * Get medications
-	 *
-	 * @return array
-	 */
-	public function getMedications()
-	{
-		return $this->medications;
-	}
-
-	/**
-	 * Add medication
-	 *
-	 * @param integer $medication
-	 *
-	 * @return Day
-	 */
-	public function addMedication($medication)
-	{
-		array_push($this->medications, $medication);
-
-		return $this;
 	}
 
 	/**
@@ -157,30 +83,6 @@ class Day
 	{
 		return $this->number;
 	}
-
-    /**
-     * Set session
-     *
-     * @param \AppBundle\Entity\Session $session
-     *
-     * @return Day
-     */
-    public function setSession(\AppBundle\Entity\Session $session = null)
-    {
-        $this->session = $session;
-
-        return $this;
-    }
-
-    /**
-     * Get session
-     *
-     * @return \AppBundle\Entity\Session
-     */
-    public function getSession()
-    {
-        return $this->session;
-    }
 
     /**
      * Remove hotspot
@@ -214,5 +116,97 @@ class Day
     public function getHotspots()
     {
         return $this->hotspots;
+    }
+
+    /**
+     * Set caseStudy
+     *
+     * @param \AppBundle\Entity\caseStudy $caseStudy
+     *
+     * @return Day
+     */
+    public function setCaseStudy(\AppBundle\Entity\caseStudy $caseStudy = null)
+    {
+        $this->caseStudy = $caseStudy;
+
+        return $this;
+    }
+
+    /**
+     * Get caseStudy
+     *
+     * @return \AppBundle\Entity\caseStudy
+     */
+    public function getCaseStudy()
+    {
+        return $this->caseStudy;
+    }
+
+    /**
+     * Add test
+     *
+     * @param \AppBundle\Entity\TestResults $test
+     *
+     * @return Day
+     */
+    public function addTest(\AppBundle\Entity\TestResults $test)
+    {
+        $this->tests[] = $test;
+
+        return $this;
+    }
+
+    /**
+     * Remove test
+     *
+     * @param \AppBundle\Entity\TestResults $test
+     */
+    public function removeTest(\AppBundle\Entity\TestResults $test)
+    {
+        $this->tests->removeElement($test);
+    }
+
+    /**
+     * Get tests
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTests()
+    {
+        return $this->tests;
+    }
+
+    /**
+     * Add medication
+     *
+     * @param \AppBundle\Entity\MedicationResults $medication
+     *
+     * @return Day
+     */
+    public function addMedication(\AppBundle\Entity\MedicationResults $medication)
+    {
+        $this->medications[] = $medication;
+
+        return $this;
+    }
+
+    /**
+     * Remove medication
+     *
+     * @param \AppBundle\Entity\MedicationResults $medication
+     */
+    public function removeMedication(\AppBundle\Entity\MedicationResults $medication)
+    {
+        $this->medications->removeElement($medication);
+    }
+
+    /**
+     * Get medications
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMedications()
+    {
+        return $this->medications;
     }
 }

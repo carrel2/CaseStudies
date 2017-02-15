@@ -54,10 +54,10 @@ class User implements UserInterface, \Serializable
     private $uin;
 
     /**
-     * @ORM\OneToOne(targetEntity="Session", inversedBy="user")
-     * @ORM\JoinColumn(name="session_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\ManyToOne(targetEntity="CaseStudy", inversedBy="users")
+     * @ORM\JoinColumn(name="case_id", referencedColumnName="id")
      */
-    private $session;
+    private $caseStudy;
 
     /**
      * @ORM\Column(name="is_active", type="boolean")
@@ -230,26 +230,26 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Set session
+     * Set caseStudy
      *
-     * @param \AppBundle\Entity\Session $session
+     * @param \AppBundle\Entity\CaseStudy $caseStudy
      *
      * @return User
      */
-    public function setSession(\AppBundle\Entity\Session $session = null)
+    public function setCaseStudy(\AppBundle\Entity\CaseStudy $caseStudy = null)
     {
-        $this->session = $session;
+        $this->caseStudy = $caseStudy;
 
         return $this;
     }
 
     /**
-     * Get session
+     * Get caseStudy
      *
-     * @return \AppBundle\Entity\Session
+     * @return \AppBundle\Entity\CaseStudy
      */
-    public function getSession()
+    public function getCaseStudy()
     {
-        return $this->session;
+        return $this->caseStudy;
     }
 }

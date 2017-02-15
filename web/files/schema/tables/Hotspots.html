@@ -100,54 +100,12 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </tr>
 </thead>
 <tbody valign='top'>
-<tr class='odd'>
+<tr class='even'>
  <td class='primaryKey' title='Primary Key'>id</td>
  <td class='detail'>int</td>
  <td class='detail' align='right'>10</td>
  <td class='detail' align='center'></td>
  <td class='detail' align='center' title='Automatically updated by the database'>&nbsp;&radic;&nbsp;</td>
- <td class='detail'></td>
- <td class='detail'></td>
- <td class='detail'> </td>
- <td class='comment detail'></td>
-</tr>
-<tr class='even'>
- <td class='indexedColumn' title='Indexed'>case_id</td>
- <td class='detail'>int</td>
- <td class='detail' align='right'>10</td>
- <td class='detail' align='center' title='nullable'>&nbsp;&radic;&nbsp;</td>
- <td class='detail' align='center'></td>
- <td class='detail' align='right'>null</td>
- <td class='detail'></td>
- <td class='detail'>
-  <table border='0' width='100%' cellspacing='0' cellpadding='0'>
-   <tr class='relative even' valign='top'>
-    <td class='relatedTable detail' title="Hotspots.case_id refs Cases.id via FK_668E5F00CF10D4F5"><a href='Cases.html'>Cases</a><span class='relatedKey'>.id</span>
-    </td>
-    <td class='constraint detail'>FK_668E5F00CF10D4F5<span title='Restrict delete:
- Parent cannot be deleted if children exist'>&nbsp;R</span></td>
-   </tr>
-  </table>
- </td>
- <td class='comment detail'></td>
-</tr>
-<tr class='odd'>
- <td class='detail'>name</td>
- <td class='detail'>varchar</td>
- <td class='detail' align='right'>40</td>
- <td class='detail' align='center'></td>
- <td class='detail' align='center'></td>
- <td class='detail'></td>
- <td class='detail'></td>
- <td class='detail'> </td>
- <td class='comment detail'></td>
-</tr>
-<tr class='even'>
- <td class='detail'>info</td>
- <td class='detail'>longtext</td>
- <td class='detail' align='right'>2147483647</td>
- <td class='detail' align='center'></td>
- <td class='detail' align='center'></td>
  <td class='detail'></td>
  <td class='detail'></td>
  <td class='detail'> </td>
@@ -173,8 +131,30 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
  </td>
  <td class='comment detail'></td>
 </tr>
+<tr class='even'>
+ <td class='detail'>name</td>
+ <td class='detail'>varchar</td>
+ <td class='detail' align='right'>40</td>
+ <td class='detail' align='center'></td>
+ <td class='detail' align='center'></td>
+ <td class='detail'></td>
+ <td class='detail'></td>
+ <td class='detail'> </td>
+ <td class='comment detail'></td>
+</tr>
+<tr class='odd'>
+ <td class='detail'>info</td>
+ <td class='detail'>longtext</td>
+ <td class='detail' align='right'>2147483647</td>
+ <td class='detail' align='center'></td>
+ <td class='detail' align='center'></td>
+ <td class='detail'></td>
+ <td class='detail'></td>
+ <td class='detail'> </td>
+ <td class='comment detail'></td>
+</tr>
 </table>
-<p title='5 columns'>Table contained 7 rows at Thu Feb 02 14:12 CST 2017<p/>
+<p title='4 columns'>Table contained 0 rows at Wed Feb 15 15:51 CST 2017<p/>
 </td></tr></table>
 <div class='indent'>
 <b>Indexes:</b>
@@ -200,30 +180,22 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
   <td class='detail' style='text-align:left;'><span title='Ascending'>Asc</span></td>
   <td class='constraint' style='text-align:left;'>IDX_668E5F009C24126</td>
  </tr>
- <tr>
-  <td class='indexedColumn'>case_id</td>
-  <td class='detail'>Performance</td>
-  <td class='detail' style='text-align:left;'><span title='Ascending'>Asc</span></td>
-  <td class='constraint' style='text-align:left;'>IDX_668E5F00CF10D4F5</td>
- </tr>
 </table>
 </div>
 <table width='100%' border='0'><tr><td class='container'>
 <br><form action='get'><b>Close relationships</b><span class='degrees' id='degrees' title='Detail diminishes with increased separation from Hotspots'>
 &nbsp;within <label for='oneDegree'><input type='radio' name='degrees' id='oneDegree' checked>one</label>  <label for='twoDegrees'><input type='radio' name='degrees' id='twoDegrees'>two degrees</label> of separation</span><b>:</b></form>
 <map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="Hotspots.html" title="Hotspots" alt="" coords="197,17,503,201">
-<area shape="rect" id="node2" href="Cases.html" title="Cases" alt="" coords="11,5,148,136">
-<area shape="rect" id="node3" href="Days.html" title="Days" alt="" coords="5,153,153,332">
+<area shape="rect" id="node1" href="Hotspots.html" title="Hotspots" alt="" coords="205,5,511,165">
+<area shape="rect" id="node2" href="Days.html" title="Days" alt="" coords="5,32,161,163">
 </map>
   <a name='diagram'><img id='oneDegreeImg' src='../diagrams/Hotspots.1degree.png' usemap='#oneDegreeRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>
 <map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="Days.html" title="Days" alt="" coords="391,103,539,281">
-<area shape="rect" id="node2" href="Sessions.html" title="Sessions" alt="" coords="193,113,341,196">
-<area shape="rect" id="node4" href="Cases.html" title="Cases" alt="" coords="5,164,143,295">
-<area shape="rect" id="node3" href="Hotspots.html" title="Hotspots" alt="" coords="583,5,888,189">
-<area shape="rect" id="node5" href="MedicationResults.html" title="MedicationResults" alt="" coords="187,213,347,296">
-<area shape="rect" id="node6" href="TestResults.html" title="TestResults" alt="" coords="198,313,335,396">
+<area shape="rect" id="node1" href="Days.html" title="Days" alt="" coords="187,183,343,313">
+<area shape="rect" id="node2" href="Cases.html" title="Cases" alt="" coords="5,207,143,289">
+<area shape="rect" id="node3" href="Hotspots.html" title="Hotspots" alt="" coords="387,5,692,165">
+<area shape="rect" id="node4" href="MedicationResults.html" title="MedicationResults" alt="" coords="459,183,619,265">
+<area shape="rect" id="node5" href="TestResults.html" title="TestResults" alt="" coords="471,283,608,365">
 </map>
 
   <a name='diagram'><img id='twoDegreesImg' src='../diagrams/Hotspots.2degrees.png' usemap='#twoDegreesRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>
