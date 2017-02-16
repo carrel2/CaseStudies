@@ -103,6 +103,7 @@ class Day
      */
     public function addHotspot(\AppBundle\Entity\HotSpots $hotspot)
     {
+	$hotspot->setDay($this);
         $this->hotspots[] = $hotspot;
 
         return $this;
@@ -125,7 +126,7 @@ class Day
      *
      * @return Day
      */
-    public function setCaseStudy(\AppBundle\Entity\caseStudy $caseStudy = null)
+    public function setCaseStudy(\AppBundle\Entity\CaseStudy $caseStudy = null)
     {
         $this->caseStudy = $caseStudy;
 

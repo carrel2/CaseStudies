@@ -3,7 +3,7 @@
 
 {% block body %}
 	{% for spot in hotspots %}
-		<span data-path="{{ session.id }}/{{ spot.id }}" onclick="updateHotspots(this)">{{ spot.name }}</span>
+		<span data-path="{{ case.id }}/{{ spot.id }}" onclick="updateHotspots(this)">{{ spot.name }}</span>
 	{% endfor %}
 
 	<a href="{{ path('order_tests') }}">Continue</a>

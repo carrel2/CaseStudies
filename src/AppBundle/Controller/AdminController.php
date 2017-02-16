@@ -41,6 +41,8 @@ class AdminController extends Controller
 		if( $form->isSubmitted() && $form->isValid() )
 		{
 			$case = $form->getData();
+
+			$em->persist($case);
 			$em->flush();
 
 			return $this->redirectToRoute('admin');

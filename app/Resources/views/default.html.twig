@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	{% if session %}
+	{% if case %}
 		<div>You have a session in progress: {{ case.title }}</div>
 		{{ form_start(form) }}
 		{{ form_widget(form) }}

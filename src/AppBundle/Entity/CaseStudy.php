@@ -44,6 +44,11 @@ class CaseStudy
         $this->users = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return strval($this->id);
+    }
+
     public function getCase()
     {
         return $this->title;
@@ -123,6 +128,7 @@ class CaseStudy
      */
     public function addDay(\AppBundle\Entity\Day $day)
     {
+	$day->setCaseStudy($this);
         $this->days[] = $day;
 
         return $this;
@@ -146,6 +152,16 @@ class CaseStudy
     public function getDays()
     {
         return $this->days;
+    }
+
+    /**
+     * Get day
+     *
+     * @return \AppBundle\Entity\Day
+     */
+    public function getDay()
+    {
+        return end($this->days);
     }
 
     /**

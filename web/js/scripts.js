@@ -11,27 +11,31 @@ function updateCase() {
 	xhttp.send();
 }
 
+function addButtonClickListener(e) {
+	$holder = $(e).parent().prev().children('.collection');
+
+	$holder.data('index', $holder.find('input[type=hidden]').length);
+
+	var $prototype = $holder.data('prototype');
+	var index = $holder.data('index');
+	var $newForm = $prototype.replace(/__name__/g, index);
+
+	$newForm = $newForm.replace(/label__/g, '');
+
+	$holder.data('index', index + 1);
+	$holder.append($newForm);
+	$holder.find('label').remove(':contains(' + index + ')');
+
+	if( $(e).text() == "Add day" ) {
+		$('.dayNumber').val(index + 1);
+	}
+}
+
 function updateAdminCase() {
 	var $id = $('#admin_case').val();
 
 	$('#caseInfo').load('/getCase/' + $id, function(responseTxt, statusTxt, xhr){
-		var $holder = $('#case_hotspots');
-
-		$holder.data('index', $holder.find('input[type=text]').length);
-
-		$('#addHotspot').on('click', function(e) {
-			var $prototype = $holder.data('prototype');
-			var index = $holder.data('index');
-			var $newForm = $prototype.replace(/__hotspot__/g, index);
-
-			$newForm = $newForm.replace(/label__/g, '');
-
-			$holder.data('index', index + 1);
-			$holder.append($newForm);
-			$holder.find('label').remove(':contains(' + index + ')');
-		});
-
-		$('#case_hotspots > div').each(function() {
+		$('#case_days > div').each(function() {
 			$(this).append('<button type="button" class="remove-button">x</button>');
 		});
 

@@ -22,13 +22,11 @@ class DefaultController extends Controller
 	public function defaultAction(Request $r)
 	{
 		$user = $this->getUser();
-		$session = $user->getSession();
-		$case = null;
+		$case = $user->getCaseStudy();
 
 		$em = $this->getDoctrine()->getManager();
 
-		if( $session ) {
-			$case = $session->getCaseStudy();
+		if( $case ) {
 			$form = $this->createFormBuilder()
 				->add('resume', SubmitType::class)
 				->getForm();
@@ -40,25 +38,9 @@ class DefaultController extends Controller
 
 		if( $form->isSubmitted() && $form->isValid() )
 		{
-			if( !$session ) {
+			if( !$case ) {
 				$case = $form->getData()['case'];
-
-				$day = new Day();
-				$day->setNumber(1);
-
-				$em->persist($day);
-
-				$session = new Session();
-				$session->setCaseStudy( $case );
-				$session->setUser( $user );
-				$session->addDay($day);
-				$day->setSession($session);
-
-				$em->persist($session);
-				$em->flush();
-
-				$user->setSession($session);
-				$em->flush();
+				$user->setCaseStudy($case);
 			}
 
 			return $this->redirectToRoute('evaluation');
@@ -67,7 +49,6 @@ class DefaultController extends Controller
 		return $this->render('default.html.twig', array(
 			'form' => $form->createView(),
 			'case' => $case,
-			'session' => $session,
 		));
 	}
 
