@@ -159,7 +159,7 @@ class CaseStudy
      *
      * @return \AppBundle\Entity\Day
      */
-    public function getDay()
+    public function getCurrentDay()
     {
         return end($this->days);
     }

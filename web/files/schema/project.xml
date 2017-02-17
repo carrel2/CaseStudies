@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <database name="project" type="MySQL - 5.7.17-0ubuntu0.16.04.1">
    <tables>
-      <table name="app_users" numRows="0" remarks="" type="TABLE">
+      <table name="app_users" numRows="1" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
          <column autoUpdated="false" digits="0" id="1" name="case_id" nullable="true" remarks="" size="10" type="INT">
             <parent column="id" foreignKey="FK_C2502824CF10D4F5" implied="false" onDeleteCascade="false" table="Cases"/>
@@ -28,7 +28,7 @@
             <column ascending="true" name="username"/>
          </index>
       </table>
-      <table name="Cases" numRows="0" remarks="" type="TABLE">
+      <table name="Cases" numRows="1" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
             <child column="case_id" foreignKey="FK_C2502824CF10D4F5" implied="false" onDeleteCascade="false" table="app_users"/>
             <child column="case_study_id" foreignKey="FK_4BD6535870CD7994" implied="false" onDeleteCascade="false" table="Days"/>
@@ -40,7 +40,7 @@
             <column ascending="true" name="id"/>
          </index>
       </table>
-      <table name="Days" numRows="0" remarks="" type="TABLE">
+      <table name="Days" numRows="1" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
             <child column="day_id" foreignKey="FK_668E5F009C24126" implied="false" onDeleteCascade="false" table="Hotspots"/>
             <child column="day_id" foreignKey="FK_C7C851159C24126" implied="false" onDeleteCascade="false" table="MedicationResults"/>
@@ -58,7 +58,7 @@
             <column ascending="true" name="case_study_id"/>
          </index>
       </table>
-      <table name="Hotspots" numRows="0" remarks="" type="TABLE">
+      <table name="Hotspots" numRows="2" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
          <column autoUpdated="false" digits="0" id="1" name="day_id" nullable="true" remarks="" size="10" type="INT">
             <parent column="id" foreignKey="FK_668E5F009C24126" implied="false" onDeleteCascade="false" table="Days"/>
@@ -73,7 +73,7 @@
             <column ascending="true" name="day_id"/>
          </index>
       </table>
-      <table name="MedicationResults" numRows="0" remarks="" type="TABLE">
+      <table name="MedicationResults" numRows="1" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
          <column autoUpdated="false" digits="0" id="1" name="day_id" nullable="true" remarks="" size="10" type="INT">
             <parent column="id" foreignKey="FK_C7C851159C24126" implied="false" onDeleteCascade="false" table="Days"/>
@@ -93,7 +93,7 @@
             <column ascending="true" name="day_id"/>
          </index>
       </table>
-      <table name="Medications" numRows="0" remarks="" type="TABLE">
+      <table name="Medications" numRows="1" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
             <child column="medication_id" foreignKey="FK_C7C851152C4DE6DA" implied="false" onDeleteCascade="false" table="MedicationResults"/>
          </column>
@@ -104,7 +104,7 @@
             <column ascending="true" name="id"/>
          </index>
       </table>
-      <table name="TestResults" numRows="0" remarks="" type="TABLE">
+      <table name="TestResults" numRows="4" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
          <column autoUpdated="false" digits="0" id="1" name="day_id" nullable="true" remarks="" size="10" type="INT">
             <parent column="id" foreignKey="FK_B868B2F29C24126" implied="false" onDeleteCascade="false" table="Days"/>
@@ -124,7 +124,7 @@
             <column ascending="true" name="day_id"/>
          </index>
       </table>
-      <table name="Tests" numRows="0" remarks="" type="TABLE">
+      <table name="Tests" numRows="3" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
             <child column="test_id" foreignKey="FK_B868B2F21E5D0459" implied="false" onDeleteCascade="false" table="TestResults"/>
          </column>

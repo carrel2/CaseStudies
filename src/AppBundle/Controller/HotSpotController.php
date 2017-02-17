@@ -16,22 +16,22 @@ class HotSpotController extends Controller
 	 * @Route("/eval", name="evaluation")
 	 * @Security("has_role('ROLE_USER')")
 	 */
-	public function showPage(Request $r, $id)
+	public function showPage(Request $r)
 	{
 		$user = $this->getUser();
 
 		$case = $user->getCaseStudy();
-		$day = $case->getCurrentDay();
-		$hotspots = $day->getHotspots();
+		$days = $case->getDays();
+		$hotspots = $days[0]->getHotspots();
 
 		return $this->render('hotspot.html.twig', array(
 			'hotspots' => $hotspots,
-			'checked' => $day->getHotspots(),
+			'checked' => $hotspots,
 		));
 	}
 
 	/**
-	 * @Route("/update/{session}/{id}", name="update")
+	 * @Route("/update/{id}", name="update")
 	 * @Security("has_role('ROLE_USER')")
 	 */
 	public function updatePage(Request $r, $session, $id)

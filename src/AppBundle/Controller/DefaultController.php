@@ -41,6 +41,9 @@ class DefaultController extends Controller
 			if( !$case ) {
 				$case = $form->getData()['case'];
 				$user->setCaseStudy($case);
+				$case->addUser($user);
+
+				$em->flush();
 			}
 
 			return $this->redirectToRoute('evaluation');
