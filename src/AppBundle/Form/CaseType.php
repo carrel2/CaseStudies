@@ -26,13 +26,19 @@ class CaseType extends AbstractType
 				'allow_add' => true,
 				'allow_delete' => true,
 				'by_reference' => false,
-				'attr' => array('class' => 'collection')))
+				'attr' => array(
+					'class' => 'collection days',
+					'data-type' => 'day')))
 			->add('add day', ButtonType::class, array(
 				'attr' => array(
 					'class' => 'addButton',
 					'onclick' => 'addButtonClickListener(this)',)))
 			->add('update', SubmitType::class, array(
-				'attr' => array( 'form' => 'case',)));
+				'attr' => array( 'form' => 'case',)))
+			->add('delete', SubmitType::class, array(
+				'attr' => array( 'form' => 'case',)))
+			->add('restore', ButtonType::class, array(
+				'attr' => array('onclick' => 'updateAdminCase()')));
 	}
 
 	public function configureOptions(OptionsResolver $resolver)

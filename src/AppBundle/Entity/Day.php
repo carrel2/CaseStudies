@@ -91,6 +91,7 @@ class Day
      */
     public function removeHotspot(\AppBundle\Entity\HotSpots $hotspot)
     {
+        $hotspot->setDay(null);
         $this->hotspots->removeElement($hotspot);
     }
 
@@ -152,6 +153,7 @@ class Day
      */
     public function addTest(\AppBundle\Entity\TestResults $test)
     {
+        $test->setDay($this);
         $this->tests[] = $test;
 
         return $this;
@@ -164,6 +166,7 @@ class Day
      */
     public function removeTest(\AppBundle\Entity\TestResults $test)
     {
+        $test->setDay(null);
         $this->tests->removeElement($test);
     }
 
@@ -186,6 +189,7 @@ class Day
      */
     public function addMedication(\AppBundle\Entity\MedicationResults $medication)
     {
+        $medication->setDay($this);
         $this->medications[] = $medication;
 
         return $this;
@@ -198,6 +202,7 @@ class Day
      */
     public function removeMedication(\AppBundle\Entity\MedicationResults $medication)
     {
+        $medication->setDay(null);
         $this->medications->removeElement($medication);
     }
 

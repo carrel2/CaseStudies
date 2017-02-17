@@ -18,9 +18,42 @@ class AdminController extends Controller
 	 */
 	public function adminAction(Request $r)
 	{
+		return $this->render('admin.html.twig');
+	}
+
+	/**
+	 * @Route("/admin/edit", name="editCase")
+	 */
+	public function editCaseAction(Request $r)
+	{
 		$form = $this->createForm( AdminType::class );
 
-		return $this->render('admin.html.twig', array(
+		return $this->render('editCase.html.twig', array(
+			'form' => $form->createView(),
+		));
+	}
+
+	/**
+	 * @Route("/admin/create", name="createCase")
+	 */
+	public function createCaseAction(Request $r)
+	{
+		$form = $this->createForm( CaseType::class );
+
+		$form->handleRequest($r);
+
+		if( $form->isSubmitted() && $form->isValid() )
+		{
+			$em = $this->getDoctrine()->getManager();
+			$case = $form->getData();
+
+			$em->persist($case);
+			$em->flush();
+
+			return $this->redirectToRoute('admin');
+		}
+
+		return $this->render('createCase.html.twig', array(
 			'form' => $form->createView(),
 		));
 	}
@@ -42,10 +75,15 @@ class AdminController extends Controller
 		{
 			$case = $form->getData();
 
-			$em->persist($case);
+			if( $form->get('update')->isClicked() ) {
+				$em->persist($case);
+			} else if( $form->get('delete')->isClicked() ) {
+				$em->remove($case);
+			}
+
 			$em->flush();
 
-			return $this->redirectToRoute('admin');
+			return $this->redirectToRoute('editCase');
 		}
 
 		return $this->render('caseInfo.html.twig', array(

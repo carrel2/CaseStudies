@@ -12,22 +12,32 @@ function updateCase() {
 }
 
 function addButtonClickListener(e) {
-	$holder = $(e).parent().prev().children('.collection');
+	holder = $(e).parent().prev().children('.collection');
 
-	$holder.data('index', $holder.find('input[type=hidden]').length);
+	holder.data('index', holder.children('div').length);
 
-	var $prototype = $holder.data('prototype');
-	var index = $holder.data('index');
-	var $newForm = $prototype.replace(/__name__/g, index);
+	var t = holder.data('type');
+	var prototype = holder.data('prototype');
+	var index = holder.data('index');
+	var newForm = prototype.replace(/__name__/g, index);
 
-	$newForm = $newForm.replace(/label__/g, '');
+	newForm = newForm.replace(/label__/g, '');
 
-	$holder.data('index', index + 1);
-	$holder.append($newForm);
-	$holder.find('label').remove(':contains(' + index + ')');
+	holder.data('index', index + 1);
+	holder.append(newForm);
+	holder.find('label').remove(':contains(' + index + ')');
+	$(holder).children('div:last-child').append('<button type="button" class="remove-button">Remove ' + t + '</button>');
+
+	$('.remove-button').each(function() {
+		$(this).on('click', function() {
+			$(this).parent().remove();
+		});
+	});
 
 	if( $(e).text() == "Add day" ) {
-		$('.dayNumber').val(index + 1);
+		$('.dayNumber').each(function(i, element){
+			$(element).val(i);
+		});
 	}
 }
 
@@ -35,8 +45,9 @@ function updateAdminCase() {
 	var $id = $('#admin_case').val();
 
 	$('#caseInfo').load('/getCase/' + $id, function(responseTxt, statusTxt, xhr){
-		$('#case_days > div').each(function() {
-			$(this).append('<button type="button" class="remove-button">x</button>');
+		$('.collection > div').each(function(i, e) {
+			var t = $(this).parent().data('type');
+			$(this).append('<button type="button" class="remove-button">Remove ' + t + '</button>');
 		});
 
 		$('.remove-button').each(function() {

@@ -22,14 +22,37 @@ class DayType extends AbstractType
 				'allow_add' => true,
 				'allow_delete' => true,
 				'by_reference' => false,
-				'attr' => array('class' => 'collection'),))
+				'attr' => array(
+					'class' => 'collection hotspots',
+					'data-type' => 'hotspot'),))
 			->add('add hotspot', ButtonType::class, array(
 				'attr' => array(
 					'class' => 'addButton',
 					'onclick' => 'addButtonClickListener(this)',)))
 			->add('tests', CollectionType::class, array(
-				'entry_type' => TestResultsType::class,))
-			->add('add test results', ButtonType::class);
+				'entry_type' => TestResultsType::class,
+				'allow_add' => true,
+				'allow_delete' => true,
+				'by_reference' => false,
+				'attr' => array(
+					'class' => 'collection tests',
+					'data-type' => 'test results'),))
+			->add('add test results', ButtonType::class, array(
+				'attr' => array(
+					'class' => 'addButton',
+					'onclick' => 'addButtonClickListener(this)',)))
+			->add('medications', CollectionType::class, array(
+				'entry_type' => MedicationResultsType::class,
+				'allow_add' => true,
+				'allow_delete' => true,
+				'by_reference' => false,
+				'attr' => array(
+					'class' => 'collection medications',
+					'data-type' => 'medication results'),))
+			->add('add medication results', ButtonType::class, array(
+				'attr' => array(
+					'class' => 'addButton',
+					'onclick' => 'addButtonClickListener(this)',)));
 	}
 
 	public function configureOptions(OptionsResolver $resolver)

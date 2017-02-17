@@ -1,22 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block scripts %}
-	{{ parent() }}
-
-	<script src="{{ asset('js/jquery.collection.js') }}"></script>
-	<script>
-		$(function(){
-			updateAdminCase();
-		});
-	</script>
-{% endblock %}
-
 {% block body %}
-	{{ form_label(form.case) }}
-	{{ form_errors(form.case) }}
-	{{ form_widget(form.case, {'attr': {'onchange': 'updateAdminCase()'}} ) }}
-
-	{{ form_rest(form) }}
-
-	<div id="caseInfo"></div>
+	<a href="{{ path('createCase') }}">Create a new case</a>
+	<a href="{{ path('editCase') }}">Edit cases</a>
 {% endblock %}

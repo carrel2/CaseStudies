@@ -29,7 +29,7 @@ class CaseStudy
 	private $description;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="Day", mappedBy="caseStudy", cascade={"all"})
+	 * @ORM\OneToMany(targetEntity="Day", mappedBy="caseStudy", cascade={"all"}, orphanRemoval=true)
 	 */
 	private $days;
 
