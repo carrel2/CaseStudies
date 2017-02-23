@@ -49,18 +49,6 @@ class CaseStudy
         return strval($this->id);
     }
 
-    public function getCase()
-    {
-        return $this->title;
-    }
-
-    public function setCase($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
     /**
      * Get id
      *
@@ -142,6 +130,7 @@ class CaseStudy
     public function removeDay(\AppBundle\Entity\Day $day)
     {
         $this->days->removeElement($day);
+        $day->setCaseStudy(null);
     }
 
     /**
@@ -155,16 +144,6 @@ class CaseStudy
     }
 
     /**
-     * Get day
-     *
-     * @return \AppBundle\Entity\Day
-     */
-    public function getCurrentDay()
-    {
-        return end($this->days);
-    }
-
-    /**
      * Add user
      *
      * @param \AppBundle\Entity\User $user
@@ -173,6 +152,7 @@ class CaseStudy
      */
     public function addUser(\AppBundle\Entity\User $user)
     {
+        $user->setCaseStudy($this);
         $this->users[] = $user;
 
         return $this;
@@ -186,6 +166,7 @@ class CaseStudy
     public function removeUser(\AppBundle\Entity\User $user)
     {
         $this->users->removeElement($user);
+        $user->setCaseStudy(null);
     }
 
     /**

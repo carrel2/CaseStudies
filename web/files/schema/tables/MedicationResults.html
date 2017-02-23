@@ -162,8 +162,28 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
+<tr class='odd'>
+ <td class='indexedColumn' title='Indexed'>user_day_id</td>
+ <td class='detail'>int</td>
+ <td class='detail' align='right'>10</td>
+ <td class='detail' align='center' title='nullable'>&nbsp;&radic;&nbsp;</td>
+ <td class='detail' align='center'></td>
+ <td class='detail' align='right'>null</td>
+ <td class='detail'></td>
+ <td class='detail'>
+  <table border='0' width='100%' cellspacing='0' cellpadding='0'>
+   <tr class='relative odd' valign='top'>
+    <td class='relatedTable detail' title="MedicationResults.user_day_id refs UserDays.id via FK_C7C851156C905A1B"><a href='UserDays.html'>UserDays</a><span class='relatedKey'>.id</span>
+    </td>
+    <td class='constraint detail'>FK_C7C851156C905A1B<span title='Restrict delete:
+ Parent cannot be deleted if children exist'>&nbsp;R</span></td>
+   </tr>
+  </table>
+ </td>
+ <td class='comment detail'></td>
+</tr>
 </table>
-<p title='4 columns'>Table contained 1 rows at Fri Feb 17 16:54 CST 2017<p/>
+<p title='5 columns'>Table contained 0 rows at Thu Feb 23 15:46 CST 2017<p/>
 </td></tr></table>
 <div class='indent'>
 <b>Indexes:</b>
@@ -190,6 +210,12 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
   <td class='constraint' style='text-align:left;'>IDX_C7C851152C4DE6DA</td>
  </tr>
  <tr>
+  <td class='indexedColumn'>user_day_id</td>
+  <td class='detail'>Performance</td>
+  <td class='detail' style='text-align:left;'><span title='Ascending'>Asc</span></td>
+  <td class='constraint' style='text-align:left;'>IDX_C7C851156C905A1B</td>
+ </tr>
+ <tr>
   <td class='indexedColumn'>day_id</td>
   <td class='detail'>Performance</td>
   <td class='detail' style='text-align:left;'><span title='Ascending'>Asc</span></td>
@@ -201,18 +227,21 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 <br><form action='get'><b>Close relationships</b><span class='degrees' id='degrees' title='Detail diminishes with increased separation from MedicationResults'>
 &nbsp;within <label for='oneDegree'><input type='radio' name='degrees' id='oneDegree' checked>one</label>  <label for='twoDegrees'><input type='radio' name='degrees' id='twoDegrees'>two degrees</label> of separation</span><b>:</b></form>
 <map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="MedicationResults.html" title="MedicationResults" alt="" coords="197,41,515,201">
-<area shape="rect" id="node2" href="Days.html" title="Days" alt="" coords="5,5,153,136">
-<area shape="rect" id="node3" href="Medications.html" title="Medications" alt="" coords="15,153,144,284">
+<area shape="rect" id="node1" href="MedicationResults.html" title="MedicationResults" alt="" coords="205,103,523,287">
+<area shape="rect" id="node2" href="Days.html" title="Days" alt="" coords="5,5,161,136">
+<area shape="rect" id="node3" href="Medications.html" title="Medications" alt="" coords="15,153,152,284">
+<area shape="rect" id="node4" href="UserDays.html" title="UserDays" alt="" coords="5,301,161,408">
 </map>
   <a name='diagram'><img id='oneDegreeImg' src='../diagrams/MedicationResults.1degree.png' usemap='#oneDegreeRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>
 <map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="Days.html" title="Days" alt="" coords="179,105,327,236">
-<area shape="rect" id="node2" href="Cases.html" title="Cases" alt="" coords="5,129,135,212">
-<area shape="rect" id="node3" href="Hotspots.html" title="Hotspots" alt="" coords="461,5,598,88">
-<area shape="rect" id="node4" href="MedicationResults.html" title="MedicationResults" alt="" coords="371,205,688,365">
-<area shape="rect" id="node5" href="Medications.html" title="Medications" alt="" coords="188,256,317,387">
-<area shape="rect" id="node6" href="TestResults.html" title="TestResults" alt="" coords="461,105,598,188">
+<area shape="rect" id="node1" href="app_users.html" title="app_users" alt="" coords="179,137,335,220">
+<area shape="rect" id="node2" href="Cases.html" title="Cases" alt="" coords="5,93,135,176">
+<area shape="rect" id="node3" href="Days.html" title="Days" alt="" coords="379,5,535,136">
+<area shape="rect" id="node4" href="Hotspots.html" title="Hotspots" alt="" coords="669,105,806,188">
+<area shape="rect" id="node5" href="UserDays.html" title="UserDays" alt="" coords="379,153,535,260">
+<area shape="rect" id="node6" href="MedicationResults.html" title="MedicationResults" alt="" coords="579,205,896,389">
+<area shape="rect" id="node7" href="Medications.html" title="Medications" alt="" coords="388,277,525,408">
+<area shape="rect" id="node8" href="TestResults.html" title="TestResults" alt="" coords="669,5,806,88">
 </map>
 
   <a name='diagram'><img id='twoDegreesImg' src='../diagrams/MedicationResults.2degrees.png' usemap='#twoDegreesRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>

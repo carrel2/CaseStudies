@@ -1,8 +1,9 @@
 TestResults
 MedicationResults
 Hotspots
-app_users
+UserDays
 Days
+app_users
 Tests
 Medications
 Cases

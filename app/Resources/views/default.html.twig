@@ -3,20 +3,13 @@
 {% block body %}
 	{% if case %}
 		<div>You have a session in progress: {{ case.title }}</div>
-		{{ form_start(form) }}
-		{{ form_widget(form) }}
-		{{ form_end(form) }}
-	{% else %}
-		{{ form_start(form) }}
-			{{ form_label(form.case) }}
-			{{ form_errors(form.case) }}
-			{{ form_widget(form.case, {'attr': {'onchange': 'updateCase()'}}) }}
-
-			{{ form_rest(form) }}
-			<button type="submit">Start</button>
-		{{ form_end(form) }}
-
-		<div id="case"></div>
-		<script>updateCase()</script>
 	{% endif %}
+
+	{{ form_start(form) }}
+	{{ form_widget(form) }}
+	{{ form_end(form) }}
+{# TODO: move div.case into form so it displays before the submit button #}
+	<div id="case"></div>
+{# TODO: move updateCase() to scripts block #}
+	<script>updateCase()</script>
 {% endblock %}

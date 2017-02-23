@@ -29,7 +29,7 @@ class CaseStudy
 	private $description;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="Day", mappedBy="caseStudy", cascade={"all"})
+	 * @ORM\OneToMany(targetEntity="Day", mappedBy="caseStudy", cascade={"all"}, orphanRemoval=true)
 	 */
 	private $days;
 
@@ -44,16 +44,9 @@ class CaseStudy
         $this->users = new ArrayCollection();
     }
 
-    public function getCase()
+    public function __toString()
     {
-        return $this->title;
-    }
-
-    public function setCase($title)
-    {
-        $this->title = $title;
-
-        return $this;
+        return strval($this->id);
     }
 
     /**
@@ -123,6 +116,7 @@ class CaseStudy
      */
     public function addDay(\AppBundle\Entity\Day $day)
     {
+	$day->setCaseStudy($this);
         $this->days[] = $day;
 
         return $this;
@@ -136,6 +130,7 @@ class CaseStudy
     public function removeDay(\AppBundle\Entity\Day $day)
     {
         $this->days->removeElement($day);
+        $day->setCaseStudy(null);
     }
 
     /**
@@ -157,6 +152,7 @@ class CaseStudy
      */
     public function addUser(\AppBundle\Entity\User $user)
     {
+        $user->setCaseStudy($this);
         $this->users[] = $user;
 
         return $this;
@@ -170,6 +166,7 @@ class CaseStudy
     public function removeUser(\AppBundle\Entity\User $user)
     {
         $this->users->removeElement($user);
+        $user->setCaseStudy(null);
     }
 
     /**

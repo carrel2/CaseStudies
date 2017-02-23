@@ -45,6 +45,7 @@ class Day
 
 	public function __construct()
 	{
+		$this->users = new ArrayCollection();
 		$this->hotspots = new ArrayCollection();
 		$this->tests = new ArrayCollection();
 		$this->medications = new ArrayCollection();
@@ -214,5 +215,39 @@ class Day
     public function getMedications()
     {
         return $this->medications;
+    }
+
+    /**
+     * Add user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Day
+     */
+    public function addUser(\AppBundle\Entity\User $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \AppBundle\Entity\User $user
+     */
+    public function removeUser(\AppBundle\Entity\User $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

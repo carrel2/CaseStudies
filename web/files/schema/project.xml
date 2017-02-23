@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <database name="project" type="MySQL - 5.7.17-0ubuntu0.16.04.1">
    <tables>
-      <table name="app_users" numRows="1" remarks="" type="TABLE">
-         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
-         <column autoUpdated="false" digits="0" id="1" name="case_id" nullable="true" remarks="" size="10" type="INT">
-            <parent column="id" foreignKey="FK_C2502824CF10D4F5" implied="false" onDeleteCascade="false" table="Cases"/>
+      <table name="app_users" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
+            <child column="user_id" foreignKey="FK_14DD497FA76ED395" implied="false" onDeleteCascade="false" table="UserDays"/>
          </column>
-         <column autoUpdated="false" digits="0" id="2" name="username" nullable="false" remarks="" size="25" type="VARCHAR"/>
-         <column autoUpdated="false" digits="0" id="3" name="password" nullable="false" remarks="" size="64" type="VARCHAR"/>
-         <column autoUpdated="false" digits="0" id="4" name="email" nullable="false" remarks="" size="60" type="VARCHAR"/>
-         <column autoUpdated="false" digits="0" id="5" name="uin" nullable="false" remarks="" size="9" type="VARCHAR"/>
-         <column autoUpdated="false" digits="0" id="6" name="is_active" nullable="false" remarks="" size="0" type="BIT"/>
+         <column autoUpdated="false" digits="0" id="1" name="case_study_id" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_C250282470CD7994" implied="false" onDeleteCascade="false" table="Cases"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="roles" nullable="false" remarks="(DC2Type:array)" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="3" name="username" nullable="false" remarks="" size="25" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="4" name="password" nullable="false" remarks="" size="64" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="5" name="email" nullable="false" remarks="" size="60" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="6" name="uin" nullable="false" remarks="" size="9" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="7" name="is_active" nullable="false" remarks="" size="0" type="BIT"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="PRIMARY" unique="true">
             <column ascending="true" name="id"/>
          </index>
-         <index name="IDX_C2502824CF10D4F5" unique="false">
-            <column ascending="true" name="case_id"/>
+         <index name="IDX_C250282470CD7994" unique="false">
+            <column ascending="true" name="case_study_id"/>
          </index>
          <index name="UNIQ_C2502824B34EEF18" unique="true">
             <column ascending="true" name="uin"/>
@@ -30,7 +33,7 @@
       </table>
       <table name="Cases" numRows="1" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
-            <child column="case_id" foreignKey="FK_C2502824CF10D4F5" implied="false" onDeleteCascade="false" table="app_users"/>
+            <child column="case_study_id" foreignKey="FK_C250282470CD7994" implied="false" onDeleteCascade="false" table="app_users"/>
             <child column="case_study_id" foreignKey="FK_4BD6535870CD7994" implied="false" onDeleteCascade="false" table="Days"/>
          </column>
          <column autoUpdated="false" digits="0" id="1" name="title" nullable="false" remarks="" size="40" type="VARCHAR"/>
@@ -40,7 +43,7 @@
             <column ascending="true" name="id"/>
          </index>
       </table>
-      <table name="Days" numRows="1" remarks="" type="TABLE">
+      <table name="Days" numRows="2" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
             <child column="day_id" foreignKey="FK_668E5F009C24126" implied="false" onDeleteCascade="false" table="Hotspots"/>
             <child column="day_id" foreignKey="FK_C7C851159C24126" implied="false" onDeleteCascade="false" table="MedicationResults"/>
@@ -58,22 +61,28 @@
             <column ascending="true" name="case_study_id"/>
          </index>
       </table>
-      <table name="Hotspots" numRows="2" remarks="" type="TABLE">
+      <table name="Hotspots" numRows="3" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
          <column autoUpdated="false" digits="0" id="1" name="day_id" nullable="true" remarks="" size="10" type="INT">
             <parent column="id" foreignKey="FK_668E5F009C24126" implied="false" onDeleteCascade="false" table="Days"/>
          </column>
          <column autoUpdated="false" digits="0" id="2" name="name" nullable="false" remarks="" size="40" type="VARCHAR"/>
          <column autoUpdated="false" digits="0" id="3" name="info" nullable="false" remarks="" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="4" name="user_day_id" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_668E5F006C905A1B" implied="false" onDeleteCascade="false" table="UserDays"/>
+         </column>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="PRIMARY" unique="true">
             <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_668E5F006C905A1B" unique="false">
+            <column ascending="true" name="user_day_id"/>
          </index>
          <index name="IDX_668E5F009C24126" unique="false">
             <column ascending="true" name="day_id"/>
          </index>
       </table>
-      <table name="MedicationResults" numRows="1" remarks="" type="TABLE">
+      <table name="MedicationResults" numRows="0" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
          <column autoUpdated="false" digits="0" id="1" name="day_id" nullable="true" remarks="" size="10" type="INT">
             <parent column="id" foreignKey="FK_C7C851159C24126" implied="false" onDeleteCascade="false" table="Days"/>
@@ -82,6 +91,9 @@
             <parent column="id" foreignKey="FK_C7C851152C4DE6DA" implied="false" onDeleteCascade="false" table="Medications"/>
          </column>
          <column autoUpdated="false" digits="0" id="3" name="results" nullable="false" remarks="" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="4" name="user_day_id" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_C7C851156C905A1B" implied="false" onDeleteCascade="false" table="UserDays"/>
+         </column>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="PRIMARY" unique="true">
             <column ascending="true" name="id"/>
@@ -89,11 +101,14 @@
          <index name="IDX_C7C851152C4DE6DA" unique="false">
             <column ascending="true" name="medication_id"/>
          </index>
+         <index name="IDX_C7C851156C905A1B" unique="false">
+            <column ascending="true" name="user_day_id"/>
+         </index>
          <index name="IDX_C7C851159C24126" unique="false">
             <column ascending="true" name="day_id"/>
          </index>
       </table>
-      <table name="Medications" numRows="1" remarks="" type="TABLE">
+      <table name="Medications" numRows="0" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
             <child column="medication_id" foreignKey="FK_C7C851152C4DE6DA" implied="false" onDeleteCascade="false" table="MedicationResults"/>
          </column>
@@ -113,6 +128,9 @@
             <parent column="id" foreignKey="FK_B868B2F21E5D0459" implied="false" onDeleteCascade="false" table="Tests"/>
          </column>
          <column autoUpdated="false" digits="0" id="3" name="results" nullable="false" remarks="" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="4" name="user_day_id" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_B868B2F26C905A1B" implied="false" onDeleteCascade="false" table="UserDays"/>
+         </column>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="PRIMARY" unique="true">
             <column ascending="true" name="id"/>
@@ -120,11 +138,14 @@
          <index name="IDX_B868B2F21E5D0459" unique="false">
             <column ascending="true" name="test_id"/>
          </index>
+         <index name="IDX_B868B2F26C905A1B" unique="false">
+            <column ascending="true" name="user_day_id"/>
+         </index>
          <index name="IDX_B868B2F29C24126" unique="false">
             <column ascending="true" name="day_id"/>
          </index>
       </table>
-      <table name="Tests" numRows="3" remarks="" type="TABLE">
+      <table name="Tests" numRows="2" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
             <child column="test_id" foreignKey="FK_B868B2F21E5D0459" implied="false" onDeleteCascade="false" table="TestResults"/>
          </column>
@@ -133,6 +154,23 @@
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="PRIMARY" unique="true">
             <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="UserDays" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
+            <child column="user_day_id" foreignKey="FK_668E5F006C905A1B" implied="false" onDeleteCascade="false" table="Hotspots"/>
+            <child column="user_day_id" foreignKey="FK_C7C851156C905A1B" implied="false" onDeleteCascade="false" table="MedicationResults"/>
+            <child column="user_day_id" foreignKey="FK_B868B2F26C905A1B" implied="false" onDeleteCascade="false" table="TestResults"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="user_id" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_14DD497FA76ED395" implied="false" onDeleteCascade="false" table="app_users"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_14DD497FA76ED395" unique="false">
+            <column ascending="true" name="user_id"/>
          </index>
       </table>
    </tables>

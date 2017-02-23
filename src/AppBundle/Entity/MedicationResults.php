@@ -23,6 +23,11 @@ class MedicationResults
 	private $day;
 
 	/**
+	 * @ORM\ManyToOne(targetEntity="UserDay", inversedBy="medications")
+	 */
+	private $userDay;
+
+	/**
 	 * @ORM\ManyToOne(targetEntity="Medication", inversedBy="results")
 	 */
 	private $medication;
@@ -112,5 +117,29 @@ class MedicationResults
     public function getDay()
     {
         return $this->day;
+    }
+
+    /**
+     * Set userDay
+     *
+     * @param \AppBundle\Entity\UserDay $userDay
+     *
+     * @return MedicationResults
+     */
+    public function setUserDay(\AppBundle\Entity\UserDay $userDay = null)
+    {
+        $this->userDay = $userDay;
+
+        return $this;
+    }
+
+    /**
+     * Get userDay
+     *
+     * @return \AppBundle\Entity\UserDay
+     */
+    public function getUserDay()
+    {
+        return $this->userDay;
     }
 }

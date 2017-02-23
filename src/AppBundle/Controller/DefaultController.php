@@ -4,8 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Form\DefaultType;
 use AppBundle\Entity\CaseStudy;
-use AppBundle\Entity\Session;
-use AppBundle\Entity\Day;
+use AppBundle\Entity\UserDay;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -29,6 +28,7 @@ class DefaultController extends Controller
 		if( $case ) {
 			$form = $this->createFormBuilder()
 				->add('resume', SubmitType::class)
+				->add('reset', SubmitType::class)
 				->getForm();
 		} else {
 			$form = $this->createForm( DefaultType::class );
@@ -39,11 +39,13 @@ class DefaultController extends Controller
 		if( $form->isSubmitted() && $form->isValid() )
 		{
 			if( !$case ) {
-				$case = $form->getData()['case'];
-				$user->setCaseStudy($case);
+				$case = $form->getData();
 				$case->addUser($user);
+				$user->addDay(new UserDay());
 
 				$em->flush();
+			} else if ( $form->get('reset')->isClicked() ) {
+				return $this->redirectToRoute('reset');
 			}
 
 			return $this->redirectToRoute('evaluation');

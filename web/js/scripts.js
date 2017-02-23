@@ -1,6 +1,6 @@
 function updateCase() {
 	var xhttp = new XMLHttpRequest();
-	var id = document.getElementById("default_case").value;
+	var id = document.getElementById("default_title").value;
 
 	xhttp.onreadystatechange = function() {
 		if( this.readyState == 4 && this.status == 200 ) {
@@ -58,19 +58,12 @@ function updateAdminCase() {
 	});
 }
 
-function updateHotspots(element) {
-	var xhttp = new XMLHttpRequest();
-
-	xhttp.onreadystatechange = function() {
-		if( this.readyState == 4 && this.status == 200 ) {
-			var li = document.createElement("LI");
-			li.innerHTML = this.responseText;
-
-			if( li.innerHTML != '' ) {
-				document.getElementById("checked").appendChild(li);
-			}
-		}
-	};
-	xhttp.open("GET", "/update/" + element.getAttribute('data-path'), true);
-	xhttp.send();
+function updateHotspots() {
+	$('.hotspot').each(function() {
+		$(this).on('click', function() {
+			$.get('/update/' + $(this).data('path'), function(data, s) {
+				$('#checked').append(data);
+			});
+		});
+	});
 }

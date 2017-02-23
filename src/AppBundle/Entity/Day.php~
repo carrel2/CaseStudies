@@ -45,6 +45,7 @@ class Day
 
 	public function __construct()
 	{
+		$this->users = new ArrayCollection();
 		$this->hotspots = new ArrayCollection();
 		$this->tests = new ArrayCollection();
 		$this->medications = new ArrayCollection();
@@ -91,6 +92,7 @@ class Day
      */
     public function removeHotspot(\AppBundle\Entity\HotSpots $hotspot)
     {
+        $hotspot->setDay(null);
         $this->hotspots->removeElement($hotspot);
     }
 
@@ -103,6 +105,7 @@ class Day
      */
     public function addHotspot(\AppBundle\Entity\HotSpots $hotspot)
     {
+	$hotspot->setDay($this);
         $this->hotspots[] = $hotspot;
 
         return $this;
@@ -125,7 +128,7 @@ class Day
      *
      * @return Day
      */
-    public function setCaseStudy(\AppBundle\Entity\caseStudy $caseStudy = null)
+    public function setCaseStudy(\AppBundle\Entity\CaseStudy $caseStudy = null)
     {
         $this->caseStudy = $caseStudy;
 
@@ -151,6 +154,7 @@ class Day
      */
     public function addTest(\AppBundle\Entity\TestResults $test)
     {
+        $test->setDay($this);
         $this->tests[] = $test;
 
         return $this;
@@ -163,6 +167,7 @@ class Day
      */
     public function removeTest(\AppBundle\Entity\TestResults $test)
     {
+        $test->setDay(null);
         $this->tests->removeElement($test);
     }
 
@@ -185,6 +190,7 @@ class Day
      */
     public function addMedication(\AppBundle\Entity\MedicationResults $medication)
     {
+        $medication->setDay($this);
         $this->medications[] = $medication;
 
         return $this;
@@ -197,6 +203,7 @@ class Day
      */
     public function removeMedication(\AppBundle\Entity\MedicationResults $medication)
     {
+        $medication->setDay(null);
         $this->medications->removeElement($medication);
     }
 
@@ -208,5 +215,39 @@ class Day
     public function getMedications()
     {
         return $this->medications;
+    }
+
+    /**
+     * Add user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Day
+     */
+    public function addUser(\AppBundle\Entity\User $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \AppBundle\Entity\User $user
+     */
+    public function removeUser(\AppBundle\Entity\User $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

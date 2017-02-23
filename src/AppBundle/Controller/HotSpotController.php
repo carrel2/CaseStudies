@@ -26,7 +26,7 @@ class HotSpotController extends Controller
 
 		return $this->render('hotspot.html.twig', array(
 			'hotspots' => $hotspots,
-			'checked' => $hotspots,
+			'checked' => $user->getCurrentDay()->getHotspots(),
 		));
 	}
 
@@ -34,43 +34,36 @@ class HotSpotController extends Controller
 	 * @Route("/update/{id}", name="update")
 	 * @Security("has_role('ROLE_USER')")
 	 */
-	public function updatePage(Request $r, $session, $id)
+	public function updatePage(Request $r, HotSpots $hotspot)
 	{
 		$em = $this->getDoctrine()->getManager();
-		$hotspot = $em->getRepository('AppBundle:HotSpots')->find($id);
+		$user = $this->getUser();
 
-		$session = $em->getRepository('AppBundle:Session')->find($session);
-		$day = $session->getCurrentDay();
+		$user->getCurrentDay()->addHotspot($hotspot);
 
-		if( !$day->getHotspots()->contains($hotspot) ) {
-			$day->addHotspot($hotspot);
-			$hotspot->setDay($day);
-			$em->flush();
+		$em->flush();
 
-			return new Response($hotspot->getName() . ": " . $hotspot->getInfo());
-		}
-
-		//return $this->redirectToRoute('evaluation');
-		return new Response('');
+		return new Response('<li>' . $hotspot->getName() . ': ' . $hotspot->getInfo() . '</li>');
 	}
 
 	/**
 	 * @Route("/reset", name="reset")
-	 * @Security("has_role('ROLE_USER')")
+	 * @Security("has_role('ROLE_ADMIN')")
 	 */
-	public function resetPage()
+	public function resetPage(Request $r)
 	{
 		$em = $this->getDoctrine()->getManager();
-
 		$user = $this->getUser();
-		$session = $user->getSession();
+		$case = $user->getCaseStudy();
 
-		$user->setSession(null);
-
-		$em->remove($session);
+		$case->removeUser($user);
+		$user->removeDays();
 
 		$em->flush();
-
-		return $this->redirectToRoute('default');
+		return $this->render('debug.html.twig', array(
+			'user' => $user,
+			'case' => $case,
+		));
+		//return $this->redirectToRoute('default');
 	}
 }

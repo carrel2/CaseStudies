@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{{ dump(form) }}
+	{{ form_start(form) }}
+		{% for user in users %}
+		{% endfor %}
+	{{ form_end(form) }}
+{% endblock %}
