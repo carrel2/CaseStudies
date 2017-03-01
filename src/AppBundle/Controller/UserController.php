@@ -36,7 +36,9 @@ class UserController extends Controller
 				$password = $this->get('security.password_encoder')
 					->encodePassword($user, $plainPassword);
 				$user->setPassword($password);
-				//add flash messages
+
+				// @TODO
+				// add flash messages
 			}
 
 			$em->flush();
@@ -46,6 +48,9 @@ class UserController extends Controller
 			'form' => $form->createView(),
 		));
 	}
+
+	// @TODO
+	// move admin actions to admin controller
 
 	/**
 	 * @Route("/admin/users", name="adminUsers")

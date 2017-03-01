@@ -59,7 +59,7 @@ class User implements UserInterface, \Serializable
 	private $uin;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="CaseStudy", inversedBy="users")
+	 * @ORM\ManyToOne(targetEntity="CaseStudy", inversedBy="users", cascade={"persist"})
 	 */
 	private $caseStudy;
 

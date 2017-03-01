@@ -1,3 +1,4 @@
+// @TODO update to use jquery
 function updateCase() {
 	var xhttp = new XMLHttpRequest();
 	var id = document.getElementById("default_title").value;
@@ -19,11 +20,10 @@ function addButtonClickListener(e) {
 	var t = holder.data('type');
 	var prototype = holder.data('prototype');
 	var index = holder.data('index');
-	var newForm = prototype.replace(/__name__/g, index);
+	var newForm = prototype.replace(new RegExp('__' + t.replace(' ', '-') + '__', 'g'), index);
 
 	newForm = newForm.replace(/label__/g, '');
 
-	holder.data('index', index + 1);
 	holder.append(newForm);
 	holder.find('label').remove(':contains(' + index + ')');
 	$(holder).children('div:last-child').append('<button type="button" class="remove-button">Remove ' + t + '</button>');

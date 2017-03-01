@@ -1,5 +1,5 @@
 <?php
-// src/AppBundle/Controller/TestsController.php
+// src/AppBundle/Controller/MedicationsController.php
 
 namespace AppBundle\Controller;
 
@@ -7,40 +7,40 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use AppBundle\Entity\Test;
-use AppBundle\Form\TestsType;
+use AppBundle\Form\MedicationsType;
 
-class TestsController extends Controller
+class MedicationsController extends Controller
 {
 	/**
-	 * @Route("/tests", name="order_tests")
+	 * @Route("/medications", name="order_meds")
 	 * @Security("has_role('ROLE_USER')")
 	 */
 	public function showPage(Request $r)
 	{
 		$user = $this->getUser();
-		$form = $this->createForm( TestsType::class );
+		$form = $this->createForm( MedicationsType::class );
 
 		$form->handleRequest($r);
 
 		if( $form->isSubmitted() && $form->isValid() )
 		{
 			$em = $this->getDoctrine()->getManager();
-			$tests = $form->getData()['test'];
+			$medications = $form->getData()['medication'];
 
 			$day = $user->getCaseStudy()->getDays()[count($user->getDays()) - 1];
 
-			foreach( $tests as $test )
+			foreach( $medications as $medication )
 			{
-				$user->getCurrentDay()->addTest($day->getResultByTest($test));
+				$user->getCurrentDay()->addMedication($day->getResultByMedication($medication));
 			}
 
 			$em->flush();
 
-			return $this->redirectToRoute('order_meds');
+//			return $this->redirectToRoute('dayController');
+			return $this->redirectToRoute('default');
 		}
 
-		return $this->render('tests.html.twig', array(
+		return $this->render('medications.html.twig', array(
 			'form' => $form->createView(),
 		));
 	}

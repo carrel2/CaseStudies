@@ -8,7 +8,6 @@ VetMed case studies web project
 
 # ToDo
 - [ ] Admin pages
-- [ ] Tests and Medications database tables
 - [ ] Tests and Medications pages
 - [ ] Logic to advance days
 - [ ] Image hotspots

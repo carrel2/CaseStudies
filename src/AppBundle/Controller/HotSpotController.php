@@ -38,6 +38,11 @@ class HotSpotController extends Controller
 	{
 		$em = $this->getDoctrine()->getManager();
 		$user = $this->getUser();
+		$hotspots = $user->getCurrentDay()->getHotspots();
+
+		if( $hotspots->contains( $hotspot ) ) {
+			return new Response('');
+		}
 
 		$user->getCurrentDay()->addHotspot($hotspot);
 
@@ -48,22 +53,18 @@ class HotSpotController extends Controller
 
 	/**
 	 * @Route("/reset", name="reset")
-	 * @Security("has_role('ROLE_ADMIN')")
+	 * @Security("has_role('ROLE_USER')")
 	 */
 	public function resetPage(Request $r)
 	{
 		$em = $this->getDoctrine()->getManager();
 		$user = $this->getUser();
-		$case = $user->getCaseStudy();
 
-		$case->removeUser($user);
+		$user->setCaseStudy(null);
 		$user->removeDays();
 
 		$em->flush();
-		return $this->render('debug.html.twig', array(
-			'user' => $user,
-			'case' => $case,
-		));
-		//return $this->redirectToRoute('default');
+
+		return $this->redirectToRoute('default');
 	}
 }

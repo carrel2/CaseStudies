@@ -15,13 +15,12 @@ class DayType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$builder->add('number', HiddenType::class, array(
-				'attr' => array('class' => 'dayNumber')))
-			->add('hotspots', CollectionType::class, array(
+		$builder->add('hotspots', CollectionType::class, array(
 				'entry_type' => HotspotType::class,
 				'allow_add' => true,
 				'allow_delete' => true,
 				'by_reference' => false,
+				'prototype_name' => '__hotspot__',
 				'attr' => array(
 					'class' => 'collection hotspots',
 					'data-type' => 'hotspot'),))
@@ -34,6 +33,7 @@ class DayType extends AbstractType
 				'allow_add' => true,
 				'allow_delete' => true,
 				'by_reference' => false,
+				'prototype_name' => '__test-results__',
 				'attr' => array(
 					'class' => 'collection tests',
 					'data-type' => 'test results'),))
@@ -46,6 +46,7 @@ class DayType extends AbstractType
 				'allow_add' => true,
 				'allow_delete' => true,
 				'by_reference' => false,
+				'prototype_name' => '__medication-results__',
 				'attr' => array(
 					'class' => 'collection medications',
 					'data-type' => 'medication results'),))

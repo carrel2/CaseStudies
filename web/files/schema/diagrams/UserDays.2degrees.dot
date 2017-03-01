@@ -42,7 +42,7 @@ digraph "twoDegreesRelationshipsDiagram" {
       <TR><TD PORT="email" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">email</TD></TR>
       <TR><TD PORT="uin" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">uin</TD></TR>
       <TR><TD PORT="is_active" COLSPAN="3" ALIGN="LEFT">is_active</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1 row</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1 &gt;</TD></TR>
     </TABLE>>
     URL="app_users.html"
     tooltip="app_users"
@@ -73,10 +73,10 @@ digraph "twoDegreesRelationshipsDiagram" {
       <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">Hotspots</TD></TR>
       <TR><TD PORT="id" COLSPAN="3" BGCOLOR="#bed1b8" ALIGN="LEFT">id</TD></TR>
       <TR><TD PORT="day_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">day_id</TD></TR>
+      <TR><TD PORT="user_day_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">user_day_id</TD></TR>
       <TR><TD PORT="name" COLSPAN="3" ALIGN="LEFT">name</TD></TR>
       <TR><TD PORT="info" COLSPAN="3" ALIGN="LEFT">info</TD></TR>
-      <TR><TD PORT="user_day_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">user_day_id</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">3 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">2 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="Hotspots.html"
     tooltip="Hotspots"
@@ -87,9 +87,9 @@ digraph "twoDegreesRelationshipsDiagram" {
       <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">MedicationResults</TD></TR>
       <TR><TD PORT="id" COLSPAN="3" BGCOLOR="#bed1b8" ALIGN="LEFT">id</TD></TR>
       <TR><TD PORT="day_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">day_id</TD></TR>
+      <TR><TD PORT="user_day_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">user_day_id</TD></TR>
       <TR><TD PORT="medication_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">medication_id</TD></TR>
       <TR><TD PORT="results" COLSPAN="3" ALIGN="LEFT">results</TD></TR>
-      <TR><TD PORT="user_day_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">user_day_id</TD></TR>
       <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 3</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="MedicationResults.html"
@@ -111,10 +111,10 @@ digraph "twoDegreesRelationshipsDiagram" {
       <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">TestResults</TD></TR>
       <TR><TD PORT="id" COLSPAN="3" BGCOLOR="#bed1b8" ALIGN="LEFT">id</TD></TR>
       <TR><TD PORT="day_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">day_id</TD></TR>
+      <TR><TD PORT="user_day_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">user_day_id</TD></TR>
       <TR><TD PORT="test_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">test_id</TD></TR>
       <TR><TD PORT="results" COLSPAN="3" ALIGN="LEFT">results</TD></TR>
-      <TR><TD PORT="user_day_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">user_day_id</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 3</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">4 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 3</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="TestResults.html"
     tooltip="TestResults"
@@ -124,7 +124,7 @@ digraph "twoDegreesRelationshipsDiagram" {
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
       <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">Tests</TD></TR>
       <TR><TD PORT="elipses" COLSPAN="3" ALIGN="LEFT">...</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">2 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1 &gt;</TD></TR>
     </TABLE>>
     URL="Tests.html"
     tooltip="Tests"
@@ -135,7 +135,7 @@ digraph "twoDegreesRelationshipsDiagram" {
       <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">UserDays</TD></TR>
       <TR><TD PORT="id" COLSPAN="2" BGCOLOR="#bed1b8" ALIGN="LEFT">id</TD><TD PORT="id.type" ALIGN="LEFT">int[10]</TD></TR>
       <TR><TD PORT="user_id" COLSPAN="2" BGCOLOR="#f4f7da" ALIGN="LEFT">user_id</TD><TD PORT="user_id.type" ALIGN="LEFT">int[10]</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">3 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1 row</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">3 &gt;</TD></TR>
     </TABLE>>
     URL="UserDays.html"
     tooltip="UserDays"

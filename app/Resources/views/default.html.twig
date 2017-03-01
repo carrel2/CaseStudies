@@ -1,15 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-	{% if case %}
-		<div>You have a session in progress: {{ case.title }}</div>
-	{% endif %}
+{% block scripts %}
+	{{ parent() }}
 
+	<script>
+		$(function() {
+			updateCase();
+		});
+	</script>
+{% endblock %}
+
+{% block body %}
 	{{ form_start(form) }}
-	{{ form_widget(form) }}
+		{% if case %}
+			<div>You have a session in progress: {{ case.title }}</div>
+		{% else %}
+			{{ form_row(form.title) }}
+
+			<div id="case"></div>
+		{% endif %}
+
+		{{ form_rest(form) }}
 	{{ form_end(form) }}
-{# TODO: move div.case into form so it displays before the submit button #}
-	<div id="case"></div>
-{# TODO: move updateCase() to scripts block #}
-	<script>updateCase()</script>
 {% endblock %}

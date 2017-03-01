@@ -38,11 +38,6 @@ class Day
 	 */
 	private $medications;
 
-	/**
-	 * @ORM\Column(type="integer")
-	 */
-	private $number;
-
 	public function __construct()
 	{
 		$this->users = new ArrayCollection();
@@ -59,30 +54,6 @@ class Day
 	public function getId()
 	{
 		return $this->id;
-	}
-
-	/**
-	 * Set number
-	 *
-	 * @param integer $number
-	 *
-	 * @return Day
-	 */
-	public function setNumber($number)
-	{
-		$this->number = $number;
-
-		return $this;
-	}
-
-	/**
-	 * Get number
-	 *
-	 * @return integer
-	 */
-	public function getNumber()
-	{
-		return $this->number;
 	}
 
     /**
@@ -182,6 +153,24 @@ class Day
     }
 
     /**
+     * Get result by test
+     *
+     * @return \AppBundle\Entity\TestResults
+     */
+    public function getResultByTest(\AppBundle\Entity\Test $test)
+    {
+        foreach( $this->tests as $results )
+        {
+            if( $results->getTest()->getId() === $test->getId() )
+            {
+                return $results;
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Add medication
      *
      * @param \AppBundle\Entity\MedicationResults $medication
@@ -208,6 +197,24 @@ class Day
     }
 
     /**
+     * Get result by medication
+     *
+     * @return \AppBundle\Entity\MedicationResults
+     */
+    public function getResultByMedication(\AppBundle\Entity\Medication $medication)
+    {
+        foreach( $this->medications as $results )
+        {
+            if( $results->getMedication()->getId() === $medication->getId() )
+            {
+                return $results;
+            }
+	}
+
+        return null;
+    }
+
+    /**
      * Get medications
      *
      * @return \Doctrine\Common\Collections\Collection
@@ -215,39 +222,5 @@ class Day
     public function getMedications()
     {
         return $this->medications;
-    }
-
-    /**
-     * Add user
-     *
-     * @param \AppBundle\Entity\User $user
-     *
-     * @return Day
-     */
-    public function addUser(\AppBundle\Entity\User $user)
-    {
-        $this->users[] = $user;
-
-        return $this;
-    }
-
-    /**
-     * Remove user
-     *
-     * @param \AppBundle\Entity\User $user
-     */
-    public function removeUser(\AppBundle\Entity\User $user)
-    {
-        $this->users->removeElement($user);
-    }
-
-    /**
-     * Get users
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUsers()
-    {
-        return $this->users;
     }
 }

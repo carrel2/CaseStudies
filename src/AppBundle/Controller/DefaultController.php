@@ -25,21 +25,15 @@ class DefaultController extends Controller
 
 		$em = $this->getDoctrine()->getManager();
 
-		if( $case ) {
-			$form = $this->createFormBuilder()
-				->add('resume', SubmitType::class)
-				->add('reset', SubmitType::class)
-				->getForm();
-		} else {
-			$form = $this->createForm( DefaultType::class );
-		}
-
+		$form = $this->createForm( DefaultType::class, $case );
 		$form->handleRequest($r);
 
 		if( $form->isSubmitted() && $form->isValid() )
 		{
 			if( !$case ) {
-				$case = $form->getData();
+				$case = $form->getData()['title'];
+				$case = $em->getRepository('AppBundle:CaseStudy')->find($case->getId());
+
 				$case->addUser($user);
 				$user->addDay(new UserDay());
 
