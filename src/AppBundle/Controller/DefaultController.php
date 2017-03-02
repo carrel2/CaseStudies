@@ -1,4 +1,7 @@
 <?php
+/**
+ * src/AppBundle/Controller/DefaultController.php
+ */
 
 namespace AppBundle\Controller;
 
@@ -12,9 +15,36 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
+/**
+ * DefaultController class
+ *
+ * DefaultController class extends \Symfony\Bundle\FrameworkBundle\Controller\Controller
+ *
+ * @see http://api.symfony.com/3.2/Symfony/Bundle/FrameworkBundle/Controller/Controller.html
+ */
 class DefaultController extends Controller
 {
 	/**
+	 * defaultAction function
+	 *
+	 * Landing page for logged in User.
+	 *
+	 * Shows DefaultType form. Renders default.html.twig
+	 * 
+	 * On submission, associates the current User with the selected CaseStudy unless an association already exists.
+	 * Redirects to HotSpots::showPage()
+	 *
+	 * @see DefaultType::class
+	 * @see User::class
+	 * @see CaseStudy::class
+	 * @see HotSpots::showPage()
+	 * @see HotSpotController::showPageAction()
+	 * @see HotSpotController::resetAction()
+	 *
+	 * @param Request $r Request object
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response Render **default.html.twig**. On submission, redirect to **HotSpotController::showPageAction()** or **HotSpotController::resetAction()**
+	 *
 	 * @Route("/", name="default")
 	 * @Security("has_role('ROLE_USER')")
 	 */
@@ -52,13 +82,22 @@ class DefaultController extends Controller
 	}
 
 	/**
+	 * updateCaseAction function
+	 *
+	 * Called by ajax from default.html.twig to retrieve the CaseStudy information
+	 *
+	 * @see CaseStudy::class
+	 * @see CaseStudy::getDescription()
+	 *
+	 * @param Request $r Request object
+	 * @param CaseStudy $case
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response Return **CaseStudy::getDescription()**
+	 *
 	 * @Route("/getDescription/{id}", name="updateCase")
 	 */
-	public function updateCaseAction(Request $r, $id)
+	public function updateCaseAction(Request $r, CaseStudy $case)
 	{
-		$repo = $this->getDoctrine()->getRepository('AppBundle:CaseStudy');
-		$case = $repo->find($id);
-
 		return new Response( $case->getDescription() );
 	}
 }

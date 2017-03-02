@@ -6,6 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
+ * User Day class
+ *
+ * Contains information relevant to the user to be compared to the original case study
+ *
  * @ORM\Entity
  * @ORM\Table(name="UserDays")
  */

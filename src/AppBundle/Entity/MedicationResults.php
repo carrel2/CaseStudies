@@ -5,6 +5,10 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Therapeutic Medication Results class
+ *
+ * Contains results for a specific medication on a specific day
+ *
  * @ORM\Entity
  * @ORM\Table(name="MedicationResults")
  */

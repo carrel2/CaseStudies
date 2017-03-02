@@ -1,5 +1,7 @@
 <?php
-// src/AppBundle/Controller/TestsController.php
+/**
+ * src/AppBundle/Controller/TestsController.php
+ */
 
 namespace AppBundle\Controller;
 
@@ -10,9 +12,30 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Test;
 use AppBundle\Form\TestsType;
 
+/**
+ * TestsController class
+ *
+ * TestsController class extends \Symfony\Bundle\FrameworkBundle\Controller\Controller
+ *
+ * @see http://api.symfony.com/3.2/Symfony/Bundle/FrameworkBundle/Controller/Controller.html
+ */
 class TestsController extends Controller
 {
 	/**
+	 * showPageAction function
+	 *
+	 * Shows TestsType form. On submission adds TestResults from the corresponding Day to the current UserDay
+	 *
+	 * @see TestsType::class
+	 * @see TestResults::class
+	 * @see Day::class
+	 * @see UserDay::class
+	 * @see MedicationsController::showPageAction()
+	 *
+	 * @param Request $r Request object
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response Render **tests.html.twig**. On submission, redirect to **MedicationsController::showPageAction()**
+	 *
 	 * @Route("/tests", name="order_tests")
 	 * @Security("has_role('ROLE_USER')")
 	 */

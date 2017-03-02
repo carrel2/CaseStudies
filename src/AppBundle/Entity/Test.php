@@ -6,6 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
+ * Diagnostic Test class
+ *
+ * Contains information about a specific diagnostic test
+ *
  * @ORM\Entity
  * @ORM\Table(name="Tests")
  */

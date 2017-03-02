@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{% for day in user.days %}
+		<div id="day{{ loop.index }}">
+			<p>Day {{ loop.index }}</p>
+
+			<div id="hotspots">
+				{% for spot in day.hotspots %}
+					<li>{{ spot.name }}: {{ spot.info }}</li>
+				{% endfor %}
+			</div>
+
+			<div id="testResults">
+				{% for testResult in day.tests %}
+					<li>{{ testResult.test.name }}: {{ testResult.results }}</li>
+				{% endfor %}
+			</div>
+
+			<div id="medicationResults">
+				{% for medResult in day.medications %}
+					<li>{{ medResult.medication.name }}: {{ medResult.results }}</li>
+				{% endfor %}
+			</div>
+		</div>
+	{% endfor %}
+
+	<a href="{{ path('nextDay') }}">Continue</a>
+{% endblock %}

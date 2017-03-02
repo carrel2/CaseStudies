@@ -1,5 +1,8 @@
 <?php
-// src/AppBundle/Controller/UserController.php
+/**
+ * src/AppBundle/Controller/UserController.php
+ */
+
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -11,9 +14,29 @@ use AppBundle\Form\UserType;
 use AppBundle\Entity\User;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
+/**
+ * UserController class
+ *
+ * UserController class extends \Symfony\Bundle\FrameworkBundle\Controller\Controller
+ *
+ * @see http://api.symfony.com/3.2/Symfony/Bundle/FrameworkBundle/Controller/Controller.html
+ */
 class UserController extends Controller
 {
 	/**
+	 * userAction function
+	 *
+	 * Shows UserType form so authenticated User can edit object information
+	 *
+	 * @todo add flash messages to notify User that changes have been (un)/succesful
+	 *
+	 * @see UserType::class
+	 * @see User::class
+	 *
+	 * @param Request $r Request object
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response Render **user.html.twig**
+	 *
 	 * @Route("/user", name="user")
 	 * @Security("has_role('ROLE_USER')")
 	 */
@@ -49,10 +72,20 @@ class UserController extends Controller
 		));
 	}
 
-	// @TODO
-	// move admin actions to admin controller
-
 	/**
+	 * adminUserAction function
+	 *
+	 * Allows admin User to edit User objects
+	 *
+	 * @todo move to AdminController
+	 * @todo redo code for effeciency and ease of use on User end
+	 *
+	 * @see User::class
+	 *
+	 * @param Request $r Request object
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response Render **adminUser.html.twig**
+	 *
 	 * @Route("/admin/users", name="adminUsers")
 	 */
 	public function adminUserAction(Request $r)
@@ -76,6 +109,18 @@ class UserController extends Controller
 	}
 
 	/**
+	 * editUserAction function
+	 *
+	 * Edit selected User object
+	 *
+	 * @todo move to AdminController
+	 * @todo see if this is necessary after redoing adminUserAction
+	 *
+	 * @param Request $r Request object
+	 * @param User $user
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response Render **user.html.twig**
+	 *
 	 * @Route("/admin/users/edit/{id}", name="editUser")
 	 */
 	public function editUserAction(Request $r, User $user)

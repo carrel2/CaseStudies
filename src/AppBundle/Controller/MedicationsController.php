@@ -1,5 +1,7 @@
 <?php
-// src/AppBundle/Controller/MedicationsController.php
+/**
+ * src/AppBundle/Controller/MedicationsController.php
+ */
 
 namespace AppBundle\Controller;
 
@@ -9,13 +11,33 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Form\MedicationsType;
 
+/**
+ * MedicationsController class
+ *
+ * MedicationsController class extends \Symfony\Bundle\FrameworkBundle\Controller\Controller
+ *
+ * @see http://api.symfony.com/3.2/Symfony/Bundle/FrameworkBundle/Controller/Controller.html
+ */
 class MedicationsController extends Controller
 {
 	/**
+	 * showPageAction function
+	 *
+	 * Shows MedicationsType form. On submission, adds MedicationResults from the corresponding Day to the current UserDay
+	 * @see MedicationsType::class
+	 * @see MedicationResults::class
+	 * @see Day::class
+	 * @see UserDay::class
+	 * @see DayController::reviewAction()
+	 *
+	 * @param Request $r Request object
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response Render **medications.html.twig**. On submission, redirect to **DayController::reviewAction()**
+	 *
 	 * @Route("/medications", name="order_meds")
 	 * @Security("has_role('ROLE_USER')")
 	 */
-	public function showPage(Request $r)
+	public function showPageAction(Request $r)
 	{
 		$user = $this->getUser();
 		$form = $this->createForm( MedicationsType::class );
@@ -36,8 +58,7 @@ class MedicationsController extends Controller
 
 			$em->flush();
 
-//			return $this->redirectToRoute('dayController');
-			return $this->redirectToRoute('default');
+			return $this->redirectToRoute('review');
 		}
 
 		return $this->render('medications.html.twig', array(

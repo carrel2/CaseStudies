@@ -9,6 +9,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
+ * User class
+ *
+ * Contains user information
+ *
  * @ORM\Entity
  * @ORM\Table(name="app_users")
  * @UniqueEntity(fields="email", message="Email already taken")

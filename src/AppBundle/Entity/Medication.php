@@ -6,6 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
+ * Therapeutic Medication class
+ *
+ * Contains information about a specific medication
+ *
  * @ORM\Entity
  * @ORM\Table(name="Medications")
  */

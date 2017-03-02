@@ -6,6 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
+ * Day class
+ *
+ * Contains information about evaluations, tests, and medications for a single day in a case
+ *
  * @ORM\Entity
  * @ORM\Table(name="Days")
  */

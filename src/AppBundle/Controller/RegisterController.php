@@ -1,4 +1,7 @@
 <?php
+/**
+ * src/AppBundle/Controller/RegisterController.php
+ */
 
 namespace AppBundle\Controller;
 
@@ -8,9 +11,30 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * RegisterController class
+ *
+ * RegisterController class extends \Symfony\Bundle\FrameworkBundle\Controller\Controller
+ *
+ * @see http://api.symfony.com/3.2/Symfony/Bundle/FrameworkBundle/Controller/Controller.html
+ */
 class RegisterController extends Controller
 {
 	/**
+	 * registerAction function
+	 *
+	 * Shows UserType form. On submission, creates a new User
+	 *
+	 * @todo move to UserController
+	 *
+	 * @see UserType::class
+	 * @see User::class
+	 * @see DefaultController::defaultAction()
+	 *
+	 * @param Request $request Request object
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response Render **register.html.twig**. On submission, redirect to **DefaultController::defaultAction()**
+	 *
 	 * @Route("/registration", name="registration")
 	 */
 	public function registerAction(Request $request)

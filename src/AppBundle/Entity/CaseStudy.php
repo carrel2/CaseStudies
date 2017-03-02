@@ -6,6 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
+ * Case Study class
+ *
+ * Contains case study information
+ *
  * @ORM\Entity
  * @ORM\Table(name="Cases")
  */

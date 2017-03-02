@@ -5,6 +5,10 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * HotSpots class
+ *
+ * Contains information about a specific location of an animal for a specific day
+ *
  * @ORM\Entity
  * @ORM\Table(name="Hotspots")
  */
