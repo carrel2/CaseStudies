@@ -1,3 +1,63 @@
 .remove-button {
 	background: red;
 }
+
+.flash-notice {
+	margin: 8px;
+	padding: 8px;
+	width: 40%;
+	background: #00e600;
+	font-size: 16px;
+	text-align: center;
+}
+
+div#tests_test, div#medications_medication {
+	padding: 8px;
+}
+
+input[type=checkbox].test, input[type=checkbox].medication {
+	display: none;
+}
+
+input[type=checkbox].test + label, input[type=checkbox].medication + label {
+	padding: 4px;
+}
+
+input[type=checkbox].test + label::before, input[type=checkbox].medication + label::before {
+	content: '\2714';
+	margin-right: 2px;
+	color: rgba(0,0,0,0);
+	border-bottom: solid 1px black;
+}
+
+input[type=checkbox].test:checked + label::before, input[type=checkbox].medication:checked + label::before {
+	content: '\2714';
+	color: black;
+}
+
+button.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+}
+
+button.accordion::after {
+	content: '\02795';
+	float: right;
+	margin-left: 5px;
+}
+
+button.accordion.active::after {
+	content: '\2796';
+}
+
+div.panel {
+	padding: 18px;
+	display:none;
+}

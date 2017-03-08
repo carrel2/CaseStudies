@@ -25,6 +25,8 @@ class DayController extends Controller
 	 *
 	 * Renders review.html.twig
 	 *
+	 * @todo redirect to default if user is not currently working on a case
+	 *
 	 * @param Request $r Request object
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response Render **review.html.twig**
@@ -34,6 +36,9 @@ class DayController extends Controller
 	 */
 	public function reviewAction(Request $r)
 	{
+		$session = $r->getSession();
+		$session->set('page', 'review');
+
 		$user = $this->getUser();
 		$days = $user->getDays();
 
@@ -48,17 +53,19 @@ class DayController extends Controller
 	 *
 	 * Function to handle the logic between Day objects
 	 *
-	 * @see Day::class 
+	 * @see Day::class
 	 *
 	 * @todo add code to control logic between days
 	 *
 	 * @param Request $r Request object
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response
+	 *
+	 * @Route("/logic", name="logic")
 	 */
 	public function logicAction(Request $r)
 	{
-		return null;
+		return $this->redirectToRoute('review');
 	}
 
 	/**

@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * User class
  *
- * Contains user information
+ * Contains User information
  *
  * @ORM\Entity
  * @ORM\Table(name="app_users")
@@ -21,6 +21,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface, \Serializable
 {
 	/**
+	 * Auto-generated unique id
+	 *
+	 * @var integer
+	 *
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="AUTO")
@@ -28,27 +32,47 @@ class User implements UserInterface, \Serializable
 	private $id;
 
 	/**
+	 * Array of roles granted to the User
+	 *
+	 * @var array
+	 *
 	 * @ORM\Column(type="array")
 	 */
 	private $roles;
 
 	/**
+	 * The username of the User
+	 *
+	 * @var string
+	 *
 	 * @ORM\Column(type="string", length=25, unique=true)
 	 * @Assert\NotBlank()
 	 */
 	private $username;
 
 	/**
+	 * The plain password submitted from login and register forms
+	 *
+	 * @var string
+	 *
 	 * @Assert\Length(max=4096)
 	 */
 	private $plainPassword;
 
 	/**
+	 * The encoded password for the User
+	 *
+	 * @var string
+	 *
 	 * @ORM\Column(type="string", length=64)
 	 */
 	private $password;
 
 	/**
+	 * Email for the User
+	 *
+	 * @var string
+	 *
 	 * @ORM\Column(type="string", length=60, unique=true)
 	 * @Assert\NotBlank()
 	 * @Assert\Email()
@@ -56,6 +80,10 @@ class User implements UserInterface, \Serializable
 	private $email;
 
 	/**
+	 * UIN for the User
+	 *
+	 * @var string
+	 *
 	 * @ORM\Column(type="string", length=9, unique=true)
 	 * @Assert\NotBlank()
 	 * @Assert\Length(min=9, max=9)
@@ -63,20 +91,43 @@ class User implements UserInterface, \Serializable
 	private $uin;
 
 	/**
+	 * Associated CaseStudy
+	 *
+	 * @var CaseStudy
+	 *
+	 * @see CaseStudy::class
+	 *
 	 * @ORM\ManyToOne(targetEntity="CaseStudy", inversedBy="users", cascade={"persist"})
 	 */
 	private $caseStudy;
 
 	/**
+	 * ArrayCollection of UserDay objects
+	 *
+	 * @var ArrayCollection
+	 *
+	 * @see ArrayCollection::class
+	 *
 	 * @ORM\OneToMany(targetEntity="UserDay", mappedBy="user", cascade={"all"}, orphanRemoval=true)
 	 */
 	private $days;
 
 	/**
+	 * Boolean isActive
+	 *
+	 * @var Boolean
+	 *
 	 * @ORM\Column(name="is_active", type="boolean")
 	 */
 	private $isActive;
 
+	/**
+	 * Constructor function
+	 *
+	 * Initializes $days as ArrayCollection, gives all User objects ROLE_USER by default
+	 *
+	 * @see ArrayCollection::class
+	 */
 	public function __construct()
 	{
 		$this->days = new ArrayCollection();
@@ -237,9 +288,11 @@ class User implements UserInterface, \Serializable
 	}
 
 	/**
-	 * Get active day
+	 * Get active UserDay
 	 *
-	 * @return \AppBundle\Entity\Day $day
+	 * @see UserDay::class
+	 *
+	 * @return \AppBundle\Entity\UserDay
 	 */
 	public function getCurrentDay()
 	{
@@ -251,7 +304,7 @@ class User implements UserInterface, \Serializable
 	 *
 	 * @param boolean $isActive
 	 *
-	 * @return User
+	 * @return self
 	 */
 	public function setIsActive($isActive)
 	{
@@ -275,7 +328,9 @@ class User implements UserInterface, \Serializable
 	 *
 	 * @param \AppBundle\Entity\CaseStudy $caseStudy
 	 *
-	 * @return User
+	 * @see CaseStudy::class
+	 *
+	 * @return self
 	 */
 	public function setCaseStudy(\AppBundle\Entity\CaseStudy $caseStudy = null)
 	{
@@ -286,6 +341,8 @@ class User implements UserInterface, \Serializable
 
 	/**
 	 * Get caseStudy
+	 *
+	 * @see CaseStudy::class
 	 *
 	 * @return \AppBundle\Entity\CaseStudy
 	 */
@@ -299,7 +356,7 @@ class User implements UserInterface, \Serializable
      *
      * @param array $roles
      *
-     * @return User
+     * @return self
      */
     public function setRoles($roles)
     {
@@ -312,8 +369,10 @@ class User implements UserInterface, \Serializable
      * Add day
      *
      * @param \AppBundle\Entity\UserDay $day
+		 *
+		 * @see UserDay::class
      *
-     * @return User
+     * @return self
      */
     public function addDay(\AppBundle\Entity\UserDay $day)
     {
@@ -327,8 +386,10 @@ class User implements UserInterface, \Serializable
      * Remove day
      *
      * @param \AppBundle\Entity\UserDay $day
+		 *
+		 * @see UserDay::class
      *
-     * @return User
+     * @return self
      */
     public function removeDay(\AppBundle\Entity\UserDay $day)
     {
@@ -340,8 +401,6 @@ class User implements UserInterface, \Serializable
 
     /**
      * Remove all days
-     *
-     * @return User
      */
     public function removeDays()
     {

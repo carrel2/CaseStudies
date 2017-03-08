@@ -24,3 +24,9 @@
 	{% endfor %}
 	</div>
 {% endblock %}
+
+{% block footer %}
+	<a href="{{ path('review') }}">Review</a>
+
+	{{ parent() }}
+{% endblock %}

@@ -16,6 +16,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 class CaseStudy
 {
 	/**
+	 * Auto-generated unique id
+	 *
+	 * @var integer Unique id
+	 *
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="AUTO")
@@ -23,31 +27,67 @@ class CaseStudy
 	private $id;
 
 	/**
+	 * The title of the CaseStudy
+	 *
+	 * @var string
+	 *
 	 * @ORM\Column(type="string", length=40)
 	 */
 	private $title;
 
 	/**
+	 * A description of the CaseStudy
+	 *
+	 * Contains initial information for the CaseStudy
+	 *
+	 * @var string
+	 *
 	 * @ORM\Column(type="text")
 	 */
 	private $description;
 
 	/**
+	 * ArrayCollection of Day objects
+	 *
+	 * @var ArrayCollection
+	 *
+	 * @see ArrayCollection::class
+	 * @see Day::class
+	 *
 	 * @ORM\OneToMany(targetEntity="Day", mappedBy="caseStudy", cascade={"all"}, orphanRemoval=true)
 	 */
 	private $days;
 
 	/**
+	 * ArrayCollection of User objects
+	 *
+	 * @var ArrayCollection
+	 *
+	 * @see ArrayCollection::class
+	 * @see User::class
+	 *
 	 * @ORM\OneToMany(targetEntity="User", mappedBy="caseStudy", cascade={"all"})
 	 */
 	private $users;
 
+		/**
+		 * Constructor function
+		 *
+		 * Initializes $days and $users as ArrayCollection
+		 *
+		 * @see ArrayCollection::class
+		 */
     public function __construct()
     {
         $this->days = new ArrayCollection();
         $this->users = new ArrayCollection();
     }
 
+		/**
+		 * Returns a string representation of the CaseStudy
+		 *
+		 * @return string
+		 */
     public function __toString()
     {
         return strval($this->id);
@@ -66,9 +106,9 @@ class CaseStudy
     /**
      * Set title
      *
-     * @param string $name
+     * @param string $title
      *
-     * @return CaseStudy
+     * @return self
      */
     public function setTitle($title)
     {
@@ -92,7 +132,7 @@ class CaseStudy
      *
      * @param string $description
      *
-     * @return CaseStudy
+     * @return self
      */
     public function setDescription($description)
     {
@@ -113,14 +153,16 @@ class CaseStudy
 
     /**
      * Add day
+		 *
+		 * Appends $day to $days and associates $this as the CaseStudy for $day
      *
      * @param \AppBundle\Entity\Day $day
      *
-     * @return CaseStudy
+     * @return self
      */
     public function addDay(\AppBundle\Entity\Day $day)
     {
-	$day->setCaseStudy($this);
+				$day->setCaseStudy($this);
         $this->days[] = $day;
 
         return $this;
@@ -128,13 +170,19 @@ class CaseStudy
 
     /**
      * Remove day
+		 *
+		 * Removes $day from $days and removes association between $this and $day
      *
      * @param \AppBundle\Entity\Day $day
+		 *
+		 * @return self
      */
     public function removeDay(\AppBundle\Entity\Day $day)
     {
         $this->days->removeElement($day);
         $day->setCaseStudy(null);
+
+				return $this;
     }
 
     /**
@@ -149,10 +197,12 @@ class CaseStudy
 
     /**
      * Add user
+		 *
+		 * Appends $user to $users and associates $this as the CaseStudy for $user
      *
      * @param \AppBundle\Entity\User $user
      *
-     * @return CaseStudy
+     * @return self
      */
     public function addUser(\AppBundle\Entity\User $user)
     {
@@ -165,12 +215,18 @@ class CaseStudy
     /**
      * Remove user
      *
+		 * Removes $user from $users and removes association between $this and $user
+		 *
      * @param \AppBundle\Entity\User $user
+		 *
+		 * @return self
      */
     public function removeUser(\AppBundle\Entity\User $user)
     {
         $this->users->removeElement($user);
         $user->setCaseStudy(null);
+
+				return $this;
     }
 
     /**

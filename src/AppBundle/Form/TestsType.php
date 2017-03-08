@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use AppBundle\Entity\Test;
 
 class TestsType extends AbstractType
 {
@@ -16,7 +17,10 @@ class TestsType extends AbstractType
 				'class' => 'AppBundle:Test',
 				'choice_label' => 'name',
 				'expanded' => true,
-				'multiple' => true,))
+				'multiple' => true,
+				'choice_attr' => function(Test $t, $key, $index) {
+					return ['class' => 'test'];
+				}))
 			->add('submit', SubmitType::class);
 	}
 }

@@ -24,6 +24,9 @@ class MedicationsController extends Controller
 	 * showPageAction function
 	 *
 	 * Shows MedicationsType form. On submission, adds MedicationResults from the corresponding Day to the current UserDay
+	 *
+	 * @todo redirect to default if no case associated to the user
+	 *
 	 * @see MedicationsType::class
 	 * @see MedicationResults::class
 	 * @see Day::class
@@ -32,13 +35,16 @@ class MedicationsController extends Controller
 	 *
 	 * @param Request $r Request object
 	 *
-	 * @return \Symfony\Component\HttpFoundation\Response Render **medications.html.twig**. On submission, redirect to **DayController::reviewAction()**
+	 * @return \Symfony\Component\HttpFoundation\Response Render **medications.html.twig**. On submission, redirect to **DayController::logicAction()**
 	 *
 	 * @Route("/medications", name="order_meds")
 	 * @Security("has_role('ROLE_USER')")
 	 */
 	public function showPageAction(Request $r)
 	{
+		$session = $r->getSession();
+		$session->set('page', 'order_meds');
+
 		$user = $this->getUser();
 		$form = $this->createForm( MedicationsType::class );
 
@@ -58,7 +64,7 @@ class MedicationsController extends Controller
 
 			$em->flush();
 
-			return $this->redirectToRoute('review');
+			return $this->redirectToRoute('logic');
 		}
 
 		return $this->render('medications.html.twig', array(

@@ -7,7 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Diagnostic Test Results class
  *
- * Contains results for a specific diagnostic test done on a specific day
+ * Contains results for a specific diagnostic Test done on a specific Day
+ *
+ * @see Test::class
+ * @see Day::class
  *
  * @ORM\Entity
  * @ORM\Table(name="TestResults")
@@ -15,6 +18,10 @@ use Doctrine\ORM\Mapping as ORM;
 class TestResults
 {
 	/**
+	 * Auto-generated unique id
+	 *
+	 * @var integer
+	 *
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="AUTO")
@@ -22,21 +29,45 @@ class TestResults
 	private $id;
 
 	/**
+	 * Associated Day
+	 *
+	 * @var Day
+	 *
+	 * @see Day::class
+	 *
 	 * @ORM\ManyToOne(targetEntity="Day", inversedBy="tests")
 	 */
 	private $day;
 
 	/**
+	 * Associated UserDay
+	 *
+	 * @var UserDay
+	 *
+	 * @see UserDay::class
+	 *
 	 * @ORM\ManyToOne(targetEntity="UserDay", inversedBy="tests")
 	 */
 	private $userDay;
 
 	/**
+	 * Associated Test
+	 *
+	 * @var Test
+	 *
+	 * @see Test::class
+	 *
 	 * @ORM\ManyToOne(targetEntity="Test", inversedBy="results")
 	 */
 	private $test;
 
 	/**
+	 * The results for the associated Test
+	 *
+	 * @var string
+	 *
+	 * @see Test::class
+	 *
 	 * @ORM\Column(type="text")
 	 */
 	private $results;
@@ -56,7 +87,7 @@ class TestResults
      *
      * @param string $results
      *
-     * @return TestResults
+     * @return self
      */
     public function setResults($results)
     {
@@ -80,7 +111,9 @@ class TestResults
      *
      * @param \AppBundle\Entity\Test $test
      *
-     * @return TestResults
+		 * @see Test::class
+		 *
+     * @return self
      */
     public function setTest(\AppBundle\Entity\Test $test = null)
     {
@@ -103,8 +136,10 @@ class TestResults
      * Set day
      *
      * @param \AppBundle\Entity\Day $day
+		 *
+		 * @see Day::class
      *
-     * @return TestResults
+     * @return self
      */
     public function setDay(\AppBundle\Entity\Day $day = null)
     {
@@ -127,8 +162,10 @@ class TestResults
      * Set userDay
      *
      * @param \AppBundle\Entity\UserDay $userDay
+		 *
+		 * @see UserDay::class
      *
-     * @return TestResults
+     * @return self
      */
     public function setUserDay(\AppBundle\Entity\UserDay $userDay = null)
     {

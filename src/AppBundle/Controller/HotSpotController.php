@@ -28,6 +28,7 @@ class HotSpotController extends Controller
 	 *
 	 * @todo add image functionality for HotSpots
 	 * @todo research 3d model functionality for HotSpots
+	 * @todo redirect to default if no case is associated to the user
 	 *
 	 * @see HotSpots::class
 	 * @see Day::class
@@ -42,11 +43,14 @@ class HotSpotController extends Controller
 	 */
 	public function showPageAction(Request $r)
 	{
+		$session = $r->getSession();
+		$session->set('page', 'evaluation');
+
 		$user = $this->getUser();
 
 		$case = $user->getCaseStudy();
 		$days = $case->getDays();
-		$hotspots = $days[0]->getHotspots();
+		$hotspots = $days[count($user->getDays()) - 1]->getHotspots();
 
 		return $this->render('hotspot.html.twig', array(
 			'hotspots' => $hotspots,

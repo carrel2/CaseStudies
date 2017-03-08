@@ -7,7 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * HotSpots class
  *
- * Contains information about a specific location of an animal for a specific day
+ * Contains information about a specific location of an animal for a specific Day
+ *
+ * @see Day::class
  *
  * @ORM\Entity
  * @ORM\Table(name="Hotspots")
@@ -15,6 +17,10 @@ use Doctrine\ORM\Mapping as ORM;
 class HotSpots
 {
 	/**
+	 * Auto-generated unique id
+	 *
+	 * @var integer
+	 *
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="AUTO")
@@ -22,22 +28,42 @@ class HotSpots
 	private $id;
 
 	/**
+	 * Associated Day
+	 *
+	 * @var Day
+	 *
+	 * @see Day::class
+	 *
 	 * @ORM\ManyToOne(targetEntity="Day", inversedBy="hotspots")
 	 * @ORM\JoinColumn(name="day_id", referencedColumnName="id")
 	 */
 	private $day;
 
 	/**
+	 * Associated UserDay
+	 *
+	 * @var UserDay
+	 *
+	 * @see UserDay::class
+	 *
 	 * @ORM\ManyToOne(targetEntity="UserDay", inversedBy="hotspots")
 	 */
 	private $userDay;
 
 	/**
+	 * The name of the HotSpots
+	 *
+	 * @var string
+	 *
 	 * @ORM\Column(type="string", length=40)
 	 */
 	private $name;
 
 	/**
+	 * Information about the HotSpots
+	 *
+	 * @var string
+	 *
 	 * @ORM\Column(type="text")
 	 */
 	private $info;
@@ -57,7 +83,7 @@ class HotSpots
      *
      * @param string $name
      *
-     * @return HotSpots
+     * @return self
      */
     public function setName($name)
     {
@@ -81,7 +107,7 @@ class HotSpots
      *
      * @param string $info
      *
-     * @return HotSpots
+     * @return self
      */
     public function setInfo($info)
     {
@@ -104,8 +130,10 @@ class HotSpots
      * Set day
      *
      * @param \AppBundle\Entity\Day $day
+		 *
+		 * @see Day::class
      *
-     * @return HotSpots
+     * @return self
      */
     public function setDay(\AppBundle\Entity\Day $day = null)
     {
@@ -128,8 +156,10 @@ class HotSpots
      * Set userDay
      *
      * @param \AppBundle\Entity\UserDays $userDay
+		 *
+		 * @see UserDay::class
      *
-     * @return HotSpots
+     * @return self
      */
     public function setUserDay(\AppBundle\Entity\UserDay $userDay = null)
     {

@@ -7,7 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Therapeutic Medication Results class
  *
- * Contains results for a specific medication on a specific day
+ * Contains results for a specific Medication on a specific Day
+ *
+ * @see Medication::class
+ * @see Day::class
  *
  * @ORM\Entity
  * @ORM\Table(name="MedicationResults")
@@ -15,6 +18,10 @@ use Doctrine\ORM\Mapping as ORM;
 class MedicationResults
 {
 	/**
+	 * Auto-generated unique id
+	 *
+	 * @var integer
+	 *
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="AUTO")
@@ -22,21 +29,45 @@ class MedicationResults
 	private $id;
 
 	/**
+	 * Associated Day
+	 *
+	 * @var Day
+	 *
+	 * @see Day::class
+	 *
 	 * @ORM\ManyToOne(targetEntity="Day", inversedBy="medications")
 	 */
 	private $day;
 
 	/**
+	 * Associated UserDay
+	 *
+	 * @var UserDay
+	 *
+	 * @see UserDay::class
+	 *
 	 * @ORM\ManyToOne(targetEntity="UserDay", inversedBy="medications")
 	 */
 	private $userDay;
 
 	/**
+	 * Associated Medication
+	 *
+	 * @var Medication
+	 *
+	 * @see Medication::class
+	 *
 	 * @ORM\ManyToOne(targetEntity="Medication", inversedBy="results")
 	 */
 	private $medication;
 
 	/**
+	 * The results for the associated Medication
+	 *
+	 * @var string
+	 *
+	 * @see Medication::class
+	 *
 	 * @ORM\Column(type="text")
 	 */
 	private $results;
@@ -56,7 +87,7 @@ class MedicationResults
      *
      * @param string $results
      *
-     * @return MedicationResults
+     * @return self
      */
     public function setResults($results)
     {
@@ -79,8 +110,10 @@ class MedicationResults
      * Set medication
      *
      * @param \AppBundle\Entity\Medication $medication
+		 *
+		 * @see Medication::class
      *
-     * @return MedicationResults
+     * @return self
      */
     public function setMedication(\AppBundle\Entity\Medication $medication = null)
     {
@@ -103,8 +136,10 @@ class MedicationResults
      * Set day
      *
      * @param \AppBundle\Entity\Day $day
+		 *
+		 * @see Day::class
      *
-     * @return MedicationResults
+     * @return self
      */
     public function setDay(\AppBundle\Entity\Day $day = null)
     {
@@ -127,6 +162,8 @@ class MedicationResults
      * Set userDay
      *
      * @param \AppBundle\Entity\UserDay $userDay
+		 *
+		 * @see UserDay::class
      *
      * @return MedicationResults
      */

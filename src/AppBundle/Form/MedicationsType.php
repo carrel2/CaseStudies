@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use AppBundle\Entity\Medication;
 
 class MedicationsType extends AbstractType
 {
@@ -16,7 +17,10 @@ class MedicationsType extends AbstractType
 				'class' => 'AppBundle:Medication',
 				'choice_label' => 'name',
 				'expanded' => true,
-				'multiple' => true,))
+				'multiple' => true,
+				'choice_attr' => function(Medication $t, $key, $index) {
+					return ['class' => 'medication'];
+				}))
 			->add('submit', SubmitType::class);
 	}
 }

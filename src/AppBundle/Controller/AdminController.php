@@ -12,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use AppBundle\Form\AdminUserType;
 use AppBundle\Entity\CaseStudy;
 use AppBundle\Form\AdminType;
 use AppBundle\Form\CaseType;
@@ -145,7 +146,65 @@ class AdminController extends Controller
 		return $this->render('caseInfo.html.twig', array(
 			'form' => $form->createView(),
 			'case' => $case,
-			'id' => $id,
+			'id' => $case->getId(),
+		));
+	}
+
+	/**
+	 * adminUserAction function
+	 *
+	 * Allows admin User to edit User objects
+	 *
+	 * @todo redo code for effeciency and ease of use on User end
+	 *
+	 * @see User::class
+	 *
+	 * @param Request $r Request object
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response Render **adminUser.html.twig**
+	 *
+	 * @Route("/admin/users", name="adminUsers")
+	 */
+	public function adminUserAction(Request $r)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$users = $em->getRepository('AppBundle:User')->findAll();
+
+		$builder = $this->createFormBuilder();
+
+		foreach($users as $user) {
+			$builder->add('id' . $user->getId(), HiddenType::class, array(
+				'data' => $user->getId()));
+		}
+
+		$form = $builder->getForm();
+
+		return $this->render('adminUser.html.twig', array(
+			'form' => $form->createView(),
+			'users' => $users,
+		));
+	}
+
+	/**
+	 * editUserAction function
+	 *
+	 * Edit selected User object
+	 *
+	 * @todo see if this is necessary after redoing adminUserAction
+	 *
+	 * @param Request $r Request object
+	 * @param User $user
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response Render **user.html.twig**
+	 *
+	 * @Route("/admin/users/edit/{id}", name="editUser")
+	 */
+	public function editUserAction(Request $r, User $user)
+	{
+		$form = $this->createForm( UserType::class, $user );
+
+		return $this->render('user.html.twig', array(
+			'form' => $form->createView(),
 		));
 	}
 }

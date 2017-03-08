@@ -8,7 +8,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Day class
  *
- * Contains information about evaluations, tests, and medications for a single day in a case
+ * Contains information about HotSpots, TestResults, and MedicationResults for a single Day in a CaseStudy
+ *
+ * @see HotSpots::class
+ * @see TestResults::class
+ * @see MedicationResults::class
+ * @see CaseStudy::class
  *
  * @ORM\Entity
  * @ORM\Table(name="Days")
@@ -16,6 +21,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Day
 {
 	/**
+	 * Auto-generated unique id
+	 *
+	 * @var integer
+	 *
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="AUTO")
@@ -23,25 +32,59 @@ class Day
 	private $id;
 
 	/**
+	 * Associated CaseStudy
+	 *
+	 * @var CaseStudy
+	 *
+	 * @see CaseStudy::class
+	 *
 	 * @ORM\ManyToOne(targetEntity="caseStudy", inversedBy="days")
 	 */
 	private $caseStudy;
 
 	/**
+	 * ArrayCollection of HotSpots objects
+	 *
+	 * @var ArrayCollection
+	 *
+	 * @see ArrayCollection::class
+	 * @see HotSpots::class
+	 *
 	 * @ORM\OneToMany(targetEntity="HotSpots", mappedBy="day", cascade={"persist", "remove"})
 	 */
 	private $hotspots;
 
 	/**
+	 * ArrayCollection of TestResults objects
+	 *
+	 * @var ArrayCollection
+	 *
+	 * @see ArrayCollection::class
+	 * @see TestResults::class
+	 *
 	 * @ORM\OneToMany(targetEntity="TestResults", mappedBy="day", cascade={"persist", "remove"})
 	 */
 	private $tests;
 
 	/**
+	 * ArrayCollection of MedicationResults
+	 *
+	 * @var ArrayCollection
+	 *
+	 * @see ArrayCollection::class
+	 * @see MedicationResults::class
+	 *
 	 * @ORM\OneToMany(targetEntity="MedicationResults", mappedBy="day", cascade={"persist", "remove"})
 	 */
 	private $medications;
 
+	/**
+	 * Constructor function
+	 *
+	 * Initializes $users, $hotspots, $tests, and $medications as ArrayCollection
+	 *
+	 * @see ArrayCollection::class
+	 */
 	public function __construct()
 	{
 		$this->users = new ArrayCollection();
@@ -62,25 +105,33 @@ class Day
 
     /**
      * Remove hotspot
+		 *
+		 * Removes $hotspot from $hotspots and removes association between $this and $hotspot
      *
      * @param \AppBundle\Entity\HotSpots $hotspot
+		 *
+		 * @return self
      */
     public function removeHotspot(\AppBundle\Entity\HotSpots $hotspot)
     {
         $hotspot->setDay(null);
         $this->hotspots->removeElement($hotspot);
+
+				return $this;
     }
 
     /**
      * Add hotspot
+		 *
+		 * Appends $hotpot to $hotspots and associates $this as Day for $hotspot
      *
      * @param \AppBundle\Entity\HotSpots $hotspot
      *
-     * @return Day
+     * @return self
      */
     public function addHotspot(\AppBundle\Entity\HotSpots $hotspot)
     {
-	$hotspot->setDay($this);
+				$hotspot->setDay($this);
         $this->hotspots[] = $hotspot;
 
         return $this;
@@ -98,10 +149,12 @@ class Day
 
     /**
      * Set caseStudy
+		 *
+		 * Associates $caseStudy as the CaseStudy for $this
      *
      * @param \AppBundle\Entity\caseStudy $caseStudy
      *
-     * @return Day
+     * @return self
      */
     public function setCaseStudy(\AppBundle\Entity\CaseStudy $caseStudy = null)
     {
@@ -122,10 +175,12 @@ class Day
 
     /**
      * Add test
+		 *
+		 * Appends $test to $tests and associates $this as Day for $test
      *
      * @param \AppBundle\Entity\TestResults $test
      *
-     * @return Day
+     * @return self
      */
     public function addTest(\AppBundle\Entity\TestResults $test)
     {
@@ -137,13 +192,19 @@ class Day
 
     /**
      * Remove test
+		 *
+		 * Removes $test from $tests and removes association between $this and $test
      *
      * @param \AppBundle\Entity\TestResults $test
+		 *
+		 * @return self
      */
     public function removeTest(\AppBundle\Entity\TestResults $test)
     {
         $test->setDay(null);
         $this->tests->removeElement($test);
+
+				return $this;
     }
 
     /**
@@ -159,7 +220,9 @@ class Day
     /**
      * Get result by test
      *
-     * @return \AppBundle\Entity\TestResults
+		 * @param Test $test Test to get results for
+		 *
+     * @return \AppBundle\Entity\TestResults Null if no **TestResults** found
      */
     public function getResultByTest(\AppBundle\Entity\Test $test)
     {
@@ -176,10 +239,12 @@ class Day
 
     /**
      * Add medication
+		 *
+		 * Appends $medication to $medications and associates $this as Day for $medication
      *
      * @param \AppBundle\Entity\MedicationResults $medication
      *
-     * @return Day
+     * @return self
      */
     public function addMedication(\AppBundle\Entity\MedicationResults $medication)
     {
@@ -191,19 +256,27 @@ class Day
 
     /**
      * Remove medication
+		 *
+		 * Removes $medication and removes association between $this and $medication
      *
      * @param \AppBundle\Entity\MedicationResults $medication
+		 *
+		 * @return self
      */
     public function removeMedication(\AppBundle\Entity\MedicationResults $medication)
     {
         $medication->setDay(null);
         $this->medications->removeElement($medication);
+
+				return $this;
     }
 
     /**
      * Get result by medication
+		 *
+		 * @param Medication $medication Medication to get results for
      *
-     * @return \AppBundle\Entity\MedicationResults
+     * @return \AppBundle\Entity\MedicationResults Null if no **MedicationResults** found
      */
     public function getResultByMedication(\AppBundle\Entity\Medication $medication)
     {

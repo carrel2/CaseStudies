@@ -1,15 +1,7 @@
-// @TODO update to use jquery
 function updateCase() {
-	var xhttp = new XMLHttpRequest();
-	var id = document.getElementById("default_title").value;
+	var id = $('#default_title').val();
 
-	xhttp.onreadystatechange = function() {
-		if( this.readyState == 4 && this.status == 200 ) {
-			document.getElementById("case").innerHTML = this.responseText;
-		}
-	};
-	xhttp.open("GET", "/getDescription/" + id, true);
-	xhttp.send();
+	$('#case').load('/getDescription/' + id);
 }
 
 function addButtonClickListener(e) {

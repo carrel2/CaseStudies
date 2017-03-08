@@ -26,6 +26,9 @@ class TestsController extends Controller
 	 *
 	 * Shows TestsType form. On submission adds TestResults from the corresponding Day to the current UserDay
 	 *
+	 * @todo handle null TestResults
+	 * @todo redirect to default if no case associated with the user
+	 *
 	 * @see TestsType::class
 	 * @see TestResults::class
 	 * @see Day::class
@@ -41,6 +44,9 @@ class TestsController extends Controller
 	 */
 	public function showPage(Request $r)
 	{
+		$session = $r->getSession();
+		$session->set('page', 'order_tests');
+
 		$user = $this->getUser();
 		$form = $this->createForm( TestsType::class );
 
@@ -55,7 +61,11 @@ class TestsController extends Controller
 
 			foreach( $tests as $test )
 			{
-				$user->getCurrentDay()->addTest($day->getResultByTest($test));
+				$results = $day->getResultByTest($test);
+				if( $results )
+				{
+					$user->getCurrentDay()->addTest($day->getResultByTest($test));
+				} else {}
 			}
 
 			$em->flush();

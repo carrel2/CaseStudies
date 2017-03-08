@@ -1,5 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% block header %}
+	{% for flash in app.session.flashBag.get('notice') %}
+		<div class="flash-notice">{{ flash }}</div>
+	{% endfor %}
+{% endblock %}
+
 {% block body %}
 	{{ form_start(form) }}
 	{{ form_widget(form) }}

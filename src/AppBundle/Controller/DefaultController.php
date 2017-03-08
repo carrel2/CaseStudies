@@ -30,7 +30,7 @@ class DefaultController extends Controller
 	 * Landing page for logged in User.
 	 *
 	 * Shows DefaultType form. Renders default.html.twig
-	 * 
+	 *
 	 * On submission, associates the current User with the selected CaseStudy unless an association already exists.
 	 * Redirects to HotSpots::showPage()
 	 *
@@ -50,6 +50,7 @@ class DefaultController extends Controller
 	 */
 	public function defaultAction(Request $r)
 	{
+		$session = $r->getSession();
 		$user = $this->getUser();
 		$case = $user->getCaseStudy();
 
@@ -72,7 +73,13 @@ class DefaultController extends Controller
 				return $this->redirectToRoute('reset');
 			}
 
-			return $this->redirectToRoute('evaluation');
+			$route = $session->get('page');
+
+			if( $route == "" ) {
+				$route = "evaluation";
+			}
+
+			return $this->redirectToRoute($route);
 		}
 
 		return $this->render('default.html.twig', array(
