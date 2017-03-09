@@ -25,8 +25,6 @@ class DayController extends Controller
 	 *
 	 * Renders review.html.twig
 	 *
-	 * @todo redirect to default if user is not currently working on a case
-	 *
 	 * @param Request $r Request object
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response Render **review.html.twig**
@@ -37,14 +35,19 @@ class DayController extends Controller
 	public function reviewAction(Request $r)
 	{
 		$session = $r->getSession();
-		$session->set('page', 'review');
-
 		$user = $this->getUser();
+
+		if( !$user->getIsActive() ) {
+			return $this->redirectToRoute('default');
+		}
+
 		$days = $user->getDays();
+		$finished = $session->get('finished');
 
 		return $this->render('review.html.twig', array(
 			'user' => $user,
 			'days' => $days,
+			'finished' => $finished,
 		));
 	}
 
@@ -65,6 +68,14 @@ class DayController extends Controller
 	 */
 	public function logicAction(Request $r)
 	{
+		$user = $this->getUser();
+		$case = $user->getCaseStudy();
+
+		if( count($case->getDays()) == count($user->getDays())) {
+			$r->getSession()->set('finished', true);
+			$this->addFlash('complete', 'Finish message.');
+		}
+
 		return $this->redirectToRoute('review');
 	}
 
@@ -92,6 +103,8 @@ class DayController extends Controller
 		$user->addDay(new UserDay());
 
 		$em->flush();
+
+		$r->getSession()->set('page', 'evaluation');
 
 		return $this->redirectToRoute('evaluation');
 	}

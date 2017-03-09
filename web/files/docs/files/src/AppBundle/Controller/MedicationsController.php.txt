@@ -25,8 +25,6 @@ class MedicationsController extends Controller
 	 *
 	 * Shows MedicationsType form. On submission, adds MedicationResults from the corresponding Day to the current UserDay
 	 *
-	 * @todo redirect to default if no case associated to the user
-	 *
 	 * @see MedicationsType::class
 	 * @see MedicationResults::class
 	 * @see Day::class
@@ -42,10 +40,13 @@ class MedicationsController extends Controller
 	 */
 	public function showPageAction(Request $r)
 	{
-		$session = $r->getSession();
-		$session->set('page', 'order_meds');
-
 		$user = $this->getUser();
+		$session = $r->getSession();
+
+		if( !$user->getIsActive() || $session->get('page') != 'order_meds' ) {
+			return $this->redirectToRoute('default');
+		}
+
 		$form = $this->createForm( MedicationsType::class );
 
 		$form->handleRequest($r);
@@ -63,6 +64,8 @@ class MedicationsController extends Controller
 			}
 
 			$em->flush();
+
+			$session->set('page', 'review');
 
 			return $this->redirectToRoute('logic');
 		}

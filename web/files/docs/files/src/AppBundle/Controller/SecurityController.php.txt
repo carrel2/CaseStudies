@@ -31,7 +31,7 @@ class SecurityController extends Controller
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response Render **login.html.twig**
 	 *
-	 * @Route("/login", name="login")
+	 * @Route("/loginold", name="loginold")
 	 */
 	public function loginAction(Request $r)
 	{

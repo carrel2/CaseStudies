@@ -33,10 +33,16 @@ function addButtonClickListener(e) {
 	}
 }
 
-function updateAdminCase() {
-	var $id = $('#admin_case').val();
+function updateAdminCase(id) {
+	if( id === undefined ) {
+		id = $('#admin_case').val();
+	}
 
-	$('#caseInfo').load('/getCase/' + $id, function(responseTxt, statusTxt, xhr){
+	if( $('#admin_case').val() != id ) {
+		$('#admin_case').val(id);
+	}
+
+	$('#caseInfo').load('/getCase/' + id, function(responseTxt, statusTxt, xhr){
 		$('.collection > div').each(function(i, e) {
 			var t = $(this).parent().data('type');
 			$(this).append('<button type="button" class="remove-button">Remove ' + t + '</button>');

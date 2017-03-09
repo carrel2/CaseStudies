@@ -32,6 +32,7 @@ class AdminController extends Controller
 	 * Default admin action. Renders admin.html.twig template
 	 *
 	 * @todo fix security role
+	 * @todo add flash messages
 	 *
 	 * @param Request $r Request object
 	 *
@@ -52,7 +53,6 @@ class AdminController extends Controller
 	 *
 	 * @see CaseStudy::class
 	 *
-	 * @todo load edited case after submit
 	 * @todo add undo functionality
 	 *
 	 * @param Request $r Request object
@@ -64,6 +64,8 @@ class AdminController extends Controller
 	public function editCaseAction(Request $r)
 	{
 		$form = $this->createForm( AdminType::class );
+
+		$form->handleRequest($r);
 
 		return $this->render('editCase.html.twig', array(
 			'form' => $form->createView(),
@@ -98,6 +100,8 @@ class AdminController extends Controller
 
 			$em->persist($case);
 			$em->flush();
+
+			$this->addFlash('notice', 'Created ' . $case->getTitle());
 
 			return $this->redirectToRoute('admin');
 		}
@@ -139,6 +143,10 @@ class AdminController extends Controller
 			}
 
 			$em->flush();
+
+			$r->getSession()->set('case', $case->getId());
+
+			$this->addFlash('notice', 'Updated ' . $case->getTitle());
 
 			return $this->redirectToRoute('editCase');
 		}

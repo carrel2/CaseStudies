@@ -35,7 +35,7 @@ class RegisterController extends Controller
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response Render **register.html.twig**. On submission, redirect to **DefaultController::defaultAction()**
 	 *
-	 * @Route("/registration", name="registration")
+	 * @Route("/registrationold", name="registrationold")
 	 */
 	public function registerAction(Request $request)
 	{

@@ -1,5 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% block header %}
+	{% for flash in app.session.flashBag.get('notice') %}
+		<div class="flash-notice">{{ flash }}</div>
+	{% endfor %}
+{% endblock %}
+
 {% block body %}
 	<a href="{{ path('createCase') }}">Create a new case</a>
 	<a href="{{ path('editCase') }}">Edit cases</a>

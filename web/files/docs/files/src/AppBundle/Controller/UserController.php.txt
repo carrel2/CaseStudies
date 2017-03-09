@@ -23,11 +23,86 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 class UserController extends Controller
 {
 	/**
+	 * registerAction function
+	 *
+	 * Shows UserType form. On submission, creates a new User
+	 *
+	 * @todo login newly registered user
+	 *
+	 * @see UserType::class
+	 * @see User::class
+	 * @see DefaultController::defaultAction()
+	 *
+	 * @param Request $request Request object
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response Render **register.html.twig**. On submission, redirect to **DefaultController::defaultAction()**
+	 *
+	 * @Route("/registration", name="registration")
+	 */
+	public function registerAction(Request $request)
+	{
+		if( $this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+			return $this->redirectToRoute('default');
+		}
+
+		$user = new User();
+
+		$form = $this->createForm( UserType::class, $user );
+
+		$form->handleRequest($request);
+
+		if( $form->isSubmitted() && $form->isValid() )
+		{
+			$password = $this->get('security.password_encoder')
+				->encodePassword($user, $user->getPlainPassword());
+			$user->setPassword($password);
+
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($user);
+			$em->flush();
+
+			return $this->redirectToRoute('default');
+		}
+
+		return $this->render('register.html.twig', array(
+			'form' => $form->createView(),
+		));
+	}
+
+	/**
+	 * loginAction function
+	 *
+	 * Login page for unauthenticated User
+	 *
+	 * @see User::class
+	 *
+	 * @param Request $r Request object
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response Render **login.html.twig**
+	 *
+	 * @Route("/login", name="login")
+	 */
+	public function loginAction(Request $r)
+	{
+		if( $this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+			return $this->redirectToRoute('default');
+		}
+
+		$authenticationUtils = $this->get('security.authentication_utils');
+
+		$error = $authenticationUtils->getLastAuthenticationError();
+		$lastUsername = $authenticationUtils->getLastUsername();
+
+		return $this->render('login.html.twig', array(
+			'last_username' => $lastUsername,
+			'error' => $error,
+		));
+	}
+
+	/**
 	 * userAction function
 	 *
 	 * Shows UserType form so authenticated User can edit object information
-	 *
-	 * @todo add flash messages to notify User that an error occurred
 	 *
 	 * @see UserType::class
 	 * @see User::class
@@ -60,9 +135,13 @@ class UserController extends Controller
 				$user->setPassword($password);
 			}
 
-			$em->flush();
+			try {
+				$em->flush();
 
-			$this->addFlash('notice', 'Changes saved');
+				$this->addFlash('notice', 'Changes saved');
+			} catch( \Doctrine\ORM\ORMException $e ) {
+				$this->addFlash('error', 'Something went wrong, changes were not saved!');
+			}
 		}
 
 		return $this->render('user.html.twig', array(

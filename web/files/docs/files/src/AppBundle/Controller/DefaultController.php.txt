@@ -51,6 +51,7 @@ class DefaultController extends Controller
 	public function defaultAction(Request $r)
 	{
 		$session = $r->getSession();
+
 		$user = $this->getUser();
 		$case = $user->getCaseStudy();
 
@@ -69,6 +70,8 @@ class DefaultController extends Controller
 				$user->addDay(new UserDay());
 
 				$em->flush();
+
+				$session->set('page', 'evaluation');
 			} else if ( $form->get('reset')->isClicked() ) {
 				return $this->redirectToRoute('reset');
 			}

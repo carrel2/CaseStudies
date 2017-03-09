@@ -131,7 +131,7 @@ class User implements UserInterface, \Serializable
 	public function __construct()
 	{
 		$this->days = new ArrayCollection();
-		$this->isActive = true;
+		$this->isActive = false;
 		$this->roles[] = 'ROLE_USER';
 		// may not be needed, see section on salt below
 		// $this->salt = md5(uniqid(null, true));
@@ -335,6 +335,7 @@ class User implements UserInterface, \Serializable
 	public function setCaseStudy(\AppBundle\Entity\CaseStudy $caseStudy = null)
 	{
 		$this->caseStudy = $caseStudy;
+		$this->isActive = !$caseStudy == null;
 
 		return $this;
 	}

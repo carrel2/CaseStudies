@@ -28,7 +28,6 @@ class HotSpotController extends Controller
 	 *
 	 * @todo add image functionality for HotSpots
 	 * @todo research 3d model functionality for HotSpots
-	 * @todo redirect to default if no case is associated to the user
 	 *
 	 * @see HotSpots::class
 	 * @see Day::class
@@ -43,10 +42,12 @@ class HotSpotController extends Controller
 	 */
 	public function showPageAction(Request $r)
 	{
-		$session = $r->getSession();
-		$session->set('page', 'evaluation');
-
 		$user = $this->getUser();
+		$session = $r->getSession();
+
+		if( !$user->getIsActive() || $session->get('page') != 'evaluation' ) {
+			return $this->redirectToRoute('default');
+		}
 
 		$case = $user->getCaseStudy();
 		$days = $case->getDays();
