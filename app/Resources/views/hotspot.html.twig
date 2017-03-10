@@ -12,11 +12,13 @@
 {% endblock %}
 
 {% block body %}
+	<div id="hotspots">
+
 	{% for spot in hotspots %}
 		<span class="hotspot" data-path="{{ spot.id }}">{{ spot.name }}</span>
 	{% endfor %}
 
-	<a href="{{ path('order_tests') }}">Continue</a>
+	</div>
 
 	<div id="checked">
 	{% for spot in checked %}
@@ -26,6 +28,7 @@
 {% endblock %}
 
 {% block footer %}
+	<a href="{{ path('order_tests') }}">Continue</a>
 	<a href="{{ path('review') }}">Review</a>
 
 	{{ parent() }}

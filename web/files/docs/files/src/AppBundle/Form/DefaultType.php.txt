@@ -25,7 +25,7 @@ class DefaultType extends AbstractType
 					'class' => 'AppBundle:CaseStudy',
 					'choice_label' => 'title',
 					'attr' => array(
-						'onchange' => 'updateCase',)))
+						'onchange' => 'updateCase()',)))
 					->add('start', SubmitType::class);
 			}
 		});

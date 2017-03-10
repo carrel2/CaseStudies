@@ -32,7 +32,6 @@ class AdminController extends Controller
 	 * Default admin action. Renders admin.html.twig template
 	 *
 	 * @todo fix security role
-	 * @todo add flash messages
 	 *
 	 * @param Request $r Request object
 	 *

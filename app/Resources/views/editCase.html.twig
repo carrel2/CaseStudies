@@ -5,7 +5,7 @@
 
 	<script>
 		$(function(){
-			updateAdminCase({{ app.session.get('case') }});
+			updateAdminCase({{ app.session.remove('case') }});
 		});
 	</script>
 {% endblock %}

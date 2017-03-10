@@ -26,8 +26,6 @@ class TestsController extends Controller
 	 *
 	 * Shows TestsType form. On submission adds TestResults from the corresponding Day to the current UserDay
 	 *
-	 * @todo handle null TestResults
-	 *
 	 * @see TestsType::class
 	 * @see TestResults::class
 	 * @see Day::class
@@ -68,8 +66,10 @@ class TestsController extends Controller
 				$results = $day->getResultByTest($test);
 				if( $results )
 				{
-					$user->getCurrentDay()->addTest($day->getResultByTest($test));
-				} else {}
+					$user->getCurrentDay()->addTest($results);
+				} else {
+					$this->addFlash('empty-test-results-' . $user->getCurrentDay()->getId(), $test->getName());
+				}
 			}
 
 			$em->flush();

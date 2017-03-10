@@ -58,7 +58,9 @@ class DayController extends Controller
 	 *
 	 * @see Day::class
 	 *
-	 * @todo add code to control logic between days
+	 * @todo update logic to be more dynamic, extend past actual CaseStudy
+	 * @todo add diagnoses input to submit when finished
+	 * @todo add email functionality
 	 *
 	 * @param Request $r Request object
 	 *

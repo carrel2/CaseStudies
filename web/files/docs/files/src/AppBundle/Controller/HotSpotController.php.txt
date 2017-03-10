@@ -97,6 +97,8 @@ class HotSpotController extends Controller
 	 *
 	 * Function to remove the association between the current User and CaseStudy
 	 *
+	 * @todo move to DefaultController
+	 *
 	 * @see User::class
 	 * @see CaseStudy::class
 	 * @see HotSpotController::showPageAction()
@@ -115,6 +117,9 @@ class HotSpotController extends Controller
 
 		$user->setCaseStudy(null);
 		$user->removeDays();
+
+		$r->getSession()->remove('finished');
+		$r->getSession()->getFlashBag()->clear();
 
 		$em->flush();
 

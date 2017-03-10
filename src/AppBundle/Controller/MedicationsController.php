@@ -60,7 +60,12 @@ class MedicationsController extends Controller
 
 			foreach( $medications as $medication )
 			{
-				$user->getCurrentDay()->addMedication($day->getResultByMedication($medication));
+				$results = $day->getResultByMedication($medication);
+				if( $results ) {
+					$user->getCurrentDay()->addMedication($results);
+				} else {
+					$this->addFlash('empty-medication-results-' . $user->getCurrentDay()->getId(), $medication->getName());
+				}
 			}
 
 			$em->flush();
