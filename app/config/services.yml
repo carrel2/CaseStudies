@@ -15,3 +15,9 @@ services:
             - 3
             - false
             - true
+
+    app.form.user:
+        class: AppBundle\Form\UserType
+        arguments: ['@security.token_storage']
+        tags:
+            - { name: form.type }

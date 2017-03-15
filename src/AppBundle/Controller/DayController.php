@@ -76,6 +76,14 @@ class DayController extends Controller
 		if( count($case->getDays()) == count($user->getDays())) {
 			$r->getSession()->set('finished', true);
 			$this->addFlash('complete', 'Finish message.');
+
+			// $message = \Swift_Message::newInstance()
+			// 	->setSubject('Test message')
+			// 	->setFrom('send@example.com')
+			// 	->setTo('vaulter82@gmail.com')
+			// 	->setBody('Finished');
+			//
+			// $this->get('mailer')->send($message);
 		}
 
 		return $this->redirectToRoute('review');

@@ -91,38 +91,4 @@ class HotSpotController extends Controller
 
 		return new Response('<li>' . $hotspot->getName() . ': ' . $hotspot->getInfo() . '</li>');
 	}
-
-	/**
-	 * resetPageAction function
-	 *
-	 * Function to remove the association between the current User and CaseStudy
-	 *
-	 * @todo move to DefaultController
-	 *
-	 * @see User::class
-	 * @see CaseStudy::class
-	 * @see HotSpotController::showPageAction()
-	 *
-	 * @param Request $r Request object
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response Redirect to **HotSpotController::showPageAction()**
-	 *
-	 * @Route("/reset", name="reset")
-	 * @Security("has_role('ROLE_USER')")
-	 */
-	public function resetPageAction(Request $r)
-	{
-		$em = $this->getDoctrine()->getManager();
-		$user = $this->getUser();
-
-		$user->setCaseStudy(null);
-		$user->removeDays();
-
-		$r->getSession()->remove('finished');
-		$r->getSession()->getFlashBag()->clear();
-
-		$em->flush();
-
-		return $this->redirectToRoute('default');
-	}
 }

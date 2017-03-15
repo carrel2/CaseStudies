@@ -6,12 +6,23 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
+ * User Day class
+ *
+ * Contains information relevant to the User to be compared to the original CaseStudy
+ *
+ * @see User::class
+ * @see CaseStudy::class
+ *
  * @ORM\Entity
  * @ORM\Table(name="UserDays")
  */
 class UserDay
 {
 	/**
+	 * Auto-generated unique id
+	 *
+	 * @var integer
+	 *
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="AUTO")
@@ -19,25 +30,60 @@ class UserDay
 	private $id;
 
 	/**
+	 * Associated User
+	 *
+	 * @var ArrayCollection
+	 *
+	 * @see User::class
+	 * @see ArrayCollection::class
+	 *
 	 * @ORM\ManyToOne(targetEntity="User", inversedBy="days")
 	 */
 	private $user;
 
 	/**
+	 * ArrayCollection of HotSpots
+	 *
+	 * @var ArrayCollection
+	 *
+	 * @see ArrayCollection::class
+	 * @see HotSpots::class
+	 *
 	 * @ORM\OneToMany(targetEntity="HotSpots", mappedBy="userDay")
 	 */
 	private $hotspots;
 
 	/**
+	 * ArrayCollection of TestResults
+	 *
+	 * @var ArrayCollection
+	 *
+	 * @see ArrayCollection::class
+	 * @see TestResults::class
+	 *
 	 * @ORM\OneToMany(targetEntity="TestResults", mappedBy="userDay")
 	 */
 	private $tests;
 
 	/**
+	 * ArrayCollection of MedicationResults
+	 *
+	 * @var ArrayCollection
+	 *
+	 * @see ArrayCollection::class
+	 * @see MedicationResults::class
+	 *
 	 * @ORM\OneToMany(targetEntity="MedicationResults", mappedBy="userDay")
 	 */
 	private $medications;
 
+	/**
+	 * Constructor function
+	 *
+	 * Initializes $hotspots, $tests, and $medications as ArrayCollection
+	 *
+	 * @see ArrayCollection::class
+	 */
 	public function __construct()
 	{
 		$this->hotspots = new ArrayCollection();
@@ -59,8 +105,10 @@ class UserDay
      * Set user
      *
      * @param \AppBundle\Entity\User $user
+		 *
+		 * @see User::class
      *
-     * @return UserDay
+     * @return self
      */
     public function setUser(\AppBundle\Entity\User $user = null)
     {
@@ -83,8 +131,10 @@ class UserDay
      * Add hotspot
      *
      * @param \AppBundle\Entity\HotSpots $hotspot
+		 *
+		 * @see HotSpots::class
      *
-     * @return UserDay
+     * @return self
      */
     public function addHotspot(\AppBundle\Entity\HotSpots $hotspot)
     {
@@ -98,6 +148,8 @@ class UserDay
      * Remove hotspot
      *
      * @param \AppBundle\Entity\HotSpots $hotspot
+		 *
+		 * @see HotSpots::class
      */
     public function removeHotspot(\AppBundle\Entity\HotSpots $hotspot)
     {
@@ -108,7 +160,7 @@ class UserDay
     /**
      * Remove all hotspots
      *
-     * @return UserDay
+     * @return self
      */
     public function removeHotspots()
     {
@@ -133,8 +185,10 @@ class UserDay
      * Add test
      *
      * @param \AppBundle\Entity\TestResults $test
+		 *
+		 * @see TestResults::class
      *
-     * @return UserDay
+     * @return self
      */
     public function addTest(\AppBundle\Entity\TestResults $test)
     {
@@ -148,17 +202,23 @@ class UserDay
      * Remove test
      *
      * @param \AppBundle\Entity\TestResults $test
+		 *
+		 * @see TestResults::class
+		 *
+		 * @return self
      */
     public function removeTest(\AppBundle\Entity\TestResults $test)
     {
         $test->setUserDay(null);
         $this->tests->removeElement($test);
+
+				return $this;
     }
 
     /**
      * Remove all tests
      *
-     * @return UserDay
+     * @return self
      */
     public function removeTests()
     {
@@ -183,8 +243,10 @@ class UserDay
      * Add medication
      *
      * @param \AppBundle\Entity\MedicationResults $medication
+		 *
+		 * @see MedicationResults::class
      *
-     * @return UserDay
+     * @return self
      */
     public function addMedication(\AppBundle\Entity\MedicationResults $medication)
     {
@@ -198,17 +260,23 @@ class UserDay
      * Remove medication
      *
      * @param \AppBundle\Entity\MedicationResults $medication
+		 *
+		 * @see MedicationResults::class
+		 *
+		 * @return self
      */
     public function removeMedication(\AppBundle\Entity\MedicationResults $medication)
     {
         $medication->setUserDay(null);
         $this->medications->removeElement($medication);
+
+				return $this;
     }
 
     /**
      * Remove all medications
      *
-     * @return UserDay
+     * @return self
      */
     public function removeMedications()
     {

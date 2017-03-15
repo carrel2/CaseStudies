@@ -36,9 +36,9 @@ class User implements UserInterface, \Serializable
 	 *
 	 * @var array
 	 *
-	 * @ORM\Column(type="array")
+	 * @ORM\Column(type="string")
 	 */
-	private $roles;
+	private $role;
 
 	/**
 	 * The username of the User
@@ -132,7 +132,7 @@ class User implements UserInterface, \Serializable
 	{
 		$this->days = new ArrayCollection();
 		$this->isActive = false;
-		$this->roles[] = 'ROLE_USER';
+		$this->role = 'ROLE_USER';
 		// may not be needed, see section on salt below
 		// $this->salt = md5(uniqid(null, true));
 	}
@@ -159,25 +159,32 @@ class User implements UserInterface, \Serializable
 		$this->plainPassword = $password;
 	}
 
+	/**
+	 * Get role
+	 *
+	 * @return string
+	 */
+	 public function getRole() {
+		 return $this->role;
+	 }
+
+	/**
+	 * Set role
+	 *
+	 * @param string $role
+	 *
+	 * @return self
+	 */
+	public function setRole($role)
+	{
+			$this->role = $role;
+
+			return $this;
+	}
+
 	public function getRoles()
 	{
-		return $this->roles;
-	}
-
-	public function addRole($role)
-	{
-		$this->roles[] = $role;
-
-		return $this;
-	}
-
-	public function removeRole($role)
-	{
-		$i = array_search($role, $this->roles);
-		unset($this->roles[$i]);
-		$this->roles = array_values($this->roles);
-
-		return $this;
+		return array($this->role);
 	}
 
 	public function eraseCredentials()
@@ -351,20 +358,6 @@ class User implements UserInterface, \Serializable
 	{
 		return $this->caseStudy;
 	}
-
-    /**
-     * Set roles
-     *
-     * @param array $roles
-     *
-     * @return self
-     */
-    public function setRoles($roles)
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
 
     /**
      * Add day

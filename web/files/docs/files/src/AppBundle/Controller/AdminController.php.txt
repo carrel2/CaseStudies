@@ -12,10 +12,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use AppBundle\Form\AdminUserType;
+use AppBundle\Form\UserType;
 use AppBundle\Entity\CaseStudy;
 use AppBundle\Form\AdminType;
 use AppBundle\Form\CaseType;
+use AppBundle\Entity\User;
 
 /**
  * AdminController class
@@ -31,14 +34,14 @@ class AdminController extends Controller
 	 *
 	 * Default admin action. Renders admin.html.twig template
 	 *
-	 * @todo fix security role
+	 * @todo look into consolidating admin.html.twig and adminUser.html.twig into one template
 	 *
 	 * @param Request $r Request object
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response Render **admin.html.twig**
 	 *
 	 * @Route("/admin", name="admin")
-	 * @Security("has_role('ROLE_USER')")
+	 * @Security("has_role('ROLE_ADMIN')")
 	 */
 	public function adminAction(Request $r)
 	{
@@ -59,6 +62,7 @@ class AdminController extends Controller
 	 * @return \Symfony\Component\HttpFoundation\Response Render **editCase.html.twig**
 	 *
 	 * @Route("/admin/edit", name="editCase")
+	 * @Security("has_role('ROLE_ADMIN')")
 	 */
 	public function editCaseAction(Request $r)
 	{
@@ -85,6 +89,7 @@ class AdminController extends Controller
 	 * @return \Symfony\Component\HttpFoundation\Response Render **createCase.html.twig**. On submission, redirect to **AdminController::adminAction()**
 	 *
 	 * @Route("/admin/create", name="createCase")
+	 * @Security("has_role('ROLE_ADMIN')")
 	 */
 	public function createCaseAction(Request $r)
 	{
@@ -122,6 +127,7 @@ class AdminController extends Controller
 	 * @return \Symfony\Component\HttpFoundation\Response Render **caseInfo.html.twig**. On submission, redirect to **AdminController::editCaseAction()**
 	 *
 	 * @Route("/getCase/{id}", name="caseInfo")
+	 * @Security("has_role('ROLE_ADMIN')")
 	 */
 	public function getCaseAction(Request $r, CaseStudy $case)
 	{
@@ -162,33 +168,39 @@ class AdminController extends Controller
 	 *
 	 * Allows admin User to edit User objects
 	 *
-	 * @todo redo code for effeciency and ease of use on User end
-	 *
 	 * @see User::class
 	 *
 	 * @param Request $r Request object
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response Render **adminUser.html.twig**
 	 *
-	 * @Route("/admin/users", name="adminUsers")
+	 * @Route("/admin/users", name="manageUsers")
+	 * @Security("has_role('ROLE_ADMIN')")
 	 */
 	public function adminUserAction(Request $r)
 	{
 		$em = $this->getDoctrine()->getManager();
-		$users = $em->getRepository('AppBundle:User')->findAll();
 
-		$builder = $this->createFormBuilder();
+		$form = $this->createForm( AdminUserType::class );
 
-		foreach($users as $user) {
-			$builder->add('id' . $user->getId(), HiddenType::class, array(
-				'data' => $user->getId()));
+		$form->handleRequest($r);
+
+		if( $form->isSubmitted() && $form->isValid() ) {
+			$user = $form->getData()['users'];
+
+			if( $form->get('edit')->isClicked() ) {
+				return $this->redirectToRoute('updateUser', array(
+					'id' => $user->getId(),
+				));
+			} else if( $form->get('delete')->isClicked() ) {
+				$em->remove($user);
+
+				$em->flush();
+			}
 		}
-
-		$form = $builder->getForm();
 
 		return $this->render('adminUser.html.twig', array(
 			'form' => $form->createView(),
-			'users' => $users,
 		));
 	}
 
@@ -197,20 +209,45 @@ class AdminController extends Controller
 	 *
 	 * Edit selected User object
 	 *
-	 * @todo see if this is necessary after redoing adminUserAction
-	 *
 	 * @param Request $r Request object
 	 * @param User $user
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response Render **user.html.twig**
 	 *
-	 * @Route("/admin/users/edit/{id}", name="editUser")
+	 * @Route("/admin/users/update/{id}", name="updateUser")
+	 * @Security("has_role('ROLE_ADMIN')")
 	 */
 	public function editUserAction(Request $r, User $user)
 	{
 		$form = $this->createForm( UserType::class, $user );
 
-		return $this->render('user.html.twig', array(
+		$form->handleRequest($r);
+
+		if( $form->isSubmitted() && $form->isValid() ) {
+			$em = $this->getDoctrine()->getManager();
+			$user = $form->getData();
+
+			$plainPassword = $user->getPlainPassword();
+
+			if( strlen($plainPassword) > 6 )
+			{
+				$password = $this->get('security.password_encoder')
+					->encodePassword($user, $plainPassword);
+				$user->setPassword($password);
+			}
+
+			try {
+				$em->flush();
+
+				$this->addFlash('notice', 'Changes saved');
+			} catch( \Doctrine\ORM\ORMException $e ) {
+				$this->addFlash('error', 'Something went wrong, changes were not saved!');
+			}
+
+			return $this->redirectToRoute('manageUsers');
+		}
+
+		return $this->render('adminUser.html.twig', array(
 			'form' => $form->createView(),
 		));
 	}

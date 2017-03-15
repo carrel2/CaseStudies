@@ -9,6 +9,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
+ * User class
+ *
+ * Contains User information
+ *
  * @ORM\Entity
  * @ORM\Table(name="app_users")
  * @UniqueEntity(fields="email", message="Email already taken")
@@ -17,6 +21,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface, \Serializable
 {
 	/**
+	 * Auto-generated unique id
+	 *
+	 * @var integer
+	 *
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="AUTO")
@@ -24,27 +32,47 @@ class User implements UserInterface, \Serializable
 	private $id;
 
 	/**
-	 * @ORM\Column(type="array")
+	 * Array of roles granted to the User
+	 *
+	 * @var array
+	 *
+	 * @ORM\Column(type="string")
 	 */
-	private $roles;
+	private $role;
 
 	/**
+	 * The username of the User
+	 *
+	 * @var string
+	 *
 	 * @ORM\Column(type="string", length=25, unique=true)
 	 * @Assert\NotBlank()
 	 */
 	private $username;
 
 	/**
+	 * The plain password submitted from login and register forms
+	 *
+	 * @var string
+	 *
 	 * @Assert\Length(max=4096)
 	 */
 	private $plainPassword;
 
 	/**
+	 * The encoded password for the User
+	 *
+	 * @var string
+	 *
 	 * @ORM\Column(type="string", length=64)
 	 */
 	private $password;
 
 	/**
+	 * Email for the User
+	 *
+	 * @var string
+	 *
 	 * @ORM\Column(type="string", length=60, unique=true)
 	 * @Assert\NotBlank()
 	 * @Assert\Email()
@@ -52,6 +80,10 @@ class User implements UserInterface, \Serializable
 	private $email;
 
 	/**
+	 * UIN for the User
+	 *
+	 * @var string
+	 *
 	 * @ORM\Column(type="string", length=9, unique=true)
 	 * @Assert\NotBlank()
 	 * @Assert\Length(min=9, max=9)
@@ -59,25 +91,48 @@ class User implements UserInterface, \Serializable
 	private $uin;
 
 	/**
+	 * Associated CaseStudy
+	 *
+	 * @var CaseStudy
+	 *
+	 * @see CaseStudy::class
+	 *
 	 * @ORM\ManyToOne(targetEntity="CaseStudy", inversedBy="users", cascade={"persist"})
 	 */
 	private $caseStudy;
 
 	/**
+	 * ArrayCollection of UserDay objects
+	 *
+	 * @var ArrayCollection
+	 *
+	 * @see ArrayCollection::class
+	 *
 	 * @ORM\OneToMany(targetEntity="UserDay", mappedBy="user", cascade={"all"}, orphanRemoval=true)
 	 */
 	private $days;
 
 	/**
+	 * Boolean isActive
+	 *
+	 * @var Boolean
+	 *
 	 * @ORM\Column(name="is_active", type="boolean")
 	 */
 	private $isActive;
 
+	/**
+	 * Constructor function
+	 *
+	 * Initializes $days as ArrayCollection, gives all User objects ROLE_USER by default
+	 *
+	 * @see ArrayCollection::class
+	 */
 	public function __construct()
 	{
 		$this->days = new ArrayCollection();
-		$this->isActive = true;
-		$this->roles[] = 'ROLE_USER';
+		$this->isActive = false;
+		$this->roles = 'ROLE_USER';
 		// may not be needed, see section on salt below
 		// $this->salt = md5(uniqid(null, true));
 	}
@@ -104,25 +159,32 @@ class User implements UserInterface, \Serializable
 		$this->plainPassword = $password;
 	}
 
+	/**
+	 * Get role
+	 *
+	 * @return string
+	 */
+	 public function getRole() {
+		 return $this->role;
+	 }
+
+	/**
+	 * Set role
+	 *
+	 * @param string $role
+	 *
+	 * @return self
+	 */
+	public function setRole($role)
+	{
+			$this->role = $role;
+
+			return $this;
+	}
+
 	public function getRoles()
 	{
-		return $this->roles;
-	}
-
-	public function addRole($role)
-	{
-		$this->roles[] = $role;
-
-		return $this;
-	}
-
-	public function removeRole($role)
-	{
-		$i = array_search($role, $this->roles);
-		unset($this->roles[$i]);
-		$this->roles = array_values($this->roles);
-
-		return $this;
+		return array($this->role);
 	}
 
 	public function eraseCredentials()
@@ -233,9 +295,11 @@ class User implements UserInterface, \Serializable
 	}
 
 	/**
-	 * Get active day
+	 * Get active UserDay
 	 *
-	 * @return \AppBundle\Entity\Day $day
+	 * @see UserDay::class
+	 *
+	 * @return \AppBundle\Entity\UserDay
 	 */
 	public function getCurrentDay()
 	{
@@ -247,7 +311,7 @@ class User implements UserInterface, \Serializable
 	 *
 	 * @param boolean $isActive
 	 *
-	 * @return User
+	 * @return self
 	 */
 	public function setIsActive($isActive)
 	{
@@ -271,17 +335,22 @@ class User implements UserInterface, \Serializable
 	 *
 	 * @param \AppBundle\Entity\CaseStudy $caseStudy
 	 *
-	 * @return User
+	 * @see CaseStudy::class
+	 *
+	 * @return self
 	 */
 	public function setCaseStudy(\AppBundle\Entity\CaseStudy $caseStudy = null)
 	{
 		$this->caseStudy = $caseStudy;
+		$this->isActive = !$caseStudy == null;
 
 		return $this;
 	}
 
 	/**
 	 * Get caseStudy
+	 *
+	 * @see CaseStudy::class
 	 *
 	 * @return \AppBundle\Entity\CaseStudy
 	 */
@@ -291,25 +360,13 @@ class User implements UserInterface, \Serializable
 	}
 
     /**
-     * Set roles
-     *
-     * @param array $roles
-     *
-     * @return User
-     */
-    public function setRoles($roles)
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
-
-    /**
      * Add day
      *
      * @param \AppBundle\Entity\UserDay $day
+		 *
+		 * @see UserDay::class
      *
-     * @return User
+     * @return self
      */
     public function addDay(\AppBundle\Entity\UserDay $day)
     {
@@ -323,8 +380,10 @@ class User implements UserInterface, \Serializable
      * Remove day
      *
      * @param \AppBundle\Entity\UserDay $day
+		 *
+		 * @see UserDay::class
      *
-     * @return User
+     * @return self
      */
     public function removeDay(\AppBundle\Entity\UserDay $day)
     {
@@ -336,8 +395,6 @@ class User implements UserInterface, \Serializable
 
     /**
      * Remove all days
-     *
-     * @return User
      */
     public function removeDays()
     {

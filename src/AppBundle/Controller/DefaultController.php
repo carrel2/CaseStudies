@@ -110,4 +110,36 @@ class DefaultController extends Controller
 	{
 		return new Response( $case->getDescription() );
 	}
+
+	/**
+	 * resetAction function
+	 *
+	 * Function to remove the association between the current User and CaseStudy
+	 *
+	 * @see User::class
+	 * @see CaseStudy::class
+	 * @see HotSpotController::showPageAction()
+	 *
+	 * @param Request $r Request object
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response Redirect to **HotSpotController::showPageAction()**
+	 *
+	 * @Route("/reset", name="reset")
+	 * @Security("has_role('ROLE_USER')")
+	 */
+	public function resetAction(Request $r)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$user = $this->getUser();
+
+		$user->setCaseStudy(null);
+		$user->removeDays();
+
+		$r->getSession()->remove('finished');
+		$r->getSession()->getFlashBag()->clear();
+
+		$em->flush();
+
+		return $this->redirectToRoute('default');
+	}
 }
