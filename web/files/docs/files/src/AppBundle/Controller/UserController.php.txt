@@ -148,5 +148,29 @@ class UserController extends Controller
 			'form' => $form->createView(),
 		));
 	}
+
+	/**
+	 * resultsAction function
+	 *
+	 * Retrieves all Results objects associated with the current User
+	 *
+	 * @see Results::class
+	 * @see User::class
+	 *
+	 * @param Request $r
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response Render **results.html.twig**
+	 *
+	 * @Route("/user/results", name="results")
+	 */
+	public function resultsAction(Request $r)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$results = $em->getRepository('AppBundle:Results')->findByUser($this->getUser());
+
+		return $this->render('results.html.twig', array(
+			'results' => $results,
+		));
+	}
 }
 

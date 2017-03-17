@@ -3,6 +3,7 @@ MedicationResults
 Hotspots
 UserDays
 Days
+Results
 app_users
 Tests
 Medications

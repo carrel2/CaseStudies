@@ -8,6 +8,7 @@ namespace AppBundle\Controller;
 use AppBundle\Form\DefaultType;
 use AppBundle\Entity\CaseStudy;
 use AppBundle\Entity\UserDay;
+use AppBundle\Entity\Results;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -129,15 +130,58 @@ class DefaultController extends Controller
 	 */
 	public function resetAction(Request $r)
 	{
+		$results = new Results();
+
 		$em = $this->getDoctrine()->getManager();
+		$session = $r->getSession();
 		$user = $this->getUser();
+
+		$user->addResult($results);
+		$user->getCaseStudy()->addResult($results);
+
+		foreach( $session->all() as $key => $attr ) {
+			if( $attr === null ) {
+				$session->remove($key);
+			}
+		}
+
+		$em->persist($results);
+		$em->flush();
+
+		foreach($user->getDays() as $day) {
+			$id = $day->getId();
+
+			$results->addUserDay($day);
+			$session->set($results->getId() . '-test-results-' . $id, $session->getFlashBag()->get('empty-test-results-' . $id));
+			$session->set($results->getId() . '-medication-results-' . $id, $session->getFlashBag()->get('empty-medication-results-' . $id));
+		}
 
 		$user->setCaseStudy(null);
 		$user->removeDays();
 
-		$r->getSession()->remove('finished');
-		$r->getSession()->getFlashBag()->clear();
+		$session->remove('finished');
+		$session->getFlashBag()->clear();
 
+		$em->flush();
+
+		return $this->redirectToRoute('default');
+	}
+
+	/**
+	 * @Route("/removeResult/{id}")
+	 */
+	public function removeResultsAction(Request $r, Results $result)
+	{
+		$em = $this->getDoctrine()->getManager();
+
+		foreach($result->getUserDays() as $day) {
+			$r->getSession()->remove($result->getId() . '-test-results-' . $day->getId());
+			$r->getSession()->remove($result->getId() . '-medication-results-' . $day->getId());
+		}
+
+		$result->removeDays();
+
+		$em->remove($result);
 		$em->flush();
 
 		return $this->redirectToRoute('default');

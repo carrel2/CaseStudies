@@ -2,6 +2,7 @@ Cases
 Medications
 Tests
 app_users
+Results
 Days
 UserDays
 Hotspots

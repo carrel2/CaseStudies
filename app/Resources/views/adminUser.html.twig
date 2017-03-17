@@ -8,6 +8,23 @@
 
 {% block body %}
 	{{ form_start(form) }}
-	{{ form_widget(form) }}
+
+		{% if form.vars.name == "user" %}
+			{{ form_row(form.email) }}
+			{{ form_row(form.username) }}
+			{{ form_row(form.uin) }}
+			{{ form_row(form.plainPassword) }}
+			{{ form_row(form.role) }}
+
+{#		{% for result in results %}
+				<input type="checkbox" form="{{ form.vars.name }}" value="{{ result.id }}">Result #{{ result.id }}</input>
+			{% endfor %}
+#}
+
+			{{ form_rest(form) }}
+		{% else %}
+			{{ form_widget(form) }}
+		{% endif %}
+
 	{{ form_end(form) }}
 {% endblock %}

@@ -46,7 +46,6 @@ class DayController extends Controller
 
 		return $this->render('review.html.twig', array(
 			'user' => $user,
-			'days' => $days,
 			'finished' => $finished,
 		));
 	}
@@ -61,6 +60,7 @@ class DayController extends Controller
 	 * @todo update logic to be more dynamic, extend past actual CaseStudy
 	 * @todo add diagnoses input to submit when finished
 	 * @todo add email functionality
+	 * @todo save Results object
 	 *
 	 * @param Request $r Request object
 	 *

@@ -25,6 +25,8 @@ use AppBundle\Entity\User;
  *
  * AdminController class extends \Symfony\Bundle\FrameworkBundle\Controller\Controller
  *
+ * @todo create forms to add tests and medications
+ *
  * @see http://api.symfony.com/3.2/Symfony/Bundle/FrameworkBundle/Controller/Controller.html
  */
 class AdminController extends Controller
@@ -164,7 +166,7 @@ class AdminController extends Controller
 	}
 
 	/**
-	 * adminUserAction function
+	 * manageUsersAction function
 	 *
 	 * Allows admin User to edit User objects
 	 *
@@ -177,7 +179,7 @@ class AdminController extends Controller
 	 * @Route("/admin/users", name="manageUsers")
 	 * @Security("has_role('ROLE_ADMIN')")
 	 */
-	public function adminUserAction(Request $r)
+	public function manageUsersAction(Request $r)
 	{
 		$em = $this->getDoctrine()->getManager();
 
@@ -194,8 +196,10 @@ class AdminController extends Controller
 				));
 			} else if( $form->get('delete')->isClicked() ) {
 				$em->remove($user);
-
+				$this->addFlash('notice', 'User deleted: ' . $user->getUsername());
 				$em->flush();
+
+				return $this->redirectToRoute('manageUsers');
 			}
 		}
 
@@ -239,7 +243,7 @@ class AdminController extends Controller
 			try {
 				$em->flush();
 
-				$this->addFlash('notice', 'Changes saved');
+				$this->addFlash('notice', 'Changes saved for ' . $user->getUsername() );
 			} catch( \Doctrine\ORM\ORMException $e ) {
 				$this->addFlash('error', 'Something went wrong, changes were not saved!');
 			}

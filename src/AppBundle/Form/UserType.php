@@ -14,6 +14,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class UserType extends AbstractType
@@ -28,7 +30,9 @@ class UserType extends AbstractType
 	{
 		$builder
 			->add('email', EmailType::class)
-			->add('username', TextType::class)
+			->add('username', TextType::class, array(
+				'label' => 'Name',
+			))
 			->add('uin', TextType::class)
 			->add('plainPassword', RepeatedType::class, array(
 				'type' => PasswordType::class,
