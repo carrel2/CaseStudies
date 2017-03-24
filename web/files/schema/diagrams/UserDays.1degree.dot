@@ -1,4 +1,4 @@
-// dot 2.38.0 on Linux 4.4.0-66-generic
+// dot 2.38.0 on Linux 4.4.0-67-generic
 // SchemaSpy rev 590
 digraph "oneDegreeRelationshipsDiagram" {
   graph [
@@ -19,11 +19,9 @@ digraph "oneDegreeRelationshipsDiagram" {
   edge [
     arrowsize="0.8"
   ];
-  "Hotspots":"user_day_id":w -> "UserDays":"id.type":e [arrowhead=none dir=back arrowtail=crowodot];
+  "HotSpotsInfo":"user_day_id":w -> "UserDays":"id.type":e [arrowhead=none dir=back arrowtail=crowodot];
   "MedicationResults":"user_day_id":w -> "UserDays":"id.type":e [arrowhead=none dir=back arrowtail=crowodot];
-  "Results":"user_id":w -> "app_users":"id":e [arrowhead=none dir=back arrowtail=crowodot];
   "TestResults":"user_day_id":w -> "UserDays":"id.type":e [arrowhead=none dir=back arrowtail=crowodot];
-  "UserDays":"results_id":w -> "Results":"id":e [arrowhead=none dir=back arrowtail=crowodot];
   "UserDays":"user_id":w -> "app_users":"id":e [arrowhead=none dir=back arrowtail=crowodot];
   "app_users" [
     label=<
@@ -42,19 +40,19 @@ digraph "oneDegreeRelationshipsDiagram" {
     URL="app_users.html"
     tooltip="app_users"
   ];
-  "Hotspots" [
+  "HotSpotsInfo" [
     label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
-      <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">Hotspots</TD></TR>
+      <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">HotSpotsInfo</TD></TR>
       <TR><TD PORT="id" COLSPAN="3" BGCOLOR="#bed1b8" ALIGN="LEFT">id</TD></TR>
       <TR><TD PORT="day_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">day_id</TD></TR>
       <TR><TD PORT="user_day_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">user_day_id</TD></TR>
-      <TR><TD PORT="name" COLSPAN="3" ALIGN="LEFT">name</TD></TR>
+      <TR><TD PORT="hotspot_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">hotspot_id</TD></TR>
       <TR><TD PORT="info" COLSPAN="3" ALIGN="LEFT">info</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">4 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 3</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">3 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
-    URL="Hotspots.html"
-    tooltip="Hotspots"
+    URL="HotSpotsInfo.html"
+    tooltip="HotSpotsInfo"
   ];
   "MedicationResults" [
     label=<
@@ -69,18 +67,6 @@ digraph "oneDegreeRelationshipsDiagram" {
     </TABLE>>
     URL="MedicationResults.html"
     tooltip="MedicationResults"
-  ];
-  "Results" [
-    label=<
-    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
-      <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">Results</TD></TR>
-      <TR><TD PORT="id" COLSPAN="3" BGCOLOR="#bed1b8" ALIGN="LEFT">id</TD></TR>
-      <TR><TD PORT="user_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">user_id</TD></TR>
-      <TR><TD PORT="case_study_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">case_study_id</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1 &gt;</TD></TR>
-    </TABLE>>
-    URL="Results.html"
-    tooltip="Results"
   ];
   "TestResults" [
     label=<
@@ -102,8 +88,7 @@ digraph "oneDegreeRelationshipsDiagram" {
       <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">UserDays</TD></TR>
       <TR><TD PORT="id" COLSPAN="2" BGCOLOR="#bed1b8" ALIGN="LEFT">id</TD><TD PORT="id.type" ALIGN="LEFT">int[10]</TD></TR>
       <TR><TD PORT="user_id" COLSPAN="2" BGCOLOR="#f4f7da" ALIGN="LEFT">user_id</TD><TD PORT="user_id.type" ALIGN="LEFT">int[10]</TD></TR>
-      <TR><TD PORT="results_id" COLSPAN="2" BGCOLOR="#f4f7da" ALIGN="LEFT">results_id</TD><TD PORT="results_id.type" ALIGN="LEFT">int[10]</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">3 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">2 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">3 &gt;</TD></TR>
     </TABLE>>
     URL="UserDays.html"
     tooltip="UserDays"

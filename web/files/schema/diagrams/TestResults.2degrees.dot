@@ -1,4 +1,4 @@
-// dot 2.38.0 on Linux 4.4.0-66-generic
+// dot 2.38.0 on Linux 4.4.0-67-generic
 // SchemaSpy rev 590
 digraph "twoDegreesRelationshipsDiagram" {
   graph [
@@ -21,16 +21,13 @@ digraph "twoDegreesRelationshipsDiagram" {
   ];
   "app_users":"elipses":w -> "Cases":"elipses":e [arrowhead=none dir=back arrowtail=crowodot];
   "Days":"case_study_id":w -> "Cases":"elipses":e [arrowhead=none dir=back arrowtail=crowodot];
-  "Hotspots":"elipses":w -> "Days":"id":e [arrowhead=none dir=back arrowtail=crowodot];
-  "Hotspots":"elipses":w -> "UserDays":"id":e [arrowhead=none dir=back arrowtail=crowodot];
+  "HotSpotsInfo":"elipses":w -> "Days":"id":e [arrowhead=none dir=back arrowtail=crowodot];
+  "HotSpotsInfo":"elipses":w -> "UserDays":"id":e [arrowhead=none dir=back arrowtail=crowodot];
   "MedicationResults":"elipses":w -> "Days":"id":e [arrowhead=none dir=back arrowtail=crowodot];
   "MedicationResults":"elipses":w -> "UserDays":"id":e [arrowhead=none dir=back arrowtail=crowodot];
-  "Results":"elipses":w -> "Cases":"elipses":e [arrowhead=none dir=back arrowtail=crowodot];
-  "Results":"elipses":w -> "app_users":"elipses":e [arrowhead=none dir=back arrowtail=crowodot];
   "TestResults":"day_id":w -> "Days":"id":e [arrowhead=none dir=back arrowtail=crowodot];
   "TestResults":"test_id":w -> "Tests":"id":e [arrowhead=none dir=back arrowtail=crowodot];
   "TestResults":"user_day_id":w -> "UserDays":"id":e [arrowhead=none dir=back arrowtail=crowodot];
-  "UserDays":"results_id":w -> "Results":"elipses":e [arrowhead=none dir=back arrowtail=crowodot];
   "UserDays":"user_id":w -> "app_users":"elipses":e [arrowhead=none dir=back arrowtail=crowodot];
   "app_users" [
     label=<
@@ -47,7 +44,7 @@ digraph "twoDegreesRelationshipsDiagram" {
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
       <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">Cases</TD></TR>
       <TR><TD PORT="elipses" COLSPAN="3" ALIGN="LEFT">...</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1 row</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">3 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1 row</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">2 &gt;</TD></TR>
     </TABLE>>
     URL="Cases.html"
     tooltip="Cases"
@@ -63,15 +60,15 @@ digraph "twoDegreesRelationshipsDiagram" {
     URL="Days.html"
     tooltip="Days"
   ];
-  "Hotspots" [
+  "HotSpotsInfo" [
     label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
-      <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">Hotspots</TD></TR>
+      <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">HotSpotsInfo</TD></TR>
       <TR><TD PORT="elipses" COLSPAN="3" ALIGN="LEFT">...</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">4 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 3</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">3 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
-    URL="Hotspots.html"
-    tooltip="Hotspots"
+    URL="HotSpotsInfo.html"
+    tooltip="HotSpotsInfo"
   ];
   "MedicationResults" [
     label=<
@@ -82,16 +79,6 @@ digraph "twoDegreesRelationshipsDiagram" {
     </TABLE>>
     URL="MedicationResults.html"
     tooltip="MedicationResults"
-  ];
-  "Results" [
-    label=<
-    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
-      <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">Results</TD></TR>
-      <TR><TD PORT="elipses" COLSPAN="3" ALIGN="LEFT">...</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1 &gt;</TD></TR>
-    </TABLE>>
-    URL="Results.html"
-    tooltip="Results"
   ];
   "TestResults" [
     label=<
@@ -125,8 +112,7 @@ digraph "twoDegreesRelationshipsDiagram" {
       <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">UserDays</TD></TR>
       <TR><TD PORT="id" COLSPAN="3" BGCOLOR="#bed1b8" ALIGN="LEFT">id</TD></TR>
       <TR><TD PORT="user_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">user_id</TD></TR>
-      <TR><TD PORT="results_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">results_id</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">3 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">2 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">3 &gt;</TD></TR>
     </TABLE>>
     URL="UserDays.html"
     tooltip="UserDays"

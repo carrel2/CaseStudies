@@ -3,12 +3,13 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
 * Results class
 *
 * Contains results for a User
+*
+* @todo implement diagnoses
 *
 * @ORM\Entity
 * @ORM\Table(name="Results")
@@ -38,130 +39,120 @@ class Results
   private $user;
 
   /**
-  * The UserDays associated with the Results
-  *
-  * @var ArrayCollection
-  *
-  * @see UserDay::class
-  * @see ArrayCollection::class
-  *
-  * @ORM\OneToMany(targetEntity="UserDay", mappedBy="results", cascade={"all"})
-  */
-  private $userDays;
-
-  /**
-  * The CaseStudy associated with the Results
-  *
-  * @var CaseStudy
+  * The name of the CaseStudy associated with the Results object
   *
   * @see CaseStudy::class
   *
-  * @ORM\ManyToOne(targetEntity="CaseStudy", inversedBy="results")
+  * @var string
+  *
+  * @ORM\Column(type="text")
   */
   private $caseStudy;
 
   /**
-  * Constructor function
+  * An array that holds all the results for the associated User
   *
-  * Initializes $userDays as ArrayCollection
+  * @see User::class
   *
-  * @see ArrayCollection::class
+  * @var string
+  *
+  * @ORM\Column(type="array")
   */
-  public function __construct() {
-    $this->userDays = new ArrayCollection();
-  }
+  private $results;
 
-  /**
-  * Get id
-  *
-  * @return integer
-  */
-  public function getId()
-  {
-    return $this->id;
-  }
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
-  /**
-  * Set user
-  *
-  * @param \AppBundle\Entity\User $user
-  *
-  * @return Results
-  */
-  public function setUser(\AppBundle\Entity\User $user = null)
-  {
-    $this->user = $user;
+    /**
+     * Set results
+     *
+     * @param array $results
+     *
+     * @return Results
+     */
+    public function setResults($results)
+    {
+        $this->results = $results;
 
-    return $this;
-  }
+        return $this;
+    }
 
-  /**
-  * Get user
-  *
-  * @return \AppBundle\Entity\User
-  */
-  public function getUser()
-  {
-    return $this->user;
-  }
+    /**
+     * Get results
+     *
+     * @return array
+     */
+    public function getResults()
+    {
+        return $this->results;
+    }
 
-  /**
-  * Add userDay
-  *
-  * @param \AppBundle\Entity\UserDay $userDay
-  *
-  * @return Results
-  */
-  public function addUserDay(\AppBundle\Entity\UserDay $userDay)
-  {
-    $userDay->setResults($this);
-    $this->userDays[] = $userDay;
+    /**
+     * Add an element to $results
+     *
+     * @param object $element
+     *
+     * @return self
+     */
+    public function add($element)
+    {
+      $this->results[] = $element;
 
-    return $this;
-  }
+      return $this;
+    }
 
-  /**
-  * Remove userDay
-  *
-  * @param \AppBundle\Entity\UserDay $userDay
-  */
-  public function removeUserDay(\AppBundle\Entity\UserDay $userDay)
-  {
-    $userDay->setResults(null);
-    $this->userDays->removeElement($userDay);
-  }
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Results
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
 
-  /**
-  * Get userDays
-  *
-  * @return \Doctrine\Common\Collections\Collection
-  */
-  public function getUserDays()
-  {
-    return $this->userDays;
-  }
+        return $this;
+    }
 
-  /**
-  * Set caseStudy
-  *
-  * @param \AppBundle\Entity\CaseStudy $caseStudy
-  *
-  * @return Results
-  */
-  public function setCaseStudy(\AppBundle\Entity\CaseStudy $caseStudy = null)
-  {
-    $this->caseStudy = $caseStudy;
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 
-    return $this;
-  }
+    /**
+     * Set caseStudy
+     *
+     * @param string $caseStudy
+     *
+     * @return Results
+     */
+    public function setCaseStudy($caseStudy)
+    {
+        $this->caseStudy = $caseStudy;
 
-  /**
-  * Get caseStudy
-  *
-  * @return \AppBundle\Entity\CaseStudy
-  */
-  public function getCaseStudy()
-  {
-    return $this->caseStudy;
-  }
+        return $this;
+    }
+
+    /**
+     * Get caseStudy
+     *
+     * @return string
+     */
+    public function getCaseStudy()
+    {
+        return $this->caseStudy;
+    }
 }

@@ -43,16 +43,16 @@ class Day
 	private $caseStudy;
 
 	/**
-	 * ArrayCollection of HotSpots objects
+	 * ArrayCollection of HotSpotInfo objects
 	 *
 	 * @var ArrayCollection
 	 *
 	 * @see ArrayCollection::class
-	 * @see HotSpots::class
+	 * @see HotSpotsInfo::class
 	 *
-	 * @ORM\OneToMany(targetEntity="HotSpots", mappedBy="day", cascade={"persist", "remove"})
+	 * @ORM\OneToMany(targetEntity="HotSpotInfo", mappedBy="day", cascade={"all"})
 	 */
-	private $hotspots;
+	private $hotspotsInfo;
 
 	/**
 	 * ArrayCollection of TestResults objects
@@ -88,9 +88,26 @@ class Day
 	public function __construct()
 	{
 		$this->users = new ArrayCollection();
-		$this->hotspots = new ArrayCollection();
+		$this->hotspotsInfo = new ArrayCollection();
 		$this->tests = new ArrayCollection();
 		$this->medications = new ArrayCollection();
+	}
+
+	public function __toString()
+	{
+		$s = "";
+
+		foreach ($this->hotspotsInfo as $spot) {
+			$s .= sprintf("%s\n", $spot);
+		}
+		foreach ($this->tests as $result) {
+			$s .= sprintf("%s\n", $result);
+		}
+		foreach ($this->medications as $result) {
+			$s .= sprintf("%s\n", $result);
+		}
+
+		return $s;
 	}
 
 	/**
@@ -102,50 +119,6 @@ class Day
 	{
 		return $this->id;
 	}
-
-    /**
-     * Remove hotspot
-		 *
-		 * Removes $hotspot from $hotspots and removes association between $this and $hotspot
-     *
-     * @param \AppBundle\Entity\HotSpots $hotspot
-		 *
-		 * @return self
-     */
-    public function removeHotspot(\AppBundle\Entity\HotSpots $hotspot)
-    {
-        $hotspot->setDay(null);
-        $this->hotspots->removeElement($hotspot);
-
-				return $this;
-    }
-
-    /**
-     * Add hotspot
-		 *
-		 * Appends $hotpot to $hotspots and associates $this as Day for $hotspot
-     *
-     * @param \AppBundle\Entity\HotSpots $hotspot
-     *
-     * @return self
-     */
-    public function addHotspot(\AppBundle\Entity\HotSpots $hotspot)
-    {
-				$hotspot->setDay($this);
-        $this->hotspots[] = $hotspot;
-
-        return $this;
-    }
-
-    /**
-     * Get hotspots
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getHotspots()
-    {
-        return $this->hotspots;
-    }
 
     /**
      * Set caseStudy

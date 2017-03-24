@@ -42,16 +42,16 @@ class UserDay
 	private $user;
 
 	/**
-	* ArrayCollection of HotSpots
+	* ArrayCollection of HotSpotInfo
 	*
 	* @var ArrayCollection
 	*
 	* @see ArrayCollection::class
-	* @see HotSpots::class
+	* @see HotSpotInfo::class
 	*
-	* @ORM\OneToMany(targetEntity="HotSpots", mappedBy="userDay")
+	* @ORM\OneToMany(targetEntity="HotSpotInfo", mappedBy="userDay", cascade={"persist"})
 	*/
-	private $hotspots;
+	private $hotspotsInfo;
 
 	/**
 	* ArrayCollection of TestResults
@@ -78,28 +78,37 @@ class UserDay
 	private $medications;
 
 	/**
-	* The associated Results object
-	*
-	* @var Results
-	*
-	* @see Results::class
-	*
-	* @ORM\ManyToOne(targetEntity="Results", inversedBy="userDays")
-	*/
-	private $results;
-
-	/**
 	* Constructor function
 	*
-	* Initializes $hotspots, $tests, and $medications as ArrayCollection
+	* Initializes $hotspotInfo, $tests, and $medications as ArrayCollection
 	*
 	* @see ArrayCollection::class
 	*/
 	public function __construct()
 	{
-		$this->hotspots = new ArrayCollection();
+		$this->hotspotInfo = new ArrayCollection();
 		$this->tests = new ArrayCollection();
 		$this->medications = new ArrayCollection();
+	}
+
+	public function toArray()
+	{
+		$a = array("hotspotsInfo" => array(), "tests" => array(), "medications" => array());
+
+		foreach($this->hotspotsInfo as $spot)
+		{
+			$a["hotspotsInfo"][$spot->getHotspot()->getName()] = $spot->getInfo();
+		}
+		foreach ($this->tests as $test)
+		{
+			$a["tests"][$test->getTest()->getName()] = $test->getResults();
+		}
+		foreach ($this->medications as $medication)
+		{
+			$a["medications"][$medication->getMedication()->getName()] = $medication->getResults();
+		}
+
+		return $a;
 	}
 
 	/**
@@ -139,57 +148,57 @@ class UserDay
 	}
 
 	/**
-	* Add hotspot
+	* Add hotspotInfo
 	*
-	* @param \AppBundle\Entity\HotSpots $hotspot
+	* @param \AppBundle\Entity\HotSpotInfo $hotspotsInfo
 	*
-	* @see HotSpots::class
+	* @see HotSpotInfo::class
 	*
 	* @return self
 	*/
-	public function addHotspot(\AppBundle\Entity\HotSpots $hotspot)
+	public function addHotspotInfo(\AppBundle\Entity\HotSpotInfo $hotspotInfo)
 	{
-		$hotspot->setUserDay($this);
-		$this->hotspots[] = $hotspot;
+		$hotspotInfo->setUserDay($this);
+		$this->hotspotsInfo[] = $hotspotInfo;
 
 		return $this;
 	}
 
 	/**
-	* Remove hotspot
+	* Remove hotspotInfo
 	*
-	* @param \AppBundle\Entity\HotSpots $hotspot
+	* @param \AppBundle\Entity\HotSpotInfo $hotspotInfo
 	*
-	* @see HotSpots::class
+	* @see HotSpotInfo::class
 	*/
-	public function removeHotspot(\AppBundle\Entity\HotSpots $hotspot)
+	public function removeHotspotInfo(\AppBundle\Entity\HotSpotInfo $hotspotInfo)
 	{
-		$hotspot->setUserDay(null);
-		$this->hotspots->removeElement($hotspot);
+		$hotspotInfo->setUserDay(null);
+		$this->hotspotsInfo->removeElement($hotspotInfo);
 	}
 
 	/**
-	* Remove all hotspots
+	* Remove all hotspotsInfo
 	*
 	* @return self
 	*/
-	public function removeHotspots()
+	public function removeHotspotsInfo()
 	{
-		foreach( $this->hotspots as $hotspot ) {
-			$this->removeHotspot($hotspot);
+		foreach( $this->hotspotsInfo as $info ) {
+			$this->removeHotspotInfo($info);
 		}
 
 		return $this;
 	}
 
 	/**
-	* Get hotspots
+	* Get hotspotsInfo
 	*
 	* @return \Doctrine\Common\Collections\Collection
 	*/
-	public function getHotspots()
+	public function getHotspotsInfo()
 	{
-		return $this->hotspots;
+		return $this->hotspotsInfo;
 	}
 
 	/**
@@ -309,27 +318,17 @@ class UserDay
 	}
 
     /**
-     * Set results
+     * Add hotspotsInfo
      *
-     * @param \AppBundle\Entity\Results $results
+     * @param \AppBundle\Entity\HotSpotInfo $hotspotsInfo
      *
      * @return UserDay
      */
-    public function setResults(\AppBundle\Entity\Results $results = null)
+    public function addHotspotsInfo(\AppBundle\Entity\HotSpotInfo $hotspotsInfo)
     {
-        $this->results = $results;
+        $this->hotspotsInfo[] = $hotspotsInfo;
 
         return $this;
-    }
-
-    /**
-     * Get results
-     *
-     * @return \AppBundle\Entity\Results
-     */
-    public function getResults()
-    {
-        return $this->results;
     }
 }
 

@@ -6,6 +6,11 @@ em {
 	font-style: italic;
 }
 
+img#animal {
+	width: auto;
+	height: 600px;
+}
+
 .remove-button {
 	background: red;
 }

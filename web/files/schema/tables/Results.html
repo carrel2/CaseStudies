@@ -36,7 +36,7 @@
 <form name='options' action=''>
  <label for='showRelatedCols'><input type=checkbox id='showRelatedCols'>Related columns</label>
  <label for='showConstNames'><input type=checkbox id='showConstNames'>Constraints</label>
- <label for='showComments'><input type=checkbox id='showComments'>Comments</label>
+ <label for='showComments'><input type=checkbox checked id='showComments'>Comments</label>
  <label for='showLegend'><input type=checkbox checked id='showLegend'>Legend</label>
 </form>
 </td><td class='container' rowspan='2' align='right' valign='top'>
@@ -107,16 +107,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
  <td class='detail' align='center'></td>
  <td class='detail' align='center' title='Automatically updated by the database'>&nbsp;&radic;&nbsp;</td>
  <td class='detail'></td>
- <td class='detail'>
-  <table border='0' width='100%' cellspacing='0' cellpadding='0'>
-   <tr class='relative even' valign='top'>
-    <td class='relatedTable detail' title="UserDays.results_id refs Results.id via FK_14DD497F8A30AB9"><a href='UserDays.html'>UserDays</a><span class='relatedKey'>.results_id</span>
-    </td>
-    <td class='constraint detail'>FK_14DD497F8A30AB9<span title='Restrict delete:
- Parent cannot be deleted if children exist'>&nbsp;R</span></td>
-   </tr>
-  </table>
-</td>
+ <td class='detail'></td>
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
@@ -141,27 +132,29 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
  <td class='comment detail'></td>
 </tr>
 <tr class='even'>
- <td class='indexedColumn' title='Indexed'>case_study_id</td>
- <td class='detail'>int</td>
- <td class='detail' align='right'>10</td>
- <td class='detail' align='center' title='nullable'>&nbsp;&radic;&nbsp;</td>
+ <td class='detail'>case_study</td>
+ <td class='detail'>longtext</td>
+ <td class='detail' align='right'>2147483647</td>
  <td class='detail' align='center'></td>
- <td class='detail' align='right'>null</td>
+ <td class='detail' align='center'></td>
  <td class='detail'></td>
- <td class='detail'>
-  <table border='0' width='100%' cellspacing='0' cellpadding='0'>
-   <tr class='relative even' valign='top'>
-    <td class='relatedTable detail' title="Results.case_study_id refs Cases.id via FK_501EDD8870CD7994"><a href='Cases.html'>Cases</a><span class='relatedKey'>.id</span>
-    </td>
-    <td class='constraint detail'>FK_501EDD8870CD7994<span title='Restrict delete:
- Parent cannot be deleted if children exist'>&nbsp;R</span></td>
-   </tr>
-  </table>
- </td>
+ <td class='detail'></td>
+ <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
+<tr class='odd'>
+ <td class='detail'>results</td>
+ <td class='detail'>longtext</td>
+ <td class='detail' align='right'>2147483647</td>
+ <td class='detail' align='center'></td>
+ <td class='detail' align='center'></td>
+ <td class='detail'></td>
+ <td class='detail'></td>
+ <td class='detail'> </td>
+ <td class='comment detail'>(DC2Type:array)</td>
+</tr>
 </table>
-<p title='3 columns'>Table contained 0 rows at Thu Mar 16 15:40 CDT 2017<p/>
+<p title='4 columns'>Table contained 0 rows at Fri Mar 24 15:20 CDT 2017<p/>
 </td></tr></table>
 <div class='indent'>
 <b>Indexes:</b>
@@ -182,12 +175,6 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
   <td class='constraint' style='text-align:left;'>PRIMARY</td>
  </tr>
  <tr>
-  <td class='indexedColumn'>case_study_id</td>
-  <td class='detail'>Performance</td>
-  <td class='detail' style='text-align:left;'><span title='Ascending'>Asc</span></td>
-  <td class='constraint' style='text-align:left;'>IDX_501EDD8870CD7994</td>
- </tr>
- <tr>
   <td class='indexedColumn'>user_id</td>
   <td class='detail'>Performance</td>
   <td class='detail' style='text-align:left;'><span title='Ascending'>Asc</span></td>
@@ -199,21 +186,15 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 <br><form action='get'><b>Close relationships</b><span class='degrees' id='degrees' title='Detail diminishes with increased separation from Results'>
 &nbsp;within <label for='oneDegree'><input type='radio' name='degrees' id='oneDegree' checked>one</label>  <label for='twoDegrees'><input type='radio' name='degrees' id='twoDegrees'>two degrees</label> of separation</span><b>:</b></form>
 <map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="app_users.html" title="app_users" alt="" coords="179,5,327,256">
-<area shape="rect" id="node2" href="Cases.html" title="Cases" alt="" coords="5,136,135,267">
-<area shape="rect" id="node3" href="Results.html" title="Results" alt="" coords="371,73,567,209">
-<area shape="rect" id="node4" href="UserDays.html" title="UserDays" alt="" coords="611,5,767,136">
+<area shape="rect" id="node1" href="Results.html" title="Results" alt="" coords="197,5,503,165">
+<area shape="rect" id="node2" href="app_users.html" title="app_users" alt="" coords="5,32,153,283">
 </map>
   <a name='diagram'><img id='oneDegreeImg' src='../diagrams/Results.1degree.png' usemap='#oneDegreeRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>
 <map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="app_users.html" title="app_users" alt="" coords="179,5,327,256">
-<area shape="rect" id="node2" href="Cases.html" title="Cases" alt="" coords="5,241,135,372">
-<area shape="rect" id="node3" href="Days.html" title="Days" alt="" coords="615,268,763,351">
-<area shape="rect" id="node4" href="Hotspots.html" title="Hotspots" alt="" coords="822,84,959,167">
-<area shape="rect" id="node5" href="UserDays.html" title="UserDays" alt="" coords="611,97,767,228">
-<area shape="rect" id="node7" href="Results.html" title="Results" alt="" coords="371,143,567,279">
-<area shape="rect" id="node6" href="MedicationResults.html" title="MedicationResults" alt="" coords="811,184,971,267">
-<area shape="rect" id="node8" href="TestResults.html" title="TestResults" alt="" coords="822,284,959,367">
+<area shape="rect" id="node1" href="app_users.html" title="app_users" alt="" coords="197,108,345,359">
+<area shape="rect" id="node2" href="Cases.html" title="Cases" alt="" coords="5,132,153,215">
+<area shape="rect" id="node3" href="Results.html" title="Results" alt="" coords="389,5,695,165">
+<area shape="rect" id="node4" href="UserDays.html" title="UserDays" alt="" coords="464,183,620,265">
 </map>
 
   <a name='diagram'><img id='twoDegreesImg' src='../diagrams/Results.2degrees.png' usemap='#twoDegreesRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>

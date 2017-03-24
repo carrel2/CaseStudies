@@ -15,10 +15,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use AppBundle\Form\AdminUserType;
 use AppBundle\Form\UserType;
-use AppBundle\Entity\CaseStudy;
 use AppBundle\Form\AdminType;
 use AppBundle\Form\CaseType;
+use AppBundle\Form\AnimalType;
+use AppBundle\Entity\CaseStudy;
 use AppBundle\Entity\User;
+use AppBundle\Entity\Animal;
 
 /**
  * AdminController class
@@ -255,5 +257,42 @@ class AdminController extends Controller
 			'form' => $form->createView(),
 		));
 	}
+
+	/**
+	 * @Route("/admin/animals", name="animal")
+	 */
+	public function animalAction(Request $r)
+	{
+		$animal = new Animal();
+
+		$form = $this->createForm(AnimalType::class, $animal);
+
+		$form->handleRequest($r);
+
+		if( $form->isSubmitted() && $form->isValid() )
+		{
+			$em = $this->getDoctrine()->getManager();
+
+			$em->persist($animal);
+			$em->flush();
+		}
+
+		return $this->render('animals.html.twig', array(
+			'form' => $form->createView(),
+		));
+	}
+
+	/**
+	 * @Route("/admin/hotspots", name="editHotspots")
+	 */
+	 public function hotspotsAction(Request $r)
+	 {
+		 $em = $this->getDoctrine()->getManager();
+		 $animal = $em->getRepository('AppBundle:Animal')->findAll();
+
+		 return $this->render('createHotspots.html.twig', array(
+			 'animal' => $animal[0],
+		 ));
+	 }
 }
 

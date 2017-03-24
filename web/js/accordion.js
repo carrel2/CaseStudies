@@ -1,8 +1,8 @@
 $(function() {
   $('button.accordion').on('click', function() {
     if( !$(this).hasClass('active') ) {
-      $('button.accordion.active').next('.panel').slideToggle();
-      $('button.accordion.active').toggleClass('active');
+      $(this).siblings('.active').next('.panel').slideToggle();
+      $(this).siblings('.active').toggleClass('active');
     }
 
     $(this).toggleClass('active');

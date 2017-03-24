@@ -412,12 +412,9 @@ class User implements UserInterface, \Serializable
 		*/
 		public function removeDays()
 		{
-			foreach( $this->days as $day ) {
-				$day->removeHotspots();
-				$day->removeTests();
-				$day->removeMedications();
+			foreach ($this->days as $day) {
+				$this->removeDay($day);
 			}
-
 			$this->days->clear();
 		}
 

@@ -72,6 +72,11 @@ class TestResults
 	 */
 	private $results;
 
+	public function __toString()
+	{
+		return sprintf("%s: %s", $this->test->getName(), $this->results);
+	}
+
     /**
      * Get id
      *

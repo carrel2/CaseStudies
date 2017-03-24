@@ -72,6 +72,11 @@ class MedicationResults
 	 */
 	private $results;
 
+	public function __toString()
+	{
+		return sprintf("%s: %s", $this->medication->getName(), $this->results);
+	}
+
     /**
      * Get id
      *

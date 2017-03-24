@@ -15,7 +15,7 @@ class DayType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$builder->add('hotspots', CollectionType::class, array(
+		$builder->add('hotspotsinfo', CollectionType::class, array(
 				'entry_type' => HotspotType::class,
 				'allow_add' => true,
 				'allow_delete' => true,

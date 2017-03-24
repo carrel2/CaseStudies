@@ -47,6 +47,17 @@ class CaseStudy
 	private $description;
 
 	/**
+	* The Animal associated with the CaseStudy
+	*
+	* @var Animal
+	*
+	* @see Animal::class
+	*
+	* @ORM\ManyToOne(targetEntity="Animal", inversedBy="cases")
+	*/
+	private $animal;
+
+	/**
 	* ArrayCollection of Day objects
 	*
 	* @var ArrayCollection
@@ -71,18 +82,6 @@ class CaseStudy
 	private $users;
 
 	/**
-	* ArrayCollection of Results objects
-	*
-	* @var ArrayCollection
-	*
-	* @see Results::class
-	* @see ArrayCollection::class
-	*
-	* @ORM\OneToMany(targetEntity="Results", mappedBy="caseStudy")
-	*/
-	private $results;
-
-	/**
 	* Constructor function
 	*
 	* Initializes $days, $users, $results as ArrayCollection
@@ -93,7 +92,6 @@ class CaseStudy
 	{
 		$this->days = new ArrayCollection();
 		$this->users = new ArrayCollection();
-		$this->results = new ArrayCollection();
 	}
 
 	/**
@@ -103,7 +101,7 @@ class CaseStudy
 	*/
 	public function __toString()
 	{
-		return strval($this->id);
+		return $this->title;
 	}
 
 	/**
@@ -253,38 +251,26 @@ class CaseStudy
 	}
 
     /**
-     * Add result
+     * Set animal
      *
-     * @param \AppBundle\Entity\Results $result
+     * @param \AppBundle\Entity\Animal $animal
      *
      * @return CaseStudy
      */
-    public function addResult(\AppBundle\Entity\Results $result)
+    public function setAnimal(\AppBundle\Entity\Animal $animal = null)
     {
-				$result->setCaseStudy($this);
-        $this->results[] = $result;
+        $this->animal = $animal;
 
         return $this;
     }
 
     /**
-     * Remove result
+     * Get animal
      *
-     * @param \AppBundle\Entity\Results $result
+     * @return \AppBundle\Entity\Animal
      */
-    public function removeResult(\AppBundle\Entity\Results $result)
+    public function getAnimal()
     {
-				$result->setCaseStudy(null);
-        $this->results->removeElement($result);
-    }
-
-    /**
-     * Get results
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getResults()
-    {
-        return $this->results;
+        return $this->animal;
     }
 }

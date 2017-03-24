@@ -9,12 +9,12 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use AppBundle\Entity\CaseStudy;
-use AppBundle\Entity\HotSpots;
 
 class CaseType extends AbstractType
 {
@@ -23,6 +23,10 @@ class CaseType extends AbstractType
 		$builder
 			->add('title', TextType::class)
 			->add('description', TextareaType::class)
+			->add('animal', EntityType::class, array(
+				'class' => 'AppBundle:Animal',
+				'choice_label' => 'name',
+			))
 			->add('days', CollectionType::class, array(
 				'entry_type' => DayType::class,
 				'allow_add' => true,

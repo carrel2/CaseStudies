@@ -31,7 +31,7 @@
 <div class='indent'>
 <table width='100%'>
 <tr><td class='container' valign='bottom'><b>
-14 Foreign Key Constraints:</b>
+15 Foreign Key Constraints:</b>
 </td><td class='container' align='right'>
 <table>
   <tr><td class='container' align='right' valign='top'><a href='http://sourceforge.net' target='_blank'><img src='http://sourceforge.net/sflogo.php?group_id=137197&amp;type=1' alt='SourceForge.net' border='0' height='31' width='88'></a></td></tr>
@@ -71,29 +71,15 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </thead>
 <tbody>
   <tr class='even'>
-  <td class='detail'>FK_14DD497F8A30AB9</td>
-  <td class='detail'><a href='tables/UserDays.html'>UserDays</a>.results_id</td>
-  <td class='detail'><a href='tables/Results.html'>Results</a>.id</td>
-  <td class='detail'><span title='Restrict delete:
- Parent cannot be deleted if children exist'>Restrict delete&nbsp;</span></td>
- </tr>
-  <tr class='odd'>
   <td class='detail'>FK_14DD497FA76ED395</td>
   <td class='detail'><a href='tables/UserDays.html'>UserDays</a>.user_id</td>
   <td class='detail'><a href='tables/app_users.html'>app_users</a>.id</td>
   <td class='detail'><span title='Restrict delete:
  Parent cannot be deleted if children exist'>Restrict delete&nbsp;</span></td>
  </tr>
-  <tr class='even'>
+  <tr class='odd'>
   <td class='detail'>FK_4BD6535870CD7994</td>
   <td class='detail'><a href='tables/Days.html'>Days</a>.case_study_id</td>
-  <td class='detail'><a href='tables/Cases.html'>Cases</a>.id</td>
-  <td class='detail'><span title='Restrict delete:
- Parent cannot be deleted if children exist'>Restrict delete&nbsp;</span></td>
- </tr>
-  <tr class='odd'>
-  <td class='detail'>FK_501EDD8870CD7994</td>
-  <td class='detail'><a href='tables/Results.html'>Results</a>.case_study_id</td>
   <td class='detail'><a href='tables/Cases.html'>Cases</a>.id</td>
   <td class='detail'><span title='Restrict delete:
  Parent cannot be deleted if children exist'>Restrict delete&nbsp;</span></td>
@@ -106,16 +92,30 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
  Parent cannot be deleted if children exist'>Restrict delete&nbsp;</span></td>
  </tr>
   <tr class='odd'>
-  <td class='detail'>FK_668E5F006C905A1B</td>
-  <td class='detail'><a href='tables/Hotspots.html'>Hotspots</a>.user_day_id</td>
-  <td class='detail'><a href='tables/UserDays.html'>UserDays</a>.id</td>
+  <td class='detail'>FK_8F7B04EF3AE7F1EF</td>
+  <td class='detail'><a href='tables/HotSpotsInfo.html'>HotSpotsInfo</a>.hotspot_id</td>
+  <td class='detail'><a href='tables/HotSpots.html'>HotSpots</a>.id</td>
   <td class='detail'><span title='Restrict delete:
  Parent cannot be deleted if children exist'>Restrict delete&nbsp;</span></td>
  </tr>
   <tr class='even'>
-  <td class='detail'>FK_668E5F009C24126</td>
-  <td class='detail'><a href='tables/Hotspots.html'>Hotspots</a>.day_id</td>
+  <td class='detail'>FK_8F7B04EF6C905A1B</td>
+  <td class='detail'><a href='tables/HotSpotsInfo.html'>HotSpotsInfo</a>.user_day_id</td>
+  <td class='detail'><a href='tables/UserDays.html'>UserDays</a>.id</td>
+  <td class='detail'><span title='Restrict delete:
+ Parent cannot be deleted if children exist'>Restrict delete&nbsp;</span></td>
+ </tr>
+  <tr class='odd'>
+  <td class='detail'>FK_8F7B04EF9C24126</td>
+  <td class='detail'><a href='tables/HotSpotsInfo.html'>HotSpotsInfo</a>.day_id</td>
   <td class='detail'><a href='tables/Days.html'>Days</a>.id</td>
+  <td class='detail'><span title='Restrict delete:
+ Parent cannot be deleted if children exist'>Restrict delete&nbsp;</span></td>
+ </tr>
+  <tr class='even'>
+  <td class='detail'>FK_A74F70048E962C16</td>
+  <td class='detail'><a href='tables/HotSpots.html'>HotSpots</a>.animal_id</td>
+  <td class='detail'><a href='tables/Animals.html'>Animals</a>.id</td>
   <td class='detail'><span title='Restrict delete:
  Parent cannot be deleted if children exist'>Restrict delete&nbsp;</span></td>
  </tr>
@@ -165,6 +165,13 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
   <td class='detail'>FK_C7C851159C24126</td>
   <td class='detail'><a href='tables/MedicationResults.html'>MedicationResults</a>.day_id</td>
   <td class='detail'><a href='tables/Days.html'>Days</a>.id</td>
+  <td class='detail'><span title='Restrict delete:
+ Parent cannot be deleted if children exist'>Restrict delete&nbsp;</span></td>
+ </tr>
+  <tr class='even'>
+  <td class='detail'>FK_DDDA2C8F8E962C16</td>
+  <td class='detail'><a href='tables/Cases.html'>Cases</a>.animal_id</td>
+  <td class='detail'><a href='tables/Animals.html'>Animals</a>.id</td>
   <td class='detail'><span title='Restrict delete:
  Parent cannot be deleted if children exist'>Restrict delete&nbsp;</span></td>
  </tr>

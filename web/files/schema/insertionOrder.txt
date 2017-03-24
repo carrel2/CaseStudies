@@ -1,10 +1,12 @@
-Cases
+Animals
 Medications
 Tests
+Cases
 app_users
-Results
 Days
 UserDays
-Hotspots
+HotSpots
+Results
+HotSpotsInfo
 MedicationResults
 TestResults

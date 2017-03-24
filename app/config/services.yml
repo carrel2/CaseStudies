@@ -21,3 +21,14 @@ services:
         arguments: ['@security.token_storage']
         tags:
             - { name: form.type }
+
+    app.file_uploader:
+        class: AppBundle\FileUploader
+        arguments: ['%image_directory%']
+
+    app.doctrine_animal_listener:
+        class: AppBundle\EventListener\AnimalImageUploadListener
+        arguments: ['@app.file_uploader']
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }

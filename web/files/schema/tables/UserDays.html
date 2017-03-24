@@ -100,7 +100,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </tr>
 </thead>
 <tbody valign='top'>
-<tr class='even'>
+<tr class='odd'>
  <td class='primaryKey' title='Primary Key'>id</td>
  <td class='detail'>int</td>
  <td class='detail' align='right'>10</td>
@@ -109,19 +109,19 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
  <td class='detail'></td>
  <td class='detail'>
   <table border='0' width='100%' cellspacing='0' cellpadding='0'>
-   <tr class='relative even' valign='top'>
-    <td class='relatedTable detail' title="Hotspots.user_day_id refs UserDays.id via FK_668E5F006C905A1B"><a href='Hotspots.html'>Hotspots</a><span class='relatedKey'>.user_day_id</span>
+   <tr class='relative odd' valign='top'>
+    <td class='relatedTable detail' title="HotSpotsInfo.user_day_id refs UserDays.id via FK_8F7B04EF6C905A1B"><a href='HotSpotsInfo.html'>HotSpotsInfo</a><span class='relatedKey'>.user_day_id</span>
     </td>
-    <td class='constraint detail'>FK_668E5F006C905A1B<span title='Restrict delete:
+    <td class='constraint detail'>FK_8F7B04EF6C905A1B<span title='Restrict delete:
  Parent cannot be deleted if children exist'>&nbsp;R</span></td>
    </tr>
-   <tr class='relative even' valign='top'>
+   <tr class='relative odd' valign='top'>
     <td class='relatedTable detail' title="MedicationResults.user_day_id refs UserDays.id via FK_C7C851156C905A1B"><a href='MedicationResults.html'>MedicationResults</a><span class='relatedKey'>.user_day_id</span>
     </td>
     <td class='constraint detail'>FK_C7C851156C905A1B<span title='Restrict delete:
  Parent cannot be deleted if children exist'>&nbsp;R</span></td>
    </tr>
-   <tr class='relative even' valign='top'>
+   <tr class='relative odd' valign='top'>
     <td class='relatedTable detail' title="TestResults.user_day_id refs UserDays.id via FK_B868B2F26C905A1B"><a href='TestResults.html'>TestResults</a><span class='relatedKey'>.user_day_id</span>
     </td>
     <td class='constraint detail'>FK_B868B2F26C905A1B<span title='Restrict delete:
@@ -132,7 +132,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='odd'>
+<tr class='even'>
  <td class='indexedColumn' title='Indexed'>user_id</td>
  <td class='detail'>int</td>
  <td class='detail' align='right'>10</td>
@@ -142,7 +142,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
  <td class='detail'></td>
  <td class='detail'>
   <table border='0' width='100%' cellspacing='0' cellpadding='0'>
-   <tr class='relative odd' valign='top'>
+   <tr class='relative even' valign='top'>
     <td class='relatedTable detail' title="UserDays.user_id refs app_users.id via FK_14DD497FA76ED395"><a href='app_users.html'>app_users</a><span class='relatedKey'>.id</span>
     </td>
     <td class='constraint detail'>FK_14DD497FA76ED395<span title='Restrict delete:
@@ -152,28 +152,8 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
  </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='even'>
- <td class='indexedColumn' title='Indexed'>results_id</td>
- <td class='detail'>int</td>
- <td class='detail' align='right'>10</td>
- <td class='detail' align='center' title='nullable'>&nbsp;&radic;&nbsp;</td>
- <td class='detail' align='center'></td>
- <td class='detail' align='right'>null</td>
- <td class='detail'></td>
- <td class='detail'>
-  <table border='0' width='100%' cellspacing='0' cellpadding='0'>
-   <tr class='relative even' valign='top'>
-    <td class='relatedTable detail' title="UserDays.results_id refs Results.id via FK_14DD497F8A30AB9"><a href='Results.html'>Results</a><span class='relatedKey'>.id</span>
-    </td>
-    <td class='constraint detail'>FK_14DD497F8A30AB9<span title='Restrict delete:
- Parent cannot be deleted if children exist'>&nbsp;R</span></td>
-   </tr>
-  </table>
- </td>
- <td class='comment detail'></td>
-</tr>
 </table>
-<p title='3 columns'>Table contained 0 rows at Thu Mar 16 15:40 CDT 2017<p/>
+<p title='2 columns'>Table contained 2 rows at Fri Mar 24 15:20 CDT 2017<p/>
 </td></tr></table>
 <div class='indent'>
 <b>Indexes:</b>
@@ -194,12 +174,6 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
   <td class='constraint' style='text-align:left;'>PRIMARY</td>
  </tr>
  <tr>
-  <td class='indexedColumn'>results_id</td>
-  <td class='detail'>Performance</td>
-  <td class='detail' style='text-align:left;'><span title='Ascending'>Asc</span></td>
-  <td class='constraint' style='text-align:left;'>IDX_14DD497F8A30AB9</td>
- </tr>
- <tr>
   <td class='indexedColumn'>user_id</td>
   <td class='detail'>Performance</td>
   <td class='detail' style='text-align:left;'><span title='Ascending'>Asc</span></td>
@@ -211,25 +185,25 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 <br><form action='get'><b>Close relationships</b><span class='degrees' id='degrees' title='Detail diminishes with increased separation from UserDays'>
 &nbsp;within <label for='oneDegree'><input type='radio' name='degrees' id='oneDegree' checked>one</label>  <label for='twoDegrees'><input type='radio' name='degrees' id='twoDegrees'>two degrees</label> of separation</span><b>:</b></form>
 <map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="Hotspots.html" title="Hotspots" alt="" coords="635,5,773,184">
-<area shape="rect" id="node2" href="UserDays.html" title="UserDays" alt="" coords="397,247,580,383">
-<area shape="rect" id="node4" href="Results.html" title="Results" alt="" coords="197,319,353,449">
-<area shape="rect" id="node5" href="app_users.html" title="app_users" alt="" coords="5,296,153,547">
-<area shape="rect" id="node3" href="MedicationResults.html" title="MedicationResults" alt="" coords="624,201,784,380">
-<area shape="rect" id="node6" href="TestResults.html" title="TestResults" alt="" coords="635,397,773,576">
+<area shape="rect" id="node1" href="HotSpotsInfo.html" title="HotSpotsInfo" alt="" coords="435,5,573,184">
+<area shape="rect" id="node2" href="UserDays.html" title="UserDays" alt="" coords="197,247,380,359">
+<area shape="rect" id="node5" href="app_users.html" title="app_users" alt="" coords="5,273,153,524">
+<area shape="rect" id="node3" href="MedicationResults.html" title="MedicationResults" alt="" coords="424,201,584,380">
+<area shape="rect" id="node4" href="TestResults.html" title="TestResults" alt="" coords="435,397,573,576">
 </map>
   <a name='diagram'><img id='oneDegreeImg' src='../diagrams/UserDays.1degree.png' usemap='#oneDegreeRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>
 <map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="app_users.html" title="app_users" alt="" coords="179,207,327,457">
-<area shape="rect" id="node2" href="Cases.html" title="Cases" alt="" coords="5,231,135,313">
-<area shape="rect" id="node3" href="Days.html" title="Days" alt="" coords="588,131,736,213">
-<area shape="rect" id="node4" href="Hotspots.html" title="Hotspots" alt="" coords="809,5,946,184">
-<area shape="rect" id="node5" href="UserDays.html" title="UserDays" alt="" coords="571,231,753,367">
-<area shape="rect" id="node8" href="Results.html" title="Results" alt="" coords="371,281,527,412">
-<area shape="rect" id="node6" href="MedicationResults.html" title="MedicationResults" alt="" coords="797,201,957,380">
-<area shape="rect" id="node7" href="Medications.html" title="Medications" alt="" coords="593,384,731,467">
-<area shape="rect" id="node9" href="TestResults.html" title="TestResults" alt="" coords="809,397,946,576">
-<area shape="rect" id="node10" href="Tests.html" title="Tests" alt="" coords="593,484,731,567">
+<area shape="rect" id="node1" href="app_users.html" title="app_users" alt="" coords="197,205,345,456">
+<area shape="rect" id="node2" href="Cases.html" title="Cases" alt="" coords="5,176,153,259">
+<area shape="rect" id="node3" href="Days.html" title="Days" alt="" coords="407,105,555,188">
+<area shape="rect" id="node4" href="HotSpotsInfo.html" title="HotSpotsInfo" alt="" coords="627,64,765,243">
+<area shape="rect" id="node5" href="HotSpots.html" title="HotSpots" alt="" coords="403,5,559,88">
+<area shape="rect" id="node6" href="UserDays.html" title="UserDays" alt="" coords="389,305,572,417">
+<area shape="rect" id="node7" href="MedicationResults.html" title="MedicationResults" alt="" coords="616,260,776,439">
+<area shape="rect" id="node8" href="Medications.html" title="Medications" alt="" coords="412,435,549,517">
+<area shape="rect" id="node9" href="Results.html" title="Results" alt="" coords="412,205,549,288">
+<area shape="rect" id="node10" href="TestResults.html" title="TestResults" alt="" coords="627,456,765,635">
+<area shape="rect" id="node11" href="Tests.html" title="Tests" alt="" coords="412,535,549,617">
 </map>
 
   <a name='diagram'><img id='twoDegreesImg' src='../diagrams/UserDays.2degrees.png' usemap='#twoDegreesRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>

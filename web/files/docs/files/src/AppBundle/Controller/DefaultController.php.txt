@@ -38,7 +38,6 @@ class DefaultController extends Controller
 	 * @see DefaultType::class
 	 * @see User::class
 	 * @see CaseStudy::class
-	 * @see HotSpots::showPage()
 	 * @see HotSpotController::showPageAction()
 	 * @see HotSpotController::resetAction()
 	 *
@@ -137,7 +136,25 @@ class DefaultController extends Controller
 		$user = $this->getUser();
 
 		$user->addResult($results);
-		$user->getCaseStudy()->addResult($results);
+		$results->setCaseStudy($user->getCaseStudy()->getTitle());
+
+		foreach($user->getDays() as $key => $day)
+		{
+			$id = $day->getId();
+
+			$results->add($day->toArray());
+
+			$a = $results->getResults();
+
+			foreach ($session->getFlashBag()->get('empty-test-results-' . $id) as $flash) {
+				$a[$key]["tests"][$flash] = "No results available.";
+			}
+			foreach ($session->getFlashBag()->get('empty-medication-results-' . $id) as $flash) {
+				$a[$key]["medications"][$flash] = "No results available.";
+			}
+
+			$results->setResults($a);
+		}
 
 		foreach( $session->all() as $key => $attr ) {
 			if( $attr === null ) {
@@ -145,16 +162,15 @@ class DefaultController extends Controller
 			}
 		}
 
-		$em->persist($results);
-		$em->flush();
-
-		foreach($user->getDays() as $day) {
-			$id = $day->getId();
-
-			$results->addUserDay($day);
-			$session->set($results->getId() . '-test-results-' . $id, $session->getFlashBag()->get('empty-test-results-' . $id));
-			$session->set($results->getId() . '-medication-results-' . $id, $session->getFlashBag()->get('empty-medication-results-' . $id));
-		}
+		 $em->persist($results);
+		// $em->flush();
+		//
+		// foreach($user->getDays() as $day) {
+		// 	$id = $day->getId();
+		//
+		// 	$session->set($results->getId() . '-test-results-' . $id, $session->getFlashBag()->get('empty-test-results-' . $id));
+		// 	$session->set($results->getId() . '-medication-results-' . $id, $session->getFlashBag()->get('empty-medication-results-' . $id));
+		// }
 
 		$user->setCaseStudy(null);
 		$user->removeDays();
@@ -173,13 +189,6 @@ class DefaultController extends Controller
 	public function removeResultsAction(Request $r, Results $result)
 	{
 		$em = $this->getDoctrine()->getManager();
-
-		foreach($result->getUserDays() as $day) {
-			$r->getSession()->remove($result->getId() . '-test-results-' . $day->getId());
-			$r->getSession()->remove($result->getId() . '-medication-results-' . $day->getId());
-		}
-
-		$result->removeDays();
 
 		$em->remove($result);
 		$em->flush();

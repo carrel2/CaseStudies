@@ -13,16 +13,18 @@
 
 {% block body %}
 	<div id="hotspots">
+		<img id="animal" src="{{ asset('images/' ~ animal.image) }}" usemap="#hotspots" />
 
-	{% for spot in hotspots %}
-		<span class="hotspot" data-path="{{ spot.id }}">{{ spot.name }}</span>
-	{% endfor %}
-
+		<map name="hotspots">
+			{% for spot in animal.hotspots %}
+				<area class="hotspot" shape="rect" coords="{{ spot.x1 }},{{ spot.y1 }},{{ spot.x2 }},{{ spot.y2 }}" data-path="{{ spot.id }}">
+			{% endfor %}
+		</map>
 	</div>
 
 	<div id="checked">
 	{% for spot in checked %}
-		<li>{{ spot.name }}: {{ spot.info }}</li>
+		<li>{{ spot.hotspot.name }}: {{ spot.info }}</li>
 	{% endfor %}
 	</div>
 {% endblock %}
