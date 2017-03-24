@@ -67,6 +67,8 @@ class HotSpotController extends Controller
 	 *
 	 * Called by ajax. Function to update UserDay with the HotSpots given
 	 *
+	 * @todo handle HotSpot with no HotSpotInfo associated
+	 *
 	 * @see HotSpots::class
 	 * @see UserDay::class
 	 *
@@ -95,7 +97,7 @@ class HotSpotController extends Controller
 			}
 		}
 
-		return new Response('');
+		return new Response('<li>' . $hotspot->getName() . ': No information available.');
 	}
 
 	/**

@@ -21,7 +21,7 @@
         var name = $('input#name').val();
         $('input#name').val('');
 
-        $('#hotspots').load('/{{ animal.id }}/' + name + '/' + x1 + '.' + y1 + '.' + x2 + '.' + y2);
+        $('#hotspots').load('/addHotspot/{{ animal.id }}/' + name + '/' + x1 + '.' + y1 + '.' + x2 + '.' + y2);
       });
 
       $('img').imgAreaSelect({

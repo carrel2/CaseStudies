@@ -67,6 +67,8 @@ class HotSpotController extends Controller
 	 *
 	 * Called by ajax. Function to update UserDay with the HotSpots given
 	 *
+	 * @todo handle HotSpot with no HotSpotInfo associated
+	 *
 	 * @see HotSpots::class
 	 * @see UserDay::class
 	 *
@@ -95,11 +97,11 @@ class HotSpotController extends Controller
 			}
 		}
 
-		return new Response('');
+		return new Response('<li>' . $hotspot->getName() . ': No information available.');
 	}
 
 	/**
-	 * @Route("/{animal}/{name}/{x1}.{y1}.{x2}.{y2}", name="addHotspot")
+	 * @Route("/addHotspot/{animal}/{name}/{x1}.{y1}.{x2}.{y2}", name="addHotspot")
 	 */
 	 public function addHotspotAction(Animal $animal, $name, $x1, $y1, $x2, $y2)
 	 {
@@ -130,7 +132,7 @@ class HotSpotController extends Controller
 	 }
 
 	 /**
- 	 * @Route("/{animal}/{hotspot}", name="removeHotspot")
+ 	 * @Route("/removeHotspot/{animal}/{hotspot}", name="removeHotspot")
  	 */
  	 public function removeHotspotAction(Animal $animal, HotSpot $hotspot)
 	 {
