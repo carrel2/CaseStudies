@@ -99,7 +99,7 @@ class HotSpotController extends Controller
 	}
 
 	/**
-	 * @Route("/{animal}/{name}/{x1}.{y1}.{x2}.{y2}", name="addHotspot")
+	 * @Route("/addHotspot/{animal}/{name}/{x1}.{y1}.{x2}.{y2}", name="addHotspot")
 	 */
 	 public function addHotspotAction(Animal $animal, $name, $x1, $y1, $x2, $y2)
 	 {
@@ -130,7 +130,7 @@ class HotSpotController extends Controller
 	 }
 
 	 /**
- 	 * @Route("/{animal}/{hotspot}", name="removeHotspot")
+ 	 * @Route("/removeHotspot/{animal}/{hotspot}", name="removeHotspot")
  	 */
  	 public function removeHotspotAction(Animal $animal, HotSpot $hotspot)
 	 {
