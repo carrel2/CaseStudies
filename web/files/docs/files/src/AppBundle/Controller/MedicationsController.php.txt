@@ -75,7 +75,7 @@ class MedicationsController extends Controller
 			return $this->redirectToRoute('logic');
 		}
 
-		return $this->render('medications.html.twig', array(
+		return $this->render('Default/medications.html.twig', array(
 			'form' => $form->createView(),
 		));
 	}

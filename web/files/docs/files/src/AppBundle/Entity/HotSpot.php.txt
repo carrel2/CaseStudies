@@ -226,6 +226,26 @@ class HotSpot
     }
 
     /**
+     * Get height
+     *
+     * @return integer
+     */
+    public function getHeight()
+    {
+      return $this->y2 - $this->y1;
+    }
+
+    /**
+     * Get width
+     *
+     * @return integer
+     */
+    public function getWidth()
+    {
+      return $this->x2 - $this->x1;
+    }
+
+    /**
      * Set animal
      *
      * @param \AppBundle\Entity\Animal $animal

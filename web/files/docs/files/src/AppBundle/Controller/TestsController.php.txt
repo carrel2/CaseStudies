@@ -79,7 +79,7 @@ class TestsController extends Controller
 			return $this->redirectToRoute('order_meds');
 		}
 
-		return $this->render('tests.html.twig', array(
+		return $this->render('Default/tests.html.twig', array(
 			'form' => $form->createView(),
 		));
 	}

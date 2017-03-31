@@ -13,14 +13,18 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use AppBundle\Form\AdminUserType;
 use AppBundle\Form\UserType;
 use AppBundle\Form\AdminType;
 use AppBundle\Form\CaseType;
 use AppBundle\Form\AnimalType;
+use AppBundle\Form\TestType;
 use AppBundle\Entity\CaseStudy;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Animal;
+use AppBundle\Entity\Test;
 
 /**
  * AdminController class
@@ -45,7 +49,6 @@ class AdminController extends Controller
 	 * @return \Symfony\Component\HttpFoundation\Response Render **admin.html.twig**
 	 *
 	 * @Route("/admin", name="admin")
-	 * @Security("has_role('ROLE_ADMIN')")
 	 */
 	public function adminAction(Request $r)
 	{
@@ -65,8 +68,7 @@ class AdminController extends Controller
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response Render **editCase.html.twig**
 	 *
-	 * @Route("/admin/edit", name="editCase")
-	 * @Security("has_role('ROLE_ADMIN')")
+	 * @Route("/admin/edit/case", name="editCase")
 	 */
 	public function editCaseAction(Request $r)
 	{
@@ -74,7 +76,7 @@ class AdminController extends Controller
 
 		$form->handleRequest($r);
 
-		return $this->render('editCase.html.twig', array(
+		return $this->render('Admin/editCase.html.twig', array(
 			'form' => $form->createView(),
 		));
 	}
@@ -92,8 +94,7 @@ class AdminController extends Controller
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response Render **createCase.html.twig**. On submission, redirect to **AdminController::adminAction()**
 	 *
-	 * @Route("/admin/create", name="createCase")
-	 * @Security("has_role('ROLE_ADMIN')")
+	 * @Route("/admin/create/case", name="createCase")
 	 */
 	public function createCaseAction(Request $r)
 	{
@@ -114,7 +115,7 @@ class AdminController extends Controller
 			return $this->redirectToRoute('admin');
 		}
 
-		return $this->render('createCase.html.twig', array(
+		return $this->render('Admin/createCase.html.twig', array(
 			'form' => $form->createView(),
 		));
 	}
@@ -131,7 +132,6 @@ class AdminController extends Controller
 	 * @return \Symfony\Component\HttpFoundation\Response Render **caseInfo.html.twig**. On submission, redirect to **AdminController::editCaseAction()**
 	 *
 	 * @Route("/getCase/{id}", name="caseInfo")
-	 * @Security("has_role('ROLE_ADMIN')")
 	 */
 	public function getCaseAction(Request $r, CaseStudy $case)
 	{
@@ -160,7 +160,7 @@ class AdminController extends Controller
 			return $this->redirectToRoute('editCase');
 		}
 
-		return $this->render('caseInfo.html.twig', array(
+		return $this->render('Ajax/caseInfo.html.twig', array(
 			'form' => $form->createView(),
 			'case' => $case,
 			'id' => $case->getId(),
@@ -179,13 +179,18 @@ class AdminController extends Controller
 	 * @return \Symfony\Component\HttpFoundation\Response Render **adminUser.html.twig**
 	 *
 	 * @Route("/admin/users", name="manageUsers")
-	 * @Security("has_role('ROLE_ADMIN')")
 	 */
 	public function manageUsersAction(Request $r)
 	{
 		$em = $this->getDoctrine()->getManager();
 
-		$form = $this->createForm( AdminUserType::class );
+		$form = $this->createFormBuilder()->add('users', EntityType::class,
+			array(
+				'class' => 'AppBundle:User',
+				'choice_label' => 'username',
+				'expanded' => true,))
+			->add('edit', SubmitType::class)
+			->add('delete', SubmitType::class)->getForm();
 
 		$form->handleRequest($r);
 
@@ -193,7 +198,7 @@ class AdminController extends Controller
 			$user = $form->getData()['users'];
 
 			if( $form->get('edit')->isClicked() ) {
-				return $this->redirectToRoute('updateUser', array(
+				return $this->redirectToRoute('editUser', array(
 					'id' => $user->getId(),
 				));
 			} else if( $form->get('delete')->isClicked() ) {
@@ -205,7 +210,7 @@ class AdminController extends Controller
 			}
 		}
 
-		return $this->render('adminUser.html.twig', array(
+		return $this->render('Admin/adminUser.html.twig', array(
 			'form' => $form->createView(),
 		));
 	}
@@ -220,8 +225,7 @@ class AdminController extends Controller
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response Render **user.html.twig**
 	 *
-	 * @Route("/admin/users/update/{id}", name="updateUser")
-	 * @Security("has_role('ROLE_ADMIN')")
+	 * @Route("/admin/edit/users/{id}", name="editUser")
 	 */
 	public function editUserAction(Request $r, User $user)
 	{
@@ -253,19 +257,55 @@ class AdminController extends Controller
 			return $this->redirectToRoute('manageUsers');
 		}
 
-		return $this->render('adminUser.html.twig', array(
+		return $this->render('Admin/adminUser.html.twig', array(
 			'form' => $form->createView(),
 		));
 	}
 
 	/**
-	 * @Route("/admin/animals", name="animal")
+	 * @Route("/admin/animals", name="manageAnimals")
 	 */
 	public function animalAction(Request $r)
 	{
-		$animal = new Animal();
+		$em = $this->getDoctrine()->getManager();
 
-		$form = $this->createForm(AnimalType::class, $animal);
+		$form = $this->createFormBuilder()
+			->add('animals', EntityType::class, array(
+				'class' => 'AppBundle:Animal',
+				'choice_label' => 'name',
+				'expanded' => true,
+			))
+			->add('edit', SubmitType::class)
+			->add('delete', SubmitType::class)->getForm();
+
+		$form->handleRequest($r);
+
+		if( $form->isSubmitted() && $form->isValid() )
+		{
+			$animal = $form->getData()['animals'];
+
+			if( $form->get('edit')->isClicked() ) {
+				return $this->redirectToRoute('editAnimal', array('id' => $animal->getId()));
+			} else if( $form->get('delete')->isClicked() ) {
+				$em->remove($animal);
+				$em->flush();
+
+				return $this->redirectToRoute('manageAnimals');
+			}
+		}
+
+		return $this->render('Admin/animals.html.twig', array(
+			'form' => $form->createView(),
+			'animal' => null,
+		));
+	}
+
+	/**
+	 * @Route("/admin/create/animal", name="createAnimal")
+	 */
+	public function createAnimalAction(Request $r)
+	{
+		$form = $this->createForm( AnimalType::class );
 
 		$form->handleRequest($r);
 
@@ -274,25 +314,133 @@ class AdminController extends Controller
 			$em = $this->getDoctrine()->getManager();
 
 			$em->persist($animal);
+
 			$em->flush();
 		}
 
-		return $this->render('animals.html.twig', array(
+		return $this->render('Admin/animals.html.twig', array(
 			'form' => $form->createView(),
+			'animal' => null,
 		));
 	}
 
 	/**
-	 * @Route("/admin/hotspots", name="editHotspots")
+	 * @Route("/admin/edit/animals/{id}", name="editAnimal")
 	 */
-	 public function hotspotsAction(Request $r)
+	 public function hotspotsAction(Request $r, Animal $animal = null)
 	 {
-		 $em = $this->getDoctrine()->getManager();
-		 $animal = $em->getRepository('AppBundle:Animal')->findAll();
+		 if( $animal === null )
+		 {
+			 $animal = new Animal();
+		 }
 
-		 return $this->render('createHotspots.html.twig', array(
-			 'animal' => $animal[0],
+		 $form = $this->createForm( AnimalType::class, $animal );
+
+		 $form->handleRequest($r);
+
+		 if( $form->isSubmitted() && $form->isValid() )
+		 {
+			 $em = $this->getDoctrine()->getManager();
+
+			 $em->persist($animal);
+
+			 $em->flush();
+		 }
+
+		 return $this->render('Admin/animals.html.twig', array(
+			 'form' => $form->createView(),
+			 'animal' => $animal,
 		 ));
 	 }
+
+	 /**
+	  * @Route("/admin/tests", name="manageTests")
+		*/
+		public function testsAction(Request $r)
+		{
+			$em = $this->getDoctrine()->getManager();
+
+			$form = $this->createFormBuilder()
+				->add('tests', EntityType::class, array(
+					'class' => 'AppBundle:Test',
+					'choice_label' => 'name',
+					'expanded' => true,
+				))
+				->add('edit', SubmitType::class)
+				->add('delete', SubmitType::class)->getForm();
+
+			$form->handleRequest($r);
+
+			if( $form->isSubmitted() && $form->isValid() )
+			{
+				$test = $form->getData()['tests'];
+
+				if( $form->get('edit')->isClicked() ) {
+					return $this->redirectToRoute('editTest', array('id' => $test->getId()));
+				} else if( $form->get('delete')->isClicked() ) {
+					$em->remove($test);
+					$em->flush();
+
+					return $this->redirectToRoute('manageTests');
+				}
+			}
+
+			return $this->render('Admin/test.html.twig', array(
+				'form' => $form->createView(),
+			));
+		}
+
+		/**
+		 * @Route("/admin/create/test", name="createTest")
+		 */
+		public function createTestAction(Request $r)
+		{
+			$form = $this->createForm( TestType::class );
+
+			$form->handleRequest($r);
+
+			if( $form->isSubmitted() && $form->isValid() )
+			{
+				$em = $this->getDoctrine()->getManager();
+
+				$em->persist($test);
+
+				$em->flush();
+			}
+
+			return $this->render('Admin/test.html.twig', array(
+				'form' => $form->createView(),
+				'test' => null,
+			));
+		}
+
+		/**
+		 * @Route("/admin/edit/tests/{id}", name="editTest")
+		 */
+		 public function editTestAction(Request $r, Test $test = null)
+		 {
+			 if( $test === null )
+			 {
+				 $test = new Test();
+			 }
+
+			 $form = $this->createForm( TestType::class, $test );
+
+			 $form->handleRequest($r);
+
+			 if( $form->isSubmitted() && $form->isValid() )
+			 {
+				 $em = $this->getDoctrine()->getManager();
+
+				 $em->persist($test);
+
+				 $em->flush();
+			 }
+
+			 return $this->render('Admin/test.html.twig', array(
+				 'form' => $form->createView(),
+				 'test' => $test,
+			 ));
+		 }
 }
 

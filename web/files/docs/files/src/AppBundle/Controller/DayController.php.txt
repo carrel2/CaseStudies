@@ -44,7 +44,7 @@ class DayController extends Controller
 		$days = $user->getDays();
 		$finished = $session->get('finished');
 
-		return $this->render('review.html.twig', array(
+		return $this->render('Default/review.html.twig', array(
 			'user' => $user,
 			'finished' => $finished,
 		));
