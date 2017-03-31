@@ -4,10 +4,12 @@
 	{% for flash in app.session.flashBag.get('notice') %}
 		<div class="flash-notice">{{ flash }}</div>
 	{% endfor %}
-{% endblock %}
 
-{% block body %}
 	<a href="{{ path('manageUsers') }}">Manage users</a>
+	<a href="{{ path('createAnimal') }}">Create new animal</a>
+	<a href="{{ path('manageAnimals') }}">Manage animals</a>
 	<a href="{{ path('createCase') }}">Create a new case</a>
 	<a href="{{ path('editCase') }}">Edit cases</a>
+	<a href="{{ path('createTest') }}">Create a new test</a>
+	<a href="{{ path('manageTests') }}">Manage tests</a>
 {% endblock %}

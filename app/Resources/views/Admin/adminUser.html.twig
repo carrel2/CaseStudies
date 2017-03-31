@@ -1,0 +1,19 @@
+{% extends 'admin.html.twig' %}
+
+{% block body %}
+	{{ form_start(form) }}
+
+		{% if form.vars.name == "user" %}
+			{{ form_row(form.email) }}
+			{{ form_row(form.username) }}
+			{{ form_row(form.uin) }}
+			{{ form_row(form.plainPassword) }}
+			{{ form_row(form.role) }}
+
+			{{ form_rest(form) }}
+		{% else %}
+			{{ form_widget(form) }}
+		{% endif %}
+
+	{{ form_end(form) }}
+{% endblock %}

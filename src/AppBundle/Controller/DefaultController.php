@@ -85,7 +85,7 @@ class DefaultController extends Controller
 			return $this->redirectToRoute($route);
 		}
 
-		return $this->render('default.html.twig', array(
+		return $this->render('Default/default.html.twig', array(
 			'form' => $form->createView(),
 			'case' => $case,
 		));
@@ -129,53 +129,46 @@ class DefaultController extends Controller
 	 */
 	public function resetAction(Request $r)
 	{
-		$results = new Results();
-
 		$em = $this->getDoctrine()->getManager();
 		$session = $r->getSession();
 		$user = $this->getUser();
 
-		$user->addResult($results);
-		$results->setCaseStudy($user->getCaseStudy()->getTitle());
-
-		foreach($user->getDays() as $key => $day)
+		if( $session->remove('finished') != null )
 		{
-			$id = $day->getId();
+			$results = new Results();
 
-			$results->add($day->toArray());
+			$user->addResult($results);
+			$results->setCaseStudy($user->getCaseStudy()->getTitle());
 
-			$a = $results->getResults();
+			foreach($user->getDays() as $key => $day)
+			{
+				$id = $day->getId();
 
-			foreach ($session->getFlashBag()->get('empty-test-results-' . $id) as $flash) {
-				$a[$key]["tests"][$flash] = "No results available.";
+				$results->add($day->toArray());
+
+				$a = $results->getResults();
+
+				foreach ($session->getFlashBag()->get('hotspot-' . $id) as $flash) {
+					$a[$key]["hotspotsInfo"][$flash] = "No results available.";
+				}
+				foreach ($session->getFlashBag()->get('empty-test-results-' . $id) as $flash) {
+					$a[$key]["tests"][$flash] = "No results available.";
+				}
+				foreach ($session->getFlashBag()->get('empty-medication-results-' . $id) as $flash) {
+					$a[$key]["medications"][$flash] = "No results available.";
+				}
+
+				$results->setResults($a);
 			}
-			foreach ($session->getFlashBag()->get('empty-medication-results-' . $id) as $flash) {
-				$a[$key]["medications"][$flash] = "No results available.";
-			}
 
-			$results->setResults($a);
+			$em->persist($results);
 		}
 
-		foreach( $session->all() as $key => $attr ) {
-			if( $attr === null ) {
-				$session->remove($key);
-			}
-		}
-
-		 $em->persist($results);
-		// $em->flush();
-		//
-		// foreach($user->getDays() as $day) {
-		// 	$id = $day->getId();
-		//
-		// 	$session->set($results->getId() . '-test-results-' . $id, $session->getFlashBag()->get('empty-test-results-' . $id));
-		// 	$session->set($results->getId() . '-medication-results-' . $id, $session->getFlashBag()->get('empty-medication-results-' . $id));
-		// }
+		$session->clear();
 
 		$user->setCaseStudy(null);
 		$user->removeDays();
 
-		$session->remove('finished');
 		$session->getFlashBag()->clear();
 
 		$em->flush();

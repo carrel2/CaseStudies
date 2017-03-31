@@ -48,4 +48,17 @@ class AnimalImageUploadListener
         $fileName = $this->uploader->upload($file);
         $entity->setImage($fileName);
     }
+
+    public function postLoad(LifecycleEventArgs $args)
+    {
+      $entity = $args->getEntity();
+
+      if (!$entity instanceof Animal) {
+          return;
+      }
+
+      if ($fileName = $entity->getImage()) {
+          $entity->setImage(new File($this->uploader->getTargetDir().'/'.$fileName));
+      }
+    }
 }

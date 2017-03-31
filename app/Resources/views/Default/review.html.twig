@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block scripts %}
+	{{ parent() }}
+
+	<script src="{{ asset('js/accordion.js') }}"></script>
+{% endblock %}
+
+{% block header %}
+	{% for flash in app.session.flashBag.get('complete') %}
+		<div class="flash-finished">{{ flash }}</div>
+	{% endfor %}
+{% endblock %}
+
+{% block body %}
+	{% for day in user.days %}
+		<button class="accordion">Day {{ loop.index }}</button>
+
+		<div class="panel">
+			<div id="hotspots">
+				{% for spot in day.hotspotsinfo %}
+					<li><em>{{ spot.hotspot.name }}:</em> {{ spot.info }}</li>
+				{% endfor %}
+
+				{% for flash in app.session.flashBag.peek('hotspot-' ~ day.id) %}
+					<li><em>{{ flash }}:</em> No information available</li>
+				{% endfor %}
+			</div>
+
+			<div id="testResults">
+				{% for testResult in day.tests %}
+					<li><em>{{ testResult.test.name }}:</em> {{ testResult.results }}</li>
+				{% endfor %}
+
+				{% for flash in app.session.flashBag.peek('empty-test-results-' ~ day.id) %}
+					<li><em>{{ flash }}:</em> No results available</li>
+				{% endfor %}
+			</div>
+
+			<div id="medicationResults">
+				{% for medResult in day.medications %}
+					<li><em>{{ medResult.medication.name }}:</em> {{ medResult.results }}</li>
+				{% endfor %}
+
+				{% for flash in app.session.flashBag.peek('empty-medication-results-' ~ day.id) %}
+					<li><em>{{ flash }}:</em> No results available</li>
+				{% endfor %}
+			</div>
+		</div>
+	{% endfor %}
+
+	{% set finished = app.session.get('finished') %}
+
+	{% if finished %}
+		<a href="{{ path('reset') }}">Finish</a>
+	{% else %}
+		{% set page = app.session.get('page') %}
+		{% if page == 'review' %}
+			<a href="{{ path('nextDay') }}">Continue</a>
+		{% else %}
+			<a href="{{ path(page) }}">Resume</a>
+		{% endif %}
+	{% endif %}
+{% endblock %}

@@ -1,3 +1,0 @@
-{% for hotspot in animal.hotspots %}
-  <div>{{ hotspot.name }}: ({{ hotspot.x1 }}, {{ hotspot.y1 }}), ({{ hotspot.x2 }}, {{ hotspot.y2 }}) <a href="{{ path('removeHotspot', {'animal': animal.id, 'hotspot': hotspot.id }) }}">Remove</a></div>
-{% endfor %}

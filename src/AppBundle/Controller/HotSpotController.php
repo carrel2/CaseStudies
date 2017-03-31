@@ -56,9 +56,10 @@ class HotSpotController extends Controller
 		$days = $case->getDays();
 		$hotspots = $days[count($user->getDays()) - 1]->getHotspotsInfo();
 
-		return $this->render('hotspot.html.twig', array(
+		return $this->render('Default/hotspot.html.twig', array(
 			'animal' => $animal,
 			'checked' => $user->getCurrentDay()->getHotspotsInfo(),
+			'day' => $user->getCurrentDay(),
 		));
 	}
 
@@ -83,21 +84,31 @@ class HotSpotController extends Controller
 	public function updatePageAction(Request $r, HotSpot $hotspot)
 	{
 		$em = $this->getDoctrine()->getManager();
+		$session = $r->getSession();
 		$user = $this->getUser();
 		$hotspots = $user->getCaseStudy()->getDays()[count($user->getDays()) - 1]->getHotspotsInfo();
 
 		foreach ($hotspots as $info) {
-			if( $info->getHotspot()->getId() == $hotspot->getId() )
+			if( $info->getHotspot()->getId() == $hotspot->getId() && !$user->getCurrentDay()->getHotspotsInfo()->contains($info) )
 			{
 				$user->getCurrentDay()->addHotspotInfo($info);
 
 				$em->flush();
 
 				return new Response('<li>' . $hotspot->getName() . ': ' . $info->getInfo() . '</li>');
+			} else if( $info->getHotspot()->getId() == $hotspot->getId() && $user->getCurrentDay()->getHotspotsInfo()->contains($info) ) {
+				return new Response('');
 			}
 		}
 
-		return new Response('<li>' . $hotspot->getName() . ': No information available.');
+		if( !array_search($hotspot->getName(), $session->getFlashBag()->peek('hotspot-' . $user->getCurrentDay()->getId())) )
+		{
+			$this->addFlash('hotspot-' . $user->getCurrentDay()->getId(), $hotspot->getName());
+
+			return new Response('<li>' . $hotspot->getName() . ': No information available.</li>');
+		}
+
+		return new Response('');
 	}
 
 	/**
@@ -107,6 +118,7 @@ class HotSpotController extends Controller
 	 {
 		 $hotspots = $animal->getHotspots();
 		 $spot = null;
+		 $name = ucfirst(strtolower($name));
 
 		 foreach( $hotspots as $hotspot) {
 		 	if( $hotspot->getName() === $name )
@@ -126,7 +138,7 @@ class HotSpotController extends Controller
 
 		 $this->getDoctrine()->getManager()->flush();
 
-		 return $this->render('hotspots.html.twig', array(
+		 return $this->render('Ajax/hotspots.html.twig', array(
 			 'animal' => $animal,
 		 ));
 	 }
@@ -140,6 +152,6 @@ class HotSpotController extends Controller
 
 		 $this->getDoctrine()->getManager()->flush();
 
-		 return $this->redirectToRoute('editHotspots');
+		 return $this->redirectToRoute('editAnimal', array('id' => $animal->getId()));
 	 }
 }

@@ -44,7 +44,6 @@ class Animal
 
   /**
   * @ORM\Column(type="string")
-  * @Assert\File(mimeTypes={"image/*"})
   */
   private $image;
 

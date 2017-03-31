@@ -13,9 +13,11 @@ class AnimalType extends AbstractType
 {
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
-    $builder->add('image', FileType::class)
-            ->add('name')
-            ->add('submit', SubmitType::class);
+    $builder->add('image', FileType::class, array(
+        'data' => '',
+      ))
+      ->add('name')
+      ->add('submit', SubmitType::class);
   }
 
   public function configureOptions(OptionsResolver $resolver)

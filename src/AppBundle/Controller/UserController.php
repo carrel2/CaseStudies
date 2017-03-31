@@ -64,7 +64,7 @@ class UserController extends Controller
 			return $this->redirectToRoute('default');
 		}
 
-		return $this->render('register.html.twig', array(
+		return $this->render('Default/register.html.twig', array(
 			'form' => $form->createView(),
 		));
 	}
@@ -93,7 +93,7 @@ class UserController extends Controller
 		$error = $authenticationUtils->getLastAuthenticationError();
 		$lastUsername = $authenticationUtils->getLastUsername();
 
-		return $this->render('login.html.twig', array(
+		return $this->render('Default/login.html.twig', array(
 			'last_username' => $lastUsername,
 			'error' => $error,
 		));
@@ -144,7 +144,7 @@ class UserController extends Controller
 			}
 		}
 
-		return $this->render('user.html.twig', array(
+		return $this->render('Default/user.html.twig', array(
 			'form' => $form->createView(),
 		));
 	}
@@ -168,7 +168,7 @@ class UserController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		$results = $em->getRepository('AppBundle:Results')->findByUser($this->getUser());
 
-		return $this->render('results.html.twig', array(
+		return $this->render('Default/results.html.twig', array(
 			'results' => $results,
 		));
 	}
