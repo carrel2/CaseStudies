@@ -161,6 +161,8 @@ class DefaultController extends Controller
 				$results->setResults($a);
 			}
 
+			$results->setDiagnosis($session->remove('diagnosis'));
+
 			$em->persist($results);
 		}
 

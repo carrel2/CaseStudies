@@ -21,10 +21,12 @@ use AppBundle\Form\AdminType;
 use AppBundle\Form\CaseType;
 use AppBundle\Form\AnimalType;
 use AppBundle\Form\TestType;
+use AppBundle\Form\MedicationType;
 use AppBundle\Entity\CaseStudy;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Animal;
 use AppBundle\Entity\Test;
+use AppBundle\Entity\Medication;
 
 /**
  * AdminController class
@@ -52,7 +54,9 @@ class AdminController extends Controller
 	 */
 	public function adminAction(Request $r)
 	{
-		return $this->render('admin.html.twig');
+		return $this->render('admin.html.twig', array(
+			'form' => null,
+		));
 	}
 
 	/**
@@ -210,7 +214,7 @@ class AdminController extends Controller
 			}
 		}
 
-		return $this->render('Admin/adminUser.html.twig', array(
+		return $this->render('admin.html.twig', array(
 			'form' => $form->createView(),
 		));
 	}
@@ -257,7 +261,7 @@ class AdminController extends Controller
 			return $this->redirectToRoute('manageUsers');
 		}
 
-		return $this->render('Admin/adminUser.html.twig', array(
+		return $this->render('admin.html.twig', array(
 			'form' => $form->createView(),
 		));
 	}
@@ -385,7 +389,7 @@ class AdminController extends Controller
 				}
 			}
 
-			return $this->render('Admin/test.html.twig', array(
+			return $this->render('Admin/manage.html.twig', array(
 				'form' => $form->createView(),
 			));
 		}
@@ -408,7 +412,7 @@ class AdminController extends Controller
 				$em->flush();
 			}
 
-			return $this->render('Admin/test.html.twig', array(
+			return $this->render('Admin/manage.html.twig', array(
 				'form' => $form->createView(),
 				'test' => null,
 			));
@@ -437,9 +441,99 @@ class AdminController extends Controller
 				 $em->flush();
 			 }
 
-			 return $this->render('Admin/test.html.twig', array(
+			 return $this->render('Admin/manage.html.twig', array(
 				 'form' => $form->createView(),
 				 'test' => $test,
 			 ));
 		 }
+
+		 /**
+		  * @Route("/admin/medications", name="manageMedications")
+			*/
+			public function medicationsAction(Request $r)
+			{
+				$em = $this->getDoctrine()->getManager();
+
+				$form = $this->createFormBuilder()
+					->add('medications', EntityType::class, array(
+						'class' => 'AppBundle:Medication',
+						'choice_label' => 'name',
+						'expanded' => true,
+					))
+					->add('edit', SubmitType::class)
+					->add('delete', SubmitType::class)->getForm();
+
+				$form->handleRequest($r);
+
+				if( $form->isSubmitted() && $form->isValid() )
+				{
+					$medication = $form->getData()['medications'];
+
+					if( $form->get('edit')->isClicked() ) {
+						return $this->redirectToRoute('editMedication', array('id' => $medication->getId()));
+					} else if( $form->get('delete')->isClicked() ) {
+						$em->remove($medication);
+						$em->flush();
+
+						return $this->redirectToRoute('manageMediations');
+					}
+				}
+
+				return $this->render('Admin/manage.html.twig', array(
+					'form' => $form->createView(),
+				));
+			}
+
+			/**
+			 * @Route("/admin/create/medication", name="createMedication")
+			 */
+			public function createMedicationAction(Request $r)
+			{
+				$form = $this->createForm( MedicationType::class );
+
+				$form->handleRequest($r);
+
+				if( $form->isSubmitted() && $form->isValid() )
+				{
+					$em = $this->getDoctrine()->getManager();
+
+					$em->persist($medication);
+
+					$em->flush();
+				}
+
+				return $this->render('Admin/manage.html.twig', array(
+					'form' => $form->createView(),
+					'medication' => null,
+				));
+			}
+
+			/**
+			 * @Route("/admin/edit/medications/{id}", name="editMedication")
+			 */
+			 public function editMedicationAction(Request $r, Medication $medication = null)
+			 {
+				 if( $medication === null )
+				 {
+					 $medication = new Medication();
+				 }
+
+				 $form = $this->createForm( MedicationType::class, $medication );
+
+				 $form->handleRequest($r);
+
+				 if( $form->isSubmitted() && $form->isValid() )
+				 {
+					 $em = $this->getDoctrine()->getManager();
+
+					 $em->persist($medication);
+
+					 $em->flush();
+				 }
+
+				 return $this->render('Admin/manage.html.twig', array(
+					 'form' => $form->createView(),
+					 'medication' => $test,
+				 ));
+			 }
 }

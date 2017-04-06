@@ -10,6 +10,8 @@
 	{% for flash in app.session.flashBag.get('complete') %}
 		<div class="flash-finished">{{ flash }}</div>
 	{% endfor %}
+
+	{{ parent() }}
 {% endblock %}
 
 {% block body %}
@@ -52,7 +54,9 @@
 	{% set finished = app.session.get('finished') %}
 
 	{% if finished %}
-		<a href="{{ path('reset') }}">Finish</a>
+		{{ form_start(form) }}
+		{{ form_widget(form) }}
+		{{ form_end(form) }}
 	{% else %}
 		{% set page = app.session.get('page') %}
 		{% if page == 'review' %}

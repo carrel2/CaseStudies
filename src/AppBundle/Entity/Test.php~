@@ -63,9 +63,14 @@ class Test
 	 *
 	 * @see ArrayCollection::class
 	 */
-	public function __construct()
+	public function __construct(array $array = null)
 	{
 		$this->results = new ArrayCollection();
+		if( $array )
+		{
+			$this->name = $array["name"];
+			$this->cost = $array["cost"] === null ? 0 : $array["cost"];
+		}
 	}
 
     /**

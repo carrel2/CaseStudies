@@ -2,6 +2,79 @@ html, body {
 	height: 100%;
 }
 
+#header {
+	overflow: hidden;
+	background: #bbb;
+}
+
+#header ul li {
+	float: left;
+}
+
+#header ul li.right {
+	float: right;
+}
+
+#header ul li a {
+	display: inline-block;
+	padding: 14px 18px;
+	color: black;
+	text-align: center;
+	text-decoration: none;
+	transition: background .5s;
+}
+
+#header ul li a:hover, #header ul li .admin-menu a:hover {
+	color: white;
+	background: #00cc00;
+}
+
+#header ul li.admin-dropdown, #header ul li.admin-dropdown a {
+	min-width: 160px;
+}
+
+#header ul li.admin-dropdown .admin-menu {
+	display: none;
+	position: absolute;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	transition: height .5s;
+}
+
+#header ul li.admin-dropdown:hover .admin-menu {
+	display: block;
+}
+
+#header ul li .admin-menu a {
+	display: block;
+	background: #eee;
+}
+
+#body {
+	clear: both;
+	padding: 10px 4px;
+}
+
+#body select {
+	padding: 6px 8px;
+	border: solid 1px #bbb;
+	border-radius: 4px;
+}
+
+#body input {
+	padding: 6px;
+	border: solid 1px #bbb;
+	border-radius: 4px;
+}
+
+#body textarea {
+	padding: 10px;
+	width: 90%;
+	height: 100px;
+	border: solid 1px #bbb;
+	border-radius: 3px;
+	resize: none;
+}
+
 em {
 	font-style: italic;
 }
@@ -12,6 +85,8 @@ img#animal {
 }
 
 .remove-button {
+	padding: 6px;
+	border-radius: 2px;
 	background: red;
 }
 
@@ -50,6 +125,13 @@ input[type=checkbox].test:checked + label::before, input[type=checkbox].medicati
 	color: black;
 }
 
+.diagnosis {
+	padding: 8px;
+	border: solid 1px #eee;
+	border-bottom: none;
+	border-radius: 8px 8px 0 0;
+}
+
 button.accordion {
   background-color: #eee;
   color: #444;
@@ -61,6 +143,14 @@ button.accordion {
   border: none;
   outline: none;
   transition: 0.4s;
+}
+
+button.accordion:first-child {
+	border-radius: 8px 8px 0 0;
+}
+
+button.accordion:last-child {
+	border-radius: 0 0 8px 8px;
 }
 
 button.accordion.active {
@@ -81,6 +171,8 @@ div.panel {
 	padding: 18px;
 	display:none;
 	max-height: 20%;
+	border: solid 1px #cfcfcf;
+	border-top: none;
 	overflow: auto;
 }
 
@@ -107,12 +199,4 @@ div.panel {
 .panel li {
 	padding: 8px 20px;
 	list-style: none;
-}
-
-#footer {
-	padding: 8px;
-	width: 100%;
-	height: 10%;
-	position: fixed;
-	bottom: 0px;
 }

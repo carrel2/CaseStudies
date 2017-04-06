@@ -13,7 +13,35 @@
 	</head>
 	<body>
 		<div id="header">
-			{% block header %}{% endblock %}
+			{% block header %}
+				<ul>
+					<li><a href="{{ path('default') }}">Home</a></li>
+					<li><a href="{{ path('user') }}">Account</a></li>
+
+					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+						<li class="right"><a href="{{ path('logout') }}">Logout</a></li>
+					{% endif %}
+
+					{% if is_granted('ROLE_ADMIN') %}
+						<li class="admin-dropdown right">
+							<a href="{{ path('admin') }}">Admin</a>
+
+							<div class="admin-menu">
+								<a href="{{ path('manageUsers') }}">Manage users</a>
+								<a href="{{ path('createAnimal') }}">Create new animal</a>
+								<a href="{{ path('manageAnimals') }}">Manage animals</a>
+								<a href="{{ path('createCase') }}">Create a new case</a>
+								<a href="{{ path('editCase') }}">Edit cases</a>
+								<a href="{{ path('createTest') }}">Create a new test</a>
+								<a href="{{ path('manageTests') }}">Manage tests</a>
+								<a href="{{ path('createMedication') }}">Create a new medication</a>
+								<a href="{{ path('manageMedications') }}">Manage medications</a>
+								<a href="{{ path('import') }}">Import</a>
+							</div>
+						</li>
+					{% endif %}
+				</ul>
+			{% endblock %}
 		</div>
 
 		<div id="body">
@@ -22,13 +50,6 @@
 
 		<div id="footer">
 			{% block footer %}
-				{% if is_granted('ROLE_ADMIN') %}
-					<a href="{{ path('admin') }}">Admin</a>
-				{% endif %}
-
-				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-					<a href="{{ path('logout') }}">Logout</a>
-				{% endif %}
 			{% endblock %}
 		</div>
 	</body>

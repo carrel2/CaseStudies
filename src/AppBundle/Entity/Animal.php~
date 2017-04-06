@@ -44,12 +44,11 @@ class Animal
 
   /**
   * @ORM\Column(type="string")
-  * @Assert\File(mimeTypes={"image/*"})
   */
   private $image;
 
   /**
-  * @ORM\OneToMany(targetEntity="HotSpot", mappedBy="animal", cascade={"all"})
+  * @ORM\OneToMany(targetEntity="HotSpot", mappedBy="animal", cascade={"all"}, orphanRemoval=true)
   */
   private $hotspots;
 

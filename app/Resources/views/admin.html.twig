@@ -5,11 +5,25 @@
 		<div class="flash-notice">{{ flash }}</div>
 	{% endfor %}
 
-	<a href="{{ path('manageUsers') }}">Manage users</a>
-	<a href="{{ path('createAnimal') }}">Create new animal</a>
-	<a href="{{ path('manageAnimals') }}">Manage animals</a>
-	<a href="{{ path('createCase') }}">Create a new case</a>
-	<a href="{{ path('editCase') }}">Edit cases</a>
-	<a href="{{ path('createTest') }}">Create a new test</a>
-	<a href="{{ path('manageTests') }}">Manage tests</a>
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	{% if form %}
+		{{ form_start(form) }}
+
+			{% if form.vars.name == "user" %}
+				{{ form_row(form.email) }}
+				{{ form_row(form.username) }}
+				{{ form_row(form.uin) }}
+				{{ form_row(form.plainPassword) }}
+				{{ form_row(form.role) }}
+
+				{{ form_rest(form) }}
+			{% else %}
+				{{ form_widget(form) }}
+			{% endif %}
+
+		{{ form_end(form) }}
+	{% endif %}
 {% endblock %}

@@ -7,6 +7,8 @@
 	{% for flash in app.session.flashBag.get('error') %}
 		<div class="flash-error">{{ flash }}</div>
 	{% endfor %}
+
+	{{ parent() }}
 {% endblock %}
 
 {% block body %}

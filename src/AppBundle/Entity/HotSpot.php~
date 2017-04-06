@@ -226,6 +226,26 @@ class HotSpot
     }
 
     /**
+     * Get height
+     *
+     * @return integer
+     */
+    public function getHeight()
+    {
+      return $this->y2 - $this->y1;
+    }
+
+    /**
+     * Get width
+     *
+     * @return integer
+     */
+    public function getWidth()
+    {
+      return $this->x2 - $this->x1;
+    }
+
+    /**
      * Set animal
      *
      * @param \AppBundle\Entity\Animal $animal
@@ -281,5 +301,29 @@ class HotSpot
     public function getInfo()
     {
         return $this->info;
+    }
+
+    /**
+     * Add info
+     *
+     * @param \AppBundle\Entity\HotSpotInfo $info
+     *
+     * @return HotSpot
+     */
+    public function addInfo(\AppBundle\Entity\HotSpotInfo $info)
+    {
+        $this->info[] = $info;
+
+        return $this;
+    }
+
+    /**
+     * Remove info
+     *
+     * @param \AppBundle\Entity\HotSpotInfo $info
+     */
+    public function removeInfo(\AppBundle\Entity\HotSpotInfo $info)
+    {
+        $this->info->removeElement($info);
     }
 }

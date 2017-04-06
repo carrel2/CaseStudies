@@ -9,6 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use AppBundle\Entity\UserDay;
 
 /**
@@ -37,16 +39,31 @@ class DayController extends Controller
 		$session = $r->getSession();
 		$user = $this->getUser();
 
+		$form = $this->createFormBuilder()
+			->add('diagnosis', TextareaType::class)
+			->add('finish', SubmitType::class)->getForm();
+
 		if( !$user->getIsActive() ) {
 			return $this->redirectToRoute('default');
 		}
 
-		$days = $user->getDays();
+		$form->handleRequest($r);
+
+		if( $form->isSubmitted() && $form->isValid() )
+		{
+			$diagnosis = $form->getData()['diagnosis'];
+
+			$session->set('diagnosis', $diagnosis);
+
+			return $this->redirectToRoute('reset');
+		}
+
 		$finished = $session->get('finished');
 
 		return $this->render('Default/review.html.twig', array(
 			'user' => $user,
 			'finished' => $finished,
+			'form' => $form->createView(),
 		));
 	}
 
