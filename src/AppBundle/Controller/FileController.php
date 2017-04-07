@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Port\Excel\ExcelReader;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use AppBundle\Entity\Test;
 use AppBundle\Entity\Medication;
@@ -16,6 +16,8 @@ use AppBundle\Entity\Medication;
 class FileController extends Controller
 {
   /**
+   * @todo read every sheet in the given file unless a specific sheet is specified
+   *
    * @Route("/import", name="import")
    */
   public function fileAction(Request $r)
@@ -27,12 +29,18 @@ class FileController extends Controller
       ->add('type', ChoiceType::class, array(
         'choices' => array('Medication' => 'Medication', 'Test' => 'Test'),
       ))
-      ->add('file', FileType::class)
-      ->add('sheet', IntegerType::class, array(
+      ->add('file', FileType::class, array(
+        'attr' => array(
+          'accept' => 'application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        ),
+      ))
+      ->add('sheet', TextType::class, array(
         'required' => false,
-        'scale' => 0,
-        'empty_data' => null,
-        'attr' => array('min' => 0),
+        'empty_data' => 1,
+        'attr' => array(
+          'pattern' => '^[1-9][0-9]*',
+          'title' => 'The sheet number to import data from (defaults to 1)',
+        ),
       ))
       ->add('submit', SubmitType::class)
       ->getForm();
@@ -41,34 +49,45 @@ class FileController extends Controller
 
     if( $form->isSubmitted() && $form->isValid() )
     {
+      $count = 0;
       $type = $form->getData()['type'];
       $file = $form->getData()['file'];
-      $sheet = abs($form->getData()['sheet']);
-      $reader = new ExcelReader(new \SplFileObject($file->getRealPath()), 0, $sheet);
+      $sheet = $form->getData()['sheet'];
 
-      if( $type == "Test" )
-      {
-        foreach ($reader as $row)
+      try {
+        $reader = new ExcelReader(new \SplFileObject($file->getRealPath()), 0, $sheet - 1);
+
+        if( $type == "Test" )
         {
-          $row = array_change_key_case($row);
-          if( !$em->getRepository('AppBundle:Test')->findOneByName($row["name"]) )
+          foreach ($reader as $row)
           {
-            $em->persist(new Test($row));
+            $row = array_change_key_case($row);
+            if( $row["name"] !== null && !$em->getRepository('AppBundle:Test')->findOneByName($row["name"]) )
+            {
+              $count += 1;
+              $em->persist(new Test($row));
+            }
+          }
+        } else if( $type == "Medication" )
+        {
+          foreach ($reader as $row)
+          {
+            $row = array_change_key_case($row);
+            if( $row["name"] !== null && !$em->getRepository('AppBundle:Medication')->findOneByName($row["name"]) )
+            {
+              $count += 1;
+              $em->persist(new Medication($row));
+            }
           }
         }
-      } else if( $type == "Medication" )
+
+        $em->flush();
+
+        $this->addFlash('notice', "Imported $count ${type}s!");
+      } catch( \Exception $e )
       {
-        foreach ($reader as $row)
-        {
-          $row = array_change_key_case($row);
-          if( !$em->getRepository('AppBundle:Medication')->findOneByName($row["name"]) )
-          {
-            $em->persist(new Medication($row));
-          }
-        }
+        $this->addFlash('error', 'Invalid sheet number');
       }
-
-      $em->flush();
     }
 
     return $this->render('Default/import.html.twig', array(

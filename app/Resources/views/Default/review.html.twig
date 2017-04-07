@@ -6,14 +6,6 @@
 	<script src="{{ asset('js/accordion.js') }}"></script>
 {% endblock %}
 
-{% block header %}
-	{% for flash in app.session.flashBag.get('complete') %}
-		<div class="flash-finished">{{ flash }}</div>
-	{% endfor %}
-
-	{{ parent() }}
-{% endblock %}
-
 {% block body %}
 	{% for day in user.days %}
 		<button class="accordion">Day {{ loop.index }}</button>

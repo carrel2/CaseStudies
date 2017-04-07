@@ -23,6 +23,7 @@ $(function(){
 				$('img#animal').data('x2', selection.x2);
 				$('img#animal').data('y2', selection.y2);
 				$('img#animal').data('selected', true);
+				$('input#name').focus();
 		}
 	});
 });

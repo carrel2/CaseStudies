@@ -130,6 +130,8 @@ class AdminController extends Controller
 	 * Function to get a case study and all information associated with it. Called through ajax.
 	 * Returns caseInfo.html.twig template
 	 *
+	 * @todo add confirmation for delete
+	 *
 	 * @param Request $r Request object
 	 * @param CaseStudy $case CaseStudy object
 	 *
@@ -150,16 +152,18 @@ class AdminController extends Controller
 			$case = $form->getData();
 
 			if( $form->get('update')->isClicked() ) {
+				$this->addFlash('notice', 'Updated ' . $case->getTitle());
+
 				$em->persist($case);
 			} else if( $form->get('delete')->isClicked() ) {
+				$this->addFlash('notice', 'Deleted ' . $case->getTitle());
+
 				$em->remove($case);
 			}
 
 			$em->flush();
 
 			$r->getSession()->set('case', $case->getId());
-
-			$this->addFlash('notice', 'Updated ' . $case->getTitle());
 
 			return $this->redirectToRoute('editCase');
 		}

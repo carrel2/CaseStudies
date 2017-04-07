@@ -60,6 +60,15 @@ class Results
   */
   private $results;
 
+  /**
+  * The diagnosis submitted
+  *
+  * @var string
+  *
+  * @ORM\Column(type="text")
+  */
+  private $diagnosis;
+
     /**
      * Get id
      *
@@ -106,6 +115,30 @@ class Results
       $this->results[] = $element;
 
       return $this;
+    }
+
+    /**
+     * Set diagnosis
+     *
+     * @param string $d
+     *
+     * @return self
+     */
+    public function setDiagnosis($d)
+    {
+      $this->diagnosis = $d;
+
+      return $this;
+    }
+
+    /**
+     * Get diagnosis
+     *
+     * @return string
+     */
+    public function getDiagnosis()
+    {
+      return $this->diagnosis;
     }
 
     /**

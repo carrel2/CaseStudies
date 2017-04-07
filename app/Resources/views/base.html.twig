@@ -44,6 +44,17 @@
 			{% endblock %}
 		</div>
 
+		<div id="flashes">
+			{% block flashes %}
+				{% for flash in app.session.flashBag.get('notice') %}
+					<div class="flash flash-notice">{{ flash }}</div>
+				{% endfor %}
+				{% for flash in app.session.flashBag.get('error') %}
+					<div class="flash flash-error">{{ flash }}</div>
+				{% endfor %}
+			{% endblock %}
+		</div>
+
 		<div id="body">
 			{% block body %}{% endblock %}
 		</div>
