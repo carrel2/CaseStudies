@@ -33,7 +33,7 @@ class DefaultController extends Controller
 	 * Shows DefaultType form. Renders default.html.twig
 	 *
 	 * On submission, associates the current User with the selected CaseStudy unless an association already exists.
-	 * Redirects to HotSpots::showPage()
+	 * Redirects to HotSpotController::showPage()
 	 *
 	 * @see DefaultType::class
 	 * @see User::class

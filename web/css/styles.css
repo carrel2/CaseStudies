@@ -75,6 +75,18 @@ html, body {
 	resize: none;
 }
 
+#body button {
+	padding: 10px 18px;
+	border: none;
+	cursor: pointer;
+	transition: background .5s;
+}
+
+#body button:hover {
+	color: white;
+	background: #aaa;
+}
+
 em {
 	font-style: italic;
 }

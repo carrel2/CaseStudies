@@ -33,8 +33,6 @@ use AppBundle\Entity\Medication;
  *
  * AdminController class extends \Symfony\Bundle\FrameworkBundle\Controller\Controller
  *
- * @todo create forms to add tests and medications
- *
  * @see http://api.symfony.com/3.2/Symfony/Bundle/FrameworkBundle/Controller/Controller.html
  */
 class AdminController extends Controller
@@ -43,8 +41,6 @@ class AdminController extends Controller
 	 * adminAction function
 	 *
 	 * Default admin action. Renders admin.html.twig template
-	 *
-	 * @todo look into consolidating admin.html.twig and adminUser.html.twig into one template
 	 *
 	 * @param Request $r Request object
 	 *

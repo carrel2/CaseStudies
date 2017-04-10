@@ -39,13 +39,13 @@ class DayController extends Controller
 		$session = $r->getSession();
 		$user = $this->getUser();
 
-		$form = $this->createFormBuilder()
-			->add('diagnosis', TextareaType::class)
-			->add('finish', SubmitType::class)->getForm();
-
 		if( !$user->getIsActive() ) {
 			return $this->redirectToRoute('default');
 		}
+
+		$form = $this->createFormBuilder()
+			->add('diagnosis', TextareaType::class)
+			->add('finish', SubmitType::class)->getForm();
 
 		$form->handleRequest($r);
 
@@ -75,7 +75,6 @@ class DayController extends Controller
 	 * @see Day::class
 	 *
 	 * @todo update logic to be more dynamic, extend past actual CaseStudy
-	 * @todo add diagnoses input to submit when finished
 	 * @todo add email functionality
 	 *
 	 * @param Request $r Request object

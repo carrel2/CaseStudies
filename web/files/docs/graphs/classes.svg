@@ -66,7 +66,7 @@
 <text text-anchor="middle" x="724.75" y="-2159.2" font-family="Courier,monospace" font-size="11.00">CaseType</text>
 </g>
 <!-- \\AppBundle\\Form\\CaseType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType -->
-<g id="edge8" class="edge"><title>\\AppBundle\\Form\\CaseType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType</title>
+<g id="edge9" class="edge"><title>\\AppBundle\\Form\\CaseType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType</title>
 <path fill="none" stroke="black" d="M689.243,-2158.16C665.519,-2154.52 633.809,-2147.66 608.25,-2135 477.74,-2070.37 353.641,-1944.45 303.941,-1890.52"/>
 <polygon fill="none" stroke="black" points="306.488,-1888.12 297.156,-1883.1 301.322,-1892.84 306.488,-1888.12"/>
 </g>
@@ -76,7 +76,7 @@
 <text text-anchor="middle" x="724.75" y="-2105.2" font-family="Courier,monospace" font-size="11.00">MedicationsType</text>
 </g>
 <!-- \\AppBundle\\Form\\MedicationsType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType -->
-<g id="edge10" class="edge"><title>\\AppBundle\\Form\\MedicationsType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType</title>
+<g id="edge11" class="edge"><title>\\AppBundle\\Form\\MedicationsType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType</title>
 <path fill="none" stroke="black" d="M665.482,-2098.58C646.756,-2094.45 626.218,-2088.74 608.25,-2081 488.745,-2029.54 365.287,-1934.47 310.433,-1889.63"/>
 <polygon fill="none" stroke="black" points="312.484,-1886.79 302.538,-1883.13 308.036,-1892.19 312.484,-1886.79"/>
 </g>
@@ -86,7 +86,7 @@
 <text text-anchor="middle" x="724.75" y="-2051.2" font-family="Courier,monospace" font-size="11.00">TestType</text>
 </g>
 <!-- \\AppBundle\\Form\\TestType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType -->
-<g id="edge11" class="edge"><title>\\AppBundle\\Form\\TestType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType</title>
+<g id="edge12" class="edge"><title>\\AppBundle\\Form\\TestType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType</title>
 <path fill="none" stroke="black" d="M689.038,-2048.05C665.786,-2043.54 634.706,-2036.5 608.25,-2027 499.604,-1987.99 379.955,-1922.48 319.964,-1887.93"/>
 <polygon fill="none" stroke="black" points="321.615,-1884.84 311.206,-1882.86 318.108,-1890.9 321.615,-1884.84"/>
 </g>
@@ -96,7 +96,7 @@
 <text text-anchor="middle" x="724.75" y="-1997.2" font-family="Courier,monospace" font-size="11.00">AdminUserType</text>
 </g>
 <!-- \\AppBundle\\Form\\AdminUserType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType -->
-<g id="edge14" class="edge"><title>\\AppBundle\\Form\\AdminUserType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType</title>
+<g id="edge15" class="edge"><title>\\AppBundle\\Form\\AdminUserType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType</title>
 <path fill="none" stroke="black" d="M672.614,-1989.08C652.456,-1984.5 629.164,-1978.88 608.25,-1973 512.966,-1946.19 404.158,-1908.91 339.138,-1885.9"/>
 <polygon fill="none" stroke="black" points="340.074,-1882.51 329.479,-1882.47 337.733,-1889.11 340.074,-1882.51"/>
 </g>
@@ -106,7 +106,7 @@
 <text text-anchor="middle" x="724.75" y="-1943.2" font-family="Courier,monospace" font-size="11.00">TestResultsType</text>
 </g>
 <!-- \\AppBundle\\Form\\TestResultsType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType -->
-<g id="edge16" class="edge"><title>\\AppBundle\\Form\\TestResultsType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType</title>
+<g id="edge17" class="edge"><title>\\AppBundle\\Form\\TestResultsType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType</title>
 <path fill="none" stroke="black" d="M665.43,-1935.33C592.758,-1922.03 467.473,-1899.1 379.765,-1883.05"/>
 <polygon fill="none" stroke="black" points="380.263,-1879.58 369.796,-1881.23 379.003,-1886.47 380.263,-1879.58"/>
 </g>
@@ -116,7 +116,7 @@
 <text text-anchor="middle" x="724.75" y="-1889.2" font-family="Courier,monospace" font-size="11.00">AdminType</text>
 </g>
 <!-- \\AppBundle\\Form\\AdminType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType -->
-<g id="edge17" class="edge"><title>\\AppBundle\\Form\\AdminType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType</title>
+<g id="edge18" class="edge"><title>\\AppBundle\\Form\\AdminType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType</title>
 <path fill="none" stroke="black" d="M686.012,-1889.7C635.487,-1886.62 542.449,-1880.94 458.289,-1875.81"/>
 <polygon fill="none" stroke="black" points="458.268,-1872.3 448.073,-1875.18 457.842,-1879.29 458.268,-1872.3"/>
 </g>
@@ -126,7 +126,7 @@
 <text text-anchor="middle" x="724.75" y="-1835.2" font-family="Courier,monospace" font-size="11.00">TestsType</text>
 </g>
 <!-- \\AppBundle\\Form\\TestsType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType -->
-<g id="edge18" class="edge"><title>\\AppBundle\\Form\\TestsType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType</title>
+<g id="edge19" class="edge"><title>\\AppBundle\\Form\\TestsType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType</title>
 <path fill="none" stroke="black" d="M686.012,-1840.3C635.487,-1843.38 542.449,-1849.06 458.289,-1854.19"/>
 <polygon fill="none" stroke="black" points="457.842,-1850.71 448.073,-1854.82 458.268,-1857.7 457.842,-1850.71"/>
 </g>
@@ -136,7 +136,7 @@
 <text text-anchor="middle" x="724.75" y="-1781.2" font-family="Courier,monospace" font-size="11.00">DayType</text>
 </g>
 <!-- \\AppBundle\\Form\\DayType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType -->
-<g id="edge21" class="edge"><title>\\AppBundle\\Form\\DayType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType</title>
+<g id="edge22" class="edge"><title>\\AppBundle\\Form\\DayType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType</title>
 <path fill="none" stroke="black" d="M692.626,-1789.7C628.608,-1801.41 479.806,-1828.64 379.81,-1846.94"/>
 <polygon fill="none" stroke="black" points="378.893,-1843.55 369.686,-1848.79 380.153,-1850.44 378.893,-1843.55"/>
 </g>
@@ -146,48 +146,48 @@
 <text text-anchor="middle" x="724.75" y="-1727.2" font-family="Courier,monospace" font-size="11.00">HotspotType</text>
 </g>
 <!-- \\AppBundle\\Form\\HotspotType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType -->
-<g id="edge22" class="edge"><title>\\AppBundle\\Form\\HotspotType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType</title>
+<g id="edge23" class="edge"><title>\\AppBundle\\Form\\HotspotType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType</title>
 <path fill="none" stroke="black" d="M679.087,-1739.46C657.562,-1744.27 631.443,-1750.47 608.25,-1757 512.966,-1783.81 404.158,-1821.09 339.138,-1844.1"/>
 <polygon fill="none" stroke="black" points="337.733,-1840.89 329.479,-1847.53 340.074,-1847.49 337.733,-1840.89"/>
 </g>
-<!-- \\AppBundle\\Form\\AnimalType -->
-<g id="node11" class="node"><title>\\AppBundle\\Form\\AnimalType</title>
-<polygon fill="none" stroke="black" points="766.75,-1694 682.75,-1694 682.75,-1658 766.75,-1658 766.75,-1694"/>
-<text text-anchor="middle" x="724.75" y="-1673.2" font-family="Courier,monospace" font-size="11.00">AnimalType</text>
-</g>
-<!-- \\AppBundle\\Form\\AnimalType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType -->
-<g id="edge23" class="edge"><title>\\AppBundle\\Form\\AnimalType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType</title>
-<path fill="none" stroke="black" d="M682.733,-1683.2C660.357,-1687.71 632.38,-1694.34 608.25,-1703 499.604,-1742.01 379.955,-1807.52 319.964,-1842.07"/>
-<polygon fill="none" stroke="black" points="318.108,-1839.1 311.206,-1847.14 321.615,-1845.16 318.108,-1839.1"/>
-</g>
-<!-- \\AppBundle\\Form\\DefaultType -->
-<g id="node12" class="node"><title>\\AppBundle\\Form\\DefaultType</title>
-<polygon fill="none" stroke="black" points="770.25,-1640 679.25,-1640 679.25,-1604 770.25,-1604 770.25,-1640"/>
-<text text-anchor="middle" x="724.75" y="-1619.2" font-family="Courier,monospace" font-size="11.00">DefaultType</text>
-</g>
-<!-- \\AppBundle\\Form\\DefaultType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType -->
-<g id="edge24" class="edge"><title>\\AppBundle\\Form\\DefaultType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType</title>
-<path fill="none" stroke="black" d="M678.98,-1628.65C657.074,-1632.85 630.663,-1639.35 608.25,-1649 488.745,-1700.46 365.287,-1795.53 310.433,-1840.37"/>
-<polygon fill="none" stroke="black" points="308.036,-1837.81 302.538,-1846.87 312.484,-1843.21 308.036,-1837.81"/>
-</g>
-<!-- \\AppBundle\\Form\\UserType -->
-<g id="node13" class="node"><title>\\AppBundle\\Form\\UserType</title>
-<polygon fill="none" stroke="black" points="760.25,-1586 689.25,-1586 689.25,-1550 760.25,-1550 760.25,-1586"/>
-<text text-anchor="middle" x="724.75" y="-1565.2" font-family="Courier,monospace" font-size="11.00">UserType</text>
-</g>
-<!-- \\AppBundle\\Form\\UserType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType -->
-<g id="edge25" class="edge"><title>\\AppBundle\\Form\\UserType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType</title>
-<path fill="none" stroke="black" d="M689.243,-1571.84C665.519,-1575.48 633.809,-1582.34 608.25,-1595 477.74,-1659.63 353.641,-1785.55 303.941,-1839.48"/>
-<polygon fill="none" stroke="black" points="301.322,-1837.16 297.156,-1846.9 306.488,-1841.88 301.322,-1837.16"/>
-</g>
 <!-- \\AppBundle\\Form\\MedicationType -->
-<g id="node14" class="node"><title>\\AppBundle\\Form\\MedicationType</title>
-<polygon fill="none" stroke="black" points="780.25,-1532 669.25,-1532 669.25,-1496 780.25,-1496 780.25,-1532"/>
-<text text-anchor="middle" x="724.75" y="-1511.2" font-family="Courier,monospace" font-size="11.00">MedicationType</text>
+<g id="node11" class="node"><title>\\AppBundle\\Form\\MedicationType</title>
+<polygon fill="none" stroke="black" points="780.25,-1694 669.25,-1694 669.25,-1658 780.25,-1658 780.25,-1694"/>
+<text text-anchor="middle" x="724.75" y="-1673.2" font-family="Courier,monospace" font-size="11.00">MedicationType</text>
 </g>
 <!-- \\AppBundle\\Form\\MedicationType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType -->
-<g id="edge27" class="edge"><title>\\AppBundle\\Form\\MedicationType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType</title>
-<path fill="none" stroke="black" d="M669.187,-1520.41C649.134,-1524.36 626.812,-1530.74 608.25,-1541 466.615,-1619.32 344.388,-1776.43 299.471,-1838.7"/>
+<g id="edge24" class="edge"><title>\\AppBundle\\Form\\MedicationType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType</title>
+<path fill="none" stroke="black" d="M669.236,-1686.04C649.714,-1690.34 627.728,-1696.01 608.25,-1703 499.604,-1742.01 379.955,-1807.52 319.964,-1842.07"/>
+<polygon fill="none" stroke="black" points="318.108,-1839.1 311.206,-1847.14 321.615,-1845.16 318.108,-1839.1"/>
+</g>
+<!-- \\AppBundle\\Form\\AnimalType -->
+<g id="node12" class="node"><title>\\AppBundle\\Form\\AnimalType</title>
+<polygon fill="none" stroke="black" points="766.75,-1640 682.75,-1640 682.75,-1604 766.75,-1604 766.75,-1640"/>
+<text text-anchor="middle" x="724.75" y="-1619.2" font-family="Courier,monospace" font-size="11.00">AnimalType</text>
+</g>
+<!-- \\AppBundle\\Form\\AnimalType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType -->
+<g id="edge25" class="edge"><title>\\AppBundle\\Form\\AnimalType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType</title>
+<path fill="none" stroke="black" d="M682.543,-1627.98C659.984,-1632.14 631.892,-1638.82 608.25,-1649 488.745,-1700.46 365.287,-1795.53 310.433,-1840.37"/>
+<polygon fill="none" stroke="black" points="308.036,-1837.81 302.538,-1846.87 312.484,-1843.21 308.036,-1837.81"/>
+</g>
+<!-- \\AppBundle\\Form\\DefaultType -->
+<g id="node13" class="node"><title>\\AppBundle\\Form\\DefaultType</title>
+<polygon fill="none" stroke="black" points="770.25,-1586 679.25,-1586 679.25,-1550 770.25,-1550 770.25,-1586"/>
+<text text-anchor="middle" x="724.75" y="-1565.2" font-family="Courier,monospace" font-size="11.00">DefaultType</text>
+</g>
+<!-- \\AppBundle\\Form\\DefaultType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType -->
+<g id="edge26" class="edge"><title>\\AppBundle\\Form\\DefaultType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType</title>
+<path fill="none" stroke="black" d="M679.065,-1573.53C656.934,-1577.47 630.302,-1584.08 608.25,-1595 477.74,-1659.63 353.641,-1785.55 303.941,-1839.48"/>
+<polygon fill="none" stroke="black" points="301.322,-1837.16 297.156,-1846.9 306.488,-1841.88 301.322,-1837.16"/>
+</g>
+<!-- \\AppBundle\\Form\\UserType -->
+<g id="node14" class="node"><title>\\AppBundle\\Form\\UserType</title>
+<polygon fill="none" stroke="black" points="760.25,-1532 689.25,-1532 689.25,-1496 760.25,-1496 760.25,-1532"/>
+<text text-anchor="middle" x="724.75" y="-1511.2" font-family="Courier,monospace" font-size="11.00">UserType</text>
+</g>
+<!-- \\AppBundle\\Form\\UserType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType -->
+<g id="edge27" class="edge"><title>\\AppBundle\\Form\\UserType&#45;&gt;\\Symfony\\Component\\Form\\AbstractType</title>
+<path fill="none" stroke="black" d="M689.123,-1517.08C665.198,-1520.38 633.299,-1527.15 608.25,-1541 466.615,-1619.32 344.388,-1776.43 299.471,-1838.7"/>
 <polygon fill="none" stroke="black" points="296.62,-1836.67 293.652,-1846.84 302.315,-1840.74 296.62,-1836.67"/>
 </g>
 <!-- \\AppBundle\\Entity\\HotSpot -->
@@ -305,54 +305,54 @@
 <path fill="none" stroke="black" d="M672.543,-642.629C602.244,-629.765 474.284,-606.348 383.835,-589.796"/>
 <polygon fill="none" stroke="black" points="384.293,-586.322 373.826,-587.964 383.033,-593.207 384.293,-586.322"/>
 </g>
+<!-- \\AppBundle\\Controller\\FileController -->
+<g id="node30" class="node"><title>\\AppBundle\\Controller\\FileController</title>
+<polygon fill="none" stroke="black" points="780.25,-616 669.25,-616 669.25,-580 780.25,-580 780.25,-616"/>
+<text text-anchor="middle" x="724.75" y="-595.2" font-family="Courier,monospace" font-size="11.00">FileController</text>
+</g>
+<!-- \\AppBundle\\Controller\\FileController&#45;&gt;\\Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller -->
+<g id="edge8" class="edge"><title>\\AppBundle\\Controller\\FileController&#45;&gt;\\Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller</title>
+<path fill="none" stroke="black" d="M669.032,-594.662C624.627,-591.954 558.985,-587.949 494.274,-584.002"/>
+<polygon fill="none" stroke="black" points="494.095,-580.485 483.9,-583.369 493.668,-587.472 494.095,-580.485"/>
+</g>
 <!-- \\AppBundle\\Controller\\AdminController -->
-<g id="node30" class="node"><title>\\AppBundle\\Controller\\AdminController</title>
-<polygon fill="none" stroke="black" points="783.75,-616 665.75,-616 665.75,-580 783.75,-580 783.75,-616"/>
-<text text-anchor="middle" x="724.75" y="-595.2" font-family="Courier,monospace" font-size="11.00">AdminController</text>
+<g id="node31" class="node"><title>\\AppBundle\\Controller\\AdminController</title>
+<polygon fill="none" stroke="black" points="783.75,-562 665.75,-562 665.75,-526 783.75,-526 783.75,-562"/>
+<text text-anchor="middle" x="724.75" y="-541.2" font-family="Courier,monospace" font-size="11.00">AdminController</text>
 </g>
 <!-- \\AppBundle\\Controller\\AdminController&#45;&gt;\\Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller -->
-<g id="edge9" class="edge"><title>\\AppBundle\\Controller\\AdminController&#45;&gt;\\Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller</title>
-<path fill="none" stroke="black" d="M665.43,-594.442C621.087,-591.738 557.154,-587.838 494.123,-583.993"/>
-<polygon fill="none" stroke="black" points="494.212,-580.492 484.017,-583.376 493.786,-587.479 494.212,-580.492"/>
-</g>
-<!-- \\AppBundle\\Controller\\TestsController -->
-<g id="node31" class="node"><title>\\AppBundle\\Controller\\TestsController</title>
-<polygon fill="none" stroke="black" points="783.75,-562 665.75,-562 665.75,-526 783.75,-526 783.75,-562"/>
-<text text-anchor="middle" x="724.75" y="-541.2" font-family="Courier,monospace" font-size="11.00">TestsController</text>
-</g>
-<!-- \\AppBundle\\Controller\\TestsController&#45;&gt;\\Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller -->
-<g id="edge15" class="edge"><title>\\AppBundle\\Controller\\TestsController&#45;&gt;\\Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller</title>
+<g id="edge10" class="edge"><title>\\AppBundle\\Controller\\AdminController&#45;&gt;\\Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller</title>
 <path fill="none" stroke="black" d="M665.43,-547.558C621.087,-550.262 557.154,-554.162 494.123,-558.007"/>
 <polygon fill="none" stroke="black" points="493.786,-554.521 484.017,-558.624 494.212,-561.508 493.786,-554.521"/>
 </g>
+<!-- \\AppBundle\\Controller\\TestsController -->
+<g id="node32" class="node"><title>\\AppBundle\\Controller\\TestsController</title>
+<polygon fill="none" stroke="black" points="783.75,-508 665.75,-508 665.75,-472 783.75,-472 783.75,-508"/>
+<text text-anchor="middle" x="724.75" y="-487.2" font-family="Courier,monospace" font-size="11.00">TestsController</text>
+</g>
+<!-- \\AppBundle\\Controller\\TestsController&#45;&gt;\\Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller -->
+<g id="edge16" class="edge"><title>\\AppBundle\\Controller\\TestsController&#45;&gt;\\Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller</title>
+<path fill="none" stroke="black" d="M665.43,-500.673C593.888,-513.765 471.357,-536.188 383.884,-552.195"/>
+<polygon fill="none" stroke="black" points="383.138,-548.774 373.931,-554.017 384.398,-555.659 383.138,-548.774"/>
+</g>
 <!-- \\AppBundle\\Controller\\UserController -->
-<g id="node32" class="node"><title>\\AppBundle\\Controller\\UserController</title>
-<polygon fill="none" stroke="black" points="780.25,-508 669.25,-508 669.25,-472 780.25,-472 780.25,-508"/>
-<text text-anchor="middle" x="724.75" y="-487.2" font-family="Courier,monospace" font-size="11.00">UserController</text>
+<g id="node33" class="node"><title>\\AppBundle\\Controller\\UserController</title>
+<polygon fill="none" stroke="black" points="780.25,-454 669.25,-454 669.25,-418 780.25,-418 780.25,-454"/>
+<text text-anchor="middle" x="724.75" y="-433.2" font-family="Courier,monospace" font-size="11.00">UserController</text>
 </g>
 <!-- \\AppBundle\\Controller\\UserController&#45;&gt;\\Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller -->
-<g id="edge19" class="edge"><title>\\AppBundle\\Controller\\UserController&#45;&gt;\\Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller</title>
-<path fill="none" stroke="black" d="M669.032,-500.013C598.025,-513.008 472.712,-535.94 383.743,-552.221"/>
-<polygon fill="none" stroke="black" points="383.102,-548.78 373.895,-554.023 384.362,-555.666 383.102,-548.78"/>
-</g>
-<!-- \\AppBundle\\Controller\\HotSpotController -->
-<g id="node33" class="node"><title>\\AppBundle\\Controller\\HotSpotController</title>
-<polygon fill="none" stroke="black" points="790.25,-454 659.25,-454 659.25,-418 790.25,-418 790.25,-454"/>
-<text text-anchor="middle" x="724.75" y="-433.2" font-family="Courier,monospace" font-size="11.00">HotSpotController</text>
-</g>
-<!-- \\AppBundle\\Controller\\HotSpotController&#45;&gt;\\Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller -->
-<g id="edge20" class="edge"><title>\\AppBundle\\Controller\\HotSpotController&#45;&gt;\\Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller</title>
-<path fill="none" stroke="black" d="M659.04,-450.055C642.413,-453.959 624.604,-458.399 608.25,-463 513.376,-489.693 405.096,-526.772 339.981,-549.806"/>
+<g id="edge20" class="edge"><title>\\AppBundle\\Controller\\UserController&#45;&gt;\\Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller</title>
+<path fill="none" stroke="black" d="M669.145,-447.713C649.814,-452.136 627.974,-457.451 608.25,-463 513.376,-489.693 405.096,-526.772 339.981,-549.806"/>
 <polygon fill="none" stroke="black" points="338.557,-546.597 330.302,-553.239 340.897,-553.194 338.557,-546.597"/>
 </g>
-<!-- \\AppBundle\\Controller\\FileController -->
-<g id="node34" class="node"><title>\\AppBundle\\Controller\\FileController</title>
-<polygon fill="none" stroke="black" points="780.25,-400 669.25,-400 669.25,-364 780.25,-364 780.25,-400"/>
-<text text-anchor="middle" x="724.75" y="-379.2" font-family="Courier,monospace" font-size="11.00">FileController</text>
+<!-- \\AppBundle\\Controller\\HotSpotController -->
+<g id="node34" class="node"><title>\\AppBundle\\Controller\\HotSpotController</title>
+<polygon fill="none" stroke="black" points="790.25,-400 659.25,-400 659.25,-364 790.25,-364 790.25,-400"/>
+<text text-anchor="middle" x="724.75" y="-379.2" font-family="Courier,monospace" font-size="11.00">HotSpotController</text>
 </g>
-<!-- \\AppBundle\\Controller\\FileController&#45;&gt;\\Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller -->
-<g id="edge26" class="edge"><title>\\AppBundle\\Controller\\FileController&#45;&gt;\\Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller</title>
-<path fill="none" stroke="black" d="M669.236,-392.042C649.714,-396.342 627.728,-402.006 608.25,-409 499.888,-447.909 380.58,-513.18 320.435,-547.802"/>
+<!-- \\AppBundle\\Controller\\HotSpotController&#45;&gt;\\Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller -->
+<g id="edge21" class="edge"><title>\\AppBundle\\Controller\\HotSpotController&#45;&gt;\\Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller</title>
+<path fill="none" stroke="black" d="M659.142,-394.341C642.348,-398.296 624.434,-403.189 608.25,-409 499.888,-447.909 380.58,-513.18 320.435,-547.802"/>
 <polygon fill="none" stroke="black" points="318.553,-544.847 311.65,-552.883 322.058,-550.906 318.553,-544.847"/>
 </g>
 <!-- \\AppBundle\\EventListener\\AnimalImageUploadListener -->
@@ -391,7 +391,7 @@
 <text text-anchor="middle" x="280.125" y="-81.3" font-family="Times,serif" font-size="14.00" fill="gray">\Doctrine\Common\Collections\Collection</text>
 </g>
 <!-- \\Doctrine\\Common\\Collections\\ArrayCollection&#45;&gt;\\Doctrine\\Common\\Collections\\Collection -->
-<g id="edge12" class="edge"><title>\\Doctrine\\Common\\Collections\\ArrayCollection&#45;&gt;\\Doctrine\\Common\\Collections\\Collection</title>
+<g id="edge13" class="edge"><title>\\Doctrine\\Common\\Collections\\ArrayCollection&#45;&gt;\\Doctrine\\Common\\Collections\\Collection</title>
 <path fill="none" stroke="black" stroke-dasharray="1,5" d="M665.43,-61.5575C612.742,-64.7715 532.397,-69.6725 458.768,-74.1638"/>
 <polygon fill="none" stroke="black" points="458.195,-70.6922 448.427,-74.7946 458.622,-77.6792 458.195,-70.6922"/>
 </g>
@@ -401,7 +401,7 @@
 <text text-anchor="middle" x="280.125" y="-27.3" font-family="Times,serif" font-size="14.00" fill="gray">\Doctrine\Common\Collections\Selectable</text>
 </g>
 <!-- \\Doctrine\\Common\\Collections\\ArrayCollection&#45;&gt;\\Doctrine\\Common\\Collections\\Selectable -->
-<g id="edge13" class="edge"><title>\\Doctrine\\Common\\Collections\\ArrayCollection&#45;&gt;\\Doctrine\\Common\\Collections\\Selectable</title>
+<g id="edge14" class="edge"><title>\\Doctrine\\Common\\Collections\\ArrayCollection&#45;&gt;\\Doctrine\\Common\\Collections\\Selectable</title>
 <path fill="none" stroke="black" stroke-dasharray="1,5" d="M665.43,-54.4425C612.854,-51.2353 532.739,-46.3484 459.238,-41.8648"/>
 <polygon fill="none" stroke="black" points="459.109,-38.3505 448.914,-41.2351 458.683,-45.3376 459.109,-38.3505"/>
 </g>

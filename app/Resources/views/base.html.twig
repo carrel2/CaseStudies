@@ -18,6 +18,10 @@
 					<li><a href="{{ path('default') }}">Home</a></li>
 					<li><a href="{{ path('user') }}">Account</a></li>
 
+					{% if app.user.hasResults %}
+						<li><a href="{{ path('results') }}">Past results</a></li>
+					{% endif %}
+
 					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 						<li class="right"><a href="{{ path('logout') }}">Logout</a></li>
 					{% endif %}

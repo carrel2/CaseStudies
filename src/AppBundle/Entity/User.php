@@ -463,4 +463,9 @@ class User implements UserInterface, \Serializable
 		{
 			return $this->results;
 		}
+
+		public function hasResults()
+		{
+			return !$this->results->isEmpty();
+		}
 	}

@@ -28,7 +28,6 @@ class HotSpotController extends Controller
 	 *
 	 * Evaluation page. Retrieves all HotSpots from the current Day of the associated CaseStudy.
 	 *
-	 * @todo add image functionality for HotSpots
 	 * @todo research 3d model functionality for HotSpots
 	 *
 	 * @see HotSpot::class
@@ -67,8 +66,6 @@ class HotSpotController extends Controller
 	 * updatePageAction function
 	 *
 	 * Called by ajax. Function to update UserDay with the HotSpots given
-	 *
-	 * @todo handle HotSpot with no HotSpotInfo associated
 	 *
 	 * @see HotSpots::class
 	 * @see UserDay::class

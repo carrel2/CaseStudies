@@ -13,10 +13,23 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use AppBundle\Entity\Test;
 use AppBundle\Entity\Medication;
 
+/**
+ * FileController class
+ *
+ * FileController class extends \Symfony\Bundle\FrameworkBundle\Controller\Controller
+ *
+ * @see http://api.symfony.com/3.2/Symfony/Bundle/FrameworkBundle/Controller/Controller.html
+ */
 class FileController extends Controller
 {
   /**
+   * fileAction function
+   *
    * @todo read every sheet in the given file unless a specific sheet is specified
+   *
+   * @param Request $r Request object
+   *
+   * @return \Symfony\Component\HttpFoundation\Response Render **import.html.twig**
    *
    * @Route("/import", name="import")
    */
