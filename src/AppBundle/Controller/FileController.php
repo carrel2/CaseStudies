@@ -25,6 +25,8 @@ class FileController extends Controller
   /**
    * fileAction function
    *
+   * @todo add tooltips
+   *
    * @param Request $r Request object
    *
    * @return \Symfony\Component\HttpFoundation\Response Render **import.html.twig**
@@ -50,7 +52,7 @@ class FileController extends Controller
         'empty_data' => -1,
         'attr' => array(
           'pattern' => '^[1-9][0-9]*',
-          'title' => 'The specific sheet to import data from (defaults to 1)',
+          'title' => 'The specific sheet to import data from',
         ),
       ))
       ->add('submit', SubmitType::class)

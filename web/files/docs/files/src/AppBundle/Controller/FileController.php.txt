@@ -25,8 +25,6 @@ class FileController extends Controller
   /**
    * fileAction function
    *
-   * @todo read every sheet in the given file unless a specific sheet is specified
-   *
    * @param Request $r Request object
    *
    * @return \Symfony\Component\HttpFoundation\Response Render **import.html.twig**
@@ -49,10 +47,10 @@ class FileController extends Controller
       ))
       ->add('sheet', TextType::class, array(
         'required' => false,
-        'empty_data' => 1,
+        'empty_data' => -1,
         'attr' => array(
           'pattern' => '^[1-9][0-9]*',
-          'title' => 'The sheet number to import data from (defaults to 1)',
+          'title' => 'The specific sheet to import data from (defaults to 1)',
         ),
       ))
       ->add('submit', SubmitType::class)
@@ -67,40 +65,48 @@ class FileController extends Controller
       $file = $form->getData()['file'];
       $sheet = $form->getData()['sheet'];
 
-      try {
-        $reader = new ExcelReader(new \SplFileObject($file->getRealPath()), 0, $sheet - 1);
+      $class = "AppBundle\\Entity\\$type";
 
-        if( $type == "Test" )
-        {
-          foreach ($reader as $row)
-          {
-            $row = array_change_key_case($row);
-            if( $row["name"] !== null && !$em->getRepository('AppBundle:Test')->findOneByName($row["name"]) )
-            {
-              $count += 1;
-              $em->persist(new Test($row));
+      if( $sheet < 0 ) {
+        try {
+          $i = 0;
+
+          while (true) {
+            $reader = new ExcelReader(new \SplFileObject($file->getRealPath()), 0, $i++);
+
+            foreach ($reader as $row) {
+              $row = array_change_key_case($row);
+
+              if( $row['name'] !== null && !$em->getRepository("AppBundle:$type")->findOneByName($row['name']) ) {
+                $count++;
+                $em->persist( new $class($row) );
+              }
             }
           }
-        } else if( $type == "Medication" )
-        {
-          foreach ($reader as $row)
-          {
-            $row = array_change_key_case($row);
-            if( $row["name"] !== null && !$em->getRepository('AppBundle:Medication')->findOneByName($row["name"]) )
-            {
-              $count += 1;
-              $em->persist(new Medication($row));
-            }
-          }
+        } catch( \PHPExcel_Exception $e ) {
+          $this->addFlash('notice', "Imported $count ${type}s!");
         }
-
-        $em->flush();
-
-        $this->addFlash('notice', "Imported $count ${type}s!");
-      } catch( \Exception $e )
-      {
-        $this->addFlash('error', 'Invalid sheet number');
       }
+      else {
+        try {
+            $reader = new ExcelReader(new \SplFileObject($file->getRealPath()), 0, $sheet);
+
+            foreach ($reader as $row) {
+              $row = array_change_key_case($row);
+
+              if( $row['name'] !== null && !$em->getRepository("AppBundle:$type")->findOneByName($row['name']) ) {
+                $count++;
+                $em->persist( new $class($row) );
+              }
+            }
+
+            $this->addFlash('notice', "Imported $count ${type}s!");
+          } catch( \PHPExcel_Exception $e ) {
+            $this->addFlash('error', 'Invalid sheet number');
+          }
+      }
+
+      $em->flush();
     }
 
     return $this->render('Default/import.html.twig', array(

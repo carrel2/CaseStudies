@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -55,7 +56,7 @@ class User implements UserInterface, \Serializable
 	*
 	* @var string
 	*
-	* @Assert\Length(max=4096)
+	* @Assert\Length(min=6,max=4096,minMessage="Password must be at least {{ limit }} characters long")
 	*/
 	private $plainPassword;
 
@@ -109,7 +110,7 @@ class User implements UserInterface, \Serializable
 	* @see UserDay::class
 	* @see ArrayCollection::class
 	*
-	* @ORM\OneToMany(targetEntity="UserDay", mappedBy="user", cascade={"all"})
+	* @ORM\OneToMany(targetEntity="UserDay", mappedBy="user", cascade={"all"}, orphanRemoval=true)
 	*/
 	private $days;
 
@@ -121,7 +122,7 @@ class User implements UserInterface, \Serializable
 	* @see Results::class
 	* @see ArrayCollection::class
 	*
-	* @ORM\OneToMany(targetEntity="Results", mappedBy="user")
+	* @ORM\OneToMany(targetEntity="Results", mappedBy="user", orphanRemoval=true)
 	*/
 	private $results;
 

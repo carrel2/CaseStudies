@@ -176,6 +176,8 @@ class AdminController extends Controller
 	 *
 	 * Allows admin User to edit User objects
 	 *
+	 * @todo style checkboxes
+	 *
 	 * @see User::class
 	 *
 	 * @param Request $r Request object

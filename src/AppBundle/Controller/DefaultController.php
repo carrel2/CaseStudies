@@ -133,7 +133,11 @@ class DefaultController extends Controller
 		$session = $r->getSession();
 		$user = $this->getUser();
 
-		if( $session->remove('finished') != null )
+		if( !$session->has('diagnosis') )
+		{			
+			return $this->redirectToRoute('review');
+		}
+		else if( $session->remove('finished') != null )
 		{
 			$results = new Results();
 

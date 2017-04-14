@@ -49,7 +49,7 @@ class UserDay
 	* @see ArrayCollection::class
 	* @see HotSpotInfo::class
 	*
-	* @ORM\OneToMany(targetEntity="HotSpotInfo", mappedBy="userDay", cascade={"persist"})
+	* @ORM\OneToMany(targetEntity="HotSpotInfo", mappedBy="userDay", cascade={"persist"}, orphanRemoval=true)
 	*/
 	private $hotspotsInfo;
 

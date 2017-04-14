@@ -154,7 +154,7 @@ CREATE TABLE `HotSpotsInfo` (
 
 LOCK TABLES `HotSpotsInfo` WRITE;
 /*!40000 ALTER TABLE `HotSpotsInfo` DISABLE KEYS */;
-INSERT INTO `HotSpotsInfo` VALUES (6,2,NULL,4,'102.4° F'),(7,2,24,6,'20/min, coughing frequently. Somewhat decreased lung sounds ventrally on both sides of the chest with abnormal sounds, mainly crackles, present dorsally on both sides, the right worse than the left.'),(8,2,NULL,13,'Serosanguinous nasal discharge which worsens after bouts of coughing'),(9,2,23,16,'48/min');
+INSERT INTO `HotSpotsInfo` VALUES (6,2,NULL,4,'102.4° F'),(8,2,NULL,13,'Serosanguinous nasal discharge which worsens after bouts of coughing'),(9,2,NULL,16,'48/min');
 /*!40000 ALTER TABLE `HotSpotsInfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -231,7 +231,7 @@ CREATE TABLE `Results` (
   PRIMARY KEY (`id`),
   KEY `IDX_501EDD88A76ED395` (`user_id`),
   CONSTRAINT `FK_501EDD88A76ED395` FOREIGN KEY (`user_id`) REFERENCES `app_users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -313,7 +313,7 @@ CREATE TABLE `UserDays` (
   PRIMARY KEY (`id`),
   KEY `IDX_14DD497FA76ED395` (`user_id`),
   CONSTRAINT `FK_14DD497FA76ED395` FOREIGN KEY (`user_id`) REFERENCES `app_users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -322,7 +322,6 @@ CREATE TABLE `UserDays` (
 
 LOCK TABLES `UserDays` WRITE;
 /*!40000 ALTER TABLE `UserDays` DISABLE KEYS */;
-INSERT INTO `UserDays` VALUES (1,NULL),(2,NULL),(3,NULL),(4,NULL),(5,NULL),(6,NULL),(7,NULL),(8,NULL),(9,NULL),(10,NULL),(11,NULL),(12,NULL),(13,NULL),(14,NULL),(15,NULL),(16,NULL),(17,NULL),(18,NULL),(19,NULL),(20,NULL),(21,NULL),(22,NULL),(23,NULL),(24,NULL);
 /*!40000 ALTER TABLE `UserDays` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -370,4 +369,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-13  9:38:37
+-- Dump completed on 2017-04-14 14:03:07

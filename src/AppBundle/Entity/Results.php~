@@ -9,8 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 *
 * Contains results for a User
 *
-* @todo implement diagnoses
-*
 * @ORM\Entity
 * @ORM\Table(name="Results")
 */
