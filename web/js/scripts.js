@@ -21,8 +21,19 @@ function addButtonClickListener(e) {
 	$(holder).children('div:last-child').append('<button type="button" class="remove-button">Remove ' + t + '</button>');
 
 	$('.remove-button').each(function() {
+		$(this).hover(function() {
+			$(this).prev().css('transition', 'box-shadow .5s');
+			$(this).prev().css('border-radius', '4px');
+			$(this).prev().css('box-shadow', '0px 0px 30px');
+		},
+		function() {
+			$(this).prev().css('border-radius', '');
+			$(this).prev().css('box-shadow', '');
+		});
 		$(this).on('click', function() {
-			$(this).parent().remove();
+			$(this).parent().slideUp(function() {
+				$(this).remove();
+			});
 		});
 	});
 
@@ -49,8 +60,19 @@ function updateAdminCase(id) {
 		});
 
 		$('.remove-button').each(function() {
+			$(this).hover(function() {
+				$(this).prev().css('transition', 'box-shadow .5s');
+				$(this).prev().css('border-radius', '4px');
+				$(this).prev().css('box-shadow', '0px 0px 30px');
+			},
+			function() {
+				$(this).prev().css('border-radius', '');
+				$(this).prev().css('box-shadow', '');
+			});
 			$(this).on('click', function() {
-				$(this).parent().remove();
+				$(this).parent().slideUp(function() {
+					$(this).remove();
+				});
 			});
 		});
 	});

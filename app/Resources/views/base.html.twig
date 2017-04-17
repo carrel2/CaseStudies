@@ -19,7 +19,7 @@
 					<li><a href="{{ path('user') }}">Account</a></li>
 
 					{% if app.user.hasResults %}
-						<li><a href="{{ path('results') }}">Past results</a></li>
+						<li><a href="{{ path('results') }}">My results</a></li>
 					{% endif %}
 
 					{% if is_granted('IS_AUTHENTICATED_FULLY') %}

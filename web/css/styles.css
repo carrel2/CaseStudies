@@ -112,12 +112,12 @@ a:hover {
 	resize: none;
 }
 
-#body button[type=submit], #body button.addButton {
+#body button[type=submit], #body button.addButton, #body button.remove-button {
 	padding: 10px 18px;
 	border: solid 1px #aaa;
 	border-radius: 4px;
 	cursor: pointer;
-	transition: background .5s;
+	transition: background .5s, border .5s;
 }
 
 #body button[type=submit]:hover, #body button.addButton:hover {
@@ -125,15 +125,14 @@ a:hover {
 	background: #aaa;
 }
 
+#body button.remove-button:hover {
+	background: red;
+	border: solid 1px red;
+}
+
 #body img#animal {
 	width: auto;
 	height: 600px;
-}
-
-#body .remove-button {
-	padding: 6px;
-	border-radius: 2px;
-	background: red;
 }
 
 div#tests_test, div#medications_medication {

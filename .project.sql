@@ -81,7 +81,7 @@ CREATE TABLE `Days` (
   PRIMARY KEY (`id`),
   KEY `IDX_4BD6535870CD7994` (`case_study_id`),
   CONSTRAINT `FK_4BD6535870CD7994` FOREIGN KEY (`case_study_id`) REFERENCES `Cases` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,7 +145,7 @@ CREATE TABLE `HotSpotsInfo` (
   CONSTRAINT `FK_8F7B04EF3AE7F1EF` FOREIGN KEY (`hotspot_id`) REFERENCES `HotSpots` (`id`),
   CONSTRAINT `FK_8F7B04EF6C905A1B` FOREIGN KEY (`user_day_id`) REFERENCES `UserDays` (`id`),
   CONSTRAINT `FK_8F7B04EF9C24126` FOREIGN KEY (`day_id`) REFERENCES `Days` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -369,4 +369,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-14 14:03:07
+-- Dump completed on 2017-04-17 14:46:43

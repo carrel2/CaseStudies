@@ -269,6 +269,9 @@ class AdminController extends Controller
 	}
 
 	/**
+	 * @todo manage images associated with the animal
+	 * @todo add confirmation for delete
+	 *
 	 * @Route("/admin/animals", name="manageAnimals")
 	 */
 	public function animalAction(Request $r)
