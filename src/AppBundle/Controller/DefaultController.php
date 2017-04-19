@@ -15,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler;
 
 /**
  * DefaultController class
@@ -51,6 +52,12 @@ class DefaultController extends Controller
 	public function defaultAction(Request $r)
 	{
 		$session = $r->getSession();
+
+		if (time() - $session->getMetadataBag()->getLastUsed() > $this->getParameter('sessionMaxLifetime')) {
+    	$session->invalidate();
+
+    	return $this->redirectToRoute('logout'); // redirect to expired session page
+		}
 
 		$user = $this->getUser();
 		$case = $user->getCaseStudy();
@@ -133,12 +140,13 @@ class DefaultController extends Controller
 		$session = $r->getSession();
 		$user = $this->getUser();
 
-		if( !$session->has('diagnosis') )
-		{			
-			return $this->redirectToRoute('review');
-		}
-		else if( $session->remove('finished') != null )
+		if( $session->remove('finished') )
 		{
+			if( !$session->has('diagnosis') )
+			{
+				return $this->redirectToRoute('review');
+			}
+
 			$results = new Results();
 
 			$user->addResult($results);

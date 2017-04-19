@@ -8,6 +8,7 @@ imports:
 parameters:
     locale: en
     image_directory: '%kernel.root_dir%/../web/images'
+    sessionMaxLifetime: 600
 
 framework:
     #esi:             ~

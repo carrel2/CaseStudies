@@ -11,12 +11,32 @@ $(function(){
 
 			$('#hotspots').load('/addHotspot/' + $('img#animal').data('id') + '/' + name + '/' + x1 + '.' + y1 + '.' + x2 + '.' + y2, function(r, s, x) {
 				$('.' + name + ':not(:last)').remove();
-				$('#image').append('<div class="' + name + '" style="background: rgba(255,255,255,.4); position: absolute; top: ' + y1 + 'px; left: ' + x1 + 'px; height: ' + (y2 - y1) + 'px; width: ' + (x2 - x1) + 'px;"></div>');
+				$('#image').append('<div class="hotspot ' + name + '" style="background: rgba(255,255,255,.4); position: absolute; top: ' + y1 + 'px; left: ' + x1 + 'px; height: ' + (y2 - y1) + 'px; width: ' + (x2 - x1) + 'px;"></div>');
+				$('div.hotspot').each(function() {
+					$(this).hover(function() {
+						$('.' + $(this).attr('class').replace(' ', '.')).css('border', 'solid 1px black');
+					},
+					function() {
+						$('.' + $(this).attr('class').replace(' ', '.')).css('border', '');
+					});
+				});
 			});
 		}
+
+		inst.cancelSelection();
 	});
 
-	$('img#animal').imgAreaSelect({
+	$('div.hotspot').each(function() {
+		$(this).hover(function() {
+			$('.' + $(this).attr('class').replace(' ', '.')).css('border', 'solid 1px black');
+		},
+		function() {
+			$('.' + $(this).attr('class').replace(' ', '.')).css('border', '');
+		});
+	});
+
+	var inst = $('img#animal').imgAreaSelect({
+		instance: true,
 		onSelectEnd: function(img, selection) {
 				$('img#animal').data('x1', selection.x1);
 				$('img#animal').data('y1', selection.y1);

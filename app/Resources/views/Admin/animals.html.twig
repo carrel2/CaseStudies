@@ -22,7 +22,7 @@
     <div id="image" style="position: relative; height: 600px;">
       <img id="animal" src="{{ asset('images/' ~ animal.image) }}" data-id="{{ animal.id }}" style="position: absolute" />
       {% for hotspot in animal.hotspots %}
-        <div class="{{ hotspot.name|lower }}" style="background: rgba(255,255,255,.4); position: absolute; top: {{ hotspot.y1 }}px; left: {{ hotspot.x1 }}px; height: {{ hotspot.height }}px; width: {{ hotspot.width }}px;"></div>
+        <div class="hotspot {{ hotspot.name|lower }}" style="background: rgba(255,255,255,.4); position: absolute; top: {{ hotspot.y1 }}px; left: {{ hotspot.x1 }}px; height: {{ hotspot.height }}px; width: {{ hotspot.width }}px;"></div>
       {% endfor %}
     </div>
     <div id="x1" style="display: none"></div>
@@ -33,7 +33,7 @@
     <button id="addHotspot">Save</button>
     <div id="hotspots">
       {% for hotspot in animal.hotspots %}
-        <div class="{{ hotspot.name|lower }}">{{ hotspot.name }}: ({{ hotspot.x1 }}, {{ hotspot.y1 }}), ({{ hotspot.x2 }}, {{ hotspot.y2 }}) <a href="{{ path('removeHotspot', {'animal': animal.id, 'hotspot': hotspot.id }) }}">Remove</a></div>
+        <div class="hotspot {{ hotspot.name|lower }}">{{ hotspot.name }}: ({{ hotspot.x1 }}, {{ hotspot.y1 }}), ({{ hotspot.x2 }}, {{ hotspot.y2 }}) <a href="{{ path('removeHotspot', {'animal': animal.id, 'hotspot': hotspot.id }) }}" onclick="return confirmDelete();">Remove</a></div>
       {% endfor %}
     </div>
   {% endif %}

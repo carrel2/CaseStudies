@@ -112,7 +112,7 @@ CREATE TABLE `HotSpots` (
   PRIMARY KEY (`id`),
   KEY `IDX_A74F70048E962C16` (`animal_id`),
   CONSTRAINT `FK_A74F70048E962C16` FOREIGN KEY (`animal_id`) REFERENCES `Animals` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,7 +121,7 @@ CREATE TABLE `HotSpots` (
 
 LOCK TABLES `HotSpots` WRITE;
 /*!40000 ALTER TABLE `HotSpots` DISABLE KEYS */;
-INSERT INTO `HotSpots` VALUES (4,1,'Rectum',294,331,205,306),(5,1,'Eyes',823,850,75,105),(6,1,'Lungs',517,718,218,282),(13,1,'Nostrils',892,920,141,175),(15,1,'Ears',799,844,9,51),(16,1,'Heart',653,717,283,311);
+INSERT INTO `HotSpots` VALUES (4,1,'Rectum',294,331,205,306),(5,1,'Eyes',823,850,75,105),(6,1,'Lungs',517,718,218,282),(13,1,'Nostrils',892,920,141,175),(16,1,'Heart',653,717,283,311),(17,1,'Ears',805,842,6,51);
 /*!40000 ALTER TABLE `HotSpots` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -313,7 +313,7 @@ CREATE TABLE `UserDays` (
   PRIMARY KEY (`id`),
   KEY `IDX_14DD497FA76ED395` (`user_id`),
   CONSTRAINT `FK_14DD497FA76ED395` FOREIGN KEY (`user_id`) REFERENCES `app_users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -347,7 +347,7 @@ CREATE TABLE `app_users` (
   UNIQUE KEY `UNIQ_C2502824B34EEF18` (`uin`),
   KEY `IDX_C250282470CD7994` (`case_study_id`),
   CONSTRAINT `FK_C250282470CD7994` FOREIGN KEY (`case_study_id`) REFERENCES `Cases` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -356,7 +356,7 @@ CREATE TABLE `app_users` (
 
 LOCK TABLES `app_users` WRITE;
 /*!40000 ALTER TABLE `app_users` DISABLE KEYS */;
-INSERT INTO `app_users` VALUES (1,NULL,'ROLE_ADMIN','brandon','$2y$13$/0ZWoICiRtbdEZlgHJw4q.PPdAIAhuYZ863ONTnfrPCmXWhCd6Pri','carrel2@illinois.edu','123123123',0),(2,NULL,'ROLE_USER','test','$2y$13$9eU4r./jL9tSNrcN/c9SAepC504Dx6XtUw.jshv.StqqCZD5w73K6','test@test.com','111111111',0);
+INSERT INTO `app_users` VALUES (1,NULL,'ROLE_ADMIN','brandon','$2y$13$/0ZWoICiRtbdEZlgHJw4q.PPdAIAhuYZ863ONTnfrPCmXWhCd6Pri','carrel2@illinois.edu','123123123',0),(4,NULL,'ROLE_USER','test','$2y$13$fmgTtVEq5Z1gxM/Jw1f40ORhImUe3Yapi3plikzXSA56p5O0ipuRm','test@test.com','111111111',0);
 /*!40000 ALTER TABLE `app_users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -369,4 +369,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-17 14:46:43
+-- Dump completed on 2017-04-19 14:26:35

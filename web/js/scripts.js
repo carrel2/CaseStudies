@@ -18,7 +18,7 @@ function addButtonClickListener(e) {
 
 	holder.append(newForm);
 	holder.find('label').remove(':contains(' + index + ')');
-	$(holder).children('div:last-child').append('<button type="button" class="remove-button">Remove ' + t + '</button>');
+	$(holder).children('div:last-child').append('<button type="button" class="remove-button">&#x2e3</button>');
 
 	$('.remove-button').each(function() {
 		$(this).hover(function() {
@@ -56,7 +56,7 @@ function updateAdminCase(id) {
 	$('#caseInfo').load('/getCase/' + id, function(responseTxt, statusTxt, xhr){
 		$('.collection > div').each(function(i, e) {
 			var t = $(this).parent().data('type');
-			$(this).append('<button type="button" class="remove-button">Remove ' + t + '</button>');
+			$(this).append('<button type="button" class="remove-button">&#x2e3</button>');
 		});
 
 		$('.remove-button').each(function() {
@@ -86,4 +86,8 @@ function updateHotspots() {
 			});
 		});
 	});
+}
+
+function confirmDelete() {
+	return confirm("This action cannot be undone!\n\nPress 'Ok' to continue.");
 }

@@ -126,8 +126,6 @@ class AdminController extends Controller
 	 * Function to get a case study and all information associated with it. Called through ajax.
 	 * Returns caseInfo.html.twig template
 	 *
-	 * @todo add confirmation for delete
-	 *
 	 * @param Request $r Request object
 	 * @param CaseStudy $case CaseStudy object
 	 *
@@ -176,8 +174,6 @@ class AdminController extends Controller
 	 *
 	 * Allows admin User to edit User objects
 	 *
-	 * @todo style checkboxes
-	 *
 	 * @see User::class
 	 *
 	 * @param Request $r Request object
@@ -196,7 +192,11 @@ class AdminController extends Controller
 				'choice_label' => 'username',
 				'expanded' => true,))
 			->add('edit', SubmitType::class)
-			->add('delete', SubmitType::class)->getForm();
+			->add('delete', SubmitType::class, array(
+				'attr' => array(
+					'onclick' => 'return confirmDelete();',
+				),
+			))->getForm();
 
 		$form->handleRequest($r);
 
@@ -270,7 +270,6 @@ class AdminController extends Controller
 
 	/**
 	 * @todo manage images associated with the animal
-	 * @todo add confirmation for delete
 	 *
 	 * @Route("/admin/animals", name="manageAnimals")
 	 */
@@ -285,7 +284,11 @@ class AdminController extends Controller
 				'expanded' => true,
 			))
 			->add('edit', SubmitType::class)
-			->add('delete', SubmitType::class)->getForm();
+			->add('delete', SubmitType::class, array(
+				'attr' => array(
+					'onclick' => 'return confirmDelete();',
+				),
+			))->getForm();
 
 		$form->handleRequest($r);
 
@@ -303,9 +306,10 @@ class AdminController extends Controller
 			}
 		}
 
-		return $this->render('Admin/animals.html.twig', array(
+		return $this->render('Admin/manage.html.twig', array(
 			'form' => $form->createView(),
 			'animal' => null,
+			'route' => 'createAnimal',
 		));
 	}
 
@@ -330,6 +334,7 @@ class AdminController extends Controller
 		return $this->render('Admin/animals.html.twig', array(
 			'form' => $form->createView(),
 			'animal' => null,
+			'route' => null,
 		));
 	}
 
@@ -359,6 +364,7 @@ class AdminController extends Controller
 		 return $this->render('Admin/animals.html.twig', array(
 			 'form' => $form->createView(),
 			 'animal' => $animal,
+			 'route' => null,
 		 ));
 	 }
 
@@ -374,9 +380,16 @@ class AdminController extends Controller
 					'class' => 'AppBundle:Test',
 					'choice_label' => 'name',
 					'expanded' => true,
+					'choice_attr' => function(Test $t, $key, $index) {
+						return ['class' => 'test'];
+					}
 				))
 				->add('edit', SubmitType::class)
-				->add('delete', SubmitType::class)->getForm();
+				->add('delete', SubmitType::class, array(
+					'attr' => array(
+						'onclick' => 'return confirmDelete();',
+					),
+				))->getForm();
 
 			$form->handleRequest($r);
 
@@ -396,6 +409,7 @@ class AdminController extends Controller
 
 			return $this->render('Admin/manage.html.twig', array(
 				'form' => $form->createView(),
+				'route' => 'createTest',
 			));
 		}
 
@@ -419,7 +433,7 @@ class AdminController extends Controller
 
 			return $this->render('Admin/manage.html.twig', array(
 				'form' => $form->createView(),
-				'test' => null,
+				'route' => null,
 			));
 		}
 
@@ -448,7 +462,7 @@ class AdminController extends Controller
 
 			 return $this->render('Admin/manage.html.twig', array(
 				 'form' => $form->createView(),
-				 'test' => $test,
+				 'route' => $null,
 			 ));
 		 }
 
@@ -464,9 +478,16 @@ class AdminController extends Controller
 						'class' => 'AppBundle:Medication',
 						'choice_label' => 'name',
 						'expanded' => true,
+						'choice_attr' => function(Medication $t, $key, $index) {
+							return ['class' => 'medication'];
+						}
 					))
 					->add('edit', SubmitType::class)
-					->add('delete', SubmitType::class)->getForm();
+					->add('delete', SubmitType::class, array(
+						'attr' => array(
+							'onclick' => 'return confirmDelete();',
+						),
+					))->getForm();
 
 				$form->handleRequest($r);
 
@@ -486,6 +507,7 @@ class AdminController extends Controller
 
 				return $this->render('Admin/manage.html.twig', array(
 					'form' => $form->createView(),
+					'route' => 'manageMedications',
 				));
 			}
 
@@ -509,7 +531,7 @@ class AdminController extends Controller
 
 				return $this->render('Admin/manage.html.twig', array(
 					'form' => $form->createView(),
-					'medication' => null,
+					'route' => null,
 				));
 			}
 
@@ -538,7 +560,7 @@ class AdminController extends Controller
 
 				 return $this->render('Admin/manage.html.twig', array(
 					 'form' => $form->createView(),
-					 'medication' => $test,
+					 'route' => null,
 				 ));
 			 }
 }

@@ -51,7 +51,11 @@ class CaseType extends AbstractType
 					$form->add('update', SubmitType::class, array(
 							'attr' => array( 'form' => 'case',)))
 						->add('delete', SubmitType::class, array(
-							'attr' => array( 'form' => 'case',)))
+							'attr' => array(
+								'form' => 'case',
+								'onclick' => 'return confirmDelete();',
+							),
+						))
 						->add('restore', SubmitType::class, array(
 							'attr' => array('onclick' => 'updateAdminCase(); return false;')));
 				}

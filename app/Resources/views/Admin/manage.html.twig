@@ -4,4 +4,8 @@
   {{ form_start(form) }}
   {{ form_widget(form) }}
   {{ form_end(form) }}
+
+  {% if route %}
+    <a class="button" href="{{ path(route) }}">Create</a>
+  {% endif %}
 {% endblock %}
