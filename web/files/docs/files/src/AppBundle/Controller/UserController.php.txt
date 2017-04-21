@@ -27,6 +27,7 @@ class UserController extends Controller
 	 *
 	 * Shows UserType form. On submission, creates a new User
 	 *
+	 * @todo authenticate against U of I ldap
 	 * @todo login newly registered user
 	 *
 	 * @see UserType::class
