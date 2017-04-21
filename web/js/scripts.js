@@ -1,7 +1,26 @@
+var stack = [];
+
 function updateCase() {
 	var id = $('#default_title').val();
 
 	$('#case').load('/getDescription/' + id);
+}
+
+function addRemoveButtonClickListener() {
+	$('.remove-button').each(function() {
+		$(this).hover(function() {
+			$(this).prev().css({'transition': 'box-shadow .5s','border-radius': '4px','box-shadow': '0px 0px 30px'});
+		},
+		function() {
+			$(this).prev().css({'border-radius': '','box-shadow': ''});
+		});
+		$(this).on('click', function() {
+			stack.push([$(this).parent().parent().attr('id'), $(this).prev().attr('style', '').parent().html()]);
+			$(this).parent().slideUp(function() {
+				$(this).remove();
+			});
+		});
+	});
 }
 
 function addButtonClickListener(e) {
@@ -20,22 +39,7 @@ function addButtonClickListener(e) {
 	holder.find('label').remove(':contains(' + index + ')');
 	$(holder).children('div:last-child').append('<button type="button" class="remove-button">&#x2e3</button>');
 
-	$('.remove-button').each(function() {
-		$(this).hover(function() {
-			$(this).prev().css('transition', 'box-shadow .5s');
-			$(this).prev().css('border-radius', '4px');
-			$(this).prev().css('box-shadow', '0px 0px 30px');
-		},
-		function() {
-			$(this).prev().css('border-radius', '');
-			$(this).prev().css('box-shadow', '');
-		});
-		$(this).on('click', function() {
-			$(this).parent().slideUp(function() {
-				$(this).remove();
-			});
-		});
-	});
+	addRemoveButtonClickListener();
 
 	if( $(e).text() == "Add day" ) {
 		$('.dayNumber').each(function(i, element){
@@ -53,28 +57,20 @@ function updateAdminCase(id) {
 		$('#admin_case').val(id);
 	}
 
+	$('#undo').on('click', function() {
+		var array = stack.pop();
+
+		$('#' + array[0]).append('<div>' + array[1] + '</div>');
+		addRemoveButtonClickListener();
+	});
+
 	$('#caseInfo').load('/getCase/' + id, function(responseTxt, statusTxt, xhr){
 		$('.collection > div').each(function(i, e) {
 			var t = $(this).parent().data('type');
 			$(this).append('<button type="button" class="remove-button">&#x2e3</button>');
 		});
 
-		$('.remove-button').each(function() {
-			$(this).hover(function() {
-				$(this).prev().css('transition', 'box-shadow .5s');
-				$(this).prev().css('border-radius', '4px');
-				$(this).prev().css('box-shadow', '0px 0px 30px');
-			},
-			function() {
-				$(this).prev().css('border-radius', '');
-				$(this).prev().css('box-shadow', '');
-			});
-			$(this).on('click', function() {
-				$(this).parent().slideUp(function() {
-					$(this).remove();
-				});
-			});
-		});
+		addRemoveButtonClickListener();
 	});
 }
 

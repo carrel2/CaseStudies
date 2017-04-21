@@ -11,6 +11,7 @@
 {% endblock %}
 
 {% block body %}
+	<button id="undo" type="button">Undo</button>
 	{{ form_label(form.case) }}
 	{{ form_errors(form.case) }}
 	{{ form_widget(form.case, {'attr': {'onchange': 'updateAdminCase()'}} ) }}

@@ -3,6 +3,7 @@
 namespace AppBundle\EventListener;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use AppBundle\Entity\Animal;
@@ -28,12 +29,16 @@ class AnimalImageUploadListener
     {
         $entity = $args->getEntity();
 
+        if( $args->hasChangedField('image') ) {
+          $this->removeUpload($args->getOldValue('image'));
+        }
+
         $this->uploadFile($entity);
     }
 
     private function uploadFile($entity)
     {
-        // upload only works for Product entities
+        // upload only works for Animal entities
         if (!$entity instanceof Animal) {
             return;
         }
@@ -49,16 +54,8 @@ class AnimalImageUploadListener
         $entity->setImage($fileName);
     }
 
-    public function postLoad(LifecycleEventArgs $args)
+    private function removeUpload($file)
     {
-      $entity = $args->getEntity();
-
-      if (!$entity instanceof Animal) {
-          return;
-      }
-
-      if ($fileName = $entity->getImage()) {
-          $entity->setImage(new File($this->uploader->getTargetDir().'/'.$fileName));
-      }
+      unlink($this->uploader->getTargetDir() . '/' . $file);
     }
 }
