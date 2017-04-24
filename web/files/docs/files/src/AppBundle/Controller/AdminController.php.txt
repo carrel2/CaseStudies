@@ -191,9 +191,12 @@ class AdminController extends Controller
 				'class' => 'AppBundle:User',
 				'choice_label' => 'username',
 				'expanded' => true,))
-			->add('edit', SubmitType::class)
+			->add('edit', SubmitType::class, array(
+				'attr' => array('class' => 'button'),
+			))
 			->add('delete', SubmitType::class, array(
 				'attr' => array(
+					'class' => 'button',
 					'onclick' => 'return confirmDelete();',
 				),
 			))->getForm();
@@ -281,9 +284,12 @@ class AdminController extends Controller
 				'choice_label' => 'name',
 				'expanded' => true,
 			))
-			->add('edit', SubmitType::class)
+			->add('edit', SubmitType::class, array(
+				'attr' => array('class' => 'button'),
+			))
 			->add('delete', SubmitType::class, array(
 				'attr' => array(
+					'class' => 'button',
 					'onclick' => 'return confirmDelete();',
 				),
 			))->getForm();
@@ -382,9 +388,12 @@ class AdminController extends Controller
 						return ['class' => 'test'];
 					}
 				))
-				->add('edit', SubmitType::class)
+				->add('edit', SubmitType::class, array(
+					'attr' => array('class' => 'button'),
+				))
 				->add('delete', SubmitType::class, array(
 					'attr' => array(
+						'class' => 'button',
 						'onclick' => 'return confirmDelete();',
 					),
 				))->getForm();
@@ -480,9 +489,12 @@ class AdminController extends Controller
 							return ['class' => 'medication'];
 						}
 					))
-					->add('edit', SubmitType::class)
+					->add('edit', SubmitType::class, array(
+						'attr' => array('class' => 'button'),
+					))
 					->add('delete', SubmitType::class, array(
 						'attr' => array(
+							'class' => 'button',
 							'onclick' => 'return confirmDelete();',
 						),
 					))->getForm();

@@ -67,7 +67,9 @@ class UserType extends AbstractType
 					'disabled' => $currentUser->getRole() == 'ROLE_USER',
 				));
 
-				$form->add('submit', SubmitType::class);
+				$form->add('submit', SubmitType::class, array(
+					'attr' => array('class' => 'button'),
+				));
 			}
 		});
 	}

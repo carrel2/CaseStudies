@@ -16,7 +16,9 @@ class MedicationType extends AbstractType
       ->add('cost', null, array(
         'attr' => array('pattern' => '[0-9]+')
       ))
-      ->add('submit', SubmitType::class);
+      ->add('submit', SubmitType::class, array(
+        'attr' => array('class' => 'button'),
+      ));
   }
 
   public function configureOptions(OptionsResolver $resolver)
