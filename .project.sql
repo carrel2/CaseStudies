@@ -81,7 +81,7 @@ CREATE TABLE `Days` (
   PRIMARY KEY (`id`),
   KEY `IDX_4BD6535870CD7994` (`case_study_id`),
   CONSTRAINT `FK_4BD6535870CD7994` FOREIGN KEY (`case_study_id`) REFERENCES `Cases` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -112,7 +112,7 @@ CREATE TABLE `HotSpots` (
   PRIMARY KEY (`id`),
   KEY `IDX_A74F70048E962C16` (`animal_id`),
   CONSTRAINT `FK_A74F70048E962C16` FOREIGN KEY (`animal_id`) REFERENCES `Animals` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,7 +145,7 @@ CREATE TABLE `HotSpotsInfo` (
   CONSTRAINT `FK_8F7B04EF3AE7F1EF` FOREIGN KEY (`hotspot_id`) REFERENCES `HotSpots` (`id`),
   CONSTRAINT `FK_8F7B04EF6C905A1B` FOREIGN KEY (`user_day_id`) REFERENCES `UserDays` (`id`),
   CONSTRAINT `FK_8F7B04EF9C24126` FOREIGN KEY (`day_id`) REFERENCES `Days` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -231,7 +231,7 @@ CREATE TABLE `Results` (
   PRIMARY KEY (`id`),
   KEY `IDX_501EDD88A76ED395` (`user_id`),
   CONSTRAINT `FK_501EDD88A76ED395` FOREIGN KEY (`user_id`) REFERENCES `app_users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -313,7 +313,7 @@ CREATE TABLE `UserDays` (
   PRIMARY KEY (`id`),
   KEY `IDX_14DD497FA76ED395` (`user_id`),
   CONSTRAINT `FK_14DD497FA76ED395` FOREIGN KEY (`user_id`) REFERENCES `app_users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -369,4 +369,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-21 13:51:39
+-- Dump completed on 2017-04-24 14:56:37

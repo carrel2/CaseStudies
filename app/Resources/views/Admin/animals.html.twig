@@ -30,7 +30,7 @@
     <div id="x2" style="display: none"></div>
     <div id="y2" style="display: none"></div>
     <input type="text" id="name"></input>
-    <button id="addHotspot">Save</button>
+    <button id="addHotspot" class="button">Save</button>
     <div id="hotspots">
       {% for hotspot in animal.hotspots %}
         <div class="hotspot {{ hotspot.name|lower }}">{{ hotspot.name }}: ({{ hotspot.x1 }}, {{ hotspot.y1 }}), ({{ hotspot.x2 }}, {{ hotspot.y2 }}) <a href="{{ path('removeHotspot', {'animal': animal.id, 'hotspot': hotspot.id }) }}" onclick="return confirmDelete();">Remove</a></div>

@@ -8,17 +8,21 @@ function updateCase() {
 
 function addRemoveButtonClickListener() {
 	$('.remove-button').each(function() {
-		$(this).hover(function() {
-			$(this).prev().css({'transition': 'box-shadow .5s','border-radius': '4px','box-shadow': '0px 0px 30px'});
-		},
-		function() {
-			$(this).prev().css({'border-radius': '','box-shadow': ''});
-		});
-		$(this).on('click', function() {
-			stack.push([$(this).parent().parent().attr('id'), $(this).prev().attr('style', '').parent().html()]);
+		$(this).off("click mouseout mouseover");
+		$(this).on('click',function() {
+			$(this).prev().attr('style', '');
+			stack.push([$(this).parent().index(), $(this).parent().parent().attr('id'), $(this).parent().html()]);
 			$(this).parent().slideUp(function() {
 				$(this).remove();
 			});
+
+			$('#undo').show();
+		});
+		$(this).on('mouseenter', function() {
+				$(this).prev().css({'transition': 'box-shadow .5s','border-radius': '4px','box-shadow': '0px 0px 30px'});
+		});
+		$(this).on('mouseleave', function() {
+			$(this).prev().css({'border-radius': '','box-shadow': ''});
 		});
 	});
 }
@@ -60,8 +64,19 @@ function updateAdminCase(id) {
 	$('#undo').on('click', function() {
 		var array = stack.pop();
 
-		$('#' + array[0]).append('<div>' + array[1] + '</div>');
+		if( array[0] == 0 ) {
+			$('#' + array[1]).prepend('<div>' + array[2] + '</div>');
+		} else if( array[0] > $('#' + array[1]).children().length ) {
+			$('#' + array[1]).append('<div>' + array[2] + '</div>');
+		} else {
+			$('#' + array[1]).children().eq(array[0]).after('<div>' + array[2] + '</div>');
+		}
+
 		addRemoveButtonClickListener();
+
+		if( stack.length == 0 ) {
+			$(this).hide();
+		}
 	});
 
 	$('#caseInfo').load('/getCase/' + id, function(responseTxt, statusTxt, xhr){

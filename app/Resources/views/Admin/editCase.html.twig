@@ -11,7 +11,9 @@
 {% endblock %}
 
 {% block body %}
-	<button id="undo" type="button">Undo</button>
+	<a class="button right" href="{{ path('createCase') }}">Create a new case</a>
+	<button id="undo" class="button right" type="button">Undo</button>
+
 	{{ form_label(form.case) }}
 	{{ form_errors(form.case) }}
 	{{ form_widget(form.case, {'attr': {'onchange': 'updateAdminCase()'}} ) }}

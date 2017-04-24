@@ -26,7 +26,7 @@ class DayType extends AbstractType
 					'data-type' => 'hotspot'),))
 			->add('add hotspot', ButtonType::class, array(
 				'attr' => array(
-					'class' => 'addButton',
+					'class' => 'button addButton',
 					'onclick' => 'addButtonClickListener(this)',)))
 			->add('tests', CollectionType::class, array(
 				'entry_type' => TestResultsType::class,
@@ -39,7 +39,7 @@ class DayType extends AbstractType
 					'data-type' => 'test results'),))
 			->add('add test results', ButtonType::class, array(
 				'attr' => array(
-					'class' => 'addButton',
+					'class' => 'button addButton',
 					'onclick' => 'addButtonClickListener(this)',)))
 			->add('medications', CollectionType::class, array(
 				'entry_type' => MedicationResultsType::class,
@@ -52,7 +52,7 @@ class DayType extends AbstractType
 					'data-type' => 'medication results'),))
 			->add('add medication results', ButtonType::class, array(
 				'attr' => array(
-					'class' => 'addButton',
+					'class' => 'button addButton',
 					'onclick' => 'addButtonClickListener(this)',)));
 	}
 

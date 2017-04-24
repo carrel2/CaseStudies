@@ -26,7 +26,9 @@ class DefaultType extends AbstractType
 					'choice_label' => 'title',
 					'attr' => array(
 						'onchange' => 'updateCase()',)))
-					->add('start', SubmitType::class);
+					->add('start', SubmitType::class, array(
+						'attr' => array('class' => 'button'),
+					));
 			}
 		});
 	}

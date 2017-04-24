@@ -21,6 +21,8 @@ class TestsType extends AbstractType
 				'choice_attr' => function(Test $t, $key, $index) {
 					return ['class' => 'test'];
 				}))
-			->add('submit', SubmitType::class);
+			->add('submit', SubmitType::class, array(
+				'attr' => array('class' => 'button'),
+			));
 	}
 }

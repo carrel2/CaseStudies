@@ -17,7 +17,11 @@ class AdminUserType extends AbstractType
 				'class' => 'AppBundle:User',
 				'choice_label' => 'username',
 				'expanded' => true,))
-			->add('edit', SubmitType::class)
-			->add('delete', SubmitType::class);
+			->add('edit', SubmitType::class, array(
+				'attr' => array('class' => 'button'),
+			))
+			->add('delete', SubmitType::class, array(
+				'attr' => array('class' => 'button'),
+			));
 	}
 }

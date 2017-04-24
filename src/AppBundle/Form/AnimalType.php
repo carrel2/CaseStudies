@@ -17,7 +17,9 @@ class AnimalType extends AbstractType
         'data' => '',
       ))
       ->add('name')
-      ->add('submit', SubmitType::class);
+      ->add('submit', SubmitType::class, array(
+        'attr' => array('class' => 'button'),
+      ));
   }
 
   public function configureOptions(OptionsResolver $resolver)

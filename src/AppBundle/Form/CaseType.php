@@ -38,7 +38,7 @@ class CaseType extends AbstractType
 					'data-type' => 'day')))
 			->add('add day', ButtonType::class, array(
 				'attr' => array(
-					'class' => 'addButton',
+					'class' => 'button addButton',
 					'onclick' => 'addButtonClickListener(this)',)))
 			->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
 				$case = $event->getData();
@@ -46,18 +46,31 @@ class CaseType extends AbstractType
 
 				if( $case == null ) {
 					$form->add('create', SubmitType::class, array(
-						'attr' => array( 'form' => 'case',)));
+						'attr' => array(
+							'form' => 'case',
+							'class' => 'button',
+						),
+					));
 				} else {
 					$form->add('update', SubmitType::class, array(
-							'attr' => array( 'form' => 'case',)))
+							'attr' => array(
+								'form' => 'case',
+								'class' => 'button',
+							),
+						))
 						->add('delete', SubmitType::class, array(
 							'attr' => array(
 								'form' => 'case',
+								'class' => 'button',
 								'onclick' => 'return confirmDelete();',
 							),
 						))
 						->add('restore', SubmitType::class, array(
-							'attr' => array('onclick' => 'updateAdminCase(); return false;')));
+							'attr' => array(
+								'class' => 'button',
+								'onclick' => 'updateAdminCase(); return false;',
+							),
+						));
 				}
 			});
 	}

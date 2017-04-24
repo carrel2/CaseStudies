@@ -117,7 +117,7 @@ a:hover {
 	resize: none;
 }
 
-#body button[type=submit], #body button.addButton/*, #body button.remove-button*/, #body a.button {
+#body .button/*, #body button.remove-button*/ {
 	display: inline-block;
 	padding: 10px 18px;
 	font: 13.3333px Arial;
@@ -129,10 +129,19 @@ a:hover {
 	transition: background .5s, border .5s;
 }
 
-#body button[type=submit]:hover, #body button.addButton:hover, #body a.button:hover {
+#body .button:hover {
 	color: white;
 	background: #aaa;
 	text-decoration: none;
+}
+
+#body button#undo {
+	display: none;
+}
+
+#body .right {
+	float: right;
+	margin-right: 4px;
 }
 
 /*#body button.remove-button:hover {
