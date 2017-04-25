@@ -97,7 +97,7 @@ class UserDay
 
 		foreach($this->hotspotsInfo as $spot)
 		{
-			$a["hotspotsInfo"][$spot->getHotspot()->getName()] = $spot->getInfo();
+			$a["hotspotsInfo"][$spot->getName()] = $spot->getInfo();
 		}
 		foreach ($this->tests as $test)
 		{

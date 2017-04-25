@@ -109,7 +109,7 @@ class User implements UserInterface, \Serializable
 	* @see UserDay::class
 	* @see ArrayCollection::class
 	*
-	* @ORM\OneToMany(targetEntity="UserDay", mappedBy="user", cascade={"all"}, orphanRemoval=true)
+	* @ORM\OneToMany(targetEntity="UserDay", mappedBy="user", cascade={"all"})
 	*/
 	private $days;
 
@@ -121,7 +121,7 @@ class User implements UserInterface, \Serializable
 	* @see Results::class
 	* @see ArrayCollection::class
 	*
-	* @ORM\OneToMany(targetEntity="Results", mappedBy="user", orphanRemoval=true)
+	* @ORM\OneToMany(targetEntity="Results", mappedBy="user")
 	*/
 	private $results;
 
@@ -462,10 +462,5 @@ class User implements UserInterface, \Serializable
 		public function getResults()
 		{
 			return $this->results;
-		}
-
-		public function hasResults()
-		{
-			return !$this->results->isEmpty();
 		}
 	}

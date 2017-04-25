@@ -164,6 +164,10 @@ a:hover {
 	height: 600px;
 }
 
+#body #hotspots {
+	max-width: 350px;
+}
+
 div#tests_test, div#medications_medication {
 	padding: 8px;
 }

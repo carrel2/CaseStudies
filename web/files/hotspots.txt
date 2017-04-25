@@ -1,8 +1,0 @@
-1	Lungs	Everything is fine.
-1	Heart	Everything is fine.
-1	Nostrils	Everything is fine.
-1	Ears	Everything is fine.
-2	Lungs	Coughing frequently.
-2	Heart	Everything is fine.
-2	Nostrils	Serosanguinous nasal discharge which worsens after bouts of coughing.
-2	Ears	Everything is fine.

@@ -62,8 +62,6 @@ class AdminController extends Controller
 	 *
 	 * @see CaseStudy::class
 	 *
-	 * @todo add undo functionality
-	 *
 	 * @param Request $r Request object
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response Render **editCase.html.twig**
