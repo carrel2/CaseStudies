@@ -36,6 +36,11 @@ class Test
 	private $name;
 
 	/**
+	 * @ORM\Column(type="string", length=40)
+	 */
+	private $group;
+
+	/**
 	 * The cost of the Test
 	 *
 	 * @var string
@@ -106,6 +111,24 @@ class Test
     {
         return $this->name;
     }
+
+		/**
+		 *
+		 */
+		public function setGroup($group)
+		{
+			$this->group = $group;
+
+			return $this;
+		}
+
+		/**
+		 *
+		 */
+		public function getGroup()
+		{
+			return $this->group;
+		}
 
     /**
      * Set cost

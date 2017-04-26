@@ -163,11 +163,11 @@ class DefaultController extends Controller
 				foreach ($session->getFlashBag()->get('hotspot-' . $id) as $flash) {
 					$a[$key]["hotspotsInfo"][$flash] = "No results available.";
 				}
-				foreach ($session->getFlashBag()->get('empty-test-results-' . $id) as $flash) {
-					$a[$key]["tests"][$flash] = "No results available.";
+				foreach ($session->getFlashBag()->get('empty-diagnostic-results-' . $id) as $flash) {
+					$a[$key]["diagnostics"][$flash] = "No results available.";
 				}
-				foreach ($session->getFlashBag()->get('empty-medication-results-' . $id) as $flash) {
-					$a[$key]["medications"][$flash] = "No results available.";
+				foreach ($session->getFlashBag()->get('empty-therapeutic-results-' . $id) as $flash) {
+					$a[$key]["therapeutics"][$flash] = "No results available.";
 				}
 
 				$results->setResults($a);

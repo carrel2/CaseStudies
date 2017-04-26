@@ -29,28 +29,28 @@ class DayType extends AbstractType
 					'class' => 'button addButton',
 					'onclick' => 'addButtonClickListener(this)',)))
 			->add('tests', CollectionType::class, array(
-				'entry_type' => TestResultsType::class,
+				'entry_type' => DiagnosticResultsType::class,
 				'allow_add' => true,
 				'allow_delete' => true,
 				'by_reference' => false,
-				'prototype_name' => '__test-results__',
+				'prototype_name' => '__diagnostic-results__',
 				'attr' => array(
 					'class' => 'collection tests',
-					'data-type' => 'test results'),))
-			->add('add test results', ButtonType::class, array(
+					'data-type' => 'diagnostic results'),))
+			->add('add diagnostic results', ButtonType::class, array(
 				'attr' => array(
 					'class' => 'button addButton',
 					'onclick' => 'addButtonClickListener(this)',)))
 			->add('medications', CollectionType::class, array(
-				'entry_type' => MedicationResultsType::class,
+				'entry_type' => TherapeuticResultsType::class,
 				'allow_add' => true,
 				'allow_delete' => true,
 				'by_reference' => false,
-				'prototype_name' => '__medication-results__',
+				'prototype_name' => '__therapeutic-results__',
 				'attr' => array(
 					'class' => 'collection medications',
-					'data-type' => 'medication results'),))
-			->add('add medication results', ButtonType::class, array(
+					'data-type' => 'therapeutic results'),))
+			->add('add therapeutic results', ButtonType::class, array(
 				'attr' => array(
 					'class' => 'button addButton',
 					'onclick' => 'addButtonClickListener(this)',)));

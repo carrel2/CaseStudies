@@ -168,7 +168,7 @@ a:hover {
 	max-width: 350px;
 }
 
-div#tests_test, div#medications_medication {
+div#diagnostics_test, div#therapeutics_medication {
 	padding: 8px;
 }
 

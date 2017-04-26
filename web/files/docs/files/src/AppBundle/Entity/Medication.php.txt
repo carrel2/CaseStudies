@@ -36,6 +36,11 @@ class Medication
 	private $name;
 
 	/**
+	 *
+	 */
+	private $group;
+
+	/**
 	 * The cost of the Medication
 	 *
 	 * @var string
@@ -106,6 +111,24 @@ class Medication
     {
         return $this->name;
     }
+
+		/**
+		 *
+		 */
+		public function setGroup($group)
+		{
+			$this->group = $group;
+
+			return $this;
+		}
+
+		/**
+		 *
+		 */
+		public function getGroup()
+		{
+			return $this->group;
+		}
 
     /**
      * Set cost
