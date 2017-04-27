@@ -92,6 +92,17 @@ class User implements UserInterface, \Serializable
 	private $uin;
 
 	/**
+	 * The location of the CaseStudy
+	 *
+	 * Either farm or hospital. Provided by the user. Used to decide the order that the Diagnostic and Therapeutic pages are shown
+	 *
+	 * @var string
+	 *
+	 * @ORM\Column(type="string", length=8)
+	 */
+	private $location;
+
+	/**
 	* Associated CaseStudy
 	*
 	* @var CaseStudy
@@ -307,6 +318,30 @@ class User implements UserInterface, \Serializable
 		public function getUin()
 		{
 			return $this->uin;
+		}
+
+		/**
+		 * Set location
+		 *
+		 * @param string $location
+		 *
+		 * @return User
+		 */
+		public function setLocation($location)
+		{
+				$this->location = $location;
+
+				return $this;
+		}
+
+		/**
+		 * Get location
+		 *
+		 * @return string
+		 */
+		public function getLocation()
+		{
+				return $this->location;
 		}
 
 		/**

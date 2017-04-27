@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use AppBundle\Form\MedicationsType;
+use AppBundle\Form\TherapeuticsType;
 
 /**
  * TherapeuticsController class
@@ -47,7 +47,7 @@ class TherapeuticsController extends Controller
 			return $this->redirectToRoute('default');
 		}
 
-		$form = $this->createForm( MedicationsType::class );
+		$form = $this->createForm( TherapeuticsType::class );
 
 		$form->handleRequest($r);
 

@@ -273,4 +273,40 @@ class Day
     {
         return $this->medications;
     }
+
+    /**
+     * Add hotspotsInfo
+     *
+     * @param \AppBundle\Entity\HotSpotInfo $hotspotsInfo
+     *
+     * @return Day
+     */
+    public function addHotspotsInfo(\AppBundle\Entity\HotSpotInfo $hotspotsInfo)
+    {
+				$hotspotsInfo->setDay($this);
+        $this->hotspotsInfo[] = $hotspotsInfo;
+
+        return $this;
+    }
+
+    /**
+     * Remove hotspotsInfo
+     *
+     * @param \AppBundle\Entity\HotSpotInfo $hotspotsInfo
+     */
+    public function removeHotspotsInfo(\AppBundle\Entity\HotSpotInfo $hotspotsInfo)
+    {
+				$hotspotsInfo->setDay(null);
+        $this->hotspotsInfo->removeElement($hotspotsInfo);
+    }
+
+    /**
+     * Get hotspotsInfo
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getHotspotsInfo()
+    {
+        return $this->hotspotsInfo;
+    }
 }

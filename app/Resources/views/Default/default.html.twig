@@ -16,6 +16,7 @@
 			<div>You have a session in progress: {{ case.title }}</div>
 		{% else %}
 			{{ form_row(form.title) }}
+			{{ form_row(form.location) }}
 
 			<div id="case"></div>
 		{% endif %}

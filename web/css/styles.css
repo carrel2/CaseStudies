@@ -194,11 +194,19 @@ input.test:checked + label::before, input.medication:checked + label::before {
 	color: black;
 }
 
-.diagnosis {
+.result {
 	padding: 8px;
 	border: solid 1px #eee;
+}
+
+.location {
 	border-bottom: none;
 	border-radius: 8px 8px 0 0;
+}
+
+.diagnosis {
+	border-top: none;
+	border-bottom: none;
 }
 
 button.accordion {

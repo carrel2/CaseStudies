@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class DefaultType extends AbstractType
@@ -18,14 +19,29 @@ class DefaultType extends AbstractType
 			$form = $event->getForm();
 
 			if( $case ) {
-				$form->add('resume', SubmitType::class)
-					->add('reset', SubmitType::class);
+				$form->add('resume', SubmitType::class, array(
+					'attr' => array(
+						'class' => 'button',
+					)
+				))
+					->add('reset', SubmitType::class, array(
+						'attr' => array(
+							'class' => 'button',
+						)
+					));
 			} else {
 				$form->add('title', EntityType::class, array(
 					'class' => 'AppBundle:CaseStudy',
 					'choice_label' => 'title',
 					'attr' => array(
 						'onchange' => 'updateCase()',)))
+					->add('location', ChoiceType::class, array(
+						'choices' => array(
+							'Farm' => 'Farm',
+							'Hospital' => 'Hospital',
+						),
+						'expanded' => true,
+					))
 					->add('start', SubmitType::class, array(
 						'attr' => array('class' => 'button'),
 					));

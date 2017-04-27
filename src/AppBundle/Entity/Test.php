@@ -41,6 +41,11 @@ class Test
 	private $group;
 
 	/**
+	 * @ORM\Column(type="string", length=4)
+	 */
+	private $waitTime;
+
+	/**
 	 * The cost of the Test
 	 *
 	 * @var string
@@ -194,5 +199,29 @@ class Test
     public function getResults()
     {
         return $this->results;
+    }
+
+    /**
+     * Set waitTime
+     *
+     * @param string $waitTime
+     *
+     * @return Test
+     */
+    public function setWaitTime($waitTime)
+    {
+        $this->waitTime = $waitTime;
+
+        return $this;
+    }
+
+    /**
+     * Get waitTime
+     *
+     * @return string
+     */
+    public function getWaitTime()
+    {
+        return $this->waitTime;
     }
 }

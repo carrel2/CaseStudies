@@ -36,9 +36,14 @@ class Medication
 	private $name;
 
 	/**
-	 *
+	 * @ORM\Column(type="string", length=40)
 	 */
 	private $group;
+
+	/**
+	 * @ORM\Column(type="string", length=4)
+	 */
+	private $waitTime;
 
 	/**
 	 * The cost of the Medication
@@ -196,6 +201,30 @@ class Medication
     public function getResults()
     {
         return $this->results;
+    }
+
+    /**
+     * Set waitTime
+     *
+     * @param string $waitTime
+     *
+     * @return Medication
+     */
+    public function setWaitTime($waitTime)
+    {
+        $this->waitTime = $waitTime;
+
+        return $this;
+    }
+
+    /**
+     * Get waitTime
+     *
+     * @return string
+     */
+    public function getWaitTime()
+    {
+        return $this->waitTime;
     }
 }
 

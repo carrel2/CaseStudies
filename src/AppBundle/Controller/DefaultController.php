@@ -56,7 +56,7 @@ class DefaultController extends Controller
 		if (time() - $session->getMetadataBag()->getLastUsed() > $this->getParameter('sessionMaxLifetime')) {
     	$session->invalidate();
 
-    	return $this->redirectToRoute('logout'); // redirect to expired session page
+    	return $this->redirectToRoute('logout');
 		}
 
 		$user = $this->getUser();
@@ -75,6 +75,7 @@ class DefaultController extends Controller
 
 				$case->addUser($user);
 				$user->addDay(new UserDay());
+				$user->setLocation($form->getData()['location']);
 
 				$em->flush();
 
@@ -115,7 +116,9 @@ class DefaultController extends Controller
 	 */
 	public function updateCaseAction(Request $r, CaseStudy $case)
 	{
-		return new Response( $case->getDescription() );
+		return $this->render('Ajax/caseDescription.html.twig', array(
+			'case' => $case,
+		));
 	}
 
 	/**
@@ -174,6 +177,7 @@ class DefaultController extends Controller
 			}
 
 			$results->setDiagnosis($session->remove('diagnosis'));
+			$results->setLocation($user->getLocation());
 
 			$em->persist($results);
 		}

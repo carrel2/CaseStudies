@@ -34,6 +34,7 @@ digraph "oneDegreeRelationshipsDiagram" {
       <TR><TD PORT="email" COLSPAN="2" BGCOLOR="#f4f7da" ALIGN="LEFT">email</TD><TD PORT="email.type" ALIGN="LEFT">varchar[60]</TD></TR>
       <TR><TD PORT="uin" COLSPAN="2" BGCOLOR="#f4f7da" ALIGN="LEFT">uin</TD><TD PORT="uin.type" ALIGN="LEFT">varchar[9]</TD></TR>
       <TR><TD PORT="is_active" COLSPAN="2" ALIGN="LEFT">is_active</TD><TD PORT="is_active.type" ALIGN="LEFT">bit[0]</TD></TR>
+      <TR><TD PORT="location" COLSPAN="2" ALIGN="LEFT">location</TD><TD PORT="location.type" ALIGN="LEFT">varchar[8]</TD></TR>
       <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">2 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">2 &gt;</TD></TR>
     </TABLE>>
     URL="app_users.html"

@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.17, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)
 --
 -- Host: localhost    Database: project
 -- ------------------------------------------------------
--- Server version	5.7.17-0ubuntu0.16.04.2
+-- Server version	5.7.18-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -112,7 +112,7 @@ CREATE TABLE `HotSpots` (
   PRIMARY KEY (`id`),
   KEY `IDX_A74F70048E962C16` (`animal_id`),
   CONSTRAINT `FK_A74F70048E962C16` FOREIGN KEY (`animal_id`) REFERENCES `Animals` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +154,7 @@ CREATE TABLE `HotSpotsInfo` (
 
 LOCK TABLES `HotSpotsInfo` WRITE;
 /*!40000 ALTER TABLE `HotSpotsInfo` DISABLE KEYS */;
-INSERT INTO `HotSpotsInfo` VALUES (6,2,NULL,4,'102.4° F'),(8,2,NULL,13,'Serosanguinous nasal discharge which worsens after bouts of coughing'),(9,2,NULL,16,'48/min');
+INSERT INTO `HotSpotsInfo` VALUES (8,2,NULL,13,'Serosanguinous nasal discharge which worsens after bouts of coughing'),(9,2,NULL,16,'48/min');
 /*!40000 ALTER TABLE `HotSpotsInfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -201,6 +201,8 @@ CREATE TABLE `Medications` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `cost` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `group` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `wait_time` varchar(4) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -211,7 +213,7 @@ CREATE TABLE `Medications` (
 
 LOCK TABLES `Medications` WRITE;
 /*!40000 ALTER TABLE `Medications` DISABLE KEYS */;
-INSERT INTO `Medications` VALUES (1,'Na penicillin G IV','0'),(2,'K penicillin G IV','0'),(3,'Carbenicillin subconjunct','0'),(4,'Erythromycin IM','0'),(5,'Amikacin IV','0'),(6,'Prednisone PO','0'),(7,'Albuterol PO','0');
+INSERT INTO `Medications` VALUES (1,'Na penicillin G IV','0','',''),(2,'K penicillin G IV','0','',''),(3,'Carbenicillin subconjunct','0','',''),(4,'Erythromycin IM','0','',''),(5,'Amikacin IV','0','',''),(6,'Prednisone PO','0','',''),(7,'Albuterol PO','0','','');
 /*!40000 ALTER TABLE `Medications` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,10 +230,11 @@ CREATE TABLE `Results` (
   `case_study` longtext COLLATE utf8_unicode_ci NOT NULL,
   `results` longtext COLLATE utf8_unicode_ci NOT NULL COMMENT '(DC2Type:array)',
   `diagnosis` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `location` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_501EDD88A76ED395` (`user_id`),
   CONSTRAINT `FK_501EDD88A76ED395` FOREIGN KEY (`user_id`) REFERENCES `app_users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -286,6 +289,8 @@ CREATE TABLE `Tests` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `cost` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `group` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `wait_time` varchar(4) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=238 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -296,7 +301,7 @@ CREATE TABLE `Tests` (
 
 LOCK TABLES `Tests` WRITE;
 /*!40000 ALTER TABLE `Tests` DISABLE KEYS */;
-INSERT INTO `Tests` VALUES (1,'Opthalmic examination','0'),(2,'Atlantooccipital CSF','0'),(3,'Reticulocyte count','0'),(4,'Cholesterol','0'),(5,'Serum electroophoresis','0'),(6,'Plasma viscosity','0'),(7,'Abdominal radiography','0'),(8,'Echocardiography','0'),(9,'Bone marrow aspirate','0'),(10,'Oral xylose absorption','0'),(11,'Acetylpromazine IV','0'),(12,'Acetylpromazine IM','0'),(13,'Xylazine IV','0'),(14,'Xylazine IM','0'),(15,'Detomidine IV','0'),(16,'Diazepam IV','0'),(101,'Na penicillin G IV','0'),(102,'K penicillin G IV','0'),(103,'Procaine penicillin G IM','0'),(104,'Benzathine penicillin IM','0'),(105,'Ampicillin IV','0'),(106,'Ampicillin IM','0'),(107,'Amoxicillin PO','0'),(108,'Amoxicillin/clavulanic a PO','0'),(109,'Cloxacillin IV','0'),(110,'Cloxacillin IM','0'),(111,'Carbenicillin subconjunct','0'),(112,'Ticarcillin IV','0'),(113,'Ticarcillin IMCephalothin IV','0'),(114,'Cephalothin IM','0'),(115,'Cefazolin IV','0'),(116,'Cefazolin IM','0'),(117,'Cephalexin POCephotaxine IV','0'),(118,'Moxalactam IV','0'),(119,'Trimethoprim-sulfa IV','0'),(120,'Trimethoprim-sulfa IM','0'),(121,'Trimethoprim-sulfa PO','0'),(122,'Erythromycin IV','0'),(123,'Erythromycin IM','0'),(124,'Erythromycin PO','0'),(125,'Gentamicin IV','0'),(126,'Gentamicin IM','0'),(127,'Kanamycin IV','0'),(128,'Kanamycin IM','0'),(129,'Neomycin PO','0'),(130,'Amikacin IV','0'),(131,'Amikacin IM','0'),(132,'Chloramphenicol IV','0'),(133,'Chloramphenicol IM','0'),(134,'Chloramphenicol PO','0'),(135,'Oxytetracycline IV','0'),(136,'Oxytetracycline IM','0'),(137,'Rifampicin PO','0'),(138,'Amphotericin B IV','0'),(139,'Metronidazole PO','0'),(140,'Iodochlorhydroxyquin PO','0'),(141,'Pyrimethamine PO','0'),(142,'Griseofulvin PO','0'),(143,'Methylprednisolone IV','0'),(144,'Methylprednisolone IM','0'),(145,'Methylprednisolone IA','0'),(146,'Dexamethasone IV','0'),(147,'Dexamethosone IM','0'),(148,'Flumethasone IV','0'),(149,'Flumethasone IM','0'),(150,'Prednisolone PO','0'),(151,'Prednisone PO','0'),(152,'DMSO IV','0'),(153,'DMSO topically','0'),(154,'Mannitol IV','0'),(155,'Boldenone undecylen IM','0'),(156,'Stanozolol IM','0'),(157,'Nandrolone phenylp IM','0'),(158,'Testerone IM','0'),(159,'Altrenogest PO','0'),(160,'Estradiol IM','0'),(161,'PGF2a IM','0'),(162,'Aminophylline IV','0'),(163,'Aminophylline PO','0'),(164,'Clenbuterol PO','0'),(165,'Albuterol PO','0'),(166,'Cromolyn Na insuffl','0'),(167,'Flunixin IV','0'),(168,'Flunixin IM','0'),(169,'Flunixin PO','0'),(170,'Phenylbutazone IV','0'),(171,'Phenylbutazone PO','0'),(172,'Butorphanol IV','0'),(173,'Meperidine IM','0'),(174,'Morphine IM','0'),(175,'Pentazocien IV','0'),(176,'Dipyrone IV','0'),(177,'0.9% NaCl IV','0'),(178,'1.8% NaCl IV','0'),(179,'0.45% NaCl and 2.5% glucose IV','0'),(180,'5% glucose IV','0'),(181,'10% glucose IV','0'),(182,'Lactated Ringers solution IV','0'),(183,'Ringers solution IV','0'),(184,'NaHCO3 IV','0'),(185,'KCl IV','0'),(186,'Calcium gluconate IV','0'),(187,'Dextran IV','0'),(188,'Plasma IV','0'),(189,'Whole blood IV','0'),(190,'Ivermectin IM','0'),(191,'Ivermectin PO','0'),(192,'Pyrantel PO','0'),(193,'Pyrantel 2X PO','0'),(194,'Fenbendazole PO','0'),(195,'Fenbendazole 10X PO','0'),(196,'Thiabendazole PO','0'),(197,'Cambendazole PO','0'),(198,'Albendazole PO','0'),(199,'Trichlorfon PO','0'),(200,'Diethycarbamizine PO','0'),(201,'Piperazine PO','0'),(202,'Febantel PO','0'),(203,'Dichlorvos PO','0'),(204,'Furosemide IV','0'),(205,'Furosemide IM','0'),(206,'Furosemide PO','0'),(207,'Digoxin IV','0'),(208,'Digoxin PO','0'),(209,'Quinidine IV','0'),(210,'Quinidine PO','0'),(211,'Lidocaine IV','0'),(212,'Neostigmine SQ','0'),(213,'Atropine IV','0'),(214,'Atropine IM','0'),(215,'Atropine SQ','0'),(216,'Probanthine IV','0'),(217,'Dantrolene Na IV','0'),(218,'Dantrolene Na PO','0'),(219,'Doxapram IV','0'),(220,'Cimetidine IV','0'),(221,'Cimetidine PO','0'),(222,'Ranitidine PO','0'),(223,'Sucralfate PO','0'),(224,'Isoproterenol IV','0'),(225,'Dopamine IV','0'),(226,'Dobutamine IV','0'),(227,'Isoxsuprine PO','0'),(228,'Mineral oil PO','0'),(229,'DSS PO','0'),(230,'Metamucil PO','0'),(231,'TbCG','0'),(232,'Excision','0'),(233,'Cryotherapy','0'),(234,'Weap','0'),(235,'Na heparin IV','0'),(236,'Na heparin SQ','0'),(237,'Warfarin PO','0');
+INSERT INTO `Tests` VALUES (1,'Opthalmic examination','0','','1'),(2,'Atlantooccipital CSF','0','',''),(3,'Reticulocyte count','0','',''),(4,'Cholesterol','0','',''),(5,'Serum electroophoresis','0','',''),(6,'Plasma viscosity','0','',''),(7,'Abdominal radiography','0','',''),(8,'Echocardiography','0','',''),(9,'Bone marrow aspirate','0','',''),(10,'Oral xylose absorption','0','',''),(11,'Acetylpromazine IV','0','',''),(12,'Acetylpromazine IM','0','',''),(13,'Xylazine IV','0','',''),(14,'Xylazine IM','0','',''),(15,'Detomidine IV','0','',''),(16,'Diazepam IV','0','',''),(101,'Na penicillin G IV','0','',''),(102,'K penicillin G IV','0','',''),(103,'Procaine penicillin G IM','0','',''),(104,'Benzathine penicillin IM','0','',''),(105,'Ampicillin IV','0','',''),(106,'Ampicillin IM','0','',''),(107,'Amoxicillin PO','0','',''),(108,'Amoxicillin/clavulanic a PO','0','',''),(109,'Cloxacillin IV','0','',''),(110,'Cloxacillin IM','0','',''),(111,'Carbenicillin subconjunct','0','',''),(112,'Ticarcillin IV','0','',''),(113,'Ticarcillin IMCephalothin IV','0','',''),(114,'Cephalothin IM','0','',''),(115,'Cefazolin IV','0','',''),(116,'Cefazolin IM','0','',''),(117,'Cephalexin POCephotaxine IV','0','',''),(118,'Moxalactam IV','0','',''),(119,'Trimethoprim-sulfa IV','0','',''),(120,'Trimethoprim-sulfa IM','0','',''),(121,'Trimethoprim-sulfa PO','0','',''),(122,'Erythromycin IV','0','',''),(123,'Erythromycin IM','0','',''),(124,'Erythromycin PO','0','',''),(125,'Gentamicin IV','0','',''),(126,'Gentamicin IM','0','',''),(127,'Kanamycin IV','0','',''),(128,'Kanamycin IM','0','',''),(129,'Neomycin PO','0','',''),(130,'Amikacin IV','0','',''),(131,'Amikacin IM','0','',''),(132,'Chloramphenicol IV','0','',''),(133,'Chloramphenicol IM','0','',''),(134,'Chloramphenicol PO','0','',''),(135,'Oxytetracycline IV','0','',''),(136,'Oxytetracycline IM','0','',''),(137,'Rifampicin PO','0','',''),(138,'Amphotericin B IV','0','',''),(139,'Metronidazole PO','0','',''),(140,'Iodochlorhydroxyquin PO','0','',''),(141,'Pyrimethamine PO','0','',''),(142,'Griseofulvin PO','0','',''),(143,'Methylprednisolone IV','0','',''),(144,'Methylprednisolone IM','0','',''),(145,'Methylprednisolone IA','0','',''),(146,'Dexamethasone IV','0','',''),(147,'Dexamethosone IM','0','',''),(148,'Flumethasone IV','0','',''),(149,'Flumethasone IM','0','',''),(150,'Prednisolone PO','0','',''),(151,'Prednisone PO','0','',''),(152,'DMSO IV','0','',''),(153,'DMSO topically','0','',''),(154,'Mannitol IV','0','',''),(155,'Boldenone undecylen IM','0','',''),(156,'Stanozolol IM','0','',''),(157,'Nandrolone phenylp IM','0','',''),(158,'Testerone IM','0','',''),(159,'Altrenogest PO','0','',''),(160,'Estradiol IM','0','',''),(161,'PGF2a IM','0','',''),(162,'Aminophylline IV','0','',''),(163,'Aminophylline PO','0','',''),(164,'Clenbuterol PO','0','',''),(165,'Albuterol PO','0','',''),(166,'Cromolyn Na insuffl','0','',''),(167,'Flunixin IV','0','',''),(168,'Flunixin IM','0','',''),(169,'Flunixin PO','0','',''),(170,'Phenylbutazone IV','0','',''),(171,'Phenylbutazone PO','0','',''),(172,'Butorphanol IV','0','',''),(173,'Meperidine IM','0','',''),(174,'Morphine IM','0','',''),(175,'Pentazocien IV','0','',''),(176,'Dipyrone IV','0','',''),(177,'0.9% NaCl IV','0','',''),(178,'1.8% NaCl IV','0','',''),(179,'0.45% NaCl and 2.5% glucose IV','0','',''),(180,'5% glucose IV','0','',''),(181,'10% glucose IV','0','',''),(182,'Lactated Ringers solution IV','0','',''),(183,'Ringers solution IV','0','',''),(184,'NaHCO3 IV','0','',''),(185,'KCl IV','0','',''),(186,'Calcium gluconate IV','0','',''),(187,'Dextran IV','0','',''),(188,'Plasma IV','0','',''),(189,'Whole blood IV','0','',''),(190,'Ivermectin IM','0','',''),(191,'Ivermectin PO','0','',''),(192,'Pyrantel PO','0','',''),(193,'Pyrantel 2X PO','0','',''),(194,'Fenbendazole PO','0','',''),(195,'Fenbendazole 10X PO','0','',''),(196,'Thiabendazole PO','0','',''),(197,'Cambendazole PO','0','',''),(198,'Albendazole PO','0','',''),(199,'Trichlorfon PO','0','',''),(200,'Diethycarbamizine PO','0','',''),(201,'Piperazine PO','0','',''),(202,'Febantel PO','0','',''),(203,'Dichlorvos PO','0','',''),(204,'Furosemide IV','0','',''),(205,'Furosemide IM','0','',''),(206,'Furosemide PO','0','',''),(207,'Digoxin IV','0','',''),(208,'Digoxin PO','0','',''),(209,'Quinidine IV','0','',''),(210,'Quinidine PO','0','',''),(211,'Lidocaine IV','0','',''),(212,'Neostigmine SQ','0','',''),(213,'Atropine IV','0','',''),(214,'Atropine IM','0','',''),(215,'Atropine SQ','0','',''),(216,'Probanthine IV','0','',''),(217,'Dantrolene Na IV','0','',''),(218,'Dantrolene Na PO','0','',''),(219,'Doxapram IV','0','',''),(220,'Cimetidine IV','0','',''),(221,'Cimetidine PO','0','',''),(222,'Ranitidine PO','0','',''),(223,'Sucralfate PO','0','',''),(224,'Isoproterenol IV','0','',''),(225,'Dopamine IV','0','',''),(226,'Dobutamine IV','0','',''),(227,'Isoxsuprine PO','0','',''),(228,'Mineral oil PO','0','',''),(229,'DSS PO','0','',''),(230,'Metamucil PO','0','',''),(231,'TbCG','0','',''),(232,'Excision','0','',''),(233,'Cryotherapy','0','',''),(234,'Weap','0','',''),(235,'Na heparin IV','0','',''),(236,'Na heparin SQ','0','',''),(237,'Warfarin PO','0','','');
 /*!40000 ALTER TABLE `Tests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -313,7 +318,7 @@ CREATE TABLE `UserDays` (
   PRIMARY KEY (`id`),
   KEY `IDX_14DD497FA76ED395` (`user_id`),
   CONSTRAINT `FK_14DD497FA76ED395` FOREIGN KEY (`user_id`) REFERENCES `app_users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -341,6 +346,7 @@ CREATE TABLE `app_users` (
   `email` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `uin` varchar(9) COLLATE utf8_unicode_ci NOT NULL,
   `is_active` tinyint(1) NOT NULL,
+  `location` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_C2502824F85E0677` (`username`),
   UNIQUE KEY `UNIQ_C2502824E7927C74` (`email`),
@@ -356,7 +362,7 @@ CREATE TABLE `app_users` (
 
 LOCK TABLES `app_users` WRITE;
 /*!40000 ALTER TABLE `app_users` DISABLE KEYS */;
-INSERT INTO `app_users` VALUES (1,NULL,'ROLE_ADMIN','brandon','$2y$13$/0ZWoICiRtbdEZlgHJw4q.PPdAIAhuYZ863ONTnfrPCmXWhCd6Pri','carrel2@illinois.edu','123123123',0),(4,NULL,'ROLE_USER','test','$2y$13$fmgTtVEq5Z1gxM/Jw1f40ORhImUe3Yapi3plikzXSA56p5O0ipuRm','test@test.com','111111111',0);
+INSERT INTO `app_users` VALUES (1,NULL,'ROLE_ADMIN','brandon','$2y$13$/0ZWoICiRtbdEZlgHJw4q.PPdAIAhuYZ863ONTnfrPCmXWhCd6Pri','carrel2@illinois.edu','123123123',0,'Farm'),(4,NULL,'ROLE_USER','test','$2y$13$fmgTtVEq5Z1gxM/Jw1f40ORhImUe3Yapi3plikzXSA56p5O0ipuRm','test@test.com','111111111',0,'');
 /*!40000 ALTER TABLE `app_users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -369,4 +375,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-26 14:00:08
+-- Dump completed on 2017-04-27 14:43:51

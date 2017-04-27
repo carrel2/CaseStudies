@@ -49,7 +49,7 @@ class UserDay
 	* @see ArrayCollection::class
 	* @see HotSpotInfo::class
 	*
-	* @ORM\OneToMany(targetEntity="HotSpotInfo", mappedBy="userDay", cascade={"persist"})
+	* @ORM\OneToMany(targetEntity="HotSpotInfo", mappedBy="userDay", cascade={"persist"}, orphanRemoval=true)
 	*/
 	private $hotspotsInfo;
 
@@ -97,7 +97,7 @@ class UserDay
 
 		foreach($this->hotspotsInfo as $spot)
 		{
-			$a["hotspotsInfo"][$spot->getName()] = $spot->getInfo();
+			$a["hotspotsInfo"][$spot->getHotspot()->getName()] = $spot->getInfo();
 		}
 		foreach ($this->tests as $test)
 		{

@@ -59,6 +59,11 @@ class Results
   private $results;
 
   /**
+  * @ORM\Column(type="string", length=8)
+  */
+  private $location;
+
+  /**
   * The diagnosis submitted
   *
   * @var string
@@ -185,5 +190,29 @@ class Results
     public function getCaseStudy()
     {
         return $this->caseStudy;
+    }
+
+    /**
+     * Set location
+     *
+     * @param string $location
+     *
+     * @return Results
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * Get location
+     *
+     * @return string
+     */
+    public function getLocation()
+    {
+        return $this->location;
     }
 }

@@ -9,8 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 *
 * Contains results for a User
 *
-* @todo implement diagnoses
-*
 * @ORM\Entity
 * @ORM\Table(name="Results")
 */
@@ -59,6 +57,20 @@ class Results
   * @ORM\Column(type="array")
   */
   private $results;
+
+  /**
+  * @ORM\Column(type="string", length=8)
+  */
+  private $location;
+
+  /**
+  * The diagnosis submitted
+  *
+  * @var string
+  *
+  * @ORM\Column(type="text")
+  */
+  private $diagnosis;
 
     /**
      * Get id
@@ -109,6 +121,30 @@ class Results
     }
 
     /**
+     * Set diagnosis
+     *
+     * @param string $d
+     *
+     * @return self
+     */
+    public function setDiagnosis($d)
+    {
+      $this->diagnosis = $d;
+
+      return $this;
+    }
+
+    /**
+     * Get diagnosis
+     *
+     * @return string
+     */
+    public function getDiagnosis()
+    {
+      return $this->diagnosis;
+    }
+
+    /**
      * Set user
      *
      * @param \AppBundle\Entity\User $user
@@ -154,5 +190,29 @@ class Results
     public function getCaseStudy()
     {
         return $this->caseStudy;
+    }
+
+    /**
+     * Set location
+     *
+     * @param string $location
+     *
+     * @return Results
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * Get location
+     *
+     * @return string
+     */
+    public function getLocation()
+    {
+        return $this->location;
     }
 }

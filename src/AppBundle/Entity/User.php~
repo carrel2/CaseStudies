@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -55,7 +56,7 @@ class User implements UserInterface, \Serializable
 	*
 	* @var string
 	*
-	* @Assert\Length(max=4096)
+	* @Assert\Length(min=6,max=4096,minMessage="Password must be at least {{ limit }} characters long")
 	*/
 	private $plainPassword;
 
@@ -91,6 +92,17 @@ class User implements UserInterface, \Serializable
 	private $uin;
 
 	/**
+	 * The location of the CaseStudy
+	 *
+	 * Either farm or hospital. Provided by the user. Used to decide the order that the Diagnostic and Therapeutic pages are shown
+	 *
+	 * @var string
+	 *
+	 * @ORM\Column(type="string", length=8)
+	 */
+	private $location;
+
+	/**
 	* Associated CaseStudy
 	*
 	* @var CaseStudy
@@ -109,7 +121,7 @@ class User implements UserInterface, \Serializable
 	* @see UserDay::class
 	* @see ArrayCollection::class
 	*
-	* @ORM\OneToMany(targetEntity="UserDay", mappedBy="user", cascade={"all"})
+	* @ORM\OneToMany(targetEntity="UserDay", mappedBy="user", cascade={"all"}, orphanRemoval=true)
 	*/
 	private $days;
 
@@ -121,7 +133,7 @@ class User implements UserInterface, \Serializable
 	* @see Results::class
 	* @see ArrayCollection::class
 	*
-	* @ORM\OneToMany(targetEntity="Results", mappedBy="user")
+	* @ORM\OneToMany(targetEntity="Results", mappedBy="user", orphanRemoval=true)
 	*/
 	private $results;
 
@@ -309,6 +321,30 @@ class User implements UserInterface, \Serializable
 		}
 
 		/**
+		 * Set location
+		 *
+		 * @param string $location
+		 *
+		 * @return User
+		 */
+		public function setLocation($location)
+		{
+				$this->location = $location;
+
+				return $this;
+		}
+
+		/**
+		 * Get location
+		 *
+		 * @return string
+		 */
+		public function getLocation()
+		{
+				return $this->location;
+		}
+
+		/**
 		* Get active UserDay
 		*
 		* @see UserDay::class
@@ -462,5 +498,10 @@ class User implements UserInterface, \Serializable
 		public function getResults()
 		{
 			return $this->results;
+		}
+
+		public function hasResults()
+		{
+			return !$this->results->isEmpty();
 		}
 	}

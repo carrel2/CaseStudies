@@ -20,8 +20,8 @@ use AppBundle\Form\UserType;
 use AppBundle\Form\AdminType;
 use AppBundle\Form\CaseType;
 use AppBundle\Form\AnimalType;
-use AppBundle\Form\TestType;
-use AppBundle\Form\MedicationType;
+use AppBundle\Form\DiagnosticType;
+use AppBundle\Form\TherapeuticType;
 use AppBundle\Entity\CaseStudy;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Animal;
@@ -34,6 +34,8 @@ use AppBundle\Entity\Medication;
  * AdminController class extends \Symfony\Bundle\FrameworkBundle\Controller\Controller
  *
  * @see http://api.symfony.com/3.2/Symfony/Bundle/FrameworkBundle/Controller/Controller.html
+ *
+ * @todo add flash messages
  */
 class AdminController extends Controller
 {
@@ -423,7 +425,7 @@ class AdminController extends Controller
 		 */
 		public function createTestAction(Request $r)
 		{
-			$form = $this->createForm( TestType::class );
+			$form = $this->createForm( DiagnosticType::class );
 
 			$form->handleRequest($r);
 
@@ -452,7 +454,7 @@ class AdminController extends Controller
 				 $test = new Test();
 			 }
 
-			 $form = $this->createForm( TestType::class, $test );
+			 $form = $this->createForm( DiagnosticType::class, $test );
 
 			 $form->handleRequest($r);
 
@@ -467,7 +469,7 @@ class AdminController extends Controller
 
 			 return $this->render('Admin/manage.html.twig', array(
 				 'form' => $form->createView(),
-				 'route' => $null,
+				 'route' => null,
 			 ));
 		 }
 
@@ -515,7 +517,7 @@ class AdminController extends Controller
 
 				return $this->render('Admin/manage.html.twig', array(
 					'form' => $form->createView(),
-					'route' => 'manageMedications',
+					'route' => 'createMedication',
 				));
 			}
 
@@ -524,7 +526,7 @@ class AdminController extends Controller
 			 */
 			public function createMedicationAction(Request $r)
 			{
-				$form = $this->createForm( MedicationType::class );
+				$form = $this->createForm( TherapeuticType::class );
 
 				$form->handleRequest($r);
 
@@ -553,7 +555,7 @@ class AdminController extends Controller
 					 $medication = new Medication();
 				 }
 
-				 $form = $this->createForm( MedicationType::class, $medication );
+				 $form = $this->createForm( TherapeuticType::class, $medication );
 
 				 $form->handleRequest($r);
 

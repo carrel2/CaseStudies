@@ -11,7 +11,8 @@
 		<button class="accordion">Results: {{ result.caseStudy }}</button>
 
 		<div class="panel">
-			<div class="diagnosis">Diagnosis: {{ result.diagnosis }}</div>
+			<div class="result location">Location: {{ result.location }}</div>
+			<div class="result diagnosis">Diagnosis: {{ result.diagnosis }}</div>
 
 			{% for day in result.results %}
 				<button class="accordion">Day {{ loop.index }}</button>

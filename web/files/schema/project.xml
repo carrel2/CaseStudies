@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<database name="project" type="MySQL - 5.7.17-0ubuntu0.16.04.2">
+<database name="project" type="MySQL - 5.7.18-0ubuntu0.16.04.1">
    <tables>
       <table name="Animals" numRows="0" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
@@ -27,6 +27,7 @@
          <column autoUpdated="false" digits="0" id="5" name="email" nullable="false" remarks="" size="60" type="VARCHAR"/>
          <column autoUpdated="false" digits="0" id="6" name="uin" nullable="false" remarks="" size="9" type="VARCHAR"/>
          <column autoUpdated="false" digits="0" id="7" name="is_active" nullable="false" remarks="" size="0" type="BIT"/>
+         <column autoUpdated="false" digits="0" id="8" name="location" nullable="false" remarks="" size="8" type="VARCHAR"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="PRIMARY" unique="true">
             <column ascending="true" name="id"/>
@@ -204,12 +205,13 @@
             <column ascending="true" name="day_id"/>
          </index>
       </table>
-      <table name="Tests" numRows="137" remarks="" type="TABLE">
+      <table name="Tests" numRows="153" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
             <child column="test_id" foreignKey="FK_B868B2F21E5D0459" implied="false" onDeleteCascade="false" table="TestResults"/>
          </column>
          <column autoUpdated="false" digits="0" id="1" name="name" nullable="false" remarks="" size="40" type="VARCHAR"/>
          <column autoUpdated="false" digits="0" id="2" name="cost" nullable="false" remarks="" size="10" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="3" name="group" nullable="false" remarks="" size="40" type="VARCHAR"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="PRIMARY" unique="true">
             <column ascending="true" name="id"/>

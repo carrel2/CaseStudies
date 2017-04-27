@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Test;
-use AppBundle\Form\TestsType;
+use AppBundle\Form\DiagnosticsType;
 
 /**
  * DiagnosticsController class
@@ -25,6 +25,8 @@ class DiagnosticsController extends Controller
 	 * showPageAction function
 	 *
 	 * Shows TestsType form. On submission adds TestResults from the corresponding Day to the current UserDay
+	 *
+	 * @todo use location to determine which page to go to next
 	 *
 	 * @see TestsType::class
 	 * @see TestResults::class
@@ -50,7 +52,7 @@ class DiagnosticsController extends Controller
 
 		$session->set('page', 'diagnostics');
 
-		$form = $this->createForm( TestsType::class );
+		$form = $this->createForm( DiagnosticsType::class );
 
 		$form->handleRequest($r);
 

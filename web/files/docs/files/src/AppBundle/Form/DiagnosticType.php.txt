@@ -16,6 +16,7 @@ class DiagnosticType extends AbstractType
       ->add('cost', null, array(
         'attr' => array('pattern' => '[0-9]+')
       ))
+      ->add('waitTime')
       ->add('submit', SubmitType::class, array(
         'attr' => array('class' => 'button'),
       ));
