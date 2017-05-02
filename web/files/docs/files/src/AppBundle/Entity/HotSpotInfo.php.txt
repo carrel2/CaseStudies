@@ -48,6 +48,7 @@ class HotSpotInfo
 	 * @see UserDay::class
 	 *
 	 * @ORM\ManyToOne(targetEntity="UserDay", inversedBy="hotspotsInfo")
+	 * @ORM\JoinColumn(name="user_day_id", referencedColumnName="id", onDelete="SET NULL")
 	 */
 	private $userDay;
 

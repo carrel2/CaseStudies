@@ -78,7 +78,13 @@ class DiagnosticsController extends Controller
 
 			$session->set('page', 'therapeutics');
 
-			return $this->redirectToRoute('therapeutics');
+			if( $user->getLocation() == "Farm" )
+			{
+				return $this->redirectToRoute('therapeutics');
+			} else if( $user->getLocation() == "Hospital" )
+			{
+				return $this->redirectToRoute('review');
+			}
 		}
 
 		return $this->render('Default/diagnostics.html.twig', array(

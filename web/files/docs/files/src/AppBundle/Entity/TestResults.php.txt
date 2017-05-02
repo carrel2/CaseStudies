@@ -47,6 +47,7 @@ class TestResults
 	 * @see UserDay::class
 	 *
 	 * @ORM\ManyToOne(targetEntity="UserDay", inversedBy="tests")
+	 * @ORM\JoinColumn(name="user_day_id", referencedColumnName="id", onDelete="SET NULL")
 	 */
 	private $userDay;
 

@@ -115,7 +115,7 @@ class HotSpotController extends Controller
 	 {
 		 $hotspots = $animal->getHotspots();
 		 $spot = null;
-		 $name = ucfirst(strtolower($name));
+		 $name = ucfirst(strtolower(str_replace("%20", " ", $name)));
 
 		 foreach( $hotspots as $hotspot) {
 		 	if( $hotspot->getName() === $name )

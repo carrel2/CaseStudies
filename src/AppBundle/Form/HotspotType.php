@@ -15,7 +15,10 @@ class HotspotType extends AbstractType
 	{
 		$builder->add('hotspot', EntityType::class, array(
 				'class' => 'AppBundle:HotSpot',
-				'choice_label' => 'name',))
+				'choice_label' => 'name',
+				'attr' => array(
+					'data-test' => implode(',',$options['attr']),
+				)))
 			->add('info', TextareaType::class);
 	}
 

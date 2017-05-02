@@ -111,7 +111,7 @@ class FileController extends Controller
       $em->flush();
     }
 
-    return $this->render('Default/import.html.twig', array(
+    return $this->render('Admin/import.html.twig', array(
       'form' => $form->createView(),
       'reader' => $reader,
     ));

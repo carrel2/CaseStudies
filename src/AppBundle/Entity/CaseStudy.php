@@ -54,6 +54,7 @@ class CaseStudy
 	* @see Animal::class
 	*
 	* @ORM\ManyToOne(targetEntity="Animal", inversedBy="cases")
+	* @ORM\JoinColumn(name="animal_id", referencedColumnName="id", onDelete="SET NULL")
 	*/
 	private $animal;
 

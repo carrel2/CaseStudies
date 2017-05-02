@@ -29,6 +29,11 @@ class CaseType extends AbstractType
 			))
 			->add('days', CollectionType::class, array(
 				'entry_type' => DayType::class,
+				'entry_options' => array(
+					'attr' => array(
+						'data-animal' => '3'
+					)
+				),
 				'allow_add' => true,
 				'allow_delete' => true,
 				'by_reference' => false,

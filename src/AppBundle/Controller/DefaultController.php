@@ -36,6 +36,8 @@ class DefaultController extends Controller
 	 * On submission, associates the current User with the selected CaseStudy unless an association already exists.
 	 * Redirects to HotSpotController::showPage()
 	 *
+	 * @todo style location radio boxes
+	 *
 	 * @see DefaultType::class
 	 * @see User::class
 	 * @see CaseStudy::class
@@ -143,13 +145,8 @@ class DefaultController extends Controller
 		$session = $r->getSession();
 		$user = $this->getUser();
 
-		if( $session->remove('finished') )
+		if( $session->has('diagnosis') && $session->remove('finished') )
 		{
-			if( !$session->has('diagnosis') )
-			{
-				return $this->redirectToRoute('review');
-			}
-
 			$results = new Results();
 
 			$user->addResult($results);

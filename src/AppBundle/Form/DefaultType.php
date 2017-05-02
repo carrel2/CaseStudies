@@ -27,6 +27,7 @@ class DefaultType extends AbstractType
 					->add('reset', SubmitType::class, array(
 						'attr' => array(
 							'class' => 'button',
+							'onclick' => 'return confirmDelete();',
 						)
 					));
 			} else {

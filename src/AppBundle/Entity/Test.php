@@ -31,14 +31,14 @@ class Test
 	 *
 	 * @var string
 	 *
-	 * @ORM\Column(type="string", length=40)
+	 * @ORM\Column(type="text")
 	 */
 	private $name;
 
 	/**
-	 * @ORM\Column(type="string", length=40)
+	 * @ORM\Column(type="text")
 	 */
-	private $group;
+	private $dGroup;
 
 	/**
 	 * @ORM\Column(type="string", length=4)
@@ -80,6 +80,8 @@ class Test
 		{
 			$this->name = $array["name"];
 			$this->cost = $array["cost"] === null ? 0 : $array["cost"];
+			$this->dGroup = $array["group"] === null ? '' : $array["group"];
+			$this->waitTime = $array["wait time"] === null ? 0 : $array["wait time"];
 		}
 	}
 
@@ -122,7 +124,7 @@ class Test
 		 */
 		public function setGroup($group)
 		{
-			$this->group = $group;
+			$this->dGroup = $group;
 
 			return $this;
 		}
@@ -132,7 +134,7 @@ class Test
 		 */
 		public function getGroup()
 		{
-			return $this->group;
+			return $this->dGroup;
 		}
 
     /**

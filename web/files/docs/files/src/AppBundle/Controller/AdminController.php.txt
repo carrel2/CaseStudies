@@ -34,8 +34,6 @@ use AppBundle\Entity\Medication;
  * AdminController class extends \Symfony\Bundle\FrameworkBundle\Controller\Controller
  *
  * @see http://api.symfony.com/3.2/Symfony/Bundle/FrameworkBundle/Controller/Controller.html
- *
- * @todo add flash messages
  */
 class AdminController extends Controller
 {
@@ -61,6 +59,9 @@ class AdminController extends Controller
 	 * editCaseAction function
 	 *
 	 * Creates a form for admins to use to edit CaseStudy objects
+	 *
+	 * @todo only display hotspots for the associated animal
+	 * @todo update hotspots when animal changes
 	 *
 	 * @see CaseStudy::class
 	 *
@@ -212,7 +213,7 @@ class AdminController extends Controller
 				));
 			} else if( $form->get('delete')->isClicked() ) {
 				$em->remove($user);
-				$this->addFlash('notice', 'User deleted: ' . $user->getUsername());
+				$this->addFlash('notice', 'Deleted ' . $user->getUsername());
 				$em->flush();
 
 				return $this->redirectToRoute('manageUsers');
@@ -306,6 +307,8 @@ class AdminController extends Controller
 				$em->remove($animal);
 				$em->flush();
 
+				$this->addFlash('notice', 'Deleted ' . $animal->getName());
+
 				return $this->redirectToRoute('manageAnimals');
 			}
 		}
@@ -329,10 +332,13 @@ class AdminController extends Controller
 		if( $form->isSubmitted() && $form->isValid() )
 		{
 			$em = $this->getDoctrine()->getManager();
+			$animal = $form->getData();
 
 			$em->persist($animal);
 
 			$em->flush();
+
+			$this->addFlash('notice', 'Created ' . $animal->getName());
 		}
 
 		return $this->render('Admin/animals.html.twig', array(
@@ -363,6 +369,8 @@ class AdminController extends Controller
 			 $em->persist($animal);
 
 			 $em->flush();
+
+			 $this->addFlash('notice', 'Updated ' . $animal->getName());
 		 }
 
 		 return $this->render('Admin/animals.html.twig', array(
@@ -410,6 +418,8 @@ class AdminController extends Controller
 					$em->remove($test);
 					$em->flush();
 
+					$this->addFlash('notice', 'Deleted ' . $test->getName());
+
 					return $this->redirectToRoute('manageTests');
 				}
 			}
@@ -436,6 +446,8 @@ class AdminController extends Controller
 				$em->persist($test);
 
 				$em->flush();
+
+				$this->addFlash('notice', 'Created ' . $test->getName());
 			}
 
 			return $this->render('Admin/manage.html.twig', array(
@@ -465,6 +477,8 @@ class AdminController extends Controller
 				 $em->persist($test);
 
 				 $em->flush();
+
+				 $this->addFlash('notice', 'Updated ' . $test->getName());
 			 }
 
 			 return $this->render('Admin/manage.html.twig', array(
@@ -511,6 +525,8 @@ class AdminController extends Controller
 						$em->remove($medication);
 						$em->flush();
 
+						$this->addFlash('notice', 'Deleted ' . $medication->getName());
+
 						return $this->redirectToRoute('manageMediations');
 					}
 				}
@@ -537,6 +553,8 @@ class AdminController extends Controller
 					$em->persist($medication);
 
 					$em->flush();
+
+					$this->addFlash('notice', 'Created ', $medication->getName());
 				}
 
 				return $this->render('Admin/manage.html.twig', array(
@@ -566,6 +584,8 @@ class AdminController extends Controller
 					 $em->persist($medication);
 
 					 $em->flush();
+
+					 $this->addFlash('notice', 'Updated ' . $medication->getName());
 				 }
 
 				 return $this->render('Admin/manage.html.twig', array(
