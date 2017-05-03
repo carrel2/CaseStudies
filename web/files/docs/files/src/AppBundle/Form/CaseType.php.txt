@@ -31,8 +31,8 @@ class CaseType extends AbstractType
 				'entry_type' => DayType::class,
 				'entry_options' => array(
 					'attr' => array(
-						'data-animal' => '3'
-					)
+						'animal' => $options['data']->getAnimal()->getId(),
+					),
 				),
 				'allow_add' => true,
 				'allow_delete' => true,

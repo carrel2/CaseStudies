@@ -19,7 +19,7 @@ class DayType extends AbstractType
 				'entry_type' => HotspotType::class,
 				'entry_options' => array(
 					'attr' => array(
-						'data-animal' => $options['attr'],
+						'animal' => $options['attr']['animal'],
 					)
 				),
 				'allow_add' => true,

@@ -164,7 +164,7 @@ a:hover {
 	height: 600px;
 }
 
-#body #hotspots {
+#body #image ~ #hotspots {
 	max-width: 350px;
 }
 
