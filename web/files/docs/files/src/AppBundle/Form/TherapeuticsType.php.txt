@@ -20,7 +20,8 @@ class TherapeuticsType extends AbstractType
 				'multiple' => true,
 				'choice_attr' => function(Medication $t, $key, $index) {
 					return ['class' => 'medication'];
-				}))
+				},
+			))
 			->add('submit', SubmitType::class, array(
 				'attr' => array('class' => 'button'),
 			));

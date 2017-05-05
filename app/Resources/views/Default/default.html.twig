@@ -13,7 +13,7 @@
 {% block body %}
 	{{ form_start(form) }}
 		{% if case %}
-			<div>You have a session in progress: {{ case.title }}</div>
+			<div>You have a session in progress: <b>{{ case.title }}</b></div>
 		{% else %}
 			{{ form_row(form.title) }}
 			{{ form_row(form.location) }}

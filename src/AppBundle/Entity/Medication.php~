@@ -38,7 +38,7 @@ class Medication
 	/**
 	 * @ORM\Column(type="string", length=40)
 	 */
-	private $group;
+	private $tGroup;
 
 	/**
 	 * @ORM\Column(type="string", length=4)
@@ -80,6 +80,8 @@ class Medication
 		{
 			$this->name = $array["name"];
 			$this->cost = $array["cost"] === null ? 0 : $array["cost"];
+			$this->tGroup = $array["group"] === null ? '' : $array["group"];
+			$this->waitTime = $array["wait time"] === null ? 0 : $array["wait time"];
 		}
 	}
 
@@ -122,7 +124,7 @@ class Medication
 		 */
 		public function setGroup($group)
 		{
-			$this->group = $group;
+			$this->tGroup = $group;
 
 			return $this;
 		}
@@ -132,7 +134,7 @@ class Medication
 		 */
 		public function getGroup()
 		{
-			return $this->group;
+			return $this->tGroup;
 		}
 
     /**
@@ -201,5 +203,29 @@ class Medication
     public function getResults()
     {
         return $this->results;
+    }
+
+    /**
+     * Set waitTime
+     *
+     * @param string $waitTime
+     *
+     * @return Medication
+     */
+    public function setWaitTime($waitTime)
+    {
+        $this->waitTime = $waitTime;
+
+        return $this;
+    }
+
+    /**
+     * Get waitTime
+     *
+     * @return string
+     */
+    public function getWaitTime()
+    {
+        return $this->waitTime;
     }
 }

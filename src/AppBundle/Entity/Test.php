@@ -10,6 +10,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * Contains information about a specific diagnostic Test
  *
+ * @todo possibly move wait time to TestResults entity, so it can be edited on a case by case basis
+ *
  * @ORM\Entity
  * @ORM\Table(name="Tests")
  */
@@ -225,5 +227,29 @@ class Test
     public function getWaitTime()
     {
         return $this->waitTime;
+    }
+
+    /**
+     * Set dGroup
+     *
+     * @param string $dGroup
+     *
+     * @return Test
+     */
+    public function setDGroup($dGroup)
+    {
+        $this->dGroup = $dGroup;
+
+        return $this;
+    }
+
+    /**
+     * Get dGroup
+     *
+     * @return string
+     */
+    public function getDGroup()
+    {
+        return $this->dGroup;
     }
 }

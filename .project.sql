@@ -55,7 +55,7 @@ CREATE TABLE `Cases` (
   PRIMARY KEY (`id`),
   KEY `IDX_DDDA2C8F8E962C16` (`animal_id`),
   CONSTRAINT `FK_DDDA2C8F8E962C16` FOREIGN KEY (`animal_id`) REFERENCES `Animals` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +64,7 @@ CREATE TABLE `Cases` (
 
 LOCK TABLES `Cases` WRITE;
 /*!40000 ALTER TABLE `Cases` DISABLE KEYS */;
-INSERT INTO `Cases` VALUES (2,2,'Case 12','On March 8th, you examine a 5-year-old bay Standardbred gelding with a nose bleed. He raced 4 days ago and developed a slight bloody nose during the race. The epistaxis seemed to abate after the race. The horse seemed normal the day after the race. However, the epistaxis recurred 2 days after racing. The horse subsequently developed anorexia, a fever, and a cough. The fever seemed to decrease after the trainer administered Tribressen to the horse but the epistaxis and cough have persisted. The last dose of Tribressen was 24 hours ago.'),(3,3,'Case 13','You are asked to examine a 4-year-old American Saddlebred filly for a skin mass of 4 weeks duration on the left front fetlock. The client has been spraying \"blue solution\" on it since it began but the mass has continued to increase gradually in size.\r\n\r\nThe client wants a cosmetic solution to the problem because the filly is a show horse.');
+INSERT INTO `Cases` VALUES (2,2,'Case 12','<p>On March 8th, you examine a 5-year-old bay Standardbred gelding with a nose bleed. He raced 4 days ago and developed a slight bloody nose during the race. The epistaxis seemed to abate after the race. The horse seemed normal the day after the race. However, the epistaxis recurred 2 days after racing. The horse subsequently developed anorexia, a fever, and a cough. The fever seemed to decrease after the trainer administered Tribressen to the horse but the epistaxis and cough have persisted. The last dose of Tribressen was 24 hours ago.</p>'),(3,3,'Case 13','<p>You are asked to examine a 4-year-old American Saddlebred filly for a skin mass of 4 weeks duration on the left front fetlock. The client has been spraying &quot;blue solution&quot; on it since it began but the mass has continued to increase gradually in size.</p>\r\n\r\n<p><strong>The client wants a cosmetic solution to the problem because the filly is a show horse.</strong></p>'),(5,2,'A test case','<p>This is a test case to play around with</p>');
 /*!40000 ALTER TABLE `Cases` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -81,7 +81,7 @@ CREATE TABLE `Days` (
   PRIMARY KEY (`id`),
   KEY `IDX_4BD6535870CD7994` (`case_study_id`),
   CONSTRAINT `FK_4BD6535870CD7994` FOREIGN KEY (`case_study_id`) REFERENCES `Cases` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,7 +90,7 @@ CREATE TABLE `Days` (
 
 LOCK TABLES `Days` WRITE;
 /*!40000 ALTER TABLE `Days` DISABLE KEYS */;
-INSERT INTO `Days` VALUES (2,2),(3,3);
+INSERT INTO `Days` VALUES (2,2),(3,3),(6,5);
 /*!40000 ALTER TABLE `Days` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +145,7 @@ CREATE TABLE `HotSpotsInfo` (
   CONSTRAINT `FK_8F7B04EF3AE7F1EF` FOREIGN KEY (`hotspot_id`) REFERENCES `HotSpots` (`id`),
   CONSTRAINT `FK_8F7B04EF6C905A1B` FOREIGN KEY (`user_day_id`) REFERENCES `UserDays` (`id`) ON DELETE SET NULL,
   CONSTRAINT `FK_8F7B04EF9C24126` FOREIGN KEY (`day_id`) REFERENCES `Days` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +154,7 @@ CREATE TABLE `HotSpotsInfo` (
 
 LOCK TABLES `HotSpotsInfo` WRITE;
 /*!40000 ALTER TABLE `HotSpotsInfo` DISABLE KEYS */;
-INSERT INTO `HotSpotsInfo` VALUES (14,2,NULL,21,'Serosanguinous nasal discharge'),(15,2,NULL,23,'20/min'),(16,2,NULL,25,'102.4F'),(17,2,NULL,24,'48/min'),(18,3,NULL,26,'3cm in diameter on the dorsolateral aspect.\r\nElevated above the skin level ~1cm at its highest point.\r\nSurface is reddened and easily hemorrhages when excoriated.');
+INSERT INTO `HotSpotsInfo` VALUES (14,2,NULL,21,'<p>Serosanguinous nasal discharge</p>'),(15,2,NULL,23,'<p>20/min</p>'),(16,2,NULL,25,'<p>102.4&deg; F</p>'),(17,2,NULL,24,'<p>48/min</p>'),(18,3,NULL,26,'<ol>\r\n	<li>3cm in diameter on the dorsolateral aspect</li>\r\n	<li>Elevated above the skin level ~1cm at its highest point</li>\r\n	<li>Surface is reddened and easily hemorrhages when excoriated</li>\r\n</ol>'),(23,6,NULL,21,'<p>Original</p>'),(24,6,NULL,21,'<p>Duplicate</p>');
 /*!40000 ALTER TABLE `HotSpotsInfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,7 +178,7 @@ CREATE TABLE `MedicationResults` (
   CONSTRAINT `FK_C7C851152C4DE6DA` FOREIGN KEY (`medication_id`) REFERENCES `Medications` (`id`),
   CONSTRAINT `FK_C7C851156C905A1B` FOREIGN KEY (`user_day_id`) REFERENCES `UserDays` (`id`) ON DELETE SET NULL,
   CONSTRAINT `FK_C7C851159C24126` FOREIGN KEY (`day_id`) REFERENCES `Days` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -234,7 +234,7 @@ CREATE TABLE `Results` (
   PRIMARY KEY (`id`),
   KEY `IDX_501EDD88A76ED395` (`user_id`),
   CONSTRAINT `FK_501EDD88A76ED395` FOREIGN KEY (`user_id`) REFERENCES `app_users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -266,7 +266,7 @@ CREATE TABLE `TestResults` (
   CONSTRAINT `FK_B868B2F21E5D0459` FOREIGN KEY (`test_id`) REFERENCES `Tests` (`id`),
   CONSTRAINT `FK_B868B2F26C905A1B` FOREIGN KEY (`user_day_id`) REFERENCES `UserDays` (`id`) ON DELETE SET NULL,
   CONSTRAINT `FK_B868B2F29C24126` FOREIGN KEY (`day_id`) REFERENCES `Days` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -275,7 +275,7 @@ CREATE TABLE `TestResults` (
 
 LOCK TABLES `TestResults` WRITE;
 /*!40000 ALTER TABLE `TestResults` DISABLE KEYS */;
-INSERT INTO `TestResults` VALUES (3,2,NULL,541,'No fluid reflux\r\nSome small amount of gas released from stomach\r\nNo fluid obtained after siphoning from stomach tube'),(4,2,NULL,542,'No abnormalities found'),(5,2,NULL,564,'290,000 /ul');
+INSERT INTO `TestResults` VALUES (3,2,NULL,541,'<p>No fluid reflux. Some small amount of gas released from stomach. No fluid obtained after siphoning from stomach tube</p>'),(4,2,NULL,542,'<p>No abnormalities found</p>'),(5,2,NULL,564,'<p>290,000 /ul</p>');
 /*!40000 ALTER TABLE `TestResults` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -319,7 +319,7 @@ CREATE TABLE `UserDays` (
   PRIMARY KEY (`id`),
   KEY `IDX_14DD497FA76ED395` (`user_id`),
   CONSTRAINT `FK_14DD497FA76ED395` FOREIGN KEY (`user_id`) REFERENCES `app_users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -328,6 +328,7 @@ CREATE TABLE `UserDays` (
 
 LOCK TABLES `UserDays` WRITE;
 /*!40000 ALTER TABLE `UserDays` DISABLE KEYS */;
+INSERT INTO `UserDays` VALUES (9,1);
 /*!40000 ALTER TABLE `UserDays` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -363,7 +364,7 @@ CREATE TABLE `app_users` (
 
 LOCK TABLES `app_users` WRITE;
 /*!40000 ALTER TABLE `app_users` DISABLE KEYS */;
-INSERT INTO `app_users` VALUES (1,NULL,'ROLE_ADMIN','brandon','$2y$13$/0ZWoICiRtbdEZlgHJw4q.PPdAIAhuYZ863ONTnfrPCmXWhCd6Pri','carrel2@illinois.edu','123123123',0,'Farm'),(4,NULL,'ROLE_USER','test','$2y$13$fmgTtVEq5Z1gxM/Jw1f40ORhImUe3Yapi3plikzXSA56p5O0ipuRm','test@test.com','111111111',0,'');
+INSERT INTO `app_users` VALUES (1,5,'ROLE_ADMIN','brandon','$2y$13$/0ZWoICiRtbdEZlgHJw4q.PPdAIAhuYZ863ONTnfrPCmXWhCd6Pri','carrel2@illinois.edu','123123123',1,'Hospital'),(4,NULL,'ROLE_USER','test','$2y$13$fmgTtVEq5Z1gxM/Jw1f40ORhImUe3Yapi3plikzXSA56p5O0ipuRm','test@test.com','111111111',0,'');
 /*!40000 ALTER TABLE `app_users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -376,4 +377,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-03 14:40:12
+-- Dump completed on 2017-05-05 14:37:13

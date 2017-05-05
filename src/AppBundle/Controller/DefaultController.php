@@ -82,7 +82,7 @@ class DefaultController extends Controller
 				$em->flush();
 
 				$session->set('page', 'evaluation');
-			} else if ( $form->get('reset')->isClicked() ) {
+			} else if ( $form->get('abandon')->isClicked() ) {
 				return $this->redirectToRoute('reset');
 			}
 

@@ -16,7 +16,7 @@
 		<div class="panel">
 			<div id="hotspots">
 				{% for spot in day.hotspotsinfo %}
-					<li><em>{{ spot.hotspot.name }}:</em> {{ spot.info }}</li>
+					<li><em>{{ spot.hotspot.name }}:</em><span class="info">{{ spot.info|raw }}</span></li>
 				{% endfor %}
 
 				{% for flash in app.session.flashBag.peek('hotspot-' ~ day.id) %}
@@ -27,7 +27,7 @@
 			<div id="testResults">
 				{% for testResult in day.tests %}
 					{% if testResult.test.waitTime == 0 or testResult.test.waitTime < elapsed or finished  %}
-						<li><em>{{ testResult.test.name }}:</em> {{ testResult.results }}</li>
+						<li><em>{{ testResult.test.name }}:</em><span class="info">{{ testResult.results|raw }}</span></li>
 					{% else %}
 						<li><em>{{ testResult.test.name }}:</em> Awaiting results.</li>
 					{% endif %}
@@ -40,7 +40,7 @@
 
 			<div id="medicationResults">
 				{% for medResult in day.medications %}
-					<li><em>{{ medResult.medication.name }}:</em> {{ medResult.results }}</li>
+					<li><em>{{ medResult.medication.name }}:</em><span class="info">{{ medResult.results|raw }}</span></li>
 				{% endfor %}
 
 				{% for flash in app.session.flashBag.peek('empty-therapeutic-results-' ~ day.id) %}

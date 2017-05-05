@@ -43,6 +43,10 @@ function addButtonClickListener(e) {
 	holder.find('label').remove(':contains(' + index + ')');
 	$(holder).children('div:last-child').append('<button type="button" class="remove-button">&#x2e3</button>');
 
+	if( t == "hotspot" ) {
+		updateSelects(t);
+	}
+
 	addRemoveButtonClickListener();
 
 	if( $(e).text() == "Add day" ) {
@@ -95,6 +99,14 @@ function updateHotspots() {
 			$.get('/update/' + $(this).data('path'), function(data, s) {
 				$('#checked').append(data);
 			});
+		});
+	});
+}
+
+function updateSelects(type) {
+	$.get("/getAnimalInfo/" + $('#case_animal').val() + "/" + type, function(data, status) {
+		$('.collection select.' + type).each(function() {
+			$(this).html(data);
 		});
 	});
 }

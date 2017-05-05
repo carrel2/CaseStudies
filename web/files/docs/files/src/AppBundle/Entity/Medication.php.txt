@@ -228,5 +228,29 @@ class Medication
     {
         return $this->waitTime;
     }
+
+    /**
+     * Set tGroup
+     *
+     * @param string $tGroup
+     *
+     * @return Medication
+     */
+    public function setTGroup($tGroup)
+    {
+        $this->tGroup = $tGroup;
+
+        return $this;
+    }
+
+    /**
+     * Get tGroup
+     *
+     * @return string
+     */
+    public function getTGroup()
+    {
+        return $this->tGroup;
+    }
 }
 

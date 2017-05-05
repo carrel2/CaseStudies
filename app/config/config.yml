@@ -71,3 +71,13 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+ivory_ck_editor:
+  default_config: default
+  configs:
+    default:
+      toolbar: "standard"
+  toolbars:
+    items:
+      standard.links: [ "Link", "Unlink" ]
+      standard.insert: [ "Table", "SpecialChar" ]

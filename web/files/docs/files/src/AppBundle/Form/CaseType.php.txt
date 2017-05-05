@@ -8,7 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -21,43 +21,44 @@ class CaseType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-			->add('title', TextType::class)
-			->add('description', TextareaType::class)
-			->add('animal', EntityType::class, array(
-				'class' => 'AppBundle:Animal',
-				'choice_label' => 'name',
-			))
-			->add('days', CollectionType::class, array(
-				'entry_type' => DayType::class,
-				'entry_options' => array(
-					'attr' => array(
-						'animal' => $options['data']->getAnimal()->getId(),
-					),
-				),
-				'allow_add' => true,
-				'allow_delete' => true,
-				'by_reference' => false,
-				'prototype_name' => '__day__',
-				'attr' => array(
-					'class' => 'collection days',
-					'data-type' => 'day')))
-			->add('add day', ButtonType::class, array(
-				'attr' => array(
-					'class' => 'button addButton',
-					'onclick' => 'addButtonClickListener(this)',)))
-			->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
-				$case = $event->getData();
-				$form = $event->getForm();
+		->add('title', TextType::class)
+		->add('description', CKEditorType::class)
+		->add('animal', EntityType::class, array(
+			'class' => 'AppBundle:Animal',
+			'choice_label' => 'name',
+			'attr' => array(
+				'onchange' => 'updateSelects("hotspot");',
+			)
+		))
+		->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) use($options) {
+			$case = $event->getData();
+			$form = $event->getForm();
 
-				if( $case == null ) {
-					$form->add('create', SubmitType::class, array(
-						'attr' => array(
-							'form' => 'case',
-							'class' => 'button',
-						),
-					));
-				} else {
-					$form->add('update', SubmitType::class, array(
+			if( $case == null ) {
+				$form->add('create', SubmitType::class, array(
+					'attr' => array(
+						'form' => 'case',
+						'class' => 'button',
+					),
+				));
+			} else {
+				$form->add('days', CollectionType::class, array(
+					'entry_type' => DayType::class,
+					'entry_options' => array_key_exists('data', $options) ? array('attr' => array('animal' => $options['data']->getAnimal()->getId())) : array(),
+					'allow_add' => true,
+					'allow_delete' => true,
+					'by_reference' => false,
+					'prototype_name' => '__day__',
+					'attr' => array(
+						'class' => 'collection days',
+						'data-type' => 'day')))
+						->add('add day', ButtonType::class, array(
+							'attr' => array(
+								'class' => 'button addButton',
+								'onclick' => 'addButtonClickListener(this)',
+							)
+						))
+						->add('update', SubmitType::class, array(
 							'attr' => array(
 								'form' => 'case',
 								'class' => 'button',
@@ -76,14 +77,14 @@ class CaseType extends AbstractType
 								'onclick' => 'updateAdminCase(); return false;',
 							),
 						));
-				}
-			});
-	}
+					}
+				});
+			}
 
-	public function configureOptions(OptionsResolver $resolver)
-	{
-		$resolver->setDefaults(array(
-			'data_class' => CaseStudy::class,));
-	}
-}
+			public function configureOptions(OptionsResolver $resolver)
+			{
+				$resolver->setDefaults(array(
+					'data_class' => CaseStudy::class,));
+				}
+			}
 

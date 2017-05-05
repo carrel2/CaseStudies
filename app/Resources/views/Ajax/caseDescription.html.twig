@@ -1,4 +1,4 @@
-{{ case.description }}
+{{ case.description|raw }}
 
 <div id="image">
   <img id="animal" src="{{ asset('images/' ~ case.animal.image) }}" />

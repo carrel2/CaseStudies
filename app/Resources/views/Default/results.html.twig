@@ -20,19 +20,19 @@
 				<div class="panel">
 					<div id="hotspots">
 						{% for name, info in day.hotspotsInfo %}
-							<li><em>{{ name }}:</em> {{ info }}</li>
+							<li><em>{{ name }}:</em><span>{{ info|raw }}</span></li>
 						{% endfor %}
 					</div>
 
 					<div id="testResults">
 						{% for test, result in day.tests %}
-							<li><em>{{ test }}:</em> {{ result }}</li>
+							<li><em>{{ test }}:</em><span>{{ result|raw }}</span></li>
 						{% endfor %}
 					</div>
 
 					<div id="medicationResults">
 						{% for medication, result in day.medications %}
-							<li><em>{{ medication }}:</em> {{ result }}</li>
+							<li><em>{{ medication }}:</em><span>{{ result|raw }}</span></li>
 						{% endfor %}
 					</div>
 				</div>

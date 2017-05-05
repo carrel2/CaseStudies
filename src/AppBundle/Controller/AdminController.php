@@ -113,7 +113,9 @@ class AdminController extends Controller
 
 			$this->addFlash('notice', 'Created ' . $case->getTitle());
 
-			return $this->redirectToRoute('admin');
+			$r->getSession()->set('case', $case->getId());
+
+			return $this->redirectToRoute('editCase');
 		}
 
 		return $this->render('Admin/createCase.html.twig', array(

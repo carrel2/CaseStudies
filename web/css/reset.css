@@ -46,3 +46,83 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+html, body {
+	height: 100%;
+}
+
+div {
+	position: relative;
+}
+
+address, cite, dfn, em, i, var {
+	font-style: italic;
+}
+
+b, h1, h2, h3, h4, h5, h6, strong, th {
+	font-weight: bold;
+}
+
+del, s {
+	text-decoration: line-through;
+}
+
+code, kbd, pre, samp {
+	font-family: monospace;
+}
+
+small, sub, sup {
+	font-size: smaller;
+}
+
+ins, u {
+	text-decoration: underline;
+}
+
+mark, span.marker {
+	background-color: yellow;
+	color: black;
+}
+
+area {
+	cursor: default;
+}
+
+sub {
+	vertical-align: sub;
+}
+
+sup {
+	vertical-align: super;
+}
+
+h1 {
+	font-size: 2em;
+}
+
+h2 {
+	font-size: 1.5em;
+}
+
+h3 {
+	font-size: 1.17em;
+}
+
+h5 {
+	font-size: .83em;
+}
+
+h6 {
+	font-size: .67em;
+}
+
+a:link, a:visited {
+	text-decoration: none;
+	color: #444;
+	transition: color .2s;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: #00cc00;
+}

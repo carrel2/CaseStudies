@@ -16,8 +16,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 *
 * @ORM\Entity
 * @ORM\Table(name="app_users")
-* @UniqueEntity(fields="email", message="Email already taken")
-* @UniqueEntity(fields="username", message="Username already taken")
+* @UniqueEntity(fields="email", message="Email already exists")
+* @UniqueEntity(fields="username", message="Username already exists")
 */
 class User implements UserInterface, \Serializable
 {

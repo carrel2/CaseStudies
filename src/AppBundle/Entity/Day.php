@@ -276,6 +276,8 @@ class Day
 
     /**
      * Add hotspotsInfo
+		 *
+		 * @todo add check to see if info already exists for a HotSpot for this Day
      *
      * @param \AppBundle\Entity\HotSpotInfo $hotspotsInfo
      *

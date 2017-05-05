@@ -1,26 +1,3 @@
-html, body {
-	height: 100%;
-}
-
-div {
-	position: relative;
-}
-
-em {
-	font-style: italic;
-}
-
-a:link, a:visited {
-	text-decoration: none;
-	color: #444;
-	transition: color .2s;
-}
-
-a:hover {
-	text-decoration: underline;
-	color: #00cc00;
-}
-
 #header {
 	position: initial;
 	overflow: hidden;
@@ -166,6 +143,12 @@ a:hover {
 
 #body #image ~ #hotspots {
 	max-width: 350px;
+}
+
+#body span.info {
+	display: inline-block;
+	padding: 0 8px;
+	vertical-align: top;
 }
 
 div#diagnostics_test, div#therapeutics_medication {

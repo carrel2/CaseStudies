@@ -17,11 +17,7 @@ class DayType extends AbstractType
 	{
 		$builder->add('hotspotsinfo', CollectionType::class, array(
 				'entry_type' => HotspotType::class,
-				'entry_options' => array(
-					'attr' => array(
-						'animal' => $options['attr']['animal'],
-					)
-				),
+				'entry_options' => array('attr' => array('animal' => array_key_exists('animal', $options['attr']) ? $options['attr']['animal'] : null)),
 				'allow_add' => true,
 				'allow_delete' => true,
 				'by_reference' => false,
@@ -38,10 +34,10 @@ class DayType extends AbstractType
 				'allow_add' => true,
 				'allow_delete' => true,
 				'by_reference' => false,
-				'prototype_name' => '__diagnostic-results__',
+				'prototype_name' => '__diagnostic-result__',
 				'attr' => array(
 					'class' => 'collection tests',
-					'data-type' => 'diagnostic results'),))
+					'data-type' => 'diagnostic result'),))
 			->add('add diagnostic results', ButtonType::class, array(
 				'attr' => array(
 					'class' => 'button addButton',
@@ -51,10 +47,10 @@ class DayType extends AbstractType
 				'allow_add' => true,
 				'allow_delete' => true,
 				'by_reference' => false,
-				'prototype_name' => '__therapeutic-results__',
+				'prototype_name' => '__therapeutic-result__',
 				'attr' => array(
 					'class' => 'collection medications',
-					'data-type' => 'therapeutic results'),))
+					'data-type' => 'therapeutic result'),))
 			->add('add therapeutic results', ButtonType::class, array(
 				'attr' => array(
 					'class' => 'button addButton',
