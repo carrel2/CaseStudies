@@ -157,8 +157,10 @@ class Day
      */
     public function addTest(\AppBundle\Entity\TestResults $test)
     {
-        $test->setDay($this);
-        $this->tests[] = $test;
+				if( !$this->getResultByTest($test->getTest()) ) {
+	        $test->setDay($this);
+	        $this->tests[] = $test;
+				}
 
         return $this;
     }
@@ -221,8 +223,10 @@ class Day
      */
     public function addMedication(\AppBundle\Entity\MedicationResults $medication)
     {
-        $medication->setDay($this);
-        $this->medications[] = $medication;
+				if( !$this->getResultByMedication($medication->getMedication()) ) {
+	        $medication->setDay($this);
+	        $this->medications[] = $medication;
+				}
 
         return $this;
     }
@@ -259,7 +263,7 @@ class Day
             {
                 return $results;
             }
-	}
+				}
 
         return null;
     }
@@ -276,8 +280,6 @@ class Day
 
     /**
      * Add hotspotsInfo
-		 *
-		 * @todo add check to see if info already exists for a HotSpot for this Day
      *
      * @param \AppBundle\Entity\HotSpotInfo $hotspotsInfo
      *
@@ -285,8 +287,10 @@ class Day
      */
     public function addHotspotsInfo(\AppBundle\Entity\HotSpotInfo $hotspotsInfo)
     {
-				$hotspotsInfo->setDay($this);
-        $this->hotspotsInfo[] = $hotspotsInfo;
+				if( !$this->getInfoByHotspot($hotspotsInfo->getHotspot()) ) {
+					$hotspotsInfo->setDay($this);
+	        $this->hotspotsInfo[] = $hotspotsInfo;
+				}
 
         return $this;
     }
@@ -311,4 +315,16 @@ class Day
     {
         return $this->hotspotsInfo;
     }
+
+		public function getInfoByHotspot(\AppBundle\Entity\HotSpot $hotspot)
+		{
+			foreach ( $this->hotspotsInfo as $info ) {
+				if( $info->getHotspot()->getId() === $hotspot->getId() )
+				{
+					return $info;
+				}
+			}
+
+			return null;
+		}
 }
