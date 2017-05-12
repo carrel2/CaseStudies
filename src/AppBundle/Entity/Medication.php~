@@ -36,7 +36,7 @@ class Medication
 	private $name;
 
 	/**
-	 * @ORM\Column(type="string", length=40)
+	 * @ORM\Column(type="string", length=40, nullable=true)
 	 */
 	private $tGroup;
 
@@ -227,5 +227,29 @@ class Medication
     public function getWaitTime()
     {
         return $this->waitTime;
+    }
+
+    /**
+     * Set tGroup
+     *
+     * @param string $tGroup
+     *
+     * @return Medication
+     */
+    public function setTGroup($tGroup)
+    {
+        $this->tGroup = $tGroup;
+
+        return $this;
+    }
+
+    /**
+     * Get tGroup
+     *
+     * @return string
+     */
+    public function getTGroup()
+    {
+        return $this->tGroup;
     }
 }

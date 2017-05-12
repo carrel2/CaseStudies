@@ -60,9 +60,6 @@ class AdminController extends Controller
 	 *
 	 * Creates a form for admins to use to edit CaseStudy objects
 	 *
-	 * @todo only display hotspots for the associated animal
-	 * @todo update hotspots when animal changes
-	 *
 	 * @see CaseStudy::class
 	 *
 	 * @param Request $r Request object
@@ -341,6 +338,8 @@ class AdminController extends Controller
 			$em->flush();
 
 			$this->addFlash('notice', 'Created ' . $animal->getName());
+
+			return $this->redirectToRoute('editAnimal', array('id' => $animal->getId()));
 		}
 
 		return $this->render('Admin/animals.html.twig', array(
@@ -373,6 +372,8 @@ class AdminController extends Controller
 			 $em->flush();
 
 			 $this->addFlash('notice', 'Updated ' . $animal->getName());
+
+			 return $this->redirectToRoute('editAnimal', array('id' => $animal->getId()));
 		 }
 
 		 return $this->render('Admin/animals.html.twig', array(

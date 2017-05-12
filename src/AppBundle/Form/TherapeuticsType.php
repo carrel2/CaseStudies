@@ -18,6 +18,9 @@ class TherapeuticsType extends AbstractType
 				'choice_label' => 'name',
 				'expanded' => true,
 				'multiple' => true,
+				'group_by' => function($val, $key, $index) {
+					return $val->getGroup();
+				},
 				'choice_attr' => function(Medication $t, $key, $index) {
 					return ['class' => 'medication'];
 				},

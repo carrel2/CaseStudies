@@ -54,18 +54,25 @@
 	font-weight: bold;
 }
 
-#flashes .flash-notice {
+#flashes .flash-success {
 	background: #ddffdd;
 	border-left: 6px solid #4caf50;
 	border-radius: 4px 10px;
 	box-shadow: 0px 0px 6px #4caf50;
 }
 
-#flashes .flash-error {
-	background: #ffaaaa;
-	border-left: 6px solid #ff3333;
+#flashes .flash-warning {
+	background: #ffe680;
+	border-left: 6px solid #f93;
 	border-radius: 4px 10px;
-	box-shadow: 0px 0px 6px #ff3333;
+	box-shadow: 0px 0px 6px #f93;
+}
+
+#flashes .flash-error {
+	background: #faa;
+	border-left: 6px solid #f33;
+	border-radius: 4px 10px;
+	box-shadow: 0px 0px 6px #f33;
 }
 
 #body {
@@ -157,6 +164,15 @@ div#diagnostics_test, div#therapeutics_medication {
 
 input.test, input.medication {
 	display: none;
+}
+
+label.group::before {
+	clear: both;
+}
+
+label.group {
+	display: block;
+	padding: 18px 0 6px 0;
 }
 
 input.test + label, input.medication + label {

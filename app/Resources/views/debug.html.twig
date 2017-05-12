@@ -1,1 +1,7 @@
-{{ dump() }}
+<html>
+  <body>
+    <div id="process">
+      {{ render(controller('AppBundle:Development:generate', {'command': command})) }}
+    </div>
+  </body>
+</html>

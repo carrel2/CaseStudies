@@ -20,8 +20,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * UserType class
- *
- * @todo only show role on admin page
  */
 class UserType extends AbstractType
 {

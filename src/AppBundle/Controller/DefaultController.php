@@ -57,6 +57,7 @@ class DefaultController extends Controller
 
 		if (time() - $session->getMetadataBag()->getLastUsed() > $this->getParameter('sessionMaxLifetime')) {
     	$session->invalidate();
+			$this->addFlash('warning', 'Session expired, please login again.');
 
     	return $this->redirectToRoute('logout');
 		}

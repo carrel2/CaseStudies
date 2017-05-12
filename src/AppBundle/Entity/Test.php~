@@ -38,7 +38,7 @@ class Test
 	private $name;
 
 	/**
-	 * @ORM\Column(type="text")
+	 * @ORM\Column(type="text", nullable=true)
 	 */
 	private $dGroup;
 
@@ -227,5 +227,29 @@ class Test
     public function getWaitTime()
     {
         return $this->waitTime;
+    }
+
+    /**
+     * Set dGroup
+     *
+     * @param string $dGroup
+     *
+     * @return Test
+     */
+    public function setDGroup($dGroup)
+    {
+        $this->dGroup = $dGroup;
+
+        return $this;
+    }
+
+    /**
+     * Get dGroup
+     *
+     * @return string
+     */
+    public function getDGroup()
+    {
+        return $this->dGroup;
     }
 }

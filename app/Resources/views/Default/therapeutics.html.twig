@@ -1,5 +1,21 @@
 {% extends 'base.html.twig' %}
 
+{% form_theme form _self %}
+
+{%- block choice_widget_expanded -%}
+	<div {{ block('widget_container_attributes') }}>
+		{% for group_label,group in choices %}
+			{%- if group is iterable -%}
+				<label class="group"><h3><u>{{ group_label|trans({}, translation_domain) }}</u></h3></label>
+				{% for key, choice in group %}
+					{{- form_widget(form[key]) -}}
+					{{- form_label(form[key]) -}}
+				{% endfor %}
+			{%- endif -%}
+		{% endfor %}
+	</div>
+{%- endblock -%}
+
 {% block body %}
 	{{ form_start(form) }}
 	{{ form_widget(form) }}

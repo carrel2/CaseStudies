@@ -12,6 +12,7 @@ use AppBundle\FileUploader;
 class AnimalImageUploadListener
 {
     private $uploader;
+    private $logger;
 
     public function __construct(FileUploader $uploader)
     {
@@ -27,13 +28,31 @@ class AnimalImageUploadListener
 
     public function preUpdate(PreUpdateEventArgs $args)
     {
-        $entity = $args->getEntity();
+        $this->checkForImage($args);
+    }
 
-        if( $args->hasChangedField('image') ) {
-          $this->removeUpload($args->getOldValue('image'));
-        }
+    public function preRemove(LifecycleEventArgs $args)
+    {
+      $entity = $args->getEntity();
+
+      $this->removeUpload($entity);
+    }
+
+    private function checkForImage($args)
+    {
+      $entity = $args->getEntity();
+
+      if( !$entity instanceof Animal ) {
+        return;
+      }
+
+      if( $args->hasChangedField('image') && $args->getNewValue('image') != null ) {
+        $this->removeUpload($args->getOldValue('image'));
 
         $this->uploadFile($entity);
+      } else {
+        $args->setNewValue('image', $args->getOldValue('image'));
+      }
     }
 
     private function uploadFile($entity)
@@ -54,9 +73,19 @@ class AnimalImageUploadListener
         $entity->setImage($fileName);
     }
 
-    private function removeUpload($file)
+    private function removeUpload($entity)
     {
-      unlink($this->uploader->getTargetDir() . '/' . $file);
+      if( !$entity instanceof Animal ) {
+        return;
+      }
+
+      $file = $entity->getImage();
+
+      $filePath = "{$this->uploader->getTargetDir()}/$file";
+
+      if( file_exists($filePath) ) {
+        unlink($filePath);
+      }
     }
 }
 

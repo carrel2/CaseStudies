@@ -2,6 +2,12 @@
 
 {% block body %}
 	{{ form_start(form) }}
-	{{ form_widget(form) }}
+		{{ form_row(form.email) }}
+		{{ form_row(form.username) }}
+		{{ form_row(form.uin) }}
+		{{ form_row(form.plainPassword) }}
+		{{ form_row(form.role, {'label': false, 'attr': {'hidden': true}}) }}
+
+		{{ form_rest(form) }}
 	{{ form_end(form) }}
 {% endblock %}

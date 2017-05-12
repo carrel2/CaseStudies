@@ -40,7 +40,11 @@
 
 			<div id="medicationResults">
 				{% for medResult in day.medications %}
-					<li><em>{{ medResult.medication.name }}:</em><span class="info">{{ medResult.results|raw }}</span></li>
+					{% if medResult.medication.waitTime == 0 or medResult.medication.waitTime < elapsed or finished %}
+						<li><em>{{ medResult.medication.name }}:</em><span class="info">{{ medResult.results|raw }}</span></li>
+					{% else %}
+						<li><em>{{ medResult.medication.name }}:</em> Awaiting results.</li>
+					{% endif %}
 				{% endfor %}
 
 				{% for flash in app.session.flashBag.peek('empty-therapeutic-results-' ~ day.id) %}

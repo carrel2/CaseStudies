@@ -108,7 +108,7 @@ class AdminController extends Controller
 			$em->persist($case);
 			$em->flush();
 
-			$this->addFlash('notice', 'Created ' . $case->getTitle());
+			$this->addFlash('success', 'Created ' . $case->getTitle());
 
 			$r->getSession()->set('case', $case->getId());
 
@@ -146,11 +146,11 @@ class AdminController extends Controller
 			$case = $form->getData();
 
 			if( $form->get('update')->isClicked() ) {
-				$this->addFlash('notice', 'Updated ' . $case->getTitle());
+				$this->addFlash('success', 'Updated ' . $case->getTitle());
 
 				$em->persist($case);
 			} else if( $form->get('delete')->isClicked() ) {
-				$this->addFlash('notice', 'Deleted ' . $case->getTitle());
+				$this->addFlash('success', 'Deleted ' . $case->getTitle());
 
 				$em->remove($case);
 			}
@@ -212,7 +212,7 @@ class AdminController extends Controller
 				));
 			} else if( $form->get('delete')->isClicked() ) {
 				$em->remove($user);
-				$this->addFlash('notice', 'Deleted ' . $user->getUsername());
+				$this->addFlash('success', 'Deleted ' . $user->getUsername());
 				$em->flush();
 
 				return $this->redirectToRoute('manageUsers');
@@ -258,7 +258,7 @@ class AdminController extends Controller
 			try {
 				$em->flush();
 
-				$this->addFlash('notice', 'Changes saved for ' . $user->getUsername() );
+				$this->addFlash('success', 'Changes saved for ' . $user->getUsername() );
 			} catch( \Doctrine\ORM\ORMException $e ) {
 				$this->addFlash('error', 'Something went wrong, changes were not saved!');
 			}
@@ -306,7 +306,7 @@ class AdminController extends Controller
 				$em->remove($animal);
 				$em->flush();
 
-				$this->addFlash('notice', 'Deleted ' . $animal->getName());
+				$this->addFlash('success', 'Deleted ' . $animal->getName());
 
 				return $this->redirectToRoute('manageAnimals');
 			}
@@ -337,7 +337,7 @@ class AdminController extends Controller
 
 			$em->flush();
 
-			$this->addFlash('notice', 'Created ' . $animal->getName());
+			$this->addFlash('success', 'Created ' . $animal->getName());
 
 			return $this->redirectToRoute('editAnimal', array('id' => $animal->getId()));
 		}
@@ -371,7 +371,7 @@ class AdminController extends Controller
 
 			 $em->flush();
 
-			 $this->addFlash('notice', 'Updated ' . $animal->getName());
+			 $this->addFlash('success', 'Updated ' . $animal->getName());
 
 			 return $this->redirectToRoute('editAnimal', array('id' => $animal->getId()));
 		 }
@@ -421,7 +421,7 @@ class AdminController extends Controller
 					$em->remove($test);
 					$em->flush();
 
-					$this->addFlash('notice', 'Deleted ' . $test->getName());
+					$this->addFlash('success', 'Deleted ' . $test->getName());
 
 					return $this->redirectToRoute('manageTests');
 				}
@@ -450,7 +450,7 @@ class AdminController extends Controller
 
 				$em->flush();
 
-				$this->addFlash('notice', 'Created ' . $test->getName());
+				$this->addFlash('success', 'Created ' . $test->getName());
 			}
 
 			return $this->render('Admin/manage.html.twig', array(
@@ -481,7 +481,7 @@ class AdminController extends Controller
 
 				 $em->flush();
 
-				 $this->addFlash('notice', 'Updated ' . $test->getName());
+				 $this->addFlash('success', 'Updated ' . $test->getName());
 			 }
 
 			 return $this->render('Admin/manage.html.twig', array(
@@ -528,7 +528,7 @@ class AdminController extends Controller
 						$em->remove($medication);
 						$em->flush();
 
-						$this->addFlash('notice', 'Deleted ' . $medication->getName());
+						$this->addFlash('success', 'Deleted ' . $medication->getName());
 
 						return $this->redirectToRoute('manageMediations');
 					}
@@ -557,7 +557,7 @@ class AdminController extends Controller
 
 					$em->flush();
 
-					$this->addFlash('notice', 'Created ', $medication->getName());
+					$this->addFlash('success', 'Created ', $medication->getName());
 				}
 
 				return $this->render('Admin/manage.html.twig', array(
@@ -588,7 +588,7 @@ class AdminController extends Controller
 
 					 $em->flush();
 
-					 $this->addFlash('notice', 'Updated ' . $medication->getName());
+					 $this->addFlash('success', 'Updated ' . $medication->getName());
 				 }
 
 				 return $this->render('Admin/manage.html.twig', array(
