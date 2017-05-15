@@ -39,7 +39,13 @@ class UserType extends AbstractType
 			->add('uin', TextType::class)
 			->add('plainPassword', RepeatedType::class, array(
 				'type' => PasswordType::class,
-				'first_options'  => array('label' => 'Password'),
+				'first_options'  => array(
+					'label' => 'Password',
+					'attr' => array(
+						'class' => 'tooltip',
+						'title' => 'Must be at least 6 characters long',
+					)
+				),
 				'second_options' => array('label' => 'Repeat Password'),
 			));
 

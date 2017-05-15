@@ -1,5 +1,13 @@
 var stack = [];
 
+$(function() {
+	$('.tooltip').tooltipster({
+		theme: 'tooltipster-borderless',
+		side: 'right',
+		delay: 100
+	});
+})
+
 function updateCase() {
 	var id = $('#default_title').val();
 
@@ -19,10 +27,10 @@ function addRemoveButtonClickListener() {
 			$('#undo').show();
 		});
 		$(this).on('mouseenter', function() {
-				$(this).prev().css({'transition': 'box-shadow .5s','border-radius': '4px','box-shadow': '0px 0px 30px'});
+				$(this).parent().css({'transition': 'box-shadow .5s','border-radius': '4px','box-shadow': '0px 0px 30px'});
 		});
 		$(this).on('mouseleave', function() {
-			$(this).prev().css({'border-radius': '','box-shadow': ''});
+			$(this).parent().css({'border-radius': '','box-shadow': ''});
 		});
 	});
 }
@@ -40,7 +48,11 @@ function addButtonClickListener(e) {
 	newForm = newForm.replace(/label__/g, '');
 
 	holder.append(newForm);
-	holder.find('label').remove(':contains(' + index + ')');
+
+	if( t != "day" ) {
+		holder.find('label').remove(':contains(' + index + ')');
+	}
+
 	$(holder).children('div:last-child').append('<button type="button" class="remove-button">&#x2e3</button>');
 
 	if( t == "hotspot" ) {

@@ -61,6 +61,6 @@ class DayType extends AbstractType
 	{
 		$resolver->setDefaults(array(
 			'data_class' => Day::class,
-			'label' => false));
+		));
 	}
 }

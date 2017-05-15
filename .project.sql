@@ -81,7 +81,7 @@ CREATE TABLE `Days` (
   PRIMARY KEY (`id`),
   KEY `IDX_4BD6535870CD7994` (`case_study_id`),
   CONSTRAINT `FK_4BD6535870CD7994` FOREIGN KEY (`case_study_id`) REFERENCES `Cases` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,7 +90,7 @@ CREATE TABLE `Days` (
 
 LOCK TABLES `Days` WRITE;
 /*!40000 ALTER TABLE `Days` DISABLE KEYS */;
-INSERT INTO `Days` VALUES (2,2),(3,3),(8,5),(9,5);
+INSERT INTO `Days` VALUES (2,2),(3,3),(10,5);
 /*!40000 ALTER TABLE `Days` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +145,7 @@ CREATE TABLE `HotSpotsInfo` (
   CONSTRAINT `FK_8F7B04EF3AE7F1EF` FOREIGN KEY (`hotspot_id`) REFERENCES `HotSpots` (`id`),
   CONSTRAINT `FK_8F7B04EF6C905A1B` FOREIGN KEY (`user_day_id`) REFERENCES `UserDays` (`id`) ON DELETE SET NULL,
   CONSTRAINT `FK_8F7B04EF9C24126` FOREIGN KEY (`day_id`) REFERENCES `Days` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +154,7 @@ CREATE TABLE `HotSpotsInfo` (
 
 LOCK TABLES `HotSpotsInfo` WRITE;
 /*!40000 ALTER TABLE `HotSpotsInfo` DISABLE KEYS */;
-INSERT INTO `HotSpotsInfo` VALUES (14,2,NULL,21,'<p>Serosanguinous nasal discharge</p>'),(15,2,NULL,23,'<p>20/min</p>'),(16,2,NULL,25,'<p>102.4&deg; F</p>'),(17,2,NULL,24,'<p>48/min</p>'),(18,3,NULL,26,'<ol>\r\n	<li>3cm in diameter on the dorsolateral aspect</li>\r\n	<li>Elevated above the skin level ~1cm at its highest point</li>\r\n	<li>Surface is reddened and easily hemorrhages when excoriated</li>\r\n</ol>'),(27,8,NULL,27,'<p>Original</p>'),(28,9,NULL,27,'<p>Day 2</p>');
+INSERT INTO `HotSpotsInfo` VALUES (14,2,NULL,21,'<p>Serosanguinous nasal discharge</p>'),(15,2,NULL,23,'<p>20/min</p>'),(16,2,NULL,25,'<p>102.4&deg; F</p>'),(17,2,NULL,24,'<p>48/min</p>'),(18,3,NULL,26,'<ol>\r\n	<li>3cm in diameter on the dorsolateral aspect</li>\r\n	<li>Elevated above the skin level ~1cm at its highest point</li>\r\n	<li>Surface is reddened and easily hemorrhages when excoriated</li>\r\n</ol>'),(29,10,NULL,27,'<p>Info</p>');
 /*!40000 ALTER TABLE `HotSpotsInfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -187,7 +187,6 @@ CREATE TABLE `MedicationResults` (
 
 LOCK TABLES `MedicationResults` WRITE;
 /*!40000 ALTER TABLE `MedicationResults` DISABLE KEYS */;
-INSERT INTO `MedicationResults` VALUES (4,8,NULL,1,'<p>Original</p>'),(5,9,NULL,9,'<p>Some therapeutic results</p>');
 /*!40000 ALTER TABLE `MedicationResults` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -276,7 +275,7 @@ CREATE TABLE `TestResults` (
 
 LOCK TABLES `TestResults` WRITE;
 /*!40000 ALTER TABLE `TestResults` DISABLE KEYS */;
-INSERT INTO `TestResults` VALUES (3,2,NULL,541,'<p>No fluid reflux. Some small amount of gas released from stomach. No fluid obtained after siphoning from stomach tube</p>'),(4,2,NULL,542,'<p>No abnormalities found</p>'),(5,2,NULL,564,'<p>290,000 /ul</p>'),(9,8,NULL,539,'<p>Original</p>'),(10,9,NULL,548,'<p>Some results</p>');
+INSERT INTO `TestResults` VALUES (3,2,NULL,541,'<p>No fluid reflux. Some small amount of gas released from stomach. No fluid obtained after siphoning from stomach tube</p>'),(4,2,NULL,542,'<p>No abnormalities found</p>'),(5,2,NULL,564,'<p>290,000 /ul</p>');
 /*!40000 ALTER TABLE `TestResults` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -329,7 +328,6 @@ CREATE TABLE `UserDays` (
 
 LOCK TABLES `UserDays` WRITE;
 /*!40000 ALTER TABLE `UserDays` DISABLE KEYS */;
-INSERT INTO `UserDays` VALUES (3,1);
 /*!40000 ALTER TABLE `UserDays` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -365,7 +363,7 @@ CREATE TABLE `app_users` (
 
 LOCK TABLES `app_users` WRITE;
 /*!40000 ALTER TABLE `app_users` DISABLE KEYS */;
-INSERT INTO `app_users` VALUES (1,2,'ROLE_SUPER_ADMIN','brandon','$2y$13$/0ZWoICiRtbdEZlgHJw4q.PPdAIAhuYZ863ONTnfrPCmXWhCd6Pri','carrel2@illinois.edu','123123123',1,'Farm'),(4,NULL,'ROLE_USER','test','$2y$13$fmgTtVEq5Z1gxM/Jw1f40ORhImUe3Yapi3plikzXSA56p5O0ipuRm','test@test.com','111111111',0,'');
+INSERT INTO `app_users` VALUES (1,NULL,'ROLE_SUPER_ADMIN','brandon','$2y$13$/0ZWoICiRtbdEZlgHJw4q.PPdAIAhuYZ863ONTnfrPCmXWhCd6Pri','carrel2@illinois.edu','123123123',0,'Farm'),(4,NULL,'ROLE_USER','test','$2y$13$fmgTtVEq5Z1gxM/Jw1f40ORhImUe3Yapi3plikzXSA56p5O0ipuRm','test@test.com','111111111',0,'');
 /*!40000 ALTER TABLE `app_users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -378,4 +376,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-12 12:17:29
+-- Dump completed on 2017-05-15 13:48:34

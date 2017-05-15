@@ -17,6 +17,9 @@ class TherapeuticResultsType extends AbstractType
 		$builder->add('medication', EntityType::class, array(
 				'class' => 'AppBundle:Medication',
 				'choice_label' => 'name',
+				'group_by' => function($val, $key, $index) {
+					return $val->getGroup();
+				},
 				'label' => false,
 			))
 			->add('results', CKEditorType::class);
