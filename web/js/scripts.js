@@ -18,8 +18,17 @@ function addRemoveButtonClickListener() {
 	$('.remove-button').each(function() {
 		$(this).off("click mouseout mouseover");
 		$(this).on('click',function() {
+			var editor = $(this).prev().find('.cke');
+
+			$(editor).each(function() {
+				delete window.CKEDITOR.instances[$(this).prev().attr('id')];
+				$(this).remove();
+			});
+
 			$(this).prev().attr('style', '');
+
 			stack.push([$(this).parent().index(), $(this).parent().parent().attr('id'), $(this).parent().html()]);
+
 			$(this).parent().slideUp(function() {
 				$(this).remove();
 			});
@@ -51,9 +60,11 @@ function addButtonClickListener(e) {
 
 	if( t != "day" ) {
 		holder.find('label').remove(':contains(' + index + ')');
+	} else {
+		holder.children(':nth-child(' + (index + 1) + ')').children('label').text( 'Day ' + ( index + 1 ) );
 	}
 
-	$(holder).children('div:last-child').append('<button type="button" class="remove-button">&#x2e3</button>');
+	holder.children('div:last-child').append('<button type="button" class="remove-button">&#x2e3</button>');
 
 	if( t == "hotspot" ) {
 		updateSelects(t);
@@ -77,6 +88,11 @@ function updateAdminCase(id) {
 		$('#admin_case').val(id);
 	}
 
+	for( instance in window.CKEDITOR.instances ) {
+		delete window.CKEDITOR.instances[instance];
+	}
+
+	$('#undo').off('click');
 	$('#undo').on('click', function() {
 		var array = stack.pop();
 
@@ -99,6 +115,10 @@ function updateAdminCase(id) {
 		$('.collection > div').each(function(i, e) {
 			var t = $(this).parent().data('type');
 			$(this).append('<button type="button" class="remove-button">&#x2e3</button>');
+		});
+
+		$('.collection.days > div > label').each(function() {
+			$(this).text( "Day " + ( 1 + parseInt($(this).text()) ) );
 		});
 
 		addRemoveButtonClickListener();

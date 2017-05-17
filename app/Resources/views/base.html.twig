@@ -11,6 +11,7 @@
 		{% block scripts %}
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 			<script src="{{ asset('js/tooltipster.bundle.min.js') }}"></script>
+			<script src="{{ asset('bundles/ivoryckeditor/ckeditor.js') }}"></script>
 			<script src="{{ asset('js/scripts.js') }}"></script>
 		{% endblock %}
 	</head>
@@ -73,7 +74,5 @@
 			{% block footer %}
 			{% endblock %}
 		</div>
-
-		<script src="{{ asset('bundles/ivoryckeditor/ckeditor.js') }}"></script>
 	</body>
 </html>

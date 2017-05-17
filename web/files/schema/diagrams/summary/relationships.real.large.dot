@@ -98,7 +98,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="user_day_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">user_day_id</TD></TR>
       <TR><TD PORT="hotspot_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">hotspot_id</TD></TR>
       <TR><TD PORT="info" COLSPAN="3" ALIGN="LEFT">info</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 3</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">7 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 3</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">6 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="tables/HotSpotsInfo.html"
     tooltip="HotSpotsInfo"
@@ -112,7 +112,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="user_day_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">user_day_id</TD></TR>
       <TR><TD PORT="medication_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">medication_id</TD></TR>
       <TR><TD PORT="results" COLSPAN="3" ALIGN="LEFT">results</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 3</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">2 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 3</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="tables/MedicationResults.html"
     tooltip="MedicationResults"
@@ -155,7 +155,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="user_day_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">user_day_id</TD></TR>
       <TR><TD PORT="test_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">test_id</TD></TR>
       <TR><TD PORT="results" COLSPAN="3" ALIGN="LEFT">results</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 3</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">5 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 3</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">3 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="tables/TestResults.html"
     tooltip="TestResults"

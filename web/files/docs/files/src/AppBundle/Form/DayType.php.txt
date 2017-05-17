@@ -24,7 +24,12 @@ class DayType extends AbstractType
 				'prototype_name' => '__hotspot__',
 				'attr' => array(
 					'class' => 'collection hotspots',
-					'data-type' => 'hotspot'),))
+					'data-type' => 'hotspot'
+				),
+				'label_attr' => array(
+					'class' => 'hotspots_info_label',
+				)
+			))
 			->add('add hotspot', ButtonType::class, array(
 				'attr' => array(
 					'class' => 'button addButton',
@@ -37,7 +42,12 @@ class DayType extends AbstractType
 				'prototype_name' => '__diagnostic-result__',
 				'attr' => array(
 					'class' => 'collection tests',
-					'data-type' => 'diagnostic result'),))
+					'data-type' => 'diagnostic result'
+				),
+				'label_attr' => array(
+					'class' => 'tests_label',
+				)
+			))
 			->add('add diagnostic results', ButtonType::class, array(
 				'attr' => array(
 					'class' => 'button addButton',
@@ -50,7 +60,12 @@ class DayType extends AbstractType
 				'prototype_name' => '__therapeutic-result__',
 				'attr' => array(
 					'class' => 'collection medications',
-					'data-type' => 'therapeutic result'),))
+					'data-type' => 'therapeutic result'
+				),
+				'label_attr' => array(
+					'class' => 'medications_label',
+				)
+			))
 			->add('add therapeutic results', ButtonType::class, array(
 				'attr' => array(
 					'class' => 'button addButton',

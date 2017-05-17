@@ -74,6 +74,7 @@ swiftmailer:
 
 ivory_ck_editor:
   autoload: false
+  jquery: true
   default_config: default
   configs:
     default:

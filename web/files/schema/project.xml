@@ -100,7 +100,7 @@
             <column ascending="true" name="animal_id"/>
          </index>
       </table>
-      <table name="HotSpotsInfo" numRows="7" remarks="" type="TABLE">
+      <table name="HotSpotsInfo" numRows="6" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
          <column autoUpdated="false" digits="0" id="1" name="day_id" nullable="true" remarks="" size="10" type="INT">
             <parent column="id" foreignKey="FK_8F7B04EF9C24126" implied="false" onDeleteCascade="false" table="Days"/>
@@ -126,7 +126,7 @@
             <column ascending="true" name="day_id"/>
          </index>
       </table>
-      <table name="MedicationResults" numRows="2" remarks="" type="TABLE">
+      <table name="MedicationResults" numRows="0" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
          <column autoUpdated="false" digits="0" id="1" name="day_id" nullable="true" remarks="" size="10" type="INT">
             <parent column="id" foreignKey="FK_C7C851159C24126" implied="false" onDeleteCascade="false" table="Days"/>
@@ -182,7 +182,7 @@
             <column ascending="true" name="user_id"/>
          </index>
       </table>
-      <table name="TestResults" numRows="5" remarks="" type="TABLE">
+      <table name="TestResults" numRows="3" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
          <column autoUpdated="false" digits="0" id="1" name="day_id" nullable="true" remarks="" size="10" type="INT">
             <parent column="id" foreignKey="FK_B868B2F29C24126" implied="false" onDeleteCascade="false" table="Days"/>

@@ -126,3 +126,22 @@ a:hover {
 	text-decoration: underline;
 	color: #00cc00;
 }
+
+.case_label, .case_title_label, .case_animal_label, .case_days_label {
+	font-size: 1.8em;
+}
+
+.case_days_label {
+	display: block;
+	margin: 8px 0;
+	width: 100%;
+	border-bottom: solid 1px rgb(0,0,0);
+}
+
+.case_description_label, .day_label {
+	font-size: 1.5em;
+}
+
+.hotspots_info_label, .tests_label, .medications_label {
+	font-size: 1.2em;
+}
