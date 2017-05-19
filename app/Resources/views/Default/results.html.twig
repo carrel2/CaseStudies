@@ -25,13 +25,13 @@
 					</div>
 
 					<div id="testResults">
-						{% for test, result in day.tests %}
+						{% for test, result in day.diagnostics %}
 							<li><em>{{ test }}:</em><span>{{ result|raw }}</span></li>
 						{% endfor %}
 					</div>
 
 					<div id="medicationResults">
-						{% for medication, result in day.medications %}
+						{% for medication, result in day.therapeutics %}
 							<li><em>{{ medication }}:</em><span>{{ result|raw }}</span></li>
 						{% endfor %}
 					</div>

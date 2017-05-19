@@ -50,7 +50,7 @@ class AdminController extends Controller
 	 */
 	public function adminAction(Request $r)
 	{
-		return $this->render('admin.html.twig', array(
+		return $this->render('admin.html.twig', array( // TODO: create admin landing page, or redirect to a default page
 			'form' => null,
 		));
 	}
@@ -190,7 +190,11 @@ class AdminController extends Controller
 			array(
 				'class' => 'AppBundle:User',
 				'choice_label' => 'username',
-				'expanded' => true,))
+				'expanded' => true,
+				'label_attr' => array(
+					'class' => 'admin_user_label',
+				)
+			))
 			->add('edit', SubmitType::class, array(
 				'attr' => array('class' => 'button'),
 			))
@@ -272,6 +276,14 @@ class AdminController extends Controller
 	}
 
 	/**
+	 * animalAction function
+	 *
+	 * Allows admin User to edit Animal objects
+	 *
+	 * @param Request $r Request object
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response Render **manage.html.twig**
+	 *
 	 * @Route("/admin/animals", name="manageAnimals")
 	 */
 	public function animalAction(Request $r)
@@ -283,6 +295,9 @@ class AdminController extends Controller
 				'class' => 'AppBundle:Animal',
 				'choice_label' => 'name',
 				'expanded' => true,
+				'label_attr' => array(
+					'class' => 'admin_animal_label',
+				)
 			))
 			->add('edit', SubmitType::class, array(
 				'attr' => array('class' => 'button'),
@@ -320,6 +335,14 @@ class AdminController extends Controller
 	}
 
 	/**
+	 * createAnimalAction function
+	 *
+	 * Allows admin User to create new Animal object
+	 *
+	 * @param Request $r Request object
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response Render **animals.html.twig**
+	 *
 	 * @Route("/admin/create/animal", name="createAnimal")
 	 */
 	public function createAnimalAction(Request $r)
@@ -350,6 +373,15 @@ class AdminController extends Controller
 	}
 
 	/**
+	 * hotspotsAction function
+	 *
+	 * Allows admin User to edit HotSpot objects associated with an Animal object
+	 *
+	 * @param Request $r Request object
+	 * @param Animal $animal Animal object to edit
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response Render **animals.html.twig**
+	 *
 	 * @Route("/admin/edit/animals/{id}", name="editAnimal")
 	 */
 	 public function hotspotsAction(Request $r, Animal $animal = null)
@@ -384,6 +416,14 @@ class AdminController extends Controller
 	 }
 
 	 /**
+	  * testsAction function
+		*
+		* Allows admin User to edit Test objects
+		*
+		* @param Request $r Request object
+		*
+		* @return \Symfony\Component\HttpFoundation\Response Render **manage.html.twig**
+		*
 	  * @Route("/admin/tests", name="manageTests")
 		*/
 		public function testsAction(Request $r)
@@ -397,7 +437,10 @@ class AdminController extends Controller
 					'expanded' => true,
 					'choice_attr' => function(Test $t, $key, $index) {
 						return ['class' => 'test'];
-					}
+					},
+					'label_attr' => array(
+						'class' => 'tests_label',
+					)
 				))
 				->add('edit', SubmitType::class, array(
 					'attr' => array('class' => 'button'),
@@ -434,6 +477,14 @@ class AdminController extends Controller
 		}
 
 		/**
+		 * createTestAction function
+		 *
+		 * Allows admin User to create new Test object
+		 *
+		 * @param Request $r Request object
+		 *
+		 * @return \Symfony\Component\HttpFoundation\Response Render **manage.html.twig**
+		 *
 		 * @Route("/admin/create/test", name="createTest")
 		 */
 		public function createTestAction(Request $r)
@@ -460,6 +511,15 @@ class AdminController extends Controller
 		}
 
 		/**
+		 * editTestAction function
+		 *
+		 * Allow admin User to edit Test object
+		 *
+		 * @param Request $r Request object
+		 * @param Test $test Test object to edit
+		 *
+		 * @return \Symfony\Component\HttpFoundation\Response Render **manage.html.twig**
+		 *
 		 * @Route("/admin/edit/tests/{id}", name="editTest")
 		 */
 		 public function editTestAction(Request $r, Test $test = null)
@@ -491,6 +551,14 @@ class AdminController extends Controller
 		 }
 
 		 /**
+		  * medicationsAction function
+			*
+			* Allows admin User to manage Medication objects
+			*
+			* @param Request $r Request object
+			*
+			* @return \Symfony\Component\HttpFoundation\Response Render **manage.html.twig**
+			*
 		  * @Route("/admin/medications", name="manageMedications")
 			*/
 			public function medicationsAction(Request $r)
@@ -504,7 +572,10 @@ class AdminController extends Controller
 						'expanded' => true,
 						'choice_attr' => function(Medication $t, $key, $index) {
 							return ['class' => 'medication'];
-						}
+						},
+						'label_attr' => array(
+							'class' => 'medications_label',
+						)
 					))
 					->add('edit', SubmitType::class, array(
 						'attr' => array('class' => 'button'),
@@ -541,6 +612,14 @@ class AdminController extends Controller
 			}
 
 			/**
+			 * createMedicationAction function
+			 *
+			 * Allows admin User to create a new Medication object
+			 *
+			 * @param Request $r Request object
+			 *
+			 * @return \Symfony\Component\HttpFoundation\Response Render **manage.html.twig**
+			 *
 			 * @Route("/admin/create/medication", name="createMedication")
 			 */
 			public function createMedicationAction(Request $r)
@@ -567,6 +646,15 @@ class AdminController extends Controller
 			}
 
 			/**
+			 * editMedicationAction function
+			 *
+			 * Allows adminUser to edit Medication object
+			 *
+			 * @param Request $r Request object
+			 * @param Medication $medication Medication object to edit
+			 *
+			 * @return \Symfony\Component\HttpFoundation\Response Render **manage.html.twig**
+			 *
 			 * @Route("/admin/edit/medications/{id}", name="editMedication")
 			 */
 			 public function editMedicationAction(Request $r, Medication $medication = null)

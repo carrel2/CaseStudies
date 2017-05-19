@@ -1,5 +1,5 @@
 <?php
-// src/AppBundle\Form\AdminType.php
+// src/AppBundle/Form/AdminType.php
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;

@@ -1,4 +1,9 @@
 <?php
+/**
+ * src/AppBundle/Controller/FileController.php
+ *
+ * Controller for importing Tests and Medications
+ */
 
 namespace AppBundle\Controller;
 
@@ -55,7 +60,11 @@ class FileController extends Controller
           'title' => 'The specific sheet to import data from',
         ),
       ))
-      ->add('submit', SubmitType::class)
+      ->add('submit', SubmitType::class, array(
+        'attr' => array(
+          'class' => 'button',
+        )
+      ))
       ->getForm();
 
     $form->handleRequest($r);

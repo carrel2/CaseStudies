@@ -73,6 +73,11 @@ class MedicationResults
 	 */
 	private $results;
 
+	/**
+	 * @ORM\Column(type="string", length=4, nullable=true)
+	 */
+	private $waitTime;
+
 	public function __toString()
 	{
 		return sprintf("%s: %s", $this->medication->getName(), $this->results);
@@ -188,5 +193,29 @@ class MedicationResults
     public function getUserDay()
     {
         return $this->userDay;
+    }
+
+    /**
+     * Set waitTime
+     *
+     * @param string $waitTime
+     *
+     * @return MedicationResults
+     */
+    public function setWaitTime($waitTime)
+    {
+        $this->waitTime = $waitTime;
+
+        return $this;
+    }
+
+    /**
+     * Get waitTime
+     *
+     * @return string
+     */
+    public function getWaitTime()
+    {
+        return $this->waitTime;
     }
 }

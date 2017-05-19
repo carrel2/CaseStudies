@@ -178,6 +178,19 @@ class DefaultController extends Controller
 			$results->setLocation($user->getLocation());
 
 			$em->persist($results);
+
+			$message = \Swift_Message::newInstance()
+				->setSubject("Case Study results {$user->getCaseStudy()->getTitle()}")
+				->setFrom('vaulter82@gmail.com') // TODO: ->setFrom($user->getEmail())
+				->setTo('carrel2@illinois.edu')
+				->setBody(
+					$this->renderView('Emails/email.html.twig', array(
+						'results' => $results,
+					)),
+					'text/html'
+				); // TODO: create email template
+
+			$this->get('mailer')->send($message);
 		}
 
 		$session->clear();

@@ -127,11 +127,11 @@ a:hover {
 	color: #00cc00;
 }
 
-.case_label, .case_title_label, .case_animal_label, .case_days_label {
+.case_label, .case_title_label, .case_animal_label, .case_days_label, .admin_user_label, .admin_animal_label {
 	font-size: 1.8em;
 }
 
-.case_days_label {
+.case_days_label, .admin_user_label, .admin_animal_label {
 	display: block;
 	margin: 8px 0;
 	width: 100%;

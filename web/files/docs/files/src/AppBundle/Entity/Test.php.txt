@@ -10,8 +10,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * Contains information about a specific diagnostic Test
  *
- * @todo possibly move wait time to TestResults entity, so it can be edited on a case by case basis
- *
  * @ORM\Entity
  * @ORM\Table(name="Tests")
  */

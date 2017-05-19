@@ -1,5 +1,5 @@
 <?php
-// src/AppBundle/Form/CaseType.php
+
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -27,6 +27,9 @@ class CaseType extends AbstractType
 			)
 		))
 		->add('description', CKEditorType::class, array(
+			'config' => array(
+				'disallowedContent' => 'button embed form iframe input link meta textarea video script',
+			),
 			'label_attr' => array(
 				'class' => 'case_description_label',
 			)
@@ -72,41 +75,41 @@ class CaseType extends AbstractType
 					'label_attr' => array(
 						'class' => 'case_days_label',
 					)
-				))
-				->add('add day', ButtonType::class, array(
-					'attr' => array(
-						'class' => 'button addButton',
-						'onclick' => 'addButtonClickListener(this)',
-					)
-				))
-				->add('update', SubmitType::class, array(
-					'attr' => array(
-						'form' => 'case',
-						'class' => 'button',
-					),
-				))
-				->add('delete', SubmitType::class, array(
-					'attr' => array(
-						'form' => 'case',
-						'class' => 'button',
-						'onclick' => 'return confirmDelete();',
-					),
-				))
-				->add('restore', SubmitType::class, array(
-					'attr' => array(
-						'class' => 'button',
-						'onclick' => 'updateAdminCase(); return false;',
-					),
-				));
-			}
-		});
-	}
-
-			public function configureOptions(OptionsResolver $resolver)
-			{
-				$resolver->setDefaults(array(
-					'data_class' => CaseStudy::class,
-				));
+					))
+					->add('add day', ButtonType::class, array(
+						'attr' => array(
+							'class' => 'button addButton',
+							'onclick' => 'addButtonClickListener(this)',
+						)
+					))
+					->add('update', SubmitType::class, array(
+						'attr' => array(
+							'form' => 'case',
+							'class' => 'button',
+						),
+					))
+					->add('delete', SubmitType::class, array(
+						'attr' => array(
+							'form' => 'case',
+							'class' => 'button',
+							'onclick' => 'return confirmDelete();',
+						),
+					))
+					->add('restore', SubmitType::class, array(
+						'attr' => array(
+							'class' => 'button',
+							'onclick' => 'updateAdminCase(); return false;',
+						),
+					));
 				}
-			}
+			});
+		}
+
+		public function configureOptions(OptionsResolver $resolver)
+		{
+			$resolver->setDefaults(array(
+				'data_class' => CaseStudy::class,
+			));
+		}
+	}
 

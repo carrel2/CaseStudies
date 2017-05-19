@@ -26,7 +26,7 @@
 
 			<div id="testResults">
 				{% for testResult in day.tests %}
-					{% if testResult.test.waitTime == 0 or testResult.test.waitTime < elapsed or finished  %}
+					{% if ( testResult.waitTime and ( testResult.waitTime == 0 or testResult.waitTime < elapsed ) ) or ( testResult.test.waitTime == 0 or testResult.test.waitTime < elapsed ) or finished %}
 						<li><em>{{ testResult.test.name }}:</em><span class="info">{{ testResult.results|raw }}</span></li>
 					{% else %}
 						<li><em>{{ testResult.test.name }}:</em> Awaiting results.</li>
@@ -40,7 +40,7 @@
 
 			<div id="medicationResults">
 				{% for medResult in day.medications %}
-					{% if medResult.medication.waitTime == 0 or medResult.medication.waitTime < elapsed or finished %}
+					{% if ( medResult.waitTime and ( medResult.waitTime == 0 or medResult.waitTime < elapsed ) ) or ( medResult.medication.waitTime == 0 or medResult.medication.waitTime < elapsed ) or finished %}
 						<li><em>{{ medResult.medication.name }}:</em><span class="info">{{ medResult.results|raw }}</span></li>
 					{% else %}
 						<li><em>{{ medResult.medication.name }}:</em> Awaiting results.</li>

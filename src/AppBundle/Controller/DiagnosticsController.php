@@ -26,8 +26,6 @@ class DiagnosticsController extends Controller
 	 *
 	 * Shows TestsType form. On submission adds TestResults from the corresponding Day to the current UserDay
 	 *
-	 * @todo use location to determine which page to go to next
-	 *
 	 * @see TestsType::class
 	 * @see TestResults::class
 	 * @see Day::class

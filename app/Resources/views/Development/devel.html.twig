@@ -34,7 +34,7 @@
     $(function() {
       $('button').on('click', function() {
         $.get('/run/' + $(this).attr('id'), function(data, status) {
-          $('#output').append(data);
+          $('#output').prepend(data);
         });
       });
     });

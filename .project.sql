@@ -81,7 +81,7 @@ CREATE TABLE `Days` (
   PRIMARY KEY (`id`),
   KEY `IDX_4BD6535870CD7994` (`case_study_id`),
   CONSTRAINT `FK_4BD6535870CD7994` FOREIGN KEY (`case_study_id`) REFERENCES `Cases` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,7 +90,7 @@ CREATE TABLE `Days` (
 
 LOCK TABLES `Days` WRITE;
 /*!40000 ALTER TABLE `Days` DISABLE KEYS */;
-INSERT INTO `Days` VALUES (2,2),(3,3),(10,5);
+INSERT INTO `Days` VALUES (2,2),(3,3),(10,5),(11,5),(12,5);
 /*!40000 ALTER TABLE `Days` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +145,7 @@ CREATE TABLE `HotSpotsInfo` (
   CONSTRAINT `FK_8F7B04EF3AE7F1EF` FOREIGN KEY (`hotspot_id`) REFERENCES `HotSpots` (`id`),
   CONSTRAINT `FK_8F7B04EF6C905A1B` FOREIGN KEY (`user_day_id`) REFERENCES `UserDays` (`id`) ON DELETE SET NULL,
   CONSTRAINT `FK_8F7B04EF9C24126` FOREIGN KEY (`day_id`) REFERENCES `Days` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +154,7 @@ CREATE TABLE `HotSpotsInfo` (
 
 LOCK TABLES `HotSpotsInfo` WRITE;
 /*!40000 ALTER TABLE `HotSpotsInfo` DISABLE KEYS */;
-INSERT INTO `HotSpotsInfo` VALUES (14,2,NULL,21,'<p>Serosanguinous nasal discharge</p>'),(15,2,NULL,23,'<p>20/min</p>'),(16,2,NULL,25,'<p>102.4&deg; F</p>'),(17,2,NULL,24,'<p>48/min</p>'),(18,3,NULL,26,'<ol>\r\n	<li>3cm in diameter on the dorsolateral aspect</li>\r\n	<li>Elevated above the skin level ~1cm at its highest point</li>\r\n	<li>Surface is reddened and easily hemorrhages when excoriated</li>\r\n</ol>'),(29,10,NULL,27,'<p>Info</p>');
+INSERT INTO `HotSpotsInfo` VALUES (14,2,NULL,21,'<p>Serosanguinous nasal discharge</p>'),(15,2,NULL,23,'<p>20/min</p>'),(16,2,NULL,25,'<p>102.4&deg; F</p>'),(17,2,NULL,24,'<p>48/min</p>'),(18,3,NULL,26,'<ol>\r\n	<li>3cm in diameter on the dorsolateral aspect</li>\r\n	<li>Elevated above the skin level ~1cm at its highest point</li>\r\n	<li>Surface is reddened and easily hemorrhages when excoriated</li>\r\n</ol>'),(29,10,NULL,27,'<p>Info</p>'),(30,11,NULL,29,'<p>Ear info</p>'),(31,12,NULL,28,'<p>Eye info</p>');
 /*!40000 ALTER TABLE `HotSpotsInfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,6 +171,7 @@ CREATE TABLE `MedicationResults` (
   `user_day_id` int(11) DEFAULT NULL,
   `medication_id` int(11) DEFAULT NULL,
   `results` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `wait_time` varchar(4) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_C7C851159C24126` (`day_id`),
   KEY `IDX_C7C851156C905A1B` (`user_day_id`),
@@ -178,7 +179,7 @@ CREATE TABLE `MedicationResults` (
   CONSTRAINT `FK_C7C851152C4DE6DA` FOREIGN KEY (`medication_id`) REFERENCES `Medications` (`id`),
   CONSTRAINT `FK_C7C851156C905A1B` FOREIGN KEY (`user_day_id`) REFERENCES `UserDays` (`id`) ON DELETE SET NULL,
   CONSTRAINT `FK_C7C851159C24126` FOREIGN KEY (`day_id`) REFERENCES `Days` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -234,7 +235,7 @@ CREATE TABLE `Results` (
   PRIMARY KEY (`id`),
   KEY `IDX_501EDD88A76ED395` (`user_id`),
   CONSTRAINT `FK_501EDD88A76ED395` FOREIGN KEY (`user_id`) REFERENCES `app_users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -243,6 +244,7 @@ CREATE TABLE `Results` (
 
 LOCK TABLES `Results` WRITE;
 /*!40000 ALTER TABLE `Results` DISABLE KEYS */;
+INSERT INTO `Results` VALUES (3,1,'Case 12','a:1:{i:0;a:5:{s:12:\"hotspotsInfo\";a:3:{s:8:\"Nostrils\";s:37:\"<p>Serosanguinous nasal discharge</p>\";s:6:\"Rectum\";s:19:\"<p>102.4&deg; F</p>\";s:5:\"Heart\";s:13:\"<p>48/min</p>\";}s:5:\"tests\";a:0:{}s:11:\"medications\";a:0:{}s:11:\"diagnostics\";a:2:{s:22:\"Ophthalmic examination\";s:21:\"No results available.\";s:12:\"Bronchoscopy\";s:21:\"No results available.\";}s:12:\"therapeutics\";a:2:{s:15:\"Erythromycin PO\";s:21:\"No results available.\";s:17:\"Clarithromycin PO\";s:21:\"No results available.\";}}}','Test','Hospital');
 /*!40000 ALTER TABLE `Results` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -259,6 +261,7 @@ CREATE TABLE `TestResults` (
   `user_day_id` int(11) DEFAULT NULL,
   `test_id` int(11) DEFAULT NULL,
   `results` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `wait_time` varchar(4) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_B868B2F29C24126` (`day_id`),
   KEY `IDX_B868B2F26C905A1B` (`user_day_id`),
@@ -266,7 +269,7 @@ CREATE TABLE `TestResults` (
   CONSTRAINT `FK_B868B2F21E5D0459` FOREIGN KEY (`test_id`) REFERENCES `Tests` (`id`),
   CONSTRAINT `FK_B868B2F26C905A1B` FOREIGN KEY (`user_day_id`) REFERENCES `UserDays` (`id`) ON DELETE SET NULL,
   CONSTRAINT `FK_B868B2F29C24126` FOREIGN KEY (`day_id`) REFERENCES `Days` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -275,7 +278,7 @@ CREATE TABLE `TestResults` (
 
 LOCK TABLES `TestResults` WRITE;
 /*!40000 ALTER TABLE `TestResults` DISABLE KEYS */;
-INSERT INTO `TestResults` VALUES (3,2,NULL,541,'<p>No fluid reflux. Some small amount of gas released from stomach. No fluid obtained after siphoning from stomach tube</p>'),(4,2,NULL,542,'<p>No abnormalities found</p>'),(5,2,NULL,564,'<p>290,000 /ul</p>');
+INSERT INTO `TestResults` VALUES (3,2,NULL,541,'<p>No fluid reflux. Some small amount of gas released from stomach. No fluid obtained after siphoning from stomach tube</p>',''),(4,2,NULL,542,'<p>No abnormalities found</p>',''),(5,2,NULL,564,'<p>290,000 /ul</p>',''),(11,10,NULL,539,'<p>Results</p>','2'),(12,11,NULL,611,'<p>Same day results</p>','0');
 /*!40000 ALTER TABLE `TestResults` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -319,7 +322,7 @@ CREATE TABLE `UserDays` (
   PRIMARY KEY (`id`),
   KEY `IDX_14DD497FA76ED395` (`user_id`),
   CONSTRAINT `FK_14DD497FA76ED395` FOREIGN KEY (`user_id`) REFERENCES `app_users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -363,7 +366,7 @@ CREATE TABLE `app_users` (
 
 LOCK TABLES `app_users` WRITE;
 /*!40000 ALTER TABLE `app_users` DISABLE KEYS */;
-INSERT INTO `app_users` VALUES (1,NULL,'ROLE_SUPER_ADMIN','brandon','$2y$13$/0ZWoICiRtbdEZlgHJw4q.PPdAIAhuYZ863ONTnfrPCmXWhCd6Pri','carrel2@illinois.edu','123123123',0,'Farm'),(4,NULL,'ROLE_USER','test','$2y$13$fmgTtVEq5Z1gxM/Jw1f40ORhImUe3Yapi3plikzXSA56p5O0ipuRm','test@test.com','111111111',0,'');
+INSERT INTO `app_users` VALUES (1,NULL,'ROLE_SUPER_ADMIN','brandon','$2y$13$/0ZWoICiRtbdEZlgHJw4q.PPdAIAhuYZ863ONTnfrPCmXWhCd6Pri','carrel2@illinois.edu','123123123',0,'Hospital'),(4,NULL,'ROLE_USER','test','$2y$13$fmgTtVEq5Z1gxM/Jw1f40ORhImUe3Yapi3plikzXSA56p5O0ipuRm','test@test.com','111111111',0,'');
 /*!40000 ALTER TABLE `app_users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -376,4 +379,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-17 12:44:54
+-- Dump completed on 2017-05-19 13:41:54

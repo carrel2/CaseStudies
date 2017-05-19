@@ -73,6 +73,11 @@ class MedicationResults
 	 */
 	private $results;
 
+	/**
+	 * @ORM\Column(type="string", length=4, nullable=true)
+	 */
+	private $waitTime;
+
 	public function __toString()
 	{
 		return sprintf("%s: %s", $this->medication->getName(), $this->results);

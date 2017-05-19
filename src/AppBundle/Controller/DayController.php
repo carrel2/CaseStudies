@@ -18,6 +18,8 @@ use AppBundle\Entity\UserDay;
  *
  * DayController class extends \Symfony\Bundle\FrameworkBundle\Controller\Controller
  *
+ * @todo add option to wait for results (proceed a day without creating new UserDay)
+ *
  * @see http://api.symfony.com/3.2/Symfony/Bundle/FrameworkBundle/Controller/Controller.html
  */
 class DayController extends Controller
@@ -25,7 +27,9 @@ class DayController extends Controller
 	/**
 	 * reviewAction function
 	 *
-	 * Renders review.html.twig
+	 * Renders **review.html.twig**
+	 *
+	 * @todo highlight new results
 	 *
 	 * @param Request $r Request object
 	 *
@@ -74,12 +78,11 @@ class DayController extends Controller
 	/**
 	 * logicAction function
 	 *
-	 * Function to handle the logic between Day objects
+	 * Function to handle the logic between Day objects (doesn't do much right now, may not be necessary)
 	 *
 	 * @see Day::class
 	 *
 	 * @todo update logic to be more dynamic, extend past actual CaseStudy
-	 * @todo add email functionality
 	 *
 	 * @param Request $r Request object
 	 *
@@ -95,18 +98,6 @@ class DayController extends Controller
 		if( count($case->getDays()) == count($user->getDays())) {
 			$r->getSession()->set('finished', true);
 			$this->addFlash('complete', 'Finish message.');
-
-			// $message = \Swift_Message::newInstance()
-			// 	->setSubject('Test message')
-			// 	->setFrom('send@example.com')
-			// 	->setTo('vaulter82@gmail.com')
-			// 	->setBody('Finished');
-			//
-			// $this->get('mailer')->send($message);
-
-			// return $this->render('debug.html.twig', array(
-			// 	'days' => $user->getDays(),
-			// ));
 		}
 
 		return $this->redirectToRoute('review');
