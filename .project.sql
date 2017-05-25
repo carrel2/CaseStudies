@@ -64,7 +64,7 @@ CREATE TABLE `Cases` (
 
 LOCK TABLES `Cases` WRITE;
 /*!40000 ALTER TABLE `Cases` DISABLE KEYS */;
-INSERT INTO `Cases` VALUES (2,2,'Case 12','<p>On March 8th, you examine a 5-year-old bay Standardbred gelding with a nose bleed. He raced 4 days ago and developed a slight bloody nose during the race. The epistaxis seemed to abate after the race. The horse seemed normal the day after the race. However, the epistaxis recurred 2 days after racing. The horse subsequently developed anorexia, a fever, and a cough. The fever seemed to decrease after the trainer administered Tribressen to the horse but the epistaxis and cough have persisted. The last dose of Tribressen was 24 hours ago.</p>'),(3,3,'Case 13','<p>You are asked to examine a 4-year-old American Saddlebred filly for a skin mass of 4 weeks duration on the left front fetlock. The client has been spraying &quot;blue solution&quot; on it since it began but the mass has continued to increase gradually in size.</p>\r\n\r\n<p><strong>The client wants a cosmetic solution to the problem because the filly is a show horse.</strong></p>'),(5,8,'A test case','<p>This is a test case to play around with</p>');
+INSERT INTO `Cases` VALUES (2,2,'Case 12','On March 8th, you examine a 5-year-old bay Standardbred gelding with a nose bleed. He raced 4 days ago and developed a slight bloody nose during the race. The epistaxis seemed to abate after the race. The horse seemed normal the day after the race. However, the epistaxis recurred 2 days after racing. The horse subsequently developed anorexia, a fever, and a cough. The fever seemed to decrease after the trainer administered Tribressen to the horse but the epistaxis and cough have persisted. The last dose of Tribressen was 24 hours ago.'),(3,3,'Case 13','<p>You are asked to examine a 4-year-old American Saddlebred filly for a skin mass of 4 weeks duration on the left front fetlock. The client has been spraying &quot;blue solution&quot; on it since it began but the mass has continued to increase gradually in size.</p>\r\n\r\n<p><strong>The client wants a cosmetic solution to the problem because the filly is a show horse.</strong></p>'),(5,8,'A test case','This is a test case to play around with.');
 /*!40000 ALTER TABLE `Cases` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -154,7 +154,7 @@ CREATE TABLE `HotSpotsInfo` (
 
 LOCK TABLES `HotSpotsInfo` WRITE;
 /*!40000 ALTER TABLE `HotSpotsInfo` DISABLE KEYS */;
-INSERT INTO `HotSpotsInfo` VALUES (14,2,NULL,21,'<p>Serosanguinous nasal discharge</p>'),(15,2,NULL,23,'<p>20/min</p>'),(16,2,NULL,25,'<p>102.4&deg; F</p>'),(17,2,NULL,24,'<p>48/min</p>'),(18,3,NULL,26,'<ol>\r\n	<li>3cm in diameter on the dorsolateral aspect</li>\r\n	<li>Elevated above the skin level ~1cm at its highest point</li>\r\n	<li>Surface is reddened and easily hemorrhages when excoriated</li>\r\n</ol>'),(29,10,NULL,27,'<p>Info</p>'),(30,11,NULL,29,'<p>Ear info</p>'),(31,12,NULL,28,'<p>Eye info</p>');
+INSERT INTO `HotSpotsInfo` VALUES (14,2,NULL,21,'Serosanguinous nasal discharge'),(15,2,NULL,23,'20/min'),(16,2,NULL,25,'102.4&deg;'),(17,2,NULL,24,'48/min'),(18,3,NULL,26,'<ol>\r\n	<li>3cm in diameter on the dorsolateral aspect</li>\r\n	<li>Elevated above the skin level ~1cm at its highest point</li>\r\n	<li>Surface is reddened and easily hemorrhages when excoriated</li>\r\n</ol>'),(29,10,NULL,27,'Info'),(30,11,NULL,29,'Ear info'),(31,12,NULL,28,'Eye info');
 /*!40000 ALTER TABLE `HotSpotsInfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -235,7 +235,7 @@ CREATE TABLE `Results` (
   PRIMARY KEY (`id`),
   KEY `IDX_501EDD88A76ED395` (`user_id`),
   CONSTRAINT `FK_501EDD88A76ED395` FOREIGN KEY (`user_id`) REFERENCES `app_users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -244,7 +244,6 @@ CREATE TABLE `Results` (
 
 LOCK TABLES `Results` WRITE;
 /*!40000 ALTER TABLE `Results` DISABLE KEYS */;
-INSERT INTO `Results` VALUES (3,1,'Case 12','a:1:{i:0;a:5:{s:12:\"hotspotsInfo\";a:3:{s:8:\"Nostrils\";s:37:\"<p>Serosanguinous nasal discharge</p>\";s:6:\"Rectum\";s:19:\"<p>102.4&deg; F</p>\";s:5:\"Heart\";s:13:\"<p>48/min</p>\";}s:5:\"tests\";a:0:{}s:11:\"medications\";a:0:{}s:11:\"diagnostics\";a:2:{s:22:\"Ophthalmic examination\";s:21:\"No results available.\";s:12:\"Bronchoscopy\";s:21:\"No results available.\";}s:12:\"therapeutics\";a:2:{s:15:\"Erythromycin PO\";s:21:\"No results available.\";s:17:\"Clarithromycin PO\";s:21:\"No results available.\";}}}','Test','Hospital');
 /*!40000 ALTER TABLE `Results` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -278,7 +277,7 @@ CREATE TABLE `TestResults` (
 
 LOCK TABLES `TestResults` WRITE;
 /*!40000 ALTER TABLE `TestResults` DISABLE KEYS */;
-INSERT INTO `TestResults` VALUES (3,2,NULL,541,'<p>No fluid reflux. Some small amount of gas released from stomach. No fluid obtained after siphoning from stomach tube</p>',''),(4,2,NULL,542,'<p>No abnormalities found</p>',''),(5,2,NULL,564,'<p>290,000 /ul</p>',''),(11,10,NULL,539,'<p>Results</p>','2'),(12,11,NULL,611,'<p>Same day results</p>','0');
+INSERT INTO `TestResults` VALUES (3,2,NULL,541,'No fluid reflux. Some small amount of gas released from stomach. No fluid obtained after siphoning from stomach tube.',NULL),(4,2,NULL,542,'No abnormalities found',NULL),(5,2,NULL,564,'290,000 /ul',NULL),(11,10,NULL,539,'Results','1'),(12,11,NULL,611,'Same day results','0');
 /*!40000 ALTER TABLE `TestResults` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -322,7 +321,7 @@ CREATE TABLE `UserDays` (
   PRIMARY KEY (`id`),
   KEY `IDX_14DD497FA76ED395` (`user_id`),
   CONSTRAINT `FK_14DD497FA76ED395` FOREIGN KEY (`user_id`) REFERENCES `app_users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -366,7 +365,7 @@ CREATE TABLE `app_users` (
 
 LOCK TABLES `app_users` WRITE;
 /*!40000 ALTER TABLE `app_users` DISABLE KEYS */;
-INSERT INTO `app_users` VALUES (1,NULL,'ROLE_SUPER_ADMIN','brandon','$2y$13$/0ZWoICiRtbdEZlgHJw4q.PPdAIAhuYZ863ONTnfrPCmXWhCd6Pri','carrel2@illinois.edu','123123123',0,'Hospital'),(4,NULL,'ROLE_USER','test','$2y$13$fmgTtVEq5Z1gxM/Jw1f40ORhImUe3Yapi3plikzXSA56p5O0ipuRm','test@test.com','111111111',0,'');
+INSERT INTO `app_users` VALUES (1,NULL,'ROLE_SUPER_ADMIN','brandon','$2y$13$/0ZWoICiRtbdEZlgHJw4q.PPdAIAhuYZ863ONTnfrPCmXWhCd6Pri','carrel2@illinois.edu','123123123',0,'Hospital'),(4,NULL,'ROLE_USER','test','$2y$13$fmgTtVEq5Z1gxM/Jw1f40ORhImUe3Yapi3plikzXSA56p5O0ipuRm','test@test.com','111111111',0,'Farm');
 /*!40000 ALTER TABLE `app_users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -379,4 +378,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-19 13:41:54
+-- Dump completed on 2017-05-25 14:08:06

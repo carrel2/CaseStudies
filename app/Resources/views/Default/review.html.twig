@@ -4,6 +4,13 @@
 	{{ parent() }}
 
 	<script src="{{ asset('js/accordion.js') }}"></script>
+	<script>
+		$(function() {
+			if( $('.new-result').length > 0 ) {
+				$('#flashes').append('<div class="flash flash-success">New results available!</div>');
+			}
+		});
+	</script>
 {% endblock %}
 
 {% block body %}
@@ -26,7 +33,11 @@
 
 			<div id="testResults">
 				{% for testResult in day.tests %}
-					{% if ( testResult.waitTime and ( testResult.waitTime == 0 or testResult.waitTime < elapsed ) ) or ( testResult.test.waitTime == 0 or testResult.test.waitTime < elapsed ) or finished %}
+					{% if testResult.waitTime and ( elapsed - testResult.waitTime == 0 or testResult.waitTime < elapsed ) %}
+						<li {{ elapsed - testResult.waitTime == 0 ? 'class="new-result"' : '' }}><em>{{ testResult.test.name }}:</em><span class="info">{{ testResult.results|raw }}</span></li>
+					{% elseif testResult.test.waitTime == 0 or elapsed - testResult.test.waitTime < elapsed %}
+						<li {{ elapsed - testResult.test.waitTime == 0 ? 'class="new-result"' : '' }}><em>{{ testResult.test.name }}:</em><span class="info">{{ testResult.results|raw }}</span></li>
+					{% elseif finished %}
 						<li><em>{{ testResult.test.name }}:</em><span class="info">{{ testResult.results|raw }}</span></li>
 					{% else %}
 						<li><em>{{ testResult.test.name }}:</em> Awaiting results.</li>
@@ -40,7 +51,11 @@
 
 			<div id="medicationResults">
 				{% for medResult in day.medications %}
-					{% if ( medResult.waitTime and ( medResult.waitTime == 0 or medResult.waitTime < elapsed ) ) or ( medResult.medication.waitTime == 0 or medResult.medication.waitTime < elapsed ) or finished %}
+					{% if medResult.waitTime and ( elapsed - medResult.waitTime == 0 or medResult.waitTime < elapsed ) %}
+						<li {{ elapsed - medResult.waitTime == 0 ? 'class="new-result"' : '' }}><em>{{ medResult.medication.name }}:</em><span class="info">{{ medResult.results|raw }}</span></li>
+					{% elseif elapsed - medResult.medication.waitTime == 0 or medResult.medication.waitTime < elapsed %}
+						<li {{ elapsed - medResult.medication.waitTime == 0 }}><em>{{ medResult.medication.name }}:</em><span class="info">{{ medResult.results|raw }}</span></li>
+					{% elseif finished %}
 						<li><em>{{ medResult.medication.name }}:</em><span class="info">{{ medResult.results|raw }}</span></li>
 					{% else %}
 						<li><em>{{ medResult.medication.name }}:</em> Awaiting results.</li>

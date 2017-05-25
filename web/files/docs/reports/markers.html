@@ -73,7 +73,7 @@
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">11</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">10</span>
                                 </a>
                             </li>
                             <li>
@@ -99,8 +99,7 @@
                 <li class="nav-header">Navigation</li>
                                                                                                                                                                                         <li><a href="#src/AppBundle/Controller/DefaultController.php"><i class="icon-file"></i> src/AppBundle/Controller/DefaultController.php</a></li>
                                                                                                 <li><a href="#src/AppBundle/Controller/DayController.php"><i class="icon-file"></i> src/AppBundle/Controller/DayController.php</a></li>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <li><a href="#src/AppBundle/Controller/FileController.php"><i class="icon-file"></i> src/AppBundle/Controller/FileController.php</a></li>
-                                                                                                                                                                                                                                                                        <li><a href="#src/AppBundle/Controller/AdminController.php"><i class="icon-file"></i> src/AppBundle/Controller/AdminController.php</a></li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <li><a href="#src/AppBundle/Controller/AdminController.php"><i class="icon-file"></i> src/AppBundle/Controller/AdminController.php</a></li>
                                                                                                                                                                                                                                                                                                                                                                                                                                                 <li><a href="#src/AppBundle/Controller/UserController.php"><i class="icon-file"></i> src/AppBundle/Controller/UserController.php</a></li>
                                                                                                 <li><a href="#src/AppBundle/Controller/HotSpotController.php"><i class="icon-file"></i> src/AppBundle/Controller/HotSpotController.php</a></li>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     </ul>
@@ -132,12 +131,12 @@
                                                                             <tr>
                                             <td>TODO</td>
                                             <td>184</td>
-                                            <td>-&gt;setFrom($user-&gt;getEmail())</td>
+                                            <td>-&gt;setFrom([$user-&gt;getEmail() =&gt; $user-&gt;getUsername()]) or default email</td>
                                         </tr>
                                                                             <tr>
                                             <td>TODO</td>
-                                            <td>191</td>
-                                            <td>create email template</td>
+                                            <td>185</td>
+                                            <td>-&gt;setTo(admin/professor)</td>
                                         </tr>
                                                                             <tr>
                                             <td>TODO</td>
@@ -152,7 +151,7 @@
                             <h3>
                             <i class="icon-file"></i>
                                 src/AppBundle/Controller/DayController.php
-                                <small style="float: right;padding-right: 10px;">3</small>
+                                <small style="float: right;padding-right: 10px;">2</small>
                             </h3>
                             <div>
                                 <table class="table markers table-bordered">
@@ -168,45 +167,18 @@
                                         </tr>
                                                                             <tr>
                                             <td>TODO</td>
-                                            <td>41</td>
-                                            <td>highlight new results</td>
-                                        </tr>
-                                                                            <tr>
-                                            <td>TODO</td>
-                                            <td>93</td>
+                                            <td>91</td>
                                             <td>update logic to be more dynamic, extend past actual CaseStudy</td>
                                         </tr>
                                                                     </table>
                             </div>
                         </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        <div class="package-contents">
-                            <a name="src/AppBundle/Controller/FileController.php" id="src/AppBundle/Controller/FileController.php"></a>
-                            <h3>
-                            <i class="icon-file"></i>
-                                src/AppBundle/Controller/FileController.php
-                                <small style="float: right;padding-right: 10px;">1</small>
-                            </h3>
-                            <div>
-                                <table class="table markers table-bordered">
-                                    <tr>
-                                        <th>Type</th>
-                                        <th>Line</th>
-                                        <th>Description</th>
-                                    </tr>
-                                                                            <tr>
-                                            <td>TODO</td>
-                                            <td>41</td>
-                                            <td>add tooltips</td>
-                                        </tr>
-                                                                    </table>
-                            </div>
-                        </div>
-                                                                                                                                                                                            <div class="package-contents">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <div class="package-contents">
                             <a name="src/AppBundle/Controller/AdminController.php" id="src/AppBundle/Controller/AdminController.php"></a>
                             <h3>
                             <i class="icon-file"></i>
                                 src/AppBundle/Controller/AdminController.php
-                                <small style="float: right;padding-right: 10px;">1</small>
+                                <small style="float: right;padding-right: 10px;">2</small>
                             </h3>
                             <div>
                                 <table class="table markers table-bordered">
@@ -219,6 +191,11 @@
                                             <td>TODO</td>
                                             <td>53</td>
                                             <td>create admin landing page, or redirect to a default page</td>
+                                        </tr>
+                                                                            <tr>
+                                            <td>TODO</td>
+                                            <td>206</td>
+                                            <td>style buttons to stick to the bottom of the page</td>
                                         </tr>
                                                                     </table>
                             </div>
@@ -314,7 +291,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on May 19th, 2017 at 18:41.
+                    on May 25th, 2017 at 18:02.
                 </section>
             </section>
         </section>

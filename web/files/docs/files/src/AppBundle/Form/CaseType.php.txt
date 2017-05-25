@@ -28,6 +28,7 @@ class CaseType extends AbstractType
 		))
 		->add('description', CKEditorType::class, array(
 			'config' => array(
+				'autoParagraph' => false,
 				'disallowedContent' => 'button embed form iframe input link meta textarea video script',
 			),
 			'label_attr' => array(

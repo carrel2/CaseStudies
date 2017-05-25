@@ -203,7 +203,7 @@ class AdminController extends Controller
 					'class' => 'button',
 					'onclick' => 'return confirmDelete();',
 				),
-			))->getForm();
+			))->getForm(); // TODO: style buttons to stick to the bottom of the page
 
 		$form->handleRequest($r);
 
@@ -272,6 +272,29 @@ class AdminController extends Controller
 
 		return $this->render('admin.html.twig', array(
 			'form' => $form->createView(),
+		));
+	}
+
+	/**
+	 * editUserResultsAction function
+	 *
+	 * Allows admin User to edit Results objects associated with another User
+	 *
+	 * @param Request $r Request object
+	 * @param User $user User object to edit
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response Render **results.html.twig**
+	 *
+	 * @Route("/admin/edit/users/{id}/results", name="editUserResults")
+	 */
+	public function editUserResultsAction(Request $r, User $user)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$results = $em->getRepository('AppBundle:Results')->findByUser($user);
+
+		return $this->render('Default/results.html.twig', array(
+			'user' => $user,
+			'results' => $results,
 		));
 	}
 

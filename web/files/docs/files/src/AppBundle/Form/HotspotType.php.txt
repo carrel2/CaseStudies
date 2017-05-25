@@ -27,7 +27,11 @@ class HotspotType extends AbstractType
 				),
 				'label' => false,
 			))
-			->add('info', CKEditorType::class);
+			->add('info', CKEditorType::class, array(
+				'config' => array(
+					'autoParagraph' => false,
+				)
+			));
 	}
 
 	public function configureOptions(OptionsResolver $resolver)

@@ -14,7 +14,7 @@
 {% endblock %}
 
 {% block body %}
-  {{ form_start(form) }}
+  {{ form_start(form, {'attr': {'id': 'admin_animal_form'}} ) }}
   {{ form_widget(form) }}
   {{ form_end(form) }}
 

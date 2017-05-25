@@ -1,20 +1,6 @@
-<div>{{ app.user.username|capitalize }}</div>
+<div>New results are available for {{ app.user.username|capitalize }}.</div>
 
+<div>Case: {{ results.caseStudy }}</div>
 <div>Location: {{ results.location }}</div>
 <div>Diagnosis: {{ results.diagnosis }}</div>
-
-{% for day in results.results %}
-  <h2>Day {{ loop.index }}</h2>
-
-  {% for name, info in day.hotspotsInfo %}
-    <li><em>{{ name }}:</em><span>{{ info|raw }}</span></li>
-  {% endfor %}
-
-  {% for test, result in day.diagnostics %}
-    <li><em>{{ test }}:</em><span>{{ result|raw }}</span></li>
-  {% endfor %}
-
-  {% for medication, result in day.therapeutics %}
-    <li><em>{{ medication }}:</em><span>{{ result|raw }}</span></li>
-  {% endfor %}
-{% endfor %}
+<a href="{{ absolute_url( path( 'editUserResults', {'id': app.user.id} ) ) }}">View results</a>

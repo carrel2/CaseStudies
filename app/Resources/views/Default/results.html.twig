@@ -7,7 +7,11 @@
 {% endblock %}
 
 {% block body %}
-  {% for result in results %}
+	{% if user is defined %}
+		<h2>Results for {{ user.username }}</h2>
+	{% endif %}
+
+	{% for result in results %}
 		<button class="accordion">Results: {{ result.caseStudy }}</button>
 
 		<div class="panel">
@@ -39,6 +43,8 @@
 			{% endfor %}
 		</div>
 
-    <a href="/removeResult/{{ result.id }}">Remove</a>
+		{% if is_granted('ROLE_ADMIN') %}
+    	<a href="/removeResult/{{ result.id }}">Remove</a>
+		{% endif %}
   {% endfor %}
 {% endblock %}

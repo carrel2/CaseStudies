@@ -29,8 +29,6 @@ class DayController extends Controller
 	 *
 	 * Renders **review.html.twig**
 	 *
-	 * @todo highlight new results
-	 *
 	 * @param Request $r Request object
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response Render **review.html.twig**

@@ -93,7 +93,7 @@ class UserDay
 
 	public function toArray()
 	{
-		$a = array("hotspotsInfo" => array(), "tests" => array(), "medications" => array());
+		$a = array("hotspotsInfo" => array(), "diagnostics" => array(), "therapeutics" => array());
 
 		foreach($this->hotspotsInfo as $spot)
 		{
@@ -101,11 +101,11 @@ class UserDay
 		}
 		foreach ($this->tests as $test)
 		{
-			$a["tests"][$test->getTest()->getName()] = $test->getResults();
+			$a["diagnostics"][$test->getTest()->getName()] = $test->getResults();
 		}
 		foreach ($this->medications as $medication)
 		{
-			$a["medications"][$medication->getMedication()->getName()] = $medication->getResults();
+			$a["therapeutics"][$medication->getMedication()->getName()] = $medication->getResults();
 		}
 
 		return $a;

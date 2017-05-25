@@ -22,7 +22,11 @@ class DiagnosticResultsType extends AbstractType
 				},
 				'label' => false,
 			))
-			->add('results', CKEditorType::class)
+			->add('results', CKEditorType::class, array(
+				'config' => array(
+					'autoParagraph' => false,
+				)
+			))
 			->add('waitTime');
 	}
 

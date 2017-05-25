@@ -42,6 +42,10 @@ class DefaultType extends AbstractType
 							'Hospital' => 'Hospital',
 						),
 						'expanded' => true,
+						'label_attr' => array(
+							'class' => 'tooltip',
+							'title' => 'Location affects the workflow of the application',
+						)
 					))
 					->add('start', SubmitType::class, array(
 						'attr' => array('class' => 'button'),

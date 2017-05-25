@@ -121,6 +121,17 @@ function updateAdminCase(id) {
 			$(this).text( "Day " + ( 1 + parseInt($(this).text()) ) );
 		});
 
+		if( $('#footer').children().length == 0 ) {
+			var form = $('form').attr('id');
+
+			$('button[type=submit].button').each(function() {
+				$('#footer').append($(this));
+				$(this).attr('form', form);
+			});
+		} else {
+			$('#body button[type=submit].button').remove();
+		}
+
 		addRemoveButtonClickListener();
 	});
 }

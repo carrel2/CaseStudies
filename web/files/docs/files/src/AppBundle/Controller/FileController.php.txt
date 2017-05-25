@@ -30,8 +30,6 @@ class FileController extends Controller
   /**
    * fileAction function
    *
-   * @todo add tooltips
-   *
    * @param Request $r Request object
    *
    * @return \Symfony\Component\HttpFoundation\Response Render **import.html.twig**
