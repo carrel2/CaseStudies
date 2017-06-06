@@ -1,0 +1,4 @@
+{% for hotspot in animal.hotspots %}
+  <div class="hotspot {{ hotspot.name|lower|replace({' ': '-'}) }}">{{ hotspot.name }} <a href="{{ path('removeHotspot', {'animal': animal.id, 'hotspot': hotspot.id }) }}" onclick="return confirmDelete()">Remove</a></div>
+{% endfor %}
+

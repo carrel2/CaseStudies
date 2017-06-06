@@ -1,4 +1,4 @@
-// dot 2.38.0 on Linux 4.4.0-77-generic
+// dot 2.38.0 on Linux 4.4.0-78-generic
 // SchemaSpy rev 590
 digraph "oneDegreeRelationshipsDiagram" {
   graph [
@@ -29,7 +29,8 @@ digraph "oneDegreeRelationshipsDiagram" {
       <TR><TD PORT="user_day_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">user_day_id</TD></TR>
       <TR><TD PORT="test_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">test_id</TD></TR>
       <TR><TD PORT="results" COLSPAN="3" ALIGN="LEFT">results</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 3</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">3 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD PORT="wait_time" COLSPAN="3" ALIGN="LEFT">wait_time</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 3</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">5 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="TestResults.html"
     tooltip="TestResults"

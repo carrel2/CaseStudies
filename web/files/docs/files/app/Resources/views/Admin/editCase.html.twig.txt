@@ -1,0 +1,23 @@
+{% extends 'admin.html.twig' %}
+
+{% block scripts %}
+	{{ parent() }}
+
+	<script>
+		$(function(){
+			updateAdminCase({{ app.session.remove('case') }});
+		});
+	</script>
+{% endblock %}
+
+{% block body %}
+	<a class="button right" href="{{ path('createCase') }}">Create a new case</a>
+	<button id="undo" class="button right" type="button">Undo</button>
+
+	{{ form_label(form.case) }}
+	{{ form_errors(form.case) }}
+	{{ form_widget(form.case, {'attr': {'onchange': 'updateAdminCase()'}} ) }}
+
+	<div id="caseInfo"></div>
+{% endblock %}
+

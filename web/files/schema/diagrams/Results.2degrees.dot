@@ -1,4 +1,4 @@
-// dot 2.38.0 on Linux 4.4.0-77-generic
+// dot 2.38.0 on Linux 4.4.0-78-generic
 // SchemaSpy rev 590
 digraph "twoDegreesRelationshipsDiagram" {
   graph [
@@ -60,7 +60,7 @@ digraph "twoDegreesRelationshipsDiagram" {
       <TR><TD PORT="results" COLSPAN="2" ALIGN="LEFT">results</TD><TD PORT="results.type" ALIGN="LEFT">longtext[2147483647]</TD></TR>
       <TR><TD PORT="diagnosis" COLSPAN="2" ALIGN="LEFT">diagnosis</TD><TD PORT="diagnosis.type" ALIGN="LEFT">longtext[2147483647]</TD></TR>
       <TR><TD PORT="location" COLSPAN="2" ALIGN="LEFT">location</TD><TD PORT="location.type" ALIGN="LEFT">varchar[8]</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1 row</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 &gt;</TD></TR>
     </TABLE>>
     URL="Results.html"
     tooltip="Results"

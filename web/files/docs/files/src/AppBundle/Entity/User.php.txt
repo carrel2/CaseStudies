@@ -92,14 +92,14 @@ class User implements UserInterface, \Serializable
 	private $uin;
 
 	/**
-	 * The location of the CaseStudy
-	 *
-	 * Either farm or hospital. Provided by the user. Used to decide the order that the Diagnostic and Therapeutic pages are shown
-	 *
-	 * @var string
-	 *
-	 * @ORM\Column(type="string", length=8)
-	 */
+	* The location of the CaseStudy
+	*
+	* Either farm or hospital. Provided by the user. Used to decide the order that the Diagnostic and Therapeutic pages are shown
+	*
+	* @var string
+	*
+	* @ORM\Column(type="string", length=8, nullable=true)
+	*/
 	private $location;
 
 	/**
@@ -159,8 +159,6 @@ class User implements UserInterface, \Serializable
 		$this->results = new ArrayCollection();
 		$this->isActive = false;
 		$this->role = 'ROLE_USER';
-		// may not be needed, see section on salt below
-		// $this->salt = md5(uniqid(null, true));
 	}
 
 	public function getUsername()
@@ -238,271 +236,271 @@ class User implements UserInterface, \Serializable
 			$this->password,
 			// see section on salt below
 			// $this->salt
-			) = unserialize($serialized);
-		}
-
-		/**
-		* Get id
-		*
-		* @return integer
-		*/
-		public function getId()
-		{
-			return $this->id;
-		}
-
-		/**
-		* Set name
-		*
-		* @param string $name
-		*
-		* @return User
-		*/
-		public function setUsername($name)
-		{
-			$this->username = $name;
-
-			return $this;
-		}
-
-		/**
-		* Set password
-		*
-		* @param string $password
-		*
-		* @return User
-		*/
-		public function setPassword($password)
-		{
-			$this->password = $password;
-
-			return $this;
-		}
-
-		public function getPassword()
-		{
-			return $this->password;
-		}
-
-		/**
-		* Set email
-		*
-		* @param string $email
-		*
-		* @return User
-		*/
-		public function setEmail($email)
-		{
-			$this->email = $email;
-
-			return $this;
-		}
-
-		/**
-		* Get email
-		*
-		* @return string
-		*/
-		public function getEmail()
-		{
-			return $this->email;
-		}
-
-		public function setUin($uin)
-		{
-			$this->uin = $uin;
-
-			return $this;
-		}
-
-		public function getUin()
-		{
-			return $this->uin;
-		}
-
-		/**
-		 * Set location
-		 *
-		 * @param string $location
-		 *
-		 * @return User
-		 */
-		public function setLocation($location)
-		{
-				$this->location = $location;
-
-				return $this;
-		}
-
-		/**
-		 * Get location
-		 *
-		 * @return string
-		 */
-		public function getLocation()
-		{
-				return $this->location;
-		}
-
-		/**
-		* Get active UserDay
-		*
-		* @see UserDay::class
-		*
-		* @return \AppBundle\Entity\UserDay
-		*/
-		public function getCurrentDay()
-		{
-			return $this->days->last();
-		}
-
-		/**
-		* Set isActive
-		*
-		* @param boolean $isActive
-		*
-		* @return self
-		*/
-		public function setIsActive($isActive)
-		{
-			$this->isActive = $isActive;
-
-			return $this;
-		}
-
-		/**
-		* Get isActive
-		*
-		* @return boolean
-		*/
-		public function getIsActive()
-		{
-			return $this->isActive;
-		}
-
-		/**
-		* Set caseStudy
-		*
-		* @param \AppBundle\Entity\CaseStudy $caseStudy
-		*
-		* @see CaseStudy::class
-		*
-		* @return self
-		*/
-		public function setCaseStudy(\AppBundle\Entity\CaseStudy $caseStudy = null)
-		{
-			$this->caseStudy = $caseStudy;
-			$this->isActive = !$caseStudy == null;
-
-			return $this;
-		}
-
-		/**
-		* Get caseStudy
-		*
-		* @see CaseStudy::class
-		*
-		* @return \AppBundle\Entity\CaseStudy
-		*/
-		public function getCaseStudy()
-		{
-			return $this->caseStudy;
-		}
-
-		/**
-		* Add day
-		*
-		* @param \AppBundle\Entity\UserDay $day
-		*
-		* @see UserDay::class
-		*
-		* @return self
-		*/
-		public function addDay(\AppBundle\Entity\UserDay $day)
-		{
-			$day->setUser($this);
-			$this->days[] = $day;
-
-			return $this;
-		}
-
-		/**
-		* Remove day
-		*
-		* @param \AppBundle\Entity\UserDay $day
-		*
-		* @see UserDay::class
-		*
-		* @return self
-		*/
-		public function removeDay(\AppBundle\Entity\UserDay $day)
-		{
-			$day->setUser(null);
-			$this->days->removeElement($day);
-
-			return $this;
-		}
-
-		/**
-		* Remove all days
-		*/
-		public function removeDays()
-		{
-			foreach ($this->days as $day) {
-				$this->removeDay($day);
-			}
-			$this->days->clear();
-		}
-
-		/**
-		* Get days
-		*
-		* @return \Doctrine\Common\Collections\Collection
-		*/
-		public function getDays()
-		{
-			return $this->days;
-		}
-
-		/**
-		* Add result
-		*
-		* @param \AppBundle\Entity\Results $result
-		*
-		* @return User
-		*/
-		public function addResult(\AppBundle\Entity\Results $result)
-		{
-			$result->setUser($this);
-			$this->results[] = $result;
-
-			return $this;
-		}
-
-		/**
-		* Remove result
-		*
-		* @param \AppBundle\Entity\Results $result
-		*/
-		public function removeResult(\AppBundle\Entity\Results $result)
-		{
-			$result->setUser(null);
-			$this->results->removeElement($result);
-		}
-
-		/**
-		* Get results
-		*
-		* @return \Doctrine\Common\Collections\Collection
-		*/
-		public function getResults()
-		{
-			return $this->results;
-		}
-
-		public function hasResults()
-		{
-			return !$this->results->isEmpty();
-		}
+		) = unserialize($serialized);
 	}
+
+	/**
+	* Get id
+	*
+	* @return integer
+	*/
+	public function getId()
+	{
+		return $this->id;
+	}
+
+	/**
+	* Set name
+	*
+	* @param string $name
+	*
+	* @return User
+	*/
+	public function setUsername($name)
+	{
+		$this->username = $name;
+
+		return $this;
+	}
+
+	/**
+	* Set password
+	*
+	* @param string $password
+	*
+	* @return User
+	*/
+	public function setPassword($password)
+	{
+		$this->password = $password;
+
+		return $this;
+	}
+
+	public function getPassword()
+	{
+		return $this->password;
+	}
+
+	/**
+	* Set email
+	*
+	* @param string $email
+	*
+	* @return User
+	*/
+	public function setEmail($email)
+	{
+		$this->email = $email;
+
+		return $this;
+	}
+
+	/**
+	* Get email
+	*
+	* @return string
+	*/
+	public function getEmail()
+	{
+		return $this->email;
+	}
+
+	public function setUin($uin)
+	{
+		$this->uin = $uin;
+
+		return $this;
+	}
+
+	public function getUin()
+	{
+		return $this->uin;
+	}
+
+	/**
+	* Set location
+	*
+	* @param string $location
+	*
+	* @return User
+	*/
+	public function setLocation($location)
+	{
+		$this->location = $location;
+
+		return $this;
+	}
+
+	/**
+	* Get location
+	*
+	* @return string
+	*/
+	public function getLocation()
+	{
+		return $this->location;
+	}
+
+	/**
+	* Get active UserDay
+	*
+	* @see UserDay::class
+	*
+	* @return \AppBundle\Entity\UserDay
+	*/
+	public function getCurrentDay()
+	{
+		return $this->days->last();
+	}
+
+	/**
+	* Set isActive
+	*
+	* @param boolean $isActive
+	*
+	* @return self
+	*/
+	public function setIsActive($isActive)
+	{
+		$this->isActive = $isActive;
+
+		return $this;
+	}
+
+	/**
+	* Get isActive
+	*
+	* @return boolean
+	*/
+	public function getIsActive()
+	{
+		return $this->isActive;
+	}
+
+	/**
+	* Set caseStudy
+	*
+	* @param \AppBundle\Entity\CaseStudy $caseStudy
+	*
+	* @see CaseStudy::class
+	*
+	* @return self
+	*/
+	public function setCaseStudy(\AppBundle\Entity\CaseStudy $caseStudy = null)
+	{
+		$this->caseStudy = $caseStudy;
+		$this->isActive = !$caseStudy == null;
+
+		return $this;
+	}
+
+	/**
+	* Get caseStudy
+	*
+	* @see CaseStudy::class
+	*
+	* @return \AppBundle\Entity\CaseStudy
+	*/
+	public function getCaseStudy()
+	{
+		return $this->caseStudy;
+	}
+
+	/**
+	* Add day
+	*
+	* @param \AppBundle\Entity\UserDay $day
+	*
+	* @see UserDay::class
+	*
+	* @return self
+	*/
+	public function addDay(\AppBundle\Entity\UserDay $day)
+	{
+		$day->setUser($this);
+		$this->days[] = $day;
+
+		return $this;
+	}
+
+	/**
+	* Remove day
+	*
+	* @param \AppBundle\Entity\UserDay $day
+	*
+	* @see UserDay::class
+	*
+	* @return self
+	*/
+	public function removeDay(\AppBundle\Entity\UserDay $day)
+	{
+		$day->setUser(null);
+		$this->days->removeElement($day);
+
+		return $this;
+	}
+
+	/**
+	* Remove all days
+	*/
+	public function removeDays()
+	{
+		foreach ($this->days as $day) {
+			$this->removeDay($day);
+		}
+		$this->days->clear();
+	}
+
+	/**
+	* Get days
+	*
+	* @return \Doctrine\Common\Collections\Collection
+	*/
+	public function getDays()
+	{
+		return $this->days;
+	}
+
+	/**
+	* Add result
+	*
+	* @param \AppBundle\Entity\Results $result
+	*
+	* @return User
+	*/
+	public function addResult(\AppBundle\Entity\Results $result)
+	{
+		$result->setUser($this);
+		$this->results[] = $result;
+
+		return $this;
+	}
+
+	/**
+	* Remove result
+	*
+	* @param \AppBundle\Entity\Results $result
+	*/
+	public function removeResult(\AppBundle\Entity\Results $result)
+	{
+		$result->setUser(null);
+		$this->results->removeElement($result);
+	}
+
+	/**
+	* Get results
+	*
+	* @return \Doctrine\Common\Collections\Collection
+	*/
+	public function getResults()
+	{
+		return $this->results;
+	}
+
+	public function hasResults()
+	{
+		return !$this->results->isEmpty();
+	}
+}
 

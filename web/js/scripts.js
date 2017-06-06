@@ -146,6 +146,14 @@ function updateHotspots() {
 	});
 }
 
+function moveSubmits() {
+	var form = $('form').attr('id');
+	$('button[type=submit].button').each(function() {
+		$('#footer').append($(this));
+		$(this).attr('form', form);
+	});
+}
+
 function updateSelects(type) {
 	$.get("/getAnimalInfo/" + $('#case_animal').val() + "/" + type, function(data, status) {
 		$('.collection select.' + type).each(function() {

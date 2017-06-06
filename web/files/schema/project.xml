@@ -63,7 +63,7 @@
             <column ascending="true" name="animal_id"/>
          </index>
       </table>
-      <table name="Days" numRows="3" remarks="" type="TABLE">
+      <table name="Days" numRows="4" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
             <child column="day_id" foreignKey="FK_8F7B04EF9C24126" implied="false" onDeleteCascade="false" table="HotSpotsInfo"/>
             <child column="day_id" foreignKey="FK_C7C851159C24126" implied="false" onDeleteCascade="false" table="MedicationResults"/>
@@ -100,7 +100,7 @@
             <column ascending="true" name="animal_id"/>
          </index>
       </table>
-      <table name="HotSpotsInfo" numRows="6" remarks="" type="TABLE">
+      <table name="HotSpotsInfo" numRows="8" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
          <column autoUpdated="false" digits="0" id="1" name="day_id" nullable="true" remarks="" size="10" type="INT">
             <parent column="id" foreignKey="FK_8F7B04EF9C24126" implied="false" onDeleteCascade="false" table="Days"/>
@@ -138,6 +138,7 @@
             <parent column="id" foreignKey="FK_C7C851152C4DE6DA" implied="false" onDeleteCascade="false" table="Medications"/>
          </column>
          <column autoUpdated="false" digits="0" id="4" name="results" nullable="false" remarks="" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="5" name="wait_time" nullable="true" remarks="" size="4" type="VARCHAR"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="PRIMARY" unique="true">
             <column ascending="true" name="id"/>
@@ -165,7 +166,7 @@
             <column ascending="true" name="id"/>
          </index>
       </table>
-      <table name="Results" numRows="1" remarks="" type="TABLE">
+      <table name="Results" numRows="0" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
          <column autoUpdated="false" digits="0" id="1" name="user_id" nullable="true" remarks="" size="10" type="INT">
             <parent column="id" foreignKey="FK_501EDD88A76ED395" implied="false" onDeleteCascade="false" table="app_users"/>
@@ -182,7 +183,7 @@
             <column ascending="true" name="user_id"/>
          </index>
       </table>
-      <table name="TestResults" numRows="3" remarks="" type="TABLE">
+      <table name="TestResults" numRows="5" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
          <column autoUpdated="false" digits="0" id="1" name="day_id" nullable="true" remarks="" size="10" type="INT">
             <parent column="id" foreignKey="FK_B868B2F29C24126" implied="false" onDeleteCascade="false" table="Days"/>
@@ -194,6 +195,7 @@
             <parent column="id" foreignKey="FK_B868B2F21E5D0459" implied="false" onDeleteCascade="false" table="Tests"/>
          </column>
          <column autoUpdated="false" digits="0" id="4" name="results" nullable="false" remarks="" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="5" name="wait_time" nullable="true" remarks="" size="4" type="VARCHAR"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="PRIMARY" unique="true">
             <column ascending="true" name="id"/>

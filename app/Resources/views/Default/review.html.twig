@@ -35,7 +35,7 @@
 				{% for testResult in day.tests %}
 					{% if testResult.waitTime and ( elapsed - testResult.waitTime == 0 or testResult.waitTime < elapsed ) %}
 						<li {{ elapsed - testResult.waitTime == 0 ? 'class="new-result"' : '' }}><em>{{ testResult.test.name }}:</em><span class="info">{{ testResult.results|raw }}</span></li>
-					{% elseif testResult.test.waitTime == 0 or elapsed - testResult.test.waitTime < elapsed %}
+					{% elseif testResult.test.waitTime == 0 or testResult.test.waitTime < elapsed %}
 						<li {{ elapsed - testResult.test.waitTime == 0 ? 'class="new-result"' : '' }}><em>{{ testResult.test.name }}:</em><span class="info">{{ testResult.results|raw }}</span></li>
 					{% elseif finished %}
 						<li><em>{{ testResult.test.name }}:</em><span class="info">{{ testResult.results|raw }}</span></li>

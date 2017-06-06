@@ -194,4 +194,28 @@ class MedicationResults
     {
         return $this->userDay;
     }
+
+    /**
+     * Set waitTime
+     *
+     * @param string $waitTime
+     *
+     * @return MedicationResults
+     */
+    public function setWaitTime($waitTime)
+    {
+        $this->waitTime = $waitTime;
+
+        return $this;
+    }
+
+    /**
+     * Get waitTime
+     *
+     * @return string
+     */
+    public function getWaitTime()
+    {
+        return $this->waitTime;
+    }
 }

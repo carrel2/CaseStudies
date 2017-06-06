@@ -178,7 +178,7 @@ class AdminController extends Controller
 	 *
 	 * @param Request $r Request object
 	 *
-	 * @return \Symfony\Component\HttpFoundation\Response Render **adminUser.html.twig**
+	 * @return \Symfony\Component\HttpFoundation\Response Render **admin.html.twig**
 	 *
 	 * @Route("/admin/users", name="manageUsers")
 	 */
@@ -203,7 +203,7 @@ class AdminController extends Controller
 					'class' => 'button',
 					'onclick' => 'return confirmDelete();',
 				),
-			))->getForm(); // TODO: style buttons to stick to the bottom of the page
+			))->getForm();
 
 		$form->handleRequest($r);
 

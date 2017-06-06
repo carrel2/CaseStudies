@@ -118,6 +118,8 @@ class UserController extends Controller
 	public function userAction(Request $r)
 	{
 		$user = $this->getUser();
+		$oldPlainPassword = $user->getPlainPassword();
+
 		$form = $this->createForm( UserType::class, $user );
 
 		$form->handleRequest($r);
@@ -127,21 +129,25 @@ class UserController extends Controller
 			$em = $this->getDoctrine()->getManager();
 			$user = $form->getData();
 
-			$plainPassword = $user->getPlainPassword();
+			$newPassword = $form->get('newPassword')->getData();
 
-			if( strlen($plainPassword) > 6 )
+			if( $user->getPlainPassword() == $oldPlainPassword )
 			{
-				$password = $this->get('security.password_encoder')
-					->encodePassword($user, $plainPassword);
-				$user->setPassword($password);
-			}
+				if( strlen($newPassword) > 6 ) {
+					$password = $this->get('security.password_encoder')
+						->encodePassword($user, $newPassword);
+					$user->setPassword($password);
+				}
 
-			try {
-				$em->flush();
+				try {
+					$em->flush();
 
-				$this->addFlash('notice', 'Changes saved');
-			} catch( \Doctrine\ORM\ORMException $e ) {
-				$this->addFlash('error', 'Something went wrong, changes were not saved!');
+					$this->addFlash('success', 'Changes saved');
+				} catch( \Doctrine\ORM\ORMException $e ) {
+					$this->addFlash('error', 'Something went wrong, changes were not saved!');
+				}
+			} else {
+				$this->addFlash('warning', 'Old password is incorrect, no changes were saved!');
 			}
 		}
 

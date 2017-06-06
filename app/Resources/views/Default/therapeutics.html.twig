@@ -23,7 +23,9 @@
 {% endblock %}
 
 {% block footer %}
-	<a href="{{ path('review') }}">Review</a>
+	{% if app.user.location == "Hospital" %}
+		<a href="{{ path('review') }}">Review</a>
+	{% endif %}
 
 	{{ parent() }}
 {% endblock %}

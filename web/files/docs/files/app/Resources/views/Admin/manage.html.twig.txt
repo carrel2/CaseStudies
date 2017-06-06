@@ -1,0 +1,12 @@
+{% extends 'admin.html.twig' %}
+
+{% block body %}
+  {{ form_start(form, {'attr': {'id': 'admin_manage_form'}} ) }}
+  {{ form_widget(form) }}
+  {{ form_end(form) }}
+
+  {% if route %}
+    <a class="button" href="{{ path(route) }}">Create</a>
+  {% endif %}
+{% endblock %}
+

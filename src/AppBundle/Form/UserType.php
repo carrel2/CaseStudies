@@ -37,16 +37,20 @@ class UserType extends AbstractType
 				'label' => 'Name',
 			))
 			->add('uin', TextType::class)
-			->add('plainPassword', RepeatedType::class, array(
+			->add('plainPassword', PasswordType::class, array(
+				'label' => 'Old Password',
+			))
+			->add('newPassword', RepeatedType::class, array( // TODO: add confirmation password box to compare against old password
+				'mapped' => false,
 				'type' => PasswordType::class,
 				'first_options'  => array(
-					'label' => 'Password',
+					'label' => 'New Password',
 					'attr' => array(
 						'class' => 'tooltip',
 						'title' => 'Must be at least 6 characters long',
 					)
 				),
-				'second_options' => array('label' => 'Repeat Password'),
+				'second_options' => array('label' => 'Confirm New Password'),
 			));
 
 		$builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {

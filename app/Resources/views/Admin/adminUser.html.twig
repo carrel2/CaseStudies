@@ -1,5 +1,5 @@
 {% extends 'admin.html.twig' %}
-
+{# TODO: delete this template, it isn't used #}
 {% block body %}
 	{{ form_start(form) }}
 
@@ -8,6 +8,7 @@
 			{{ form_row(form.username) }}
 			{{ form_row(form.uin) }}
 			{{ form_row(form.plainPassword) }}
+			{{ form_row(form.newPassword) }}
 			{{ form_row(form.role) }}
 
 			{{ form_rest(form) }}

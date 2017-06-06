@@ -1,3 +1,16 @@
+{#
+	Base admin template
+
+	Blocks:
+		- stylesheets
+		- header
+		- body
+		- footer
+
+	Variables:
+		- form
+#}
+
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
@@ -19,22 +32,38 @@
 	</style>
 {% endblock %}
 
-{% block scripts %}
-	{{ parent() }}
+{% block header %}
+	{% if app.request.pathInfo == "/admin" %}
+		<ul>
+			<li><a href="{{ path('default') }}">Home</a></li>
+			<li><a href="{{ path('user') }}">Account</a></li>
 
-	<script>
-		$(function() {
-			var form = $('form').attr('id');
-			$('button[type=submit].button').each(function() {
-				$('#footer').append($(this));
-				$(this).attr('form', form);
-			});
-		});
-	</script>
+			{% if app.user.hasResults %}
+				<li><a href="{{ path('results') }}">My results</a></li>
+			{% endif %}
+
+			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				<li class="right"><a href="{{ path('logout') }}">Logout</a></li>
+			{% endif %}
+
+			{% if is_granted('ROLE_SUPER_ADMIN') %}
+				<li class="right"><a href="{{ path('development') }}">Development</a></li>
+			{% endif %}
+		</ul>
+	{% else %}
+		{{ parent() }}
+	{% endif %}
 {% endblock %}
 
 {% block body %}
-	{% if form %}
+	{% if app.request.pathInfo == "/admin" %}
+		<div><a href="{{ path('manageUsers') }}">Manage users</a></div>
+		<div><a href="{{ path('manageAnimals') }}">Manage animals</a></div>
+		<div><a href="{{ path('editCase') }}">Edit cases</a></div>
+		<div><a href="{{ path('manageTests') }}">Manage tests</a></div>
+		<div><a href="{{ path('manageMedications') }}">Manage medications</a></div>
+		<div><a href="{{ path('import') }}">Import</a></div>
+	{% elseif form %}
 		{{ form_start(form, {'attr': {'id': 'admin_form'}} ) }}
 
 			{% if form.vars.name == "user" %}
@@ -42,6 +71,7 @@
 				{{ form_row(form.username) }}
 				{{ form_row(form.uin) }}
 				{{ form_row(form.plainPassword) }}
+				{{ form_row(form.newPassword) }}
 				{{ form_row(form.role) }}
 
 				{{ form_rest(form) }}
@@ -56,4 +86,10 @@
 		{{ form_end(form) }}
 
 	{% endif %}
+{% endblock %}
+
+{% block footer %}
+	<script>
+		moveSubmits();
+	</script>
 {% endblock %}

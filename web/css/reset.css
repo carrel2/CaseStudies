@@ -131,7 +131,7 @@ a:hover {
 	font-size: 1.8em;
 }
 
-.case_days_label, .admin_user_label, .admin_animal_label {
+.case_days_label, .admin_user_label, .admin_animal_label, .animal_hotspot_label {
 	display: block;
 	margin: 8px 0;
 	width: 100%;

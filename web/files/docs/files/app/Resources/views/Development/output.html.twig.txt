@@ -1,0 +1,20 @@
+<div>
+  <h1>Output for <a href="{% if command in ['docs', 'schema'] %}/files/{{ command }}/index.html{% else %}#{% endif %}">{{ command }}</a></h1>
+
+  <div id="stdout">
+    {% for item in stdout %}
+      <code>{{ item }}</code>
+    {% endfor %}
+  </div>
+
+  {% if stderr is not empty %}
+    <div id="stderr" style="display: none">
+      {% for item in stderr %}
+        <div>{{ item }}</div>
+      {% endfor %}
+    </div>
+
+    <button type="button" class="errButton" onclick="showStderr(this)">Show stderr</button>
+  {% endif %}
+</div>
+
