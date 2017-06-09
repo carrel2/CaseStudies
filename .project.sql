@@ -36,7 +36,7 @@ CREATE TABLE `Animals` (
 
 LOCK TABLES `Animals` WRITE;
 /*!40000 ALTER TABLE `Animals` DISABLE KEYS */;
-INSERT INTO `Animals` VALUES (2,'Standardbred gelding','0e229fe9361dde199a0a552d30de9d46.jpeg'),(3,'American Saddlebred','6b84f7bdd6679873bff003f6ba9df012.jpeg'),(8,'A Koala','df423712e59c0ee85aa594ac76bd6713.jpeg');
+INSERT INTO `Animals` VALUES (2,'Standardbred gelding','5d25171b9fc9266a34281c1a4370949c.jpeg'),(3,'American Saddlebred','f77337ec548a93420b47b081475e4d5a.jpeg'),(8,'A Koala','4c0b9aee75cb44beec2204468d6f5ba6.jpeg');
 /*!40000 ALTER TABLE `Animals` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -235,7 +235,7 @@ CREATE TABLE `Results` (
   PRIMARY KEY (`id`),
   KEY `IDX_501EDD88A76ED395` (`user_id`),
   CONSTRAINT `FK_501EDD88A76ED395` FOREIGN KEY (`user_id`) REFERENCES `app_users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -277,7 +277,7 @@ CREATE TABLE `TestResults` (
 
 LOCK TABLES `TestResults` WRITE;
 /*!40000 ALTER TABLE `TestResults` DISABLE KEYS */;
-INSERT INTO `TestResults` VALUES (3,2,NULL,541,'No fluid reflux. Some small amount of gas released from stomach. No fluid obtained after siphoning from stomach tube.',NULL),(4,2,NULL,542,'No abnormalities found',NULL),(5,2,NULL,564,'290,000 /ul',NULL),(11,10,NULL,539,'Results','1'),(12,11,NULL,611,'Same day results','0');
+INSERT INTO `TestResults` VALUES (3,2,NULL,541,'No fluid reflux. Some small amount of gas released from stomach. No fluid obtained after siphoning from stomach tube.',NULL),(4,2,NULL,542,'No abnormalities found',NULL),(5,2,NULL,564,'290,000 /ul',NULL),(11,10,NULL,539,'Results',NULL),(12,11,NULL,611,'Same day results','0');
 /*!40000 ALTER TABLE `TestResults` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -321,7 +321,7 @@ CREATE TABLE `UserDays` (
   PRIMARY KEY (`id`),
   KEY `IDX_14DD497FA76ED395` (`user_id`),
   CONSTRAINT `FK_14DD497FA76ED395` FOREIGN KEY (`user_id`) REFERENCES `app_users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -365,7 +365,7 @@ CREATE TABLE `app_users` (
 
 LOCK TABLES `app_users` WRITE;
 /*!40000 ALTER TABLE `app_users` DISABLE KEYS */;
-INSERT INTO `app_users` VALUES (1,NULL,'ROLE_SUPER_ADMIN','brandon','$2y$13$GdpILKYsXnaBBR0dhV0sVuKvlsE8j./QNr1XT/qx65idjz8jUcf8C','carrel2@illinois.edu','123123123',0,'Farm'),(4,NULL,'ROLE_ADMIN','admin','$2y$13$fmgTtVEq5Z1gxM/Jw1f40ORhImUe3Yapi3plikzXSA56p5O0ipuRm','test@test.com','111111111',0,'Farm'),(5,NULL,'ROLE_USER','user','$2y$13$lhIePNkv5fvaLAcK5fSN8ucA/Vsw3kIKXTZa.81DH.uOsPspllcPO','user@test.com','123456789',0,NULL);
+INSERT INTO `app_users` VALUES (1,NULL,'ROLE_SUPER_ADMIN','brandon','$2y$13$GdpILKYsXnaBBR0dhV0sVuKvlsE8j./QNr1XT/qx65idjz8jUcf8C','carrel2@illinois.edu','123123123',0,'Hospital'),(4,NULL,'ROLE_ADMIN','admin','$2y$13$fmgTtVEq5Z1gxM/Jw1f40ORhImUe3Yapi3plikzXSA56p5O0ipuRm','test@test.com','111111111',0,'Farm'),(5,NULL,'ROLE_USER','user','$2y$13$lhIePNkv5fvaLAcK5fSN8ucA/Vsw3kIKXTZa.81DH.uOsPspllcPO','user@test.com','123456789',0,NULL);
 /*!40000 ALTER TABLE `app_users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -378,4 +378,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-06 15:27:53
+-- Dump completed on 2017-06-09 14:57:46

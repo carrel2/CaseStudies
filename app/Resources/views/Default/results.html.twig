@@ -1,3 +1,16 @@
+{#
+	Results template
+
+	Blocks:
+		- scripts
+		- body
+
+	Variables:
+		- user: AppBundle\Entity\User
+		- results: array
+			- AppBundle\Entity\Results
+#}
+
 {% extends 'base.html.twig' %}
 
 {% block scripts %}
@@ -43,7 +56,7 @@
 			{% endfor %}
 		</div>
 
-		{% if is_granted('ROLE_ADMIN') %}
+		{% if user is defined and is_granted('ROLE_ADMIN') %}
     	<a href="/removeResult/{{ result.id }}">Remove</a>
 		{% endif %}
   {% endfor %}

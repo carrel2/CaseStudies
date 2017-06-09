@@ -1,3 +1,16 @@
+{#
+	Login template
+
+	Blocks:
+		- header
+		- flashes
+		- body
+
+	Variables:
+		- last_username: string
+		- error: Symfony\Component\Security\Core\Exception\BadCredentialsException
+#}
+
 {% extends 'base.html.twig' %}
 
 {% block header %}{% endblock %}
@@ -6,6 +19,8 @@
 	{% if error %}
 		<div class="flash flash-error">Incorrect username or password</div>
 	{% endif %}
+
+	{{ parent() }}
 {% endblock %}
 
 {% block body %}

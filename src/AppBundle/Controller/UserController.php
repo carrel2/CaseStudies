@@ -117,8 +117,9 @@ class UserController extends Controller
 	 */
 	public function userAction(Request $r)
 	{
+		$encoder = $this->get('security.password_encoder');
 		$user = $this->getUser();
-		$oldPlainPassword = $user->getPlainPassword();
+		$oldPassword = $user->getPassword();
 
 		$form = $this->createForm( UserType::class, $user );
 
@@ -131,11 +132,10 @@ class UserController extends Controller
 
 			$newPassword = $form->get('newPassword')->getData();
 
-			if( $user->getPlainPassword() == $oldPlainPassword )
+			if( $encoder->encodePassword($user, $user->getPlainPassword()) == $oldPassword )
 			{
 				if( strlen($newPassword) > 6 ) {
-					$password = $this->get('security.password_encoder')
-						->encodePassword($user, $newPassword);
+					$password = $encoder->encodePassword($user, $newPassword);
 					$user->setPassword($password);
 				}
 
@@ -178,5 +178,9 @@ class UserController extends Controller
 		return $this->render('Default/results.html.twig', array(
 			'results' => $results,
 		));
+	}
+
+	public function logoutAction(Request $r) {
+		return;
 	}
 }

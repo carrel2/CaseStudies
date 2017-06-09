@@ -121,7 +121,7 @@ function updateAdminCase(id) {
 			$(this).text( "Day " + ( 1 + parseInt($(this).text()) ) );
 		});
 
-		if( $('#footer').children().length == 0 ) {
+		if( $('#footer').children().length == 1 ) {
 			var form = $('form').attr('id');
 
 			$('button[type=submit].button').each(function() {

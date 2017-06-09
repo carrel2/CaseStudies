@@ -119,10 +119,6 @@
 	text-decoration: none;
 }
 
-#body button#undo {
-	display: none;
-}
-
 #body .right {
 	float: right;
 	margin-right: 4px;
@@ -164,11 +160,18 @@
 	vertical-align: top;
 }
 
+#footer button#undo {
+	display: none;
+}
+
 #footer .button {
 	float: left;
 	margin-right: 8px;
 }
 
+#footer .right {
+	float: right;
+}
 div#diagnostics_test, div#therapeutics_medication {
 	padding: 8px;
 }

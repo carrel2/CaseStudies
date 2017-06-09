@@ -1,3 +1,15 @@
+{#
+	Diagnostic template
+
+	Blocks:
+		- body
+		- footer
+		- choice_widget_expanded: overrides default block
+
+	Variables:
+		- form: Symfony\Component\Form\FormView
+#}
+
 {% extends 'base.html.twig' %}
 
 {% form_theme form _self %}

@@ -10,12 +10,12 @@
 		- footer
 
 	Variables:
-		- app
-			- user
-			- request
-			- session
-			- environment
-			- debug
+		- app: Symfony\Bridge\Twig\AppVariable
+			- user: AppBundle\Entity\User
+			- request: Symfony\Component\HttpFoundation\Request
+			- session: Symfony\Component\HttpFoundation\Session\Session
+			- environment: string
+			- debug: boolean
 #}
 
 <!DOCTYPE html>

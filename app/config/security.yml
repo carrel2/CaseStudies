@@ -36,6 +36,8 @@ security:
             logout:
                 path: logout
                 target: login
+                handlers: [ app.logout_handler ]
+                invalidate_session: false
             provider: db_provider
 
     access_control:

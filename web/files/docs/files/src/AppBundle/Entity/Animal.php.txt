@@ -45,7 +45,7 @@ class Animal
   /**
   * @ORM\Column(type="string")
   */
-  private $image;
+  private $image; // TODO: look into having multiple images associated with an Animal
 
   /**
   * @ORM\OneToMany(targetEntity="HotSpot", mappedBy="animal", cascade={"all"}, orphanRemoval=true)

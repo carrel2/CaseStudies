@@ -50,7 +50,7 @@ class AdminController extends Controller
 	 */
 	public function adminAction(Request $r)
 	{
-		return $this->render('admin.html.twig', array( // TODO: create admin landing page, or redirect to a default page
+		return $this->render('admin.html.twig', array(
 			'form' => null,
 		));
 	}
