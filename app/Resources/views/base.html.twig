@@ -37,23 +37,23 @@
 	<body>
 		<div class="columns">
 			{% block flashes %}
-				{% for flash in app.session.flashBag.get('success') %}
-					<div class="notification is-success">{{ flash }}</div>
-				{% endfor %}
-				{% for flash in app.session.flashBag.get('warning') %}
-				  <div class="notification is-warning">{{ flash }}</div>
-				{% endfor %}
-				{% for flash in app.session.flashBag.get('error') %}
-					<div class="notification is-danger">{{ flash }}</div>
-				{% endfor %}
+				<div class="column is-fullwidth">
+					{% for flash in app.session.flashBag.get('success') %}
+						<div class="notification is-success">{{ flash }}</div>
+					{% endfor %}
+					{% for flash in app.session.flashBag.get('warning') %}
+					  <div class="notification is-warning">{{ flash }}</div>
+					{% endfor %}
+					{% for flash in app.session.flashBag.get('error') %}
+						<div class="notification is-danger">{{ flash }}</div>
+					{% endfor %}
+				</div>
 			{% endblock %}
-		</div>
 
-		<div class="columns">
-			<div class="column is-one-quarter">
-				{% block header %}
+			{% block header %}
+				<div class="column is-one-quarter">
 					<p class="menu-label">Menu</p>
-					
+
 					<ul class="menu-list">
 						<li><a href="{{ path('default') }}">Home</a></li>
 						<li><a href="{{ path('user') }}">Account</a></li>
@@ -87,8 +87,8 @@
 							<li><a href="{{ path('development') }}">Run commands</a></li>
 						</ul>
 					{% endif %}
-				{% endblock %}
-			</div>
+				</div>
+			{% endblock %}
 
 			<div class="column">
 				{% block body %}{% endblock %}

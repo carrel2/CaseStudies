@@ -14,14 +14,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	{% if app.request.pathInfo == "/admin" %}
-		<div><a href="{{ path('manageUsers') }}">Manage users</a></div>
-		<div><a href="{{ path('manageAnimals') }}">Manage animals</a></div>
-		<div><a href="{{ path('editCase') }}">Edit cases</a></div>
-		<div><a href="{{ path('manageTests') }}">Manage tests</a></div>
-		<div><a href="{{ path('manageMedications') }}">Manage medications</a></div>
-		<div><a href="{{ path('import') }}">Import</a></div>
-	{% elseif form %}
+	{% if form %}
 		{{ form_start(form, {'attr': {'id': 'admin_form'}} ) }}
 
 			{% if form.vars.name == "user" %}
