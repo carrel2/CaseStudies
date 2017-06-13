@@ -35,61 +35,65 @@
 		{% endblock %}
 	</head>
 	<body>
-		<div id="header" class="menu">
-			{% block header %}
-				<p class="menu-label">Menu</p>
-				<ul class="menu-list">
-					<li><a href="{{ path('default') }}">Home</a></li>
-					<li><a href="{{ path('user') }}">Account</a></li>
-
-					{% if app.user.hasResults %}
-						<li><a href="{{ path('results') }}">My results</a></li>
-					{% endif %}
-
-					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-						<li><a href="{{ path('logout') }}">Logout</a></li>
-					{% endif %}
-				</ul>
-
-				{% if is_granted('ROLE_ADMIN') %}
-					<p class="menu-label">Admin</p>
-					<ul class="menu-list">
-						<li><a href="{{ path('manageUsers') }}">Manage users</a></li>
-						<li><a href="{{ path('manageAnimals') }}">Manage animals</a></li>
-						<li><a href="{{ path('editCase') }}">Edit cases</a></li>
-						<li><a href="{{ path('manageTests') }}">Manage tests</a></li>
-						<li><a href="{{ path('manageMedications') }}">Manage medications</a></li>
-						<li><a href="{{ path('import') }}">Import</a></li>
-
-						{% if is_granted('ROLE_SUPER_ADMIN') %}
-							<li><a href="{{ path('development') }}">Development</a></li>
-						{% endif %}
-					</ul>
-				{% endif %}
-			{% endblock %}
-		</div>
-
-		<div id="flashes">
+		<div class="columns">
 			{% block flashes %}
 				{% for flash in app.session.flashBag.get('success') %}
-					<div class="flash flash-success">{{ flash }}</div>
+					<div class="notification is-success">{{ flash }}</div>
 				{% endfor %}
 				{% for flash in app.session.flashBag.get('warning') %}
-				  <div class="flash flash-warning">{{ flash }}</div>
+				  <div class="notification is-warning">{{ flash }}</div>
 				{% endfor %}
 				{% for flash in app.session.flashBag.get('error') %}
-					<div class="flash flash-error">{{ flash }}</div>
+					<div class="notification is-danger">{{ flash }}</div>
 				{% endfor %}
 			{% endblock %}
 		</div>
 
-		<div id="body">
-			{% block body %}{% endblock %}
+		<div class="columns">
+			<div class="column is-one-third">
+				{% block header %}
+					<p class="menu-label">Menu</p>
+					<ul class="menu-list">
+						<li><a href="{{ path('default') }}">Home</a></li>
+						<li><a href="{{ path('user') }}">Account</a></li>
+
+						{% if app.user.hasResults %}
+							<li><a href="{{ path('results') }}">My results</a></li>
+						{% endif %}
+
+						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+							<li><a href="{{ path('logout') }}">Logout</a></li>
+						{% endif %}
+					</ul>
+
+					{% if is_granted('ROLE_ADMIN') %}
+						<p class="menu-label">Admin</p>
+						<ul class="menu-list">
+							<li><a href="{{ path('manageUsers') }}">Manage users</a></li>
+							<li><a href="{{ path('manageAnimals') }}">Manage animals</a></li>
+							<li><a href="{{ path('editCase') }}">Edit cases</a></li>
+							<li><a href="{{ path('manageTests') }}">Manage tests</a></li>
+							<li><a href="{{ path('manageMedications') }}">Manage medications</a></li>
+							<li><a href="{{ path('import') }}">Import</a></li>
+						</ul>
+					{% endif %}
+
+					{% if is_granted('ROLE_SUPER_ADMIN') %}
+						<p class="menu-label">Devel</p>
+						<ul class="menu-list">
+							<li><a href="{{ path('development') }}">Development</a></li>
+						</ul>
+					{% endif %}
+				{% endblock %}
+			</div>
+
+			<div class="column">
+				{% block body %}{% endblock %}
+			</div>
 		</div>
 
-		<div id="footer">
-			{% block footer %}
-			{% endblock %}
-		</div>
+		<footer class="footer">
+			{% block footer %}{% endblock %}
+		</footer>
 	</body>
 </html>
