@@ -50,7 +50,7 @@
 		</div>
 
 		<div class="columns">
-			<div class="column is-one-third">
+			<div class="column is-one-quarter">
 				{% block header %}
 					<p class="menu-label">Menu</p>
 					<ul class="menu-list">
@@ -81,7 +81,7 @@
 					{% if is_granted('ROLE_SUPER_ADMIN') %}
 						<p class="menu-label">Devel</p>
 						<ul class="menu-list">
-							<li><a href="{{ path('development') }}">Development</a></li>
+							<li><a href="{{ path('development') }}">Run commands</a></li>
 						</ul>
 					{% endif %}
 				{% endblock %}
