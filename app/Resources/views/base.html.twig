@@ -53,6 +53,7 @@
 			<div class="column is-one-quarter">
 				{% block header %}
 					<p class="menu-label">Menu</p>
+					
 					<ul class="menu-list">
 						<li><a href="{{ path('default') }}">Home</a></li>
 						<li><a href="{{ path('user') }}">Account</a></li>
@@ -68,6 +69,7 @@
 
 					{% if is_granted('ROLE_ADMIN') %}
 						<p class="menu-label">Admin</p>
+
 						<ul class="menu-list">
 							<li><a href="{{ path('manageUsers') }}">Manage users</a></li>
 							<li><a href="{{ path('manageAnimals') }}">Manage animals</a></li>
@@ -80,6 +82,7 @@
 
 					{% if is_granted('ROLE_SUPER_ADMIN') %}
 						<p class="menu-label">Devel</p>
+
 						<ul class="menu-list">
 							<li><a href="{{ path('development') }}">Run commands</a></li>
 						</ul>
