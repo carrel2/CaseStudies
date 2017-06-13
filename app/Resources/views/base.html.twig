@@ -35,41 +35,37 @@
 		{% endblock %}
 	</head>
 	<body>
-		<div id="header">
+		<div id="header" class="menu">
 			{% block header %}
-				<div class="tabs is-centered">
-					<ul>
-						<li><a href="{{ path('default') }}">Home</a></li>
-						<li><a href="{{ path('user') }}">Account</a></li>
+				<p class="menu-label">Menu</p>
+				<ul class="menu-list">
+					<li><a href="{{ path('default') }}">Home</a></li>
+					<li><a href="{{ path('user') }}">Account</a></li>
 
-						{% if app.user.hasResults %}
-							<li><a href="{{ path('results') }}">My results</a></li>
-						{% endif %}
+					{% if app.user.hasResults %}
+						<li><a href="{{ path('results') }}">My results</a></li>
+					{% endif %}
 
-						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-							<li class="right"><a href="{{ path('logout') }}">Logout</a></li>
-						{% endif %}
+					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+						<li><a href="{{ path('logout') }}">Logout</a></li>
+					{% endif %}
+				</ul>
+
+				{% if is_granted('ROLE_ADMIN') %}
+					<p class="menu-label">Admin</p>
+					<ul class="menu-list">
+						<li><a href="{{ path('manageUsers') }}">Manage users</a></li>
+						<li><a href="{{ path('manageAnimals') }}">Manage animals</a></li>
+						<li><a href="{{ path('editCase') }}">Edit cases</a></li>
+						<li><a href="{{ path('manageTests') }}">Manage tests</a></li>
+						<li><a href="{{ path('manageMedications') }}">Manage medications</a></li>
+						<li><a href="{{ path('import') }}">Import</a></li>
 
 						{% if is_granted('ROLE_SUPER_ADMIN') %}
-							<li class="right"><a href="{{ path('development') }}">Development</a></li>
-						{% endif %}
-
-						{% if is_granted('ROLE_ADMIN') %}
-							<li class="admin-dropdown right">
-								<a href="{{ path('admin') }}">Admin</a>
-
-								<div class="admin-menu">
-									<a href="{{ path('manageUsers') }}">Manage users</a>
-									<a href="{{ path('manageAnimals') }}">Manage animals</a>
-									<a href="{{ path('editCase') }}">Edit cases</a>
-									<a href="{{ path('manageTests') }}">Manage tests</a>
-									<a href="{{ path('manageMedications') }}">Manage medications</a>
-									<a href="{{ path('import') }}">Import</a>
-								</div>
-							</li>
+							<li><a href="{{ path('development') }}">Development</a></li>
 						{% endif %}
 					</ul>
-				</div>
+				{% endif %}
 			{% endblock %}
 		</div>
 
