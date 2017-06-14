@@ -1,8 +1,8 @@
 {%- block form_widget -%}
-  {% if attr.class is defined and attr.class is not empty %}
-    {% set attr.class = type|default('input') %}
+  {% if attr.class is defined and attr.class is empty %}
+    {% set attr = attr|merge({"class": type|default('input')}) %}
   {% elseif attr.class is not empty %}
-    {% set attr.class = attr.class|merge({type|default('input')}) %}
+    {% set attr = attr|merge(attr.class|merge({type|default('input')})) %}
   {% endif %}
 
   {% if compound %}
