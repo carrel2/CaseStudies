@@ -29,7 +29,7 @@ class TherapeuticsType extends AbstractType
 				},
 			))
 			->add('submit', SubmitType::class, array(
-				'attr' => array('class' => 'button'),
+				'attr' => array('class' => 'button is-success'),
 			));
 	}
 }

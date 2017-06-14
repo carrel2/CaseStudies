@@ -21,12 +21,12 @@ class DefaultType extends AbstractType
 			if( $case ) {
 				$form->add('resume', SubmitType::class, array(
 					'attr' => array(
-						'class' => 'button',
+						'class' => 'button is-success',
 					)
 				))
 					->add('abandon', SubmitType::class, array(
 						'attr' => array(
-							'class' => 'button',
+							'class' => 'button is-danger',
 							'onclick' => 'return confirmDelete();',
 						)
 					));

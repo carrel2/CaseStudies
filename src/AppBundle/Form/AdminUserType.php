@@ -19,13 +19,16 @@ class AdminUserType extends AbstractType
 				'expanded' => true,
 				'attr' => array(
 					'class' => 'select',
+				),
+				'label_attr' => array(
+					'class' => 'label',
 				)
 			))
 			->add('edit', SubmitType::class, array(
-				'attr' => array('class' => 'button'),
+				'attr' => array('class' => 'button is-success'),
 			))
 			->add('delete', SubmitType::class, array(
-				'attr' => array('class' => 'button'),
+				'attr' => array('class' => 'button is-danger'),
 			));
 	}
 }
