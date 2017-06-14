@@ -16,6 +16,9 @@ class DiagnosticResultsType extends AbstractType
 		$builder->add('test', EntityType::class, array(
 				'class' => 'AppBundle:Test',
 				'choice_label' => 'name',
+				'attr' => array(
+					'class' => 'select',
+				),
 				'group_by' => function($val, $key, $index) {
 					return $val->getGroup();
 				},

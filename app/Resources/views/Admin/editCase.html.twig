@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block body %}
-	<a class="button right" href="{{ path('createCase') }}">Create a new case</a>
+	<a class="button is-right" href="{{ path('createCase') }}">Create a new case</a>
 
 	{{ form_label(form.case) }}
 	{{ form_errors(form.case) }}
@@ -21,5 +21,5 @@
 {% endblock %}
 
 {% block footer %}
-	<button id="undo" class="button right" type="button">Undo</button>
+	<button id="undo" class="button is-right" type="button">Undo</button>
 {% endblock %}

@@ -35,6 +35,9 @@ class UserType extends AbstractType
 			->add('email', EmailType::class, array(
 				'attr' => array(
 					'class' => 'input',
+				),
+				'label_attr' => array(
+					'class' => 'label',
 				)
 			))
 			->add('username', TextType::class, array(
@@ -77,6 +80,9 @@ class UserType extends AbstractType
 					)
 				),
 				'second_options' => array(
+					'attr' => array(
+						'class' => 'input',
+					),
 					'label' => 'Confirm New Password',
 					'label_attr' => array(
 						'class' => 'label',
