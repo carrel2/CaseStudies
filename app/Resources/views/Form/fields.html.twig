@@ -1,13 +1,13 @@
-{%- block form_widget -%}
-  {% if attr.class is defined and attr.class is empty %}
-    {% set attr = attr|merge({"class": type|default('input')}) %}
-  {% elseif attr.class is not empty %}
-    {% set attr = attr|merge(attr.class|merge([type|default('input')])) %}
-  {% endif %}
-
-  {% if compound %}
-    {{- block('form_widget_compound') -}}
-  {% else %}
-    {{- block('form_widget_simple') -}}
-  {% endif %}
-{%- endblock form_widget -%}
+{%- block attributes -%}
+  {% set attr = attr|merge({'class': attr.class ~ " #{type}"}) %}
+  {%- for attrname, attrvalue in attr -%}
+    {{- " " -}}
+    {%- if attrname in ['placeholder', 'title'] -%}
+      {{- attrname }}="{{ translation_domain is same as(false) ? attrvalue : attrvalue|trans({}, translation_domain) }}"
+    {%- elseif attrvalue is same as(true) -%}
+      {{- attrname }}="{{ attrname }}"
+    {%- elseif attrvalue is not same as(false) -%}
+      {{- attrname }}="{{ attrvalue }}"
+    {%- endif -%}
+  {%- endfor -%}
+{%- endblock attributes -%}
