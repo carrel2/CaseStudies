@@ -191,16 +191,19 @@ class AdminController extends Controller
 				'class' => 'AppBundle:User',
 				'choice_label' => 'username',
 				'expanded' => true,
+				'attr' => array(
+					'class' => 'radio',
+				),
 				'label_attr' => array(
-					'class' => 'admin_user_label',
+					'class' => 'label admin_user_label',
 				)
 			))
 			->add('edit', SubmitType::class, array(
-				'attr' => array('class' => 'button'),
+				'attr' => array('class' => 'button is-success'),
 			))
 			->add('delete', SubmitType::class, array(
 				'attr' => array(
-					'class' => 'button',
+					'class' => 'button is-danger',
 					'onclick' => 'return confirmDelete();',
 				),
 			))->getForm();
@@ -318,16 +321,19 @@ class AdminController extends Controller
 				'class' => 'AppBundle:Animal',
 				'choice_label' => 'name',
 				'expanded' => true,
+				'attr' => array(
+					'class' => 'radio',
+				),
 				'label_attr' => array(
-					'class' => 'admin_animal_label',
+					'class' => 'label admin_animal_label',
 				)
 			))
 			->add('edit', SubmitType::class, array(
-				'attr' => array('class' => 'button'),
+				'attr' => array('class' => 'button is-success'),
 			))
 			->add('delete', SubmitType::class, array(
 				'attr' => array(
-					'class' => 'button',
+					'class' => 'button is-danger',
 					'onclick' => 'return confirmDelete();',
 				),
 			))->getForm();
@@ -458,19 +464,22 @@ class AdminController extends Controller
 					'class' => 'AppBundle:Test',
 					'choice_label' => 'name',
 					'expanded' => true,
+					'attr' => array(
+						'class' => 'field',
+					),
 					'choice_attr' => function(Test $t, $key, $index) {
-						return ['class' => 'test'];
+						return ['class' => 'radio test'];
 					},
 					'label_attr' => array(
-						'class' => 'tests_label',
+						'class' => ' radio tests_label',
 					)
 				))
 				->add('edit', SubmitType::class, array(
-					'attr' => array('class' => 'button'),
+					'attr' => array('class' => 'button is-success'),
 				))
 				->add('delete', SubmitType::class, array(
 					'attr' => array(
-						'class' => 'button',
+						'class' => 'button is-danger',
 						'onclick' => 'return confirmDelete();',
 					),
 				))->getForm();
@@ -593,19 +602,22 @@ class AdminController extends Controller
 						'class' => 'AppBundle:Medication',
 						'choice_label' => 'name',
 						'expanded' => true,
+						'attr' => array(
+							'class' => 'field',
+						),
 						'choice_attr' => function(Medication $t, $key, $index) {
-							return ['class' => 'medication'];
+							return ['class' => 'radio medication'];
 						},
 						'label_attr' => array(
-							'class' => 'medications_label',
+							'class' => 'radio medications_label',
 						)
 					))
 					->add('edit', SubmitType::class, array(
-						'attr' => array('class' => 'button'),
+						'attr' => array('class' => 'button is-success'),
 					))
 					->add('delete', SubmitType::class, array(
 						'attr' => array(
-							'class' => 'button',
+							'class' => 'button is-danger',
 							'onclick' => 'return confirmDelete();',
 						),
 					))->getForm();

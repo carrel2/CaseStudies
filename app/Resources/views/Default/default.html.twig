@@ -23,7 +23,6 @@
 {% endblock %}
 
 {% block body %}
-	{{ dump(form) }}
 	{{ form_start(form) }}
 		{% if case %}
 			<div>You have a session in progress: <b>{{ case.title }}</b></div>
