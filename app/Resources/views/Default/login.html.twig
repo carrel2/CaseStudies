@@ -13,8 +13,6 @@
 
 {% extends 'base.html.twig' %}
 
-{% form_theme form 'Form/fields.html.twig' %}
-
 {% block header %}{% endblock %}
 
 {% block flashes %}
@@ -27,11 +25,11 @@
 
 {% block body %}
 	<form action="{{ path('login') }}" method="post">
-		<label for="username">Name:</label>
-		<input type="text" id="username" name="_username" value="{{ last_username }}" required />
+		<label class="label" for="username">Name:</label>
+		<input class="input" type="text" id="username" name="_username" value="{{ last_username }}" required />
 
-		<label for="password">Password:</label>
-		<input type="password" id="password" name="_password" required />
+		<label class="label" for="password">Password:</label>
+		<input class="input" type="password" id="password" name="_password" required />
 
 		<button class="button" type="submit">Login</button>
 	</form>
