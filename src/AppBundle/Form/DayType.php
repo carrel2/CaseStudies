@@ -23,11 +23,11 @@ class DayType extends AbstractType
 				'by_reference' => false,
 				'prototype_name' => '__hotspot__',
 				'attr' => array(
-					'class' => 'collection hotspots',
+					'class' => 'select collection hotspots',
 					'data-type' => 'hotspot'
 				),
 				'label_attr' => array(
-					'class' => 'hotspots_info_label',
+					'class' => 'label hotspots_info_label',
 				)
 			))
 			->add('add hotspot', ButtonType::class, array(
@@ -40,12 +40,17 @@ class DayType extends AbstractType
 				'allow_delete' => true,
 				'by_reference' => false,
 				'prototype_name' => '__diagnostic-result__',
+				'entry_options' => array(
+					'attr' => array(
+						'class' => 'checkbox',
+					),
+				),
 				'attr' => array(
-					'class' => 'collection tests',
+					'class' => 'field collection tests',
 					'data-type' => 'diagnostic result'
 				),
 				'label_attr' => array(
-					'class' => 'tests_label',
+					'class' => 'label tests_label',
 				)
 			))
 			->add('add diagnostic results', ButtonType::class, array(
@@ -58,12 +63,17 @@ class DayType extends AbstractType
 				'allow_delete' => true,
 				'by_reference' => false,
 				'prototype_name' => '__therapeutic-result__',
+				'entry_options' => array(
+					'attr' => array(
+						'class' => 'checkbox',
+					),
+				),
 				'attr' => array(
-					'class' => 'collection medications',
+					'class' => 'field collection medications',
 					'data-type' => 'therapeutic result'
 				),
 				'label_attr' => array(
-					'class' => 'medications_label',
+					'class' => 'label medications_label',
 				)
 			))
 			->add('add therapeutic results', ButtonType::class, array(

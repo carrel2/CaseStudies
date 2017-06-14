@@ -23,7 +23,7 @@ class HotspotType extends AbstractType
 				},
 				'choice_label' => 'name',
 				'attr' => array(
-					'class' => 'hotspot',
+					'class' => 'select hotspot',
 				),
 				'label' => false,
 			))

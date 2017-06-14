@@ -32,25 +32,56 @@ class UserType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-			->add('email', EmailType::class)
-			->add('username', TextType::class, array(
-				'label' => 'Name',
+			->add('email', EmailType::class, array(
+				'attr' => array(
+					'class' => 'input',
+				)
 			))
-			->add('uin', TextType::class)
+			->add('username', TextType::class, array(
+				'attr' => array(
+					'class' => 'input',
+				),
+				'label' => 'Name',
+				'label_attr' => array(
+					'class' => 'label',
+				)
+			))
+			->add('uin', TextType::class, array(
+				'attr' => array(
+					'class' => 'input',
+				),
+				'label_attr' => array(
+					'class' => 'label',
+				)
+			))
 			->add('plainPassword', PasswordType::class, array(
+				'attr' => array(
+					'class' => 'input',
+				),
 				'label' => 'Old Password',
+				'label_attr' => array(
+					'class' => 'label',
+				)
 			))
 			->add('newPassword', RepeatedType::class, array( // TODO: add confirmation password box to compare against old password
 				'mapped' => false,
 				'type' => PasswordType::class,
 				'first_options'  => array(
 					'label' => 'New Password',
+					'label_attr' => array(
+						'class' => 'label',
+					),
 					'attr' => array(
-						'class' => 'tooltip',
+						'class' => 'input tooltip',
 						'title' => 'Must be at least 6 characters long',
 					)
 				),
-				'second_options' => array('label' => 'Confirm New Password'),
+				'second_options' => array(
+					'label' => 'Confirm New Password',
+					'label_attr' => array(
+						'class' => 'label',
+					)
+				),
 			));
 
 		$builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
@@ -68,6 +99,9 @@ class UserType extends AbstractType
 				);
 
 				$form->add('role', ChoiceType::class, array(
+					'attr' => array(
+						'class' => 'select',
+					),
 					'choices' => array(
 						'User' => 'ROLE_USER',
 						'Admin' => 'ROLE_ADMIN',

@@ -18,11 +18,14 @@ class TherapeuticsType extends AbstractType
 				'choice_label' => 'name',
 				'expanded' => true,
 				'multiple' => true,
+				'attr' => array(
+					'class' => 'field',
+				),
+				'choice_attr' => function(Medication $t, $key, $index) {
+					return ['class' => 'checkbox medication'];
+				},
 				'group_by' => function($val, $key, $index) {
 					return $val->getGroup();
-				},
-				'choice_attr' => function(Medication $t, $key, $index) {
-					return ['class' => 'medication'];
 				},
 			))
 			->add('submit', SubmitType::class, array(

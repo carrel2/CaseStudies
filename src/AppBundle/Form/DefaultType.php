@@ -32,18 +32,27 @@ class DefaultType extends AbstractType
 					));
 			} else {
 				$form->add('title', EntityType::class, array(
-					'class' => 'AppBundle:CaseStudy',
-					'choice_label' => 'title',
-					'attr' => array(
-						'onchange' => 'updateCase()',)))
+						'class' => 'AppBundle:CaseStudy',
+						'choice_label' => 'title',
+						'attr' => array(
+							'class' => 'input',
+							'onchange' => 'updateCase()',
+						),
+						'label_attr' => array(
+							'class' => 'label',
+						)
+					))
 					->add('location', ChoiceType::class, array(
 						'choices' => array(
 							'Farm' => 'Farm',
 							'Hospital' => 'Hospital',
 						),
 						'expanded' => true,
+						'attr' => array(
+							'class' => 'radio',
+						),
 						'label_attr' => array(
-							'class' => 'tooltip',
+							'class' => 'label tooltip',
 							'title' => 'Location affects the workflow of the application',
 						)
 					))

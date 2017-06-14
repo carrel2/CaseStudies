@@ -22,8 +22,11 @@ class CaseType extends AbstractType
 	{
 		$builder
 		->add('title', TextType::class, array(
+			'attr' => array(
+				'class' => 'input',
+			),
 			'label_attr' => array(
-				'class' => 'case_title_label',
+				'class' => 'label case_title_label',
 			)
 		))
 		->add('description', CKEditorType::class, array(
@@ -32,17 +35,18 @@ class CaseType extends AbstractType
 				'disallowedContent' => 'button embed form iframe input link meta textarea video script',
 			),
 			'label_attr' => array(
-				'class' => 'case_description_label',
+				'class' => 'label case_description_label',
 			)
 		))
 		->add('animal', EntityType::class, array(
 			'class' => 'AppBundle:Animal',
 			'choice_label' => 'name',
 			'attr' => array(
+				'class' => 'select',
 				'onchange' => 'updateSelects("hotspot");',
 			),
 			'label_attr' => array(
-				'class' => 'case_animal_label',
+				'class' => 'label case_animal_label',
 			)
 		))
 		->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) use($options) {
@@ -62,7 +66,7 @@ class CaseType extends AbstractType
 					'entry_options' => array(
 						'attr' => array_key_exists('data', $options) ? array('animal' => $options['data']->getAnimal()->getId()) : array(),
 						'label_attr' => array(
-							'class' => 'day_label',
+							'class' => 'label day_label',
 						)
 					),
 					'allow_add' => true,
@@ -70,11 +74,11 @@ class CaseType extends AbstractType
 					'by_reference' => false,
 					'prototype_name' => '__day__',
 					'attr' => array(
-						'class' => 'collection days',
+						'class' => 'select collection days',
 						'data-type' => 'day'
 					),
 					'label_attr' => array(
-						'class' => 'case_days_label',
+						'class' => 'label case_days_label',
 					)
 					))
 					->add('add day', ButtonType::class, array(

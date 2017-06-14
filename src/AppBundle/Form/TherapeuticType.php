@@ -13,12 +13,27 @@ class TherapeuticType extends AbstractType
 {
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
-    $builder->add('name', TextType::class)
-      ->add('cost', null, array(
-        'attr' => array('pattern' => '[0-9]+')
+    $builder->add('name', TextType::class, array(
+        'attr' => array(
+          'class' => 'input',
+        )
       ))
-      ->add('waitTime')
-      ->add('group')
+      ->add('cost', null, array(
+        'attr' => array(
+          'pattern' => '[0-9]+',
+          'class' => 'input',
+        )
+      ))
+      ->add('waitTime', null, array(
+        'attr' => array(
+          'class' => 'input',
+        )
+      ))
+      ->add('group', null, array(
+        'attr' => array(
+          'class' => 'input',
+        )
+      ))
       ->add('submit', SubmitType::class, array(
         'attr' => array('class' => 'button'),
       ));

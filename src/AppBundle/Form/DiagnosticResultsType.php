@@ -27,7 +27,11 @@ class DiagnosticResultsType extends AbstractType
 					'autoParagraph' => false,
 				)
 			))
-			->add('waitTime');
+			->add('waitTime', null, array(
+				'attr' => array(
+					'class' => 'input',
+				)
+			));
 	}
 
 	public function configureOptions(OptionsResolver $resolver)

@@ -18,11 +18,14 @@ class DiagnosticsType extends AbstractType
 				'choice_label' => 'name',
 				'expanded' => true,
 				'multiple' => true,
+				'attr' => array(
+					'class' => 'field',
+				),
+				'choice_attr' => function(Test $t, $key, $index) {
+					return ['class' => 'checkbox test'];
+				},
 				'group_by' => function($val, $key, $index) {
 					return $val->getGroup();
-				},
-				'choice_attr' => function(Test $t, $key, $index) {
-					return ['class' => 'test'];
 				},
 			))
 			->add('submit', SubmitType::class, array(

@@ -32,7 +32,7 @@ class AdminType extends AbstractType
 				'class' => 'AppBundle:CaseStudy',
 				'choice_label' => 'title',
 				'label_attr' => array(
-					'class' => 'case_label',
+					'class' => 'label case_label',
 				)
 			));
 	}
