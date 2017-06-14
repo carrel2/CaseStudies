@@ -1,4 +1,13 @@
-{%- block form_widget_simple -%}
-  {%- set type = type|default('text') -%}
-  <input type="{{ type }}" class="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
-{%- endblock form_widget_simple -%}
+{%- block form_widget -%}
+  {% if attr is defined and attr is not empty %}
+    {% attr.class = type|default('input') %}
+  {% else %}
+    {% set attr = {"class": type|default('input')} %}
+  {% endif %}
+
+  {% if compound %}
+    {{- block('form_widget_compound') -}}
+  {% else %}
+    {{- block('form_widget_simple') -}}
+  {% endif %}
+{%- endblock form_widget -%}
