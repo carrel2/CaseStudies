@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block flashes %}
+	{% if error %}
+		<div class="notification is-danger">Incorrect username or password</div>
+	{% endif %}
+
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<form action="{{ path('login') }}" method="post">
+		<div class="control">
+      <label class="label" for="username">Name:</label>
+		  <input class="input" type="text" id="username" name="_username" value="{{ last_username }}" required />
+    </div>
+
+    <div class="control">
+  		<label class="label" for="password">Password:</label>
+  		<input class="input" type="password" id="password" name="_password" required />
+    </div>
+
+    <div class="control">
+		  <button class="button is-primary" type="submit">Login</button>
+    </div>
+	</form>
+
+	<a href="{{ path('registration') }}">Register</a>
+{% endblock %}
