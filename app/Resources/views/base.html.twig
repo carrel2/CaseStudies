@@ -4,7 +4,7 @@
   <a class="nav-item " href="{{ path('default') }}">Home</a>
   <a class="nav-item" href="{{ path('user') }}">Account</a>
 
-  {% if app.user.hasResults %}
+  {% if app.user is not null and app.user.hasResults %}
     <a class="nav-item" href="{{ path('results') }}">My results</a>
   {% endif %}
 {% endblock %}
