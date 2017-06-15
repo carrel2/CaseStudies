@@ -21,6 +21,9 @@ class DiagnosticsType extends AbstractType
 				'attr' => array(
 					'class' => 'field',
 				),
+				'label_attr' => array(
+					'class' => 'title is-2',
+				),
 				'choice_attr' => function(Test $t, $key, $index) {
 					return ['class' => 'checkbox test'];
 				},

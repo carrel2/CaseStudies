@@ -36,7 +36,7 @@ class DiagnosticsController extends Controller
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response Render **tests.html.twig**. On submission, redirect to **MedicationsController::showPageAction()**
 	 *
-	 * @Route("/diagnostic", name="diagnostics")
+	 * @Route("/diagnostics", name="diagnostics")
 	 * @Security("has_role('ROLE_USER')")
 	 */
 	public function showPage(Request $r)
