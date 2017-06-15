@@ -11,16 +11,18 @@
 {% endblock %}
 
 {% block body %}
-  {{ form_start(form) }}
-    {% if case %}
-      <div>You have a session in progress: <b>{{ case.title }}</b></div>
-    {% else %}
-      {{ form_row(form.title) }}
-      {{ form_row(form.location) }}
+	<div class="column">
+		{{ form_start(form) }}
+	    {% if case %}
+	      <div>You have a session in progress: <b>{{ case.title }}</b></div>
+	    {% else %}
+	      {{ form_row(form.title) }}
+	      {{ form_row(form.location) }}
 
-      <div id="case" class="container"></div>
-    {% endif %}
+	      <div id="case" class="container"></div>
+	    {% endif %}
 
-    {{ form_rest(form) }}
-  {{ form_end(form) }}
+	    {{ form_rest(form) }}
+	  {{ form_end(form) }}
+	</div>
 {% endblock %}

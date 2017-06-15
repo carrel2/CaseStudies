@@ -17,14 +17,16 @@
   </head>
   <body>
     <div class="columns">
-      <nav class="nav">
-        <div class="nav-left">
-          {% block userNav %}{% endblock %}
-        </div>
-        <div class="nav-right">
-          {% block adminNav %}{% endblock %}
-        </div>
-      </nav>
+      <div class="column">
+        <nav class="nav">
+          <div class="nav-left">
+            {% block userNav %}{% endblock %}
+          </div>
+          <div class="nav-right">
+            {% block adminNav %}{% endblock %}
+          </div>
+        </nav>
+      </div>
     </div>
 
     <div class="columns">
