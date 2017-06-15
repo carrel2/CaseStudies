@@ -38,7 +38,6 @@ class UserType extends AbstractType
 			))
 			->add('uin', TextType::class)
 			->add('plainPassword', RepeatedType::class, array( // TODO: add confirmation password box to compare against old password
-				'mapped' => false,
 				'type' => PasswordType::class,
 				'first_options'  => array(
 					'label' => 'Password',
