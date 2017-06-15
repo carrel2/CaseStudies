@@ -16,20 +16,20 @@
     {% endblock %}
   </head>
   <body>
-    <section class="section">
-      <div class="columns">
-        <div class="column">
-          <nav class="nav">
-            <div class="nav-left">
-              {% block userNav %}{% endblock %}
-            </div>
-            <div class="nav-right">
-              {% block adminNav %}{% endblock %}
-            </div>
-          </nav>
-        </div>
+    <div class="columns">
+      <div class="column">
+        <nav class="nav">
+          <div class="nav-left">
+            {% block userNav %}{% endblock %}
+          </div>
+          <div class="nav-right">
+            {% block adminNav %}{% endblock %}
+          </div>
+        </nav>
       </div>
+    </div>
 
+    <section class="section">
       <div class="columns">
         {% block flashes %}
   			{% endblock %}
