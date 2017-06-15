@@ -32,62 +32,21 @@ class UserType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-			->add('email', EmailType::class, array(
-				'attr' => array(
-					'class' => 'input',
-				),
-				'label_attr' => array(
-					'class' => 'label',
-				)
-			))
+			->add('email', EmailType::class)
 			->add('username', TextType::class, array(
-				'attr' => array(
-					'class' => 'input',
-				),
 				'label' => 'Name',
-				'label_attr' => array(
-					'class' => 'label',
-				)
 			))
-			->add('uin', TextType::class, array(
-				'attr' => array(
-					'class' => 'input',
-				),
-				'label_attr' => array(
-					'class' => 'label',
-				)
-			))
-			->add('plainPassword', PasswordType::class, array(
-				'attr' => array(
-					'class' => 'input',
-				),
-				'label' => 'Old Password',
-				'label_attr' => array(
-					'class' => 'label',
-				)
-			))
-			->add('newPassword', RepeatedType::class, array( // TODO: add confirmation password box to compare against old password
-				'mapped' => false,
+			->add('uin', TextType::class)
+			->add('plainPassword', RepeatedType::class, array( // TODO: add confirmation password box to compare against old password
 				'type' => PasswordType::class,
 				'first_options'  => array(
-					'label' => 'New Password',
-					'label_attr' => array(
-						'class' => 'label',
-					),
+					'label' => 'Password',
 					'attr' => array(
-						'class' => 'input tooltip',
+						'class' => 'tooltip',
 						'title' => 'Must be at least 6 characters long',
 					)
 				),
-				'second_options' => array(
-					'attr' => array(
-						'class' => 'input',
-					),
-					'label' => 'Confirm New Password',
-					'label_attr' => array(
-						'class' => 'label',
-					)
-				),
+				'second_options' => array('label' => 'Confirm Password'),
 			));
 
 		$builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
@@ -100,25 +59,35 @@ class UserType extends AbstractType
 				$config = $form->get('plainPassword')->getConfig();
 				$options = $config->getOptions();
 
-				$form->add('plainPassword', get_class($config->getType()->getInnerType()), array_replace(
-					$options, ['required' => false,])
-				);
+				$form->add('plainPassword', PasswordType::class, array(
+					'label' => 'Old Password',
+				));
+
+				$form->add('newPassword', RepeatedType::class, array(
+					'mapped' => false,
+					'type' => PasswordType::class,
+					'first_options'  => array(
+						'label' => 'New Password',
+						'attr' => array(
+							'class' => 'tooltip',
+							'title' => 'Must be at least 6 characters long',
+						)
+					),
+					'second_options' => array('label' => 'Confirm Password'),
+				));
 
 				$form->add('role', ChoiceType::class, array(
-					'attr' => array(
-						'class' => 'select',
-					),
 					'choices' => array(
 						'User' => 'ROLE_USER',
 						'Admin' => 'ROLE_ADMIN',
 					),
 					'disabled' => $currentUser->getRole() == 'ROLE_USER',
 				));
-
-				$form->add('submit', SubmitType::class, array(
-					'attr' => array('class' => 'button is-success'),
-				));
 			}
+
+			$form->add('submit', SubmitType::class, array(
+				'attr' => array('class' => 'button'),
+			));
 		});
 	}
 
