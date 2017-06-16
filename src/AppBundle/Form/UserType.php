@@ -32,21 +32,52 @@ class UserType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-			->add('email', EmailType::class)
+			->add('email', EmailType::class, array(
+				'attr' => array(
+					'class' => 'input',
+				),
+				'label_attr' => array(
+					'class' => 'label',
+				)
+			))
 			->add('username', TextType::class, array(
 				'label' => 'Name',
+				'attr' => array(
+					'class' => 'input',
+				),
+				'label_attr' => array(
+					'class' => 'label',
+				)
 			))
-			->add('uin', TextType::class)
-			->add('plainPassword', RepeatedType::class, array( // TODO: add confirmation password box to compare against old password
+			->add('uin', TextType::class, array(
+				'attr' => array(
+					'class' => 'input',
+				),
+				'label_attr' => array(
+					'class' => 'label',
+				)
+			))
+			->add('plainPassword', RepeatedType::class, array(
 				'type' => PasswordType::class,
 				'first_options'  => array(
 					'label' => 'Password',
 					'attr' => array(
-						'class' => 'tooltip',
+						'class' => 'input tooltip',
 						'title' => 'Must be at least 6 characters long',
+					),
+					'label_attr' => array(
+						'class' => 'label',
 					)
 				),
-				'second_options' => array('label' => 'Confirm Password'),
+				'second_options' => array(
+					'label' => 'Confirm Password',
+					'attr' => array(
+						'class' => 'input',
+					),
+					'label_attr' => array(
+						'class' => 'label',
+					)
+				),
 			));
 
 		$builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
@@ -69,17 +100,31 @@ class UserType extends AbstractType
 					'first_options'  => array(
 						'label' => 'New Password',
 						'attr' => array(
-							'class' => 'tooltip',
+							'class' => 'input tooltip',
 							'title' => 'Must be at least 6 characters long',
+						),
+						'label_attr' => array(
+							'class' => 'label',
 						)
 					),
-					'second_options' => array('label' => 'Confirm Password'),
+					'second_options' => array(
+						'label' => 'Confirm Password',
+						'attr' => array(
+							'class' => 'input',
+						),
+						'label_attr' => array(
+							'class' => 'label',
+						)
+					),
 				));
 
 				$form->add('role', ChoiceType::class, array(
 					'choices' => array(
 						'User' => 'ROLE_USER',
 						'Admin' => 'ROLE_ADMIN',
+					),
+					'attr' => array(
+						'class' => 'select',
 					),
 					'disabled' => $currentUser->getRole() == 'ROLE_USER',
 				));
