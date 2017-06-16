@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{% if user is defined %}
+		<h1 class="title is-1">Results for {{ user.username }}</h2>
+	{% endif %}
+
+  <div class="column">
+  	<nav class="panel">
+      <p class="panel-heading">Results</p>
+
+      {% for result in results %}
+        <div class="panel-tabs">
+          <a id="result-{{ result.id }}" {% if loop.first %}class="is-active"{% endif %}>{{ result.caseStudy }}</a>
+        </div>
+
+        {% for day in result.results %}
+          <a id="day-{{ day.id }}" class="panel-block {% if not loop.first %} is-hidden{% endif %}">
+            <span class="panel-icon">
+              <i class="fa fa-angle-right"></i>
+            </span>
+            Day {{ loop.index }}
+          </a>
+        {% endfor %}
+      {% endfor %}
+    </nav>
+  </div>
+
+  <div class="column is-two-thirds">
+    {% for result in results %}
+      {% for day in result.results %}
+        <div id="hotspots">
+          {% for name, info in day.hotspotsInfo %}
+            <em>{{ name }}:</em><span>{{ info|raw }}</span>
+          {% endfor %}
+        </div>
+
+        <div id="testResults">
+          {% for test, result in day.diagnostics %}
+            <em>{{ test }}:</em><span>{{ result|raw }}</span>
+          {% endfor %}
+        </div>
+
+        <div id="medicationResults">
+          {% for medication, result in day.therapeutics %}
+            <em>{{ medication }}:</em><span>{{ result|raw }}</span>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    {% endfor %}
+  </div>
+{% endblock %}
