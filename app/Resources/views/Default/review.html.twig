@@ -18,9 +18,6 @@
       <p class="panel-heading">{{ user.caseStudy.title }}</p>
 
       {% for day in user.days %}
-        {% set n = loop.index %}
-        {% set elapsed = loop.length - loop.index %}
-
         <a id="day-{{ day.id }}" class="panel-block {% if loop.first %}is-active{% endif %}">
           <span class="panel-icon">
             <i class="fa fa-angle-right"></i>
@@ -33,6 +30,9 @@
 
   <div class="column is-two-thirds">
     {% for day in user.days %}
+      {% set n = loop.index %}
+      {% set elapsed = loop.length - loop.index %}
+
       {% for spot in day.hotspotsinfo %}
         <em>{{ spot.hotspot.name }}:</em><span class="info">{{ spot.info|raw }}</span>
       {% endfor %}
