@@ -1,5 +1,31 @@
 {% extends 'base.html.twig' %}
 
+{% block scripts %}
+  {{ parent() }}
+
+  <script>
+    $(function() {
+      $(".panel-tabs a").on('click', function() {
+        if( !$(this).hasClass('is-active') ) {
+          $('[data-result="' + $('.panel-tabs a.is-active').attr('id') + '"]').addClass('is-hidden');
+          $('.panel-tabs a.is-active').removeClass('is-active');
+          $(this).addClass('is-active');
+          $('[data-result="' + $(this).attr('id') + '"]').removeClass('is-hidden');
+        }
+      });
+
+      $(".panel-block").on('click', function() {
+        if( !$(this).hasClass('is-active') ) {
+          $('[data-id="' + $('.panel-block.is-active').attr('id') + '"]').addClass('is-hidden');
+          $('.panel-block.is-active').removeClass('is-active');
+          $(this).addClass('is-active');
+          $('[data-id="' + $(this).attr('id') + '"]').removeClass('is-hidden');
+        }
+      });
+    });
+  </script>
+{% endblock %}
+
 {% block body %}
 	{% if user is defined %}
 		<h1 class="title is-1">Results for {{ user.username }}</h2>
@@ -15,7 +41,7 @@
         </div>
 
         {% for day in result.results %}
-          <a id="day-{{ day.id }}" class="panel-block {% if not loop.first %} is-hidden{% endif %}">
+          <a id="day-{{ day.id }}" class="panel-block {% if not loop.first %} is-hidden{% endif %}" data-result="{{ result.id }}">
             <span class="panel-icon">
               <i class="fa fa-angle-right"></i>
             </span>
@@ -29,22 +55,24 @@
   <div class="column is-two-thirds">
     {% for result in results %}
       {% for day in result.results %}
-        <div id="hotspots">
-          {% for name, info in day.hotspotsInfo %}
-            <em>{{ name }}:</em><span>{{ info|raw }}</span>
-          {% endfor %}
-        </div>
+        <div data-id="day-{{ day.id }}"{% if not loop.first %} class=" is-hidden"{% endif %}>
+          <div id="hotspots">
+            {% for name, info in day.hotspotsInfo %}
+              <em>{{ name }}:</em><span>{{ info|raw }}</span>
+            {% endfor %}
+          </div>
 
-        <div id="testResults">
-          {% for test, result in day.diagnostics %}
-            <em>{{ test }}:</em><span>{{ result|raw }}</span>
-          {% endfor %}
-        </div>
+          <div id="testResults">
+            {% for test, result in day.diagnostics %}
+              <em>{{ test }}:</em><span>{{ result|raw }}</span>
+            {% endfor %}
+          </div>
 
-        <div id="medicationResults">
-          {% for medication, result in day.therapeutics %}
-            <em>{{ medication }}:</em><span>{{ result|raw }}</span>
-          {% endfor %}
+          <div id="medicationResults">
+            {% for medication, result in day.therapeutics %}
+              <em>{{ medication }}:</em><span>{{ result|raw }}</span>
+            {% endfor %}
+          </div>
         </div>
       {% endfor %}
     {% endfor %}
