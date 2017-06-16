@@ -55,7 +55,7 @@
   <div class="column is-two-thirds">
     {% for result in results %}
       {% for day in result.results %}
-        <div data-id="result-{{ result.id }}day-{{ loop.index }}"{% if not loop.first %} class=" is-hidden"{% endif %}>
+        <div data-id="result-{{ result.id }}-day-{{ loop.index }}"{% if not loop.first %} class=" is-hidden"{% endif %}>
           <div id="hotspots">
             {% for name, info in day.hotspotsInfo %}
               <em>{{ name }}:</em><span>{{ info|raw }}</span>
