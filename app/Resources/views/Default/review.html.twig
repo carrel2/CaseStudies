@@ -1,5 +1,21 @@
 {% extends 'base.html.twig' %}
 
+{% block scripts %}
+  {{ parent() }}
+
+  <script>
+    $(function() {
+      $(".panel-block").on('click', function() {
+        if( !$(this).hasClass('is-active') ) {
+          $('#' + $('.panel-block.is-active').attr('id')).css('display', 'none');
+          $(this).addClass('is-active');
+          $('#' + $(this).attr('id')).css('display', 'initial');
+        }
+      });
+    });
+  </script>
+{% endblock %}
+
 {% block body %}
 	<div class="column">
     <nav class="panel">
