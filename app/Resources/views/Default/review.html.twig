@@ -7,10 +7,10 @@
     $(function() {
       $(".panel-block").on('click', function() {
         if( !$(this).hasClass('is-active') ) {
-          $('[data-id="' + $('.panel-block.is-active').attr('id') + '"]').css('display', 'none');
+          $('[data-id="' + $('.panel-block.is-active').attr('id') + '"]').addClass('is-hidden');
           $('.panel-block.is-active').removeClass('is-active');
           $(this).addClass('is-active');
-          $('[data-id="' + $(this).attr('id') + '"]').css('display', 'initial');
+          $('[data-id="' + $(this).attr('id') + '"]').removeClass('is-hidden');
         }
       });
     });
