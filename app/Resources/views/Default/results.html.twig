@@ -78,3 +78,9 @@
     {% endfor %}
   </div>
 {% endblock %}
+
+{% block footer %}
+  {% if user is defined and is_granted('ROLE_ADMIN') %}
+    <a href="/removeResult/{{ result.id }}">Remove</a>
+  {% endif %}
+{% endblock %}
