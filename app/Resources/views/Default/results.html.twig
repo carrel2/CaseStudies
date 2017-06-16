@@ -41,13 +41,17 @@
         </div>
 
         {% for day in result.results %}
-          <a id="result-{{ result.id }}-day-{{ loop.index }}" class="panel-block {% if not loop.first %} is-hidden{% endif %}" data-result="result-{{ result.id }}">
+          <a id="result-{{ result.id }}-day-{{ loop.index }}" class="panel-block" data-result="result-{{ result.id }}">
             <span class="panel-icon">
               <i class="fa fa-angle-right"></i>
             </span>
             Day {{ loop.index }}
           </a>
         {% endfor %}
+
+        {% if user is defined and is_granted('ROLE_ADMIN') %}
+          <a href="/removeResult/{{ result.id }}" class="panel-block is-danger">Remove</a>
+        {% endif %}
       {% endfor %}
     </nav>
   </div>
@@ -77,10 +81,4 @@
       {% endfor %}
     {% endfor %}
   </div>
-{% endblock %}
-
-{% block footer %}
-  {% if user is defined and is_granted('ROLE_ADMIN') %}
-    <a href="/removeResult/{{ result.id }}">Remove</a>
-  {% endif %}
 {% endblock %}

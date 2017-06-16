@@ -7,6 +7,8 @@
   {% if app.user is not null and app.user.hasResults %}
     <a class="nav-item is-tab" href="{{ path('results') }}">My results</a>
   {% endif %}
+
+  <a class="nav-item is-tab" href="{{ path('logout') }}">Logout</a>
 {% endblock %}
 
 {% block adminNav %}
