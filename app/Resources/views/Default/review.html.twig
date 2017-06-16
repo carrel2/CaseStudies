@@ -7,9 +7,10 @@
     $(function() {
       $(".panel-block").on('click', function() {
         if( !$(this).hasClass('is-active') ) {
-          $('#' + $('.panel-block.is-active').attr('id')).css('display', 'none');
+          $('[data-id="' + $('.panel-block.is-active').attr('id') + '"]').css('display', 'none');
+          $('.panel-block.is-active').removeClass('is-active');
           $(this).addClass('is-active');
-          $('#' + $(this).attr('id')).css('display', 'initial');
+          $('[data-id="' + $(this).attr('id') + '"]').css('display', 'initial');
         }
       });
     });
@@ -37,7 +38,7 @@
       {% set n = loop.index %}
       {% set elapsed = loop.length - loop.index %}
 
-      <div id="day-{{ day.id }}"{% if not loop.first %} class=" is-hidden"{% endif %}>
+      <div data-id="day-{{ day.id }}"{% if not loop.first %} class=" is-hidden"{% endif %}>
         <h2 class="title is-2">Physical exam results</h2>
 
         {% for spot in day.hotspotsinfo %}
