@@ -98,7 +98,7 @@ class HotSpotController extends Controller
 			}
 		}
 
-		if( false != array_search($hotspot->getName(), $session->getFlashBag()->peek('hotspot-' . $user->getCurrentDay()->getId())) )
+		if( false == array_search($hotspot->getName(), $session->getFlashBag()->peek('hotspot-' . $user->getCurrentDay()->getId())) )
 		{
 			$this->addFlash('hotspot-' . $user->getCurrentDay()->getId(), $hotspot->getName());
 
