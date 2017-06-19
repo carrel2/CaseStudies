@@ -55,22 +55,28 @@
   <div class="column is-two-thirds">
     {% for result in results %}
       {% for day in result.results %}
-        <div data-id="result-{{ result.id }}-day-{{ loop.index }}"{% if not loop.first %} class=" is-hidden"{% endif %}>
+        <div data-id="result-{{ result.id }}-day-{{ loop.index }}" class="box{% if not loop.first %} is-hidden{% endif %}">
           <div id="hotspots">
+            <p class="title">Physical exam results</p>
+
             {% for name, info in day.hotspotsInfo %}
-              <em>{{ name }}:</em><span>{{ info|raw }}</span>
+              <div><em>{{ name }}: </em><span>{{ info|raw }}</span></div>
             {% endfor %}
           </div>
 
           <div id="testResults">
+            <p class="title">Diagnostic results</p>
+
             {% for test, result in day.diagnostics %}
-              <em>{{ test }}:</em><span>{{ result|raw }}</span>
+              <div><em>{{ test }}: </em><span>{{ result|raw }}</span></div>
             {% endfor %}
           </div>
 
           <div id="medicationResults">
+            <p class="title">Therapeutic results</p>
+
             {% for medication, result in day.therapeutics %}
-              <em>{{ medication }}:</em><span>{{ result|raw }}</span>
+              <div><em>{{ medication }}: </em><span>{{ result|raw }}</span></div>
             {% endfor %}
           </div>
         </div>
