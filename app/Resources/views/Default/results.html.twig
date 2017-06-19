@@ -12,7 +12,7 @@
           $('.panel-tabs a.is-active').removeClass('is-active');
           $(this).addClass('is-active');
           $('[data-result="' + $(this).attr('id') + '"]').removeClass('is-hidden');
-          $('[data-id=' + $('[data-result="' + $(this).attr('id') + '"]').attr('id') + ']').first().removeClass('is-hidden').addClass('is-active');
+          $($('[data-id=' + $('[data-result="' + $(this).attr('id') + '"]').attr('id') + ']').first()).removeClass('is-hidden').addClass('is-active');
         }
       });
 
