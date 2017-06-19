@@ -23,7 +23,7 @@
 
 	<div id="checked">
 		{% for spot in checked %}
-			<li><em>{{ spot.hotspot.name }}:</em><span class="info">{{ spot.info|raw }}</span></li>
+			<li><em>{{ spot.hotspot.name }}:</em><span class="info"> {{ spot.info|raw }}</span></li>
 		{% endfor %}
 
 		{% for flash in app.session.flashBag.peek('hotspot-' ~ day.id) %}
