@@ -15,7 +15,7 @@
       });
 
       $(".panel-block").on('click', function() {
-        if( !$(this).hasClass('is-active') ) {
+        if( !$(this).hasClass('is-active') && !$(this).hasClass('is-danger') ) {
           $('[data-id="' + $('.panel-block.is-active').attr('id') + '"]').addClass('is-hidden');
           $('.panel-block.is-active').removeClass('is-active');
           $(this).addClass('is-active');
@@ -35,7 +35,9 @@
         <div class="panel-tabs">
           <a id="result-{{ result.id }}" {% if loop.first %}class="is-active"{% endif %}>{{ result.caseStudy }}</a>
         </div>
+      {% endfor %}
 
+      {% for result in results %}
         {% for day in result.results %}
           <a id="result-{{ result.id }}-day-{{ loop.index }}" class="panel-block{% if loop.first %} is-active{% endif %}" data-result="result-{{ result.id }}">
             <span class="panel-icon">
@@ -46,7 +48,7 @@
         {% endfor %}
 
         {% if user is defined and is_granted('ROLE_ADMIN') %}
-          <a href="/removeResult/{{ result.id }}" class="panel-block is-danger">Remove</a>
+          <a href="/removeResult/{{ result.id }}" class="panel-block is-danger" data-result="result-{{ result.id }}">Remove</a>
         {% endif %}
       {% endfor %}
     </nav>
