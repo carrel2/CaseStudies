@@ -31,7 +31,7 @@
       <p class="panel-heading">{{ user.caseStudy.title }}</p>
 
       {% for day in user.days %}
-        <a id="day-{{ day.id }}" class="panel-block {% if loop.first %}is-active{% endif %}">
+        <a id="day-{{ day.id }}" class="panel-block {% if loop.last %}is-active{% endif %}">
           <span class="panel-icon">
             <i class="fa fa-angle-right"></i>
           </span>
@@ -46,7 +46,7 @@
       {% set n = loop.index %}
       {% set elapsed = loop.length - loop.index %}
 
-      <div data-id="day-{{ day.id }}"{% if not loop.first %} class=" is-hidden"{% endif %}>
+      <div data-id="day-{{ day.id }}"{% if not loop.last %} class=" is-hidden"{% endif %}>
         <h2 class="title is-2">Physical exam results</h2>
 
         {% for spot in day.hotspotsinfo %}
@@ -61,9 +61,9 @@
 
         {% for testResult in day.tests %}
           {% if testResult.waitTime and ( elapsed - testResult.waitTime == 0 or testResult.waitTime < elapsed ) %}
-            <li><em>{{ testResult.test.name }}:</em>{{ elapsed - testResult.waitTime == 0 ? '<span class="tag is-success">New results!</span>' : '' }}<span class="info"> {{ testResult.results|raw }}</span></li>
+            <li>{{ elapsed - testResult.waitTime == 0 ? '<span class="tag is-success">New results!</span>' : '' }}<em>{{ testResult.test.name }}:</em><span class="info"> {{ testResult.results|raw }}</span></li>
           {% elseif testResult.test.waitTime == 0 or testResult.test.waitTime < elapsed %}
-            <li><em>{{ testResult.test.name }}:</em>{{ elapsed - testResult.test.waitTime == 0 ? '<span class="tag is-success">New results!</span>' : '' }}<span class="info"> {{ testResult.results|raw }}</span></li>
+            <li>{{ elapsed - testResult.test.waitTime == 0 ? '<span class="tag is-success">New results!</span>' : '' }}<em>{{ testResult.test.name }}:</em><span class="info"> {{ testResult.results|raw }}</span></li>
           {% elseif finished %}
             <li><em>{{ testResult.test.name }}:</em><span class="info"> {{ testResult.results|raw }}</span></li>
           {% else %}
@@ -79,9 +79,9 @@
 
         {% for medResult in day.medications %}
           {% if medResult.waitTime and ( elapsed - medResult.waitTime == 0 or medResult.waitTime < elapsed ) %}
-            <li><em>{{ medResult.medication.name }}:</em>{{ elapsed - medResult.waitTime == 0 ? '<span class="tag is-success">New results!</span>' : '' }}<span class="info"> {{ medResult.results|raw }}</span></li>
+            <li>{{ elapsed - medResult.waitTime == 0 ? '<span class="tag is-success">New results!</span>' : '' }}<em>{{ medResult.medication.name }}:</em><span class="info"> {{ medResult.results|raw }}</span></li>
           {% elseif elapsed - medResult.medication.waitTime == 0 or medResult.medication.waitTime < elapsed %}
-            <li><em>{{ medResult.medication.name }}:</em>{{ elapsed - medResult.medication.waitTime == 0 ? '<span class="tag is-success">New results!</span>' : '' }}<span class="info"> {{ medResult.results|raw }}</span></li>
+            <li>{{ elapsed - medResult.medication.waitTime == 0 ? '<span class="tag is-success">New results!</span>' : '' }}<em>{{ medResult.medication.name }}:</em><span class="info"> {{ medResult.results|raw }}</span></li>
           {% elseif finished %}
             <li><em>{{ medResult.medication.name }}:</em><span class="info"> {{ medResult.results|raw }}</span></li>
           {% else %}
