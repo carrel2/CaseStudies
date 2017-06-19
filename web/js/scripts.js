@@ -139,7 +139,7 @@ function updateAdminCase(id) {
 function updateHotspots() {
 	$('.hotspot').each(function() {
 		$(this).on('click', function() {
-			$.get('/update/' + $(this).data('path'), function(data, s) {
+			$.get('/update/' + $(this).attr('data-path'), function(data, s) {
 				$('#checked').append(data);
 			});
 		});

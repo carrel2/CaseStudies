@@ -92,7 +92,7 @@ class HotSpotController extends Controller
 
 				$em->flush();
 
-				return new Response('<li><em>' . $hotspot->getName() . ':</em><span class="info">' . $info->getInfo() . '</span></li>');
+				return new Response('<li><em>' . $hotspot->getName() . ':</em><span class="info"> ' . $info->getInfo() . '</span></li>');
 			} else if( $info->getHotspot()->getId() == $hotspot->getId() && $user->getCurrentDay()->getHotspotsInfo()->contains($info) ) {
 				return new Response('');
 			}
