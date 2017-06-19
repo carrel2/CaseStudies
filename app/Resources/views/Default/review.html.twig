@@ -14,8 +14,11 @@
         }
       });
       $('.panel-block').each(function() {
-        if( $('[data-id=' + $(this).attr('id') + ']').has('span.tag').length > 0 ) {
+        if( $('[data-id=' + $(this).attr('id') + ']').has('span.tag.is-success').length > 0 ) {
           $(this).append('<span class="tag is-success">New results!</span>');
+        }
+        if( $('[data-id=' + $(this).attr('id') + ']').has('span.tag.is-info').length > 0 ) {
+          $(this).append('<span class="tag is-info">Awaiting results</span>');
         }
       });
     });
@@ -64,7 +67,7 @@
           {% elseif finished %}
             <li><em>{{ testResult.test.name }}:</em><span class="info"> {{ testResult.results|raw }}</span></li>
           {% else %}
-            <li><em>{{ testResult.test.name }}:</em> Awaiting results.</li>
+            <li><em>{{ testResult.test.name }}:</em><span class="tag is-info"> Awaiting results.</span></li>
           {% endif %}
         {% endfor %}
 
@@ -82,7 +85,7 @@
           {% elseif finished %}
             <li><em>{{ medResult.medication.name }}:</em><span class="info"> {{ medResult.results|raw }}</span></li>
           {% else %}
-            <li><em>{{ medResult.medication.name }}:</em> Awaiting results.</li>
+            <li><em>{{ medResult.medication.name }}:</em><span class="tag is-info"> Awaiting results.</span></li>
           {% endif %}
         {% endfor %}
 
