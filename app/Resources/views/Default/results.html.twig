@@ -8,11 +8,11 @@
       $(".panel-tabs a").on('click', function() {
         if( !$(this).hasClass('is-active') ) {
           $('[data-result="' + $('.panel-tabs a.is-active').attr('id') + '"]').addClass('is-hidden');
-          $('[data-id=' + $('[data-result="' + $('.panel-tabs a.is-active').attr('id') + '"].is-active').attr('id') + '].is-active').removeClass('is-active').addClass('is-hidden');
+          $('.box:not(".is-hidden")').addClass('is-hidden');
           $('.panel-tabs a.is-active').removeClass('is-active');
           $(this).addClass('is-active');
           $('[data-result="' + $(this).attr('id') + '"]').removeClass('is-hidden');
-          $($('[data-id=' + $('[data-result="' + $(this).attr('id') + '"]').attr('id') + ']').first()).removeClass('is-hidden').addClass('is-active');
+          $('[data-id=' + $('[data-result="' + $(this).attr('id') + '"].is-active').attr('id') + ']').removeClass('is-hidden')
         }
       });
 
@@ -41,7 +41,7 @@
 
       {% for result in results %}
         {% for day in result.results %}
-          <a id="result-{{ result.id }}-day-{{ loop.index }}" class="panel-block{% if loop.first and loop.parent.loop.first %} is-active{% endif %}{% if not loop.parent.loop.first %} is-hidden{% endif %}" data-result="result-{{ result.id }}">
+          <a id="result-{{ result.id }}-day-{{ loop.index }}" class="panel-block{% if loop.first %} is-active{% endif %}{% if not loop.parent.loop.first %} is-hidden{% endif %}" data-result="result-{{ result.id }}">
             <span class="panel-icon">
               <i class="fa fa-angle-right"></i>
             </span>
