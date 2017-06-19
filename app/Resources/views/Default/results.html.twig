@@ -8,11 +8,9 @@
       $(".panel-tabs a").on('click', function() {
         if( !$(this).hasClass('is-active') ) {
           $('[data-result="' + $('.panel-tabs a.is-active').attr('id') + '"]').addClass('is-hidden');
-          $('.box:not(".is-hidden")').addClass('is-hidden');
           $('.panel-tabs a.is-active').removeClass('is-active');
           $(this).addClass('is-active');
           $('[data-result="' + $(this).attr('id') + '"]').removeClass('is-hidden');
-          $('[data-id=' + $('[data-result="' + $(this).attr('id') + '"]').attr('id') + ']').removeClass('is-hidden')
         }
       });
 
