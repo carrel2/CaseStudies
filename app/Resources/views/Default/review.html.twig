@@ -15,10 +15,10 @@
       });
       $('.panel-block').each(function() {
         if( $('[data-id=' + $(this).attr('id') + ']').has('span.tag.is-success').length > 0 ) {
-          $(this).append('<span class="tag is-success">New results!</span>');
+          $(this).append('<span class="tag is-success">New!</span>');
         }
         if( $('[data-id=' + $(this).attr('id') + ']').has('span.tag.is-info').length > 0 ) {
-          $(this).append('<span class="tag is-info">Awaiting results</span>');
+          $(this).append('<span class="tag is-info">Pending</span>');
         }
       });
     });
@@ -99,9 +99,11 @@
 
 {% block footer %}
   {% if finished %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+    <div class="column is-one-third is-offset-one-third">
+      {{ form_start(form) }}
+      {{ form_widget(form) }}
+      {{ form_end(form) }}
+    </div>
   {% else %}
     {% set page = app.session.get('page') %}
     {% if page == 'review' %}
