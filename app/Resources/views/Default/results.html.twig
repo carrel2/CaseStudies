@@ -8,10 +8,11 @@
       $(".panel-tabs a").on('click', function() {
         if( !$(this).hasClass('is-active') ) {
           $('[data-result="' + $('.panel-tabs a.is-active').attr('id') + '"]').addClass('is-hidden');
+          $('[data-id=' + $('[data-result="' + $('.panel-tabs a.is-active').attr('id') + '"].is-active').attr('id') + '].is-active').removeClass('is-active').addClass('is-hidden');
           $('.panel-tabs a.is-active').removeClass('is-active');
           $(this).addClass('is-active');
           $('[data-result="' + $(this).attr('id') + '"]').removeClass('is-hidden');
-          $('[data-id=' + $('[data-result="' + $(this).attr('id') + '"]').first().attr('id') + ']').first().click();
+          $('[data-id=' + $('[data-result="' + $(this).attr('id') + '"].is-active').attr('id') + '].is-active').removeClass('is-hidden').first().addClass('is-active');
         }
       });
 
