@@ -27,13 +27,9 @@
 {% endblock %}
 
 {% block body %}
-	{% if user is defined %}
-		<h1 class="title is-1">Results for {{ user.username }}</h2>
-	{% endif %}
-
   <div class="column">
   	<nav class="panel">
-      <p class="panel-heading">Results</p>
+      <p class="panel-heading">Results{% if user is defined %} for {{ user.username }}{% endif %}</p>
 
       {% for result in results %}
         <div class="panel-tabs">
@@ -41,7 +37,7 @@
         </div>
 
         {% for day in result.results %}
-          <a id="result-{{ result.id }}-day-{{ loop.index }}" class="panel-block" data-result="result-{{ result.id }}">
+          <a id="result-{{ result.id }}-day-{{ loop.index }}" class="panel-block{% if loop.first %} is-active{% endif %}" data-result="result-{{ result.id }}">
             <span class="panel-icon">
               <i class="fa fa-angle-right"></i>
             </span>
