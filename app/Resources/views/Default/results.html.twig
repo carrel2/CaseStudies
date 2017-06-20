@@ -36,7 +36,7 @@
 
           $('[data-id="' + removeid + '"]').addClass('is-hidden');
           $('.panel-block.is-active').filter("[data-result='" + resultid + "']").removeClass('is-active');
-          $('.panel-block.is-active').filter("[data-result='" + resultid + "']").find('.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+          $($('.panel-block.is-active').filter("[data-result='" + resultid + "']")).find('.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder');
           $(this).addClass('is-active');
           $($(this).find('.fa-folder')).removeClass('fa-folder').addClass('fa-folder-open');
           $('[data-id="' + id + '"]').removeClass('is-hidden');
