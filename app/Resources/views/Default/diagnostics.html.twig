@@ -2,22 +2,19 @@
 
 {% form_theme form _self %}
 
-{%- block choice_widget_expanded -%}
+{#- block choice_widget_expanded -%}
 	<div {{ block('widget_container_attributes') }}>
 		{% for group_label,group in choices %}
-			<div class="control">
-				{%- if group is iterable -%}
-					<label class="label title is-4 checkbox"><u>{{ group_label|trans({}, translation_domain) }}</u>
-						{% for key, choice in group %}
-							{{- form_widget(form[key]) -}}
-							{{- form_label(form[key]) -}}
-						{% endfor %}
-					</label>
-				{%- endif -%}
-			</div>
+			{%- if group is iterable -%}
+				<label class="label title is-4"><u>{{ group_label|trans({}, translation_domain) }}</u></label>
+				{% for key, choice in group %}
+					{{- form_widget(form[key]) -}}
+					{{- form_label(form[key]) -}}
+				{% endfor %}
+			{%- endif -%}
 		{% endfor %}
 	</div>
-{%- endblock -%}
+{%- endblock -#}
 
 {% block body %}
   <div class="column">
