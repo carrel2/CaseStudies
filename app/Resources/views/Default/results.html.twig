@@ -7,17 +7,22 @@
     $(function() {
       $(".panel-tabs a").on('click', function() {
         if( !$(this).hasClass('is-active') ) {
-          $('[data-result="' + $('.panel-tabs a.is-active').attr('id') + '"]').each(function() {
+          $("[data-result='" + $(".panel-tabs a.is-active").attr('id') + "']").each(function() {
+            var id = $(this).attr("id");
             $(this).addClass('is-hidden');
-            $('[data-id="' + $(this).attr('id') + '"]').addClass('is-hidden');
+
+            $("[data-id='" + id + "']").addClass('is-hidden');
           });
+
           $('.panel-tabs a.is-active').removeClass('is-active');
           $(this).addClass('is-active');
+
           $('[data-result="' + $(this).attr('id') + '"]').each(function() {
+            var id = $(this).attr("id");
             $(this).removeClass('is-hidden');
 
             if( $(this).hasClass('is-active') ) {
-              $('[data-id="' + $(this).attr('id') + '"]').removeClass('is-hidden');
+              $('[data-id="' + id + '"]').removeClass('is-hidden');
             }
           });
         }
@@ -29,7 +34,7 @@
           $('.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder');
           $('.panel-block.is-active').removeClass('is-active');
           $(this).addClass('is-active');
-          $($(this).children('.fa-folder')).removeClass('fa-folder').addClass('fa-folder-open');
+          $($(this).find('.fa-folder')).removeClass('fa-folder').addClass('fa-folder-open');
           $('[data-id="' + $(this).attr('id') + '"]').removeClass('is-hidden');
         }
       });
