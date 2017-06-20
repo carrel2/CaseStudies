@@ -30,12 +30,16 @@
 
       $(".panel-block").on('click', function() {
         if( !$(this).hasClass('is-active') && !$(this).hasClass('is-danger') ) {
-          $('[data-id="' + $('.panel-block.is-active').attr('id') + '"]').addClass('is-hidden');
+          var remove-id = $('.panel-block.is-active').attr('id');
+          var id = $(this).attr("id");
+          var result-id = $(this).attr('data-result');
+
+          $('[data-id="' + remove-id + '"]').addClass('is-hidden');
           $('.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder');
-          $('.panel-block.is-active').removeClass('is-active');
+          $('.panel-block.is-active').filter("[data-result='" + result-id + "']").removeClass('is-active');
           $(this).addClass('is-active');
           $($(this).find('.fa-folder')).removeClass('fa-folder').addClass('fa-folder-open');
-          $('[data-id="' + $(this).attr('id') + '"]').removeClass('is-hidden');
+          $('[data-id="' + id + '"]').removeClass('is-hidden');
         }
       });
     });
