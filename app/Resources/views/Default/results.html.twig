@@ -31,12 +31,16 @@
       $(".panel-block").on('click', function() {
         if( !$(this).hasClass('is-active') && !$(this).hasClass('is-danger') ) {
           var resultid = $(this).attr("data-result");
+          var id = $(this).attr("id");
           var oldPanelBlock = $("[data-result='" + resultid + "'].panel-block.is-active");
+          var oldId = oldPanelBlock.attr("id");
 
           oldPanelBlock.find(".fa-folder-open").addClass("fa-folder").removeClass("fa-folder-open");
+          $("[data-id='" + oldId + "']").addClass("is-hidden");
           oldPanelBlock.removeClass("is-active");
           $(this).addClass("is-active");
           $(this).find(".fa-folder").addClass("fa-folder-open").removeClass("fa-folder");
+          $("[data-id='" + id + "']").removeClass("is-hidden");
         }
       });
     });
