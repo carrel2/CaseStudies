@@ -34,8 +34,7 @@
           var id = $(this).attr("id");
           var resultid = $(this).attr('data-result');
 
-          $('[data-id="' + removeid + '"]').addClass('is-hidden');
-          $('.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder');
+          $('[data-id="' + removeid + '"]').addClass('is-hidden').find('.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder');
           $('.panel-block.is-active').filter("[data-result='" + resultid + "']").removeClass('is-active');
           $(this).addClass('is-active');
           $($(this).find('.fa-folder')).removeClass('fa-folder').addClass('fa-folder-open');
