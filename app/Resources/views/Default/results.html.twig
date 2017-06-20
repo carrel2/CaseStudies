@@ -30,16 +30,13 @@
 
       $(".panel-block").on('click', function() {
         if( !$(this).hasClass('is-active') && !$(this).hasClass('is-danger') ) {
-          var removeid = $('.panel-block.is-active').attr('id');
-          var id = $(this).attr("id");
-          var resultid = $(this).attr('data-result');
+          var resultid = $(this).attr("data-result");
+          var oldPanelBlock = $("[data-result='" + resultid + "'].panel-block.is-active");
 
-          $('[data-id="' + removeid + '"]').addClass('is-hidden');
-          $('.panel-block.is-active').filter("[data-result='" + resultid + "']").removeClass('is-active');
-          $($('.panel-block.is-active').filter("[data-result='" + resultid + "']")).find('.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder');
-          $(this).addClass('is-active');
-          $($(this).find('.fa-folder')).removeClass('fa-folder').addClass('fa-folder-open');
-          $('[data-id="' + id + '"]').removeClass('is-hidden');
+          oldPanelBlock.find(".fa-folder-open").addClass("fa-folder").removeClass("fa-folder-open");
+          oldPanelBlock.removeClass("is-active");
+          $(this).addClass("is-active");
+          $(this).find(".fa-folder").addClass("fa-folder-open").removeClass("fa-folder");
         }
       });
     });
