@@ -15,7 +15,10 @@
           $(this).addClass('is-active');
           $('[data-result="' + $(this).attr('id') + '"]').each(function() {
             $(this).removeClass('is-hidden');
-            $('[data-id="' + $(this).attr('id') + '"].is-active').removeClass('is-hidden');
+
+            if( $(this).hasClass('is-active') ) {
+              $('[data-id="' + $(this).attr('id') + '"]').removeClass('is-hidden');
+            }
           });
         }
       });
@@ -26,7 +29,7 @@
           $('.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder');
           $('.panel-block.is-active').removeClass('is-active');
           $(this).addClass('is-active');
-          $(this).children('.fa-folder').removeClass('fa-folder').addClass('fa-folder-open');
+          $($(this).children('.fa-folder')).removeClass('fa-folder').addClass('fa-folder-open');
           $('[data-id="' + $(this).attr('id') + '"]').removeClass('is-hidden');
         }
       });
