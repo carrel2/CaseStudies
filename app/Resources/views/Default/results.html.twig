@@ -7,18 +7,26 @@
     $(function() {
       $(".panel-tabs a").on('click', function() {
         if( !$(this).hasClass('is-active') ) {
-          $('[data-result="' + $('.panel-tabs a.is-active').attr('id') + '"]').addClass('is-hidden');
+          $('[data-result="' + $('.panel-tabs a.is-active').attr('id') + '"]').each(function() {
+            $(this).addClass('is-hidden');
+            $('[data-id="' + $(this).attr('id') + '"]').addClass('is-hidden');
+          });
           $('.panel-tabs a.is-active').removeClass('is-active');
           $(this).addClass('is-active');
-          $('[data-result="' + $(this).attr('id') + '"]').removeClass('is-hidden');
+          $('[data-result="' + $(this).attr('id') + '"]').each(function() {
+            $(this).removeClass('is-hidden');
+            $('[data-id="' + $(this).attr('id') + '"].is-active').removeClass('is-hidden');
+          });
         }
       });
 
       $(".panel-block").on('click', function() {
         if( !$(this).hasClass('is-active') && !$(this).hasClass('is-danger') ) {
           $('[data-id="' + $('.panel-block.is-active').attr('id') + '"]').addClass('is-hidden');
+          $('.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder');
           $('.panel-block.is-active').removeClass('is-active');
           $(this).addClass('is-active');
+          $(this).children('fa-folder').removeClass('fa-folder').addClass('fa-folder-open');
           $('[data-id="' + $(this).attr('id') + '"]').removeClass('is-hidden');
         }
       });
@@ -41,7 +49,7 @@
         {% for day in result.results %}
           <a id="result-{{ result.id }}-day-{{ loop.index }}" class="panel-block{% if loop.first %} is-active{% endif %}{% if not loop.parent.loop.first %} is-hidden{% endif %}" data-result="result-{{ result.id }}">
             <span class="panel-icon">
-              <i class="fa fa-angle-right"></i>
+              <i class="fa fa-folder{% if loop.first %}-open{% endif %}"></i>
             </span>
             Day {{ loop.index }}
           </a>
