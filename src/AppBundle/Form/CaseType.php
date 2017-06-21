@@ -53,7 +53,7 @@ class CaseType extends AbstractType
 				$form->add('create', SubmitType::class, array(
 					'attr' => array(
 						'form' => 'case',
-						//'class' => 'button is-success',
+						'class' => 'is-success',
 					),
 				));
 			} else {
@@ -79,26 +79,26 @@ class CaseType extends AbstractType
 					))
 					->add('add day', ButtonType::class, array(
 						'attr' => array(
-							'class' => 'button addButton is-success',
+							'class' => 'addButton is-success',
 							'onclick' => 'addButtonClickListener(this)',
 						)
 					))
 					->add('update', SubmitType::class, array(
 						'attr' => array(
 							'form' => 'case',
-							//'class' => 'button is-success',
+							'class' => 'is-success',
 						),
 					))
 					->add('delete', SubmitType::class, array(
 						'attr' => array(
 							'form' => 'case',
-							//'class' => 'button is-danger',
+							'class' => 'is-danger',
 							'onclick' => 'return confirmDelete();',
 						),
 					))
 					->add('restore', SubmitType::class, array(
 						'attr' => array(
-							//'class' => 'button is-info',
+							'class' => 'is-info',
 							'onclick' => 'updateAdminCase(); return false;',
 						),
 					));

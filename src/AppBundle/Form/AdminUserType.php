@@ -22,10 +22,10 @@ class AdminUserType extends AbstractType
 				)
 			))
 			->add('edit', SubmitType::class, array(
-				//'attr' => array('class' => 'button is-success'),
+				'attr' => array('class' => 'is-success'),
 			))
 			->add('delete', SubmitType::class, array(
-				//'attr' => array('class' => 'button is-danger'),
+				'attr' => array('class' => 'is-danger'),
 			));
 	}
 }

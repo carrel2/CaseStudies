@@ -26,7 +26,7 @@ class AnimalType extends AbstractType
         )
       ))
       ->add('submit', SubmitType::class, array(
-        //'attr' => array('class' => 'button is-success'),
+        'attr' => array('class' => 'is-success'),
       ));
   }
 

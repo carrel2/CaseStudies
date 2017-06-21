@@ -26,7 +26,7 @@ class DefaultType extends AbstractType
 				))
 					->add('abandon', SubmitType::class, array(
 						'attr' => array(
-							//'class' => 'button is-danger',
+							'class' => 'is-danger',
 							'onclick' => 'return confirmDelete();',
 						)
 					));
@@ -35,12 +35,8 @@ class DefaultType extends AbstractType
 						'class' => 'AppBundle:CaseStudy',
 						'choice_label' => 'title',
 						'attr' => array(
-							//'class' => 'input',
 							'onchange' => 'updateCase()',
 						),
-						'label_attr' => array(
-							//'class' => 'label',
-						)
 					))
 					->add('location', ChoiceType::class, array(
 						'choices' => array(
@@ -48,17 +44,12 @@ class DefaultType extends AbstractType
 							'Hospital' => 'Hospital',
 						),
 						'expanded' => true,
-						'attr' => array(
-							//'class' => 'radio',
-						),
 						'label_attr' => array(
-							'class' => 'label tooltip',
+							'class' => 'tooltip',
 							'title' => 'Location affects the workflow of the application',
 						)
 					))
-					->add('start', SubmitType::class, array(
-						//'attr' => array('class' => 'button'),
-					));
+					->add('start', SubmitType::class);
 			}
 		});
 	}
