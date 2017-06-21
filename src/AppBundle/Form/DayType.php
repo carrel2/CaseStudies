@@ -17,7 +17,11 @@ class DayType extends AbstractType
 	{
 		$builder->add('hotspotsinfo', CollectionType::class, array(
 				'entry_type' => HotspotType::class,
-				'entry_options' => array('attr' => array('animal' => array_key_exists('animal', $options['attr']) ? $options['attr']['animal'] : null)),
+				'entry_options' => array(
+					'attr' => array(
+						'animal' => array_key_exists('animal', $options['attr']) ? $options['attr']['animal'] : null,
+						'class' => 'message',
+				)),
 				'allow_add' => true,
 				'allow_delete' => true,
 				'by_reference' => false,
