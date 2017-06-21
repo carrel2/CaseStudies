@@ -16,9 +16,6 @@ class TherapeuticResultsType extends AbstractType
 		$builder->add('medication', EntityType::class, array(
 				'class' => 'AppBundle:Medication',
 				'choice_label' => 'name',
-				'attr' => array(
-					'class' => 'select',
-				),
 				'group_by' => function($val, $key, $index) {
 					return $val->getGroup();
 				},
@@ -29,11 +26,7 @@ class TherapeuticResultsType extends AbstractType
 					'autoParagraph' => false,
 				)
 			))
-			->add('waitTime', null, array(
-				'attr' => array(
-					'class' => 'input',
-				)
-			));
+			->add('waitTime');
 	}
 
 	public function configureOptions(OptionsResolver $resolver)

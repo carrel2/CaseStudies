@@ -17,9 +17,6 @@ class AdminUserType extends AbstractType
 				'class' => 'AppBundle:User',
 				'choice_label' => 'username',
 				'expanded' => true,
-				'label_attr' => array(
-					'class' => 'label',
-				)
 			))
 			->add('edit', SubmitType::class, array(
 				'attr' => array('class' => 'is-success'),

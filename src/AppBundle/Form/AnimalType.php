@@ -16,15 +16,8 @@ class AnimalType extends AbstractType
     $builder->add('image', FileType::class, array(
         'data' => '',
         'required' => false,
-        'label_attr' => array(
-          'class' => 'label',
-        )
       ))
-      ->add('name', null, array(
-        'label_attr' => array(
-          'class' => 'label',
-        )
-      ))
+      ->add('name')
       ->add('submit', SubmitType::class, array(
         'attr' => array('class' => 'is-success'),
       ));

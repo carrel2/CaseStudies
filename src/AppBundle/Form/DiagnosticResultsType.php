@@ -16,9 +16,6 @@ class DiagnosticResultsType extends AbstractType
 		$builder->add('test', EntityType::class, array(
 				'class' => 'AppBundle:Test',
 				'choice_label' => 'name',
-				'attr' => array(
-					'class' => 'select',
-				),
 				'group_by' => function($val, $key, $index) {
 					return $val->getGroup();
 				},
@@ -29,11 +26,7 @@ class DiagnosticResultsType extends AbstractType
 					'autoParagraph' => false,
 				)
 			))
-			->add('waitTime', null, array(
-				'attr' => array(
-					'class' => 'input',
-				)
-			));
+			->add('waitTime');
 	}
 
 	public function configureOptions(OptionsResolver $resolver)

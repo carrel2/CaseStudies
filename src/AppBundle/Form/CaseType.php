@@ -21,19 +21,12 @@ class CaseType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-		->add('title', TextType::class, array(
-			'label_attr' => array(
-				'class' => 'label case_title_label',
-			)
-		))
+		->add('title', TextType::class)
 		->add('description', CKEditorType::class, array(
 			'config' => array(
 				'autoParagraph' => false,
 				'disallowedContent' => 'button embed form iframe input link meta textarea video script',
 			),
-			'label_attr' => array(
-				'class' => 'label case_description_label',
-			)
 		))
 		->add('animal', EntityType::class, array(
 			'class' => 'AppBundle:Animal',
@@ -41,9 +34,6 @@ class CaseType extends AbstractType
 			'attr' => array(
 				'onchange' => 'updateSelects("hotspot");',
 			),
-			'label_attr' => array(
-				'class' => 'label case_animal_label',
-			)
 		))
 		->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) use($options) {
 			$case = $event->getData();
@@ -61,16 +51,12 @@ class CaseType extends AbstractType
 					'entry_type' => DayType::class,
 					'entry_options' => array(
 						'attr' => array_key_exists('data', $options) ? array('animal' => $options['data']->getAnimal()->getId()) : array(),
-						'label_attr' => array(
-							'class' => 'label day_label',
-						)
 					),
 					'allow_add' => true,
 					'allow_delete' => true,
 					'by_reference' => false,
 					'prototype_name' => '__day__',
 					'attr' => array(
-						'class' => 'select collection days',
 						'data-type' => 'day'
 					),
 					'label_attr' => array(

@@ -26,13 +26,10 @@ class DayType extends AbstractType
 					'class' => 'collection hotspots',
 					'data-type' => 'hotspot'
 				),
-				'label_attr' => array(
-					'class' => 'label hotspots_info_label',
-				)
 			))
 			->add('add hotspot', ButtonType::class, array(
 				'attr' => array(
-					'class' => 'button addButton is-success',
+					'class' => 'addButton is-success',
 					'onclick' => 'addButtonClickListener(this)',)))
 			->add('tests', CollectionType::class, array(
 				'entry_type' => DiagnosticResultsType::class,
@@ -40,22 +37,13 @@ class DayType extends AbstractType
 				'allow_delete' => true,
 				'by_reference' => false,
 				'prototype_name' => '__diagnostic-result__',
-				'entry_options' => array(
-					'attr' => array(
-						//'class' => 'checkbox',
-					),
-				),
 				'attr' => array(
-					//'class' => 'field collection tests',
 					'data-type' => 'diagnostic result'
 				),
-				'label_attr' => array(
-					'class' => 'label tests_label',
-				)
 			))
 			->add('add diagnostic results', ButtonType::class, array(
 				'attr' => array(
-					//'class' => 'button addButton is-success',
+					'class' => 'addButton is-success',
 					'onclick' => 'addButtonClickListener(this)',)))
 			->add('medications', CollectionType::class, array(
 				'entry_type' => TherapeuticResultsType::class,
@@ -63,22 +51,13 @@ class DayType extends AbstractType
 				'allow_delete' => true,
 				'by_reference' => false,
 				'prototype_name' => '__therapeutic-result__',
-				'entry_options' => array(
-					'attr' => array(
-						//'class' => 'checkbox',
-					),
-				),
 				'attr' => array(
-					//'class' => 'field collection medications',
 					'data-type' => 'therapeutic result'
 				),
-				'label_attr' => array(
-					'class' => 'label medications_label',
-				)
 			))
 			->add('add therapeutic results', ButtonType::class, array(
 				'attr' => array(
-					'class' => 'button addButton is-success',
+					'class' => 'addButton is-success',
 					'onclick' => 'addButtonClickListener(this)',)));
 	}
 

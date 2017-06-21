@@ -31,9 +31,6 @@ class AdminType extends AbstractType
 			->add('case', EntityType::class, array(
 				'class' => 'AppBundle:CaseStudy',
 				'choice_label' => 'title',
-				'label_attr' => array(
-					'class' => 'label case_label',
-				)
 			));
 	}
 }
