@@ -20,7 +20,7 @@ class DayType extends AbstractType
 				'entry_options' => array(
 					'attr' => array(
 						'animal' => array_key_exists('animal', $options['attr']) ? $options['attr']['animal'] : null,
-						'class' => 'message',
+						'class' => 'notification',
 				)),
 				'allow_add' => true,
 				'allow_delete' => true,

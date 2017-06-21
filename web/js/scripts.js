@@ -64,7 +64,7 @@ function addButtonClickListener(e) {
 		holder.children(':nth-child(' + (index + 1) + ')').children('label').text( 'Day ' + ( index + 1 ) );
 	}
 
-	holder.children('div:last-child').append('<button type="button" class="remove-button">&#x2e3</button>');
+	holder.children('div:last-child').append('<button type="button" class="delete remove-button"></button>');
 
 	if( t == "hotspot" ) {
 		updateSelects(t);
