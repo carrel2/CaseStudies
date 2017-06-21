@@ -21,15 +21,12 @@ class AnimalType extends AbstractType
         )
       ))
       ->add('name', null, array(
-        'attr' => array(
-          'class' => 'input',
-        ),
         'label_attr' => array(
           'class' => 'label',
         )
       ))
       ->add('submit', SubmitType::class, array(
-        'attr' => array('class' => 'button is-success'),
+        //'attr' => array('class' => 'button is-success'),
       ));
   }
 

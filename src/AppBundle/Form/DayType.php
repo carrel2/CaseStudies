@@ -23,7 +23,7 @@ class DayType extends AbstractType
 				'by_reference' => false,
 				'prototype_name' => '__hotspot__',
 				'attr' => array(
-					'class' => 'select collection hotspots',
+					'class' => 'collection hotspots',
 					'data-type' => 'hotspot'
 				),
 				'label_attr' => array(
@@ -42,11 +42,11 @@ class DayType extends AbstractType
 				'prototype_name' => '__diagnostic-result__',
 				'entry_options' => array(
 					'attr' => array(
-						'class' => 'checkbox',
+						//'class' => 'checkbox',
 					),
 				),
 				'attr' => array(
-					'class' => 'field collection tests',
+					//'class' => 'field collection tests',
 					'data-type' => 'diagnostic result'
 				),
 				'label_attr' => array(
@@ -55,7 +55,7 @@ class DayType extends AbstractType
 			))
 			->add('add diagnostic results', ButtonType::class, array(
 				'attr' => array(
-					'class' => 'button addButton is-success',
+					//'class' => 'button addButton is-success',
 					'onclick' => 'addButtonClickListener(this)',)))
 			->add('medications', CollectionType::class, array(
 				'entry_type' => TherapeuticResultsType::class,
@@ -65,11 +65,11 @@ class DayType extends AbstractType
 				'prototype_name' => '__therapeutic-result__',
 				'entry_options' => array(
 					'attr' => array(
-						'class' => 'checkbox',
+						//'class' => 'checkbox',
 					),
 				),
 				'attr' => array(
-					'class' => 'field collection medications',
+					//'class' => 'field collection medications',
 					'data-type' => 'therapeutic result'
 				),
 				'label_attr' => array(

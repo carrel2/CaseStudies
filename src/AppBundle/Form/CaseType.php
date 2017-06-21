@@ -22,9 +22,6 @@ class CaseType extends AbstractType
 	{
 		$builder
 		->add('title', TextType::class, array(
-			'attr' => array(
-				'class' => 'input',
-			),
 			'label_attr' => array(
 				'class' => 'label case_title_label',
 			)
@@ -42,7 +39,6 @@ class CaseType extends AbstractType
 			'class' => 'AppBundle:Animal',
 			'choice_label' => 'name',
 			'attr' => array(
-				'class' => 'select',
 				'onchange' => 'updateSelects("hotspot");',
 			),
 			'label_attr' => array(
@@ -57,7 +53,7 @@ class CaseType extends AbstractType
 				$form->add('create', SubmitType::class, array(
 					'attr' => array(
 						'form' => 'case',
-						'class' => 'button is-success',
+						//'class' => 'button is-success',
 					),
 				));
 			} else {
@@ -90,19 +86,19 @@ class CaseType extends AbstractType
 					->add('update', SubmitType::class, array(
 						'attr' => array(
 							'form' => 'case',
-							'class' => 'button is-success',
+							//'class' => 'button is-success',
 						),
 					))
 					->add('delete', SubmitType::class, array(
 						'attr' => array(
 							'form' => 'case',
-							'class' => 'button is-danger',
+							//'class' => 'button is-danger',
 							'onclick' => 'return confirmDelete();',
 						),
 					))
 					->add('restore', SubmitType::class, array(
 						'attr' => array(
-							'class' => 'button is-info',
+							//'class' => 'button is-info',
 							'onclick' => 'updateAdminCase(); return false;',
 						),
 					));

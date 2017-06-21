@@ -21,12 +21,12 @@ class DefaultType extends AbstractType
 			if( $case ) {
 				$form->add('resume', SubmitType::class, array(
 					'attr' => array(
-						'class' => 'button is-success',
+						//'class' => 'button is-success',
 					)
 				))
 					->add('abandon', SubmitType::class, array(
 						'attr' => array(
-							'class' => 'button is-danger',
+							//'class' => 'button is-danger',
 							'onclick' => 'return confirmDelete();',
 						)
 					));
@@ -35,11 +35,11 @@ class DefaultType extends AbstractType
 						'class' => 'AppBundle:CaseStudy',
 						'choice_label' => 'title',
 						'attr' => array(
-							'class' => 'input',
+							//'class' => 'input',
 							'onchange' => 'updateCase()',
 						),
 						'label_attr' => array(
-							'class' => 'label',
+							//'class' => 'label',
 						)
 					))
 					->add('location', ChoiceType::class, array(
@@ -49,7 +49,7 @@ class DefaultType extends AbstractType
 						),
 						'expanded' => true,
 						'attr' => array(
-							'class' => 'radio',
+							//'class' => 'radio',
 						),
 						'label_attr' => array(
 							'class' => 'label tooltip',
@@ -57,7 +57,7 @@ class DefaultType extends AbstractType
 						)
 					))
 					->add('start', SubmitType::class, array(
-						'attr' => array('class' => 'button'),
+						//'attr' => array('class' => 'button'),
 					));
 			}
 		});
