@@ -46,14 +46,7 @@ class DayController extends Controller
 		}
 
 		$form = $this->createFormBuilder()
-			->add('diagnosis', TextareaType::class, array(
-				'attr' => array(
-					'class' => 'textarea',
-				),
-				'label_attr' => array(
-					'class' => 'label',
-				)
-			))
+			->add('diagnosis', TextareaType::class)
 			->add('finish', SubmitType::class, array(
 				'attr' => array(
 					'class' => 'button',

@@ -2421,6 +2421,8 @@ input[type="submit"].button {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .field.is-grouped > .control {
