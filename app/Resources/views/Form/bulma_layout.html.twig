@@ -50,19 +50,38 @@
 
     {%- set attr = attr|merge({class: (attr.class|default('') ~ ' control')|trim}) -%}
     <div {{ block('widget_container_attributes') }}>
-        {%- for child in form -%}
-            {{- form_widget(child, {
-                inline_choice: inline_choice|default(false),
-                translation_domain: choice_translation_domain,
-            }) -}}
-        {%- endfor -%}
-        {{- block('form_errors') -}}
+      {% for group_label,group in choices %}
+        {%- if group is iterable -%}
+          <label class="label title is-4"><u>{{ group_label|trans({}, translation_domain) }}</u></label>
+          {%- for key,choice in group -%}
+              {{- form_widget(form[key], {
+                  inline_choice: inline_choice|default(false),
+                  translation_domain: choice_translation_domain,
+              }) -}}
+          {%- endfor -%}
+        {% endif %}
+      {% endfor %}
+      {{- block('form_errors') -}}
     </div>
 
     {%- if inline_choice|default(false) == true -%}
         </p>
     {%- endif -%}
 {%- endblock choice_widget_expanded -%}
+
+{#- block choice_widget_expanded -%}
+	<div {{ block('widget_container_attributes') }}>
+		{% for group_label,group in choices %}
+			{%- if group is iterable -%}
+				<label class="label title is-4"><u>{{ group_label|trans({}, translation_domain) }}</u></label>
+				{% for key, choice in group %}
+					{{- form_widget(form[key]) -}}
+					{{- form_label(form[key]) -}}
+				{% endfor %}
+			{%- endif -%}
+		{% endfor %}
+	</div>
+{%- endblock -#}
 
 {%- block textarea_widget -%}
     <p {{ block('form_widget_container_attributes') }}>
