@@ -114,7 +114,7 @@ function updateAdminCase(id) {
 	$('#caseInfo').load('/getCase/' + id, function(responseTxt, statusTxt, xhr){
 		$('.collection > div').each(function(i, e) {
 			var t = $(this).parent().data('type');
-			$(this).append('<button type="button" class="remove-button">&#x2e3</button>');
+			$(this).append('<button type="button" class="delete remove-button"></button>');
 		});
 
 		$('.collection.days > div > label').each(function() {
