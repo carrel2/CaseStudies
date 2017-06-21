@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block body %}
-	<div class="columns">
+	<div class="column is-12">
 		<a class="button is-pulled-right is-primary" href="{{ path('createCase') }}">Create a new case</a>
 
 		{{ form_label(form.case) }}
@@ -19,7 +19,7 @@
 		{{ form_widget(form.case, {'attr': {'onchange': 'updateAdminCase()'}} ) }}
 	</div>
 
-	<div id="caseInfo" class="columns"></div>
+	<div id="caseInfo" class="column"></div>
 {% endblock %}
 
 {% block footer %}
