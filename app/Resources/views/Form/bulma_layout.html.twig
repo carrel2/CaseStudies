@@ -50,6 +50,7 @@
 
     {%- set attr = attr|merge({class: (attr.class|default('') ~ ' control')|trim}) -%}
     <div {{ block('widget_container_attributes') }}>
+      {{ dump(choices) }}
       {% for group_label,group in choices %}
         {%- if group is iterable -%}
           <label class="label title is-4"><u>{{ group_label|trans({}, translation_domain) }}</u></label>
