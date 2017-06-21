@@ -11,13 +11,15 @@
 {% endblock %}
 
 {% block body %}
-	<a class="button is-pulled-right is-primary" href="{{ path('createCase') }}">Create a new case</a>
+	<div class="columns">
+		<a class="button is-pulled-right is-primary" href="{{ path('createCase') }}">Create a new case</a>
 
-	{{ form_label(form.case) }}
-	{{ form_errors(form.case) }}
-	{{ form_widget(form.case, {'attr': {'onchange': 'updateAdminCase()'}} ) }}
+		{{ form_label(form.case) }}
+		{{ form_errors(form.case) }}
+		{{ form_widget(form.case, {'attr': {'onchange': 'updateAdminCase()'}} ) }}
+	</div>
 
-	<div id="caseInfo"></div>
+	<div id="caseInfo" class="columns"></div>
 {% endblock %}
 
 {% block footer %}
