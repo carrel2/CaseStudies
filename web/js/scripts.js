@@ -21,13 +21,13 @@ function addRemoveButtonClickListener() {
 			var editor = $(this).siblings("div.cke");
 
 			$(editor).each(function() {
-				delete window.CKEDITOR.instances[$(this).attr('id')];
+				delete window.CKEDITOR.instances[$(this).prev().attr('id')];
 				$(this).remove();
 			});
 
 			$(this).prev().attr('style', '');
 
-			stack.push([$(this).parent().index(), $(this).parent().parent().attr('id'), $(this).parent().html()]);
+			stack.push([$(this).parent().index(), $(this).parent().parent().attr('id'), $(this).parent().clone(true)]);
 
 			$(this).parent().slideUp(function() {
 				$(this).remove();
@@ -104,7 +104,7 @@ function updateAdminCase(id) {
 			$('#' + array[1]).children().eq(array[0]).after('<div>' + array[2] + '</div>');
 		}
 
-		addRemoveButtonClickListener();
+		//addRemoveButtonClickListener();
 
 		if( stack.length == 0 ) {
 			$(this).hide();
