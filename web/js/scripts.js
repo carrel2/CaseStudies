@@ -97,11 +97,11 @@ function updateAdminCase(id) {
 		var array = stack.pop();
 
 		if( array[0] == 0 ) {
-			$('#' + array[1]).prepend('<div>' + array[2] + '</div>');
+			$('#' + array[1]).prepend( $(array[2]) );
 		} else if( array[0] > $('#' + array[1]).children().length - 1 ) {
-			$('#' + array[1]).append('<div>' + array[2] + '</div>');
+			$('#' + array[1]).append( $(array[2]) );
 		} else {
-			$('#' + array[1]).children().eq(array[0]).after('<div>' + array[2] + '</div>');
+			$('#' + array[1]).children().eq(array[0]).after( $(array[2]) );
 		}
 
 		//addRemoveButtonClickListener();
