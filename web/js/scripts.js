@@ -19,15 +19,17 @@ function addRemoveButtonClickListener() {
 		$(this).off("click mouseout mouseover");
 		$(this).on('click',function() {
 			var editor = $(this).siblings("div.cke");
+			var id = "";
 
-			$(this).prev().attr('style', '');
-
-			stack.push([$(this).parent().index(), $(this).parent().parent().attr('id'), $(this).parent().clone(true), editor.prev().attr('id')]);
+			$(this).parent().attr('style', '');
 
 			$(editor).each(function() {
-				delete window.CKEDITOR.instances[$(this).prev().attr('id')];
+				id = $(this).prev().attr('id');
+				delete window.CKEDITOR.instances[id];
 				$(this).remove();
 			});
+
+			stack.push([$(this).parent().index(), $(this).parent().parent().attr('id'), $(this).parent().clone(true), id]);
 
 			$(this).parent().slideUp(function() {
 				$(this).remove();
