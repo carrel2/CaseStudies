@@ -18,10 +18,10 @@ function addRemoveButtonClickListener() {
 	$('.remove-button').each(function() {
 		$(this).off("click mouseout mouseover");
 		$(this).on('click',function() {
-			var editor = $(this).prev().find('.cke');
+			var editor = $(this).siblings("div.cke");
 
 			$(editor).each(function() {
-				delete window.CKEDITOR.instances[$(this).prev().attr('id')];
+				delete window.CKEDITOR.instances[$(this).attr('id')];
 				$(this).remove();
 			});
 
