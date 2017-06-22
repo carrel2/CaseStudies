@@ -20,14 +20,14 @@ function addRemoveButtonClickListener() {
 		$(this).on('click',function() {
 			var editor = $(this).siblings("div.cke");
 
+			$(this).prev().attr('style', '');
+
+			stack.push([$(this).parent().index(), $(this).parent().parent().attr('id'), $(this).parent().clone(true), editor.prev().attr('id')]);
+
 			$(editor).each(function() {
 				delete window.CKEDITOR.instances[$(this).prev().attr('id')];
 				$(this).remove();
 			});
-
-			$(this).prev().attr('style', '');
-
-			stack.push([$(this).parent().index(), $(this).parent().parent().attr('id'), $(this).parent().clone(true)]);
 
 			$(this).parent().slideUp(function() {
 				$(this).remove();
@@ -103,6 +103,8 @@ function updateAdminCase(id) {
 		} else {
 			$('#' + array[1]).children().eq(array[0]).after( $(array[2]) );
 		}
+
+		window.CKEDITOR.replace(array[3], {"toolbar":[["Cut","Copy","Paste","PasteText","PasteFromWord","-","Undo","Redo"],["Scayt"],["Link","Unlink"],["Table","SpecialChar"],["Maximize"],["Source"],"\/",["Bold","Italic","Strike","-","RemoveFormat"],["NumberedList","BulletedList","-","Outdent","Indent","-","Blockquote"],["Styles","Format","About"]],"autoParagraph":false,"language":"en"});
 
 		//addRemoveButtonClickListener();
 
