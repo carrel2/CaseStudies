@@ -47,7 +47,7 @@ function addRemoveButtonClickListener() {
 }
 
 function addButtonClickListener(e) {
-	holder = $(e).parent().prev().children('.collection');
+	holder = $(e).closest('div').prev();
 
 	holder.data('index', holder.children('div').length);
 
