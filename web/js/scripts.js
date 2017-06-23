@@ -32,6 +32,9 @@ function addRemoveButtonClickListener() {
 			stack.push([$(this).parent().index(), $(this).parent().parent().attr('id'), $(this).parent().clone(true), id]);
 
 			$(this).parent().slideUp(function() {
+				if( $(this).prev().is('label') ) {
+					$(this).prev().remove();
+				}
 				$(this).remove();
 			});
 
