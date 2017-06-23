@@ -151,10 +151,11 @@ function updateHotspots() {
 function moveSubmits() {
 	var form = $('form').attr('id');
 	$('button[type=submit].button').each(function() {
-		$('#footer').append($(this));
+		$('#footer .level-left').append($(this));
 		$(this)
 			.attr('form', form)
-			.addClass('is-pulled-left');
+			.addClass('is-pulled-left')
+			.wrap('<div class="level-item"></div>');
 	});
 }
 
