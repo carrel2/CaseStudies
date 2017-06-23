@@ -57,6 +57,7 @@ class CaseType extends AbstractType
 					'by_reference' => false,
 					'prototype_name' => '__day__',
 					'attr' => array(
+						'class' => 'collection days',
 						'data-type' => 'day'
 					),
 					'label_attr' => array(

@@ -119,20 +119,22 @@ function updateAdminCase(id) {
 			$(this).append('<button type="button" class="delete remove-button"></button>');
 		});
 
-		$('.collection.days > div > label').each(function() {
+		$('.collection.days > label').each(function() {
 			$(this).text( "Day " + ( 1 + parseInt($(this).text()) ) );
 		});
 
-		if( $('#footer').children().length == 1 ) {
-			var form = $('form').attr('id');
+		moveSubmits();
 
-			$('button[type=submit].button').each(function() {
-				$('#footer').append($(this));
-				$(this).attr('form', form);
-			});
-		} else {
-			$('#body button[type=submit].button').remove();
-		}
+		// if( $('#footer').children().length == 1 ) {
+		// 	var form = $('form').attr('id');
+		//
+		// 	$('button[type=submit].button').each(function() {
+		// 		$('#footer').append($(this));
+		// 		$(this).attr('form', form);
+		// 	});
+		// } else {
+		// 	$('#body button[type=submit].button').remove();
+		// }
 
 		addRemoveButtonClickListener();
 	});
@@ -149,11 +151,16 @@ function updateHotspots() {
 }
 
 function moveSubmits() {
-	var form = $('form').attr('id');
-	$('button[type=submit].button').each(function() {
-		$('#footer .level-left').append($(this));
-		$(this).attr('form', form).addClass('is-pulled-left').wrap('<div class="level-item"></div>');
-	});
+	if( $('#footer .level-left').children().length == 0 ) {
+		var form = $('form').attr('id');
+
+		$('button[type=submit].button').each(function() {
+			$('#footer .level-left').append($(this));
+			$(this).attr('form', form).wrap('<div class="level-item"></div>');
+		});
+	} else {
+		$('#body button[type=submit].button').remove();
+	}
 }
 
 function updateSelects(type) {
