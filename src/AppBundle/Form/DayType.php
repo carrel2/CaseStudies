@@ -37,6 +37,11 @@ class DayType extends AbstractType
 					'onclick' => 'addButtonClickListener(this)',)))
 			->add('tests', CollectionType::class, array(
 				'entry_type' => DiagnosticResultsType::class,
+				'entry_options' => array(
+					'attr' => array(
+						'class' => 'notification',
+					)
+				),
 				'allow_add' => true,
 				'allow_delete' => true,
 				'by_reference' => false,
@@ -51,6 +56,11 @@ class DayType extends AbstractType
 					'onclick' => 'addButtonClickListener(this)',)))
 			->add('medications', CollectionType::class, array(
 				'entry_type' => TherapeuticResultsType::class,
+				'entry_options' => array(
+					'attr' => array(
+						'class' => 'notification',
+					)
+				),
 				'allow_add' => true,
 				'allow_delete' => true,
 				'by_reference' => false,

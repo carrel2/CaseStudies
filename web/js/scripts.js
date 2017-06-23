@@ -103,12 +103,10 @@ function updateAdminCase(id) {
 		} else if( array[0] > $('#' + array[1]).children().length - 1 ) {
 			$('#' + array[1]).append( $(array[2]) );
 		} else {
-			$('#' + array[1]).children().eq(array[0]).after( $(array[2]) );
+			$('#' + array[1]).children().eq(array[0]).before( $(array[2]) );
 		}
 
 		window.CKEDITOR.replace(array[3], {"toolbar":[["Cut","Copy","Paste","PasteText","PasteFromWord","-","Undo","Redo"],["Scayt"],["Link","Unlink"],["Table","SpecialChar"],["Maximize"],["Source"],"\/",["Bold","Italic","Strike","-","RemoveFormat"],["NumberedList","BulletedList","-","Outdent","Indent","-","Blockquote"],["Styles","Format","About"]],"autoParagraph":false,"language":"en"});
-
-		//addRemoveButtonClickListener();
 
 		if( stack.length == 0 ) {
 			$(this).hide();
