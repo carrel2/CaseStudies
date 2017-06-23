@@ -47,6 +47,7 @@ class DayType extends AbstractType
 				'by_reference' => false,
 				'prototype_name' => '__diagnostic-result__',
 				'attr' => array(
+					'class' => 'collection tests',
 					'data-type' => 'diagnostic result'
 				),
 			))
@@ -66,6 +67,7 @@ class DayType extends AbstractType
 				'by_reference' => false,
 				'prototype_name' => '__therapeutic-result__',
 				'attr' => array(
+					'class' => 'collection medications',
 					'data-type' => 'therapeutic result'
 				),
 			))
