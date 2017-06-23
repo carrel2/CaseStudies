@@ -50,7 +50,10 @@ class CaseType extends AbstractType
 				$form->add('days', CollectionType::class, array(
 					'entry_type' => DayType::class,
 					'entry_options' => array(
-						'attr' => array_key_exists('data', $options) ? array('animal' => $options['data']->getAnimal()->getId()) : array(),
+						'attr' => array(
+							'class' => 'notification',
+							array_key_exists('data', $options) ? 'animal' => $options['data']->getAnimal()->getId() : ,
+						),
 					),
 					'allow_add' => true,
 					'allow_delete' => true,
