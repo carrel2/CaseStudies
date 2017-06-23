@@ -6,6 +6,9 @@
 	<script>
 		$(function(){
 			updateAdminCase({{ app.session.remove('case') }});
+			moveSubmits();
+
+			$('#footer');
 		});
 	</script>
 {% endblock %}
