@@ -52,7 +52,7 @@ class CaseType extends AbstractType
 					'entry_options' => array(
 						'attr' => array(
 							'class' => 'notification',
-							array_key_exists('data', $options) ? 'animal' => $options['data']->getAnimal()->getId() : ,
+							'animal' => array_key_exists('data', $options) ? $options['data']->getAnimal()->getId() : null,
 						),
 					),
 					'allow_add' => true,
