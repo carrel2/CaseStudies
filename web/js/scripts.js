@@ -152,10 +152,7 @@ function moveSubmits() {
 	var form = $('form').attr('id');
 	$('button[type=submit].button').each(function() {
 		$('#footer .level-left').append($(this));
-		$(this)
-			.attr('form', form)
-			.addClass('is-pulled-left')
-			.wrap('<div class="level-item"></div>');
+		$(this).attr('form', form).addClass('is-pulled-left').wrap('<div class="level-item"></div>');
 	});
 }
 
