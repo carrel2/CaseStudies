@@ -41,7 +41,7 @@ $(function(){
 				$('img#animal').data('x1', selection.x1);
 				$('img#animal').data('y1', selection.y1);
 				$('img#animal').data('x2', selection.x2);
-				$('img#animal').data('y2', selection.y2);
+				$('img#animal').data('y2', selection.y2); // TODO: prevent selections from overlapping
 				$('img#animal').data('selected', true);
 				$('input#name').focus();
 		}
