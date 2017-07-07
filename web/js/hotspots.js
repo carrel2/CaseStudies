@@ -1,4 +1,6 @@
 $(function(){
+	var selections = [];
+
 	$('#addHotspot').on('click', function() {
 		if( $('img#animal').data('selected') && $('input#name').val() != "" ) {
 			var x1 = $('img#animal').data('x1');
@@ -27,6 +29,8 @@ $(function(){
 	});
 
 	$('div.hotspot').each(function() {
+		selections.push([[$(this).css('top'), $(this).css('left')], [$(this).css('top') + $(this).css('height'), $(this).css('left') + $(this).css('width')]]);
+
 		$(this).hover(function() {
 			$('.' + $(this).attr('class').replace(' ', '.')).css({'border': 'solid 1px black', 'z-index': '3'});
 		},
@@ -37,6 +41,16 @@ $(function(){
 
 	var inst = $('img#animal').imgAreaSelect({
 		instance: true,
+		onSelectStart: function(img, selection) {
+			for(s in selections) {
+				if( selection.x1 > s[0][0] && selection.y1 > s[0][1] && selection.x2 < s[1][0] && selection.y2 < s[1][1] ) {
+					inst.cancelSelection();
+				}
+			}
+		},
+		onSelectChange: function(img, selection) {
+			// check if selection overlaps another selection
+		}
 		onSelectEnd: function(img, selection) {
 				$('img#animal').data('x1', selection.x1);
 				$('img#animal').data('y1', selection.y1);
