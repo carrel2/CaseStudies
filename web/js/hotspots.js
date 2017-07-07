@@ -28,9 +28,11 @@ $(function(){
 		inst.cancelSelection();
 	});
 
-	$('div.hotspot').each(function() {
-		selections.push([[$(this).css('top'), $(this).css('left')], [$(this).css('top') + $(this).css('height'), $(this).css('left') + $(this).css('width')]]);
+	$('#image div.hotspot').each(function() {
+		selections.push([[$(this).position().top, $(this).position().left], [$(this).position().top + $(this).height(), $(this).position().left + $(this).width()]]);
+	});
 
+	$('div.hotspot').each(function() {
 		$(this).hover(function() {
 			$('.' + $(this).attr('class').replace(' ', '.')).css({'border': 'solid 1px black', 'z-index': '3'});
 		},
