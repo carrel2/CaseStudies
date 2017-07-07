@@ -49,7 +49,11 @@ $(function(){
 			}
 		},
 		onSelectChange: function(img, selection) {
-			// check if selection overlaps another selection
+			for(s in selections) {
+				if( selection.x1 > s[0][0] && selection.y1 > s[0][1] || selection.x2 < s[1][0] && selection.y2 < s[1][1] ) {
+					inst.cancelSelection();
+				}
+			}
 		},
 		onSelectEnd: function(img, selection) {
 				$('img#animal').data('x1', selection.x1);
