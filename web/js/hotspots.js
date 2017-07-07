@@ -50,7 +50,7 @@ $(function(){
 		},
 		onSelectChange: function(img, selection) {
 			for(s in selections) {
-				if( selection.x1 > s[0][0] && selection.y1 > s[0][1] || selection.x2 < s[1][0] && selection.y2 < s[1][1] ) {
+				if( selection.x1 > s[0][0] && selection.y1 > s[0][1] && selection.x2 < s[1][0] && selection.y2 < s[1][1] ) {
 					inst.cancelSelection();
 				}
 			}
