@@ -50,7 +50,7 @@ $(function(){
 		},
 		onSelectChange: function(img, selection) {
 			// check if selection overlaps another selection
-		}
+		},
 		onSelectEnd: function(img, selection) {
 				$('img#animal').data('x1', selection.x1);
 				$('img#animal').data('y1', selection.y1);
