@@ -74,4 +74,6 @@ $(function(){
 				$('input#name').focus();
 		}
 	});
+
+	$('body').append(inst.getOptions());
 });
