@@ -60,9 +60,8 @@ $(function(){
 				if( selection.x1 <= selections[s][1][0] && selection.x2 > selections[s][1][0] && ( selection.y1 > selections[s][0][1] && selection.y1 < selections[s][1][1] || selection.y2 > selections[s][0][1] && selection.y2 < selections[s][1][1] ) ) {
 					inst.setSelection(selections[s][1][0] + 1, selection.y1, selections[s][1][0] + (selection.x2 - selection.x1) + 1, selection.y2);
 				} else if( selection.x2 >= selections[s][0][0] && selection.x1 < selections[s][0][0] && ( selection.y1 > selections[s][0][1] && selection.y1 < selections[s][1][1] || selection.y2 > selections[s][0][1] && selection.y2 < selections[s][1][1] ) ) {
-					inst.setSelection(selections[s][0][0] - (selection.x2 - selection.x1) - 1, selection.y1, selections[s][0][0] - 1, selection.y2);				}
-
-				if( selection.y1 <= selections[s][1][1] && selection.y2 > selections[s][1][1] && ( selection.x1 > selections[s][0][0] && selection.x1 < selections[s][1][0] || selection.x2 > selections[s][0][0] && selection.x2 < selections[s][1][0] ) ) {
+					inst.setSelection(selections[s][0][0] - (selection.x2 - selection.x1) - 1, selection.y1, selections[s][0][0] - 1, selection.y2);
+				} else if( selection.y1 <= selections[s][1][1] && selection.y2 > selections[s][1][1] && ( selection.x1 > selections[s][0][0] && selection.x1 < selections[s][1][0] || selection.x2 > selections[s][0][0] && selection.x2 < selections[s][1][0] ) ) {
 					inst.setSelection(selection.x1, selections[s][1][1] + 1, selection.x2, selections[s][1][1] + (selection.y2 - selection.y1) + 1);
 				} else if( selection.y2 >= selections[s][0][1] && selection.y1 < selections[s][0][1] && ( selection.x1 > selections[s][0][0] && selection.x1 < selections[s][1][0] || selection.x2 > selections[s][0][0] && selection.x2 < selections[s][1][0] ) ) {
 					inst.setSelection(selection.x1, selections[s][0][1] - (selection.y2 - selection.y1) - 1, selection.x2, selections[s][0][1] - 1);
