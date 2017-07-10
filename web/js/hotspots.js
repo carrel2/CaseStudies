@@ -64,6 +64,8 @@ $(function(){
 					selection.y2 -= 1;
 				}
 			}
+
+			inst.update();
 		},
 		onSelectEnd: function(img, selection) {
 				$('img#animal').data('x1', selection.x1);
@@ -74,6 +76,4 @@ $(function(){
 				$('input#name').focus();
 		}
 	});
-
-	$('body').append(inst.getOptions());
 });
