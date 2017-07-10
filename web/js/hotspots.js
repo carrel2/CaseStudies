@@ -54,18 +54,20 @@ $(function(){
 			for(s in selections) {
 				if( selection.x1 <= selections[s][1][0] && selection.x2 > selections[s][1][0] && ( selection.y1 > selections[s][0][1] && selection.y1 < selections[s][1][1] || selection.y2 > selections[s][0][1] && selection.y2 < selections[s][1][1] ) ) {
 					selection.x1 += 1;
+					inst.update();
 				} else if( selection.x2 >= selections[s][0][0] && selection.x1 < selections[s][0][0] && ( selection.y1 > selections[s][0][1] && selection.y1 < selections[s][1][1] || selection.y2 > selections[s][0][1] && selection.y2 < selections[s][1][1] ) ) {
 					selection.x2 -= 1;
+					inst.update();
 				}
 
 				if( selection.y1 >= selections[s][1][1] && selection.y2 < selections[s][1][1] && ( selection.x1 > selections[s][0][0] && selection.x1 < selections[s][1][0] || selection.x2 > selections[s][0][0] && selection.x2 < selections[s][1][0] ) ) {
 					selection.y1 += 1;
+					inst.update();
 				} else if( selection.y2 <= selections[s][0][1] && selection.y1 > selections[s][0][1] && ( selection.x1 > selections[s][0][0] && selection.x1 < selections[s][1][0] || selection.x2 > selections[s][0][0] && selection.x2 < selections[s][1][0] ) ) {
 					selection.y2 -= 1;
+					inst.update();
 				}
 			}
-
-			inst.update();
 		},
 		onSelectEnd: function(img, selection) {
 				$('img#animal').data('x1', selection.x1);
