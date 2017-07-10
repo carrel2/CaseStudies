@@ -43,6 +43,7 @@ $(function(){
 
 	var inst = $('img#animal').imgAreaSelect({
 		instance: true,
+		parent: '#image',
 		onSelectStart: function(img, selection) {
 			for(s in selections) {
 				if( selection.x1 > selections[s][0][0] && selection.y1 > selections[s][0][1] && selection.x2 < selections[s][1][0] && selection.y2 < selections[s][1][1] ) {
