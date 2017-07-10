@@ -1,6 +1,10 @@
 $(function(){
 	var selections = [];
 
+	$('#image').on('mousemove', function(event) {
+		$('#debug').children(':first-child').text(event.pageX + ', ' + event.pageY);
+	});
+
 	$('#addHotspot').on('click', function() {
 		if( $('img#animal').data('selected') && $('input#name').val() != "" ) {
 			var x1 = $('img#animal').data('x1');
@@ -52,19 +56,20 @@ $(function(){
 			}
 		},
 		onSelectChange: function(img, selection) {
-			for(s in selections) {
-				if( selection.x1 <= selections[s][1][0] && selection.x2 > selections[s][1][0] && ( selection.y1 > selections[s][0][1] && selection.y1 < selections[s][1][1] || selection.y2 > selections[s][0][1] && selection.y2 < selections[s][1][1] ) ) {
-					inst.cancelSelection();
-				} else if( selection.x2 >= selections[s][0][0] && selection.x1 < selections[s][0][0] && ( selection.y1 > selections[s][0][1] && selection.y1 < selections[s][1][1] || selection.y2 > selections[s][0][1] && selection.y2 < selections[s][1][1] ) ) {
-					inst.cancelSelection();
-				}
-
-				if( selection.y1 >= selections[s][1][1] && selection.y2 < selections[s][1][1] && ( selection.x1 > selections[s][0][0] && selection.x1 < selections[s][1][0] || selection.x2 > selections[s][0][0] && selection.x2 < selections[s][1][0] ) ) {
-					inst.cancelSelection();
-				} else if( selection.y2 <= selections[s][0][1] && selection.y1 > selections[s][0][1] && ( selection.x1 > selections[s][0][0] && selection.x1 < selections[s][1][0] || selection.x2 > selections[s][0][0] && selection.x2 < selections[s][1][0] ) ) {
-					inst.cancelSelection();
-				}
-			}
+			// for(s in selections) {
+			// 	if( selection.x1 <= selections[s][1][0] && selection.x2 > selections[s][1][0] && ( selection.y1 > selections[s][0][1] && selection.y1 < selections[s][1][1] || selection.y2 > selections[s][0][1] && selection.y2 < selections[s][1][1] ) ) {
+			// 		inst.cancelSelection();
+			// 	} else if( selection.x2 >= selections[s][0][0] && selection.x1 < selections[s][0][0] && ( selection.y1 > selections[s][0][1] && selection.y1 < selections[s][1][1] || selection.y2 > selections[s][0][1] && selection.y2 < selections[s][1][1] ) ) {
+			// 		inst.cancelSelection();
+			// 	}
+			//
+			// 	if( selection.y1 >= selections[s][1][1] && selection.y2 < selections[s][1][1] && ( selection.x1 > selections[s][0][0] && selection.x1 < selections[s][1][0] || selection.x2 > selections[s][0][0] && selection.x2 < selections[s][1][0] ) ) {
+			// 		inst.cancelSelection();
+			// 	} else if( selection.y2 <= selections[s][0][1] && selection.y1 > selections[s][0][1] && ( selection.x1 > selections[s][0][0] && selection.x1 < selections[s][1][0] || selection.x2 > selections[s][0][0] && selection.x2 < selections[s][1][0] ) ) {
+			// 		inst.cancelSelection();
+			// 	}
+			// }
+			$('#debug').children(':last-child').text( selection.x1 + ', ' + selection.y1);
 		},
 		onSelectEnd: function(img, selection) {
 				$('img#animal').data('x1', selection.x1);
