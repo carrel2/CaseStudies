@@ -33,7 +33,7 @@ $(function(){
 	});
 
 	$('#image div.hotspot').each(function() {
-		selections.push([[$(this).position().top, $(this).position().left], [$(this).position().top + $(this).height(), $(this).position().left + $(this).width()]]);
+		selections.push([[$(this).position().left, $(this).position().top], [$(this).position().left + $(this).width(), $(this).position().top + $(this).height()]]);
 	});
 
 	$('div.hotspot').each(function() {
@@ -56,19 +56,19 @@ $(function(){
 			}
 		},
 		onSelectChange: function(img, selection) {
-			// for(s in selections) {
-			// 	if( selection.x1 <= selections[s][1][0] && selection.x2 > selections[s][1][0] && ( selection.y1 > selections[s][0][1] && selection.y1 < selections[s][1][1] || selection.y2 > selections[s][0][1] && selection.y2 < selections[s][1][1] ) ) {
-			// 		inst.cancelSelection();
-			// 	} else if( selection.x2 >= selections[s][0][0] && selection.x1 < selections[s][0][0] && ( selection.y1 > selections[s][0][1] && selection.y1 < selections[s][1][1] || selection.y2 > selections[s][0][1] && selection.y2 < selections[s][1][1] ) ) {
-			// 		inst.cancelSelection();
-			// 	}
-			//
-			// 	if( selection.y1 >= selections[s][1][1] && selection.y2 < selections[s][1][1] && ( selection.x1 > selections[s][0][0] && selection.x1 < selections[s][1][0] || selection.x2 > selections[s][0][0] && selection.x2 < selections[s][1][0] ) ) {
-			// 		inst.cancelSelection();
-			// 	} else if( selection.y2 <= selections[s][0][1] && selection.y1 > selections[s][0][1] && ( selection.x1 > selections[s][0][0] && selection.x1 < selections[s][1][0] || selection.x2 > selections[s][0][0] && selection.x2 < selections[s][1][0] ) ) {
-			// 		inst.cancelSelection();
-			// 	}
-			// }
+			for(s in selections) {
+				if( selection.x1 <= selections[s][1][0] && selection.x2 > selections[s][1][0] && ( selection.y1 > selections[s][0][1] && selection.y1 < selections[s][1][1] || selection.y2 > selections[s][0][1] && selection.y2 < selections[s][1][1] ) ) {
+					inst.cancelSelection();
+				} else if( selection.x2 >= selections[s][0][0] && selection.x1 < selections[s][0][0] && ( selection.y1 > selections[s][0][1] && selection.y1 < selections[s][1][1] || selection.y2 > selections[s][0][1] && selection.y2 < selections[s][1][1] ) ) {
+					inst.cancelSelection();
+				}
+
+				if( selection.y1 >= selections[s][1][1] && selection.y2 < selections[s][1][1] && ( selection.x1 > selections[s][0][0] && selection.x1 < selections[s][1][0] || selection.x2 > selections[s][0][0] && selection.x2 < selections[s][1][0] ) ) {
+					inst.cancelSelection();
+				} else if( selection.y2 <= selections[s][0][1] && selection.y1 > selections[s][0][1] && ( selection.x1 > selections[s][0][0] && selection.x1 < selections[s][1][0] || selection.x2 > selections[s][0][0] && selection.x2 < selections[s][1][0] ) ) {
+					inst.cancelSelection();
+				}
+			}
 			$('#debug').children(':last-child').text( selection.x1 + ', ' + selection.y1);
 		},
 		onSelectEnd: function(img, selection) {
