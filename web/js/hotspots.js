@@ -68,6 +68,7 @@ $(function(){
 					inst.setSelection(selection.x1, selections[s][0][1] - (selection.y2 - selection.y1) - 1, selection.x2, selections[s][0][1] - 1);
 				}
 			}
+			inst.update();
 			$('#debug').children(':last-child').text( selection.x1 + ', ' + selection.y1);
 		},
 		onSelectEnd: function(img, selection) {
