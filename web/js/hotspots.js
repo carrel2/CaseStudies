@@ -73,8 +73,10 @@ $(function(){
 					newY2 = selections[s][0][1] - 1;
 				}
 
-				inst.setSelection(newX1, newY1, newX2, newY2);
-
+				if( newX1 && newX2 && newY1 && newY2 ) {
+					inst.setSelection(newX1, newY1, newX2, newY2);
+				}
+				
 				inst.update();
 			}
 			$('#debug').children(':last-child').text( selection.x1 + ', ' + selection.y1);
