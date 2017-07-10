@@ -56,7 +56,7 @@ $(function(){
 			}
 		},
 		onSelectChange: function(img, selection) {
-			var newX1 selection.x1, newX2 = selection.x2, newY1 = selection.y1, newY2 = selection.y2;
+			var newX1 = selection.x1, newX2 = selection.x2, newY1 = selection.y1, newY2 = selection.y2;
 
 			for(s in selections) {
 				if( selection.x1 <= selections[s][1][0] && selection.x2 > selections[s][1][0] && ( selection.y1 > selections[s][0][1] && selection.y1 < selections[s][1][1] || selection.y2 > selections[s][0][1] && selection.y2 < selections[s][1][1] ) ) {
