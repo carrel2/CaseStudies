@@ -56,7 +56,7 @@ $(function(){
 			}
 		},
 		onSelectChange: function(img, selection) {
-			var newX1 = selection.x1, newX2 = selection.x2, newY1 = selection.y1, newY2 = selection.y2;
+			var newX1, newX2, newY1, newY2;
 
 			for(s in selections) {
 				if( selection.x1 <= selections[s][1][0] && selection.x2 > selections[s][1][0] && ( selection.y1 > selections[s][0][1] && selection.y1 < selections[s][1][1] || selection.y2 > selections[s][0][1] && selection.y2 < selections[s][1][1] ) ) {
@@ -72,13 +72,25 @@ $(function(){
 					// inst.setSelection(selection.x1, selections[s][0][1] - (selection.y2 - selection.y1) - 1, selection.x2, selections[s][0][1] - 1);
 					newY2 = selections[s][0][1] - 1;
 				}
-
-				if( newX1 && newX2 && newY1 && newY2 ) {
-					inst.setSelection(newX1, newY1, newX2, newY2);
-				}
-
-				inst.update();
+// TODO: maintain width and height
 			}
+
+			if( newX1 && !newX2 ) {
+				newX2 = newX1 + selection.width;
+			} else if( newX2 && !newX1 ) {
+				newX1 = newX2 - selection.width;
+			}
+
+			if( newY1 && !newY2 ) {
+				newY2 = newY1 + selection.height;
+			} else if( newY2 && !newY1 ) {
+				newY1 = newY2 - selection.height;
+			}
+
+			inst.setSelection( newX1, newY1, newX2, newY2 );
+
+			inst.update();
+
 			$('#debug').children(':last-child').text( selection.x1 + ', ' + selection.y1);
 		},
 		onSelectEnd: function(img, selection) {
