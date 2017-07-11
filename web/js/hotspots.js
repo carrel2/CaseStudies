@@ -73,7 +73,7 @@ $(function(){
 			if( newX1 && !newX2 ) {
 				newX2 = newX1 + selection.width;
 			} else if( newX2 && !newX1 ) {
-				newX1 = (newX2 - selection.width < 0) ? newX2 - selection.width : 0;
+				newX1 = (newX2 - selection.width >= 0) ? newX2 - selection.width : 0;
 			} else {
 				newX1 = selection.x1;
 				newX2 = selection.x2;
@@ -82,7 +82,7 @@ $(function(){
 			if( newY1 && !newY2 ) {
 				newY2 = newY1 + selection.height;
 			} else if( newY2 && !newY1 ) {
-				newY1 = (newY2 - selection.height < 0) ? newY2 - selection.height : 0;
+				newY1 = (newY2 - selection.height >= 0) ? newY2 - selection.height : 0;
 			} else {
 				newY1 = selection.y1;
 				newY2 = selection.y2;
