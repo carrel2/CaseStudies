@@ -79,12 +79,18 @@ $(function(){
 				newX2 = newX1 + selection.width;
 			} else if( newX2 && !newX1 ) {
 				newX1 = newX2 - selection.width;
+			} else {
+				newX1 = selection.x1;
+				newX2 = selection.x2;
 			}
 
 			if( newY1 && !newY2 ) {
 				newY2 = newY1 + selection.height;
 			} else if( newY2 && !newY1 ) {
 				newY1 = newY2 - selection.height;
+			} else {
+				newY1 = selection.y1;
+				newY2 = selection.y2;
 			}
 
 			inst.setSelection( newX1, newY1, newX2, newY2 );
