@@ -1,10 +1,6 @@
 $(function(){
 	var selections = [];
 
-	$('#image').on('mousemove', function(event) {
-		$('#debug').children(':first-child').text(event.pageX + ', ' + event.pageY);
-	});
-
 	$('#addHotspot').on('click', function() {
 		if( $('img#animal').data('selected') && $('input#name').val() != "" ) {
 			var x1 = $('img#animal').data('x1');
@@ -91,14 +87,12 @@ $(function(){
 			inst.setSelection( newX1, newY1, newX2, newY2 );
 
 			inst.update();
-
-			$('#debug').children(':last-child').text( selection.x1 + ', ' + selection.y1);
 		},
 		onSelectEnd: function(img, selection) {
 				$('img#animal').data('x1', selection.x1);
 				$('img#animal').data('y1', selection.y1);
 				$('img#animal').data('x2', selection.x2);
-				$('img#animal').data('y2', selection.y2); // TODO: prevent selections from overlapping
+				$('img#animal').data('y2', selection.y2);
 				$('img#animal').data('selected', true);
 				$('input#name').focus();
 		}
