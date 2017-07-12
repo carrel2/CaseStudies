@@ -6,6 +6,16 @@
 	<script>
 		$(function() {
 			updateHotspots();
+
+			$('.modal-background').on('click', function() {
+				$('.modal').toggleClass('is-active');
+			});
+
+			function modal(event) {
+				event.preventDefault();
+
+				$('.modal').toggleClass('is-active');
+			}
 		});
 	</script>
 {% endblock %}
@@ -30,10 +40,17 @@
 			<li>{{ flash }}: No information available</li>
 		{% endfor %}
 	</div>
+
+	<div id="modal" class="modal">
+		<div class="modal-background"></div>
+		<div class="modal-content">
+
+		</div>
+	</div>
 {% endblock %}
 
 {% block footer %}
-	<a href="{{ path('diagnostics') }}">Continue</a>
+	<a href="{{ path('diagnostics') }}" onclick="modal(event)">Continue</a>
 	<a href="{{ path('review') }}">Review</a>
 
 	{{ parent() }}
