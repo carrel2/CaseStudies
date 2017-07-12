@@ -24,6 +24,7 @@
     <div id="image" class="image" style="position: relative; height: 600px;">
       <img id="animal" src="{{ asset('images/' ~ animal.image) }}" data-id="{{ animal.id }}" style="position: absolute" />
       {% for hotspot in animal.hotspots %}
+        {# TODO: scale hotspot divs based on image size #}
         <div class="hotspot {{ hotspot.name|lower|replace({' ': '-'}) }}" style="background: rgba(255,255,255,.4); position: absolute; top: {{ hotspot.y1 }}px; left: {{ hotspot.x1 }}px; height: {{ hotspot.height }}px; width: {{ hotspot.width }}px;"></div>
       {% endfor %}
     </div>
