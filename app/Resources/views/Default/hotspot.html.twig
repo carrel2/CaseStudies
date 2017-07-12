@@ -15,7 +15,8 @@
 		function modal(event) {
 			event.preventDefault();
 
-			$('.modal-content').toggleClass('is-active').prepend( $('#checked').children() );
+			$('.modal').toggleClass('is-active');
+			$('.modal-content').prepend( $('#checked').children() );
 		}
 	</script>
 {% endblock %}
