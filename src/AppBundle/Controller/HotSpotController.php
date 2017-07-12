@@ -167,4 +167,11 @@ class HotSpotController extends Controller
 
 		return new Response($response);
 	}
+
+	/**
+	 * @Route("/eval/differentials/{explanation}", name="differentials")
+	 */
+	public function differentialsAction(Request $r, $explanation) {
+		$session = $r->getSession();
+	}
 }

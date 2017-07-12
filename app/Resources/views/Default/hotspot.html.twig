@@ -11,7 +11,13 @@
 				window.location.assign( "{{ path("diagnostics") }}" );
 			});
 			$('#continue').on('click', function() {
-				// save textarea input
+				// save textarea input, don't allow empty input
+				var input = $('#differentials').val();
+
+				if( input.length ) {
+					document.cookie = "differentials=" + input;
+					window.location.assign( "{{ path("diagnostics") }}" );
+				}
 			})
 		});
 
@@ -56,7 +62,7 @@
 				<div class="field">
 					<label class="label">Explanation</label>
 					<p class="control">
-						<textarea class="textarea"></textarea>
+						<textarea id="differentials" class="textarea"></textarea>
 					</p>
 				</div>
 			</section>
