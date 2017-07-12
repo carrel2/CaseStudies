@@ -16,7 +16,7 @@
 
 				if( input.length ) {
 					document.cookie = "differentials=" + input;
-					window.location.assign( "{{ path("diagnostics") }}" );
+					window.location.assign( "{{ path("differentials") }}" );
 				}
 			})
 		});
@@ -51,7 +51,7 @@
 		{% endfor %}
 	</div>
 
-	<div id="modal" class="modal">
+	<div id="modal" class="modal"> {# TODO: keep modal up on refresh #}
 		<div class="modal-background"></div>
 		<div class="modal-card">
 			<header class="modal-card-head">
