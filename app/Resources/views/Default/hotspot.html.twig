@@ -16,7 +16,7 @@
 			event.preventDefault();
 
 			$('.modal').toggleClass('is-active');
-			$('.modal-content').prepend( $('#checked').children() );
+			$('.modal-card-body').prepend( $('#checked').children() );
 		}
 	</script>
 {% endblock %}
@@ -44,12 +44,20 @@
 
 	<div id="modal" class="modal">
 		<div class="modal-background"></div>
-		<div class="modal-content">
-			<div class="field">
-				<p class="control">
-					<textarea class="textarea"></textarea>
-				</p>
-			</div>
+		<div class="modal-card">
+			<header class="modal-card-header">
+				<p class="modale-card-title">Title</p>
+			</header>
+			<section class="modal-card-body">
+				<div class="field">
+					<p class="control">
+						<textarea class="textarea"></textarea>
+					</p>
+				</div>
+			</section>
+			<footer class="modal-card-footer">
+				<a class="button is-succes">Continue</a>
+			</footer>
 		</div>
 	</div>
 {% endblock %}
