@@ -10,13 +10,13 @@
 			$('.modal-background').on('click', function() {
 				$('.modal').toggleClass('is-active');
 			});
-
-			function modal(event) {
-				event.preventDefault();
-
-				$('.modal').toggleClass('is-active');
-			}
 		});
+
+		function modal(event) {
+			event.preventDefault();
+
+			$('.modal').toggleClass('is-active');
+		}
 	</script>
 {% endblock %}
 
@@ -50,7 +50,7 @@
 {% endblock %}
 
 {% block footer %}
-	<a href="{{ path('diagnostics') }}" onclick="modal(event)">Continue</a>
+	<a onclick="modal(event)">Continue</a>
 	<a href="{{ path('review') }}">Review</a>
 
 	{{ parent() }}
