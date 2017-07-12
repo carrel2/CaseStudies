@@ -15,7 +15,7 @@
 		function modal(event) {
 			event.preventDefault();
 
-			$('.modal').toggleClass('is-active').prepend( $('#checked').children() );
+			$('.modal-content').toggleClass('is-active').prepend( $('#checked').children() );
 		}
 	</script>
 {% endblock %}
@@ -44,7 +44,11 @@
 	<div id="modal" class="modal">
 		<div class="modal-background"></div>
 		<div class="modal-content">
-
+			<div class="field">
+				<p class="control">
+					<textarea class="textarea"></textarea>
+				</p>
+			</div>
 		</div>
 	</div>
 {% endblock %}
