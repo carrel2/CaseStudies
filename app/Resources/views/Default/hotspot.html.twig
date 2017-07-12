@@ -7,9 +7,12 @@
 		$(function() {
 			updateHotspots();
 
-			$('.modal-background').on('click', function() {
+			$('.delete').on('click', function() {
 				window.location.assign( "{{ path("diagnostics") }}" );
 			});
+			$('#continue').on('click', function() {
+				// save textarea input
+			})
 		});
 
 		function modal(event) {
@@ -46,17 +49,19 @@
 		<div class="modal-background"></div>
 		<div class="modal-card">
 			<header class="modal-card-head">
-				<p class="modale-card-title">Title</p>
+				<p class="modal-card-title">Problems/differentials</p>
+				<button class="delete"></button>
 			</header>
 			<section class="modal-card-body">
 				<div class="field">
+					<label class="label">Explanation</label>
 					<p class="control">
 						<textarea class="textarea"></textarea>
 					</p>
 				</div>
 			</section>
 			<footer class="modal-card-foot">
-				<a class="button is-succes">Continue</a>
+				<a id="continue" class="button is-success">Continue</a>
 			</footer>
 		</div>
 	</div>
