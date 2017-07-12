@@ -8,14 +8,14 @@
 			updateHotspots();
 
 			$('.modal-background').on('click', function() {
-				$('.modal').toggleClass('is-active');
+				window.location.assign( {{ path("diagnostics") }} );
 			});
 		});
 
 		function modal(event) {
 			event.preventDefault();
 
-			$('.modal').toggleClass('is-active');
+			$('.modal').toggleClass('is-active').prepend( $('#checked').children() );
 		}
 	</script>
 {% endblock %}
