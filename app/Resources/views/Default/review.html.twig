@@ -15,10 +15,10 @@
       });
       $('.panel-block').each(function() {
         if( $('[data-id=' + $(this).attr('id') + ']').has('span.tag.is-success').length > 0 ) {
-          $(this).prepend('<span class="tag is-success">New!</span>');
+          $(this).children(':last-child').after('<span class="tag is-success">New!</span>');
         }
         if( $('[data-id=' + $(this).attr('id') + ']').has('span.tag.is-info').length > 0 ) {
-          $(this).prepend('<span class="tag is-info">Pending</span>');
+          $(this).children(':last-child').after('<span class="tag is-info">Pending</span>');
         }
       });
     });
