@@ -29,7 +29,7 @@
 
 					if( input.length ) {
 						$.post( "{{ path("differentials") }}", {explanation: input}, function(result, status, xhr) {
-							location.href = {{ path("diagnostics") }};
+							location.href = "{{ path("diagnostics") }}";
 						});
 						//window.location.assign( "{{ path("differentials", { 'moveOn': true }) }}" );
 					}
