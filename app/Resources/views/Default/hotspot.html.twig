@@ -29,9 +29,9 @@
 
 					if( input.length ) {
 						$.post( "{{ path("differentials") }}", {explanation: input}, function(result) {
-							
+
 						});
-						window.location.assign( "{{ path("differentials", { 'moveOn': true }) }}" );
+						//window.location.assign( "{{ path("differentials", { 'moveOn': true }) }}" );
 					}
 				});
 			});
