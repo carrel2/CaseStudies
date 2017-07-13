@@ -185,6 +185,6 @@ class HotSpotController extends Controller
 
 		$session->remove('modalUp');
 
-		return $this->redirectToRoute('diagnostics');
+		return new Response();
 	}
 }
