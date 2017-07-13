@@ -169,13 +169,13 @@ class HotSpotController extends Controller
 	}
 
 	/**
-	 * @Route("/eval/differentials", name="differentials")
+	 * @Route("/eval/differentials/{moveOn}", name="differentials")
 	 */
-	public function differentialsAction(Request $r) {
+	public function differentialsAction(Request $r, $moveOn = false) {
 		$session = $r->getSession();
 		$diff = $r->cookies->get('differentials');
 
-		if( $diff ) {
+		if( $diff || $moveOn ) {
 			$session->remove('modalUp');
 			$session->set('differentials', $diff);
 			$r->cookies->remove('differentials');

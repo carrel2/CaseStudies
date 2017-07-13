@@ -22,14 +22,14 @@
 				$('.modal-card-body').prepend( $('#checked').children() );
 
 				$('.delete').on('click', function() {
-					window.location.assign( "{{ path("differentials") }}" );
+					window.location.assign( "{{ path("differentials", { 'moveOn': true }) }}" );
 				});
 				$('#continue').on('click', function() {
 					var input = $('#differentials').val();
 
 					if( input.length ) {
 						document.cookie = "differentials=" + input;
-						window.location.assign( "{{ path("differentials") }}" );
+						window.location.assign( "{{ path("differentials", { 'moveOn': true }) }}" );
 					}
 				});
 			});
