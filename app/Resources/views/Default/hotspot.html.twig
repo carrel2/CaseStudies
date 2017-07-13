@@ -28,8 +28,8 @@
 					var input = $('#differentials').val();
 
 					if( input.length ) {
-						$.post( "{{ path("differentials") }}", {explanation: input}, function(result) {
-							$('html').html(result)
+						$.post( "{{ path("differentials") }}", {explanation: input}, function(result, status, xhr) {
+							location.href = xhr.getResponseHeader("Location");
 						});
 						//window.location.assign( "{{ path("differentials", { 'moveOn': true }) }}" );
 					}
