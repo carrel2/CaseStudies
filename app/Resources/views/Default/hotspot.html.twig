@@ -28,7 +28,9 @@
 					var input = $('#differentials').val();
 
 					if( input.length ) {
-						document.cookie = "differentials=" + input;
+						$.post( "{{ path("differentials") }}", {explanation: input}, function(result) {
+							
+						});
 						window.location.assign( "{{ path("differentials", { 'moveOn': true }) }}" );
 					}
 				});
