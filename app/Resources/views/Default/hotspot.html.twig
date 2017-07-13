@@ -7,25 +7,32 @@
 		$(function() {
 			updateHotspots();
 
-			$('.delete').on('click', function() {
-				window.location.assign( "{{ path("diagnostics") }}" );
-			});
-			$('#continue').on('click', function() {
-				// save textarea input, don't allow empty input
-				var input = $('#differentials').val();
-
-				if( input.length ) {
-					document.cookie = "differentials=" + input;
-					window.location.assign( "{{ path("differentials") }}" );
-				}
-			})
+			{% if app.session.get('modalUp', false) %}
+				modal();
+			{% endif %}
 		});
 
-		function modal(event) {
-			event.preventDefault();
+		function modal(event=NULL) {
+			if( event ) {
+				event.preventDefault();
+			}
 
 			$('.modal').toggleClass('is-active');
-			$('.modal-card-body').prepend( $('#checked').children() );
+			$('.modal').load( "{{ path('differentials') }}", function() {
+				$('.modal-card-body').prepend( $('#checked').children() );
+
+				$('.delete').on('click', function() {
+					window.location.assign( "{{ path("differentials") }}" );
+				});
+				$('#continue').on('click', function() {
+					var input = $('#differentials').val();
+
+					if( input.length ) {
+						document.cookie = "differentials=" + input;
+						window.location.assign( "{{ path("differentials", { 'save': true }) }}" );
+					}
+				});
+			});
 		}
 	</script>
 {% endblock %}
@@ -51,25 +58,7 @@
 		{% endfor %}
 	</div>
 
-	<div id="modal" class="modal"> {# TODO: keep modal up on refresh #}
-		<div class="modal-background"></div>
-		<div class="modal-card">
-			<header class="modal-card-head">
-				<p class="modal-card-title">Problems/differentials</p>
-				<button class="delete"></button>
-			</header>
-			<section class="modal-card-body">
-				<div class="field">
-					<label class="label">Explanation</label>
-					<p class="control">
-						<textarea id="differentials" class="textarea"></textarea>
-					</p>
-				</div>
-			</section>
-			<footer class="modal-card-foot">
-				<a id="continue" class="button is-success">Continue</a>
-			</footer>
-		</div>
+	<div id="modal" class="modal">
 	</div>
 {% endblock %}
 

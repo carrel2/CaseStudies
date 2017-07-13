@@ -169,11 +169,23 @@ class HotSpotController extends Controller
 	}
 
 	/**
-	 * @Route("/eval/differentials", name="differentials")
+	 * @Route("/eval/differentials/{save}", name="differentials")
 	 */
-	public function differentialsAction(Request $r) {
+	public function differentialsAction(Request $r, $save = false) {
 		$session = $r->getSession();
 
-		return $this->redirectToRoute('diagnostics');
+		if( $save ) {
+			$session->remove('modalUp');
+			$session->set('differentials', $r->cookies->get('differentials'));
+			$r->cookies->remove('differentials');
+
+			return $this->redirectToRoute('diagnostics');
+		} else if( $session->remove('modalUp') ) {
+			return $this->redirectToRoute('diagnostics');
+		} else {
+			$session->set('modalUp', true);
+		}
+
+		return $this->render('Ajax/differentials.html.twig');
 	}
 }
