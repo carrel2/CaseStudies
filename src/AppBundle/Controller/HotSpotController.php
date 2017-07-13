@@ -173,7 +173,7 @@ class HotSpotController extends Controller
 	 */
 	public function differentialsAction(Request $r, $moveOn = false) {
 		$session = $r->getSession();
-		$diff = $r->cookies->get('differentials');
+		$diff = $r->request->remove('explanation');
 
 		if( $diff || $moveOn ) {
 			$session->set('differentials', $diff);
@@ -184,7 +184,6 @@ class HotSpotController extends Controller
 		}
 
 		$session->remove('modalUp');
-		$r->cookies->remove('differentials');
 
 		return $this->redirectToRoute('diagnostics');
 	}
