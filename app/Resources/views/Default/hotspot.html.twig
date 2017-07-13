@@ -29,7 +29,7 @@
 
 					if( input.length ) {
 						document.cookie = "differentials=" + input;
-						window.location.assign( "{{ path("differentials", { 'save': true }) }}" );
+						window.location.assign( "{{ path("differentials") }}" );
 					}
 				});
 			});
