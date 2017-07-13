@@ -176,14 +176,15 @@ class HotSpotController extends Controller
 		$diff = $r->cookies->get('differentials');
 
 		if( $diff || $moveOn ) {
-			$session->remove('modalUp');
 			$session->set('differentials', $diff);
-			$r->cookies->remove('differentials');
 		} else {
 			$session->set('modalUp', true);
 
 			return $this->render('Ajax/differentials.html.twig');
 		}
+
+		$session->remove('modalUp');
+		$r->cookies->remove('differentials');
 
 		return $this->redirectToRoute('diagnostics');
 	}
