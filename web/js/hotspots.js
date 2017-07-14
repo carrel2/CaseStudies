@@ -51,43 +51,43 @@ $(function(){
 				}
 			}
 		},
-		onSelectChange: function(img, selection) {
-			var newX1, newX2, newY1, newY2;
-
-			for(s in selections) {
-				if( selection.x1 <= selections[s][1][0] && selection.x2 > selections[s][1][0] && ( selection.y1 > selections[s][0][1] && selection.y1 < selections[s][1][1] || selection.y2 > selections[s][0][1] && selection.y2 < selections[s][1][1] ) ) {
-					newX1 = selections[s][1][0] + 1;
-				} else if( selection.x2 >= selections[s][0][0] && selection.x1 < selections[s][0][0] && ( selection.y1 > selections[s][0][1] && selection.y1 < selections[s][1][1] || selection.y2 > selections[s][0][1] && selection.y2 < selections[s][1][1] ) ) {
-					newX2 = selections[s][0][0] - 1;
-				} else if( selection.y1 <= selections[s][1][1] && selection.y2 > selections[s][1][1] && ( selection.x1 > selections[s][0][0] && selection.x1 < selections[s][1][0] || selection.x2 > selections[s][0][0] && selection.x2 < selections[s][1][0] ) ) {
-					newY1 = selections[s][1][1] + 1;
-				} else if( selection.y2 >= selections[s][0][1] && selection.y1 < selections[s][0][1] && ( selection.x1 > selections[s][0][0] && selection.x1 < selections[s][1][0] || selection.x2 > selections[s][0][0] && selection.x2 < selections[s][1][0] ) ) {
-					newY2 = selections[s][0][1] - 1;
-				}
-			}
-
-			if( newX1 && !newX2 ) {
-				newX2 = newX1 + selection.width;
-			} else if( newX2 && !newX1 ) {
-				newX1 = (newX2 - selection.width >= 0) ? newX2 - selection.width : 0;
-			} else if( !newX1 && !newX2 ) {
-				newX1 = selection.x1;
-				newX2 = selection.x2;
-			}
-
-			if( newY1 && !newY2 ) {
-				newY2 = newY1 + selection.height;
-			} else if( newY2 && !newY1 ) {
-				newY1 = (newY2 - selection.height >= 0) ? newY2 - selection.height : 0;
-			} else if( !newY1 && !newY2 ) {
-				newY1 = selection.y1;
-				newY2 = selection.y2;
-			}
-
-			inst.setSelection( newX1, newY1, newX2, newY2 );
-
-			inst.update();
-		},
+		// onSelectChange: function(img, selection) {
+		// 	var newX1, newX2, newY1, newY2;
+		//
+		// 	for(s in selections) {
+		// 		if( selection.x1 <= selections[s][1][0] && selection.x2 > selections[s][1][0] && ( selection.y1 > selections[s][0][1] && selection.y1 < selections[s][1][1] || selection.y2 > selections[s][0][1] && selection.y2 < selections[s][1][1] ) ) {
+		// 			newX1 = selections[s][1][0] + 1;
+		// 		} else if( selection.x2 >= selections[s][0][0] && selection.x1 < selections[s][0][0] && ( selection.y1 > selections[s][0][1] && selection.y1 < selections[s][1][1] || selection.y2 > selections[s][0][1] && selection.y2 < selections[s][1][1] ) ) {
+		// 			newX2 = selections[s][0][0] - 1;
+		// 		} else if( selection.y1 <= selections[s][1][1] && selection.y2 > selections[s][1][1] && ( selection.x1 > selections[s][0][0] && selection.x1 < selections[s][1][0] || selection.x2 > selections[s][0][0] && selection.x2 < selections[s][1][0] ) ) {
+		// 			newY1 = selections[s][1][1] + 1;
+		// 		} else if( selection.y2 >= selections[s][0][1] && selection.y1 < selections[s][0][1] && ( selection.x1 > selections[s][0][0] && selection.x1 < selections[s][1][0] || selection.x2 > selections[s][0][0] && selection.x2 < selections[s][1][0] ) ) {
+		// 			newY2 = selections[s][0][1] - 1;
+		// 		}
+		// 	}
+		//
+		// 	if( newX1 && !newX2 ) {
+		// 		newX2 = newX1 + selection.width;
+		// 	} else if( newX2 && !newX1 ) {
+		// 		newX1 = (newX2 - selection.width >= 0) ? newX2 - selection.width : 0;
+		// 	} else if( !newX1 && !newX2 ) {
+		// 		newX1 = selection.x1;
+		// 		newX2 = selection.x2;
+		// 	}
+		//
+		// 	if( newY1 && !newY2 ) {
+		// 		newY2 = newY1 + selection.height;
+		// 	} else if( newY2 && !newY1 ) {
+		// 		newY1 = (newY2 - selection.height >= 0) ? newY2 - selection.height : 0;
+		// 	} else if( !newY1 && !newY2 ) {
+		// 		newY1 = selection.y1;
+		// 		newY2 = selection.y2;
+		// 	}
+		//
+		// 	inst.setSelection( newX1, newY1, newX2, newY2 );
+		//
+		// 	inst.update();
+		// },
 		onSelectEnd: function(img, selection) {
 				$('img#animal').data('x1', selection.x1);
 				$('img#animal').data('y1', selection.y1);
