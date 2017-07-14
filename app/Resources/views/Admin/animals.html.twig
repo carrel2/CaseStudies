@@ -14,15 +14,15 @@
 {% endblock %}
 
 {% block body %}
-  <div class="column">
+  <div class="column is-3">
     {{ form_start(form, {'attr': {'id': 'admin_animal_form'}} ) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}
   </div>
 
   {% if animal %}
-    <div class="column">
-      <div id="image" class="image" style="position: relative; height: 600px; min-width: 900px;">
+    <div class="column is-9">
+      <div id="image" class="image" style="position: relative; height: 600px; min-width: 900px; max-width: 900px;">
         <img id="animal" src="{{ asset('images/' ~ animal.image) }}" data-id="{{ animal.id }}" />
         {% for hotspot in animal.hotspots %}
           <div class="hotspot {{ hotspot.name|lower|replace({' ': '-'}) }}" style="background: rgba(255,255,255,.4); position: absolute; top: {{ hotspot.y1 }}px; left: {{ hotspot.x1 }}px; height: {{ hotspot.height }}px; width: {{ hotspot.width }}px;"></div>
@@ -33,13 +33,15 @@
       <div id="x2" style="display: none"></div>
       <div id="y2" style="display: none"></div>
     </div>
-    <div class="column">
+
+    <div class="column is-5">
       <input type="text" id="name" class="input"></input>
       <button id="addHotspot" class="button is-success">Save</button>
     </div>
-    <div id="hotspots" class="column">
+
+    <div id="hotspots" class="column is-full">
       {% for hotspot in animal.hotspots %}
-        <div class="hotspot {{ hotspot.name|lower|replace({' ': '-'}) }}">{{ hotspot.name }} <a href="{{ path('removeHotspot', {'animal': animal.id, 'hotspot': hotspot.id }) }}" onclick="return confirmDelete();">Remove</a></div>
+        <div class="hotspot {{ hotspot.name|lower|replace({' ': '-'}) }}">{{ hotspot.name }} <a href="{{ path('removeHotspot', {'animal': animal.id, 'hotspot': hotspot.id }) }}" style="width: 30%;" onclick="return confirmDelete();">Remove</a></div>
       {% endfor %}
     </div>
   {% endif %}
