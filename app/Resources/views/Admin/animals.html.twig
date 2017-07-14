@@ -36,7 +36,7 @@
 
     <div id="hotspots" class="column is-3">
       {% for hotspot in animal.hotspots %}
-        <div class="hotspot {{ hotspot.name|lower|replace({' ': '-'}) }}" style="width: 30%;">{{ hotspot.name }} <a href="{{ path('removeHotspot', {'animal': animal.id, 'hotspot': hotspot.id }) }}" onclick="return confirmDelete();">Remove</a></div>
+        <div class="hotspot {{ hotspot.name|lower|replace({' ': '-'}) }}">{{ hotspot.name }} <a href="{{ path('removeHotspot', {'animal': animal.id, 'hotspot': hotspot.id }) }}" onclick="return confirmDelete();">Remove</a></div>
       {% endfor %}
     </div>
 
