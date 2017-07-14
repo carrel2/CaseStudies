@@ -191,16 +191,13 @@ class AdminController extends Controller
 				'class' => 'AppBundle:User',
 				'choice_label' => 'username',
 				'expanded' => true,
-				'label_attr' => array(
-					'class' => 'admin_user_label',
-				)
 			))
 			->add('edit', SubmitType::class, array(
-				'attr' => array('class' => 'button'),
+				'attr' => array('class' => 'is-success'),
 			))
 			->add('delete', SubmitType::class, array(
 				'attr' => array(
-					'class' => 'button',
+					'class' => 'is-danger',
 					'onclick' => 'return confirmDelete();',
 				),
 			))->getForm();
@@ -318,16 +315,13 @@ class AdminController extends Controller
 				'class' => 'AppBundle:Animal',
 				'choice_label' => 'name',
 				'expanded' => true,
-				'label_attr' => array(
-					'class' => 'admin_animal_label',
-				)
 			))
 			->add('edit', SubmitType::class, array(
-				'attr' => array('class' => 'button'),
+				'attr' => array('class' => 'is-success'),
 			))
 			->add('delete', SubmitType::class, array(
 				'attr' => array(
-					'class' => 'button',
+					'class' => 'is-danger',
 					'onclick' => 'return confirmDelete();',
 				),
 			))->getForm();
@@ -462,15 +456,15 @@ class AdminController extends Controller
 						return ['class' => 'test'];
 					},
 					'label_attr' => array(
-						'class' => 'tests_label',
+						'class' => ' tests_label',
 					)
 				))
 				->add('edit', SubmitType::class, array(
-					'attr' => array('class' => 'button'),
+					'attr' => array('class' => 'is-success'),
 				))
 				->add('delete', SubmitType::class, array(
 					'attr' => array(
-						'class' => 'button',
+						'class' => 'is-danger',
 						'onclick' => 'return confirmDelete();',
 					),
 				))->getForm();
@@ -601,11 +595,11 @@ class AdminController extends Controller
 						)
 					))
 					->add('edit', SubmitType::class, array(
-						'attr' => array('class' => 'button'),
+						'attr' => array('class' => 'is-success'),
 					))
 					->add('delete', SubmitType::class, array(
 						'attr' => array(
-							'class' => 'button',
+							'class' => 'is-danger',
 							'onclick' => 'return confirmDelete();',
 						),
 					))->getForm();

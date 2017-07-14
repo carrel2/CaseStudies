@@ -8,7 +8,7 @@ imports:
 parameters:
     locale: en
     image_directory: '%kernel.root_dir%/../web/images'
-    sessionMaxLifetime: 600
+    sessionMaxLifetime: 1200
 
 framework:
     #esi:             ~
@@ -41,6 +41,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form_themes:
+      - 'Form/bulma_layout.html.twig'
 
 # Doctrine Configuration
 doctrine:

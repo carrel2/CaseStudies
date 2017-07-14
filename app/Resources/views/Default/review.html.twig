@@ -1,97 +1,115 @@
-{#
-	Review template
-
-	Blocks:
-		- scripts
-		- body
-
-	Variables:
-		- user: AppBundle\Entity\User
-		- finished: boolean
-		- form: Symfony\Component\Form\FormView
-#}
-
 {% extends 'base.html.twig' %}
 
 {% block scripts %}
-	{{ parent() }}
+  {{ parent() }}
 
-	<script src="{{ asset('js/accordion.js') }}"></script>
-	<script>
-		$(function() {
-			if( $('.new-result').length > 0 ) {
-				$('#flashes').append('<div class="flash flash-success">New results available!</div>');
-			}
-		});
-	</script>
+  <script>
+    $(function() {
+      $(".panel-block").on('click', function() {
+        if( !$(this).hasClass('is-active') ) {
+          $('[data-id="' + $('.panel-block.is-active').attr('id') + '"]').addClass('is-hidden');
+          $('.panel-block.is-active').removeClass('is-active');
+          $(this).addClass('is-active');
+          $('[data-id="' + $(this).attr('id') + '"]').removeClass('is-hidden');
+        }
+      });
+      $('.panel-block').each(function() {
+        if( $('[data-id=' + $(this).attr('id') + ']').has('span.tag.is-success').length > 0 ) {
+          $(this).children(':last-child').after('<span class="tag is-success">New!</span>');
+        }
+        if( $('[data-id=' + $(this).attr('id') + ']').has('span.tag.is-info').length > 0 ) {
+          $(this).children(':last-child').after('<span class="tag is-info">Pending</span>');
+        }
+      });
+    });
+  </script>
 {% endblock %}
 
 {% block body %}
-	{% for day in user.days %}
-		{% set n = loop.index %}
-		{% set elapsed = loop.length - loop.index %}
+	<div class="column">
+    <nav class="panel">
+      <p class="panel-heading">{{ user.caseStudy.title }}</p>
 
-		<button class="accordion">Day {{ n }}</button>
+      {% for day in user.days %}
+        <a id="day-{{ day.id }}" class="panel-block {% if loop.last %}is-active{% endif %}">
+          <span class="panel-icon">
+            <i class="fa fa-angle-right"></i>
+          </span>
+          Day {{ loop.index }}
+        </a>
+      {% endfor %}
+    </nav>
+	</div>
 
-		<div class="panel">
-			<div id="hotspots">
-				{% for spot in day.hotspotsinfo %}
-					<li><em>{{ spot.hotspot.name }}:</em><span class="info">{{ spot.info|raw }}</span></li>
-				{% endfor %}
+  <div class="column is-two-thirds">
+    {% for day in user.days %}
+      {% set n = loop.index %}
+      {% set elapsed = loop.length - loop.index %}
 
-				{% for flash in app.session.flashBag.peek('hotspot-' ~ day.id) %}
-					<li><em>{{ flash }}:</em> No information available</li>
-				{% endfor %}
-			</div>
+      <div data-id="day-{{ day.id }}"{% if not loop.last %} class=" is-hidden"{% endif %}>
+        <h2 class="title is-2">Physical exam results</h2>
 
-			<div id="testResults">
-				{% for testResult in day.tests %}
-					{% if testResult.waitTime and ( elapsed - testResult.waitTime == 0 or testResult.waitTime < elapsed ) %}
-						<li {{ elapsed - testResult.waitTime == 0 ? 'class="new-result"' : '' }}><em>{{ testResult.test.name }}:</em><span class="info">{{ testResult.results|raw }}</span></li>
-					{% elseif testResult.test.waitTime == 0 or testResult.test.waitTime < elapsed %}
-						<li {{ elapsed - testResult.test.waitTime == 0 ? 'class="new-result"' : '' }}><em>{{ testResult.test.name }}:</em><span class="info">{{ testResult.results|raw }}</span></li>
-					{% elseif finished %}
-						<li><em>{{ testResult.test.name }}:</em><span class="info">{{ testResult.results|raw }}</span></li>
-					{% else %}
-						<li><em>{{ testResult.test.name }}:</em> Awaiting results.</li>
-					{% endif %}
-				{% endfor %}
+        {% for spot in day.hotspotsinfo %}
+          <li><em>{{ spot.hotspot.name }}:</em><span class="info"> {{ spot.info|raw }}</span></li>
+        {% endfor %}
 
-				{% for flash in app.session.flashBag.peek('empty-diagnostic-results-' ~ day.id) %}
-					<li><em>{{ flash }}:</em> No results available</li>
-				{% endfor %}
-			</div>
+        {% for flash in app.session.flashBag.peek('hotspot-' ~ day.id) %}
+          <li><em>{{ flash }}:</em> No information available</li>
+        {% endfor %}
 
-			<div id="medicationResults">
-				{% for medResult in day.medications %}
-					{% if medResult.waitTime and ( elapsed - medResult.waitTime == 0 or medResult.waitTime < elapsed ) %}
-						<li {{ elapsed - medResult.waitTime == 0 ? 'class="new-result"' : '' }}><em>{{ medResult.medication.name }}:</em><span class="info">{{ medResult.results|raw }}</span></li>
-					{% elseif elapsed - medResult.medication.waitTime == 0 or medResult.medication.waitTime < elapsed %}
-						<li {{ elapsed - medResult.medication.waitTime == 0 }}><em>{{ medResult.medication.name }}:</em><span class="info">{{ medResult.results|raw }}</span></li>
-					{% elseif finished %}
-						<li><em>{{ medResult.medication.name }}:</em><span class="info">{{ medResult.results|raw }}</span></li>
-					{% else %}
-						<li><em>{{ medResult.medication.name }}:</em> Awaiting results.</li>
-					{% endif %}
-				{% endfor %}
+        <h2 class="title is-2">Diagnostic results</h2>
 
-				{% for flash in app.session.flashBag.peek('empty-therapeutic-results-' ~ day.id) %}
-					<li><em>{{ flash }}:</em> No results available</li>
-				{% endfor %}
-			</div>
-		</div>
-	{% endfor %}
+        {% for testResult in day.tests %}
+          {% if testResult.waitTime and ( elapsed - testResult.waitTime == 0 or testResult.waitTime < elapsed ) %}
+            <li>{{ elapsed - testResult.waitTime == 0 ? '<span class="tag is-success">New!</span>' : '' }}<em>{{ testResult.test.name }}:</em><span class="info"> {{ testResult.results|raw }}</span></li>
+          {% elseif testResult.test.waitTime == 0 or testResult.test.waitTime < elapsed %}
+            <li>{{ elapsed - testResult.test.waitTime == 0 ? '<span class="tag is-success">New!</span>' : '' }}<em>{{ testResult.test.name }}:</em><span class="info"> {{ testResult.results|raw }}</span></li>
+          {% elseif finished %}
+            <li><em>{{ testResult.test.name }}:</em><span class="info"> {{ testResult.results|raw }}</span></li>
+          {% else %}
+            <li><span class="tag is-info">Pending</span><em>{{ testResult.test.name }}:</em><span> ...</span></li>
+          {% endif %}
+        {% endfor %}
 
-	{% if finished %}
-		{{ form_start(form) }}
-		{{ form_widget(form) }}
-		{{ form_end(form) }}
-	{% else %}
-		{% set page = app.session.get('page') %}
-		{% if page == 'review' %}
-			<a href="{{ path('nextDay') }}">Continue</a>
-		{% else %}
-			<a href="{{ path(page) }}">{{ page|capitalize }}</a>
-		{% endif %}
-	{% endif %}
+        {% for flash in app.session.flashBag.peek('empty-diagnostic-results-' ~ day.id) %}
+          <li><em>{{ flash }}:</em> No results available</li>
+        {% endfor %}
+
+        <h2 class="title is-2">Therapeutic results</h2>
+
+        {% for medResult in day.medications %}
+          {% if medResult.waitTime and ( elapsed - medResult.waitTime == 0 or medResult.waitTime < elapsed ) %}
+            <li>{{ elapsed - medResult.waitTime == 0 ? '<span class="tag is-success">New!</span>' : '' }}<em>{{ medResult.medication.name }}:</em><span class="info"> {{ medResult.results|raw }}</span></li>
+          {% elseif elapsed - medResult.medication.waitTime == 0 or medResult.medication.waitTime < elapsed %}
+            <li>{{ elapsed - medResult.medication.waitTime == 0 ? '<span class="tag is-success">New!</span>' : '' }}<em>{{ medResult.medication.name }}:</em><span class="info"> {{ medResult.results|raw }}</span></li>
+          {% elseif finished %}
+            <li><em>{{ medResult.medication.name }}:</em><span class="info"> {{ medResult.results|raw }}</span></li>
+          {% else %}
+            <li><span class="tag is-info">Pending</span><em>{{ medResult.medication.name }}:</em><span> ...</span></li>
+          {% endif %}
+        {% endfor %}
+
+        {% for flash in app.session.flashBag.peek('empty-therapeutic-results-' ~ day.id) %}
+          <li><em>{{ flash }}:</em> No results available</li>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
+
+{% block footer %}
+  {% if finished %}
+    <div class="column is-one-third is-offset-one-third">
+      {{ form_start(form) }}
+      {{ form_widget(form) }}
+      {{ form_end(form) }}
+    </div>
+  {% else %}
+    {% set page = app.session.get('page') %}
+    {% if page == 'review' %}
+      <a href="{{ path('nextDay') }}">Continue</a>
+    {% else %}
+      <a href="{{ path(page) }}">{{ page|capitalize }}</a>
+    {% endif %}
+  {% endif %}
 {% endblock %}

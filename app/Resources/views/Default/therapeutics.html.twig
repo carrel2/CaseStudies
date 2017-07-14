@@ -1,15 +1,3 @@
-{#
-	Therapeutics template
-
-	Blocks:
-		- body
-		- footer
-		- choice_widget_expanded: overrides default block
-
-	Variables:
-		- form: Symfony\Component\Form\FormView
-#}
-
 {% extends 'base.html.twig' %}
 
 {% form_theme form _self %}
@@ -18,7 +6,7 @@
 	<div {{ block('widget_container_attributes') }}>
 		{% for group_label,group in choices %}
 			{%- if group is iterable -%}
-				<label class="group"><h3><u>{{ group_label|trans({}, translation_domain) }}</u></h3></label>
+				<label class="label title is-4"><u>{{ group_label|trans({}, translation_domain) }}</u></label>
 				{% for key, choice in group %}
 					{{- form_widget(form[key]) -}}
 					{{- form_label(form[key]) -}}
@@ -29,9 +17,11 @@
 {%- endblock -%}
 
 {% block body %}
-	{{ form_start(form) }}
-	{{ form_widget(form) }}
-	{{ form_end(form) }}
+  <div class="column">
+  	{{ form_start(form) }}
+  	{{ form_widget(form) }}
+  	{{ form_end(form) }}
+  </div>
 {% endblock %}
 
 {% block footer %}

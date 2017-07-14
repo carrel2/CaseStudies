@@ -18,15 +18,18 @@ class DiagnosticsType extends AbstractType
 				'choice_label' => 'name',
 				'expanded' => true,
 				'multiple' => true,
-				'group_by' => function($val, $key, $index) {
-					return $val->getGroup();
-				},
+				'label_attr' => array(
+					'class' => 'title is-2',
+				),
 				'choice_attr' => function(Test $t, $key, $index) {
 					return ['class' => 'test'];
 				},
+				'group_by' => function($val, $key, $index) {
+					return $val->getGroup();
+				},
 			))
 			->add('submit', SubmitType::class, array(
-				'attr' => array('class' => 'button'),
+				'attr' => array('class' => 'is-success'),
 			));
 	}
 }

@@ -15,12 +15,14 @@ class DiagnosticType extends AbstractType
   {
     $builder->add('name', TextType::class)
       ->add('cost', null, array(
-        'attr' => array('pattern' => '[0-9]+')
+        'attr' => array(
+          'pattern' => '[0-9]+',
+        )
       ))
       ->add('waitTime')
       ->add('group')
       ->add('submit', SubmitType::class, array(
-        'attr' => array('class' => 'button'),
+        'attr' => array('class' => 'is-success'),
       ));
   }
 

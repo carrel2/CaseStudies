@@ -92,13 +92,13 @@ class HotSpotController extends Controller
 
 				$em->flush();
 
-				return new Response('<li><em>' . $hotspot->getName() . ':</em><span class="info">' . $info->getInfo() . '</span></li>');
+				return new Response('<li><em>' . $hotspot->getName() . ':</em><span class="info"> ' . $info->getInfo() . '</span></li>');
 			} else if( $info->getHotspot()->getId() == $hotspot->getId() && $user->getCurrentDay()->getHotspotsInfo()->contains($info) ) {
 				return new Response('');
 			}
 		}
 
-		if( !array_search($hotspot->getName(), $session->getFlashBag()->peek('hotspot-' . $user->getCurrentDay()->getId())) )
+		if( false === array_search($hotspot->getName(), $session->getFlashBag()->peek('hotspot-' . $user->getCurrentDay()->getId())) )
 		{
 			$this->addFlash('hotspot-' . $user->getCurrentDay()->getId(), $hotspot->getName());
 
@@ -166,5 +166,26 @@ class HotSpotController extends Controller
 		}
 
 		return new Response($response);
+	}
+
+	/**
+	 * @Route("/eval/differentials/{moveOn}", name="differentials")
+	 */
+	public function differentialsAction(Request $r, $moveOn = false)
+	{
+		$session = $r->getSession();
+		$diff = $r->request->get('explanation');
+
+		if( $diff || $moveOn ) {
+			$session->set('differentials', $diff);
+		} else {
+			$session->set('modalUp', true);
+
+			return $this->render('Ajax/differentials.html.twig');
+		}
+
+		$session->remove('modalUp');
+
+		return new Response();
 	}
 }

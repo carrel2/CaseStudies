@@ -1,23 +1,12 @@
-{#
-	Register template
-
-	Blocks:
-		- header
-		- body
-		- footer
-
-	Variables:
-		- form: Symfony\Component\Form\FormView
-#}
-
 {% extends 'base.html.twig' %}
 
-{% block header %}{% endblock %}
+{% block userNav %}{% endblock %}
+{% block adminNav %}{% endblock %}
 
 {% block body %}
-	{{ form_start(form) }}
-	{{ form_widget(form) }}
-	{{ form_end(form) }}
+  <div class="column is-one-third">
+  	{{ form_start(form) }}
+  	{{ form_widget(form) }}
+  	{{ form_end(form) }}
+  </div>
 {% endblock %}
-
-{% block footer %}{% endblock %}

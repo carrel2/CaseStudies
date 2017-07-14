@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    {% block scripts %}
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script src="{{ asset('js/tooltipster.bundle.min.js') }}"></script>
+      <script src="{{ asset('bundles/ivoryckeditor/ckeditor.js') }}"></script>
+      <script src="{{ asset('js/scripts.js') }}"></script>
+    {% endblock %}
+
+    {% block stylesheets %}
+      <link href="{{ asset('css/bulma.css')}}" rel="stylesheet" />
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link href="{{ asset('css/tooltipster/tooltipster.bundle.min.css') }}" rel="stylesheet" />
+      <link href="{{ asset('css/tooltipster/tooltipster-sideTip-borderless.min.css') }}" rel="stylesheet" />
+    {% endblock %}
+  </head>
+  <body>
+    <div class="columns">
+      <div class="column">
+        <nav class="nav">
+          <div class="nav-left">
+            {% block userNav %}{% endblock %}
+          </div>
+          <div class="nav-right">
+            {% block adminNav %}{% endblock %}
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="columns">
+        {% block flashes %}
+  			{% endblock %}
+      </div>
+
+      <div class="columns is-multiline">
+        {% block body %}{% endblock %}
+      </div>
+
+      <div id="footer" class="columns">
+        {% block footer %}{% endblock %}
+      </div>
+    </section>
+  </body>
+</html>

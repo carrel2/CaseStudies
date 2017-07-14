@@ -21,35 +21,31 @@ class DefaultType extends AbstractType
 			if( $case ) {
 				$form->add('resume', SubmitType::class, array(
 					'attr' => array(
-						'class' => 'button',
+						//'class' => 'button is-success',
 					)
 				))
 					->add('abandon', SubmitType::class, array(
 						'attr' => array(
-							'class' => 'button',
+							'class' => 'is-danger',
 							'onclick' => 'return confirmDelete();',
 						)
 					));
 			} else {
 				$form->add('title', EntityType::class, array(
-					'class' => 'AppBundle:CaseStudy',
-					'choice_label' => 'title',
-					'attr' => array(
-						'onchange' => 'updateCase()',)))
+						'class' => 'AppBundle:CaseStudy',
+						'choice_label' => 'title',
+						'attr' => array(
+							'onchange' => 'updateCase()',
+						),
+					))
 					->add('location', ChoiceType::class, array(
 						'choices' => array(
 							'Farm' => 'Farm',
 							'Hospital' => 'Hospital',
 						),
 						'expanded' => true,
-						'label_attr' => array(
-							'class' => 'tooltip',
-							'title' => 'Location affects the workflow of the application',
-						)
 					))
-					->add('start', SubmitType::class, array(
-						'attr' => array('class' => 'button'),
-					));
+					->add('start', SubmitType::class);
 			}
 		});
 	}

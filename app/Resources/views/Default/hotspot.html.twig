@@ -1,17 +1,3 @@
-{#
-	Hotspot template
-
-	Blocks:
-		- scripts
-		- body
-		- footer
-
-	Variables:
-		- animal: AppBundle\Entity\Animal
-		- checked: Doctrine\ORM\PersistentCollection
-		- day: AppBundle\Entity\UserDay
-#}
-
 {% extends 'base.html.twig' %}
 
 {% block scripts %}
@@ -20,7 +6,37 @@
 	<script>
 		$(function() {
 			updateHotspots();
+
+			{% if app.session.get('modalUp', false) %}
+				modal();
+			{% endif %}
 		});
+
+		function modal(event=null) {
+			if( event ) {
+				event.preventDefault();
+			}
+
+			$('.modal').toggleClass('is-active');
+			$('.modal').load( "{{ path('differentials') }}", function() {
+				$('.modal-card-body').prepend( $('#checked').children() );
+
+				$('.delete').on('click', function() {
+					$.post( "{{ path("differentials", { 'moveOn': true }) }}", function() {
+						location.href = "{{ path("diagnostics") }}";
+					});
+				});
+				$('#continue').on('click', function() {
+					var input = $('#differentials').val();
+
+					if( input.length ) {
+						$.post( "{{ path("differentials", { 'moveOn': true }) }}", {explanation: input}, function(result, status, xhr) {
+							location.href = "{{ path("diagnostics") }}";
+						});
+					}
+				});
+			});
+		}
 	</script>
 {% endblock %}
 
@@ -37,17 +53,20 @@
 
 	<div id="checked">
 		{% for spot in checked %}
-			<li><em>{{ spot.hotspot.name }}:</em><span class="info">{{ spot.info|raw }}</span></li>
+			<li><em>{{ spot.hotspot.name }}:</em><span class="info"> {{ spot.info|raw }}</span></li>
 		{% endfor %}
 
 		{% for flash in app.session.flashBag.peek('hotspot-' ~ day.id) %}
 			<li>{{ flash }}: No information available</li>
 		{% endfor %}
 	</div>
+
+	<div id="modal" class="modal">
+	</div>
 {% endblock %}
 
 {% block footer %}
-	<a href="{{ path('diagnostics') }}">Continue</a>
+	<a onclick="modal(event)">Continue</a>
 	<a href="{{ path('review') }}">Review</a>
 
 	{{ parent() }}

@@ -21,9 +21,10 @@
   {% if animal %}
     <h2 class="animal_hotspot_label">Hotspots</h2>
 
-    <div id="image" style="position: relative; height: 600px;">
+    <div id="image" class="image" style="position: relative; height: 600px;">
       <img id="animal" src="{{ asset('images/' ~ animal.image) }}" data-id="{{ animal.id }}" style="position: absolute" />
       {% for hotspot in animal.hotspots %}
+        {# TODO: scale hotspot divs based on image size #}
         <div class="hotspot {{ hotspot.name|lower|replace({' ': '-'}) }}" style="background: rgba(255,255,255,.4); position: absolute; top: {{ hotspot.y1 }}px; left: {{ hotspot.x1 }}px; height: {{ hotspot.height }}px; width: {{ hotspot.width }}px;"></div>
       {% endfor %}
     </div>
@@ -31,8 +32,8 @@
     <div id="y1" style="display: none"></div>
     <div id="x2" style="display: none"></div>
     <div id="y2" style="display: none"></div>
-    <input type="text" id="name"></input>
-    <button id="addHotspot" class="button">Save</button>
+    <input type="text" id="name" class="input"></input>
+    <button id="addHotspot" class="button is-success">Save</button>
     <div id="hotspots">
       {% for hotspot in animal.hotspots %}
         <div class="hotspot {{ hotspot.name|lower|replace({' ': '-'}) }}">{{ hotspot.name }} <a href="{{ path('removeHotspot', {'animal': animal.id, 'hotspot': hotspot.id }) }}" onclick="return confirmDelete();">Remove</a></div>

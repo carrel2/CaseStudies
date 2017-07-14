@@ -1,63 +1,109 @@
-{#
-	Results template
-
-	Blocks:
-		- scripts
-		- body
-
-	Variables:
-		- user: AppBundle\Entity\User
-		- results: array
-			- AppBundle\Entity\Results
-#}
-
 {% extends 'base.html.twig' %}
 
 {% block scripts %}
-	{{ parent() }}
+  {{ parent() }}
 
-	<script src="{{ asset('js/accordion.js') }}"></script>
+  <script>
+    $(function() {
+      $(".panel-tabs a").on('click', function() {
+        if( !$(this).hasClass('is-active') ) {
+          $("[data-result='" + $(".panel-tabs a.is-active").attr('id') + "']").each(function() {
+            var id = $(this).attr("id");
+            $(this).addClass('is-hidden');
+
+            $("[data-id='" + id + "']").addClass('is-hidden');
+          });
+
+          $('.panel-tabs a.is-active').removeClass('is-active');
+          $(this).addClass('is-active');
+
+          $('[data-result="' + $(this).attr('id') + '"]').each(function() {
+            var id = $(this).attr("id");
+            $(this).removeClass('is-hidden');
+
+            if( $(this).hasClass('is-active') ) {
+              $('[data-id="' + id + '"]').removeClass('is-hidden');
+            }
+          });
+        }
+      });
+
+      $(".panel-block").on('click', function() {
+        if( !$(this).hasClass('is-active') && !$(this).hasClass('is-danger') ) {
+          var resultid = $(this).attr("data-result");
+          var id = $(this).attr("id");
+          var oldPanelBlock = $("[data-result='" + resultid + "'].panel-block.is-active");
+          var oldId = oldPanelBlock.attr("id");
+
+          oldPanelBlock.find(".fa-folder-open").addClass("fa-folder").removeClass("fa-folder-open");
+          $("[data-id='" + oldId + "']").addClass("is-hidden");
+          oldPanelBlock.removeClass("is-active");
+          $(this).addClass("is-active");
+          $(this).find(".fa-folder").addClass("fa-folder-open").removeClass("fa-folder");
+          $("[data-id='" + id + "']").removeClass("is-hidden");
+        }
+      });
+    });
+  </script>
 {% endblock %}
 
 {% block body %}
-	{% if user is defined %}
-		<h2>Results for {{ user.username }}</h2>
-	{% endif %}
+  <div class="column">
+  	<nav class="panel">
+      <p class="panel-heading">Results{% if user is defined %} for {{ user.username }}{% endif %}</p>
 
-	{% for result in results %}
-		<button class="accordion">Results: {{ result.caseStudy }}</button>
+      <div class="panel-tabs">
+        {% for result in results %}
+          <a id="result-{{ result.id }}" {% if loop.first %}class="is-active"{% endif %}>{{ result.caseStudy }}</a>
+        {% endfor %}
+      </div>
 
-		<div class="panel">
-			<div class="result location">Location: {{ result.location }}</div>
-			<div class="result diagnosis">Diagnosis: {{ result.diagnosis }}</div>
+      {% for result in results %}
+        {% for day in result.results %}
+          <a id="result-{{ result.id }}-day-{{ loop.index }}" class="panel-block{% if loop.first %} is-active{% endif %}{% if not loop.parent.loop.first %} is-hidden{% endif %}" data-result="result-{{ result.id }}">
+            <span class="panel-icon">
+              <i class="fa fa-folder{% if loop.first %}-open{% endif %}"></i>
+            </span>
+            Day {{ loop.index }}
+          </a>
+        {% endfor %}
 
-			{% for day in result.results %}
-				<button class="accordion">Day {{ loop.index }}</button>
+        {% if user is defined and is_granted('ROLE_ADMIN') %}
+          <a href="/removeResult/{{ result.id }}" class="panel-block is-danger{% if not loop.first %} is-hidden{% endif %}" data-result="result-{{ result.id }}">Remove</a>
+        {% endif %}
+      {% endfor %}
+    </nav>
+  </div>
 
-				<div class="panel">
-					<div id="hotspots">
-						{% for name, info in day.hotspotsInfo %}
-							<li><em>{{ name }}:</em><span>{{ info|raw }}</span></li>
-						{% endfor %}
-					</div>
+  <div class="column is-two-thirds">
+    {% for result in results %}
+      {% for day in result.results %}
+        <div data-id="result-{{ result.id }}-day-{{ loop.index }}" class="box{% if not loop.first or not loop.parent.loop.first %} is-hidden{% endif %}">
+          <div id="hotspots">
+            <p class="title">Physical exam results</p>
 
-					<div id="testResults">
-						{% for test, result in day.diagnostics %}
-							<li><em>{{ test }}:</em><span>{{ result|raw }}</span></li>
-						{% endfor %}
-					</div>
+            {% for name, info in day.hotspotsInfo %}
+              <div><em>{{ name }}: </em><span>{{ info|raw }}</span></div>
+            {% endfor %}
+          </div>
 
-					<div id="medicationResults">
-						{% for medication, result in day.therapeutics %}
-							<li><em>{{ medication }}:</em><span>{{ result|raw }}</span></li>
-						{% endfor %}
-					</div>
-				</div>
-			{% endfor %}
-		</div>
+          <div id="testResults">
+            <p class="title">Diagnostic results</p>
 
-		{% if user is defined and is_granted('ROLE_ADMIN') %}
-    	<a href="/removeResult/{{ result.id }}">Remove</a>
-		{% endif %}
-  {% endfor %}
+            {% for test, result in day.diagnostics %}
+              <div><em>{{ test }}: </em><span>{{ result|raw }}</span></div>
+            {% endfor %}
+          </div>
+
+          <div id="medicationResults">
+            <p class="title">Therapeutic results</p>
+
+            {% for medication, result in day.therapeutics %}
+              <div><em>{{ medication }}: </em><span>{{ result|raw }}</span></div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+    {% endfor %}
+  </div>
 {% endblock %}

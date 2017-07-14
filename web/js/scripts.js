@@ -18,18 +18,23 @@ function addRemoveButtonClickListener() {
 	$('.remove-button').each(function() {
 		$(this).off("click mouseout mouseover");
 		$(this).on('click',function() {
-			var editor = $(this).prev().find('.cke');
+			var editor = $(this).siblings("div.cke");
+			var id = "";
+
+			$(this).parent().attr('style', '');
 
 			$(editor).each(function() {
-				delete window.CKEDITOR.instances[$(this).prev().attr('id')];
+				id = $(this).prev().attr('id');
+				delete window.CKEDITOR.instances[id];
 				$(this).remove();
 			});
 
-			$(this).prev().attr('style', '');
-
-			stack.push([$(this).parent().index(), $(this).parent().parent().attr('id'), $(this).parent().html()]);
+			stack.push([$(this).parent().index(), $(this).parent().parent().attr('id'), $(this).parent().clone(true), id]);
 
 			$(this).parent().slideUp(function() {
+				if( $(this).prev().is('label') ) {
+					$(this).prev().remove();
+				}
 				$(this).remove();
 			});
 
@@ -45,7 +50,7 @@ function addRemoveButtonClickListener() {
 }
 
 function addButtonClickListener(e) {
-	holder = $(e).parent().prev().children('.collection');
+	holder = $(e).closest('div').prev();
 
 	holder.data('index', holder.children('div').length);
 
@@ -61,10 +66,10 @@ function addButtonClickListener(e) {
 	if( t != "day" ) {
 		holder.find('label').remove(':contains(' + index + ')');
 	} else {
-		holder.children(':nth-child(' + (index + 1) + ')').children('label').text( 'Day ' + ( index + 1 ) );
+		holder.prev().text( 'Day ' + ( index + 1 ) );
 	}
 
-	holder.children('div:last-child').append('<button type="button" class="remove-button">&#x2e3</button>');
+	holder.children('div:last-child').append('<button type="button" class="delete remove-button"></button>');
 
 	if( t == "hotspot" ) {
 		updateSelects(t);
@@ -97,14 +102,14 @@ function updateAdminCase(id) {
 		var array = stack.pop();
 
 		if( array[0] == 0 ) {
-			$('#' + array[1]).prepend('<div>' + array[2] + '</div>');
+			$('#' + array[1]).prepend( $(array[2]) );
 		} else if( array[0] > $('#' + array[1]).children().length - 1 ) {
-			$('#' + array[1]).append('<div>' + array[2] + '</div>');
+			$('#' + array[1]).append( $(array[2]) );
 		} else {
-			$('#' + array[1]).children().eq(array[0]).after('<div>' + array[2] + '</div>');
+			$('#' + array[1]).children().eq(array[0]).before( $(array[2]) );
 		}
 
-		addRemoveButtonClickListener();
+		window.CKEDITOR.replace(array[3], {"toolbar":[["Cut","Copy","Paste","PasteText","PasteFromWord","-","Undo","Redo"],["Scayt"],["Link","Unlink"],["Table","SpecialChar"],["Maximize"],["Source"],"\/",["Bold","Italic","Strike","-","RemoveFormat"],["NumberedList","BulletedList","-","Outdent","Indent","-","Blockquote"],["Styles","Format","About"]],"autoParagraph":false,"language":"en"});
 
 		if( stack.length == 0 ) {
 			$(this).hide();
@@ -114,23 +119,25 @@ function updateAdminCase(id) {
 	$('#caseInfo').load('/getCase/' + id, function(responseTxt, statusTxt, xhr){
 		$('.collection > div').each(function(i, e) {
 			var t = $(this).parent().data('type');
-			$(this).append('<button type="button" class="remove-button">&#x2e3</button>');
+			$(this).append('<button type="button" class="delete remove-button"></button>');
 		});
 
-		$('.collection.days > div > label').each(function() {
+		$('.collection.days > label').each(function() {
 			$(this).text( "Day " + ( 1 + parseInt($(this).text()) ) );
 		});
 
-		if( $('#footer').children().length == 1 ) {
-			var form = $('form').attr('id');
+		moveSubmits();
 
-			$('button[type=submit].button').each(function() {
-				$('#footer').append($(this));
-				$(this).attr('form', form);
-			});
-		} else {
-			$('#body button[type=submit].button').remove();
-		}
+		// if( $('#footer').children().length == 1 ) {
+		// 	var form = $('form').attr('id');
+		//
+		// 	$('button[type=submit].button').each(function() {
+		// 		$('#footer').append($(this));
+		// 		$(this).attr('form', form);
+		// 	});
+		// } else {
+		// 	$('#body button[type=submit].button').remove();
+		// }
 
 		addRemoveButtonClickListener();
 	});
@@ -139,7 +146,7 @@ function updateAdminCase(id) {
 function updateHotspots() {
 	$('.hotspot').each(function() {
 		$(this).on('click', function() {
-			$.get('/update/' + $(this).data('path'), function(data, s) {
+			$.get('/update/' + $(this).attr('data-path'), function(data, s) {
 				$('#checked').append(data);
 			});
 		});
@@ -147,11 +154,16 @@ function updateHotspots() {
 }
 
 function moveSubmits() {
-	var form = $('form').attr('id');
-	$('button[type=submit].button').each(function() {
-		$('#footer').append($(this));
-		$(this).attr('form', form);
-	});
+	if( $('#footer .level-left').children().length == 0 ) {
+		var form = $('form').attr('id');
+
+		$('button[type=submit].button').each(function() {
+			$('#footer .level-left').append($(this));
+			$(this).attr('form', form).wrap('<div class="level-item"></div>');
+		});
+	} else {
+		$('#body button[type=submit].button').remove();
+	}
 }
 
 function updateSelects(type) {

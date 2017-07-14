@@ -21,19 +21,12 @@ class CaseType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-		->add('title', TextType::class, array(
-			'label_attr' => array(
-				'class' => 'case_title_label',
-			)
-		))
+		->add('title', TextType::class)
 		->add('description', CKEditorType::class, array(
 			'config' => array(
 				'autoParagraph' => false,
 				'disallowedContent' => 'button embed form iframe input link meta textarea video script',
 			),
-			'label_attr' => array(
-				'class' => 'case_description_label',
-			)
 		))
 		->add('animal', EntityType::class, array(
 			'class' => 'AppBundle:Animal',
@@ -41,9 +34,6 @@ class CaseType extends AbstractType
 			'attr' => array(
 				'onchange' => 'updateSelects("hotspot");',
 			),
-			'label_attr' => array(
-				'class' => 'case_animal_label',
-			)
 		))
 		->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) use($options) {
 			$case = $event->getData();
@@ -53,17 +43,17 @@ class CaseType extends AbstractType
 				$form->add('create', SubmitType::class, array(
 					'attr' => array(
 						'form' => 'case',
-						'class' => 'button',
+						'class' => 'is-success',
 					),
 				));
 			} else {
 				$form->add('days', CollectionType::class, array(
 					'entry_type' => DayType::class,
 					'entry_options' => array(
-						'attr' => array_key_exists('data', $options) ? array('animal' => $options['data']->getAnimal()->getId()) : array(),
-						'label_attr' => array(
-							'class' => 'day_label',
-						)
+						'attr' => array(
+							'class' => 'notification',
+							'animal' => array_key_exists('data', $options) ? $options['data']->getAnimal()->getId() : null,
+						),
 					),
 					'allow_add' => true,
 					'allow_delete' => true,
@@ -74,31 +64,31 @@ class CaseType extends AbstractType
 						'data-type' => 'day'
 					),
 					'label_attr' => array(
-						'class' => 'case_days_label',
+						'class' => 'label case_days_label',
 					)
 					))
 					->add('add day', ButtonType::class, array(
 						'attr' => array(
-							'class' => 'button addButton',
+							'class' => 'addButton is-success',
 							'onclick' => 'addButtonClickListener(this)',
 						)
 					))
 					->add('update', SubmitType::class, array(
 						'attr' => array(
 							'form' => 'case',
-							'class' => 'button',
+							'class' => 'is-success',
 						),
 					))
 					->add('delete', SubmitType::class, array(
 						'attr' => array(
 							'form' => 'case',
-							'class' => 'button',
+							'class' => 'is-danger',
 							'onclick' => 'return confirmDelete();',
 						),
 					))
 					->add('restore', SubmitType::class, array(
 						'attr' => array(
-							'class' => 'button',
+							'class' => 'is-info',
 							'onclick' => 'updateAdminCase(); return false;',
 						),
 					));
