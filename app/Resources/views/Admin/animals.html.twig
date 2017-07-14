@@ -34,15 +34,15 @@
       <div id="y2" style="display: none"></div>
     </div>
 
-    <div class="column is-5">
-      <input type="text" id="name" class="input"></input>
-      <button id="addHotspot" class="button is-success">Save</button>
-    </div>
-
-    <div id="hotspots" class="column is-full">
+    <div id="hotspots" class="column is-3">
       {% for hotspot in animal.hotspots %}
         <div class="hotspot {{ hotspot.name|lower|replace({' ': '-'}) }}" style="width: 30%;">{{ hotspot.name }} <a href="{{ path('removeHotspot', {'animal': animal.id, 'hotspot': hotspot.id }) }}" onclick="return confirmDelete();">Remove</a></div>
       {% endfor %}
+    </div>
+
+    <div class="column is-5">
+      <input type="text" id="name" class="input"></input>
+      <button id="addHotspot" class="button is-success">Save</button>
     </div>
   {% endif %}
 {% endblock %}
