@@ -22,7 +22,9 @@
 				$('.modal-card-body').prepend( $('#checked').children() );
 
 				$('.delete').on('click', function() {
-					location.href = "{{ path("diagnostics") }}";
+					$.post( "{{ path("differentials", { 'moveOn': true }) }}", function() {
+						location.href = "{{ path("diagnostics") }}";
+					});
 				});
 				$('#continue').on('click', function() {
 					var input = $('#differentials').val();
