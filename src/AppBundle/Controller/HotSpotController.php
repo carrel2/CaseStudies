@@ -171,7 +171,8 @@ class HotSpotController extends Controller
 	/**
 	 * @Route("/eval/differentials/{moveOn}", name="differentials")
 	 */
-	public function differentialsAction(Request $r, $moveOn = false) {
+	public function differentialsAction(Request $r, $moveOn = false)
+	{
 		$session = $r->getSession();
 		$diff = $r->request->get('explanation');
 
