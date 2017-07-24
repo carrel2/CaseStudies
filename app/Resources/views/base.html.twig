@@ -1,24 +1,24 @@
 {% extends 'layout.html.twig' %}
 
 {% block userNav %}
-  <a class="nav-item is-tab" href="{{ path('default') }}">Home</a>
-  <a class="nav-item is-tab" href="{{ path('user') }}">Account</a>
+  <a class="navbar-item" href="{{ path('default') }}">Home</a>
+  <a class="navbar-item" href="{{ path('user') }}">Account</a>
 
   {% if app.user is not null and app.user.hasResults %}
-    <a class="nav-item is-tab" href="{{ path('results') }}">My results</a>
+    <a class="navbar-item" href="{{ path('results') }}">My results</a>
   {% endif %}
 
-  <a class="nav-item is-tab" href="{{ path('logout') }}">Logout</a>
+  <a class="navbar-item" href="{{ path('logout') }}">Logout</a>
 {% endblock %}
 
 {% block adminNav %}
   {% if is_granted('ROLE_ADMIN') %}
-    <a class="nav-item is-tab" href="{{ path('manageUsers') }}">Manage users</a>
-    <a class="nav-item is-tab" href="{{ path('manageAnimals') }}">Manage animals</a>
-    <a class="nav-item is-tab" href="{{ path('editCase') }}">Edit cases</a>
-    <a class="nav-item is-tab" href="{{ path('manageTests') }}">Manage tests</a>
-    <a class="nav-item is-tab" href="{{ path('manageMedications') }}">Manage medications</a>
-    <a class="nav-item is-tab" href="{{ path('import') }}">Import</a>
+    <a class="navbar-item" href="{{ path('manageUsers') }}">Manage users</a>
+    <a class="navbar-item" href="{{ path('manageAnimals') }}">Manage animals</a>
+    <a class="navbar-item" href="{{ path('editCase') }}">Edit cases</a>
+    <a class="navbar-item" href="{{ path('manageTests') }}">Manage tests</a>
+    <a class="navbar-item" href="{{ path('manageMedications') }}">Manage medications</a>
+    <a class="navbar-item" href="{{ path('import') }}">Import</a>
   {% endif %}
 {% endblock %}
 
