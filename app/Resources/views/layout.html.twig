@@ -21,6 +21,9 @@
       <div class="column">
         <nav class="navbar">
           <div class="navbar-brand">
+            <a class="navbar-item" href="{{ path('default') }}">
+              <img src="{{ asset() }}" alt="Logo">
+            </a>
             <div class="navbar-burger burger">
               <span></span>
               <span></span>
@@ -30,8 +33,6 @@
           <div class="navbar-menu">
             <div class="navbar-start">
               {% block userNav %}{% endblock %}
-            </div>
-            <div class="navbar-end">
               {% block adminNav %}{% endblock %}
             </div>
           </div>
