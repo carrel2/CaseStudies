@@ -1,6 +1,11 @@
 var stack = [];
 
 $(function() {
+	$('.navbar-burger').on('click', function() {
+		$(this).toggleClass('is-active');
+		$('.navbar-menu').toggleClass('is-active');
+	});
+
 	$('.tooltip').tooltipster({
 		theme: 'tooltipster-borderless',
 		side: 'right',
