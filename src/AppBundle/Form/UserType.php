@@ -62,8 +62,8 @@ class UserType extends AbstractType
 				$options = $config->getOptions();
 
 				$form->add('plainPassword', PasswordType::class, array(
-					'label' => 'Old Password',
-					'required' => $currentUser->getRole() != 'ROLE_SUPER_ADMIN',
+					'label' => 'Password',
+					'required' => !($currentUser->getRole() == 'ROLE_SUPER_ADMIN' && $user->getId() != $currentUser->getId()),
 				));
 
 				$form->add('newPassword', RepeatedType::class, array(
@@ -78,7 +78,7 @@ class UserType extends AbstractType
 						),
 					),
 					'second_options' => array(
-						'label' => 'Confirm Password',
+						'label' => 'Confirm New Password',
 					),
 				));
 
