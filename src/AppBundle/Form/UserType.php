@@ -63,7 +63,7 @@ class UserType extends AbstractType
 
 				$form->add('plainPassword', PasswordType::class, array(
 					'label' => 'Old Password',
-					'required' => $currentUser->getRole() != 'ROLE_SUPER_USER',
+					'required' => $currentUser->getRole() != 'ROLE_SUPER_ADMIN',
 				));
 
 				$form->add('newPassword', RepeatedType::class, array(
