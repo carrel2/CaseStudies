@@ -120,6 +120,7 @@ class UserController extends Controller
 		$encoder = $this->get('security.password_encoder');
 		$user = $this->getUser();
 		$oldPassword = $user->getPassword();
+		$oldRole = $user->getRole();
 
 		$form = $this->createForm( UserType::class, $user );
 
@@ -137,6 +138,10 @@ class UserController extends Controller
 				if( strlen($newPassword) > 6 ) {
 					$password = $encoder->encodePassword($user, $newPassword);
 					$user->setPassword($password);
+				}
+
+				if( $oldRole == 'ROLE_SUPER_ADMIN' ) {
+					$user->setRole( $oldRole );
 				}
 
 				try {
