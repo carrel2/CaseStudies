@@ -69,6 +69,7 @@ class UserType extends AbstractType
 				$form->add('newPassword', RepeatedType::class, array(
 					'mapped' => false,
 					'type' => PasswordType::class,
+					'required' => false,
 					'first_options'  => array(
 						'label' => 'New Password',
 						'attr' => array(
