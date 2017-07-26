@@ -139,7 +139,7 @@ class UserController extends Controller
 				'submitted password' => $user->getPlainPassword(),
 				'submitted password encoded' => $encodedPassword,
 				'equal' => $encodedPassword == $oldPassword,
-				'encoder test' => $encoder->isPasswordValid( $user, $user->getPlainPassword() );
+				'encoder test' => $encoder->isPasswordValid( $user, $user->getPlainPassword() )
 			));
 
 			if( $encoder->isPasswordValid( $user, $user->getPlainPassword() ) )
