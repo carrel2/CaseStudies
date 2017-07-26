@@ -12,9 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\UserType;
 use AppBundle\Entity\User;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Debug\Debug;
-
-Debug::enable();
 
 /**
  * UserController class
@@ -135,6 +132,8 @@ class UserController extends Controller
 			$user = $form->getData();
 
 			$newPassword = $form->get('newPassword')->getData();
+
+			var_dump($oldPassword);
 
 			if( $encoder->encodePassword($user, $user->getPlainPassword()) == $oldPassword )
 			{
