@@ -12,6 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\UserType;
 use AppBundle\Entity\User;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Debug\Debug;
+
+Debug::enable();
 
 /**
  * UserController class
