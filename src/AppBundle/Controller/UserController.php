@@ -133,7 +133,7 @@ class UserController extends Controller
 
 			$newPassword = $form->get('newPassword')->getData();
 
-			var_dump($oldPassword);
+			dump($oldPassword);
 
 			if( $encoder->encodePassword($user, $user->getPlainPassword()) == $oldPassword )
 			{
