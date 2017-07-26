@@ -139,9 +139,10 @@ class UserController extends Controller
 				'submitted password' => $user->getPlainPassword(),
 				'submitted password encoded' => $encodedPassword,
 				'equal' => $encodedPassword == $oldPassword,
+				'encoder test' => $encoder->isPasswordValid( $user, $user->getPlainPassword() );
 			));
 
-			if( $encodedPassword == $oldPassword )
+			if( $encoder->isPasswordValid( $user, $user->getPlainPassword() ) )
 			{
 				if( strlen($newPassword) > 6 ) {
 					$password = $encoder->encodePassword($user, $newPassword);
