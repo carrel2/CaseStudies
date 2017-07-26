@@ -132,15 +132,6 @@ class UserController extends Controller
 			$user = $form->getData();
 
 			$newPassword = $form->get('newPassword')->getData();
-			$encodedPassword = $encoder->encodePassword($user, $user->getPlainPassword());
-
-			dump( array(
-				'password' => $oldPassword,
-				'submitted password' => $user->getPlainPassword(),
-				'submitted password encoded' => $encodedPassword,
-				'equal' => $encodedPassword == $oldPassword,
-				'encoder test' => $encoder->isPasswordValid( $user, $user->getPlainPassword() )
-			));
 
 			if( $encoder->isPasswordValid( $user, $user->getPlainPassword() ) )
 			{

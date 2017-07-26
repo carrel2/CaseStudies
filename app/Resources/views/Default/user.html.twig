@@ -1,14 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	{{ form_start(form) }}
-		{{ form_row(form.email) }}
-		{{ form_row(form.username) }}
-		{{ form_row(form.uin) }}
-		{{ form_row(form.plainPassword) }}
-		{{ form_row(form.newPassword) }}
-		{{ form_row(form.role, {'label': false, 'attr': {'hidden': true}}) }}
+	<div class="column is-4">
+		{{ form_start(form) }}
+			{{ form_row(form.email) }}
+			{{ form_row(form.username) }}
+			{{ form_row(form.uin) }}
+			{{ form_row(form.plainPassword) }}
+			{{ form_row(form.newPassword) }}
+			{{ form_row(form.role, {'label': false, 'attr': {'hidden': true}}) }}
 
-		{{ form_rest(form) }}
-	{{ form_end(form) }}
+			{{ form_rest(form) }}
+		{{ form_end(form) }}
+	</div>
 {% endblock %}
