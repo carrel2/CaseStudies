@@ -136,7 +136,8 @@ class UserController extends Controller
 
 			dump( array(
 				'password' => $oldPassword,
-				'submitted password' => $encodedPassword,
+				'submitted password' => $user->getPlainPassword(),
+				'submitted password encoded' => $encodedPassword,
 				'equal' => $encodedPassword == $oldPassword,
 			));
 
