@@ -455,6 +455,9 @@ class AdminController extends Controller
 					'choice_attr' => function(Test $t, $key, $index) {
 						return ['class' => 'test'];
 					},
+					'group_by' => function($val, $key, $index) {
+						return $val->getGroup();
+					},
 					'label_attr' => array(
 						'class' => ' tests_label',
 					)
@@ -589,6 +592,9 @@ class AdminController extends Controller
 						'expanded' => true,
 						'choice_attr' => function(Medication $t, $key, $index) {
 							return ['class' => 'medication'];
+						},
+						'group_by' => function($val, $key, $index) {
+							return $val->getGroup();
 						},
 						'label_attr' => array(
 							'class' => 'medications_label',
