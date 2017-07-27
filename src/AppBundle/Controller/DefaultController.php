@@ -36,8 +36,6 @@ class DefaultController extends Controller
 	 * On submission, associates the current User with the selected CaseStudy unless an association already exists.
 	 * Redirects to HotSpotController::showPage()
 	 *
-	 * @todo style location radio boxes
-	 *
 	 * @see DefaultType::class
 	 * @see User::class
 	 * @see CaseStudy::class
@@ -55,11 +53,11 @@ class DefaultController extends Controller
 	{
 		$session = $r->getSession();
 
-		if (time() - $session->getMetadataBag()->getLastUsed() > $this->getParameter('sessionMaxLifetime')) {
-			$session->set('timed out', true);
-			
-    	return $this->redirectToRoute('logout');
-		}
+		// if (time() - $session->getMetadataBag()->getLastUsed() > $this->getParameter('sessionMaxLifetime')) {
+		// 	$session->set('timed out', true);
+		//
+    // 	return $this->redirectToRoute('logout');
+		// }
 
 		$user = $this->getUser();
 		$case = $user->getCaseStudy();
