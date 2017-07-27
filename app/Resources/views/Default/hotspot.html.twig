@@ -41,7 +41,27 @@
 {% endblock %}
 
 {% block body %}
-	<div id="hotspots" class="image is-900x600">
+	{% set class = 'is-1by1' %}
+	{% set closest = 3 %}
+	{% set ratio = (size[0] / size[1])|number_format(3) %}
+
+	{% if (1.33 - ratio)|abs < closest %}
+		{% set class = 'is-4by3' %}
+		{% set closest = (1.33 - ratio)|abs %}
+	{% endif %}
+	{% if (1.50 - ratio)|abs < closest %}
+		{% set class = 'is-3by2' %}
+		{% set closest = (1.50 - ratio)|abs %}
+	{% endif %}
+	{% if (1.77 - ratio)|abs < closest %}
+		{% set class = 'is-16by9' %}
+		{% set closest = (1.77 - ratio)|abs %}
+	{% endif %}
+	{% if (2 - ratio)|abs < closest %}
+		{% set class = 'is-2by1' %}
+	{% endif %}
+
+	<div id="hotspots" class="image {{ class }}">
 		<img id="animal" src="{{ asset('images/' ~ animal.image) }}" usemap="#hotspots" />
 
 		<map name="hotspots">

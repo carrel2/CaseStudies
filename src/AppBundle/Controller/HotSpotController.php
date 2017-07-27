@@ -57,6 +57,7 @@ class HotSpotController extends Controller
 
 		return $this->render('Default/hotspot.html.twig', array(
 			'animal' => $animal,
+			'size' => getimagesize("./images/{$animal->getImage()}"),
 			'checked' => $user->getCurrentDay()->getHotspotsInfo(),
 			'day' => $user->getCurrentDay(),
 		));
