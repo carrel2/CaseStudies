@@ -87,8 +87,11 @@
 {% endblock %}
 
 {% block footer %}
-	<a onclick="modal(event)">Continue</a>
-	<a href="{{ path('review') }}">Review</a>
-
+	<div class="tabs">
+		<ul>
+			<li><a onclick="modal(event)">Continue</a></li>
+			<li><a href="{{ path('review') }}">Review</a></li>
+		</ul>
+	</div>
 	{{ parent() }}
 {% endblock %}
