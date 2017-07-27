@@ -428,6 +428,7 @@ class AdminController extends Controller
 		 return $this->render('Admin/animals.html.twig', array(
 			 'form' => $form->createView(),
 			 'animal' => $animal,
+			 'size' => getimagesize($animal->getImage()),
 			 'route' => null,
 		 ));
 	 }
