@@ -26,8 +26,7 @@ security:
             anonymous: ~
             form_login_ldap:
                 service: ldap
-                dn_string: 'dc=ldap,dc=illinois,dc=edu'
-                query_string: '(&(uid={username})(dc=ldap,dc=illinois,dc=edu))'
+                dn_string: 'uid={username},dc=ldap,dc=illinois,dc=edu'
                 login_path: login
                 check_path: login
                 default_target_path: default
