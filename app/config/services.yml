@@ -2,9 +2,11 @@ parameters:
 
 services:
     ldap:
-        class: Symfony\Component\Ldap\Ldap:
+        class: Symfony\Component\Ldap\Ldap
         arguments: ['@Symfony\Component\Ldap\Adapter\ExtLdap\Adapter']
-    Symfony\Component\Ldap\Adapter\ExtLdap\Adapter:
+
+    adapter:
+        class: Symfony\Component\Ldap\Adapter\ExtLdap\Adapter
         arguments:
             -   host: ldap.illinois.edu
                 port: 389
