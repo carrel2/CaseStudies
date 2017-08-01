@@ -4,14 +4,14 @@ security:
             entity:
                 class: AppBundle:User
                 property: username
-        # ui_ldap:
-        #     ldap:
-        #         service: ldap
-        #         base_dn: dc=ldap,dc=illinois,dc=edu
-        #         search_dn: "dc=ldap,dc=illinois,dc=edu"
-        #         search_password: password
-        #         default_roles: ROLE_USER
-        #         uid_key: uid
+        ui_ldap:
+            ldap:
+                service: ldap
+                base_dn: dc=ldap,dc=illinois,dc=edu
+                search_dn: "cn=carrel2,dc=ldap,dc=illinois,dc=edu"
+                search_password: password
+                default_roles: ROLE_USER
+                uid_key: uid
 
     encoders:
         AppBundle\Entity\User:
@@ -39,8 +39,6 @@ security:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/development, roles: ROLE_SUPER_ADMIN }
-        - { path: ^/run, roles: ROLE_SUPER_ADMIN }
         - { path: ^/files/docs, roles: ROLE_SUPER_ADMIN }
         - { path: ^/files/schema, roles: ROLE_SUPER_ADMIN }
 
