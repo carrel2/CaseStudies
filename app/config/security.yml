@@ -25,6 +25,7 @@ security:
         main:
             anonymous: ~
             form_login_ldap:
+                service: ui_ldap
                 login_path: login
                 check_path: login
                 default_target_path: default
