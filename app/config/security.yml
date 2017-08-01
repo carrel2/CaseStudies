@@ -1,8 +1,4 @@
-# To get started with security, check out the documentation:
-# http://symfony.com/doc/current/security.html
 security:
-
-    # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         db_provider:
             entity:
@@ -11,8 +7,8 @@ security:
         # ui_ldap:
         #     ldap:
         #         service: ldap
-        #         base_dn: dc=uiuc,dc=edu
-        #         search_dn: "dc=uiuc,dc=edu"
+        #         base_dn: dc=ldap,dc=illinois,dc=edu
+        #         search_dn: "dc=ldap,dc=illinois,dc=edu"
         #         search_password: password
         #         default_roles: ROLE_USER
         #         uid_key: uid
@@ -22,7 +18,6 @@ security:
             algorithm: bcrypt
 
     firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false

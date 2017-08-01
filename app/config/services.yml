@@ -1,20 +1,16 @@
-# Learn more about services, parameters and containers at
-# http://symfony.com/doc/current/service_container.html
 parameters:
-#    parameter_name: value
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
-    ldap:
-        class: Symfony\Component\Ldap\LdapClient
+    Symfony\Component\Ldap\Ldap:
+        arguments: ['@Symfony\Component\Ldap\Adapter\ExtLdap\Adapter']
+    Symfony\Component\Ldap\Adapter\ExtLdap\Adapter:
         arguments:
-            - ldap.illinois.edu
-            - 389
-            - 3
-            - false
-            - true
+            -   host: ldap.illinois.edu
+                port: 389
+                encryption: tls
+                options:
+                    protocol_version: 3
+                    referrals: false
 
     app.form.user:
         class: AppBundle\Form\UserType
