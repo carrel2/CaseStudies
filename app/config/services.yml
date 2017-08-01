@@ -3,7 +3,7 @@ parameters:
 services:
     ldap:
         class: Symfony\Component\Ldap\Ldap
-        arguments: ['@Symfony\Component\Ldap\Adapter\ExtLdap\Adapter']
+        arguments: ['@adapter']
 
     adapter:
         class: Symfony\Component\Ldap\Adapter\ExtLdap\Adapter
