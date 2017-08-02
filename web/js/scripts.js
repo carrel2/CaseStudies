@@ -107,11 +107,12 @@ function updateAdminCase(id) {
 		var array = stack.pop();
 
 		if( array[0] == 0 ) {
-			$('#' + array[1]).prepend( $(array[2]) ).before( $(array[3]) );
+			$('#' + array[1]).prepend( $(array[2]) ).prepend( $(array[3]) );
 		} else if( array[0] > $('#' + array[1]).children().length - 1 ) {
-			$('#' + array[1]).append( $(array[2]) ).before( $(array[3]) );
+			$('#' + array[1]).append( $(array[3]) ).append( $(array[3]) );
 		} else {
-			$('#' + array[1]).children().eq(array[0]).before( $(array[2]) ).before( $(array[3]) );
+			$('#' + array[1]).children().eq(array[0]).before( $(array[3]) );
+			$('#' + array[1]).children().eq(array[0]).before( $(array[3]) );
 		}
 
 		window.CKEDITOR.replace(array[4], {"toolbar":[["Cut","Copy","Paste","PasteText","PasteFromWord","-","Undo","Redo"],["Scayt"],["Link","Unlink"],["Table","SpecialChar"],["Maximize"],["Source"],"\/",["Bold","Italic","Strike","-","RemoveFormat"],["NumberedList","BulletedList","-","Outdent","Indent","-","Blockquote"],["Styles","Format","About"]],"autoParagraph":false,"language":"en"});
