@@ -170,7 +170,7 @@ function moveSubmits() {
 			$(this).attr('form', form).wrap('<div class="level-item"></div>');
 		});
 	} else {
-		$('#body button[type=submit].button').remove();
+		$('#caseInfo button[type=submit].button').remove();
 	}
 }
 
