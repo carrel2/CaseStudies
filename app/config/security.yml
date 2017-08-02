@@ -8,7 +8,7 @@ security:
             ldap:
                 service: ldap
                 base_dn: ou=People,dc=ldap,dc=illinois,dc=edu
-                search_dn: ~
+                search_dn: "cn=carrel2,dc=ldap,dc=illinois,dc=edu"
                 search_password: ~
                 default_roles: ROLE_USER
                 uid_key: uid
