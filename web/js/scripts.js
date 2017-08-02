@@ -106,7 +106,7 @@ function updateAdminCase(id) {
 	$('#undo').on('click', function() {
 		var array = stack.pop();
 
-		if( array[0] == 0 ) {
+		if( array[0] == 1 ) {
 			$('#' + array[1]).prepend( $(array[2]) ).prepend( $(array[3]) );
 		} else if( array[0] > ($('#' + array[1]).children().length / 2) - 1 ) {
 			$('#' + array[1]).append( $(array[3]) ).append( $(array[2]) );
