@@ -34,7 +34,7 @@ function addRemoveButtonClickListener() {
 				$(this).remove();
 			});
 
-			stack.push([$(this).parent().index(), $(this).parent().parent().attr('id'), $(this).parent().clone(true), id]);
+			stack.push([$(this).parent().index(), $(this).parent().parent().attr('id'), $(this).parent().clone(true), $(this).parent().prev().clone(true), id]);
 
 			$(this).parent().slideUp(function() {
 				if( $(this).prev().is('label') ) {
@@ -107,14 +107,14 @@ function updateAdminCase(id) {
 		var array = stack.pop();
 
 		if( array[0] == 0 ) {
-			$('#' + array[1]).prepend( $(array[2]) );
+			$('#' + array[1]).prepend( $(array[2]) ).before( $(array[3]) );
 		} else if( array[0] > $('#' + array[1]).children().length - 1 ) {
-			$('#' + array[1]).append( $(array[2]) );
+			$('#' + array[1]).append( $(array[2]) ).before( $(array[3]) );
 		} else {
-			$('#' + array[1]).children().eq(array[0]).before( $(array[2]) );
+			$('#' + array[1]).children().eq(array[0]).before( $(array[2]) ).before( $(array[3]) );
 		}
 
-		window.CKEDITOR.replace(array[3], {"toolbar":[["Cut","Copy","Paste","PasteText","PasteFromWord","-","Undo","Redo"],["Scayt"],["Link","Unlink"],["Table","SpecialChar"],["Maximize"],["Source"],"\/",["Bold","Italic","Strike","-","RemoveFormat"],["NumberedList","BulletedList","-","Outdent","Indent","-","Blockquote"],["Styles","Format","About"]],"autoParagraph":false,"language":"en"});
+		window.CKEDITOR.replace(array[4], {"toolbar":[["Cut","Copy","Paste","PasteText","PasteFromWord","-","Undo","Redo"],["Scayt"],["Link","Unlink"],["Table","SpecialChar"],["Maximize"],["Source"],"\/",["Bold","Italic","Strike","-","RemoveFormat"],["NumberedList","BulletedList","-","Outdent","Indent","-","Blockquote"],["Styles","Format","About"]],"autoParagraph":false,"language":"en"});
 
 		if( stack.length == 0 ) {
 			$(this).hide();
