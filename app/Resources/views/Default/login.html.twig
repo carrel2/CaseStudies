@@ -5,6 +5,7 @@
 
 {% block flashes %}
 	{% if error %}
+		<div class="notification is-danger">{{ error }}</div>
 		<div class="notification is-danger">Incorrect username or password</div>
 	{% endif %}
 

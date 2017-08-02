@@ -35,7 +35,7 @@ security:
                 target: login
                 handlers: [ app.logout_handler ]
                 invalidate_session: false
-            provider: db_provider
+            provider: ui_ldap
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
