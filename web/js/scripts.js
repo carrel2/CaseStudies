@@ -71,7 +71,7 @@ function addButtonClickListener(e) {
 	if( t != "day" ) {
 		holder.find('label').remove(':contains(' + index + ')');
 	} else {
-		holder.prev().text( 'Day ' + ( index + 1 ) );
+		holder.children(':last-child').prev('label').text( 'Day ' + ( index + 1 ) );
 	}
 
 	holder.children('div:last-child').append('<button type="button" class="delete remove-button"></button>');
