@@ -34,7 +34,7 @@ function addRemoveButtonClickListener() {
 				$(this).remove();
 			});
 
-			stack.push([$(this).parent().index(), $(this).parent().parent().attr('id'), $(this).parent().clone(true), $(this).parent().prev().clone(true), id]);
+			stack.push([$(this).parent().index(), $(this).parent().parent().attr('id'), $(this).parent().clone(true), $(this).parent().prev('label').clone(true), id]);
 
 			$(this).parent().slideUp(function() {
 				if( $(this).prev().is('label') ) {
@@ -81,12 +81,6 @@ function addButtonClickListener(e) {
 	}
 
 	addRemoveButtonClickListener();
-
-	if( $(e).text() == "Add day" ) {
-		$('.dayNumber').each(function(i, element){
-			$(element).val(i);
-		});
-	}
 }
 
 function updateAdminCase(id) {
@@ -135,17 +129,6 @@ function updateAdminCase(id) {
 		});
 
 		moveSubmits();
-
-		// if( $('#footer').children().length == 1 ) {
-		// 	var form = $('form').attr('id');
-		//
-		// 	$('button[type=submit].button').each(function() {
-		// 		$('#footer').append($(this));
-		// 		$(this).attr('form', form);
-		// 	});
-		// } else {
-		// 	$('#body button[type=submit].button').remove();
-		// }
 
 		addRemoveButtonClickListener();
 	});
