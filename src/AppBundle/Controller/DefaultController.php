@@ -178,6 +178,7 @@ class DefaultController extends Controller
 
 			$message = \Swift_Message::newInstance()
 				->setSubject("Case Study results: {$user->getCaseStudy()->getTitle()}")
+				->setFrom('casestudies@vetmed.illinois.edu')
 				->setTo($user->getEmail()) // TODO: ->setTo(admin/professor)
 				->setBody(
 					$this->renderView('Emails/email.html.twig', array(
