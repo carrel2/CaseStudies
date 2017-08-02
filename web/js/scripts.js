@@ -112,7 +112,7 @@ function updateAdminCase(id) {
 			$('#' + array[1]).append( $(array[3]) ).append( $(array[3]) );
 		} else {
 			$('#' + array[1]).children().eq(array[0]).before( $(array[3]) );
-			$('#' + array[1]).children().eq(array[0]).before( $(array[3]) );
+			$('#' + array[1]).children().eq(array[0]).before( $(array[2]) );
 		}
 
 		window.CKEDITOR.replace(array[4], {"toolbar":[["Cut","Copy","Paste","PasteText","PasteFromWord","-","Undo","Redo"],["Scayt"],["Link","Unlink"],["Table","SpecialChar"],["Maximize"],["Source"],"\/",["Bold","Italic","Strike","-","RemoveFormat"],["NumberedList","BulletedList","-","Outdent","Indent","-","Blockquote"],["Styles","Format","About"]],"autoParagraph":false,"language":"en"});
