@@ -34,7 +34,7 @@ class FileController extends Controller
    *
    * @return \Symfony\Component\HttpFoundation\Response Render **import.html.twig**
    *
-   * @Route("/import", name="import")
+   * @Route("/admin/import", name="import")
    */
   public function fileAction(Request $r)
   {
