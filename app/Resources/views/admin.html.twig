@@ -23,7 +23,7 @@
 {% endblock %}
 
 {% block footer %}
-	{% if form.vars.data.hasResults() %}
+	{% if form.vars.data is defined and form.vars.data.hasResults() %}
 		<div class="tabs">
 			<ul>
 				<li><a href="{{ path('editUserResults', {'id': form.vars.data.id }) }}">View user's results</a></li>
