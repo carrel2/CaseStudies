@@ -23,7 +23,7 @@
 {% endblock %}
 
 {% block footer %}
-	{% if not form.vars.data is null and form.vars.data.hasResults() %}
+	{% if get_type(form.vars.data) == "User" and form.vars.data.hasResults() %}
 		<div class="tabs">
 			<ul>
 				<li><a href="{{ path('editUserResults', {'id': form.vars.data.id }) }}">View user's results</a></li>
