@@ -5,7 +5,7 @@
 
 {% block flashes %}
 	{% if error %}
-		<div class="notification is-danger">{{ app.environment matches "prod" ? "Incorrect username or password" : error }}</div>
+		<div class="notification is-danger">{{ app.environment == "prod" ? "Incorrect username or password" : error }}</div>
 	{% endif %}
 
 	{{ parent() }}
