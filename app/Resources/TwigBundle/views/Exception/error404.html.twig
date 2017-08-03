@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Page not found</h1>
+  <section class="hero is-warning">
+    <div class="hero-body">
+      <p class="title"></p>
 
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        {# ... #}
-    {% endif %}
-
-    <p>
-        The requested page couldn't be located. Checkout for any URL
-        misspelling or <a href="{{ path('default') }}">return to the homepage</a>.
-    </p>
+      <p class="subtitle">
+          The requested page couldn't be located. Check for any URL
+          misspelling or <a href="{{ path('default') }}">return to the homepage</a>.
+      </p>
+  </div>
+</section>
 {% endblock %}
