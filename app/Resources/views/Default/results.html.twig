@@ -69,7 +69,7 @@
         {% endfor %}
 
         {% if user is defined and is_granted('ROLE_ADMIN') %}
-          <a href="/removeResult/{{ result.id }}" class="panel-block is-danger{% if not loop.first %} is-hidden{% endif %}" data-result="result-{{ result.id }}">Remove</a>
+          <a href="/removeResult/{{ result.id }}" class="panel-block is-danger{% if not loop.first %} is-hidden{% endif %}" data-result="result-{{ result.id }}" onclick="return confirmDelete();">Remove</a>
         {% endif %}
       {% endfor %}
     </nav>
