@@ -154,6 +154,24 @@
     </p>
 {%- endblock button_widget -%}
 
+{%- block file_widget -%}
+    <div class="file">
+      <label class="file-label">
+        <p {{ block('form_widget_container_attributes') }}>
+            {{- parent() -}}
+        </p>
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fa fa-upload"></i>
+          </span>
+          <span class="file-label">
+            Choose a file…
+          </span>
+        </span>
+      </label>
+    </div>
+{%- endblock -%}
+
 {# Labels #}
 
 {%- block form_label -%}
