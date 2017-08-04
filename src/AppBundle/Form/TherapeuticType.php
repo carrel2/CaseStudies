@@ -19,8 +19,12 @@ class TherapeuticType extends AbstractType
           'pattern' => '[0-9]+',
         )
       ))
-      ->add('waitTime')
-      ->add('group')
+      ->add('waitTime', null, array(
+        'required' => false,
+      ))
+      ->add('group', null, array(
+        'required' => false,
+      ))
       ->add('submit', SubmitType::class, array(
         'attr' => array('class' => 'is-success'),
       ));
