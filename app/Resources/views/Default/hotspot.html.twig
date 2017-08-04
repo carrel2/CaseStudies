@@ -60,6 +60,7 @@
 	{% if (2 - ratio)|abs < closest %}
 		{% set class = 'is-2by1' %}
 	{% endif %}
+
 	<div class="column is-half">
 		<div id="hotspots" class="image {{ class }}">
 			<img id="animal" src="{{ asset('images/' ~ animal.image) }}" usemap="#hotspots" />
@@ -93,6 +94,6 @@
 			<li><a href="{{ path('review') }}">Review</a></li>
 		</ul>
 	</div>
-	
+
 	{{ parent() }}
 {% endblock %}

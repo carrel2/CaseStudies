@@ -14,7 +14,6 @@
 {% endblock %}
 
 {% block body %}
-  {% dump(size) %}
   <div class="column is-3">
     {{ form_start(form, {'attr': {'id': 'admin_animal_form'}} ) }}
     {{ form_widget(form) }}
@@ -42,7 +41,7 @@
       {% set class = 'is-2by1' %}
     {% endif %}
 
-    <div class="column is-9">
+    <div class="column is-half">
       <div id="image" class="image {{ class }}">
         <img id="animal" src="{{ asset('images/' ~ animal.image) }}" data-id="{{ animal.id }}" />
         {% for hotspot in animal.hotspots %}
@@ -61,7 +60,7 @@
       {% endfor %}
     </div>
 
-    <div class="column is-5">
+    <div class="column is-half is-offset-3">
       <input type="text" id="name" class="input"></input>
       <button id="addHotspot" class="button is-success">Save</button>
     </div>
