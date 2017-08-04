@@ -21,9 +21,11 @@ class TherapeuticType extends AbstractType
       ))
       ->add('waitTime', null, array(
         'required' => false,
+        'empty_data' => 0,
       ))
       ->add('group', null, array(
         'required' => false,
+        'empty_data' => 0,
       ))
       ->add('submit', SubmitType::class, array(
         'attr' => array('class' => 'is-success'),
