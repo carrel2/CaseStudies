@@ -158,6 +158,7 @@
     <div class="file">
       <label class="file-label">
         <p {{ block('form_widget_container_attributes') }}>
+            {% set attr = attr|merge({class: (attr.class|default('') ~ 'file-input')|trim}) %}
             {{- block('form_widget_simple') -}}
         </p>
         <span class="file-cta">
