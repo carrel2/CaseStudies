@@ -1,7 +1,9 @@
 {% extends 'admin.html.twig' %}
 
 {% block body %}
-  {{ form_start(form, {'attr': {'id': 'admin_import_form'}} ) }}
-  {{ form_widget(form) }}
-  {{ form_end(form) }}
+  <div class="column">
+    {{ form_start(form, {'attr': {'id': 'admin_import_form'}} ) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+  </div>
 {% endblock %}
