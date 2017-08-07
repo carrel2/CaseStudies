@@ -168,6 +168,10 @@ class DefaultController extends Controller
 					$a[$key]["therapeutics"][$flash] = "No results available.";
 				}
 
+				if( $session->get('differentials-' . $id) ) {
+					$a[$key]["differentials"] = $session->remove('differentials-' . $id);
+				}
+
 				$results->setResults($a);
 			}
 

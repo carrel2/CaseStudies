@@ -76,7 +76,16 @@
   </div>
 
   <div class="column is-two-thirds">
+    <div id="details">
+      <p><span class="title">Diagnosis:</span> {{ result.diagnosis }}</p>
+    </div>
+
     {% for result in results %}
+      <div id="details">
+        <p><span class="title">Location:</span> {{ result.location }}</p>
+        <p><span class="title">Diagnosis:</span> {{ result.diagnosis }}</p>
+      </div>
+
       {% for day in result.results %}
         <div data-id="result-{{ result.id }}-day-{{ loop.index }}" class="box{% if not loop.first or not loop.parent.loop.first %} is-hidden{% endif %}">
           <div id="hotspots">
@@ -85,6 +94,8 @@
             {% for name, info in day.hotspotsInfo %}
               <div><em>{{ name }}: </em><span>{{ info|raw }}</span></div>
             {% endfor %}
+
+            <p><span class="title">Differentials:</span> {{ result.results.differentials }}</p>
           </div>
 
           <div id="testResults">
