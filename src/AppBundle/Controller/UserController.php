@@ -180,6 +180,8 @@ class UserController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		$results = $em->getRepository('AppBundle:Results')->findByUser($this->getUser());
 
+		dump($results);
+
 		return $this->render('Default/results.html.twig', array(
 			'results' => $results,
 		));
