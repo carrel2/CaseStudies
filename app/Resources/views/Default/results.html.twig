@@ -91,7 +91,7 @@
               <div><em>{{ name }}: </em><span>{{ info|raw }}</span></div>
             {% endfor %}
 
-            {% if not day.differentials is empty %}
+            {% if day.differentials is defined %}
               <p><span class="title">Differentials:</span> {{ day.differentials }}</p>
             {% endif %}
           </div>
