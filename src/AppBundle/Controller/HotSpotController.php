@@ -178,7 +178,7 @@ class HotSpotController extends Controller
 		$diff = $r->request->get('explanation');
 
 		if( $diff || $moveOn ) {
-			$session->set("differentials-${$session->getUser()->getCurrentDay()->getId()}", $diff);
+			$session->set("differentials-${$this->getUser()->getCurrentDay()->getId()}", $diff);
 		} else {
 			$session->set('modalUp', true);
 
