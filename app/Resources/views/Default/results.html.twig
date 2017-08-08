@@ -78,8 +78,8 @@
   <div class="column is-two-thirds">
     {% for result in results %}
       <div id="details" {% if not loop.first %}class="is-hidden"{% endif %} data-result="result-{{ result.id }}">
-        <p><span class="title">Location:</span> {{ result.location }}</p>
-        <p><span class="title">Diagnosis:</span> {{ result.diagnosis }}</p>
+        <p><span class="title">Location:</span><span class="subtitle">{{ result.location }}</span></p>
+        <p><span class="title">Diagnosis:</span><span class="subtitle">{{ result.diagnosis }}</span></p>
       </div>
 
       {% for day in result.results %}
