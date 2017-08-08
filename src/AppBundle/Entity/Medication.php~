@@ -60,7 +60,7 @@ class Medication
 	 * @var ArrayCollection
 	 *
 	 * @see ArrayCollection::class
-	 * @see MedicationResults::class
+	 * @see 'AppBundle\Entity\MedicationResults'
 	 *
 	 * @ORM\OneToMany(targetEntity="MedicationResults", mappedBy="medication")
 	 */
@@ -168,7 +168,7 @@ class Medication
      *
      * @param \AppBundle\Entity\MedicationResults $result
 		 *
-		 * @see MedicationResults::class
+		 * @see 'AppBundle\Entity\MedicationResults'
      *
      * @return self
      */

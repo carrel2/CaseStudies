@@ -32,13 +32,13 @@ class UserType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-			->add('email', EmailType::class)
-			->add('username', TextType::class, array(
+			->add('email', 'Symfony\Component\Form\Extension\Core\Type\EmailType')
+			->add('username', 'Symfony\Component\Form\Extension\Core\Type\TextType', array(
 				'label' => 'Name',
 			))
-			->add('uin', TextType::class)
-			->add('plainPassword', RepeatedType::class, array(
-				'type' => PasswordType::class,
+			->add('uin', 'Symfony\Component\Form\Extension\Core\Type\TextType')
+			->add('plainPassword', 'Symfony\Component\Form\Extension\Core\Type\RepeatedType', array(
+				'type' => 'Symfony\Component\Form\Extension\Core\Type\PasswordType',
 				'first_options'  => array(
 					'label' => 'Password',
 					'attr' => array(
@@ -61,14 +61,14 @@ class UserType extends AbstractType
 				$config = $form->get('plainPassword')->getConfig();
 				$options = $config->getOptions();
 
-				$form->add('plainPassword', PasswordType::class, array(
+				$form->add('plainPassword', 'Symfony\Component\Form\Extension\Core\Type\PasswordType', array(
 					'label' => 'Password',
 					'required' => !($currentUser->getRole() == 'ROLE_SUPER_ADMIN' && $user->getId() != $currentUser->getId()),
 				));
 
-				$form->add('newPassword', RepeatedType::class, array(
+				$form->add('newPassword', 'Symfony\Component\Form\Extension\Core\Type\RepeatedType', array(
 					'mapped' => false,
-					'type' => PasswordType::class,
+					'type' => 'Symfony\Component\Form\Extension\Core\Type\PasswordType',
 					'required' => false,
 					'first_options'  => array(
 						'label' => 'New Password',
@@ -82,7 +82,7 @@ class UserType extends AbstractType
 					),
 				));
 
-				$form->add('role', ChoiceType::class, array(
+				$form->add('role', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
 					'choices' => array(
 						'User' => 'ROLE_USER',
 						'Admin' => 'ROLE_ADMIN',
@@ -91,14 +91,14 @@ class UserType extends AbstractType
 				));
 			}
 
-			$form->add('submit', SubmitType::class);
+			$form->add('submit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType');
 		});
 	}
 
 	public function configureOptions(OptionsResolver $resolver)
 	{
 		$resolver->setDefaults(array(
-			'data_class' => User::class,
+			'data_class' => 'AppBundle\Entity\User',
 		));
 	}
 }

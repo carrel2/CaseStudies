@@ -13,15 +13,15 @@ class AdminUserType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-			->add('users', EntityType::class, array(
+			->add('users', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
 				'class' => 'AppBundle:User',
 				'choice_label' => 'username',
 				'expanded' => true,
 			))
-			->add('edit', SubmitType::class, array(
+			->add('edit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 				'attr' => array('class' => 'is-success'),
 			))
-			->add('delete', SubmitType::class, array(
+			->add('delete', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 				'attr' => array('class' => 'is-danger'),
 			));
 	}

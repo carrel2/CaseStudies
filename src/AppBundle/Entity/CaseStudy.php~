@@ -51,7 +51,7 @@ class CaseStudy
 	*
 	* @var Animal
 	*
-	* @see Animal::class
+	* @see 'AppBundle\Entity\Animal'
 	*
 	* @ORM\ManyToOne(targetEntity="Animal", inversedBy="cases")
 	* @ORM\JoinColumn(name="animal_id", referencedColumnName="id", onDelete="SET NULL")
@@ -64,7 +64,7 @@ class CaseStudy
 	* @var ArrayCollection
 	*
 	* @see ArrayCollection::class
-	* @see Day::class
+	* @see 'AppBundle\Entity\Day'
 	*
 	* @ORM\OneToMany(targetEntity="Day", mappedBy="caseStudy", cascade={"all"}, orphanRemoval=true)
 	*/
@@ -76,7 +76,7 @@ class CaseStudy
 	* @var ArrayCollection
 	*
 	* @see ArrayCollection::class
-	* @see User::class
+	* @see 'AppBundle\Entity\User'
 	*
 	* @ORM\OneToMany(targetEntity="User", mappedBy="caseStudy", cascade={"all"})
 	*/

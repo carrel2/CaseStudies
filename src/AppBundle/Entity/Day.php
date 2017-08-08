@@ -11,8 +11,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Contains information about HotSpots, TestResults, and MedicationResults for a single Day in a CaseStudy
  *
  * @see HotSpots::class
- * @see TestResults::class
- * @see MedicationResults::class
+ * @see 'AppBundle\Entity\TestResults'
+ * @see 'AppBundle\Entity\MedicationResults'
  * @see CaseStudy::class
  *
  * @ORM\Entity
@@ -60,7 +60,7 @@ class Day
 	 * @var ArrayCollection
 	 *
 	 * @see ArrayCollection::class
-	 * @see TestResults::class
+	 * @see 'AppBundle\Entity\TestResults'
 	 *
 	 * @ORM\OneToMany(targetEntity="TestResults", mappedBy="day", cascade={"persist", "remove"})
 	 */
@@ -72,7 +72,7 @@ class Day
 	 * @var ArrayCollection
 	 *
 	 * @see ArrayCollection::class
-	 * @see MedicationResults::class
+	 * @see 'AppBundle\Entity\MedicationResults'
 	 *
 	 * @ORM\OneToMany(targetEntity="MedicationResults", mappedBy="day", cascade={"persist", "remove"})
 	 */

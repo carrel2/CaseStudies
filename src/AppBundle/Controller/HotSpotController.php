@@ -31,7 +31,7 @@ class HotSpotController extends Controller
 	* @todo research 3d model functionality for HotSpots
 	*
 	* @see HotSpot::class
-	* @see Day::class
+	* @see 'AppBundle\Entity\Day'
 	* @see CaseStudy::class
 	*
 	* @param Request $r Request object
@@ -69,7 +69,7 @@ class HotSpotController extends Controller
 	* Called by ajax. Function to update UserDay with the HotSpots given
 	*
 	* @see HotSpots::class
-	* @see UserDay::class
+	* @see User'AppBundle\Entity\Day'
 	*
 	* @param Request $r Request object
 	* @param HotSpots $hotspot The HotSpots to add to the current UserDay

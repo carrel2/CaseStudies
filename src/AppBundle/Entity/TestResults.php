@@ -9,8 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * Contains results for a specific diagnostic Test done on a specific Day
  *
- * @see Test::class
- * @see Day::class
+ * @see 'AppBundle\Entity\Test'
+ * @see 'AppBundle\Entity\Day'
  *
  * @ORM\Entity
  * @ORM\Table(name="TestResults")
@@ -33,7 +33,7 @@ class TestResults
 	 *
 	 * @var Day
 	 *
-	 * @see Day::class
+	 * @see 'AppBundle\Entity\Day'
 	 *
 	 * @ORM\ManyToOne(targetEntity="Day", inversedBy="tests")
 	 */
@@ -44,7 +44,7 @@ class TestResults
 	 *
 	 * @var UserDay
 	 *
-	 * @see UserDay::class
+	 * @see User'AppBundle\Entity\Day'
 	 *
 	 * @ORM\ManyToOne(targetEntity="UserDay", inversedBy="tests")
 	 * @ORM\JoinColumn(name="user_day_id", referencedColumnName="id", onDelete="SET NULL")
@@ -56,7 +56,7 @@ class TestResults
 	 *
 	 * @var Test
 	 *
-	 * @see Test::class
+	 * @see 'AppBundle\Entity\Test'
 	 *
 	 * @ORM\ManyToOne(targetEntity="Test", inversedBy="results")
 	 */
@@ -67,7 +67,7 @@ class TestResults
 	 *
 	 * @var string
 	 *
-	 * @see Test::class
+	 * @see 'AppBundle\Entity\Test'
 	 *
 	 * @ORM\Column(type="text")
 	 */
@@ -122,7 +122,7 @@ class TestResults
      *
      * @param \AppBundle\Entity\Test $test
      *
-		 * @see Test::class
+		 * @see 'AppBundle\Entity\Test'
 		 *
      * @return self
      */
@@ -148,7 +148,7 @@ class TestResults
      *
      * @param \AppBundle\Entity\Day $day
 		 *
-		 * @see Day::class
+		 * @see 'AppBundle\Entity\Day'
      *
      * @return self
      */
@@ -174,7 +174,7 @@ class TestResults
      *
      * @param \AppBundle\Entity\UserDay $userDay
 		 *
-		 * @see UserDay::class
+		 * @see User'AppBundle\Entity\Day'
      *
      * @return self
      */

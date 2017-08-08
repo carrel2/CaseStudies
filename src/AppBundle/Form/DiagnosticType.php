@@ -13,7 +13,7 @@ class DiagnosticType extends AbstractType
 {
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
-    $builder->add('name', TextType::class)
+    $builder->add('name', 'Symfony\Component\Form\Extension\Core\Type\TextType')
       ->add('cost', null, array(
         'attr' => array(
           'pattern' => '[0-9]+',
@@ -27,7 +27,7 @@ class DiagnosticType extends AbstractType
         'required' => false,
         'empty_data' => 0,
       ))
-      ->add('submit', SubmitType::class, array(
+      ->add('submit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
         'attr' => array('class' => 'is-success'),
       ));
   }
@@ -35,7 +35,7 @@ class DiagnosticType extends AbstractType
   public function configureOptions(OptionsResolver $resolver)
   {
     $resolver->setDefaults(array(
-      'data_class' => Test::class,
+      'data_class' => 'AppBundle\Entity\Test',
     ));
   }
 }

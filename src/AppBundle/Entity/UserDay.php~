@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 *
 * Contains information relevant to the User to be compared to the original CaseStudy
 *
-* @see User::class
+* @see 'AppBundle\Entity\User'
 * @see CaseStudy::class
 *
 * @ORM\Entity
@@ -34,7 +34,7 @@ class UserDay
 	*
 	* @var ArrayCollection
 	*
-	* @see User::class
+	* @see 'AppBundle\Entity\User'
 	* @see ArrayCollection::class
 	*
 	* @ORM\ManyToOne(targetEntity="User", inversedBy="days")
@@ -47,7 +47,7 @@ class UserDay
 	* @var ArrayCollection
 	*
 	* @see ArrayCollection::class
-	* @see HotSpotInfo::class
+	* @see 'AppBundle\Entity\HotSpotInfo'
 	*
 	* @ORM\OneToMany(targetEntity="HotSpotInfo", mappedBy="userDay", cascade={"persist"})
 	*/
@@ -59,7 +59,7 @@ class UserDay
 	* @var ArrayCollection
 	*
 	* @see ArrayCollection::class
-	* @see TestResults::class
+	* @see 'AppBundle\Entity\TestResults'
 	*
 	* @ORM\OneToMany(targetEntity="TestResults", mappedBy="userDay")
 	*/
@@ -71,7 +71,7 @@ class UserDay
 	* @var ArrayCollection
 	*
 	* @see ArrayCollection::class
-	* @see MedicationResults::class
+	* @see 'AppBundle\Entity\MedicationResults'
 	*
 	* @ORM\OneToMany(targetEntity="MedicationResults", mappedBy="userDay")
 	*/
@@ -126,7 +126,7 @@ class UserDay
 	*
 	* @param \AppBundle\Entity\User $user
 	*
-	* @see User::class
+	* @see 'AppBundle\Entity\User'
 	*
 	* @return self
 	*/
@@ -152,7 +152,7 @@ class UserDay
 	*
 	* @param \AppBundle\Entity\HotSpotInfo $hotspotsInfo
 	*
-	* @see HotSpotInfo::class
+	* @see 'AppBundle\Entity\HotSpotInfo'
 	*
 	* @return self
 	*/
@@ -169,7 +169,7 @@ class UserDay
 	*
 	* @param \AppBundle\Entity\HotSpotInfo $hotspotInfo
 	*
-	* @see HotSpotInfo::class
+	* @see 'AppBundle\Entity\HotSpotInfo'
 	*/
 	public function removeHotspotInfo(\AppBundle\Entity\HotSpotInfo $hotspotInfo)
 	{
@@ -206,7 +206,7 @@ class UserDay
 	*
 	* @param \AppBundle\Entity\TestResults $test
 	*
-	* @see TestResults::class
+	* @see 'AppBundle\Entity\TestResults'
 	*
 	* @return self
 	*/
@@ -223,7 +223,7 @@ class UserDay
 	*
 	* @param \AppBundle\Entity\TestResults $test
 	*
-	* @see TestResults::class
+	* @see 'AppBundle\Entity\TestResults'
 	*
 	* @return self
 	*/
@@ -264,7 +264,7 @@ class UserDay
 	*
 	* @param \AppBundle\Entity\MedicationResults $medication
 	*
-	* @see MedicationResults::class
+	* @see 'AppBundle\Entity\MedicationResults'
 	*
 	* @return self
 	*/
@@ -281,7 +281,7 @@ class UserDay
 	*
 	* @param \AppBundle\Entity\MedicationResults $medication
 	*
-	* @see MedicationResults::class
+	* @see 'AppBundle\Entity\MedicationResults'
 	*
 	* @return self
 	*/

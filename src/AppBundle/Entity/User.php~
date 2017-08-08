@@ -118,7 +118,7 @@ class User implements UserInterface, \Serializable
 	*
 	* @var ArrayCollection
 	*
-	* @see UserDay::class
+	* @see User'AppBundle\Entity\Day'
 	* @see ArrayCollection::class
 	*
 	* @ORM\OneToMany(targetEntity="UserDay", mappedBy="user", cascade={"all"}, orphanRemoval=true)
@@ -345,7 +345,7 @@ class User implements UserInterface, \Serializable
 	/**
 	* Get active UserDay
 	*
-	* @see UserDay::class
+	* @see User'AppBundle\Entity\Day'
 	*
 	* @return \AppBundle\Entity\UserDay
 	*/
@@ -412,7 +412,7 @@ class User implements UserInterface, \Serializable
 	*
 	* @param \AppBundle\Entity\UserDay $day
 	*
-	* @see UserDay::class
+	* @see User'AppBundle\Entity\Day'
 	*
 	* @return self
 	*/
@@ -429,7 +429,7 @@ class User implements UserInterface, \Serializable
 	*
 	* @param \AppBundle\Entity\UserDay $day
 	*
-	* @see UserDay::class
+	* @see User'AppBundle\Entity\Day'
 	*
 	* @return self
 	*/

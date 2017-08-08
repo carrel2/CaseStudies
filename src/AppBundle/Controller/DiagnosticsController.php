@@ -27,9 +27,9 @@ class DiagnosticsController extends Controller
 	 * Shows TestsType form. On submission adds TestResults from the corresponding Day to the current UserDay
 	 *
 	 * @see TestsType::class
-	 * @see TestResults::class
-	 * @see Day::class
-	 * @see UserDay::class
+	 * @see 'AppBundle\Entity\TestResults'
+	 * @see 'AppBundle\Entity\Day'
+	 * @see User'AppBundle\Entity\Day'
 	 * @see MedicationsController::showPageAction()
 	 *
 	 * @param Request $r Request object
@@ -50,7 +50,7 @@ class DiagnosticsController extends Controller
 
 		$session->set('page', 'diagnostics');
 
-		$form = $this->createForm( DiagnosticsType::class );
+		$form = $this->createForm( 'AppBundle\Form\DiagnosticsType' );
 
 		$form->handleRequest($r);
 

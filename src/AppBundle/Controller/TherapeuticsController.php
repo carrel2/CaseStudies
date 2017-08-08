@@ -26,9 +26,9 @@ class TherapeuticsController extends Controller
 	 * Shows MedicationsType form. On submission, adds TherapeuticResults from the corresponding Day to the current UserDay
 	 *
 	 * @see MedicationsType::class
-	 * @see MedicationResults::class
-	 * @see Day::class
-	 * @see UserDay::class
+	 * @see 'AppBundle\Entity\MedicationResults'
+	 * @see 'AppBundle\Entity\Day'
+	 * @see User'AppBundle\Entity\Day'
 	 * @see DayController::reviewAction()
 	 *
 	 * @param Request $r Request object
@@ -47,7 +47,7 @@ class TherapeuticsController extends Controller
 			return $this->redirectToRoute('default');
 		}
 
-		$form = $this->createForm( TherapeuticsType::class );
+		$form = $this->createForm( 'AppBundle\Form\TherapeuticsType' );
 
 		$form->handleRequest($r);
 

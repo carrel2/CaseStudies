@@ -37,7 +37,7 @@ class DefaultController extends Controller
 	 * Redirects to HotSpotController::showPage()
 	 *
 	 * @see DefaultType::class
-	 * @see User::class
+	 * @see 'AppBundle\Entity\User'
 	 * @see CaseStudy::class
 	 * @see HotSpotController::showPageAction()
 	 * @see HotSpotController::resetAction()
@@ -64,7 +64,7 @@ class DefaultController extends Controller
 
 		$em = $this->getDoctrine()->getManager();
 
-		$form = $this->createForm( DefaultType::class, $case );
+		$form = $this->createForm( 'AppBundle\Form\DefaultType', $case );
 		$form->handleRequest($r);
 
 		if( $form->isSubmitted() && $form->isValid() )
@@ -126,7 +126,7 @@ class DefaultController extends Controller
 	 *
 	 * Function to remove the association between the current User and CaseStudy
 	 *
-	 * @see User::class
+	 * @see 'AppBundle\Entity\User'
 	 * @see CaseStudy::class
 	 * @see HotSpotController::showPageAction()
 	 *
