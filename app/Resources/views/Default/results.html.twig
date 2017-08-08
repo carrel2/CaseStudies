@@ -77,7 +77,7 @@
 
   <div class="column is-two-thirds">
     {% for result in results %}
-      <div id="details">
+      <div id="details" {% if not loop.first %}class="is-hidden"{% endif %} data-result="result-{{ result.id }}">
         <p><span class="title">Location:</span> {{ result.location }}</p>
         <p><span class="title">Diagnosis:</span> {{ result.diagnosis }}</p>
       </div>
