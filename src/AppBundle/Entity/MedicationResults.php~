@@ -9,8 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * Contains results for a specific Medication on a specific Day
  *
- * @see Medication::class
- * @see Day::class
+ * @see 'AppBundle\Entity\Medication'
+ * @see 'AppBundle\Entity\Day'
  *
  * @ORM\Entity
  * @ORM\Table(name="MedicationResults")
@@ -33,7 +33,7 @@ class MedicationResults
 	 *
 	 * @var Day
 	 *
-	 * @see Day::class
+	 * @see 'AppBundle\Entity\Day'
 	 *
 	 * @ORM\ManyToOne(targetEntity="Day", inversedBy="medications")
 	 */
@@ -44,7 +44,7 @@ class MedicationResults
 	 *
 	 * @var UserDay
 	 *
-	 * @see UserDay::class
+	 * @see User'AppBundle\Entity\Day'
 	 *
 	 * @ORM\ManyToOne(targetEntity="UserDay", inversedBy="medications")
 	 * @ORM\JoinColumn(name="user_day_id", referencedColumnName="id", onDelete="SET NULL")
@@ -56,7 +56,7 @@ class MedicationResults
 	 *
 	 * @var Medication
 	 *
-	 * @see Medication::class
+	 * @see 'AppBundle\Entity\Medication'
 	 *
 	 * @ORM\ManyToOne(targetEntity="Medication", inversedBy="results")
 	 */
@@ -67,7 +67,7 @@ class MedicationResults
 	 *
 	 * @var string
 	 *
-	 * @see Medication::class
+	 * @see 'AppBundle\Entity\Medication'
 	 *
 	 * @ORM\Column(type="text")
 	 */
@@ -122,7 +122,7 @@ class MedicationResults
      *
      * @param \AppBundle\Entity\Medication $medication
 		 *
-		 * @see Medication::class
+		 * @see 'AppBundle\Entity\Medication'
      *
      * @return self
      */
@@ -148,7 +148,7 @@ class MedicationResults
      *
      * @param \AppBundle\Entity\Day $day
 		 *
-		 * @see Day::class
+		 * @see 'AppBundle\Entity\Day'
      *
      * @return self
      */
@@ -174,7 +174,7 @@ class MedicationResults
      *
      * @param \AppBundle\Entity\UserDay $userDay
 		 *
-		 * @see UserDay::class
+		 * @see User'AppBundle\Entity\Day'
      *
      * @return MedicationResults
      */

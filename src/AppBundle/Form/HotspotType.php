@@ -16,7 +16,7 @@ class HotspotType extends AbstractType
 	{
 		$animalId = $options['attr']['animal'];
 
-		$builder->add('hotspot', EntityType::class, array(
+		$builder->add('hotspot', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
 				'class' => 'AppBundle:HotSpot',
 				'query_builder' => function(EntityRepository $er) use($animalId) {
 					return $er->createQueryBuilder('h')->where('h.animal = :id')->setParameter('id', $animalId);
@@ -27,7 +27,7 @@ class HotspotType extends AbstractType
 				),
 				'label' => false,
 			))
-			->add('info', CKEditorType::class, array(
+			->add('info', 'Ivory\CKEditorBundle\Form\Type\CKEditorType', array(
 				'config' => array(
 					'autoParagraph' => false,
 				)
@@ -37,7 +37,7 @@ class HotspotType extends AbstractType
 	public function configureOptions(OptionsResolver $resolver)
 	{
 		$resolver->setDefaults(array(
-			'data_class' => HotSpotInfo::class,
+			'data_class' => 'AppBundle\Entity\HotSpotInfo',
 			'label' => false,
 		));
 	}

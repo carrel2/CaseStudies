@@ -46,8 +46,8 @@ class DayController extends Controller
 		}
 
 		$form = $this->createFormBuilder()
-			->add('diagnosis', TextareaType::class)
-			->add('finish', SubmitType::class, array(
+			->add('diagnosis', 'Symfony\Component\Form\Extension\Core\Type\TextareaType')
+			->add('finish', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 				'attr' => array(
 					'class' => 'button',
 				),
@@ -78,7 +78,7 @@ class DayController extends Controller
 	 *
 	 * Function to handle the logic between Day objects (doesn't do much right now, may not be necessary)
 	 *
-	 * @see Day::class
+	 * @see 'AppBundle\Entity\Day'
 	 *
 	 * @todo update logic to be more dynamic, extend past actual CaseStudy
 	 *
@@ -106,8 +106,8 @@ class DayController extends Controller
 	 *
 	 * Creates a new UserDay for the User and redirects to evaluation page
 	 *
-	 * @see UserDay::class
-	 * @see User::class
+	 * @see User'AppBundle\Entity\Day'
+	 * @see 'AppBundle\Entity\User'
 	 * @see HotSpotController::showPageAction()
 	 *
 	 * @param Request $r Request object

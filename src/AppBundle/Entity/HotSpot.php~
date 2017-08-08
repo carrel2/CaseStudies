@@ -27,7 +27,7 @@ class HotSpot
    *
    * @var Animal
    *
-   * @see Animal::class
+   * @see 'AppBundle\Entity\Animal'
    *
    * @ORM\ManyToOne(targetEntity="Animal", inversedBy="hotspots")
    */

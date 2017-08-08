@@ -21,14 +21,14 @@ class CaseType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-		->add('title', TextType::class)
-		->add('description', CKEditorType::class, array(
+		->add('title', 'Symfony\Component\Form\Extension\Core\Type\TextType')
+		->add('description', 'Ivory\CKEditorBundle\Form\Type\CKEditorType', array(
 			'config' => array(
 				'autoParagraph' => false,
 				'disallowedContent' => 'button embed form iframe input link meta textarea video script',
 			),
 		))
-		->add('animal', EntityType::class, array(
+		->add('animal', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
 			'class' => 'AppBundle:Animal',
 			'choice_label' => 'name',
 			'attr' => array(
@@ -40,15 +40,15 @@ class CaseType extends AbstractType
 			$form = $event->getForm();
 
 			if( $case == null ) {
-				$form->add('create', SubmitType::class, array(
+				$form->add('create', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 					'attr' => array(
 						'form' => 'case',
 						'class' => 'is-success',
 					),
 				));
 			} else {
-				$form->add('days', CollectionType::class, array(
-					'entry_type' => DayType::class,
+				$form->add('days', 'Symfony\Component\Form\Extension\Core\Type\CollectionType', array(
+					'entry_type' => 'AppBundle\Form\DayType',
 					'entry_options' => array(
 						'attr' => array(
 							'class' => 'notification',
@@ -67,26 +67,26 @@ class CaseType extends AbstractType
 						'class' => 'label case_days_label',
 					)
 					))
-					->add('add day', ButtonType::class, array(
+					->add('add day', 'Symfony\Component\Form\Extension\Core\Type\ButtonType', array(
 						'attr' => array(
 							'class' => 'addButton is-success',
 							'onclick' => 'addButtonClickListener(this)',
 						)
 					))
-					->add('update', SubmitType::class, array(
+					->add('update', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 						'attr' => array(
 							'form' => 'case',
 							'class' => 'is-success',
 						),
 					))
-					->add('delete', SubmitType::class, array(
+					->add('delete', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 						'attr' => array(
 							'form' => 'case',
 							'class' => 'is-danger',
 							'onclick' => 'return confirmDelete();',
 						),
 					))
-					->add('restore', SubmitType::class, array(
+					->add('restore', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 						'attr' => array(
 							'class' => 'is-info',
 							'onclick' => 'updateAdminCase(); return false;',
@@ -99,7 +99,7 @@ class CaseType extends AbstractType
 		public function configureOptions(OptionsResolver $resolver)
 		{
 			$resolver->setDefaults(array(
-				'data_class' => CaseStudy::class,
+				'data_class' => 'AppBundle\Entity\CaseStudy',
 			));
 		}
 	}

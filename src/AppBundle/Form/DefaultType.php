@@ -19,33 +19,33 @@ class DefaultType extends AbstractType
 			$form = $event->getForm();
 
 			if( $case ) {
-				$form->add('resume', SubmitType::class, array(
+				$form->add('resume', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 					'attr' => array(
 						//'class' => 'button is-success',
 					)
 				))
-					->add('abandon', SubmitType::class, array(
+					->add('abandon', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 						'attr' => array(
 							'class' => 'is-danger',
 							'onclick' => 'return confirmDelete();',
 						)
 					));
 			} else {
-				$form->add('title', EntityType::class, array(
+				$form->add('title', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
 						'class' => 'AppBundle:CaseStudy',
 						'choice_label' => 'title',
 						'attr' => array(
 							'onchange' => 'updateCase()',
 						),
 					))
-					->add('location', ChoiceType::class, array(
+					->add('location', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
 						'choices' => array(
 							'Farm' => 'Farm',
 							'Hospital' => 'Hospital',
 						),
 						'expanded' => true,
 					))
-					->add('start', SubmitType::class);
+					->add('start', 'Symfony\Component\Form\Extension\Core\Type\SubmitType');
 			}
 		});
 	}

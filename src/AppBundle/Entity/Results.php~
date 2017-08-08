@@ -30,7 +30,7 @@ class Results
   *
   * @var User
   *
-  * @see User::class
+  * @see 'AppBundle\Entity\User'
   *
   * @ORM\ManyToOne(targetEntity="User", inversedBy="results")
   */
@@ -50,7 +50,7 @@ class Results
   /**
   * An array that holds all the results for the associated User
   *
-  * @see User::class
+  * @see 'AppBundle\Entity\User'
   *
   * @var string
   *

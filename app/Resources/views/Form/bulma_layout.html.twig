@@ -154,6 +154,27 @@
     </p>
 {%- endblock button_widget -%}
 
+{%- block file_widget -%}
+    <div class="file has-name is-fullwidth">
+      <label class="file-label">
+        <p {{ block('form_widget_container_attributes') }}>
+            {% set attr = attr|merge({class: (attr.class|default('') ~ 'file-input')|trim}) %}
+            {{- block('form_widget_simple') -}}
+        </p>
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fa fa-upload"></i>
+          </span>
+          <span class="file-label">
+            Choose a file…
+          </span>
+        </span>
+        <span id="filename" class="file-name">
+        </span>
+      </label>
+    </div>
+{%- endblock -%}
+
 {# Labels #}
 
 {%- block form_label -%}

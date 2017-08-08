@@ -60,7 +60,7 @@ class Test
 	 * @var ArrayCollection
 	 *
 	 * @see ArrayCollection::class
-	 * @see TestResults::class
+	 * @see 'AppBundle\Entity\TestResults'
 	 *
 	 * @ORM\OneToMany(targetEntity="TestResults", mappedBy="test")
 	 */
@@ -166,7 +166,7 @@ class Test
      *
      * @param \AppBundle\Entity\TestResults $result
 		 *
-		 * @see TestResults::class
+		 * @see 'AppBundle\Entity\TestResults'
      *
      * @return self
      */
@@ -182,7 +182,7 @@ class Test
      *
      * @param \AppBundle\Entity\TestResults $result
 		 *
-		 * @see TestResults::class
+		 * @see 'AppBundle\Entity\TestResults'
 		 *
 		 * @return self
      */

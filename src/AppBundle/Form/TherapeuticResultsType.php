@@ -13,7 +13,7 @@ class TherapeuticResultsType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$builder->add('medication', EntityType::class, array(
+		$builder->add('medication', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
 				'class' => 'AppBundle:Medication',
 				'choice_label' => 'name',
 				'group_by' => function($val, $key, $index) {
@@ -21,7 +21,7 @@ class TherapeuticResultsType extends AbstractType
 				},
 				'label' => false,
 			))
-			->add('results', CKEditorType::class, array(
+			->add('results', 'Ivory\CKEditorBundle\Form\Type\CKEditorType', array(
 				'config' => array(
 					'autoParagraph' => false,
 				)
@@ -32,7 +32,7 @@ class TherapeuticResultsType extends AbstractType
 	public function configureOptions(OptionsResolver $resolver)
 	{
 		$resolver->setDefaults(array(
-			'data_class' => MedicationResults::class,
+			'data_class' => 'AppBundle\Entity\MedicationResults',
 			'label' => false,));
 	}
 }

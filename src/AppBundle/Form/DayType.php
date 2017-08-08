@@ -15,8 +15,8 @@ class DayType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$builder->add('hotspotsinfo', CollectionType::class, array(
-				'entry_type' => HotspotType::class,
+		$builder->add('hotspotsinfo', 'Symfony\Component\Form\Extension\Core\Type\CollectionType', array(
+				'entry_type' => 'AppBundle\Form\HotspotType',
 				'entry_options' => array(
 					'attr' => array(
 						'animal' => array_key_exists('animal', $options['attr']) ? $options['attr']['animal'] : null,
@@ -31,12 +31,12 @@ class DayType extends AbstractType
 					'data-type' => 'hotspot'
 				),
 			))
-			->add('add hotspot', ButtonType::class, array(
+			->add('add hotspot', 'Symfony\Component\Form\Extension\Core\Type\ButtonType', array(
 				'attr' => array(
 					'class' => 'addButton is-success',
 					'onclick' => 'addButtonClickListener(this)',)))
-			->add('tests', CollectionType::class, array(
-				'entry_type' => DiagnosticResultsType::class,
+			->add('tests', 'Symfony\Component\Form\Extension\Core\Type\CollectionType', array(
+				'entry_type' => 'AppBundle\Form\DiagnosticResultsType',
 				'entry_options' => array(
 					'attr' => array(
 						'class' => 'notification',
@@ -51,12 +51,12 @@ class DayType extends AbstractType
 					'data-type' => 'diagnostic result'
 				),
 			))
-			->add('add diagnostic results', ButtonType::class, array(
+			->add('add diagnostic results', 'Symfony\Component\Form\Extension\Core\Type\ButtonType', array(
 				'attr' => array(
 					'class' => 'addButton is-success',
 					'onclick' => 'addButtonClickListener(this)',)))
-			->add('medications', CollectionType::class, array(
-				'entry_type' => TherapeuticResultsType::class,
+			->add('medications', 'Symfony\Component\Form\Extension\Core\Type\CollectionType', array(
+				'entry_type' => 'AppBundle\Form\TherapeuticResultsType',
 				'entry_options' => array(
 					'attr' => array(
 						'class' => 'notification',
@@ -71,7 +71,7 @@ class DayType extends AbstractType
 					'data-type' => 'therapeutic result'
 				),
 			))
-			->add('add therapeutic results', ButtonType::class, array(
+			->add('add therapeutic results', 'Symfony\Component\Form\Extension\Core\Type\ButtonType', array(
 				'attr' => array(
 					'class' => 'addButton is-success',
 					'onclick' => 'addButtonClickListener(this)',)));
@@ -80,7 +80,7 @@ class DayType extends AbstractType
 	public function configureOptions(OptionsResolver $resolver)
 	{
 		$resolver->setDefaults(array(
-			'data_class' => Day::class,
+			'data_class' => 'AppBundle\Entity\Day',
 		));
 	}
 }

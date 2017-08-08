@@ -30,8 +30,8 @@ class UserController extends Controller
 	 * @todo authenticate against U of I ldap
 	 * @todo login newly registered user
 	 *
-	 * @see UserType::class
-	 * @see User::class
+	 * @see 'AppBundle\Form\UserType'
+	 * @see 'AppBundle\Entity\User'
 	 * @see DefaultController::defaultAction()
 	 *
 	 * @param Request $request Request object
@@ -48,7 +48,7 @@ class UserController extends Controller
 
 		$user = new User();
 
-		$form = $this->createForm( UserType::class, $user );
+		$form = $this->createForm( 'AppBundle\Form\UserType', $user );
 
 		$form->handleRequest($request);
 
@@ -75,7 +75,7 @@ class UserController extends Controller
 	 *
 	 * Login page for unauthenticated User
 	 *
-	 * @see User::class
+	 * @see 'AppBundle\Entity\User'
 	 *
 	 * @param Request $r Request object
 	 *
@@ -105,8 +105,8 @@ class UserController extends Controller
 	 *
 	 * Shows UserType form so authenticated User can edit object information
 	 *
-	 * @see UserType::class
-	 * @see User::class
+	 * @see 'AppBundle\Form\UserType'
+	 * @see 'AppBundle\Entity\User'
 	 *
 	 * @param Request $r Request object
 	 *
@@ -122,7 +122,7 @@ class UserController extends Controller
 		$oldPassword = $user->getPassword();
 		$oldRole = $user->getRole();
 
-		$form = $this->createForm( UserType::class, $user );
+		$form = $this->createForm( 'AppBundle\Form\UserType', $user );
 
 		$form->handleRequest($r);
 
@@ -167,7 +167,7 @@ class UserController extends Controller
 	 * Retrieves all Results objects associated with the current User
 	 *
 	 * @see Results::class
-	 * @see User::class
+	 * @see 'AppBundle\Entity\User'
 	 *
 	 * @param Request $r
 	 *

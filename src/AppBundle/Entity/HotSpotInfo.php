@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * Contains information about a specific HotSpot of an Animal for a specific Day
  *
  * @see HotSpot::class
- * @see Animal::class
- * @see Day::class
+ * @see 'AppBundle\Entity\Animal'
+ * @see 'AppBundle\Entity\Day'
  *
  * @ORM\Entity
  * @ORM\Table(name="HotSpotsInfo")
@@ -34,7 +34,7 @@ class HotSpotInfo
 	 *
 	 * @var Day
 	 *
-	 * @see Day::class
+	 * @see 'AppBundle\Entity\Day'
 	 *
 	 * @ORM\ManyToOne(targetEntity="Day", inversedBy="hotspotsInfo")
 	 */
@@ -45,7 +45,7 @@ class HotSpotInfo
 	 *
 	 * @var UserDay
 	 *
-	 * @see UserDay::class
+	 * @see User'AppBundle\Entity\Day'
 	 *
 	 * @ORM\ManyToOne(targetEntity="UserDay", inversedBy="hotspotsInfo")
 	 * @ORM\JoinColumn(name="user_day_id", referencedColumnName="id", onDelete="SET NULL")

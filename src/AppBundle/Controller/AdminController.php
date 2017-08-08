@@ -70,7 +70,7 @@ class AdminController extends Controller
 	 */
 	public function editCaseAction(Request $r)
 	{
-		$form = $this->createForm( AdminType::class );
+		$form = $this->createForm( 'AppBundle\Form\AdminType' );
 
 		$form->handleRequest($r);
 
@@ -96,7 +96,7 @@ class AdminController extends Controller
 	 */
 	public function createCaseAction(Request $r)
 	{
-		$form = $this->createForm( CaseType::class );
+		$form = $this->createForm( 'AppBundle\Form\CaseType' );
 
 		$form->handleRequest($r);
 
@@ -137,7 +137,7 @@ class AdminController extends Controller
 	{
 		$em = $this->getDoctrine()->getManager();
 
-		$form = $this->createForm( CaseType::class, $case );
+		$form = $this->createForm( 'AppBundle\Form\CaseType', $case );
 
 		$form->handleRequest($r);
 
@@ -174,7 +174,7 @@ class AdminController extends Controller
 	 *
 	 * Allows admin User to edit User objects
 	 *
-	 * @see User::class
+	 * @see 'AppBundle\Entity\User'
 	 *
 	 * @param Request $r Request object
 	 *
@@ -186,16 +186,16 @@ class AdminController extends Controller
 	{
 		$em = $this->getDoctrine()->getManager();
 
-		$form = $this->createFormBuilder()->add('users', EntityType::class,
+		$form = $this->createFormBuilder()->add('users', 'Symfony\Bridge\Doctrine\Form\Type\EntityType',
 			array(
 				'class' => 'AppBundle:User',
 				'choice_label' => 'username',
 				'expanded' => true,
 			))
-			->add('edit', SubmitType::class, array(
+			->add('edit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 				'attr' => array('class' => 'is-success'),
 			))
-			->add('delete', SubmitType::class, array(
+			->add('delete', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 				'attr' => array(
 					'class' => 'is-danger',
 					'onclick' => 'return confirmDelete();',
@@ -239,7 +239,7 @@ class AdminController extends Controller
 	 */
 	public function editUserAction(Request $r, User $user)
 	{
-		$form = $this->createForm( UserType::class, $user );
+		$form = $this->createForm( 'AppBundle\Form\UserType', $user );
 
 		$form->handleRequest($r);
 
@@ -311,15 +311,15 @@ class AdminController extends Controller
 		$em = $this->getDoctrine()->getManager();
 
 		$form = $this->createFormBuilder()
-			->add('animals', EntityType::class, array(
+			->add('animals', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
 				'class' => 'AppBundle:Animal',
 				'choice_label' => 'name',
 				'expanded' => true,
 			))
-			->add('edit', SubmitType::class, array(
+			->add('edit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 				'attr' => array('class' => 'is-success'),
 			))
-			->add('delete', SubmitType::class, array(
+			->add('delete', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 				'attr' => array(
 					'class' => 'is-danger',
 					'onclick' => 'return confirmDelete();',
@@ -364,7 +364,7 @@ class AdminController extends Controller
 	 */
 	public function createAnimalAction(Request $r)
 	{
-		$form = $this->createForm( AnimalType::class );
+		$form = $this->createForm( 'AppBundle\Form\AnimalType' );
 
 		$form->handleRequest($r);
 
@@ -408,7 +408,7 @@ class AdminController extends Controller
 			 $animal = new Animal();
 		 }
 
-		 $form = $this->createForm( AnimalType::class, $animal );
+		 $form = $this->createForm( 'AppBundle\Form\AnimalType', $animal );
 
 		 $form->handleRequest($r);
 
@@ -449,7 +449,7 @@ class AdminController extends Controller
 			$em = $this->getDoctrine()->getManager();
 
 			$form = $this->createFormBuilder()
-				->add('tests', EntityType::class, array(
+				->add('tests', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
 					'class' => 'AppBundle:Test',
 					'choice_label' => 'name',
 					'expanded' => true,
@@ -463,10 +463,10 @@ class AdminController extends Controller
 						'class' => ' tests_label',
 					)
 				))
-				->add('edit', SubmitType::class, array(
+				->add('edit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 					'attr' => array('class' => 'is-success'),
 				))
-				->add('delete', SubmitType::class, array(
+				->add('delete', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 					'attr' => array(
 						'class' => 'is-danger',
 						'onclick' => 'return confirmDelete();',
@@ -510,7 +510,7 @@ class AdminController extends Controller
 		 */
 		public function createTestAction(Request $r)
 		{
-			$form = $this->createForm( DiagnosticType::class );
+			$form = $this->createForm( 'AppBundle\Form\DiagnosticType' );
 
 			$form->handleRequest($r);
 
@@ -550,7 +550,7 @@ class AdminController extends Controller
 				 $test = new Test();
 			 }
 
-			 $form = $this->createForm( DiagnosticType::class, $test );
+			 $form = $this->createForm( 'AppBundle\Form\DiagnosticType', $test );
 
 			 $form->handleRequest($r);
 
@@ -587,7 +587,7 @@ class AdminController extends Controller
 				$em = $this->getDoctrine()->getManager();
 
 				$form = $this->createFormBuilder()
-					->add('medications', EntityType::class, array(
+					->add('medications', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
 						'class' => 'AppBundle:Medication',
 						'choice_label' => 'name',
 						'expanded' => true,
@@ -601,10 +601,10 @@ class AdminController extends Controller
 							'class' => 'medications_label',
 						)
 					))
-					->add('edit', SubmitType::class, array(
+					->add('edit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 						'attr' => array('class' => 'is-success'),
 					))
-					->add('delete', SubmitType::class, array(
+					->add('delete', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 						'attr' => array(
 							'class' => 'is-danger',
 							'onclick' => 'return confirmDelete();',
@@ -648,7 +648,7 @@ class AdminController extends Controller
 			 */
 			public function createMedicationAction(Request $r)
 			{
-				$form = $this->createForm( TherapeuticType::class );
+				$form = $this->createForm( 'AppBundle\Form\TherapeuticType' );
 
 				$form->handleRequest($r);
 
@@ -688,7 +688,7 @@ class AdminController extends Controller
 					 $medication = new Medication();
 				 }
 
-				 $form = $this->createForm( TherapeuticType::class, $medication );
+				 $form = $this->createForm( 'AppBundle\Form\TherapeuticType', $medication );
 
 				 $form->handleRequest($r);
 

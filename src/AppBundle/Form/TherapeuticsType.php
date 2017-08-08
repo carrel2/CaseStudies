@@ -13,7 +13,7 @@ class TherapeuticsType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-			->add('medication', EntityType::class, array(
+			->add('medication', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
 				'class' => 'AppBundle:Medication',
 				'choice_label' => 'name',
 				'expanded' => true,
@@ -28,7 +28,7 @@ class TherapeuticsType extends AbstractType
 					return $val->getGroup();
 				},
 			))
-			->add('submit', SubmitType::class, array(
+			->add('submit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 				'attr' => array('class' => 'is-success'),
 			));
 	}

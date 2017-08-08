@@ -13,12 +13,12 @@ class AnimalType extends AbstractType
 {
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
-    $builder->add('image', FileType::class, array(
+    $builder->add('image', 'Symfony\Component\Form\Extension\Core\Type\FileType', array(
         'data' => '',
         'required' => false,
       ))
       ->add('name')
-      ->add('submit', SubmitType::class, array(
+      ->add('submit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
         'attr' => array('class' => 'is-success'),
       ));
   }
@@ -26,7 +26,7 @@ class AnimalType extends AbstractType
   public function configureOptions(OptionsResolver $resolver)
   {
     $resolver->setDefaults(array(
-      'data_class' => Animal::class,
+      'data_class' => 'AppBundle\Entity\Animal',
     ));
   }
 }

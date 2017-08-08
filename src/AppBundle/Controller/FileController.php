@@ -42,15 +42,15 @@ class FileController extends Controller
     $em = $this->getDoctrine()->getManager();
 
     $form = $this->createFormBuilder()
-      ->add('type', ChoiceType::class, array(
+      ->add('type', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
         'choices' => array('Medication' => 'Medication', 'Test' => 'Test'),
       ))
-      ->add('file', FileType::class, array(
+      ->add('file', 'Symfony\Component\Form\Extension\Core\Type\FileType', array(
         'attr' => array(
           'accept' => 'application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         ),
       ))
-      ->add('sheet', TextType::class, array(
+      ->add('sheet', 'Symfony\Component\Form\Extension\Core\Type\TextType', array(
         'required' => false,
         'empty_data' => -1,
         'attr' => array(
@@ -58,7 +58,7 @@ class FileController extends Controller
           'title' => 'The specific sheet to import data from',
         ),
       ))
-      ->add('submit', SubmitType::class, array(
+      ->add('submit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
         'attr' => array(
           'class' => 'button',
         )
