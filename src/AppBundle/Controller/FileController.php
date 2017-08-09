@@ -26,6 +26,7 @@ class FileController extends Controller
     $form = $this->createFormBuilder()
       ->add('type', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
         'choices' => array('Medication' => 'Medication', 'Test' => 'Test'),
+        'choices_as_values' => true,
       ))
       ->add('file', 'Symfony\Component\Form\Extension\Core\Type\FileType', array(
         'attr' => array(

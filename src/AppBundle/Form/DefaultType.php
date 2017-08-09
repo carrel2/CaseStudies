@@ -43,6 +43,7 @@ class DefaultType extends AbstractType
 							'Farm' => 'Farm',
 							'Hospital' => 'Hospital',
 						),
+						'choices_as_values' => true,
 						'expanded' => true,
 					))
 					->add('start', 'Symfony\Component\Form\Extension\Core\Type\SubmitType');
