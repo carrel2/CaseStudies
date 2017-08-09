@@ -10,12 +10,13 @@ use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use AppBundle\Entity\User;
 
 class TokenAuthenticator extends AbstractGuardAuthenticator
 {
     public function getCredentials(Request $request)
     {
-        if (!$token = $request->headers->get('sm-serversessionid')) {
+        if (!$token = $request->headers->get('php-auth-user')) {
             $token = null;
         }
 
@@ -32,7 +33,12 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
             return;
         }
 
-        return $userProvider->loadUserByUsername($apiKey);
+        if( !$user = $userProvider->loadUserByUsername($apiKey) ) {
+          $user = new User();
+          $user->setUsername($apiKey);
+        }
+
+        return $user;
     }
 
     public function checkCredentials($credentials, UserInterface $user)

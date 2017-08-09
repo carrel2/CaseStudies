@@ -4,16 +4,11 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
 * @ORM\Entity
 * @ORM\Table(name="app_users")
-* @UniqueEntity(fields="email", message="Email already exists")
-* @UniqueEntity(fields="username", message="Username already exists")
 */
 class User implements UserInterface, \Serializable
 {
@@ -31,33 +26,8 @@ class User implements UserInterface, \Serializable
 
 	/**
 	* @ORM\Column(type="string", length=25, unique=true)
-	* @Assert\NotBlank()
 	*/
 	private $username;
-
-	/**
-	* @Assert\Length(min=6,max=4096,minMessage="Password must be at least {{ limit }} characters long")
-	*/
-	private $plainPassword;
-
-	/**
-	* @ORM\Column(type="string", length=64)
-	*/
-	private $password;
-
-	/**
-	* @ORM\Column(type="string", length=60, unique=true)
-	* @Assert\NotBlank()
-	* @Assert\Email()
-	*/
-	private $email;
-
-	/**
-	* @ORM\Column(type="string", length=9, unique=true)
-	* @Assert\NotBlank()
-	* @Assert\Length(min=9, max=9)
-	*/
-	private $uin;
 
 	/**
 	* @ORM\Column(type="string", length=8, nullable=true)
