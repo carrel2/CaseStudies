@@ -39,7 +39,6 @@ class UserType extends AbstractType
 					'disabled' => $currentUser->getRole() == 'ROLE_USER',
 				))
 				->add('submit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType');
-		});
 	}
 
 	public function configureOptions(OptionsResolver $resolver)
