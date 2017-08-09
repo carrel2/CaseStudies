@@ -38,3 +38,4 @@ services:
 
     app.token_authenticator:
       class: AppBundle\Security\TokenAuthenticator
+      arguments: ['@doctrine.orm.default_entity_manager']

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Security;
 
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +15,12 @@ use AppBundle\Entity\User;
 
 class TokenAuthenticator extends AbstractGuardAuthenticator
 {
+    private $em;
+
+    public function __construct(EntityManager $em) {
+      $this->em = $em;
+    }
+
     public function getCredentials(Request $request)
     {
         if (!$token = $request->headers->get('php-auth-user')) {
@@ -38,6 +45,9 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
         } catch(\Symfony\Component\Security\Core\Exception\UsernameNotFoundException $e) {
           $user = new User();
           $user->setUsername($apiKey);
+
+          $em->persist($user);
+          $em->flush();
         }
 
         dump($user);
