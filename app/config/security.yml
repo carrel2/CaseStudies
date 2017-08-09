@@ -4,14 +4,6 @@ security:
             entity:
                 class: AppBundle:User
                 property: username
-        # ui_ldap:
-        #     ldap:
-        #         service: ldap
-        #         base_dn: ou=People,dc=ldap,dc=illinois,dc=edu
-        #         search_dn: "cn=carrel2,dc=ldap,dc=illinois,dc=edu"
-        #         search_password: ~
-        #         default_roles: ROLE_USER
-        #         uid_key: uid
 
     encoders:
         AppBundle\Entity\User:
