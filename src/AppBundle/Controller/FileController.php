@@ -1,9 +1,4 @@
 <?php
-/**
- * src/AppBundle/Controller/FileController.php
- *
- * Controller for importing Tests and Medications
- */
 
 namespace AppBundle\Controller;
 
@@ -18,22 +13,9 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use AppBundle\Entity\Test;
 use AppBundle\Entity\Medication;
 
-/**
- * FileController class
- *
- * FileController class extends \Symfony\Bundle\FrameworkBundle\Controller\Controller
- *
- * @see http://api.symfony.com/3.2/Symfony/Bundle/FrameworkBundle/Controller/Controller.html
- */
 class FileController extends Controller
 {
   /**
-   * fileAction function
-   *
-   * @param Request $r Request object
-   *
-   * @return \Symfony\Component\HttpFoundation\Response Render **import.html.twig**
-   *
    * @Route("/admin/import", name="import")
    */
   public function fileAction(Request $r)

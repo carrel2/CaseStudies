@@ -34,6 +34,9 @@ security:
                 handlers: [ app.logout_handler ]
                 invalidate_session: false
             provider: db_provider
+            guard:
+                authenticators:
+                    - app.token_authenticator
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -1,7 +1,4 @@
 <?php
-/**
- * src/AppBundle/Controller/UserController.php
- */
 
 namespace AppBundle\Controller;
 
@@ -13,31 +10,9 @@ use AppBundle\Form\UserType;
 use AppBundle\Entity\User;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
-/**
- * UserController class
- *
- * UserController class extends \Symfony\Bundle\FrameworkBundle\Controller\Controller
- *
- * @see http://api.symfony.com/3.2/Symfony/Bundle/FrameworkBundle/Controller/Controller.html
- */
 class UserController extends Controller
 {
 	/**
-	 * registerAction function
-	 *
-	 * Shows UserType form. On submission, creates a new User
-	 *
-	 * @todo authenticate against U of I ldap
-	 * @todo login newly registered user
-	 *
-	 * @see 'AppBundle\Form\UserType'
-	 * @see 'AppBundle\Entity\User'
-	 * @see DefaultController::defaultAction()
-	 *
-	 * @param Request $request Request object
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response Render **register.html.twig**. On submission, redirect to **DefaultController::defaultAction()**
-	 *
 	 * @Route("/registration", name="registration")
 	 */
 	public function registerAction(Request $request)
@@ -71,16 +46,6 @@ class UserController extends Controller
 	}
 
 	/**
-	 * loginAction function
-	 *
-	 * Login page for unauthenticated User
-	 *
-	 * @see 'AppBundle\Entity\User'
-	 *
-	 * @param Request $r Request object
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response Render **login.html.twig**
-	 *
 	 * @Route("/login", name="login")
 	 */
 	public function loginAction(Request $r)
@@ -101,17 +66,6 @@ class UserController extends Controller
 	}
 
 	/**
-	 * userAction function
-	 *
-	 * Shows UserType form so authenticated User can edit object information
-	 *
-	 * @see 'AppBundle\Form\UserType'
-	 * @see 'AppBundle\Entity\User'
-	 *
-	 * @param Request $r Request object
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response Render **user.html.twig**
-	 *
 	 * @Route("/user", name="user")
 	 * @Security("has_role('ROLE_USER')")
 	 */
@@ -162,17 +116,6 @@ class UserController extends Controller
 	}
 
 	/**
-	 * resultsAction function
-	 *
-	 * Retrieves all Results objects associated with the current User
-	 *
-	 * @see Results::class
-	 * @see 'AppBundle\Entity\User'
-	 *
-	 * @param Request $r
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response Render **results.html.twig**
-	 *
 	 * @Route("/user/results", name="results")
 	 */
 	public function resultsAction(Request $r)

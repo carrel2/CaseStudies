@@ -1,7 +1,4 @@
 <?php
-/**
-* src/AppBundle/Controller/HotSpotController.php
-*/
 
 namespace AppBundle\Controller;
 
@@ -14,30 +11,9 @@ use AppBundle\Entity\HotSpot;
 use AppBundle\Entity\HotSpotInfo;
 use AppBundle\Entity\Animal;
 
-/**
-* HotSpotController class
-*
-* HotSpotController class extends \Symfony\Bundle\FrameworkBundle\Controller\Controller
-*
-* @see http://api.symfony.com/3.2/Symfony/Bundle/FrameworkBundle/Controller/Controller.html
-*/
 class HotSpotController extends Controller
 {
-	/**
-	* showPageAction function
-	*
-	* Evaluation page. Retrieves all HotSpots from the current Day of the associated CaseStudy.
-	*
-	* @todo research 3d model functionality for HotSpots
-	*
-	* @see HotSpot::class
-	* @see 'AppBundle\Entity\Day'
-	* @see CaseStudy::class
-	*
-	* @param Request $r Request object
-	*
-	* @return \Symfony\Component\HttpFoundation\Response Render **hotspot.html.twig**
-	*
+	/*
 	* @Route("/eval", name="evaluation")
 	* @Security("has_role('ROLE_USER')")
 	*/
@@ -64,18 +40,6 @@ class HotSpotController extends Controller
 	}
 
 	/**
-	* updatePageAction function
-	*
-	* Called by ajax. Function to update UserDay with the HotSpots given
-	*
-	* @see HotSpots::class
-	* @see User'AppBundle\Entity\Day'
-	*
-	* @param Request $r Request object
-	* @param HotSpots $hotspot The HotSpots to add to the current UserDay
-	*
-	* @return \Symfony\Component\HttpFoundation\Response If $hotspot was added to the **UserDay**, returns name and info. Returns empty string otherwise
-	*
 	* @Route("/update/{id}", name="update")
 	* @Security("has_role('ROLE_USER')")
 	*/
