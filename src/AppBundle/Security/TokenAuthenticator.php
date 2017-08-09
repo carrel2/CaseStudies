@@ -34,17 +34,17 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        $apiKey = $credentials['token'];
+        $username = $credentials['token'];
 
         if (null === $apiKey) {
             return;
         }
 
         try {
-          $user = $userProvider->loadUserByUsername($apiKey);
+          $user = $userProvider->loadUserByUsername($username);
         } catch(\Symfony\Component\Security\Core\Exception\UsernameNotFoundException $e) {
           $user = new User();
-          $user->setUsername($apiKey);
+          $user->setUsername($username);
 
           $em->persist($user);
           $em->flush();
