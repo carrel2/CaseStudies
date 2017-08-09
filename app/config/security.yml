@@ -16,13 +16,9 @@ security:
 
         main:
             anonymous: ~
-            # form_login:
-            #     login_path: login
-            #     check_path: login
-            #     default_target_path: default
             logout:
                 path: logout
-                target: login
+                target: default
                 handlers: [ app.logout_handler ]
                 invalidate_session: false
             provider: db_provider
