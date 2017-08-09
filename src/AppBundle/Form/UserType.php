@@ -18,9 +18,6 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-/**
- * UserType class
- */
 class UserType extends AbstractType
 {
 	private $tokenStorage;
@@ -87,6 +84,7 @@ class UserType extends AbstractType
 						'User' => 'ROLE_USER',
 						'Admin' => 'ROLE_ADMIN',
 					),
+					'choices_as_values' => true,
 					'disabled' => $currentUser->getRole() == 'ROLE_USER',
 				));
 			}

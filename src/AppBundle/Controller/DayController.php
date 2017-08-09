@@ -13,26 +13,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use AppBundle\Entity\UserDay;
 
-/**
- * DayController class
- *
- * DayController class extends \Symfony\Bundle\FrameworkBundle\Controller\Controller
- *
- * @todo add option to wait for results (proceed a day without creating new UserDay)
- *
- * @see http://api.symfony.com/3.2/Symfony/Bundle/FrameworkBundle/Controller/Controller.html
- */
 class DayController extends Controller
 {
 	/**
-	 * reviewAction function
-	 *
-	 * Renders **review.html.twig**
-	 *
-	 * @param Request $r Request object
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response Render **review.html.twig**
-	 *
 	 * @Route("/review", name="review")
 	 * @Security("has_role('ROLE_USER')")
 	 */
@@ -74,18 +57,6 @@ class DayController extends Controller
 	}
 
 	/**
-	 * logicAction function
-	 *
-	 * Function to handle the logic between Day objects (doesn't do much right now, may not be necessary)
-	 *
-	 * @see 'AppBundle\Entity\Day'
-	 *
-	 * @todo update logic to be more dynamic, extend past actual CaseStudy
-	 *
-	 * @param Request $r Request object
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response
-	 *
 	 * @Route("/logic", name="logic")
 	 */
 	public function logicAction(Request $r)
@@ -102,18 +73,6 @@ class DayController extends Controller
 	}
 
 	/**
-	 * nextAction function
-	 *
-	 * Creates a new UserDay for the User and redirects to evaluation page
-	 *
-	 * @see User'AppBundle\Entity\Day'
-	 * @see 'AppBundle\Entity\User'
-	 * @see HotSpotController::showPageAction()
-	 *
-	 * @param Request $r Request object
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response Redirect to **HotSpotController::showPageAction()**
-	 *
 	 * @Route("/nextDay", name="nextDay")
 	 * @Security("has_role('ROLE_USER')")
 	 */

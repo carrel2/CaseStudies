@@ -6,20 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Therapeutic Medication class
- *
- * Contains information about a specific Medication
- *
  * @ORM\Entity
  * @ORM\Table(name="Medications")
  */
 class Medication
 {
 	/**
-	 * Auto-generated unique id
-	 *
-	 * @var integer
-	 *
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="AUTO")
@@ -27,10 +19,6 @@ class Medication
 	private $id;
 
 	/**
-	 * The name of the Medication
-	 *
-	 * @var string
-	 *
 	 * @ORM\Column(type="string", length=40)
 	 */
 	private $name;
@@ -46,33 +34,15 @@ class Medication
 	private $waitTime;
 
 	/**
-	 * The cost of the Medication
-	 *
-	 * @var string
-	 *
 	 * @ORM\Column(type="string", length=10)
 	 */
 	private $cost;
 
 	/**
-	 * ArrayCollection of MedicationResults
-	 *
-	 * @var ArrayCollection
-	 *
-	 * @see ArrayCollection::class
-	 * @see 'AppBundle\Entity\MedicationResults'
-	 *
 	 * @ORM\OneToMany(targetEntity="MedicationResults", mappedBy="medication")
 	 */
 	private $results;
 
-	/**
-	 * Constructor function
-	 *
-	 * Initializes $results as ArrayCollection
-	 *
-	 * @see ArrayCollection::class
-	 */
 	public function __construct(array $array = null)
 	{
 		$this->results = new ArrayCollection();
@@ -85,23 +55,11 @@ class Medication
 		}
 	}
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return self
-     */
     public function setName($name)
     {
         $this->name = $name;
@@ -109,19 +67,11 @@ class Medication
         return $this;
     }
 
-    /**
-     * Get name
-     *
-     * @return string
-     */
     public function getName()
     {
         return $this->name;
     }
 
-		/**
-		 *
-		 */
 		public function setGroup($group)
 		{
 			$this->tGroup = $group;
@@ -129,21 +79,11 @@ class Medication
 			return $this;
 		}
 
-		/**
-		 *
-		 */
 		public function getGroup()
 		{
 			return $this->tGroup;
 		}
 
-    /**
-     * Set cost
-     *
-     * @param string $cost
-     *
-     * @return self
-     */
     public function setCost($cost)
     {
         $this->cost = $cost;
@@ -151,27 +91,11 @@ class Medication
         return $this;
     }
 
-    /**
-     * Get cost
-     *
-     * @return string
-     */
     public function getCost()
     {
         return $this->cost;
     }
 
-    /**
-     * Add result
-		 *
-		 * Appends $result to $results
-     *
-     * @param \AppBundle\Entity\MedicationResults $result
-		 *
-		 * @see 'AppBundle\Entity\MedicationResults'
-     *
-     * @return self
-     */
     public function addResult(\AppBundle\Entity\MedicationResults $result)
     {
         $this->results[] = $result;
@@ -179,15 +103,6 @@ class Medication
         return $this;
     }
 
-    /**
-     * Remove result
-		 *
-		 * Removes $result from $results
-     *
-     * @param \AppBundle\Entity\MedicationResults $result
-		 *
-		 * @return self
-     */
     public function removeResult(\AppBundle\Entity\MedicationResults $result)
     {
         $this->results->removeElement($result);
@@ -195,23 +110,11 @@ class Medication
 				return $this;
     }
 
-    /**
-     * Get results
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
     public function getResults()
     {
         return $this->results;
     }
 
-    /**
-     * Set waitTime
-     *
-     * @param string $waitTime
-     *
-     * @return Medication
-     */
     public function setWaitTime($waitTime)
     {
         $this->waitTime = $waitTime;
@@ -219,23 +122,11 @@ class Medication
         return $this;
     }
 
-    /**
-     * Get waitTime
-     *
-     * @return string
-     */
     public function getWaitTime()
     {
         return $this->waitTime;
     }
 
-    /**
-     * Set tGroup
-     *
-     * @param string $tGroup
-     *
-     * @return Medication
-     */
     public function setTGroup($tGroup)
     {
         $this->tGroup = $tGroup;
@@ -243,11 +134,6 @@ class Medication
         return $this;
     }
 
-    /**
-     * Get tGroup
-     *
-     * @return string
-     */
     public function getTGroup()
     {
         return $this->tGroup;

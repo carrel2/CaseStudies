@@ -6,20 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Diagnostic Test class
- *
- * Contains information about a specific diagnostic Test
- *
  * @ORM\Entity
  * @ORM\Table(name="Tests")
  */
 class Test
 {
 	/**
-	 * Auto-generated unique id
-	 *
-	 * @var integer
-	 *
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="AUTO")
@@ -27,10 +19,6 @@ class Test
 	private $id;
 
 	/**
-	 * The name of the Test
-	 *
-	 * @var string
-	 *
 	 * @ORM\Column(type="text")
 	 */
 	private $name;
@@ -46,33 +34,15 @@ class Test
 	private $waitTime;
 
 	/**
-	 * The cost of the Test
-	 *
-	 * @var string
-	 *
 	 * @ORM\Column(type="string", length=10)
 	 */
 	private $cost;
 
 	/**
-	 * ArrayCollection of TestResults
-	 *
-	 * @var ArrayCollection
-	 *
-	 * @see ArrayCollection::class
-	 * @see 'AppBundle\Entity\TestResults'
-	 *
 	 * @ORM\OneToMany(targetEntity="TestResults", mappedBy="test")
 	 */
 	private $results;
 
-	/**
-	 * Constructor function
-	 *
-	 * Initializes $results as ArrayCollection
-	 *
-	 * @see ArrayCollection::class
-	 */
 	public function __construct(array $array = null)
 	{
 		$this->results = new ArrayCollection();
@@ -85,23 +55,11 @@ class Test
 		}
 	}
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return self
-     */
     public function setName($name)
     {
         $this->name = $name;
@@ -109,19 +67,11 @@ class Test
         return $this;
     }
 
-    /**
-     * Get name
-     *
-     * @return string
-     */
     public function getName()
     {
         return $this->name;
     }
 
-		/**
-		 *
-		 */
 		public function setGroup($group)
 		{
 			$this->dGroup = $group;
@@ -129,21 +79,11 @@ class Test
 			return $this;
 		}
 
-		/**
-		 *
-		 */
 		public function getGroup()
 		{
 			return $this->dGroup;
 		}
 
-    /**
-     * Set cost
-     *
-     * @param string $cost
-     *
-     * @return self
-     */
     public function setCost($cost)
     {
         $this->cost = $cost;
@@ -151,25 +91,11 @@ class Test
         return $this;
     }
 
-    /**
-     * Get cost
-     *
-     * @return string
-     */
     public function getCost()
     {
         return $this->cost;
     }
 
-    /**
-     * Add result
-     *
-     * @param \AppBundle\Entity\TestResults $result
-		 *
-		 * @see 'AppBundle\Entity\TestResults'
-     *
-     * @return self
-     */
     public function addResult(\AppBundle\Entity\TestResults $result)
     {
         $this->results[] = $result;
@@ -177,15 +103,6 @@ class Test
         return $this;
     }
 
-    /**
-     * Remove result
-     *
-     * @param \AppBundle\Entity\TestResults $result
-		 *
-		 * @see 'AppBundle\Entity\TestResults'
-		 *
-		 * @return self
-     */
     public function removeResult(\AppBundle\Entity\TestResults $result)
     {
         $this->results->removeElement($result);
@@ -193,23 +110,11 @@ class Test
 				return $this;
     }
 
-    /**
-     * Get results
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
     public function getResults()
     {
         return $this->results;
     }
 
-    /**
-     * Set waitTime
-     *
-     * @param string $waitTime
-     *
-     * @return Test
-     */
     public function setWaitTime($waitTime)
     {
         $this->waitTime = $waitTime;
@@ -217,23 +122,11 @@ class Test
         return $this;
     }
 
-    /**
-     * Get waitTime
-     *
-     * @return string
-     */
     public function getWaitTime()
     {
         return $this->waitTime;
     }
 
-    /**
-     * Set dGroup
-     *
-     * @param string $dGroup
-     *
-     * @return Test
-     */
     public function setDGroup($dGroup)
     {
         $this->dGroup = $dGroup;
@@ -241,11 +134,6 @@ class Test
         return $this;
     }
 
-    /**
-     * Get dGroup
-     *
-     * @return string
-     */
     public function getDGroup()
     {
         return $this->dGroup;

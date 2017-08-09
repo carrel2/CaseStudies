@@ -1,7 +1,4 @@
 <?php
-/**
- * src/AppBundle/Controller/TestsController.php
- */
 
 namespace AppBundle\Controller;
 
@@ -12,30 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Test;
 use AppBundle\Form\DiagnosticsType;
 
-/**
- * DiagnosticsController class
- *
- * DiagnosticsController class extends \Symfony\Bundle\FrameworkBundle\Controller\Controller
- *
- * @see http://api.symfony.com/3.2/Symfony/Bundle/FrameworkBundle/Controller/Controller.html
- */
 class DiagnosticsController extends Controller
 {
 	/**
-	 * showPageAction function
-	 *
-	 * Shows TestsType form. On submission adds TestResults from the corresponding Day to the current UserDay
-	 *
-	 * @see TestsType::class
-	 * @see 'AppBundle\Entity\TestResults'
-	 * @see 'AppBundle\Entity\Day'
-	 * @see User'AppBundle\Entity\Day'
-	 * @see MedicationsController::showPageAction()
-	 *
-	 * @param Request $r Request object
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response Render **tests.html.twig**. On submission, redirect to **MedicationsController::showPageAction()**
-	 *
 	 * @Route("/diagnostics", name="diagnostics")
 	 * @Security("has_role('ROLE_USER')")
 	 */

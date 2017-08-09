@@ -1,9 +1,4 @@
 <?php
-/**
- * src/AppBundle/Controller/AdminController.php
- *
- * Controller for admin actions
- */
 
 namespace AppBundle\Controller;
 
@@ -28,24 +23,9 @@ use AppBundle\Entity\Animal;
 use AppBundle\Entity\Test;
 use AppBundle\Entity\Medication;
 
-/**
- * AdminController class
- *
- * AdminController class extends \Symfony\Bundle\FrameworkBundle\Controller\Controller
- *
- * @see http://api.symfony.com/3.2/Symfony/Bundle/FrameworkBundle/Controller/Controller.html
- */
 class AdminController extends Controller
 {
 	/**
-	 * adminAction function
-	 *
-	 * Default admin action. Renders admin.html.twig template
-	 *
-	 * @param Request $r Request object
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response Render **admin.html.twig**
-	 *
 	 * @Route("/admin", name="admin")
 	 */
 	public function adminAction(Request $r)
@@ -56,16 +36,6 @@ class AdminController extends Controller
 	}
 
 	/**
-	 * editCaseAction function
-	 *
-	 * Creates a form for admins to use to edit CaseStudy objects
-	 *
-	 * @see CaseStudy::class
-	 *
-	 * @param Request $r Request object
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response Render **editCase.html.twig**
-	 *
 	 * @Route("/admin/edit/case", name="editCase")
 	 */
 	public function editCaseAction(Request $r)
@@ -80,18 +50,6 @@ class AdminController extends Controller
 	}
 
 	/**
-	 * createCaseAction function
-	 *
-	 * Shows CaseType form for admins to create a new CaseStudy
-	 *
-	 * @see CaseType::class
-	 * @see CaseStudy::class
-	 * @see AdminController::adminAction()
-	 *
-	 * @param Request $r Request object
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response Render **createCase.html.twig**. On submission, redirect to **AdminController::adminAction()**
-	 *
 	 * @Route("/admin/create/case", name="createCase")
 	 */
 	public function createCaseAction(Request $r)
@@ -121,16 +79,6 @@ class AdminController extends Controller
 	}
 
 	/**
-	 * getCaseAction function
-	 *
-	 * Function to get a case study and all information associated with it. Called through ajax.
-	 * Returns caseInfo.html.twig template
-	 *
-	 * @param Request $r Request object
-	 * @param CaseStudy $case CaseStudy object
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response Render **caseInfo.html.twig**. On submission, redirect to **AdminController::editCaseAction()**
-	 *
 	 * @Route("/getCase/{id}", name="caseInfo")
 	 */
 	public function getCaseAction(Request $r, CaseStudy $case)
@@ -170,16 +118,6 @@ class AdminController extends Controller
 	}
 
 	/**
-	 * manageUsersAction function
-	 *
-	 * Allows admin User to edit User objects
-	 *
-	 * @see 'AppBundle\Entity\User'
-	 *
-	 * @param Request $r Request object
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response Render **admin.html.twig**
-	 *
 	 * @Route("/admin/users", name="manageUsers")
 	 */
 	public function manageUsersAction(Request $r)
@@ -226,15 +164,6 @@ class AdminController extends Controller
 	}
 
 	/**
-	 * editUserAction function
-	 *
-	 * Edit selected User object
-	 *
-	 * @param Request $r Request object
-	 * @param User $user
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response Render **user.html.twig**
-	 *
 	 * @Route("/admin/edit/users/{id}", name="editUser")
 	 */
 	public function editUserAction(Request $r, User $user)
@@ -273,15 +202,6 @@ class AdminController extends Controller
 	}
 
 	/**
-	 * editUserResultsAction function
-	 *
-	 * Allows admin User to edit Results objects associated with another User
-	 *
-	 * @param Request $r Request object
-	 * @param User $user User object to edit
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response Render **results.html.twig**
-	 *
 	 * @Route("/admin/edit/users/{id}/results", name="editUserResults")
 	 */
 	public function editUserResultsAction(Request $r, User $user)
@@ -296,14 +216,6 @@ class AdminController extends Controller
 	}
 
 	/**
-	 * animalAction function
-	 *
-	 * Allows admin User to edit Animal objects
-	 *
-	 * @param Request $r Request object
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response Render **manage.html.twig**
-	 *
 	 * @Route("/admin/animals", name="manageAnimals")
 	 */
 	public function animalAction(Request $r)
@@ -352,14 +264,6 @@ class AdminController extends Controller
 	}
 
 	/**
-	 * createAnimalAction function
-	 *
-	 * Allows admin User to create new Animal object
-	 *
-	 * @param Request $r Request object
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response Render **animals.html.twig**
-	 *
 	 * @Route("/admin/create/animal", name="createAnimal")
 	 */
 	public function createAnimalAction(Request $r)
@@ -390,15 +294,6 @@ class AdminController extends Controller
 	}
 
 	/**
-	 * hotspotsAction function
-	 *
-	 * Allows admin User to edit HotSpot objects associated with an Animal object
-	 *
-	 * @param Request $r Request object
-	 * @param Animal $animal Animal object to edit
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response Render **animals.html.twig**
-	 *
 	 * @Route("/admin/edit/animals/{id}", name="editAnimal")
 	 */
 	 public function hotspotsAction(Request $r, Animal $animal = null)
@@ -434,14 +329,6 @@ class AdminController extends Controller
 	 }
 
 	 /**
-	  * testsAction function
-		*
-		* Allows admin User to edit Test objects
-		*
-		* @param Request $r Request object
-		*
-		* @return \Symfony\Component\HttpFoundation\Response Render **manage.html.twig**
-		*
 	  * @Route("/admin/tests", name="manageTests")
 		*/
 		public function testsAction(Request $r)
@@ -498,14 +385,6 @@ class AdminController extends Controller
 		}
 
 		/**
-		 * createTestAction function
-		 *
-		 * Allows admin User to create new Test object
-		 *
-		 * @param Request $r Request object
-		 *
-		 * @return \Symfony\Component\HttpFoundation\Response Render **manage.html.twig**
-		 *
 		 * @Route("/admin/create/test", name="createTest")
 		 */
 		public function createTestAction(Request $r)
@@ -532,15 +411,6 @@ class AdminController extends Controller
 		}
 
 		/**
-		 * editTestAction function
-		 *
-		 * Allow admin User to edit Test object
-		 *
-		 * @param Request $r Request object
-		 * @param Test $test Test object to edit
-		 *
-		 * @return \Symfony\Component\HttpFoundation\Response Render **manage.html.twig**
-		 *
 		 * @Route("/admin/edit/tests/{id}", name="editTest")
 		 */
 		 public function editTestAction(Request $r, Test $test = null)
@@ -572,14 +442,6 @@ class AdminController extends Controller
 		 }
 
 		 /**
-		  * medicationsAction function
-			*
-			* Allows admin User to manage Medication objects
-			*
-			* @param Request $r Request object
-			*
-			* @return \Symfony\Component\HttpFoundation\Response Render **manage.html.twig**
-			*
 		  * @Route("/admin/medications", name="manageMedications")
 			*/
 			public function medicationsAction(Request $r)
@@ -636,14 +498,6 @@ class AdminController extends Controller
 			}
 
 			/**
-			 * createMedicationAction function
-			 *
-			 * Allows admin User to create a new Medication object
-			 *
-			 * @param Request $r Request object
-			 *
-			 * @return \Symfony\Component\HttpFoundation\Response Render **manage.html.twig**
-			 *
 			 * @Route("/admin/create/medication", name="createMedication")
 			 */
 			public function createMedicationAction(Request $r)
@@ -670,15 +524,6 @@ class AdminController extends Controller
 			}
 
 			/**
-			 * editMedicationAction function
-			 *
-			 * Allows adminUser to edit Medication object
-			 *
-			 * @param Request $r Request object
-			 * @param Medication $medication Medication object to edit
-			 *
-			 * @return \Symfony\Component\HttpFoundation\Response Render **manage.html.twig**
-			 *
 			 * @Route("/admin/edit/medications/{id}", name="editMedication")
 			 */
 			 public function editMedicationAction(Request $r, Medication $medication = null)
