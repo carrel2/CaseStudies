@@ -34,7 +34,6 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        dump($em);
         $username = $credentials['token'];
 
         if (null === $username) {
@@ -47,8 +46,8 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
           $user = new User();
           $user->setUsername($username);
 
-          $em->persist($user);
-          $em->flush();
+          $this->em->persist($user);
+          $this->em->flush();
         }
 
         return $user;
