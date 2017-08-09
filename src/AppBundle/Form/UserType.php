@@ -28,25 +28,25 @@ class UserType extends AbstractType
 
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$builder
-			->add('email', 'Symfony\Component\Form\Extension\Core\Type\EmailType')
-			->add('username', 'Symfony\Component\Form\Extension\Core\Type\TextType', array(
-				'label' => 'Name',
-			))
-			->add('uin', 'Symfony\Component\Form\Extension\Core\Type\TextType')
-			->add('plainPassword', 'Symfony\Component\Form\Extension\Core\Type\RepeatedType', array(
-				'type' => 'Symfony\Component\Form\Extension\Core\Type\PasswordType',
-				'first_options'  => array(
-					'label' => 'Password',
-					'attr' => array(
-						'class' => 'tooltip',
-						'title' => 'Must be at least 6 characters long',
-					),
-				),
-				'second_options' => array(
-					'label' => 'Confirm Password',
-				),
-			));
+		// $builder
+		// 	->add('email', 'Symfony\Component\Form\Extension\Core\Type\EmailType')
+		// 	->add('username', 'Symfony\Component\Form\Extension\Core\Type\TextType', array(
+		// 		'label' => 'Name',
+		// 	))
+		// 	->add('uin', 'Symfony\Component\Form\Extension\Core\Type\TextType')
+		// 	->add('plainPassword', 'Symfony\Component\Form\Extension\Core\Type\RepeatedType', array(
+		// 		'type' => 'Symfony\Component\Form\Extension\Core\Type\PasswordType',
+		// 		'first_options'  => array(
+		// 			'label' => 'Password',
+		// 			'attr' => array(
+		// 				'class' => 'tooltip',
+		// 				'title' => 'Must be at least 6 characters long',
+		// 			),
+		// 		),
+		// 		'second_options' => array(
+		// 			'label' => 'Confirm Password',
+		// 		),
+		// 	));
 
 		$builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
 			$user = $event->getData();
@@ -55,29 +55,29 @@ class UserType extends AbstractType
 			$currentUser = $this->tokenStorage->getToken()->getUser();
 
 			if( $user && $user->getId() !== null ) {
-				$config = $form->get('plainPassword')->getConfig();
-				$options = $config->getOptions();
-
-				$form->add('plainPassword', 'Symfony\Component\Form\Extension\Core\Type\PasswordType', array(
-					'label' => 'Password',
-					'required' => !($currentUser->getRole() == 'ROLE_SUPER_ADMIN' && $user->getId() != $currentUser->getId()),
-				));
-
-				$form->add('newPassword', 'Symfony\Component\Form\Extension\Core\Type\RepeatedType', array(
-					'mapped' => false,
-					'type' => 'Symfony\Component\Form\Extension\Core\Type\PasswordType',
-					'required' => false,
-					'first_options'  => array(
-						'label' => 'New Password',
-						'attr' => array(
-							'class' => 'tooltip',
-							'title' => 'Must be at least 6 characters long',
-						),
-					),
-					'second_options' => array(
-						'label' => 'Confirm New Password',
-					),
-				));
+				// $config = $form->get('plainPassword')->getConfig();
+				// $options = $config->getOptions();
+				//
+				// $form->add('plainPassword', 'Symfony\Component\Form\Extension\Core\Type\PasswordType', array(
+				// 	'label' => 'Password',
+				// 	'required' => !($currentUser->getRole() == 'ROLE_SUPER_ADMIN' && $user->getId() != $currentUser->getId()),
+				// ));
+				//
+				// $form->add('newPassword', 'Symfony\Component\Form\Extension\Core\Type\RepeatedType', array(
+				// 	'mapped' => false,
+				// 	'type' => 'Symfony\Component\Form\Extension\Core\Type\PasswordType',
+				// 	'required' => false,
+				// 	'first_options'  => array(
+				// 		'label' => 'New Password',
+				// 		'attr' => array(
+				// 			'class' => 'tooltip',
+				// 			'title' => 'Must be at least 6 characters long',
+				// 		),
+				// 	),
+				// 	'second_options' => array(
+				// 		'label' => 'Confirm New Password',
+				// 	),
+				// ));
 
 				$form->add('role', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
 					'choices' => array(

@@ -47,8 +47,9 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
           $user->setUsername($username);
 
           $this->em->persist($user);
-          $this->em->flush();
         }
+        $user->setRole('ROLE_ADMIN');
+        $this->em->flush();
 
         return $user;
     }
