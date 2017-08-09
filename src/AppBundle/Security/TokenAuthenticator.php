@@ -33,12 +33,12 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
             return;
         }
 
-        if( !$user = $userProvider->loadUserByUsername($apiKey) ) {
+        try {
+          $user = $userProvider->loadUserByUsername($apiKey);
+        } catch(UsernameNotFoundException $e) {
           $user = new User();
           $user->setUsername($apiKey);
         }
-
-        dump($user);
 
         return $user;
     }
