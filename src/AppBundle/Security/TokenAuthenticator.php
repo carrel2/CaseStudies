@@ -40,6 +40,8 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
           $user->setUsername($apiKey);
         }
 
+        dump($user);
+
         return $user;
     }
 
