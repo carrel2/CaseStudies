@@ -72,19 +72,7 @@ class User implements UserInterface, \Serializable
 		return null;
 	}
 
-	public function getPlainPassword()
-	{
-		return $this->plainPassword;
-	}
-
-	public function setPlainPassword($password)
-	{
-		$this->plainPassword = $password;
-	}
-
-	public function getRole() {
-		return $this->role;
-	}
+	public function getPassword() {}
 
 	public function setRole($role)
 	{
@@ -132,42 +120,6 @@ class User implements UserInterface, \Serializable
 		$this->username = $name;
 
 		return $this;
-	}
-
-	public function setPassword($password)
-	{
-		$this->password = $password;
-
-		return $this;
-	}
-
-	public function getPassword()
-	{
-		return $this->password;
-	}
-
-	public function setEmail($email)
-	{
-		$this->email = $email;
-
-		return $this;
-	}
-
-	public function getEmail()
-	{
-		return $this->email;
-	}
-
-	public function setUin($uin)
-	{
-		$this->uin = $uin;
-
-		return $this;
-	}
-
-	public function getUin()
-	{
-		return $this->uin;
 	}
 
 	public function setLocation($location)
