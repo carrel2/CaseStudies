@@ -35,7 +35,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
 
         try {
           $user = $userProvider->loadUserByUsername($apiKey);
-        } catch(Symfony\Component\Security\Core\Exception\UsernameNotFoundException $e) {
+        } catch(\Symfony\Component\Security\Core\Exception\UsernameNotFoundException $e) {
           $user = new User();
           $user->setUsername($apiKey);
         }
