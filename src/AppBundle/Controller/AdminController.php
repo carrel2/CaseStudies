@@ -4,11 +4,9 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Process\Process;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -561,19 +559,9 @@ class AdminController extends Controller
 	 * @Route("/admin/clear/cache/{env}")
 	 */
 	public function cacheAction($env="dev") {
-		$application = new Application($this->get('kernel'));
-		$application->setAutoExit(false);
+		$process = new Process("php /var/www/project/bin/console cache:clear --env={$env}");
+		$process->run();
 
-		$input = new ArrayInput(array(
-			'command' => 'cache:clear',
-			'--env' => $env,
-		));
-
-		$output = new BufferedOutput();
-		$application->run($input, $output);
-
-		$content = $output->fetch();
-
-		return new Response($content);
+		return new Response($process->getOutput());
 	}
 }
