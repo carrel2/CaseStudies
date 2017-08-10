@@ -4,8 +4,11 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -79,7 +82,7 @@ class AdminController extends Controller
 	}
 
 	/**
-	 * @Route("/getCase/{id}", name="caseInfo")
+	 * @Route("/admin/getCase/{id}", name="caseInfo")
 	 */
 	public function getCaseAction(Request $r, CaseStudy $case)
 	{
@@ -441,61 +444,61 @@ class AdminController extends Controller
 			 ));
 		 }
 
-		 /**
-		  * @Route("/admin/medications", name="manageMedications")
-			*/
-			public function medicationsAction(Request $r)
+		/**
+		 * @Route("/admin/medications", name="manageMedications")
+		 */
+		public function medicationsAction(Request $r)
+		{
+			$em = $this->getDoctrine()->getManager();
+
+			$form = $this->createFormBuilder()
+				->add('medications', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
+					'class' => 'AppBundle:Medication',
+					'choice_label' => 'name',
+					'expanded' => true,
+					'choice_attr' => function(Medication $t, $key, $index) {
+						return ['class' => 'medication'];
+					},
+					'group_by' => function($val, $key, $index) {
+						return $val->getGroup();
+					},
+					'label_attr' => array(
+						'class' => 'medications_label',
+					)
+				))
+				->add('edit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
+					'attr' => array('class' => 'is-success'),
+				))
+				->add('delete', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
+					'attr' => array(
+						'class' => 'is-danger',
+						'onclick' => 'return confirmDelete();',
+					),
+				))->getForm();
+
+			$form->handleRequest($r);
+
+			if( $form->isSubmitted() && $form->isValid() )
 			{
-				$em = $this->getDoctrine()->getManager();
+				$medication = $form->getData()['medications'];
 
-				$form = $this->createFormBuilder()
-					->add('medications', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
-						'class' => 'AppBundle:Medication',
-						'choice_label' => 'name',
-						'expanded' => true,
-						'choice_attr' => function(Medication $t, $key, $index) {
-							return ['class' => 'medication'];
-						},
-						'group_by' => function($val, $key, $index) {
-							return $val->getGroup();
-						},
-						'label_attr' => array(
-							'class' => 'medications_label',
-						)
-					))
-					->add('edit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
-						'attr' => array('class' => 'is-success'),
-					))
-					->add('delete', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
-						'attr' => array(
-							'class' => 'is-danger',
-							'onclick' => 'return confirmDelete();',
-						),
-					))->getForm();
+				if( $form->get('edit')->isClicked() ) {
+					return $this->redirectToRoute('editMedication', array('id' => $medication->getId()));
+				} else if( $form->get('delete')->isClicked() ) {
+					$em->remove($medication);
+					$em->flush();
 
-				$form->handleRequest($r);
+					$this->addFlash('success', 'Deleted ' . $medication->getName());
 
-				if( $form->isSubmitted() && $form->isValid() )
-				{
-					$medication = $form->getData()['medications'];
-
-					if( $form->get('edit')->isClicked() ) {
-						return $this->redirectToRoute('editMedication', array('id' => $medication->getId()));
-					} else if( $form->get('delete')->isClicked() ) {
-						$em->remove($medication);
-						$em->flush();
-
-						$this->addFlash('success', 'Deleted ' . $medication->getName());
-
-						return $this->redirectToRoute('manageMediations');
-					}
+					return $this->redirectToRoute('manageMediations');
 				}
-
-				return $this->render('Admin/manage.html.twig', array(
-					'form' => $form->createView(),
-					'route' => 'createMedication',
-				));
 			}
+
+			return $this->render('Admin/manage.html.twig', array(
+				'form' => $form->createView(),
+				'route' => 'createMedication',
+			));
+		}
 
 			/**
 			 * @Route("/admin/create/medication", name="createMedication")
@@ -553,4 +556,24 @@ class AdminController extends Controller
 					 'route' => null,
 				 ));
 			 }
+
+	/**
+	 * @Route("/admin/clear/cache/{env}")
+	 */
+	public function cacheAction($env="dev") {
+		$application = new Application($this->get('kernel'));
+		$application->setAutoExit(false);
+
+		$input = new ArrayInput(array(
+			'command' => 'cache:clear',
+			'--env' => $env,
+		));
+
+		$output = new BufferedOutput();
+		$application->run($input, $output);
+
+		$content = $output->fetch();
+
+		return new Response($content);
+	}
 }
