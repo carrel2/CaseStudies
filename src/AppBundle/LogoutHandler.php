@@ -13,15 +13,11 @@ class LogoutHandler implements LogoutHandlerInterface
   {
     $session = $request->getSession();
 
-    $timedOut = $session->get('timed out');
-
     $page = $session->get('page');
     $session->invalidate();
 
     $session->set('page', $page);
 
-    if( $timedOut ) {
-      $session->getFlashBag()->set('warning', 'Session timed out, please login again');
-    }
+    $request->headers->remove('remote-user');
   }
 }

@@ -12,14 +12,14 @@ $(function() {
 		delay: 100
 	});
 
-	var file = document.getElementById("form_file");
-	if( file ) {
-		file.onchange = function(){
-	    if(file.files.length > 0)
-	    {
-	      document.getElementById('filename').innerHTML = file.files[0].name;
-	    }
-		};
+	var file = $('.file-input');
+	if( file.is('input[type=file]') ) {
+		file.change(function(){
+			if(file.files.length > 0)
+			{
+				document.getElementById('filename').innerHTML = file.files[0].name;
+			}
+		});
 	}
 })
 
