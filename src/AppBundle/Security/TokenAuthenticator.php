@@ -23,7 +23,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
 
     public function getCredentials(Request $request)
     {
-        if (!$token = $request->headers->get('php-auth-user')) {
+        if (!$token = $request->headers->get('remote-user')) {
             $token = null;
         }
 
@@ -47,9 +47,8 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
           $user->setUsername($username);
 
           $this->em->persist($user);
+          $this->em->flush();
         }
-        $user->setRole('ROLE_ADMIN');
-        $this->em->flush();
 
         return $user;
     }
