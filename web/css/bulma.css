@@ -8356,9 +8356,9 @@ label.panel-block {
   .image.is-hotspots img {
     height: 100%; }
 
-.navbar-burger {
-  color: white; }
-  .navbar-burger:hover {
-    background-color: #3c6491; }
+.navbar-burger span {
+  background-color: white; }
+.navbar-burger:hover {
+  background-color: #3c6491; }
 
 /*# sourceMappingURL=bulma.css.map */
