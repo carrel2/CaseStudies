@@ -8360,5 +8360,7 @@ label.panel-block {
   background-color: white; }
 .navbar-burger:hover {
   background-color: #3c6491; }
+.navbar-burger.is-active span {
+  background-color: white; }
 
 /*# sourceMappingURL=bulma.css.map */
