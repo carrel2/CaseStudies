@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0b3d685af26ef503d3265b05b05bb07d",
+    "content-hash": "b58d2bb11e8ba1fd24c4ebf18dfd9eff",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -1212,6 +1212,187 @@
                 "random"
             ],
             "time": "2017-03-13T16:27:32+00:00"
+        },
+        {
+            "name": "phpoffice/phpexcel",
+            "version": "1.8.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPOffice/PHPExcel.git",
+                "reference": "372c7cbb695a6f6f1e62649381aeaa37e7e70b32"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPOffice/PHPExcel/zipball/372c7cbb695a6f6f1e62649381aeaa37e7e70b32",
+                "reference": "372c7cbb695a6f6f1e62649381aeaa37e7e70b32",
+                "shasum": ""
+            },
+            "require": {
+                "ext-xml": "*",
+                "ext-xmlwriter": "*",
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PHPExcel": "Classes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Maarten Balliauw",
+                    "homepage": "http://blog.maartenballiauw.be"
+                },
+                {
+                    "name": "Mark Baker"
+                },
+                {
+                    "name": "Franck Lefevre",
+                    "homepage": "http://blog.rootslabs.net"
+                },
+                {
+                    "name": "Erik Tilt"
+                }
+            ],
+            "description": "PHPExcel - OpenXML - Read, Create and Write Spreadsheet documents in PHP - Spreadsheet engine",
+            "homepage": "http://phpexcel.codeplex.com",
+            "keywords": [
+                "OpenXML",
+                "excel",
+                "php",
+                "spreadsheet",
+                "xls",
+                "xlsx"
+            ],
+            "time": "2015-05-01T07:00:55+00:00"
+        },
+        {
+            "name": "portphp/excel",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/portphp/excel.git",
+                "reference": "0971763c1914ea24e293c3a26eca5b6a403b28a6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/portphp/excel/zipball/0971763c1914ea24e293c3a26eca5b6a403b28a6",
+                "reference": "0971763c1914ea24e293c3a26eca5b6a403b28a6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "phpoffice/phpexcel": "~1.8",
+                "portphp/portphp": "1.0.x-dev"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Port\\Excel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David de Boer",
+                    "email": "david@ddeboer.nl"
+                },
+                {
+                    "name": "Markus Bachmann",
+                    "email": "markus.bachmann@bachi.biz"
+                },
+                {
+                    "name": "Community contributors",
+                    "homepage": "https://github.com/portphp/excel/graphs/contributors"
+                }
+            ],
+            "description": "Excel reader and writer for Port",
+            "homepage": "https://github.com/portphp",
+            "time": "2017-01-29 11:03:16"
+        },
+        {
+            "name": "portphp/portphp",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/portphp/portphp.git",
+                "reference": "810cdbd5a4e4fbc2721540fce98909f0b4899b50"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/portphp/portphp/zipball/810cdbd5a4e4fbc2721540fce98909f0b4899b50",
+                "reference": "810cdbd5a4e4fbc2721540fce98909f0b4899b50",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "psr/log": "~1.0",
+                "symfony/property-access": "^2.7 || ^3.0",
+                "symfony/validator": "^2.7 || ^3.0"
+            },
+            "require-dev": {
+                "doctrine/instantiator": "^1.0.5",
+                "ext-iconv": "*",
+                "ext-mbstring": "*",
+                "phpspec/phpspec": "^2.4",
+                "phpunit/phpunit": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Port\\": "src/",
+                    "Port\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David de Boer",
+                    "email": "david@ddeboer.nl"
+                },
+                {
+                    "name": "Markus Bachmann",
+                    "email": "markus.bachmann@bachi.biz"
+                },
+                {
+                    "name": "Community contributors",
+                    "homepage": "https://github.com/portphp/portphp/graphs/contributors"
+                }
+            ],
+            "description": "Data import/export workflow",
+            "homepage": "https://github.com/portphp",
+            "keywords": [
+                "csv",
+                "data",
+                "doctrine",
+                "excel",
+                "export",
+                "import"
+            ],
+            "time": "2017-06-02 16:34:36"
         },
         {
             "name": "psr/log",
@@ -2436,7 +2617,10 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "portphp/excel": 20,
+        "portphp/portphp": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

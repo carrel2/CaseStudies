@@ -555,6 +555,7 @@ class AdminController extends Controller
 				 ));
 			 }
 
+	// TODO: Remove for production
 	/**
 	 * @Route("/admin/clear/cache/{env}")
 	 */

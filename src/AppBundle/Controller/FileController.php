@@ -76,7 +76,7 @@ class FileController extends Controller
             }
           }
         } catch( \PHPExcel_Exception $e ) {
-          $this->addFlash('notice', "Imported $count ${type}s!");
+          $this->addFlash('success', "Imported $count ${type}s!");
         }
       }
       else {
@@ -92,7 +92,7 @@ class FileController extends Controller
               }
             }
 
-            $this->addFlash('notice', "Imported $count ${type}s!");
+            $this->addFlash('success', "Imported $count ${type}s!");
           } catch( \PHPExcel_Exception $e ) {
             $this->addFlash('error', 'Invalid sheet number');
           }
