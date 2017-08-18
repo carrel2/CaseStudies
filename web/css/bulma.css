@@ -8363,4 +8363,7 @@ label.panel-block {
 .navbar-burger.is-active span {
   background-color: white; }
 
+area.hotspot {
+  cursor: default; }
+
 /*# sourceMappingURL=bulma.css.map */
