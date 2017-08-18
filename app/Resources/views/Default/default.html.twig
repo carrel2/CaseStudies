@@ -11,7 +11,11 @@
 {% endblock %}
 
 {% block body %}
-	<div class="column is-two-thirds">
+	<div class="column is-hidden-desktop">
+		<h1 class="title">Instructions</h1>
+	</div>
+
+	<div class="column is-half-desktop">
 		{{ form_start(form) }}
 	    {% if case %}
 	      <div>You have a session in progress: <b>{{ case.title }}</b></div>
@@ -24,5 +28,9 @@
 
 	    {{ form_rest(form) }}
 	  {{ form_end(form) }}
+	</div>
+
+	<div class="column is-hidden-touch has-text-centered">
+		<h1 class="title">Instructions</h1>
 	</div>
 {% endblock %}

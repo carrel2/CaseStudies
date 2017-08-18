@@ -13,7 +13,7 @@ use AppBundle\Entity\Animal;
 
 class HotSpotController extends Controller
 {
-	/*
+	/**
 	* @Route("/eval", name="evaluation")
 	* @Security("has_role('ROLE_USER')")
 	*/
@@ -74,7 +74,7 @@ class HotSpotController extends Controller
 	}
 
 	/**
-	* @Route("/addHotspot/{animal}/{name}/{x1}.{y1}.{x2}.{y2}", name="addHotspot")
+	* @Route("/addHotspot/{animal}/{name}/{x1}-{y1}-{x2}-{y2}", name="addHotspot")
 	*/
 	public function addHotspotAction(Animal $animal, $name, $x1, $y1, $x2, $y2)
 	{

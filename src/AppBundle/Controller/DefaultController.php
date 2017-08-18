@@ -126,7 +126,7 @@ class DefaultController extends Controller
 
 			$em->persist($results);
 
-			$message = \Swift_Message::newInstance()
+			/* $message = \Swift_Message::newInstance()
 				->setSubject("Case Study results: {$user->getCaseStudy()->getTitle()}")
 				->setFrom($user->getEmail()) // TODO: consider what email(s) to send from
 				->setTo('vaulter82@gmail.com') // TODO: ->setTo(admin/professor)
@@ -137,7 +137,7 @@ class DefaultController extends Controller
 					'text/html'
 				);
 
-			$this->get('mailer')->send($message);
+			$this->get('mailer')->send($message); */
 		}
 
 		$session->clear();
