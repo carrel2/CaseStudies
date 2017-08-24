@@ -28,6 +28,7 @@ class CaseType extends AbstractType
 				'disallowedContent' => 'button embed form iframe input link meta textarea video script',
 			),
 		))
+		->add('email', 'Symfony\Component\Form\Extension\Core\Type\EmailType')
 		->add('animal', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
 			'class' => 'AppBundle:Animal',
 			'choice_label' => 'name',

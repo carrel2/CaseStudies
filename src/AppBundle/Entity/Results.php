@@ -37,10 +37,6 @@ class Results
   */
   private $location;
 
-  /**
-  * @ORM\Column(type="text")
-  */
-  private $diagnosis;
 
     public function getId()
     {
@@ -64,18 +60,6 @@ class Results
       $this->results[] = $element;
 
       return $this;
-    }
-
-    public function setDiagnosis($d)
-    {
-      $this->diagnosis = $d;
-
-      return $this;
-    }
-
-    public function getDiagnosis()
-    {
-      return $this->diagnosis;
     }
 
     public function setUser(\AppBundle\Entity\User $user = null)

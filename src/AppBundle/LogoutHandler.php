@@ -11,13 +11,13 @@ class LogoutHandler implements LogoutHandlerInterface
 {
   public function logout(Request $request, Response $response, TokenInterface $token)
   {
-    $session = $request->getSession();
+//    $session = $request->getSession();
 
-    $page = $session->get('page');
-    $session->invalidate();
+//    $page = $session->get('page');
+//    $session->invalidate();
 
-    $session->set('page', $page);
+//    $session->set('page', $page);
 
-    $request->headers->remove('remote-user');
+//    $session->set('logout', true);
   }
 }

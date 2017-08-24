@@ -29,6 +29,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
 
         return array(
             'token' => $token,
+            'logout' => $request->getSession()->remove('logout'),
         );
     }
 

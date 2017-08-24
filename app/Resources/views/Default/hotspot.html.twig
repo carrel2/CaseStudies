@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% import _self as i %}
+
 {% block scripts %}
 	{{ parent() }}
 
@@ -69,9 +71,7 @@
 		{% set class = 'is-2by1' %}
 	{% endif %}
 
-	<div class="column is-full">
-		<h1 class="title">Physical Evaluation</h1>
-	</div>
+	{{ i.instructions() }}
 
 	<div class="column is-half-desktop">
 		<div id="hotspots" class="image {{ class }}">
@@ -109,3 +109,15 @@
 
 	{{ parent() }}
 {% endblock %}
+
+{% macro instructions() %}
+  <div class="column is-full">
+    <h1 class="title">Physical Evaluation</h1>
+
+    <div class="tile box">
+      <div class="content">
+        <p>Click the image to perform the physical evaluation</p>
+      </div>
+    </div>
+  </div>
+{% endmacro %}

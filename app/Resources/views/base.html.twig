@@ -3,7 +3,11 @@
 {% block userNav %}
   <a class="navbar-item is-hidden-touch" href="{{ path('default') }}">Home</a>
 
-  <div class="navbar-item has-dropdown is-hoverable">
+  {% if app.user is not null and app.user.hasResults %}
+    <a class="navbar-item" href="{{ path('results') }}">My results</a>
+  {% endif %}
+
+{#  <div class="navbar-item has-dropdown is-hoverable">
     <a class="navbar-link" href="#">Account</a>
 
     <div class="navbar-dropdown">
@@ -13,7 +17,7 @@
 
       <a class="navbar-item" href="{{ path('logout') }}">Logout</a>
     </div>
-  </div>
+  </div> #}
 {% endblock %}
 
 {% block adminNav %}

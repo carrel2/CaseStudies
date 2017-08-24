@@ -18,9 +18,7 @@ class TherapeuticsType extends AbstractType
 				'choice_label' => 'name',
 				'expanded' => true,
 				'multiple' => true,
-				'label_attr' => array(
-					'class' => 'title is-2',
-				),
+				'label' => false,
 				'choice_attr' => function(Medication $t, $key, $index) {
 					return ['class' => 'medication'];
 				},

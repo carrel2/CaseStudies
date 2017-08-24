@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% import _self as i %}
+
 {% block scripts %}
 	{{ parent() }}
 
@@ -11,26 +13,34 @@
 {% endblock %}
 
 {% block body %}
-	<div class="column is-hidden-desktop">
-		<h1 class="title">Instructions</h1>
-	</div>
+  {{ i.instructions("is-hidden-desktop") }}
 
-	<div class="column is-half-desktop">
-		{{ form_start(form) }}
-	    {% if case %}
-	      <div>You have a session in progress: <b>{{ case.title }}</b></div>
-	    {% else %}
-	      {{ form_row(form.title) }}
-	      {{ form_row(form.location) }}
+  <div class="column is-half-desktop">
+    {{ form_start(form) }}
+      {% if case %}
+        <div>You have a session in progress: <b>{{ case.title }}</b></div>
+      {% else %}
+        {{ form_row(form.title) }}
+        {{ form_row(form.location) }}
 
-	      <div id="case"></div>
-	    {% endif %}
+        <div id="case"></div>
+      {% endif %}
 
-	    {{ form_rest(form) }}
-	  {{ form_end(form) }}
-	</div>
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+  </div>
 
-	<div class="column is-hidden-touch has-text-centered">
-		<h1 class="title">Instructions</h1>
-	</div>
+  {{ i.instructions("is-hidden-touch has-text-centered") }}
 {% endblock %}
+
+{% macro instructions(class) %}
+  <div class="column {{ class }}">
+    <div class="tile box">
+      <div class="content">
+        <p>You can only work on one case at a time. Progress is saved after each step. Steps are linear, <b>you cannot go back to a previous step once you have moved on.</b></p>
+        <p>Abandoning a case deletes all progress. You can abandon a case at any time <b>(but be careful, this can't be undone!)</b>.</p>
+        <p>Choose a case study and a location to start.</p>
+      </div>
+    </div>
+  </div>
+{% endmacro %}
