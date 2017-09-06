@@ -37,6 +37,14 @@ class AdminController extends Controller
 	}
 
 	/**
+	 * @Route("/admin/guides/{guide}", name="guides")
+	 */
+	public function guideAction(Request $r, $guide)
+	{
+		return $this->render("Guides/{$guide}.html.twig");
+	}
+
+	/**
 	 * @Route("/admin/edit/case", name="editCase")
 	 */
 	public function editCaseAction(Request $r)

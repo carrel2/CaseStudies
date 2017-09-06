@@ -141,9 +141,9 @@ class HotSpotController extends Controller
 		$session = $r->getSession();
 		$diff = $r->request->get('explanation');
 
-		if( $diff || $moveOn ) {
+		if( $diff && $moveOn ) {
 			$session->set("differentials-{$this->getUser()->getCurrentDay()->getId()}", $diff);
-		} else {
+		} else if( !$moveOn ) {
 			$session->set('modalUp', true);
 
 			return $this->render('Ajax/differentials.html.twig');

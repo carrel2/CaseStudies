@@ -90,7 +90,7 @@ class DefaultController extends Controller
 		$user = $this->getUser();
 		$case = $user->getCaseStudy();
 
-		if( $session->remove('finished') )
+		if( $session->has('diagnosis-' . $user->getCurrentDay()->getId()) && $session->remove('finished') )
 		{
 			$results = new Results();
 

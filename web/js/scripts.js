@@ -83,10 +83,6 @@ function addButtonClickListener(e) {
 
 	holder.children('div:last-child').append('<button type="button" class="delete remove-button"></button>');
 
-	if( t == "hotspot" ) {
-		updateSelects(t);
-	}
-
 	addRemoveButtonClickListener();
 }
 
@@ -167,10 +163,10 @@ function moveSubmits() {
 }
 
 function updateSelects(type) {
-	$.get("/courses/cs/getAnimalInfo/" + $('#case_animal').val() + "/" + type, function(data, status) {
-		$('.collection select.' + type).each(function() {
-			$(this).html(data);
-		});
+	$('select.' + type).each(function() {
+		var v = $(this).find(':selected').val();
+
+		$('select.' + type + ' option[value="' + val + '"').addClass('is-hidden');
 	});
 }
 
