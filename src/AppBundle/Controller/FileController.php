@@ -25,7 +25,7 @@ class FileController extends Controller
 
     $form = $this->createFormBuilder()
       ->add('type', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
-        'choices' => array('Medication' => 'Medication', 'Test' => 'Test'),
+        'choices' => array('Diagnostic procedures' => 'Test', 'Therapeutic procedures' => 'Medication'),
         'choices_as_values' => true,
       ))
       ->add('file', 'Symfony\Component\Form\Extension\Core\Type\FileType', array(
@@ -76,7 +76,7 @@ class FileController extends Controller
             }
           }
         } catch( \PHPExcel_Exception $e ) {
-          $this->addFlash('success', "Imported $count ${type}s!");
+          $this->addFlash('success', "Imported $count " . ngettext($type == "Medication" ? "Therapeutic procedure" : "Diagnostic procedure",$type == "Medication" ? "Therapeutic procedures" : "Diagnostic procedures", $count) . "!");
         }
       }
       else {
@@ -92,7 +92,7 @@ class FileController extends Controller
               }
             }
 
-            $this->addFlash('success', "Imported $count ${type}s!");
+            $this->addFlash('success', "Imported $count " . ngettext($type == "Medication" ? "Therapeutic procedure" : "Diagnostic procedure",$type == "Medication" ? "Therapeutic procedures" : "Diagnostic procedures", $count) . "!");
           } catch( \PHPExcel_Exception $e ) {
             $this->addFlash('error', 'Invalid sheet number');
           }

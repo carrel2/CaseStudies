@@ -47,7 +47,7 @@ class UserDay
 
 	public function toArray()
 	{
-		$a = array("hotspotsInfo" => array(), "diagnostics" => array(), "therapeutics" => array());
+		$a = array("hotspotsInfo" => array(), "diagnostics" => array(), "therapeutics" => array(), "diagnosis" => "");
 
 		foreach($this->hotspotsInfo as $spot)
 		{

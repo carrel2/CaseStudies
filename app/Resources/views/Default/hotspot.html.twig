@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% import _self as i %}
+
 {% block scripts %}
 	{{ parent() }}
 
@@ -10,6 +12,14 @@
 			{% if app.session.get('modalUp', false) %}
 				modal();
 			{% endif %}
+
+			$(window).resize(function() {
+				{% for spot in animal.hotspots %}
+					$('area.hotspot[data-path="{{ spot.id }}"]').attr('coords', $('#hotspots').innerWidth() * {{ spot.x1|number_format(2) }} + ',' + $('#hotspots').innerHeight() * {{ spot.y1|number_format(2) }} + ',' + $('#hotspots').innerWidth() * {{ spot.x2|number_format(2) }} + ',' + $('#hotspots').innerHeight() * {{ spot.y2|number_format(2) }} );
+				{% endfor %}
+			});
+
+			$(window).resize();
 		});
 
 		function modal(event=null) {
@@ -61,13 +71,15 @@
 		{% set class = 'is-2by1' %}
 	{% endif %}
 
-	<div class="column is-half">
+	{{ i.instructions() }}
+
+	<div class="column is-half-desktop">
 		<div id="hotspots" class="image {{ class }}">
 			<img id="animal" src="{{ asset('images/' ~ animal.image) }}" usemap="#hotspots" />
 
 			<map name="hotspots">
 				{% for spot in animal.hotspots %}
-					<area class="hotspot" shape="rect" coords="{{ spot.x1 }},{{ spot.y1 }},{{ spot.x2 }},{{ spot.y2 }}" data-path="{{ spot.id }}">
+					<area class="hotspot" shape="rect" data-path="{{ spot.id }}">
 				{% endfor %}
 			</map>
 		</div>
@@ -97,3 +109,15 @@
 
 	{{ parent() }}
 {% endblock %}
+
+{% macro instructions() %}
+  <div class="column is-full">
+    <h1 class="title">Physical Evaluation</h1>
+
+    <div class="tile box">
+      <div class="content">
+        <p>Click the image to perform the physical evaluation</p>
+      </div>
+    </div>
+  </div>
+{% endmacro %}

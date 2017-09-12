@@ -37,6 +37,14 @@ class AdminController extends Controller
 	}
 
 	/**
+	 * @Route("/admin/guides/{guide}", name="guides")
+	 */
+	public function guideAction(Request $r, $guide)
+	{
+		return $this->render("Guides/{$guide}.html.twig");
+	}
+
+	/**
 	 * @Route("/admin/edit/case", name="editCase")
 	 */
 	public function editCaseAction(Request $r)
@@ -557,12 +565,27 @@ class AdminController extends Controller
 
 	// TODO: Remove for production
 	/**
-	 * @Route("/admin/clear/cache/{env}")
+	 * @Route("/admin/super")
 	 */
-	public function cacheAction($env="dev") {
-		$process = new Process("php /var/www/project/bin/console cache:clear --env={$env}");
-		$process->run();
+	public function superAction(Request $r) {
+		$form = $this->createFormBuilder()
+			->add('command', 'Symfony\Component\Form\Extension\Core\Type\TextType')
+			->add('submit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType')
+			->getForm();
 
-		return new Response($process->getOutput());
+		$form->handleRequest($r);
+
+		if($form->isSubmitted() && $form->isVAlid()) {
+			$command = $form->getData()['command'];
+
+			$process = new Process($command);
+			$process->run();
+
+			$this->addFlash('success', $process->getOutput());
+		}
+
+		return $this->render('admin.html.twig', array(
+			'form' => $form->createView(),
+		));
 	}
 }

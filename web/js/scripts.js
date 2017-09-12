@@ -23,7 +23,7 @@ $(function() {
 function updateCase() {
 	var id = $('#default_title').val();
 
-	$('#case').load('/getDescription/' + id);
+	$('#case').load('/courses/cs/getDescription/' + id);
 }
 
 function addRemoveButtonClickListener() {
@@ -83,10 +83,6 @@ function addButtonClickListener(e) {
 
 	holder.children('div:last-child').append('<button type="button" class="delete remove-button"></button>');
 
-	if( t == "hotspot" ) {
-		updateSelects(t);
-	}
-
 	addRemoveButtonClickListener();
 }
 
@@ -127,7 +123,7 @@ function updateAdminCase(id) {
 		}
 	});
 
-	$('#caseInfo').load('/getCase/' + id, function(responseTxt, statusTxt, xhr){
+	$('#caseInfo').load('/courses/cs/admin/getCase/' + id, function(responseTxt, statusTxt, xhr){
 		$('.collection > div').each(function(i, e) {
 			var t = $(this).parent().data('type');
 			$(this).append('<button type="button" class="delete remove-button"></button>');
@@ -146,7 +142,7 @@ function updateAdminCase(id) {
 function updateHotspots() {
 	$('.hotspot').each(function() {
 		$(this).on('click', function() {
-			$.get('/update/' + $(this).attr('data-path'), function(data, s) {
+			$.get('/courses/cs/update/' + $(this).attr('data-path'), function(data, s) {
 				$('#checked').append(data);
 			});
 		});
@@ -167,10 +163,10 @@ function moveSubmits() {
 }
 
 function updateSelects(type) {
-	$.get("/getAnimalInfo/" + $('#case_animal').val() + "/" + type, function(data, status) {
-		$('.collection select.' + type).each(function() {
-			$(this).html(data);
-		});
+	$('select.' + type).each(function() {
+		var v = $(this).find(':selected').val();
+
+		$('select.' + type + ' option[value="' + val + '"').addClass('is-hidden');
 	});
 }
 

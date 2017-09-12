@@ -33,6 +33,7 @@ class DefaultType extends AbstractType
 			} else {
 				$form->add('title', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
 						'class' => 'AppBundle:CaseStudy',
+						'label' => 'Case Study',
 						'choice_label' => 'title',
 						'attr' => array(
 							'onchange' => 'updateCase()',

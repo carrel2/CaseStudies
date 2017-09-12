@@ -28,9 +28,14 @@ class DayController extends Controller
 			return $this->redirectToRoute('default');
 		}
 
+		$finished = $session->get('finished');
+
 		$form = $this->createFormBuilder()
-			->add('diagnosis', 'Symfony\Component\Form\Extension\Core\Type\TextareaType')
+			->add('diagnosis', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', array(
+				'label' => $finished ? 'Diagnosis' : 'Tentative Diagnosis',
+			))
 			->add('finish', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
+				'label' => $finished ? 'Finish' : 'Submit',
 				'attr' => array(
 					'class' => 'button',
 				),
@@ -42,12 +47,14 @@ class DayController extends Controller
 		{
 			$diagnosis = $form->getData()['diagnosis'];
 
-			$session->set('diagnosis', $diagnosis);
+			$session->set('diagnosis-' . $user->getCurrentDay()->getId(), $diagnosis);
 
-			return $this->redirectToRoute('reset');
+			if( $finished ) {
+				return $this->redirectToRoute('reset');
+			}
+
+			return $this->redirectToRoute('nextDay');
 		}
-
-		$finished = $session->get('finished');
 
 		return $this->render('Default/review.html.twig', array(
 			'user' => $user,

@@ -40,8 +40,8 @@
 {% endblock %}
 
 {% block body %}
-  <div id="image" style="position: relative; height: 600px;">
-    <img id="animal" src="{{ asset('images/' ~ animal.image) }}" style="position: absolute" />
+  <div id="image" class="image">
+    <img id="animal" src="{{ asset('images/' ~ animal.image) }}" />
     {% for hotspot in animal.hotspots %}
       <div style="background: rgba(255,255,255,.4); position: absolute; top: {{ hotspot.y1 }}px; left: {{ hotspot.x1 }}px; height: {{ hotspot.height }}px; width: {{ hotspot.width }}px;"></div>
     {% endfor %}

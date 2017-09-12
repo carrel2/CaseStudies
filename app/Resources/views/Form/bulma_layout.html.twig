@@ -53,12 +53,14 @@
       {% for group_label,group in choices %}
         {%- if group is iterable -%}
           <label class="label title is-4"><u>{{ group_label|trans({}, translation_domain) }}</u></label>
-          <div class="field control is-grouped is-grouped-multiline">
+          <div class="field control columns is-multiline">
             {%- for key,choice in group -%}
+              <div class="column is-one-quarter-desktop is-half">
                 {{- form_widget(form[key], {
                     inline_choice: inline_choice|default(false),
                     translation_domain: choice_translation_domain,
                 }) -}}
+              </div>
             {%- endfor -%}
           </div>
         {% else %}

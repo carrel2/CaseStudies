@@ -29,6 +29,11 @@ class CaseStudy
 	private $description;
 
 	/**
+	* @ORM\Column(type="text")
+	*/
+	private $email;
+
+	/**
 	* @ORM\ManyToOne(targetEntity="Animal", inversedBy="cases")
 	* @ORM\JoinColumn(name="animal_id", referencedColumnName="id", onDelete="SET NULL")
 	*/
@@ -82,6 +87,18 @@ class CaseStudy
 	public function getDescription()
 	{
 		return $this->description;
+	}
+
+	public function setEmail($email)
+	{
+		$this->email = $email;
+
+		return $this;
+	}
+
+	public function getEmail()
+	{
+		return $this->email;
 	}
 
 	public function addDay(\AppBundle\Entity\Day $day)
