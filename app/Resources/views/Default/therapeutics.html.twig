@@ -1,6 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+  <div class="column is-full">
+    <h1 class="title">Therapeutics</h1>
+
+    <div class="tile box">
+      <div class="content">
+        <p>Select therapeutic procedures from the list below. <b>Once you submit this page, you cannot come back to change your selections!</b></p>
+      </div>
+    </div>
+  </div>
+
   <div class="column">
   	{{ form_start(form) }}
   	{{ form_widget(form) }}

@@ -6,7 +6,6 @@ $primary: $blue
 @import "bulma/sass/utilities/_all"
 @import "bulma/sass/base/_all"
 @import "bulma/sass/elements/_all"
-@import "bulma/sass/components/_all"
 
 $navbar-background-color: $primary
 $navbar-item-hover-color: $white
@@ -15,6 +14,7 @@ $navbar-item-color: $white
 $navbar-dropdown-background-color: $grey-dark
 $navbar-dropdown-item-hover-color: $white
 $navbar-dropdown-item-hover-background-color: $orange
+$navbar-dropdown-arrow: $orange
 
 @import "bulma/bulma"
 
@@ -26,3 +26,15 @@ $navbar-dropdown-item-hover-background-color: $orange
 
     img
       height: 100%
+
+.navbar-burger
+  span
+    background-color: $white
+  &:hover
+    background-color: #3c6491
+  &.is-active
+    span
+      background-color: $white
+
+area.hotspot
+  cursor: default

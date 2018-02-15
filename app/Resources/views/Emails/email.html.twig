@@ -1,6 +1,5 @@
-<div>New results are available for {{ app.user.username|capitalize }}.</div>
+<div>New results are available for {{ app.user.username }}.</div>
 
-<div>Case: {{ results.caseStudy }}</div>
-<div>Location: {{ results.location }}</div>
-<div>Diagnosis: {{ results.diagnosis }}</div>
+<div><b>Case:</b> {{ results.caseStudy }}</div>
+<div><b>Location:</b> {{ results.location }}</div>
 <a href="{{ absolute_url( path( 'editUserResults', {'id': app.user.id} ) ) }}">View results</a>

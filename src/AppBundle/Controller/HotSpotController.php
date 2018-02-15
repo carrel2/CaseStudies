@@ -13,7 +13,7 @@ use AppBundle\Entity\Animal;
 
 class HotSpotController extends Controller
 {
-	/*
+	/**
 	* @Route("/eval", name="evaluation")
 	* @Security("has_role('ROLE_USER')")
 	*/
@@ -74,7 +74,7 @@ class HotSpotController extends Controller
 	}
 
 	/**
-	* @Route("/addHotspot/{animal}/{name}/{x1}.{y1}.{x2}.{y2}", name="addHotspot")
+	* @Route("/addHotspot/{animal}/{name}/{x1}-{y1}-{x2}-{y2}", name="addHotspot")
 	*/
 	public function addHotspotAction(Animal $animal, $name, $x1, $y1, $x2, $y2)
 	{
@@ -141,9 +141,9 @@ class HotSpotController extends Controller
 		$session = $r->getSession();
 		$diff = $r->request->get('explanation');
 
-		if( $diff || $moveOn ) {
+		if( $diff && $moveOn ) {
 			$session->set("differentials-{$this->getUser()->getCurrentDay()->getId()}", $diff);
-		} else {
+		} else if( !$moveOn ) {
 			$session->set('modalUp', true);
 
 			return $this->render('Ajax/differentials.html.twig');

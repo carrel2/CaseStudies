@@ -21,8 +21,13 @@
       <div class="column">
         <nav class="navbar">
           <div class="navbar-brand">
-            <a class="navbar-item" href="#">
-              <img src="{# asset() #}" alt="Logo">
+            <a class="navbar-item" href="http://illinois.edu">
+              <img src="{{ asset('images/I_column.png') }}" alt="Logo">
+            </a>
+            <a class="navbar-item is-hidden-desktop" href="{{ path('default') }}">
+              <span class="icon is-small">
+                <i class="fa fa-home"></i>
+              </span>
             </a>
             <div class="navbar-burger burger">
               <span></span>
@@ -43,10 +48,10 @@
     <section class="section">
       <div class="columns">
         {% block flashes %}
-  			{% endblock %}
+        {% endblock %}
       </div>
 
-      <div class="columns is-multiline">
+      <div class="columns is-multiline is-desktop">
         {% block body %}{% endblock %}
       </div>
 
@@ -54,5 +59,13 @@
         {% block footer %}{% endblock %}
       </div>
     </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="content has-text-centered">
+          <p class="is-size-7-touch">©2017 University of Illinois College of Veterinary Medicine</p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

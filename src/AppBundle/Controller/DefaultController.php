@@ -88,13 +88,14 @@ class DefaultController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		$session = $r->getSession();
 		$user = $this->getUser();
+		$case = $user->getCaseStudy();
 
-		if( $session->has('diagnosis') && $session->remove('finished') )
+		if( $session->has('diagnosis-' . $user->getCurrentDay()->getId()) && $session->remove('finished') )
 		{
 			$results = new Results();
 
 			$user->addResult($results);
-			$results->setCaseStudy($user->getCaseStudy()->getTitle());
+			$results->setCaseStudy($case->getTitle());
 
 			foreach($user->getDays() as $key => $day)
 			{
@@ -114,6 +115,10 @@ class DefaultController extends Controller
 					$a[$key]["therapeutics"][$flash] = "No results available.";
 				}
 
+				if( $session->get('diagnosis-' . $id) ) {
+					$a[$key]["diagnosis"] = $session->remove('diagnosis-' . $id);
+				}
+
 				if( $session->get('differentials-' . $id) ) {
 					$a[$key]["differentials"] = $session->remove('differentials-' . $id);
 				}
@@ -121,15 +126,14 @@ class DefaultController extends Controller
 				$results->setResults($a);
 			}
 
-			$results->setDiagnosis($session->remove('diagnosis'));
 			$results->setLocation($user->getLocation());
 
 			$em->persist($results);
 
 			$message = \Swift_Message::newInstance()
 				->setSubject("Case Study results: {$user->getCaseStudy()->getTitle()}")
-				->setFrom($user->getEmail()) // TODO: consider what email(s) to send from
-				->setTo('vaulter82@gmail.com') // TODO: ->setTo(admin/professor)
+				->setFrom('casestudies@vetmed.illinois.edu')
+				->setTo($case->getEmail())
 				->setBody(
 					$this->renderView('Emails/email.html.twig', array(
 						'results' => $results,
@@ -159,9 +163,15 @@ class DefaultController extends Controller
 	{
 		$em = $this->getDoctrine()->getManager();
 
+		$uid = $result->getUser()->getId();
+
 		$em->remove($result);
 		$em->flush();
 
-		return $this->redirectToRoute('default');
+		$this->addFlash('success', 'Result removed');
+
+		return $this->redirectToRoute('editUserResults', array(
+			'id' => $uid,
+		));
 	}
 }

@@ -11,17 +11,13 @@ class LogoutHandler implements LogoutHandlerInterface
 {
   public function logout(Request $request, Response $response, TokenInterface $token)
   {
-    $session = $request->getSession();
+//    $session = $request->getSession();
 
-    $timedOut = $session->get('timed out');
+//    $page = $session->get('page');
+//    $session->invalidate();
 
-    $page = $session->get('page');
-    $session->invalidate();
+//    $session->set('page', $page);
 
-    $session->set('page', $page);
-
-    if( $timedOut ) {
-      $session->getFlashBag()->set('warning', 'Session timed out, please login again');
-    }
+//    $session->set('logout', true);
   }
 }

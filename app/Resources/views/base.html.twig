@@ -1,25 +1,17 @@
 {% extends 'layout.html.twig' %}
 
 {% block userNav %}
-  <a class="navbar-item" href="{{ path('default') }}">Home</a>
+  <a class="navbar-item is-hidden-touch" href="{{ path('default') }}">Home</a>
 
-  <div class="navbar-item has-dropdown is-hoverable">
-    <a class="navbar-link" href="{{ path('user') }}">Account</a>
-
-    <div class="navbar-dropdown">
-      {% if app.user is not null and app.user.hasResults %}
-        <a class="navbar-item" href="{{ path('results') }}">My results</a>
-      {% endif %}
-
-      <a class="navbar-item" href="{{ path('logout') }}">Logout</a>
-    </div>
-  </div>
+  {% if app.user is not null and app.user.hasResults %}
+    <a class="navbar-item" href="{{ path('results') }}">My results</a>
+  {% endif %}
 {% endblock %}
 
 {% block adminNav %}
   {% if is_granted('ROLE_ADMIN') %}
     <div class="navbar-item has-dropdown is-hoverable">
-      <a class="navbar-link" href="#">Admin</a>
+      <a class="navbar-link" href="javascript:void(0)">Admin</a>
 
       <div class="navbar-dropdown">
         <a class="navbar-item" href="{{ path('manageUsers') }}">Manage users</a>
@@ -30,6 +22,15 @@
         <a class="navbar-item" href="{{ path('import') }}">Import</a>
       </div>
     </div>
+
+    <div class="navbar-item has-dropdown is-hoverable">
+      <a class="navbar-link" href="javascript:void(0)">Guides</a>
+
+      <div class="navbar-dropdown">
+        <a class="navbar-item" href="{{ path('guides', {guide: "create-case"}) }}">Creating/editing cases</a>
+        <a class="navbar-item" href="{{ path('guides', {guide: "importing"}) }}">Importing</a>
+      </div>
+    </div>
   {% endif %}
 {% endblock %}
 
@@ -37,7 +38,7 @@
   {% for flash in app.session.flashBag.get('success') %}
     <div class="notification is-success">{{ flash }}</div>
   {% endfor %}
-  {% for flash in app.session.flashBag.get('warning') %}
+  {% for flash in app.session.flashBag.get('notice') %}
     <div class="notification is-warning">{{ flash }}</div>
   {% endfor %}
   {% for flash in app.session.flashBag.get('error') %}

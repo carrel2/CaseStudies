@@ -29,6 +29,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
 
         return array(
             'token' => $token,
+            'logout' => $request->getSession()->remove('logout'),
         );
     }
 
@@ -47,9 +48,8 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
           $user->setUsername($username);
 
           $this->em->persist($user);
+          $this->em->flush();
         }
-        $user->setRole('ROLE_ADMIN');
-        $this->em->flush();
 
         return $user;
     }

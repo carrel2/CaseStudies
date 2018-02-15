@@ -13,37 +13,6 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 class UserController extends Controller
 {
 	/**
-	 * @Route("/user", name="user")
-	 * @Security("has_role('ROLE_USER')")
-	 */
-	public function userAction(Request $r)
-	{
-		$user = $this->getUser();
-
-		$form = $this->createForm( 'AppBundle\Form\UserType', $user );
-
-		$form->handleRequest($r);
-
-		if( $form->isSubmitted() && $form->isValid() )
-		{
-			$em = $this->getDoctrine()->getManager();
-			$user = $form->getData();
-
-			try {
-				$em->flush();
-
-				$this->addFlash('success', 'Changes saved');
-			} catch( \Doctrine\ORM\ORMException $e ) {
-				$this->addFlash('error', 'Something went wrong, changes were not saved!');
-			}
-		}
-
-		return $this->render('Default/user.html.twig', array(
-			'form' => $form->createView(),
-		));
-	}
-
-	/**
 	 * @Route("/user/results", name="results")
 	 */
 	public function resultsAction(Request $r)

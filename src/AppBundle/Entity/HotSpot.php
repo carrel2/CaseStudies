@@ -29,22 +29,22 @@ class HotSpot
   private $name;
 
   /**
-   * @ORM\Column(type="integer")
+   * @ORM\Column(type="float")
    */
   private $x1;
 
   /**
-   * @ORM\Column(type="integer")
+   * @ORM\Column(type="float")
    */
   private $x2;
 
   /**
-   * @ORM\Column(type="integer")
+   * @ORM\Column(type="float")
    */
   private $y1;
 
   /**
-   * @ORM\Column(type="integer")
+   * @ORM\Column(type="float")
    */
   private $y2;
 

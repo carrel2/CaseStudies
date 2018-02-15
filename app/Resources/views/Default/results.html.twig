@@ -69,48 +69,64 @@
         {% endfor %}
 
         {% if user is defined and is_granted('ROLE_ADMIN') %}
-          <a href="/removeResult/{{ result.id }}" class="panel-block is-danger{% if not loop.first %} is-hidden{% endif %}" data-result="result-{{ result.id }}" onclick="return confirmDelete();">Remove</a>
+          <a href="/courses/cs/removeResult/{{ result.id }}" class="panel-block is-danger{% if not loop.first %} is-hidden{% endif %}" data-result="result-{{ result.id }}" onclick="return confirmDelete();">Remove</a>
         {% endif %}
       {% endfor %}
     </nav>
   </div>
 
-  <div class="column is-two-thirds">
+  <div class="column is-two-thirds-desktop">
     {% for result in results %}
-      <div id="details" {% if not loop.first %}class="is-hidden"{% endif %} data-result="result-{{ result.id }}">
-        <p><span class="title">Location:</span><span class="subtitle">{{ result.location }}</span></p>
-        <p><span class="title">Diagnosis:</span><span class="subtitle">{{ result.diagnosis }}</span></p>
+      <div id="details" class="box{% if not loop.first %} is-hidden{% endif %}" data-result="result-{{ result.id }}">
+        <h1 class="title">Location</h1><h2 class="subtitle">{{ result.location }}</h2>
+        <h1 class="title">Diagnosis</h1><h2 class="subtitle">{{ result.results|last.diagnosis }}</h2>
       </div>
 
       {% for day in result.results %}
         <div data-id="result-{{ result.id }}-day-{{ loop.index }}" class="box{% if not loop.first or not loop.parent.loop.first %} is-hidden{% endif %}">
           <div id="hotspots">
-            <p class="title">Physical exam results</p>
+            <p class="title">Physical examination results</p>
 
             {% for name, info in day.hotspotsInfo %}
               <div><em>{{ name }}: </em><span>{{ info|raw }}</span></div>
             {% endfor %}
 
             {% if day.differentials is defined %}
-              <p><span class="title">Differentials:</span> {{ day.differentials }}</p>
+              <p class="title">Differentials</p>
+
+              <div class="columns">
+                <div class="column">{{ day.differentials }}</div>
+              </div>
             {% endif %}
           </div>
 
           <div id="testResults">
             <p class="title">Diagnostic results</p>
 
-            {% for test, result in day.diagnostics %}
-              <div><em>{{ test }}: </em><span>{{ result|raw }}</span></div>
-            {% endfor %}
+            <div class="columns is-multiline">
+              {% for test, result in day.diagnostics %}
+                <div class="column is-3"><em>{{ test }}:</em></div><div class="column is-9 content">{{ result|raw }}</div>
+              {% endfor %}
+            </div>
           </div>
 
           <div id="medicationResults">
             <p class="title">Therapeutic results</p>
 
-            {% for medication, result in day.therapeutics %}
-              <div><em>{{ medication }}: </em><span>{{ result|raw }}</span></div>
-            {% endfor %}
+            <div class="columns is-multiline">
+              {% for medication, result in day.therapeutics %}
+                <div class="column is-3"><em>{{ medication }}:</em></div><div class="column is-9 content">{{ result|raw }}</div>
+              {% endfor %}
+            </div>
           </div>
+
+          {% if day.diagnosis is defined and not loop.last %}
+            <div id="diagnosis">
+              <p class="title">Tentative Diagnosis</p>
+
+              <div>{{ day.diagnosis }}</div>
+            </div>
+          {% endif %}
         </div>
       {% endfor %}
     {% endfor %}
