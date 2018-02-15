@@ -20,7 +20,7 @@ class TherapeuticsType extends AbstractType
 				'multiple' => true,
 				'label' => false,
 				'choice_attr' => function(Medication $t, $key, $index) {
-					return ['class' => 'medication'];
+					return ['class' => 'medication', 'data-cost' => $t->getCost()];
 				},
 				'group_by' => function($val, $key, $index) {
 					return $val->getGroup();

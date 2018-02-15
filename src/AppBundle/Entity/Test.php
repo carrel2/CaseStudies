@@ -39,6 +39,11 @@ class Test
 	private $cost;
 
 	/**
+	 * @ORM\Column(type="text", nullable=true)
+	 */
+	private $defaultResult;
+
+	/**
 	 * @ORM\OneToMany(targetEntity="TestResults", mappedBy="test")
 	 */
 	private $results;
@@ -52,6 +57,7 @@ class Test
 			$this->cost = $array["cost"] === null ? 0 : $array["cost"];
 			$this->dGroup = $array["group"] === null ? '' : $array["group"];
 			$this->waitTime = $array["wait time"] === null ? 0 : $array["wait time"];
+			$this->defaultResult = $array["default result"] === null ? '' : $array["default result"];
 		}
 	}
 
@@ -137,5 +143,15 @@ class Test
     public function getDGroup()
     {
         return $this->dGroup;
+    }
+
+    public function getDefaultResult() {
+        return $this->defaultResult;
+    }
+
+    public function setDefaultResult($defaultResult) {
+        $this->defaultResult = $defaultResult;
+
+        return $this;
     }
 }
