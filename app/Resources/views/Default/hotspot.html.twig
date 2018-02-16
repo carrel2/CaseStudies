@@ -15,10 +15,12 @@
 
 			$(window).resize(function() {
 				{% for spot in animal.hotspots %}
-					$('area.hotspot[data-path="{{ spot.id }}"]').attr('coords', $('#animal').innerWidth() * {{ spot.x1|number_format(2) }} + ',' + $('#animal').innerHeight() * {{ spot.y1|number_format(2) }} + ',' + $('#animal').innerWidth() * {{ spot.x2|number_format(2) }} + ',' + $('#animal').innerHeight() * {{ spot.y2|number_format(2) }} );
+					$('area.hotspot[data-path="{{ spot.id }}"]').attr('coords', $('#hotspots').innerWidth() * {{ spot.x1|number_format(2) }} + ',' + $('#hotspots').innerHeight() * {{ spot.y1|number_format(2) }} + ',' + $('#hotspots').innerWidth() * {{ spot.x2|number_format(2) }} + ',' + $('#hotspots').innerHeight() * {{ spot.y2|number_format(2) }} );
 				{% endfor %}
 			});
+		});
 
+		$('#hotspots').ready(function() {
 			$(window).resize();
 		});
 

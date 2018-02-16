@@ -68,17 +68,10 @@ class FileController extends Controller
 
             foreach ($reader as $row) {
               $row = array_change_key_case($row);
-              $obj = $em->getRepository("AppBundle:$type")->findOneByName($row['name']);
 
-              if( $row['name'] !== null && !$obj ) {
+              if( $row['name'] !== null && !$em->getRepository("AppBundle:$type")->findOneByName($row['name']) ) {
                 $count++;
                 $em->persist( new $class($row) );
-              } elseif( $row['name'] !== null && $obj ) {
-                $obj->setName($row['name']);
-                $row['cost'] !== null ? $obj->setCost($row['cost']) : '';
-                $row['group'] !== null ? $obj->setDGroup($row['group']) : '';
-                $row['wait time'] !== null ? $obj->setWaitTime($row['wait time']) : '';
-                $row['default result'] ? $obj->setDefaultResult($row['default result']) : '';
               }
             }
           }
@@ -92,17 +85,10 @@ class FileController extends Controller
 
             foreach ($reader as $row) {
               $row = array_change_key_case($row);
-              $obj = $em->getRepository("AppBundle:$type")->findOneByName($row['name']);
 
-              if( $row['name'] !== null && !$obj ) {
+              if( $row['name'] !== null && !$em->getRepository("AppBundle:$type")->findOneByName($row['name']) ) {
                 $count++;
                 $em->persist( new $class($row) );
-              } elseif( $row['name'] !== null && $obj ) {
-                $obj->setName($row['name']);
-                $row['cost'] !== null ? $obj->setCost($row['cost']) : '';
-                $row['group'] !== null ? $obj->setDGroup($row['group']) : '';
-                $row['wait time'] !== null ? $obj->setWaitTime($row['wait time']) : '';
-                $row['default result'] ? $obj->setDefaultResult($row['default result']) : '';
               }
             }
 

@@ -26,24 +26,6 @@ function updateCase() {
 	$('#case').load('/courses/cs/getDescription/' + id);
 }
 
-function addCheckboxListener() {
-	$('input[type=checkbox]').on('change', function() {
-		var cb = $(this);
-		var cost = $('#cost');
-
-		var currentCost = Number(cost.text());
-		var cbCost = Number(cb.attr('data-cost'));
-
-		var isChecked = cb.prop('checked');
-
-		if( isChecked ) {
-			cost.text((currentCost + cbCost).toFixed(2));
-		} else {
-			cost.text((currentCost - cbCost).toFixed(2));
-		}
-	});
-}
-
 function addRemoveButtonClickListener() {
 	$('.remove-button').each(function() {
 		$(this).off("click mouseout mouseover");

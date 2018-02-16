@@ -39,10 +39,3 @@ services:
     app.token_authenticator:
       class: AppBundle\Security\TokenAuthenticator
       arguments: ['@doctrine.orm.entity_manager']
-
-    twig.extension:
-        class: AppBundle\Twig\DoctrineExtension
-        arguments:
-            doctrine: '@doctrine'
-        tags:
-            - { name: twig.extension }

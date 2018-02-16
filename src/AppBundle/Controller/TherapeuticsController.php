@@ -40,7 +40,7 @@ class TherapeuticsController extends Controller
 				if( $results ) {
 					$user->getCurrentDay()->addMedication($results);
 				} else {
-					$this->addFlash('empty-therapeutic-results-' . $user->getCurrentDay()->getId(), $medication->getId());
+					$this->addFlash('empty-therapeutic-results-' . $user->getCurrentDay()->getId(), $medication->getName());
 				}
 			}
 

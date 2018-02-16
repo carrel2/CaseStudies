@@ -185,6 +185,15 @@ class AdminController extends Controller
 			$em = $this->getDoctrine()->getManager();
 			$user = $form->getData();
 
+			$plainPassword = $user->getPlainPassword();
+
+			if( strlen($plainPassword) > 6 )
+			{
+				$password = $this->get('security.password_encoder')
+					->encodePassword($user, $plainPassword);
+				$user->setPassword($password);
+			}
+
 			try {
 				$em->flush();
 
@@ -561,9 +570,6 @@ class AdminController extends Controller
 	public function superAction(Request $r) {
 		$form = $this->createFormBuilder()
 			->add('command', 'Symfony\Component\Form\Extension\Core\Type\TextType')
-			->add('file', 'Symfony\Component\Form\Extension\Core\Type\FileType', array(
-				'required' => false,
-			))
 			->add('submit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType')
 			->getForm();
 
@@ -571,11 +577,6 @@ class AdminController extends Controller
 
 		if($form->isSubmitted() && $form->isVAlid()) {
 			$command = $form->getData()['command'];
-			$file = $form->getData()['file'];
-
-			if( $file ) {
-				$file->move($this->getParameter('image_directory'), $file->getClientOriginalName());
-			}
 
 			$process = new Process($command);
 			$process->run();

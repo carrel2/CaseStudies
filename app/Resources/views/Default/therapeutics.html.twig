@@ -1,15 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block scripts %}
-  {{ parent() }}
-
-  <script>
-    $(function() {
-      addCheckboxListener();
-    });
-  </script>
-{% endblock %}
-
 {% block body %}
   <div class="column is-full">
     <h1 class="title">Therapeutics</h1>
@@ -25,10 +15,6 @@
   	{{ form_start(form) }}
   	{{ form_widget(form) }}
   	{{ form_end(form) }}
-  </div>
-
-  <div class="tile box" style="position: fixed; bottom: 40px; right: 10px">
-    <b>Total cost: $<span id="cost">0</span></b>
   </div>
 {% endblock %}
 

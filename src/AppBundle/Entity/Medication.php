@@ -39,11 +39,6 @@ class Medication
 	private $cost;
 
 	/**
-	 * @ORM\Column(type="text", nullable=true)
-	 */
-	private $defaultResult;
-
-	/**
 	 * @ORM\OneToMany(targetEntity="MedicationResults", mappedBy="medication")
 	 */
 	private $results;
@@ -57,7 +52,6 @@ class Medication
 			$this->cost = $array["cost"] === null ? 0 : $array["cost"];
 			$this->tGroup = $array["group"] === null ? '' : $array["group"];
 			$this->waitTime = $array["wait time"] === null ? 0 : $array["wait time"];
-			$this->defaultResult = $array["default result"] === null ? '' : $array["default result"];
 		}
 	}
 
@@ -143,15 +137,5 @@ class Medication
     public function getTGroup()
     {
         return $this->tGroup;
-    }
-
-    public function getDefaultResult() {
-        return $this->defaultResult;
-    }
-
-    public function setDefaultResult($defaultResult) {
-        $this->defaultResult = $defaultResult;
-
-        return $this;
     }
 }

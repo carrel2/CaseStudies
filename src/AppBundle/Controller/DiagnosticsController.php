@@ -37,8 +37,6 @@ class DiagnosticsController extends Controller
 
 			$day = $user->getCaseStudy()->getDays()[count($user->getDays()) - 1];
 
-			$dCost = 0;
-
 			foreach( $tests as $test )
 			{
 				$results = $day->getResultByTest($test);
@@ -46,13 +44,9 @@ class DiagnosticsController extends Controller
 				{
 					$user->getCurrentDay()->addTest($results);
 				} else {
-					$this->addFlash('empty-diagnostic-results-' . $user->getCurrentDay()->getId(), $test->getId());
-
-					$dCost += $test->getCost();
+					$this->addFlash('empty-diagnostic-results-' . $user->getCurrentDay()->getId(), $test->getName());
 				}
 			}
-
-			$this->addFlash('diagnostic-cost-' . $user->getCurrentDay()->getId(), $dCost);
 
 			$em->flush();
 
