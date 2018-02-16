@@ -19,7 +19,9 @@
 				{% endfor %}
 			});
 
-			$(window).resize();
+			$('#animal').ready(function() {
+				$(window).resize();
+			});
 		});
 
 		function modal(event=null) {
