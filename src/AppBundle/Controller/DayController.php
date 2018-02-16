@@ -73,7 +73,6 @@ class DayController extends Controller
 
 		if( count($case->getDays()) == count($user->getDays())) {
 			$r->getSession()->set('finished', true);
-			$this->addFlash('complete', 'Finish message.');
 		}
 
 		return $this->redirectToRoute('review');

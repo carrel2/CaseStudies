@@ -26,6 +26,7 @@ class DayType extends AbstractType
 				'allow_delete' => true,
 				'by_reference' => false,
 				'prototype_name' => '__hotspot__',
+				'label' => 'Hotspots',
 				'attr' => array(
 					'class' => 'collection hotspots',
 					'data-type' => 'hotspot'
@@ -46,6 +47,7 @@ class DayType extends AbstractType
 				'allow_delete' => true,
 				'by_reference' => false,
 				'prototype_name' => '__diagnostic-result__',
+				'label' => 'Diagnostics',
 				'attr' => array(
 					'class' => 'collection tests',
 					'data-type' => 'diagnostic result'
@@ -66,6 +68,7 @@ class DayType extends AbstractType
 				'allow_delete' => true,
 				'by_reference' => false,
 				'prototype_name' => '__therapeutic-result__',
+				'label' => 'Therapeutics',
 				'attr' => array(
 					'class' => 'collection medications',
 					'data-type' => 'therapeutic result'

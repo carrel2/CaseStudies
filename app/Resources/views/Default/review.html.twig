@@ -78,18 +78,22 @@
         <div class="columns is-multiline">
           {% for testResult in day.tests %}
             {% if testResult.waitTime and ( elapsed - testResult.waitTime == 0 or testResult.waitTime < elapsed ) %}
-              <div class="column is-3">{{ elapsed - testResult.waitTime == 0 ? '<span class="tag is-success">New!</span>' : '' }}<em>{{ testResult.test.name }}:</em></div><div class="column is-9 content"><span class="info"> {{ testResult.results|raw }}</span></div>
+              <div class="column is-3">{{ elapsed - testResult.waitTime == 0 ? '<span class="tag is-success">New!</span>' : '' }}<em>{{ testResult.test.name }} (${{ testResult.test.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ testResult.results|raw }}</span></div>
             {% elseif testResult.test.waitTime == 0 or testResult.test.waitTime < elapsed %}
-              <div class="column is-3">{{ elapsed - testResult.test.waitTime == 0 ? '<span class="tag is-success">New!</span>' : '' }}<em>{{ testResult.test.name }}:</em></div><div class="column is-9 content"><span class="info"> {{ testResult.results|raw }}</span></div>
+              <div class="column is-3">{{ elapsed - testResult.test.waitTime == 0 ? '<span class="tag is-success">New!</span>' : '' }}<em>{{ testResult.test.name }} (${{ testResult.test.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ testResult.results|raw }}</span></div>
             {% elseif finished %}
-              <div class="column is-3"><em>{{ testResult.test.name }}:</em></div><div class="column is-9 content"><span class="info">{{ testResult.results|raw }}</span></div>
+              <div class="column is-3"><em>{{ testResult.test.name }} (${{ testResult.test.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info">{{ testResult.results|raw }}</span></div>
             {% else %}
               <div class="column is-full"><span class="tag is-info">Pending</span><em>{{ testResult.test.name }}:</em><span> ...</span></div>
             {% endif %}
           {% endfor %}
 
           {% for flash in app.session.flashBag.peek('empty-diagnostic-results-' ~ day.id) %}
-            <div class="column is-full"><em>{{ flash }}:</em> No results available</div>
+            {% set dFlash = find(flash, "AppBundle:Test") %}
+
+            {% if flash is not empty %}
+              <div class="column is-full"><em>{{ dFlash.name }} (${{ dFlash.cost|number_format(2) }}):</em> {{ dFlash.defaultResult }}</div>
+            {% endif %}
           {% endfor %}
         </div>
 
@@ -98,22 +102,60 @@
         <div class="columns is-multiline">
           {% for medResult in day.medications %}
             {% if medResult.waitTime and ( elapsed - medResult.waitTime == 0 or medResult.waitTime < elapsed ) %}
-              <div class="column is-3">{{ elapsed - medResult.waitTime == 0 ? '<span class="tag is-success">New!</span>' : '' }}<em>{{ medResult.medication.name }}:</em></div><div class="column is-9 content"><span class="info"> {{ medResult.results|raw }}</span></div>
+              <div class="column is-3">{{ elapsed - medResult.waitTime == 0 ? '<span class="tag is-success">New!</span>' : '' }}<em>{{ medResult.medication.name }} (${{ medResult.medication.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ medResult.results|raw }}</span></div>
             {% elseif elapsed - medResult.medication.waitTime == 0 or medResult.medication.waitTime < elapsed %}
-              <div class="column is-3">{{ elapsed - medResult.medication.waitTime == 0 ? '<span class="tag is-success">New!</span>' : '' }}<em>{{ medResult.medication.name }}:</em></div><div class="column is-9 content"><span class="info"> {{ medResult.results|raw }}</span></div>
+              <div class="column is-3">{{ elapsed - medResult.medication.waitTime == 0 ? '<span class="tag is-success">New!</span>' : '' }}<em>{{ medResult.medication.name }} (${{ medResult.medication.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ medResult.results|raw }}</span></div>
             {% elseif finished %}
-              <div class="column is-3"><em>{{ medResult.medication.name }}:</em></div><div class="column is-9 content"><span class="info"> {{ medResult.results|raw }}</span></div>
+              <div class="column is-3"><em>{{ medResult.medication.name }} (${{ medResult.medication.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ medResult.results|raw }}</span></div>
             {% else %}
               <div class="column is-full"><span class="tag is-info">Pending</span><em>{{ medResult.medication.name }}:</em><span> ...</span></div>
             {% endif %}
           {% endfor %}
 
           {% for flash in app.session.flashBag.peek('empty-therapeutic-results-' ~ day.id) %}
-            <div class="column is-full"><em>{{ flash }}:</em> No results available</div>
+            {% set tFlash = find(flash, "AppBundle:Medication") %}
+
+            {% if flash is not empty %}
+              <div class="column is-full"><em>{{ tFlash.name }} (${{ tFlash.cost|number_format(2) }}):</em> {{ tFlash.defaultResult }}</div>
+            {% endif %}
           {% endfor %}
         </div>
       </div>
     {% endfor %}
+  </div>
+
+  <div class="column is-offset-one-third-desktop">
+    <h2 class="title is-2">Cost breakdown</h2>
+
+    {% set totalCost = 0 %}
+
+    {% for day in user.days %}
+      {% set testCost = 0 %}
+      {% set medCost = 0 %}
+
+      <h4 class="subtitle is-4">Day {{ loop.index }}</h4> 
+
+        {% for testResult in day.tests %}
+          {% set testCost = testCost + testResult.test.cost %}
+        {% endfor %}
+
+      {% set testCost = testCost + app.session.flashBag.peek('diagnostic-cost-' ~ day.id)|first %}
+
+      <div>Diagnostic cost: ${{ testCost }}</div>
+
+        {% for medResult in day.medications %}
+          {% set medCost = medCost + medResult.medication.cost %}
+        {% endfor %}
+
+      {% set medCost = medCost + app.session.flashBag.peek('therapeutic-cost-' ~ day.id)|first %}
+
+      <div>Therapeutic cost: ${{ medCost }}</div>
+
+      {% set totalCost = totalCost + testCost + medCost %}
+    {% endfor %}
+
+    <h4 class="subtitle is-4">Total Cost: ${{ totalCost }}</h4>
+
   </div>
 {% endblock %}
 

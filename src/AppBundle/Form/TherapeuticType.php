@@ -27,6 +27,9 @@ class TherapeuticType extends AbstractType
         'required' => false,
         'empty_data' => 0,
       ))
+      ->add('defaultResult', null, array(
+        'required' => false,
+      ))
       ->add('submit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
         'attr' => array('class' => 'is-success'),
       ));

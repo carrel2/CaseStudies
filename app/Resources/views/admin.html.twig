@@ -2,6 +2,10 @@
 
 {% block body %}
 	{% if form %}
+		{% if form.vars.value.username is defined %}
+			<div class="column is-full"><h1 class="title">{{ form.vars.value.username }}</h1></div>
+		{% endif %}
+
 		{{ form_start(form, {'attr': {'id': 'admin_form'}} ) }}
 
 				{{ form_widget(form) }}
