@@ -12,13 +12,11 @@ $(function() {
 		delay: 100
 	});
 
-	$(window).resize(function() {
-		if( $(window).height() > $('body').height() ) {
-			$('footer.footer').css({"position":"absolute","bottom":"0","right":"0","left":"0"});
-		} else {
-			$('footer.footer').css("position", "initial");
-		}
-	});
+	if( $(window).height() > $('body').height() ) {
+		$('footer.footer').css({"position":"absolute","bottom":"0","right":"0","left":"0"});
+	} else {
+		$('footer.footer').css("position", "initial");
+	}
 
 	var file = document.querySelectorAll('input[type=file]')[0];
 	file.onchange = function(){
