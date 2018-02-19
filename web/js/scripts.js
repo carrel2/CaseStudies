@@ -14,9 +14,9 @@ $(function() {
 
 	$(window).resize(function() {
 		if( $(window).height() > $('body').height() ) {
-			$('#footer').css({"position":"absolute","bottom":"0","right":"0","left":"0"});
+			$('footer.footer').css({"position":"absolute","bottom":"0","right":"0","left":"0"});
 		} else {
-			$('#footer').css("position", "initial");
+			$('footer.footer').css("position", "initial");
 		}
 	});
 
