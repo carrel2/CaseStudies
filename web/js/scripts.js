@@ -12,18 +12,14 @@ $(function() {
 		delay: 100
 	});
 
-	if( $(window).height() > $('body').height() ) {
-		$('footer.footer').css({"position":"absolute","bottom":"0","right":"0","left":"0"});
-	} else {
-		$('footer.footer').css("position", "initial");
-	}
-
 	var file = document.querySelectorAll('input[type=file]')[0];
 	file.onchange = function(){
 		if( file.files.length > 0 ) {
 			document.getElementById('filename').innerHTML = file.files[0].name;
 		}
 	}
+
+	moveFooter();
 })
 
 function updateCase() {
@@ -158,6 +154,7 @@ function updateAdminCase(id) {
 		});
 
 		moveSubmits();
+		moveFooter();
 
 		addRemoveButtonClickListener();
 	});
@@ -168,6 +165,8 @@ function updateHotspots() {
 		$(this).on('click', function() {
 			$.get('/courses/cs/update/' + $(this).attr('data-path'), function(data, s) {
 				$('#checked').append(data);
+
+				moveFooter();
 			});
 		});
 	});
@@ -183,6 +182,14 @@ function moveSubmits() {
 		});
 	} else {
 		$('#caseInfo button[type=submit].button').remove();
+	}
+}
+
+function moveFooter() {
+	if( $(window).height() > $('body').height() ) {
+		$('footer.footer').css({"position":"absolute","bottom":"0","right":"0","left":"0"});
+	} else {
+		$('footer.footer').css("position", "initial");
 	}
 }
 
