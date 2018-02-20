@@ -25,7 +25,9 @@ $(function() {
 function updateCase() {
 	var id = $('#default_title').val();
 
-	$('#case').load('/courses/cs/getDescription/' + id);
+	$('#case').load('/courses/cs/getDescription/' + id, function() {
+		moveFooter();
+	});
 }
 
 function addCheckboxListener() {
