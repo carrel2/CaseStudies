@@ -1,27 +1,5 @@
 var stack = [];
 
-$(function() {
-	$('.navbar-burger').on('click', function() {
-		$(this).toggleClass('is-active');
-		$('.navbar-menu').toggleClass('is-active');
-	});
-
-	$('.tooltip').tooltipster({
-		theme: 'tooltipster-borderless',
-		side: 'right',
-		delay: 100
-	});
-
-	var file = document.querySelectorAll('input[type=file]')[0];
-	file.onchange = function(){
-		if( file.files.length > 0 ) {
-			document.getElementById('filename').innerHTML = file.files[0].name;
-		}
-	}
-
-	moveFooter();
-});
-
 function updateCase() {
 	var id = $('#default_title').val();
 
@@ -206,3 +184,25 @@ function updateSelects(type) {
 function confirmDelete() {
 	return confirm("This action cannot be undone!\n\nPress 'Ok' to continue.");
 }
+
+$(function() {
+	$('.navbar-burger').on('click', function() {
+		$(this).toggleClass('is-active');
+		$('.navbar-menu').toggleClass('is-active');
+	});
+
+	$('.tooltip').tooltipster({
+		theme: 'tooltipster-borderless',
+		side: 'right',
+		delay: 100
+	});
+
+	var file = document.querySelectorAll('input[type=file]')[0];
+	file.onchange = function(){
+		if( file.files.length > 0 ) {
+			document.getElementById('filename').innerHTML = file.files[0].name;
+		}
+	}
+
+	moveFooter();
+});
