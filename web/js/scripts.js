@@ -20,7 +20,7 @@ $(function() {
 	}
 
 	moveFooter();
-})
+});
 
 function updateCase() {
 	var id = $('#default_title').val();
