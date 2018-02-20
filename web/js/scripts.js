@@ -197,11 +197,15 @@ $(function() {
 		delay: 100
 	});
 
-	var file = document.querySelectorAll('input[type=file]')[0];
-	file.onchange = function(){
-		if( file.files.length > 0 ) {
-			document.getElementById('filename').innerHTML = file.files[0].name;
+	try {
+		var file = document.querySelectorAll('input[type=file]')[0];
+		file.onchange = function(){
+			if( file.files.length > 0 ) {
+				document.getElementById('filename').innerHTML = file.files[0].name;
+			}
 		}
+	} catch (e) {
+		console.log("No file inputs found.");
 	}
 
 	moveFooter();
