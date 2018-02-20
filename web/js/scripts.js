@@ -205,7 +205,7 @@ $(function() {
 			}
 		}
 	} catch (e) {
-		console.log("No file inputs found.");
+		console.info("No file inputs found.");
 	}
 
 	moveFooter();
