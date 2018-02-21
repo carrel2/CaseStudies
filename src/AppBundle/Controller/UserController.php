@@ -24,8 +24,4 @@ class UserController extends Controller
 			'results' => $results,
 		));
 	}
-
-	public function logoutAction(Request $r) {
-		return;
-	}
 }

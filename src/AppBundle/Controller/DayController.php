@@ -64,21 +64,6 @@ class DayController extends Controller
 	}
 
 	/**
-	 * @Route("/logic", name="logic")
-	 */
-	public function logicAction(Request $r)
-	{
-		$user = $this->getUser();
-		$case = $user->getCaseStudy();
-
-		if( count($case->getDays()) == count($user->getDays())) {
-			$r->getSession()->set('finished', true);
-		}
-
-		return $this->redirectToRoute('review');
-	}
-
-	/**
 	 * @Route("/nextDay", name="nextDay")
 	 * @Security("has_role('ROLE_USER')")
 	 */

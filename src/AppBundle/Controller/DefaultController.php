@@ -23,12 +23,6 @@ class DefaultController extends Controller
 	{
 		$session = $r->getSession();
 
-		// if (time() - $session->getMetadataBag()->getLastUsed() > $this->getParameter('sessionMaxLifetime')) {
-		// 	$session->set('timed out', true);
-		//
-    // 	return $this->redirectToRoute('logout');
-		// }
-
 		$user = $this->getUser();
 		$case = $user->getCaseStudy();
 
