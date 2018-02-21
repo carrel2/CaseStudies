@@ -166,7 +166,7 @@ function moveSubmits() {
 }
 
 function moveFooter() {
-	if( $(window).height() > $('body').height() ) {
+	if( $(window).height() > $('body').height() + $('footer.footer').height() ) {
 		$('footer.footer').css({"position":"absolute","bottom":"0","right":"0","left":"0"});
 	} else {
 		$('footer.footer').css("position", "initial");
