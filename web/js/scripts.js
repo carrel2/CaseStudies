@@ -204,9 +204,7 @@ $(function() {
 				document.getElementById('filename').innerHTML = file.files[0].name;
 			}
 		}
-	} catch (e) {
-		console.info("No file inputs found.");
-	}
+	} catch (e) {}
 
 	moveFooter();
 });
