@@ -208,7 +208,7 @@ $(function() {
 
 	if( $('img').length != 0 ) {
 		$('img').on('ready', moveFooter);
-	} else {
-		moveFooter();
 	}
+	
+	moveFooter();
 });
