@@ -166,7 +166,7 @@ function moveSubmits() {
 }
 
 function moveFooter() {
-	if( $(window).height() > $('body').height() + $('footer.footer').height() ) {
+	if( $(window).height() > $('body').height() ) {
 		$('footer.footer').css({"position":"absolute","bottom":"0","right":"0","left":"0"});
 	} else {
 		$('footer.footer').css("position", "initial");
@@ -206,5 +206,9 @@ $(function() {
 		}
 	} catch (e) {}
 
-	moveFooter();
+	if( $('img').length != 0 ) {
+		$('img').on('ready', moveFooter);
+	} else {
+		moveFooter();
+	}
 });
