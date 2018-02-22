@@ -4,6 +4,10 @@ function updateCase() {
 	var id = $('#default_title').val();
 
 	$('#case').load('/courses/cs/getDescription/' + id, function() {
+		if( $('img').length ) {
+			$('img').on('ready', moveFooter);
+		}
+		
 		moveFooter();
 	});
 }
@@ -133,6 +137,10 @@ function updateAdminCase(id) {
 			$(this).text( "Day " + ( 1 + parseInt($(this).text()) ) );
 		});
 
+		if( $('img').length ) {
+			$('img').on('ready', moveFooter);
+		}
+
 		moveSubmits();
 		moveFooter();
 
@@ -145,6 +153,10 @@ function updateHotspots() {
 		$(this).on('click', function() {
 			$.get('/courses/cs/update/' + $(this).attr('data-path'), function(data, s) {
 				$('#checked').append(data);
+
+				if( $('img').length ) {
+					$('img').on('ready', moveFooter);
+				}
 
 				moveFooter();
 			});
@@ -206,9 +218,9 @@ $(function() {
 		}
 	} catch (e) {}
 
-	if( $('img').length != 0 ) {
+	if( $('img').length ) {
 		$('img').on('ready', moveFooter);
 	}
-	
+
 	moveFooter();
 });
