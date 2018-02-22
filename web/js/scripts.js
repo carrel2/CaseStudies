@@ -6,9 +6,9 @@ function updateCase() {
 	$('#case').load('/courses/cs/getDescription/' + id, function() {
 		if( $('img').length ) {
 			$('img').on('ready', moveFooter);
+		} else {
+			moveFooter();
 		}
-		
-		moveFooter();
 	});
 }
 
@@ -139,10 +139,11 @@ function updateAdminCase(id) {
 
 		if( $('img').length ) {
 			$('img').on('ready', moveFooter);
+		} else {
+			moveFooter();
 		}
 
 		moveSubmits();
-		moveFooter();
 
 		addRemoveButtonClickListener();
 	});
@@ -156,9 +157,9 @@ function updateHotspots() {
 
 				if( $('img').length ) {
 					$('img').on('ready', moveFooter);
+				} else {
+					moveFooter();
 				}
-
-				moveFooter();
 			});
 		});
 	});
@@ -220,7 +221,7 @@ $(function() {
 
 	if( $('img').length ) {
 		$('img').on('ready', moveFooter);
+	} else {
+		moveFooter();
 	}
-
-	moveFooter();
 });
