@@ -40,15 +40,16 @@ class DefaultController extends Controller
 				$case->addUser($user);
 				$user->addDay(new UserDay());
 				$user->setLocation($form->getData()['location']);
+				$user->setCurrentProgress("evaluation");
 
 				$em->flush();
 
-				$session->set('page', 'evaluation');
+				//$session->set('page', 'evaluation');
 			} else if ( $form->get('abandon')->isClicked() ) {
 				return $this->redirectToRoute('reset');
 			}
 
-			$route = $session->get('page');
+			$route = $user->getCurrentProgress();
 
 			if( $route == "" ) {
 				$route = "evaluation";
@@ -144,7 +145,8 @@ class DefaultController extends Controller
 
 		$session->clear();
 
-		$user->setCaseStudy(null);
+		$user->setCaseStudy();
+		$user->setCurrentProgress();
 		$user->removeDays();
 
 		$session->getFlashBag()->clear();

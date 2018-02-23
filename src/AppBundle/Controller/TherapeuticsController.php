@@ -17,9 +17,9 @@ class TherapeuticsController extends Controller
 	public function showPageAction(Request $r)
 	{
 		$user = $this->getUser();
-		$session = $r->getSession();
+		//$session = $r->getSession();
 
-		if( !$user->getIsActive() || $session->get('page') != 'therapeutics' ) {
+		if( !$user->getIsActive() || $user->getCurrentProgress() != 'therapeutics' ) {
 			return $this->redirectToRoute('default');
 		}
 
@@ -46,7 +46,7 @@ class TherapeuticsController extends Controller
 
 			$em->flush();
 
-			$session->set('page', 'review');
+			$user->setCurrentProgress('review');
 
 			return $this->redirectToRoute('logic');
 		}

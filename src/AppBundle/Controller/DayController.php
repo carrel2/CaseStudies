@@ -28,7 +28,7 @@ class DayController extends Controller
 			return $this->redirectToRoute('default');
 		}
 
-		$finished = $session->get('finished');
+		//$finished = $session->get('finished');
 
 		$form = $this->createFormBuilder()
 			->add('diagnosis', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', array(
@@ -58,7 +58,7 @@ class DayController extends Controller
 
 		return $this->render('Default/review.html.twig', array(
 			'user' => $user,
-			'finished' => $finished,
+			//'finished' => $finished,
 			'form' => $form->createView(),
 		));
 	}
@@ -76,7 +76,8 @@ class DayController extends Controller
 
 		$em->flush();
 
-		$r->getSession()->set('page', 'evaluation');
+		$user->setCurrentProgress('evaluation');
+		//$r->getSession()->set('page', 'evaluation');
 
 		return $this->redirectToRoute('evaluation');
 	}

@@ -50,6 +50,11 @@ class User implements UserInterface, \Serializable
 	private $results;
 
 	/**
+	 * @ORM\Column(type="string", length=12)
+	 */
+  private $currentProgress;
+
+	/**
 	* @ORM\Column(name="is_active", type="boolean")
 	*/
 	private $isActive;
@@ -58,6 +63,7 @@ class User implements UserInterface, \Serializable
 	{
 		$this->days = new ArrayCollection();
 		$this->results = new ArrayCollection();
+		$this->currentProgress = "";
 		$this->isActive = false;
 		$this->role = 'ROLE_USER';
 	}
@@ -141,6 +147,18 @@ class User implements UserInterface, \Serializable
 	public function getCurrentDay()
 	{
 		return $this->days->last();
+	}
+
+	public function setCurrentProgress($progress = "")
+	{
+		$this->currentProgress = $this->isActive ? $progress : "";
+
+		return $this;
+	}
+
+	public function getCurrentProgress()
+	{
+		return $this->getCurrentProgress;
 	}
 
 	public function setIsActive($isActive)

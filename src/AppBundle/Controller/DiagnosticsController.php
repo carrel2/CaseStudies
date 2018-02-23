@@ -18,13 +18,13 @@ class DiagnosticsController extends Controller
 	public function showPage(Request $r)
 	{
 		$user = $this->getUser();
-		$session = $r->getSession();
+		//$session = $r->getSession();
 
-		if( !$user->getIsActive() || !in_array($session->get('page'), ['evaluation', 'diagnostics']) ) {
+		if( !$user->getIsActive() || !in_array($user->getCurrentProgress(), ['evaluation', 'diagnostics']) ) {
 			return $this->redirectToRoute('default');
 		}
 
-		$session->set('page', 'diagnostics');
+		$user->setCurrentProgress('diagnostics');
 
 		$form = $this->createForm( 'AppBundle\Form\DiagnosticsType' );
 
@@ -56,7 +56,7 @@ class DiagnosticsController extends Controller
 
 			$em->flush();
 
-			$session->set('page', 'therapeutics');
+			$user->setCurrentProgress('therapeutics');
 
 			if( $user->getLocation() == "Farm" )
 			{
