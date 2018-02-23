@@ -158,7 +158,7 @@ class User implements UserInterface, \Serializable
 
 	public function getCurrentProgress()
 	{
-		return $this->getCurrentProgress;
+		return $this->currentProgress;
 	}
 
 	public function setIsActive($isActive)

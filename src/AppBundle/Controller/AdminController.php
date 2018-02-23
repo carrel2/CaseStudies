@@ -569,7 +569,7 @@ class AdminController extends Controller
 
 		$form->handleRequest($r);
 
-		if($form->isSubmitted() && $form->isVAlid()) {
+		if($form->isSubmitted() && $form->isValid()) {
 			$command = $form->getData()['command'];
 			$file = $form->getData()['file'];
 
