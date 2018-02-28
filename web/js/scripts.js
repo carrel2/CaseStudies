@@ -4,11 +4,13 @@ function updateCase() {
 	var id = $('#default_title').val();
 
 	$('#case').load('/courses/cs/getDescription/' + id, function() {
-		if( $('img').not('#logo').length ) {
-			$('img').not('#logo').on('ready', moveFooter);
-		} else {
-			moveFooter();
-		}
+		$("body").imagesLoaded().always(moveFooter);
+
+//		if( $('img').not('#logo').length ) {
+//			$('img').not('#logo').on('ready', moveFooter);
+//		} else {
+//			moveFooter();
+//		}
 	});
 }
 
@@ -137,11 +139,13 @@ function updateAdminCase(id) {
 			$(this).text( "Day " + ( 1 + parseInt($(this).text()) ) );
 		});
 
-		if( $('img').not('#logo').length ) {
-			$('img').not('#logo').on('ready', moveFooter);
-		} else {
-			moveFooter();
-		}
+		$("body").imagesLoaded().always(moveFooter);
+
+//		if( $('img').not('#logo').length ) {
+//			$('img').not('#logo').on('ready', moveFooter);
+//		} else {
+//			moveFooter();
+//		}
 
 		moveSubmits();
 
@@ -155,10 +159,12 @@ function updateHotspots() {
 			$.get('/courses/cs/update/' + $(this).attr('data-path'), function(data, s) {
 				$('#checked').append(data);
 
-				if( $('img').not('#logo').length ) {
-					$('img').not('#logo').on('ready', moveFooter);
-				} else {
-					moveFooter();
+				$("body").imagesLoaded().always(moveFooter);
+
+//				if( $('img').not('#logo').length ) {
+//					$('img').not('#logo').on('ready', moveFooter);
+//				} else {
+//					moveFooter();
 				}
 			});
 		});
@@ -219,9 +225,10 @@ $(function() {
 		}
 	} catch (e) {}
 
-	if( $('img').not('#logo').length ) {
-		$('img').not('#logo').on('ready', moveFooter);
-	} else {
-		moveFooter();
-	}
+	$("body").imagesLoaded().always(moveFooter);
+//	if( $('img').not('#logo').length ) {
+//		$('img').not('#logo').on('ready', moveFooter);
+//	} else {
+//		moveFooter();
+//	}
 });
