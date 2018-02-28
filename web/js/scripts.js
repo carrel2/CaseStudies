@@ -3,8 +3,8 @@ var stack = [];
 function updateCase() {
 	var id = $('#default_title').val();
 
-	$('#case').load('/courses/cs/getDescription/' + id, function() {
-		$(this).imagesLoaded().always(moveFooter);
+	$('#case').load('/courses/cs/getDescription/' + id, function(response, status) {
+		$(response).imagesLoaded().always(moveFooter);
 	});
 }
 
