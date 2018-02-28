@@ -5,12 +5,6 @@ function updateCase() {
 
 	$('#case').load('/courses/cs/getDescription/' + id, function() {
 		$("body").imagesLoaded().always(moveFooter);
-
-//		if( $('img').not('#logo').length ) {
-//			$('img').not('#logo').on('ready', moveFooter);
-//		} else {
-//			moveFooter();
-//		}
 	});
 }
 
@@ -141,12 +135,6 @@ function updateAdminCase(id) {
 
 		$("body").imagesLoaded().always(moveFooter);
 
-//		if( $('img').not('#logo').length ) {
-//			$('img').not('#logo').on('ready', moveFooter);
-//		} else {
-//			moveFooter();
-//		}
-
 		moveSubmits();
 
 		addRemoveButtonClickListener();
@@ -160,12 +148,6 @@ function updateHotspots() {
 				$('#checked').append(data);
 
 				$("body").imagesLoaded().always(moveFooter);
-
-//				if( $('img').not('#logo').length ) {
-//					$('img').not('#logo').on('ready', moveFooter);
-//				} else {
-//					moveFooter();
-//				}
 			});
 		});
 	});
@@ -185,7 +167,7 @@ function moveSubmits() {
 }
 
 function moveFooter() {
-	if( $(window).height() > $('body').height() ) {
+	if( $(window).height() > $('body').height() + $('footer.footer').height() ) {
 		$('footer.footer').css({"position":"absolute","bottom":"0","right":"0","left":"0"});
 	} else {
 		$('footer.footer').css("position", "initial");
@@ -226,9 +208,4 @@ $(function() {
 	} catch (e) {}
 
 	$("body").imagesLoaded().always(moveFooter);
-//	if( $('img').not('#logo').length ) {
-//		$('img').not('#logo').on('ready', moveFooter);
-//	} else {
-//		moveFooter();
-//	}
 });
