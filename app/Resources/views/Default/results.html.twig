@@ -25,6 +25,8 @@
               $('[data-id="' + id + '"]').removeClass('is-hidden');
             }
           });
+
+          moveFooter();
         }
       });
 
@@ -41,6 +43,8 @@
           $(this).addClass("is-active");
           $(this).find(".fa-folder").addClass("fa-folder-open").removeClass("fa-folder");
           $("[data-id='" + id + "']").removeClass("is-hidden");
+
+          moveFooter();
         }
       });
     });

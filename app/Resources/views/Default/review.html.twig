@@ -11,6 +11,8 @@
           $('.panel-block.is-active').removeClass('is-active');
           $(this).addClass('is-active');
           $('[data-id="' + $(this).attr('id') + '"]').removeClass('is-hidden');
+
+          moveFooter();
         }
       });
       $('.panel-block').each(function() {

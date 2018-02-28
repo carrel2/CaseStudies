@@ -133,7 +133,7 @@ function updateAdminCase(id) {
 			$(this).text( "Day " + ( 1 + parseInt($(this).text()) ) );
 		});
 
-		$("body").imagesLoaded().always(moveFooter);
+		$(responseTxt).imagesLoaded().always(moveFooter);
 
 		moveSubmits();
 
@@ -147,7 +147,7 @@ function updateHotspots() {
 			$.get('/courses/cs/update/' + $(this).attr('data-path'), function(data, s) {
 				$('#checked').append(data);
 
-				$("body").imagesLoaded().always(moveFooter);
+				$('#checked').imagesLoaded().always(moveFooter);
 			});
 		});
 	});
