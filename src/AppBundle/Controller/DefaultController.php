@@ -44,16 +44,15 @@ class DefaultController extends Controller
 
 				$em->flush();
 
-				//$session->set('page', 'evaluation');
 			} else if ( $form->get('abandon')->isClicked() ) {
 				return $this->redirectToRoute('reset');
 			}
 
-			$route = $user->getCurrentProgress();
-
-			if( $route == "" ) {
-				$route = "evaluation";
+			if( $user->getCurrentProgress() == "" ) {
+				$user->setCurrentProgress("evaluation");
 			}
+
+			$em->flush();
 
 			return $this->redirectToRoute($route);
 		}

@@ -44,9 +44,9 @@ class TherapeuticsController extends Controller
 				}
 			}
 
-			$em->flush();
-
 			$user->setCurrentProgress('review');
+
+			$em->flush();
 
 			return $this->redirectToRoute('logic');
 		}

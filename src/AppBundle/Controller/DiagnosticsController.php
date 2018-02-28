@@ -17,6 +17,7 @@ class DiagnosticsController extends Controller
 	 */
 	public function showPage(Request $r)
 	{
+		$em = $this->getDoctrine()->getManager();
 		$user = $this->getUser();
 		//$session = $r->getSession();
 
@@ -32,7 +33,6 @@ class DiagnosticsController extends Controller
 
 		if( $form->isSubmitted() && $form->isValid() )
 		{
-			$em = $this->getDoctrine()->getManager();
 			$tests = $form->getData()['test'];
 
 			$day = $user->getCaseStudy()->getDays()[count($user->getDays()) - 1];
@@ -54,9 +54,9 @@ class DiagnosticsController extends Controller
 
 			$this->addFlash('diagnostic-cost-' . $user->getCurrentDay()->getId(), $dCost);
 
-			$em->flush();
-
 			$user->setCurrentProgress('therapeutics');
+
+			$em->flush();
 
 			if( $user->getLocation() == "Farm" )
 			{

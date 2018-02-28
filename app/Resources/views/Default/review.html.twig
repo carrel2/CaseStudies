@@ -133,7 +133,7 @@
       {% set testCost = 0 %}
       {% set medCost = 0 %}
 
-      <h4 class="subtitle is-4">Day {{ loop.index }}</h4> 
+      <h4 class="subtitle is-4">Day {{ loop.index }}</h4>
 
         {% for testResult in day.tests %}
           {% set testCost = testCost + testResult.test.cost %}
@@ -160,14 +160,14 @@
 {% endblock %}
 
 {% block footer %}
-  {% if app.session.get('page') == 'review' %}
+  {% if app.user.getCurrentProgress() == 'review' %}
     <div class="column is-two-thirds-desktop is-offset-one-third-desktop is-half-widescreen">
       {{ form_start(form) }}
       {{ form_widget(form) }}
       {{ form_end(form) }}
     </div>
   {% else %}
-    <a href="{{ path(app.session.get('page')) }}">{{ app.session.get('page')|capitalize }}</a>
+    <a href="{{ path(app.user.getCurrentProgress()) }}">{{ app.user.getCurrentProgress()|capitalize }}</a>
   {% endif %}
   {# else %}
     {% set page = app.session.get('page') %}
