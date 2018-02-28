@@ -4,7 +4,7 @@ function updateCase() {
 	var id = $('#default_title').val();
 
 	$('#case').load('/courses/cs/getDescription/' + id, function() {
-		$("body").imagesLoaded().always(moveFooter);
+		$(this).imagesLoaded().always(moveFooter);
 	});
 }
 
