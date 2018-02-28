@@ -165,7 +165,7 @@ function updateHotspots() {
 //					$('img').not('#logo').on('ready', moveFooter);
 //				} else {
 //					moveFooter();
-				}
+//				}
 			});
 		});
 	});
