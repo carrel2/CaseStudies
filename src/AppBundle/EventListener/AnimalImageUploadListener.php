@@ -12,7 +12,6 @@ use AppBundle\FileUploader;
 class AnimalImageUploadListener
 {
     private $uploader;
-    private $logger;
 
     public function __construct(FileUploader $uploader)
     {
