@@ -54,7 +54,7 @@ class DefaultController extends Controller
 
 			$em->flush();
 
-			return $this->redirectToRoute($route);
+			return $this->redirectToRoute($user->getCurrentProgress());
 		}
 
 		return $this->render('Default/default.html.twig', array(
