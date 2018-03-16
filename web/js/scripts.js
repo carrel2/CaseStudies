@@ -84,6 +84,8 @@ function addButtonClickListener(e) {
 	holder.children('div:last-child').append('<button type="button" class="delete remove-button"></button>');
 
 	addRemoveButtonClickListener();
+
+	moveFooter();
 }
 
 function updateAdminCase(id) {
