@@ -27,7 +27,7 @@ class Animal
   private $cases;
 
   /**
-  * @ORM\Column(type="string", length=40)
+  * @ORM\Column(type="string", length=80)
   */
   private $name;
 
