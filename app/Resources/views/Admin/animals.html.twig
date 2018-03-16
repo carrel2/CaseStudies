@@ -34,10 +34,14 @@
   </div>
 
   {% if animal %}
-    {% set class = 'is-1by1' %}
+    {% set class = '' %}
     {% set closest = 3 %}
     {% set ratio = (size[0] / size[1])|number_format(3) %}
 
+    {% if (1.00 - ratio)|abs < closest %}
+      {% set class = 'is-1by1' %}
+      {% set closest = (1.33 - ratio)|abs %}
+    {% endif %}
     {% if (1.33 - ratio)|abs < closest %}
       {% set class = 'is-4by3' %}
       {% set closest = (1.33 - ratio)|abs %}
