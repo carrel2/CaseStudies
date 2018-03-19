@@ -19,6 +19,11 @@ class Day
 	private $id;
 
 	/**
+	 * @ORM\Column(type="text")
+	 */
+	private $description;
+
+	/**
 	 * @ORM\ManyToOne(targetEntity="caseStudy", inversedBy="days")
 	 */
 	private $caseStudy;
@@ -66,6 +71,18 @@ class Day
 	public function getId()
 	{
 		return $this->id;
+	}
+
+	public function getDescription()
+	{
+		return $this->description;
+	}
+
+	public function setDescription($description)
+	{
+		$this->description = $description;
+
+		return $this;
 	}
 
     public function setCaseStudy(\AppBundle\Entity\CaseStudy $caseStudy = null)

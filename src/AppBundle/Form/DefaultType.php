@@ -47,7 +47,9 @@ class DefaultType extends AbstractType
 						'choices_as_values' => true,
 						'expanded' => true,
 					))
-					->add('start', 'Symfony\Component\Form\Extension\Core\Type\SubmitType');
+					->add('start', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
+						'label' => "Begin Physical Examination",
+					));
 			}
 		});
 	}
