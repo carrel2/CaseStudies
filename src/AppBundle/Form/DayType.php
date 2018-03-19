@@ -15,7 +15,8 @@ class DayType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$builder->add('hotspotsinfo', 'Symfony\Component\Form\Extension\Core\Type\CollectionType', array(
+		$builder->add('description')
+			->add('hotspotsinfo', 'Symfony\Component\Form\Extension\Core\Type\CollectionType', array(
 				'entry_type' => 'AppBundle\Form\HotspotType',
 				'entry_options' => array(
 					'attr' => array(
