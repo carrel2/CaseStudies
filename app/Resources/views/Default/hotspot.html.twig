@@ -80,7 +80,10 @@
 	{{ i.instructions() }}
 
 	<div class="column is-half-desktop">
-		<div class="box">{{ app.user.getCurrentDay().description|raw }}</div>
+		{% if app.user.getCurrentDay().description is not empty %}
+		  <div class="box">{{ app.user.getCurrentDay().description|raw }}</div>
+		{% endif %}
+
 		<div id="hotspots" class="image {{ class }}">
 			<img id="animal" src="{{ asset('images/' ~ animal.image) }}" usemap="#hotspots" />
 
