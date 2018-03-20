@@ -56,7 +56,7 @@ class DiagnosticsController extends Controller
 
 			$user->setCurrentProgress('therapeutics');
 
-			//$em->flush();
+			$em->flush();
 
 			if( $user->getLocation() == "Farm" )
 			{
