@@ -89,10 +89,7 @@ class DayController extends Controller
 
 		$user->addDay(new UserDay());
 
-		//$em->flush();
-
 		$user->setCurrentProgress('evaluation');
-		//$r->getSession()->set('page', 'evaluation');
 
 		$em->flush();
 

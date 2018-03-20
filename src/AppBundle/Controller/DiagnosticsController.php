@@ -19,7 +19,6 @@ class DiagnosticsController extends Controller
 	{
 		$em = $this->getDoctrine()->getManager();
 		$user = $this->getUser();
-		//$session = $r->getSession();
 
 		if( !$user->getIsActive() || !in_array($user->getCurrentProgress(), ['evaluation', 'diagnostics']) ) {
 			return $this->redirectToRoute('default');

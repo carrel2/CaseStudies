@@ -20,7 +20,6 @@ class HotSpotController extends Controller
 	public function showPageAction(Request $r)
 	{
 		$user = $this->getUser();
-		//$session = $r->getSession();
 
 		if( !$user->getIsActive() || $user->getCurrentProgress() != 'evaluation' ) {
 			return $this->redirectToRoute('default');

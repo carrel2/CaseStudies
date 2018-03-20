@@ -17,7 +17,6 @@ class TherapeuticsController extends Controller
 	public function showPageAction(Request $r)
 	{
 		$user = $this->getUser();
-		//$session = $r->getSession();
 
 		if( !$user->getIsActive() || $user->getCurrentProgress() != 'therapeutics' ) {
 			return $this->redirectToRoute('default');
