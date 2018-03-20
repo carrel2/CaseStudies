@@ -74,7 +74,7 @@ class DayController extends Controller
 		if( count($case->getDays()) == count($user->getDays())) {
 			$r->getSession()->set('finished', true);
 		}
-		
+
 		return $this->redirectToRoute('review');
 	}
 
@@ -89,10 +89,12 @@ class DayController extends Controller
 
 		$user->addDay(new UserDay());
 
-		$em->flush();
+		//$em->flush();
 
 		$user->setCurrentProgress('evaluation');
 		//$r->getSession()->set('page', 'evaluation');
+
+		$em->flush();
 
 		return $this->redirectToRoute('evaluation');
 	}

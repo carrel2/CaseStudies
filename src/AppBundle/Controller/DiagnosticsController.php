@@ -56,7 +56,7 @@ class DiagnosticsController extends Controller
 
 			$user->setCurrentProgress('therapeutics');
 
-			$em->flush();
+			//$em->flush();
 
 			if( $user->getLocation() == "Farm" )
 			{
@@ -66,6 +66,8 @@ class DiagnosticsController extends Controller
 				return $this->redirectToRoute('review');
 			}
 		}
+
+		$em->flush();
 
 		return $this->render('Default/diagnostics.html.twig', array(
 			'form' => $form->createView(),
