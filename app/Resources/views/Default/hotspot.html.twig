@@ -80,8 +80,8 @@
 	{{ i.instructions() }}
 
 	<div class="column is-half-desktop">
-		{% if app.user.getCurrentDay().description is not empty %}
-		  <div class="box">{{ app.user.getCurrentDay().description|raw }}</div>
+		{% if day.description is not empty %}
+		  <div class="box">{{ day.description|raw }}</div>
 		{% endif %}
 
 		<div id="hotspots" class="image {{ class }}">
@@ -100,7 +100,7 @@
 			<li><em>{{ spot.hotspot.name }}:</em><span class="info"> {{ spot.info|raw }}</span></li>
 		{% endfor %}
 
-		{% for flash in app.session.flashBag.peek('hotspot-' ~ day.id) %}
+		{% for flash in app.session.flashBag.peek('hotspot-' ~ userDay.id) %}
 			<li>{{ flash }}: No information available</li>
 		{% endfor %}
 	</div>

@@ -194,12 +194,6 @@ $(function() {
 		$('.navbar-menu').toggleClass('is-active');
 	});
 
-	$('.tooltip').tooltipster({
-		theme: 'tooltipster-borderless',
-		side: 'right',
-		delay: 100
-	});
-
 	try {
 		var file = document.querySelectorAll('input[type=file]')[0];
 		file.onchange = function(){

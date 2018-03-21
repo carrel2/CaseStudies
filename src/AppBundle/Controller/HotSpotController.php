@@ -27,14 +27,15 @@ class HotSpotController extends Controller
 
 		$case = $user->getCaseStudy();
 		$animal = $case->getAnimal();
-		$days = $case->getDays();
-		$hotspots = $days[count($user->getDays()) - 1]->getHotspotsInfo();
+		$day = $case->getDays()[count($user->getDays()) - 1];
+		$hotspots = $day->getHotspotsInfo();
 
 		return $this->render('Default/hotspot.html.twig', array(
 			'animal' => $animal,
 			'size' => getimagesize("./images/{$animal->getImage()}"),
 			'checked' => $user->getCurrentDay()->getHotspotsInfo(),
-			'day' => $user->getCurrentDay(),
+			'userDay' => $user->getCurrentDay(),
+			'day' => $day,
 		));
 	}
 
