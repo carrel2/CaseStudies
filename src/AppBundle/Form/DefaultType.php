@@ -20,9 +20,6 @@ class DefaultType extends AbstractType
 
 			if( $case ) {
 				$form->add('resume', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
-					'attr' => array(
-						//'class' => 'button is-success',
-					)
 				))
 					->add('abandon', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 						'attr' => array(

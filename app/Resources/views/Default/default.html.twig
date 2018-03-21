@@ -17,17 +17,14 @@
 
   <div class="column is-half-desktop">
     {{ form_start(form) }}
-      {% if case %}
-        <div>You have a session in progress: <b>{{ case.title }}</b></div>
-      {% else %}
-        {{ form_row(form.title) }}
-        {{ form_row(form.location) }}
+		{{ form_widget(form) }}
+		{{ form_end(form) }}
 
-        <div id="case"></div>
-      {% endif %}
-
-    {{ form_rest(form) }}
-    {{ form_end(form) }}
+    {% if case %}
+      <div>You have a session in progress: <b>{{ case.title }}</b></div>
+    {% else %}
+      <div id="case"></div>
+    {% endif %}
   </div>
 
   {{ i.instructions("is-hidden-touch has-text-centered") }}
