@@ -13,22 +13,28 @@ class TherapeuticType extends AbstractType
 {
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
-    $builder->add('name', 'Symfony\Component\Form\Extension\Core\Type\TextType')
+    $builder->add('name', 'Symfony\Component\Form\Extension\Core\Type\TextType', array(
+      'label_attr' => 'is-large',
+    ))
       ->add('cost', null, array(
         'attr' => array(
           'pattern' => '[0-9]+',
-        )
+        ),
+        'label_attr' => 'is-large',
       ))
       ->add('waitTime', null, array(
         'required' => false,
         'empty_data' => 0,
+        'label_attr' => 'is-large',
       ))
       ->add('group', null, array(
         'required' => false,
         'empty_data' => 0,
+        'label_attr' => 'is-large',
       ))
       ->add('defaultResult', null, array(
         'required' => false,
+        'label_attr' => 'is-large',
       ))
       ->add('submit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
         'attr' => array('class' => 'is-success'),

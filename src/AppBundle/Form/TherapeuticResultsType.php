@@ -24,11 +24,14 @@ class TherapeuticResultsType extends AbstractType
 				'label' => false,
 			))
 			->add('results', 'Ivory\CKEditorBundle\Form\Type\CKEditorType', array(
+				'label_attr' => 'is-large',
 				'config' => array(
 					'autoParagraph' => false,
 				)
 			))
-			->add('waitTime');
+			->add('waitTime', null, array(
+				'label_attr' => 'is-large',
+			));
 	}
 
 	public function configureOptions(OptionsResolver $resolver)

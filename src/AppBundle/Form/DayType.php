@@ -16,6 +16,7 @@ class DayType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder->add('description', 'Ivory\CKEditorBundle\Form\Type\CKEditorType', array(
+				'label_attr' => 'is-large',
 				'config' => array(
 					'autoParagraph' => false,
 					'disallowedContent' => 'button embed form iframe input link meta textarea video script',
@@ -33,6 +34,7 @@ class DayType extends AbstractType
 				'by_reference' => false,
 				'prototype_name' => '__hotspot__',
 				'label' => 'Hotspots',
+				'label_attr' => 'is-large',
 				'attr' => array(
 					'class' => 'collection hotspots',
 					'data-type' => 'hotspot'
@@ -54,6 +56,7 @@ class DayType extends AbstractType
 				'by_reference' => false,
 				'prototype_name' => '__diagnostic-result__',
 				'label' => 'Diagnostics',
+				'label_attr' => 'is-large',
 				'attr' => array(
 					'class' => 'collection tests',
 					'data-type' => 'diagnostic result'
@@ -75,6 +78,7 @@ class DayType extends AbstractType
 				'by_reference' => false,
 				'prototype_name' => '__therapeutic-result__',
 				'label' => 'Therapeutics',
+				'label_attr' => 'is-large',
 				'attr' => array(
 					'class' => 'collection medications',
 					'data-type' => 'therapeutic result'

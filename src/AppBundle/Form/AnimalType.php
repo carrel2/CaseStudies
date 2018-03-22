@@ -16,8 +16,11 @@ class AnimalType extends AbstractType
     $builder->add('image', 'Symfony\Component\Form\Extension\Core\Type\FileType', array(
         'data' => '',
         'required' => false,
+        'label_attr' => 'is-large',
       ))
-      ->add('name')
+      ->add('name', null, array(
+        'label_attr' => 'is-large',
+      ))
       ->add('submit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
         'attr' => array('class' => 'is-success'),
       ));

@@ -14,6 +14,7 @@ class AdminType extends AbstractType
 		$builder
 			->add('case', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
 				'class' => 'AppBundle:CaseStudy',
+				'label_attr' => 'is-large',
 				'choice_label' => 'title',
 			));
 	}

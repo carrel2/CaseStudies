@@ -35,6 +35,7 @@ class UserType extends AbstractType
 						'User' => 'ROLE_USER',
 						'Admin' => 'ROLE_ADMIN',
 					),
+					'label_attr' => 'is-large',
 					'choices_as_values' => true,
 					'disabled' => $currentUser->getRole() == 'ROLE_USER',
 				))

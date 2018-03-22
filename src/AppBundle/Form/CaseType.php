@@ -21,16 +21,22 @@ class CaseType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-		->add('title', 'Symfony\Component\Form\Extension\Core\Type\TextType')
+		->add('title', 'Symfony\Component\Form\Extension\Core\Type\TextType', array(
+			'label_attr' => 'is-large',
+		))
 		->add('description', 'Ivory\CKEditorBundle\Form\Type\CKEditorType', array(
+			'label_attr' => 'is-large',
 			'config' => array(
 				'autoParagraph' => false,
 				'disallowedContent' => 'button embed form iframe input link meta textarea video script',
 			),
 		))
-		->add('email', 'Symfony\Component\Form\Extension\Core\Type\EmailType')
+		->add('email', 'Symfony\Component\Form\Extension\Core\Type\EmailType', array(
+			'label_attr' => 'is-large',
+		))
 		->add('animal', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
 			'class' => 'AppBundle:Animal',
+			'label_attr' => 'is-large',
 			'choice_label' => 'name',
 			'attr' => array(
 				'onchange' => 'updateSelects("hotspot");',
