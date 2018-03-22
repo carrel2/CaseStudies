@@ -16,9 +16,9 @@ class TherapeuticResultsType extends AbstractType
 		$builder->add('medication', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
 				'class' => 'AppBundle:Medication',
 				'choice_label' => 'name',
-				'group_by' => function($val, $key, $index) {
+				/*'group_by' => function($val, $key, $index) {
 					return $val->getGroup();
-				},
+				},*/
 				'label' => false,
 			))
 			->add('results', 'Ivory\CKEditorBundle\Form\Type\CKEditorType', array(
