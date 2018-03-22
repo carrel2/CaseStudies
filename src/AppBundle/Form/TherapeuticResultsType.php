@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Doctrine\ORM\EntityRepository;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use AppBundle\Entity\MedicationResults;
@@ -16,9 +17,10 @@ class TherapeuticResultsType extends AbstractType
 		$builder->add('medication', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
 				'class' => 'AppBundle:Medication',
 				'choice_label' => 'name',
-				/*'group_by' => function($val, $key, $index) {
-					return $val->getGroup();
-				},*/
+				'query_builder' => function (EntityRepository $er) {
+        	return $er->createQueryBuilder('m')
+            ->orderBy('m.name', 'ASC');
+    		},
 				'label' => false,
 			))
 			->add('results', 'Ivory\CKEditorBundle\Form\Type\CKEditorType', array(

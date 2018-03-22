@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Doctrine\ORM\EntityRepository;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use AppBundle\Entity\TestResults;
@@ -16,9 +17,10 @@ class DiagnosticResultsType extends AbstractType
 		$builder->add('test', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
 				'class' => 'AppBundle:Test',
 				'choice_label' => 'name',
-				/*'group_by' => function($val, $key, $index) {
-					return $val->getGroup();
-				},*/
+				'query_builder' => function (EntityRepository $er) {
+        	return $er->createQueryBuilder('t')
+            ->orderBy('t.name', 'ASC');
+    		},
 				'label' => false,
 			))
 			->add('results', 'Ivory\CKEditorBundle\Form\Type\CKEditorType', array(
