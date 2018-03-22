@@ -81,7 +81,7 @@
 		<div class="box">{{ day.description|raw }}</div>
 	{% endif %}
 
-	{{ i.instructions(user.getDays()|length) }}
+	{{ i.instructions(app.user.days|length) }}
 
 	<div class="column is-half-desktop">
 		<div id="hotspots" class="image {{ class }}">
