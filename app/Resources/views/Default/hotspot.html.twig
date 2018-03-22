@@ -77,13 +77,13 @@
 		{% set class = 'is-2by1' %}
 	{% endif %}
 
-	{{ i.instructions() }}
+	{% if day.description is not empty %}
+		<div class="box">{{ day.description|raw }}</div>
+	{% endif %}
+
+	{{ i.instructions(user.days|length) }}
 
 	<div class="column is-half-desktop">
-		{% if day.description is not empty %}
-		  <div class="box">{{ day.description|raw }}</div>
-		{% endif %}
-
 		<div id="hotspots" class="image {{ class }}">
 			<img id="animal" src="{{ asset('images/' ~ animal.image) }}" usemap="#hotspots" />
 
@@ -120,9 +120,9 @@
 	{{ parent() }}
 {% endblock %}
 
-{% macro instructions() %}
+{% macro instructions(i) %}
   <div class="column is-full">
-    <h1 class="title">Physical Evaluation</h1>
+    <h1 class="title">Physical Evaluation - Day {{ i }}</h1>
 
     <div class="tile box">
       <div class="content">
