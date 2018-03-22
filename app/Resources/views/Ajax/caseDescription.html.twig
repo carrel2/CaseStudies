@@ -2,7 +2,9 @@
   {{ case.animal.name }}
 </label>
 
-{{ case.description|raw }}
+<div class="content">
+  {{ case.description|raw }}
+</div>
 
 <figure id="image" class="image">
   <img id="animal" src="{{ asset('images/' ~ case.animal.image) }}" />
