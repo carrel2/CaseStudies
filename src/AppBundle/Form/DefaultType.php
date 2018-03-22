@@ -31,7 +31,9 @@ class DefaultType extends AbstractType
 				$form->add('title', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
 						'class' => 'AppBundle:CaseStudy',
 						'label' => 'Case Study',
-						'label_attr' => 'is-large',
+						'label_attr' => array(
+							'class' => 'is-large',
+						),
 						'choice_label' => 'title',
 						'attr' => array(
 							'onchange' => 'updateCase()',
@@ -39,7 +41,9 @@ class DefaultType extends AbstractType
 					))
 					->add('location', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
 						'label' => 'Choose your location',
-						'label_attr' => 'is-large',
+						'label_attr' => array(
+							'class' => 'is-large',
+						),
 						'choices' => array(
 							'Farm' => 'Farm',
 							'Hospital' => 'Hospital',

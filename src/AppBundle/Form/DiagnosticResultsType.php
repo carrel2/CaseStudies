@@ -24,13 +24,17 @@ class DiagnosticResultsType extends AbstractType
 				'label' => false,
 			))
 			->add('results', 'Ivory\CKEditorBundle\Form\Type\CKEditorType', array(
-				'label_attr' => 'is-large',
+				'label_attr' => array(
+					'is-large',
+				),
 				'config' => array(
 					'autoParagraph' => false,
 				)
 			))
 			->add('waitTime', null, array(
-				'label_attr' => 'is-large',
+				'label_attr' => array(
+					'is-large',
+				),
 			));
 	}
 

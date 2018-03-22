@@ -22,21 +22,29 @@ class CaseType extends AbstractType
 	{
 		$builder
 		->add('title', 'Symfony\Component\Form\Extension\Core\Type\TextType', array(
-			'label_attr' => 'is-large',
+			'label_attr' => array(
+				'class' => 'is-large',
+			),
 		))
 		->add('description', 'Ivory\CKEditorBundle\Form\Type\CKEditorType', array(
-			'label_attr' => 'is-large',
+			'label_attr' => array(
+				'class' => 'is-large',
+			),
 			'config' => array(
 				'autoParagraph' => false,
 				'disallowedContent' => 'button embed form iframe input link meta textarea video script',
 			),
 		))
 		->add('email', 'Symfony\Component\Form\Extension\Core\Type\EmailType', array(
-			'label_attr' => 'is-large',
+			'label_attr' => array(
+				'class' => 'is-large',
+			),
 		))
 		->add('animal', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
 			'class' => 'AppBundle:Animal',
-			'label_attr' => 'is-large',
+			'label_attr' => array(
+				'class' => 'is-large',
+			),
 			'choice_label' => 'name',
 			'attr' => array(
 				'onchange' => 'updateSelects("hotspot");',
