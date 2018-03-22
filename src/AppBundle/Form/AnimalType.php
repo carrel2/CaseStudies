@@ -17,12 +17,12 @@ class AnimalType extends AbstractType
         'data' => '',
         'required' => false,
         'label_attr' => array(
-          'is-large',
+          'class' => 'is-large',
         ),
       ))
       ->add('name', null, array(
         'label_attr' => array(
-          'is-large',
+          'class' => 'is-large',
         ),
       ))
       ->add('submit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
