@@ -19,10 +19,10 @@
       });
       $('.panel-block').each(function() {
         if( $('[data-id=' + $(this).attr('id') + ']').has('span.tag.is-success').length > 0 ) {
-          $(this).children(':last-child').after('{{ s.tag('New!', 'is-success')|raw }}');
+          $(this).children(':last-child').after('<span class="tag is-success" style="margin-right:8px">New!</span>');
         }
         if( $('[data-id=' + $(this).attr('id') + ']').has('span.tag.is-info').length > 0 ) {
-          $(this).children(':last-child').after('{{ s.tag('Pending', 'is-info')|raw }}');
+          $(this).children(':last-child').after('<span class="tag is-info" style="margin-right:8px">Pending</span>');
         }
       });
     });
