@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% import _self as s %}
+
 {% block scripts %}
   {{ parent() }}
 
@@ -17,10 +19,10 @@
       });
       $('.panel-block').each(function() {
         if( $('[data-id=' + $(this).attr('id') + ']').has('span.tag.is-success').length > 0 ) {
-          $(this).children(':last-child').after('{{ tag('New!', 'is-success') }}');
+          $(this).children(':last-child').after('{{ s.tag('New!', 'is-success') }}');
         }
         if( $('[data-id=' + $(this).attr('id') + ']').has('span.tag.is-info').length > 0 ) {
-          $(this).children(':last-child').after('{{ tag('Pending', 'is-info') }}');
+          $(this).children(':last-child').after('{{ s.tag('Pending', 'is-info') }}');
         }
       });
     });
@@ -92,13 +94,13 @@
             <div class="columns is-multiline">
               {% for testResult in day.tests %}
                 {% if testResult.waitTime and ( elapsed - testResult.waitTime == 0 or testResult.waitTime < elapsed ) %}
-                  <div class="column is-3">{{ elapsed - testResult.waitTime == 0 ? tag('New!', 'is-success') : '' }}<em>{{ testResult.test.name }} (${{ testResult.test.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ testResult.results|raw }}</span></div>
+                  <div class="column is-3">{{ elapsed - testResult.waitTime == 0 ? s.tag('New!', 'is-success') : '' }}<em>{{ testResult.test.name }} (${{ testResult.test.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ testResult.results|raw }}</span></div>
                 {% elseif testResult.test.waitTime == 0 or testResult.test.waitTime < elapsed %}
-                  <div class="column is-3">{{ elapsed - testResult.test.waitTime == 0 ? tag('New!', 'is-success') : '' }}<em>{{ testResult.test.name }} (${{ testResult.test.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ testResult.results|raw }}</span></div>
+                  <div class="column is-3">{{ elapsed - testResult.test.waitTime == 0 ? s.tag('New!', 'is-success') : '' }}<em>{{ testResult.test.name }} (${{ testResult.test.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ testResult.results|raw }}</span></div>
                 {% elseif finished %}
                   <div class="column is-3"><em>{{ testResult.test.name }} (${{ testResult.test.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info">{{ testResult.results|raw }}</span></div>
                 {% else %}
-                  <div class="column is-full">{{ tag('Pending', 'is-info') }}<em>{{ testResult.test.name }}:</em><span> ...</span></div>
+                  <div class="column is-full">{{ s.tag('Pending', 'is-info') }}<em>{{ testResult.test.name }}:</em><span> ...</span></div>
                 {% endif %}
               {% endfor %}
 
@@ -122,13 +124,13 @@
             <div class="columns is-multiline">
               {% for medResult in day.medications %}
                 {% if medResult.waitTime and ( elapsed - medResult.waitTime == 0 or medResult.waitTime < elapsed ) %}
-                  <div class="column is-3">{{ elapsed - medResult.waitTime == 0 ? tag('New!', 'is-success') : '' }}<em>{{ medResult.medication.name }} (${{ medResult.medication.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ medResult.results|raw }}</span></div>
+                  <div class="column is-3">{{ elapsed - medResult.waitTime == 0 ? s.tag('New!', 'is-success') : '' }}<em>{{ medResult.medication.name }} (${{ medResult.medication.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ medResult.results|raw }}</span></div>
                 {% elseif elapsed - medResult.medication.waitTime == 0 or medResult.medication.waitTime < elapsed %}
-                  <div class="column is-3">{{ elapsed - medResult.medication.waitTime == 0 ? tag('New!', 'is-success') : '' }}<em>{{ medResult.medication.name }} (${{ medResult.medication.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ medResult.results|raw }}</span></div>
+                  <div class="column is-3">{{ elapsed - medResult.medication.waitTime == 0 ? s.tag('New!', 'is-success') : '' }}<em>{{ medResult.medication.name }} (${{ medResult.medication.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ medResult.results|raw }}</span></div>
                 {% elseif finished %}
                   <div class="column is-3"><em>{{ medResult.medication.name }} (${{ medResult.medication.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ medResult.results|raw }}</span></div>
                 {% else %}
-                  <div class="column is-full">{{ tag('Pending', 'is-info') }}<em>{{ medResult.medication.name }}:</em><span> ...</span></div>
+                  <div class="column is-full">{{ s.tag('Pending', 'is-info') }}<em>{{ medResult.medication.name }}:</em><span> ...</span></div>
                 {% endif %}
               {% endfor %}
 
