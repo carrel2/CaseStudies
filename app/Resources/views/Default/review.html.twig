@@ -17,10 +17,10 @@
       });
       $('.panel-block').each(function() {
         if( $('[data-id=' + $(this).attr('id') + ']').has('span.tag.is-success').length > 0 ) {
-          $(this).children(':last-child').after('<span class="tag is-success">New!</span>');
+          $(this).children(':last-child').after('{{ tag('New!', 'is-success') }}');
         }
         if( $('[data-id=' + $(this).attr('id') + ']').has('span.tag.is-info').length > 0 ) {
-          $(this).children(':last-child').after('<span class="tag is-info">Pending</span>');
+          $(this).children(':last-child').after('{{ tag('Pending', 'is-info') }}');
         }
       });
     });
@@ -61,7 +61,7 @@
       <div data-id="day-{{ day.id }}"{% if not loop.last %} class=" is-hidden"{% endif %}>
         <div class="message">
           <div class="message-header">
-            <h2 class="title is-2 has-text-white">Physical examination results</h2>
+            <h2 class="title has-text-white">Physical examination results</h2>
           </div>
 
           <div class="message-body">
@@ -74,29 +74,31 @@
             {% endfor %}
 
             {% if app.session.has('differentials-' ~ day.id) %}
-              <p class="title">Differentials</p>
+              <div id="differentials-{{ day.id }}">
+                <p class="title">Differentials</p>
 
-              <div>{{ app.session.get('differentials-' ~ day.id) }}</div>
+                <div>{{ app.session.get('differentials-' ~ day.id) }}</div>
+              </div>
             {% endif %}
           </div>
         </div>
 
         <div class="message">
           <div class="message-header">
-            <h2 class="title is-2 has-text-white">Diagnostic results</h2>
+            <h2 class="title has-text-white">Diagnostic results</h2>
           </div>
 
           <div class="message-body">
             <div class="columns is-multiline">
               {% for testResult in day.tests %}
                 {% if testResult.waitTime and ( elapsed - testResult.waitTime == 0 or testResult.waitTime < elapsed ) %}
-                  <div class="column is-3">{{ elapsed - testResult.waitTime == 0 ? '<span class="tag is-success">New!</span>' : '' }}<em>{{ testResult.test.name }} (${{ testResult.test.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ testResult.results|raw }}</span></div>
+                  <div class="column is-3">{{ elapsed - testResult.waitTime == 0 ? tag('New!', 'is-success') : '' }}<em>{{ testResult.test.name }} (${{ testResult.test.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ testResult.results|raw }}</span></div>
                 {% elseif testResult.test.waitTime == 0 or testResult.test.waitTime < elapsed %}
-                  <div class="column is-3">{{ elapsed - testResult.test.waitTime == 0 ? '<span class="tag is-success">New!</span>' : '' }}<em>{{ testResult.test.name }} (${{ testResult.test.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ testResult.results|raw }}</span></div>
+                  <div class="column is-3">{{ elapsed - testResult.test.waitTime == 0 ? tag('New!', 'is-success') : '' }}<em>{{ testResult.test.name }} (${{ testResult.test.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ testResult.results|raw }}</span></div>
                 {% elseif finished %}
                   <div class="column is-3"><em>{{ testResult.test.name }} (${{ testResult.test.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info">{{ testResult.results|raw }}</span></div>
                 {% else %}
-                  <div class="column is-full"><span class="tag is-info">Pending</span><em>{{ testResult.test.name }}:</em><span> ...</span></div>
+                  <div class="column is-full">{{ tag('Pending', 'is-info') }}<em>{{ testResult.test.name }}:</em><span> ...</span></div>
                 {% endif %}
               {% endfor %}
 
@@ -113,20 +115,20 @@
 
         <div class="message">
           <div class="message-header">
-            <h2 class="title is-2 has-text-white">Therapeutic results</h2>
+            <h2 class="title has-text-white">Therapeutic results</h2>
           </div>
 
           <div class="message-body">
             <div class="columns is-multiline">
               {% for medResult in day.medications %}
                 {% if medResult.waitTime and ( elapsed - medResult.waitTime == 0 or medResult.waitTime < elapsed ) %}
-                  <div class="column is-3">{{ elapsed - medResult.waitTime == 0 ? '<span class="tag is-success">New!</span>' : '' }}<em>{{ medResult.medication.name }} (${{ medResult.medication.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ medResult.results|raw }}</span></div>
+                  <div class="column is-3">{{ elapsed - medResult.waitTime == 0 ? tag('New!', 'is-success') : '' }}<em>{{ medResult.medication.name }} (${{ medResult.medication.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ medResult.results|raw }}</span></div>
                 {% elseif elapsed - medResult.medication.waitTime == 0 or medResult.medication.waitTime < elapsed %}
-                  <div class="column is-3">{{ elapsed - medResult.medication.waitTime == 0 ? '<span class="tag is-success">New!</span>' : '' }}<em>{{ medResult.medication.name }} (${{ medResult.medication.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ medResult.results|raw }}</span></div>
+                  <div class="column is-3">{{ elapsed - medResult.medication.waitTime == 0 ? tag('New!', 'is-success') : '' }}<em>{{ medResult.medication.name }} (${{ medResult.medication.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ medResult.results|raw }}</span></div>
                 {% elseif finished %}
                   <div class="column is-3"><em>{{ medResult.medication.name }} (${{ medResult.medication.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ medResult.results|raw }}</span></div>
                 {% else %}
-                  <div class="column is-full"><span class="tag is-info">Pending</span><em>{{ medResult.medication.name }}:</em><span> ...</span></div>
+                  <div class="column is-full">{{ tag('Pending', 'is-info') }}<em>{{ medResult.medication.name }}:</em><span> ...</span></div>
                 {% endif %}
               {% endfor %}
 
@@ -145,7 +147,7 @@
   </div>
 
   <div class="column is-offset-one-third-desktop">
-    <h2 class="title is-2">Cost breakdown</h2>
+    <h2 class="title">Cost breakdown</h2>
 
     {% set totalCost = 0 %}
 
@@ -189,12 +191,8 @@
   {% else %}
     <a href="{{ path(app.user.getCurrentProgress()) }}">{{ app.user.getCurrentProgress()|capitalize }}</a>
   {% endif %}
-  {# else %}
-    {% set page = app.session.get('page') %}
-    {% if page == 'review' %}
-      <a href="{{ path('nextDay') }}">Continue</a>
-    {% else %}
-      <a href="{{ path(page) }}">{{ page|capitalize }}</a>
-    {% endif %}
-  {% endif #}
 {% endblock %}
+
+{% macro tag(text, class) %}
+  <span class="tag {{ class }}" style="margin-right:8px">{{ text }}</span>
+{% endmacro %}
