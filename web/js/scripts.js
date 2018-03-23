@@ -6,7 +6,8 @@ function updateCase() {
 
 	$('#case').load('/courses/cs/getDescription/' + id, function(response, status) {
 		$(response).imagesLoaded().always(moveFooter);
-		$('form div:has(#default_start)').detach().after('#case_description');
+		$('form div:has(#default_start)').detach();
+		$('#case_description').after(button);
 	});
 }
 
