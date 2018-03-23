@@ -2,9 +2,11 @@ var stack = [];
 
 function updateCase() {
 	var id = $('#default_title').val();
+	var button = $('div:has(#default_start)').clone();
 
 	$('#case').load('/courses/cs/getDescription/' + id, function(response, status) {
 		$(response).imagesLoaded().always(moveFooter);
+		$('div:has(#default_start)').detach().after('#case_description');
 	});
 }
 
