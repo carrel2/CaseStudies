@@ -19,18 +19,13 @@
     {{ form_start(form) }}
 
 			{% if case %}
-				{{ form_widget(form) }}
-
 	      <div>You have a session in progress: <b>{{ case.title }}</b></div>
 	    {% else %}
-				{{ form_widget(form) }}
-				
 	      <div id="case"></div>
 	    {% endif %}
 
+			{{ form_widget(form) }}
 		{{ form_end(form) }}
-
-
   </div>
 
   {{ i.instructions("is-hidden-touch has-text-centered") }}
