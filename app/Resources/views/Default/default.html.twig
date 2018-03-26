@@ -20,11 +20,14 @@
 
 			{% if case %}
 	      <div>You have a session in progress: <b>{{ case.title }}</b></div>
+
+				{{ form_widget(form) }}
 	    {% else %}
+				{{ form_widget(form) }}
+
 	      <div id="case"></div>
 	    {% endif %}
 
-			{{ form_widget(form) }}
 		{{ form_end(form) }}
   </div>
 
