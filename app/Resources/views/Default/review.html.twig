@@ -149,37 +149,45 @@
   </div>
 
   <div class="column is-offset-one-third-desktop">
-    <h2 class="title">Cost breakdown</h2>
+    <div class="message">
+      <div class="message-header">
+        <h2 class="title has-text-white">Cost breakdown</h2>
+      </div>
 
-    {% set totalCost = 0 %}
+      <div class="message-body">
 
-    {% for day in user.days %}
-      {% set testCost = 0 %}
-      {% set medCost = 0 %}
+        {% set totalCost = 0 %}
 
-      <h4 class="subtitle is-4">Day {{ loop.index }}</h4>
+        {% for day in user.days %}
+          {% set testCost = 0 %}
+          {% set medCost = 0 %}
 
-        {% for testResult in day.tests %}
-          {% set testCost = testCost + testResult.test.cost %}
+          <h4 class="title is-4">Day {{ loop.index }}</h4>
+
+          <h5 class="subtitle is-5 is-spaced">
+            {% for testResult in day.tests %}
+              {% set testCost = testCost + testResult.test.cost %}
+            {% endfor %}
+
+            {% set testCost = testCost + app.session.flashBag.peek('diagnostic-cost-' ~ day.id)|first %}
+
+            <div>Diagnostic cost: ${{ testCost }}</div>
+
+              {% for medResult in day.medications %}
+                {% set medCost = medCost + medResult.medication.cost %}
+              {% endfor %}
+
+            {% set medCost = medCost + app.session.flashBag.peek('therapeutic-cost-' ~ day.id)|first %}
+
+            <div>Therapeutic cost: ${{ medCost }}</div>
+
+            {% set totalCost = totalCost + testCost + medCost %}
+          </h5>
         {% endfor %}
 
-      {% set testCost = testCost + app.session.flashBag.peek('diagnostic-cost-' ~ day.id)|first %}
-
-      <div>Diagnostic cost: ${{ testCost }}</div>
-
-        {% for medResult in day.medications %}
-          {% set medCost = medCost + medResult.medication.cost %}
-        {% endfor %}
-
-      {% set medCost = medCost + app.session.flashBag.peek('therapeutic-cost-' ~ day.id)|first %}
-
-      <div>Therapeutic cost: ${{ medCost }}</div>
-
-      {% set totalCost = totalCost + testCost + medCost %}
-    {% endfor %}
-
-    <h4 class="subtitle is-4">Total Cost: ${{ totalCost }}</h4>
-
+        <h4 class="subtitle is-4">Total Cost: ${{ totalCost }}</h4>
+      </div>
+    </div>
   </div>
 {% endblock %}
 
