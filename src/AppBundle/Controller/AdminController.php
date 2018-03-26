@@ -141,6 +141,7 @@ class AdminController extends Controller
 			))
 			->add('edit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 				'attr' => array('class' => 'is-success'),
+				'label_attr' => array('class' => 'is-large'),
 			))
 			->add('delete', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 				'attr' => array(
@@ -226,6 +227,7 @@ class AdminController extends Controller
 			->add('animals', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
 				'class' => 'AppBundle:Animal',
 				'choice_label' => 'name',
+				'label_attr' => array('class' => 'is-large'),
 				'expanded' => true,
 			))
 			->add('edit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
@@ -347,7 +349,7 @@ class AdminController extends Controller
 						return $val->getGroup();
 					},
 					'label_attr' => array(
-						'class' => ' tests_label',
+						'class' => ' tests_label is-large',
 					)
 				))
 				->add('edit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
@@ -460,7 +462,7 @@ class AdminController extends Controller
 						return $val->getGroup();
 					},
 					'label_attr' => array(
-						'class' => 'medications_label',
+						'class' => 'medications_label is-large',
 					)
 				))
 				->add('edit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
