@@ -77,7 +77,7 @@
 
             {% if app.session.has('differentials-' ~ day.id) %}
               <div id="differentials-{{ day.id }}">
-                <p class="title">Differentials</p>
+                <p class="title is-4"><u>Differentials</u></p>
 
                 <div>{{ app.session.get('differentials-' ~ day.id) }}</div>
               </div>
