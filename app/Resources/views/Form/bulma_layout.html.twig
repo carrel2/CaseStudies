@@ -180,7 +180,7 @@
 {# Labels #}
 
 {%- block form_label -%}
-    {%- set label_attr = label_attr|merge({class: (attr.class|default('') ~ ' label')|trim}) -%}
+    {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' label')|trim}) -%}
     {{- parent() -}}
 {%- endblock form_label -%}
 
