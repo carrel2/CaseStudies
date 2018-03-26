@@ -28,7 +28,7 @@ class DayController extends Controller
 			return $this->redirectToRoute('default');
 		}
 
-		$finished = $session->get('finished');
+		$finished = $user->getCurrentProgress();
 
 		$form = $this->createFormBuilder()
 			->add('diagnosis', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', array(
@@ -72,7 +72,9 @@ class DayController extends Controller
 		$case = $user->getCaseStudy();
 
 		if( count($case->getDays()) == count($user->getDays())) {
-			$r->getSession()->set('finished', true);
+			$user->setCurrentProgress('finished');
+			
+			$this->getDoctrine()->getManager()->flush();
 		}
 
 		return $this->redirectToRoute('review');

@@ -54,7 +54,13 @@ class DefaultController extends Controller
 
 			$em->flush();
 
-			return $this->redirectToRoute($user->getCurrentProgress());
+			$route = $user->getCurrentProgress();
+
+			if( $route == "finished" ) {
+				$route = "review";
+			}
+
+			return $this->redirectToRoute($route);
 		}
 
 		return $this->render('Default/default.html.twig', array(
