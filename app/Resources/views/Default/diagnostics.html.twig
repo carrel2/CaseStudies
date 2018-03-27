@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% import 'macros.html.twig' as m %}
+
 {% block scripts %}
   {{ parent() }}
 
@@ -11,6 +13,8 @@
 {% endblock %}
 
 {% block body %}
+  {{ m.steps("diagnostic") }}
+
   <div class="column is-full">
     <h1 class="title">Diagnostics - Day {{ app.user.days|length }}</h1>
 

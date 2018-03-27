@@ -81,7 +81,7 @@
 	{{ m.steps("physical") }}
 
 	{% if day.description is not empty %}
-		<div class="box">{{ day.description|raw }}</div>
+		<div class="column is-full box">{{ day.description|raw }}</div>
 	{% endif %}
 
 	{{ i.instructions(app.user.days|length) }}

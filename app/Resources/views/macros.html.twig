@@ -1,26 +1,28 @@
 {% macro steps(active) %}
-  <ul class="steps has-content-centered">
-    <li class="steps-segment{% if active == "physical" %} is-active{% endif %}">
-      <span href="#" class="steps-marker"></span>
-      <div class="steps-content">
-        <p class="is-size-4">Physical Examination</p>
-      </div>
-    </li>
+  <div class="column is-full">
+    <ul class="steps has-content-centered">
+      <li class="steps-segment{% if active == "physical" %} is-active{% endif %}">
+        <span class="steps-marker"></span>
+        <div class="steps-content">
+          <p>Physical Examination</p>
+        </div>
+      </li>
 
-    <li class="steps-segment{% if active == "diagnostic" %} is-active{% endif %}">
-      <span href="#" class="steps-marker"></span>
-      <div class="steps-content">
-        <p class="is-size-4">Diagnostic Plan</p>
-      </div>
-    </li>
+      <li class="steps-segment{% if active == "diagnostic" %} is-active{% endif %}">
+        <span class="steps-marker"></span>
+        <div class="steps-content">
+          <p>Diagnostic Plan</p>
+        </div>
+      </li>
 
-    <li class="steps-segment{% if active == "therapeutic" %} is-active{% endif %}">
-      <span href="#" class="steps-marker"></span>
-      <div class="steps-content">
-        <p class="is-size-4">Therapeutic Plan</p>
-      </div>
-    </li>
-  </ul>
+      <li class="steps-segment{% if active == "therapeutic" %} is-active{% endif %}">
+        <span class="steps-marker"></span>
+        <div class="steps-content">
+          <p>Therapeutic Plan</p>
+        </div>
+      </li>
+    </ul>
+  </div>
 {% endmacro %}
 
 {% macro tag(text, class) %}
