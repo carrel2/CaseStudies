@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% import _self as i %}
+{% import 'macros.html.twig' as m %}
 
 {% block scripts %}
 	{{ parent() }}
@@ -76,6 +77,8 @@
 	{% if (2 - ratio)|abs < closest %}
 		{% set class = 'is-2by1' %}
 	{% endif %}
+
+	{{ m.steps("physical") }}
 
 	{% if day.description is not empty %}
 		<div class="box">{{ day.description|raw }}</div>

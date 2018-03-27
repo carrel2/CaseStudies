@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% import _self as i %}
+{% import 'macros.html.twig' as m %}
 
 {% block scripts %}
 	{{ parent() }}
@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block body %}
-  {{ i.instructions("is-hidden-desktop is-size-7") }}
+  {{ m.instructions("is-hidden-desktop is-size-7") }}
 
   <div class="column is-half-desktop">
     {{ form_start(form) }}
@@ -31,10 +31,10 @@
 		{{ form_end(form) }}
   </div>
 
-  {{ i.instructions("is-hidden-touch has-text-centered") }}
+  {{ m.instructions("is-hidden-touch has-text-centered") }}
 {% endblock %}
 
-{% macro instructions(class) %}
+{# macro instructions(class) %}
   <div class="column {{ class }}">
     <div class="tile box">
       <div class="content">
@@ -44,4 +44,4 @@
       </div>
     </div>
   </div>
-{% endmacro %}
+{% endmacro #}

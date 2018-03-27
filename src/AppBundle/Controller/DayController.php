@@ -32,10 +32,10 @@ class DayController extends Controller
 
 		$form = $this->createFormBuilder()
 			->add('diagnosis', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', array(
-				'label' => $finished == "finished" ? 'Diagnosis' : 'Tentative Diagnosis',
+				'label' => $finished == 'finished' ? 'Diagnosis' : 'Tentative Diagnosis',
 			))
 			->add('finish', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
-				'label' => $finished == "finished" ? 'Finish' : 'Go to next day',
+				'label' => $finished == 'finished' ? 'Finish' : 'Go to next day',
 				'attr' => array(
 					'class' => 'button',
 				),
