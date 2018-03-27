@@ -69,6 +69,9 @@ class CaseType extends AbstractType
 							'class' => 'notification',
 							'animal' => array_key_exists('data', $options) ? $options['data']->getAnimal()->getId() : null,
 						),
+						'label_attr' => array(
+							'class' => 'is-large',
+						),
 					),
 					'allow_add' => true,
 					'allow_delete' => true,
@@ -79,7 +82,7 @@ class CaseType extends AbstractType
 						'data-type' => 'day'
 					),
 					'label_attr' => array(
-						'class' => 'label case_days_label',
+						'class' => 'label case_days_label is-large',
 					)
 					))
 					->add('add day', 'Symfony\Component\Form\Extension\Core\Type\ButtonType', array(
