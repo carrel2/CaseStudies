@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% import 'macros.html.twig' as m %}
+{% import _self as m %}
 
 {% block scripts %}
 	{{ parent() }}
@@ -34,7 +34,7 @@
   {{ m.instructions("is-hidden-touch has-text-centered") }}
 {% endblock %}
 
-{# macro instructions(class) %}
+{% macro instructions(class) %}
   <div class="column {{ class }}">
     <div class="tile box">
       <div class="content">
@@ -44,4 +44,4 @@
       </div>
     </div>
   </div>
-{% endmacro #}
+{% endmacro %}
