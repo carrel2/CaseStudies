@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% import _self as m %}
+
 {% block scripts %}
   {{ parent() }}
 
@@ -201,6 +203,6 @@
   {% endif %}
 {% endblock %}
 
-{# macro tag(text, class) %}
+{% macro tag(text, class) %}
   <span class="tag {{ class }}" style="margin-right:8px">{{ text }}</span>
-{% endmacro #}
+{% endmacro %}
