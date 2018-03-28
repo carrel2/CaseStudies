@@ -34,7 +34,7 @@
 
 {% block footer %}
 	{% if app.user.location == "Hospital" %}
-		<a href="{{ path('review') }}">Review</a>
+		<a class="button is-primary" href="{{ path('review') }}">Review</a>
 	{% endif %}
 
 	{{ parent() }}
