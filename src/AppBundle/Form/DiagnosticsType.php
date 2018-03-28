@@ -27,6 +27,7 @@ class DiagnosticsType extends AbstractType
 				},
 			))
 			->add('submit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
+				'label' => 'Submit and move on',
 				'attr' => array('class' => 'is-success'),
 			));
 	}
