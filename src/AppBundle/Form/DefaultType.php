@@ -20,6 +20,9 @@ class DefaultType extends AbstractType
 
 			if( $case ) {
 				$form->add('resume', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
+					'attr' => array(
+						'style' => 'margin-bottom: 1rem;',
+					),
 				))
 					->add('abandon', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 						'attr' => array(
@@ -53,6 +56,9 @@ class DefaultType extends AbstractType
 					))
 					->add('start', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 						'label' => "Begin Physical Examination",
+						'attr' => array(
+							'style' => 'margin-bottom: 1rem;',
+						),
 					));
 			}
 		});
