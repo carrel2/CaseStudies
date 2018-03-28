@@ -36,6 +36,9 @@ class DayController extends Controller
 			))
 			->add('finish', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 				'label' => $finished == 'finished' ? 'Finish' : 'Go to next day',
+				'label_attr' => array(
+					'class' => 'is-large',
+				),
 				'attr' => array(
 					'class' => 'button',
 				),
