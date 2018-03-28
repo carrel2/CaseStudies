@@ -154,7 +154,7 @@ function updateHotspots() {
 			$.get('/courses/cs/update/' + $(this).attr('data-path'), function(data, s) {
 				var coords = area.coords.split(",");
 
-				$('#hotspots').append('<div style="background: rgba(255,255,255,.4);position:absolute;top:' + coords[0] + 'px;left:' + coords[1] + 'px;height:' + (coords[3] - coords[1]) + 'px;width:' + (coords[2] - coords[0]) + 'px;</div>' );
+				$('#hotspots').append('<div style="background: rgba(255,255,255,.4);position:absolute;top:' + coords[0] + 'px;left:' + coords[1] + 'px;height:' + (coords[3] - coords[1]) + 'px;width:' + (coords[2] - coords[0]) + 'px;"></div>' );
 				$('#checked').append(data);
 
 				$('#checked').imagesLoaded().always(moveFooter);
