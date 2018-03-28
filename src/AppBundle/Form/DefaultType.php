@@ -21,12 +21,13 @@ class DefaultType extends AbstractType
 			if( $case ) {
 				$form->add('resume', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 					'attr' => array(
-						'style' => 'margin-bottom: 1rem;',
+						'style' => 'margin-top: 1rem;',
 					),
 				))
 					->add('abandon', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 						'attr' => array(
 							'class' => 'is-danger',
+							'style' => 'margin-top: 1rem;',
 							'onclick' => 'return confirmDelete();',
 						)
 					));
