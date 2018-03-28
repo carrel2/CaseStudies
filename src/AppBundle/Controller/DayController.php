@@ -49,7 +49,7 @@ class DayController extends Controller
 
 			$session->set('diagnosis-' . $user->getCurrentDay()->getId(), $diagnosis);
 
-			if( $finished ) {
+			if( $finished == 'finished' ) {
 				return $this->redirectToRoute('reset');
 			}
 
