@@ -137,11 +137,11 @@ class AdminController extends Controller
 			array(
 				'class' => 'AppBundle:User',
 				'choice_label' => 'username',
+				'label_attr' => array('class' => 'is-large'),
 				'expanded' => true,
 			))
 			->add('edit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 				'attr' => array('class' => 'is-success'),
-				'label_attr' => array('class' => 'is-large'),
 			))
 			->add('delete', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 				'attr' => array(

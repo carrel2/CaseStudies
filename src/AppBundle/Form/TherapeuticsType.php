@@ -28,7 +28,10 @@ class TherapeuticsType extends AbstractType
 			))
 			->add('submit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 				'label' => 'Submit and move on',
-				'attr' => array('class' => 'is-success'),
+				'attr' => array(
+					'class' => 'is-success',
+					'style' => 'margin-top: 1rem;',
+				),
 			));
 	}
 }
