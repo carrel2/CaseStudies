@@ -141,11 +141,15 @@ class AdminController extends Controller
 				'expanded' => true,
 			))
 			->add('edit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
-				'attr' => array('class' => 'is-success'),
+				'attr' => array(
+					'class' => 'is-success',
+					'style' => 'margin-top: 1rem;',
+				),
 			))
 			->add('delete', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 				'attr' => array(
 					'class' => 'is-danger',
+					'style' => 'margin-top: 1rem;',
 					'onclick' => 'return confirmDelete();',
 				),
 			))->getForm();
@@ -231,11 +235,15 @@ class AdminController extends Controller
 				'expanded' => true,
 			))
 			->add('edit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
-				'attr' => array('class' => 'is-success'),
+				'attr' => array(
+					'class' => 'is-success',
+					'style' => 'margin-top: 1rem;',
+				),
 			))
 			->add('delete', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 				'attr' => array(
 					'class' => 'is-danger',
+					'style' => 'margin-top: 1rem;',
 					'onclick' => 'return confirmDelete();',
 				),
 			))->getForm();
@@ -353,11 +361,15 @@ class AdminController extends Controller
 					)
 				))
 				->add('edit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
-					'attr' => array('class' => 'is-success'),
+					'attr' => array(
+						'class' => 'is-success',
+						'style' => 'margin-top: 1rem;',
+					),
 				))
 				->add('delete', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 					'attr' => array(
 						'class' => 'is-danger',
+						'style' => 'margin-top: 1rem;',
 						'onclick' => 'return confirmDelete();',
 					),
 				))->getForm();
@@ -466,11 +478,15 @@ class AdminController extends Controller
 					)
 				))
 				->add('edit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
-					'attr' => array('class' => 'is-success'),
+					'attr' => array(
+						'class' => 'is-success',
+						'style' => 'margin-top: 1rem;',
+					),
 				))
 				->add('delete', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
 					'attr' => array(
 						'class' => 'is-danger',
+						'style' => 'margin-top: 1rem;',
 						'onclick' => 'return confirmDelete();',
 					),
 				))->getForm();
