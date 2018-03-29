@@ -24,6 +24,7 @@ security:
     access_control:
         - { path: ^/, roles: ROLE_USER }
         - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/admin/super, roles: ROLE_SUPER_ADMIN }
 
     role_hierarchy:
         ROLE_ADMIN:	ROLE_USER
