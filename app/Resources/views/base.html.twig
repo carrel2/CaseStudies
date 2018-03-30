@@ -39,7 +39,7 @@
   {% if app.session.flashBag.has('results') %}
     <div class="notification is-primary">
       <p>Your results for {{ app.session.flashBag.get('results')|first }} have been submitted.</p>
-      <p>You can review your results at <a href="{{ url('results') }}">{{ path('results') }}</a></p>
+      <p>You can review your results at <a href="{{ url('results') }}">{{ url('results') }}</a></p>
     </div>
   {% endif %}
   {% for flash in app.session.flashBag.get('success') %}
