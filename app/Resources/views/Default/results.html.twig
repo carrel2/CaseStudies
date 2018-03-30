@@ -81,9 +81,11 @@
 
   <div class="column is-two-thirds-desktop">
     {% for result in results %}
-      <div id="details" class="box{% if not loop.first %} is-hidden{% endif %}" data-result="result-{{ result.id }}">
-        <h1 class="title">Location</h1><h2 class="subtitle">{{ result.location }}</h2>
-        <h1 class="title">Diagnosis</h1><h2 class="subtitle">{{ result.results|last.diagnosis }}</h2>
+      <div id="details" class="message{% if not loop.first %} is-hidden{% endif %}" data-result="result-{{ result.id }}">
+        <div class="message-body">
+          <h1 class="title">Location</h1><h2 class="subtitle">{{ result.location }}</h2>
+          <h1 class="title">Diagnosis</h1><h2 class="subtitle">{{ result.results|last.diagnosis }}</h2>
+        </div>
       </div>
 
       {% for day in result.results %}
