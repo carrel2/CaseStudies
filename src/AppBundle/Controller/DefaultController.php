@@ -158,7 +158,7 @@ class DefaultController extends Controller
 
 		$em->flush();
 
-		$this->addFlash('notice', "Your results for {$case->getTitle()} have been submitted. You can review your results at <a href='{$this->generateUrl('results')}'>{$this->generateUrl('results')}<a/>");
+		$this->addFlash('results', $case->getTitle());
 
 		return $this->redirectToRoute('default');
 	}

@@ -36,6 +36,12 @@
 {% endblock %}
 
 {% block flashes %}
+  {% if app.session.flashBag.has('results') %}
+    <div class="notification is-primary">
+      <p>Your results for {{ app.session.flashBag.get('results') }} have been submitted.</p>
+      <p>You can review your results at <a href="{{ path('results') }}">{{ path('results') }}</a></p>
+    </div>
+  {% endfor %}
   {% for flash in app.session.flashBag.get('success') %}
     <div class="notification is-success">{{ flash }}</div>
   {% endfor %}
