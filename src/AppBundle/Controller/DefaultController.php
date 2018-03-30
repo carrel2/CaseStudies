@@ -90,7 +90,7 @@ class DefaultController extends Controller
 		$user = $this->getUser();
 		$case = $user->getCaseStudy();
 
-		if( $session->has('diagnosis-' . $user->getCurrentDay()->getId()) && $session->remove('finished') )
+		if( $session->has('diagnosis-' . $user->getCurrentDay()->getId()) && $user->getCurrentProgress() == "finished" )
 		{
 			$results = new Results();
 
@@ -157,6 +157,8 @@ class DefaultController extends Controller
 		$session->getFlashBag()->clear();
 
 		$em->flush();
+
+		$this->addFlash('notice', "Your results for {$case->getTitle()} have been submitted. You can review your results at <a href='{$this->generateUrl('results')}'>{$this->generateUrl('results')}<a/>");
 
 		return $this->redirectToRoute('default');
 	}
