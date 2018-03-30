@@ -87,48 +87,64 @@
       </div>
 
       {% for day in result.results %}
-        <div data-id="result-{{ result.id }}-day-{{ loop.index }}" class="box{% if not loop.first or not loop.parent.loop.first %} is-hidden{% endif %}">
-          <div id="hotspots">
-            <p class="title">Physical examination results</p>
+        <div data-id="result-{{ result.id }}-day-{{ loop.index }}"{% if not loop.first or not loop.parent.loop.first %} class="is-hidden"{% endif %}>
+          <div id="hotspots" class="message">
+            <div class="message-header">
+              <p class="title has-text-white">Physical examination results</p>
+            </div>
 
-            {% for name, info in day.hotspotsInfo %}
-              <div><em>{{ name }}: </em><span>{{ info|raw }}</span></div>
-            {% endfor %}
-
-            {% if day.differentials is defined %}
-              <p class="title">Differentials</p>
-
-              <div class="columns">
-                <div class="column">{{ day.differentials }}</div>
-              </div>
-            {% endif %}
-          </div>
-
-          <div id="testResults">
-            <p class="title">Diagnostic results</p>
-
-            <div class="columns is-multiline">
-              {% for test, result in day.diagnostics %}
-                <div class="column is-3"><em>{{ test }}:</em></div><div class="column is-9 content">{{ result|raw }}</div>
+            <div class="message-body">
+              {% for name, info in day.hotspotsInfo %}
+                <div><em>{{ name }}: </em><span>{{ info|raw }}</span></div>
               {% endfor %}
+
+              {% if day.differentials is defined %}
+                <p class="title is-5">Differentials</p>
+
+                <div class="columns">
+                  <div class="column">{{ day.differentials }}</div>
+                </div>
+              {% endif %}
             </div>
           </div>
 
-          <div id="medicationResults">
-            <p class="title">Therapeutic results</p>
+          <div id="testResults" class="message">
+            <div class="message-header">
+              <p class="title has-text-white">Diagnostic results</p>
+            </div>
 
-            <div class="columns is-multiline">
-              {% for medication, result in day.therapeutics %}
-                <div class="column is-3"><em>{{ medication }}:</em></div><div class="column is-9 content">{{ result|raw }}</div>
-              {% endfor %}
+            <div class="message-body">
+              <div class="columns is-multiline">
+                {% for test, result in day.diagnostics %}
+                  <div class="column is-3"><em>{{ test }}:</em></div><div class="column is-9 content">{{ result|raw }}</div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+
+          <div id="medicationResults" class="message">
+            <div class="message-header">
+              <p class="title has-text-white">Therapeutic results</p>
+            </div>
+
+            <div class="message-body">
+              <div class="columns is-multiline">
+                {% for medication, result in day.therapeutics %}
+                  <div class="column is-3"><em>{{ medication }}:</em></div><div class="column is-9 content">{{ result|raw }}</div>
+                {% endfor %}
+              </div>
             </div>
           </div>
 
           {% if day.diagnosis is defined and not loop.last %}
-            <div id="diagnosis">
-              <p class="title">Tentative Diagnosis</p>
+            <div id="diagnosis" class="message">
+              <div class="message-header">
+                <p class="title has-text-white">Tentative Diagnosis</p>
+              </div>
 
-              <div>{{ day.diagnosis }}</div>
+              <div class="message-body">
+                {{ day.diagnosis }}
+              </div>
             </div>
           {% endif %}
         </div>
