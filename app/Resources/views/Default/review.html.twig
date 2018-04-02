@@ -63,7 +63,7 @@
       <div data-id="day-{{ day.id }}"{% if not loop.last %} class=" is-hidden"{% endif %}>
         <div class="message">
           <div class="message-header">
-            <h2 class="title is-5 has-text-white">Physical examination results</h2>
+            <h2 class="title is-5 has-text-white">Physical examination results - Day {{ loop.index }}</h2>
           </div>
 
           <div class="message-body">
@@ -87,7 +87,7 @@
 
         <div class="message">
           <div class="message-header">
-            <h2 class="title is-5 has-text-white">Diagnostic results</h2>
+            <h2 class="title is-5 has-text-white">Diagnostic results - Day {{ loop.index }}</h2>
           </div>
 
           <div class="message-body">
@@ -117,7 +117,7 @@
 
         <div class="message">
           <div class="message-header">
-            <h2 class="title is-5 has-text-white">Therapeutic results</h2>
+            <h2 class="title is-5 has-text-white">Therapeutic results - Day {{ loop.index }}</h2>
           </div>
 
           <div class="message-body">

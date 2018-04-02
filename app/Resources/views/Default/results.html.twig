@@ -92,7 +92,7 @@
         <div data-id="result-{{ result.id }}-day-{{ loop.index }}"{% if not loop.first or not loop.parent.loop.first %} class="is-hidden"{% endif %}>
           <div id="hotspots" class="message">
             <div class="message-header">
-              <p class="title has-text-white">Physical examination results</p>
+              <p class="title is-5 has-text-white">Physical examination results - Day {{ loop.index }}</p>
             </div>
 
             <div class="message-body">
@@ -101,7 +101,7 @@
               {% endfor %}
 
               {% if day.differentials is defined %}
-                <p class="title is-5">Differentials</p>
+                <p class="subtitle is-5"><u>Differentials</u></p>
 
                 <div class="columns">
                   <div class="column">{{ day.differentials }}</div>
@@ -112,7 +112,7 @@
 
           <div id="testResults" class="message">
             <div class="message-header">
-              <p class="title has-text-white">Diagnostic results</p>
+              <p class="title is-5 has-text-white">Diagnostic results - Day {{ loop.index }}</p>
             </div>
 
             <div class="message-body">
@@ -126,7 +126,7 @@
 
           <div id="medicationResults" class="message">
             <div class="message-header">
-              <p class="title has-text-white">Therapeutic results</p>
+              <p class="title is-5 has-text-white">Therapeutic results - Day {{ loop.index }}</p>
             </div>
 
             <div class="message-body">
@@ -141,7 +141,7 @@
           {% if day.diagnosis is defined and not loop.last %}
             <div id="diagnosis" class="message">
               <div class="message-header">
-                <p class="title has-text-white">Tentative Diagnosis</p>
+                <p class="title is-5 has-text-white">Tentative Diagnosis</p>
               </div>
 
               <div class="message-body">
