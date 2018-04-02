@@ -89,6 +89,7 @@ class DefaultController extends Controller
 		$session = $r->getSession();
 		$user = $this->getUser();
 		$case = $user->getCaseStudy();
+		$addFlash = false;
 
 		if( $session->has('diagnosis-' . $user->getCurrentDay()->getId()) && $user->getCurrentProgress() == "finished" )
 		{
@@ -146,6 +147,8 @@ class DefaultController extends Controller
 				);
 
 			$this->get('mailer')->send($message);
+
+			$addFlash = true;
 		}
 
 		$session->clear();
@@ -158,7 +161,9 @@ class DefaultController extends Controller
 
 		$em->flush();
 
-		$this->addFlash('results', $case->getTitle());
+		if( $addFlash ) {
+			$this->addFlash('results', $case->getTitle());
+		}
 
 		return $this->redirectToRoute('default');
 	}
