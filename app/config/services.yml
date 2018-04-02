@@ -40,6 +40,11 @@ services:
       class: AppBundle\Security\TokenAuthenticator
       arguments: ['@doctrine.orm.entity_manager']
 
+    app.response_listener:
+      class: AppBundle\EventListener\ResponseListener
+      tags:
+        - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+
     session.handler.pdo:
       class: Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
       public: false
