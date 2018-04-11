@@ -52,7 +52,8 @@ class FileController extends Controller
 
     if( $form->isSubmitted() && $form->isValid() )
     {
-      $count = 0;
+      $importCount = 0;
+      $updateCount = 0;
       $type = $form->getData()['type'];
       $file = $form->getData()['file'];
       $sheet = $form->getData()['sheet'];
@@ -71,7 +72,7 @@ class FileController extends Controller
               $obj = $em->getRepository("AppBundle:$type")->findOneByName($row['name']);
 
               if( $row['name'] !== null && !$obj ) {
-                $count++;
+                $importCount++;
                 $em->persist( new $class($row) );
               } elseif( $row['name'] !== null && $obj ) {
                 $obj->setName($row['name']);
@@ -79,11 +80,19 @@ class FileController extends Controller
                 $row['group'] !== null ? $obj->setDGroup($row['group']) : '';
                 $row['wait time'] !== null ? $obj->setWaitTime($row['wait time']) : '';
                 $row['default result'] ? $obj->setDefaultResult($row['default result']) : '';
+
+                $updateCount++;
               }
             }
           }
         } catch( \PHPExcel_Exception $e ) {
-          $this->addFlash('success', "Imported $count " . ngettext($type == "Medication" ? "Therapeutic procedure" : "Diagnostic procedure",$type == "Medication" ? "Therapeutic procedures" : "Diagnostic procedures", $count) . "!");
+          if( $importCount ) {
+            $this->addFlash('success', "Imported $importCount " . ngettext($type == "Medication" ? "Therapeutic procedure" : "Diagnostic procedure",$type == "Medication" ? "Therapeutic procedures" : "Diagnostic procedures", $importCount) . "!");
+          }
+
+          if( $updateCount ) {
+            $this->addFlash('success', "Updated $updateCount " . ngettext($type == "Medication" ? "Therapeutic procedure" : "Diagnostic procedure",$type == "Medication" ? "Therapeutic procedures" : "Diagnostic procedures", $updateCount) . "!");
+          }
         }
       }
       else {
@@ -95,7 +104,7 @@ class FileController extends Controller
               $obj = $em->getRepository("AppBundle:$type")->findOneByName($row['name']);
 
               if( $row['name'] !== null && !$obj ) {
-                $count++;
+                $importCount++;
                 $em->persist( new $class($row) );
               } elseif( $row['name'] !== null && $obj ) {
                 $obj->setName($row['name']);
@@ -103,10 +112,18 @@ class FileController extends Controller
                 $row['group'] !== null ? $obj->setDGroup($row['group']) : '';
                 $row['wait time'] !== null ? $obj->setWaitTime($row['wait time']) : '';
                 $row['default result'] ? $obj->setDefaultResult($row['default result']) : '';
+
+                $updateCount++;
               }
             }
 
-            $this->addFlash('success', "Imported $count " . ngettext($type == "Medication" ? "Therapeutic procedure" : "Diagnostic procedure",$type == "Medication" ? "Therapeutic procedures" : "Diagnostic procedures", $count) . "!");
+            if( $importCount ) {
+              $this->addFlash('success', "Imported $importCount " . ngettext($type == "Medication" ? "Therapeutic procedure" : "Diagnostic procedure",$type == "Medication" ? "Therapeutic procedures" : "Diagnostic procedures", $importCount) . "!");
+            }
+
+            if( $updateCount ) {
+              $this->addFlash('success', "Updated $updateCount " . ngettext($type == "Medication" ? "Therapeutic procedure" : "Diagnostic procedure",$type == "Medication" ? "Therapeutic procedures" : "Diagnostic procedures", $updateCount) . "!");
+            }
           } catch( \PHPExcel_Exception $e ) {
             $this->addFlash('error', 'Invalid sheet number');
           }
