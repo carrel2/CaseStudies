@@ -94,11 +94,11 @@
             <div class="columns is-multiline">
               {% for testResult in day.tests %}
                 {% if testResult.waitTime and ( elapsed - testResult.waitTime == 0 or testResult.waitTime < elapsed ) %}
-                  <div class="column is-3">{{ elapsed - testResult.waitTime == 0 ? m.tag('New results', 'is-success') : '' }}<em>{{ testResult.test.name }} (${{ testResult.test.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ testResult.results|raw }}</span></div>
+                  <div class="column is-3">{{ elapsed - testResult.waitTime == 0 ? m.tag('New results', 'is-success') : '' }}<em>{{ testResult.test.name }} (${{ testResult.test.cost|number_format }}):</em></div><div class="column is-9 content"><span class="info"> {{ testResult.results|raw }}</span></div>
                 {% elseif testResult.test.waitTime == 0 or testResult.test.waitTime < elapsed %}
-                  <div class="column is-3">{{ elapsed - testResult.test.waitTime == 0 ? m.tag('New results', 'is-success') : '' }}<em>{{ testResult.test.name }} (${{ testResult.test.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ testResult.results|raw }}</span></div>
+                  <div class="column is-3">{{ elapsed - testResult.test.waitTime == 0 ? m.tag('New results', 'is-success') : '' }}<em>{{ testResult.test.name }} (${{ testResult.test.cost|number_format }}):</em></div><div class="column is-9 content"><span class="info"> {{ testResult.results|raw }}</span></div>
                 {% elseif finished %}
-                  <div class="column is-3"><em>{{ testResult.test.name }} (${{ testResult.test.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info">{{ testResult.results|raw }}</span></div>
+                  <div class="column is-3"><em>{{ testResult.test.name }} (${{ testResult.test.cost|number_format }}):</em></div><div class="column is-9 content"><span class="info">{{ testResult.results|raw }}</span></div>
                 {% else %}
                   <div class="column is-full">{{ m.tag('Pending results', 'is-info') }}<em>{{ testResult.test.name }}:</em><span> ...</span></div>
                 {% endif %}
@@ -108,7 +108,7 @@
                 {% set dFlash = find(flash, "AppBundle:Test") %}
 
                 {% if flash is not empty %}
-                  <div class="column is-full"><em>{{ dFlash.name }} (${{ dFlash.cost|number_format(2) }}):</em> {{ dFlash.defaultResult }}</div>
+                  <div class="column is-full"><em>{{ dFlash.name }} (${{ dFlash.cost|number_format }}):</em> {{ dFlash.defaultResult }}</div>
                 {% endif %}
               {% endfor %}
             </div>
@@ -124,11 +124,11 @@
             <div class="columns is-multiline">
               {% for medResult in day.medications %}
                 {% if medResult.waitTime and ( elapsed - medResult.waitTime == 0 or medResult.waitTime < elapsed ) %}
-                  <div class="column is-3">{{ elapsed - medResult.waitTime == 0 ? m.tag('New results', 'is-success') : '' }}<em>{{ medResult.medication.name }} (${{ medResult.medication.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ medResult.results|raw }}</span></div>
+                  <div class="column is-3">{{ elapsed - medResult.waitTime == 0 ? m.tag('New results', 'is-success') : '' }}<em>{{ medResult.medication.name }} (${{ medResult.medication.cost|number_format }}):</em></div><div class="column is-9 content"><span class="info"> {{ medResult.results|raw }}</span></div>
                 {% elseif elapsed - medResult.medication.waitTime == 0 or medResult.medication.waitTime < elapsed %}
-                  <div class="column is-3">{{ elapsed - medResult.medication.waitTime == 0 ? m.tag('New results', 'is-success') : '' }}<em>{{ medResult.medication.name }} (${{ medResult.medication.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ medResult.results|raw }}</span></div>
+                  <div class="column is-3">{{ elapsed - medResult.medication.waitTime == 0 ? m.tag('New results', 'is-success') : '' }}<em>{{ medResult.medication.name }} (${{ medResult.medication.cost|number_format }}):</em></div><div class="column is-9 content"><span class="info"> {{ medResult.results|raw }}</span></div>
                 {% elseif finished %}
-                  <div class="column is-3"><em>{{ medResult.medication.name }} (${{ medResult.medication.cost|number_format(2) }}):</em></div><div class="column is-9 content"><span class="info"> {{ medResult.results|raw }}</span></div>
+                  <div class="column is-3"><em>{{ medResult.medication.name }} (${{ medResult.medication.cost|number_format }}):</em></div><div class="column is-9 content"><span class="info"> {{ medResult.results|raw }}</span></div>
                 {% else %}
                   <div class="column is-full">{{ m.tag('Pending results', 'is-info') }}<em>{{ medResult.medication.name }}:</em><span> ...</span></div>
                 {% endif %}
@@ -138,7 +138,7 @@
                 {% set tFlash = find(flash, "AppBundle:Medication") %}
 
                 {% if flash is not empty %}
-                  <div class="column is-full"><em>{{ tFlash.name }} (${{ tFlash.cost|number_format(2) }}):</em> {{ tFlash.defaultResult }}</div>
+                  <div class="column is-full"><em>{{ tFlash.name }} (${{ tFlash.cost|number_format }}):</em> {{ tFlash.defaultResult }}</div>
                 {% endif %}
               {% endfor %}
             </div>
@@ -171,7 +171,7 @@
 
             {% set testCost = testCost + app.session.flashBag.peek('diagnostic-cost-' ~ day.id)|first %}
 
-            <div>Diagnostic cost: ${{ testCost }}</div>
+            <div>Diagnostic cost: ${{ testCost|number_format }}</div>
 
               {% for medResult in day.medications %}
                 {% set medCost = medCost + medResult.medication.cost %}
@@ -179,13 +179,13 @@
 
             {% set medCost = medCost + app.session.flashBag.peek('therapeutic-cost-' ~ day.id)|first %}
 
-            <div>Therapeutic cost: ${{ medCost }}</div>
+            <div>Therapeutic cost: ${{ medCost|number_format }}</div>
 
             {% set totalCost = totalCost + testCost + medCost %}
           </h5>
         {% endfor %}
 
-        <h4 class="subtitle is-5">Total Cost: ${{ totalCost }}</h4>
+        <h4 class="subtitle is-5">Total Cost: ${{ totalCost|number_format }}</h4>
       </div>
     </div>
   </div>
