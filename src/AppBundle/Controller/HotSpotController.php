@@ -40,7 +40,7 @@ class HotSpotController extends Controller
 	}
 
 	/**
-	* @Route("/update/{id}", name="update")
+	* @Route("/update/{id}", name="update", condition="request.isXMLHttpRequest()")
 	* @Security("has_role('ROLE_USER')")
 	*/
 	public function updatePageAction(Request $r, HotSpot $hotspot)
@@ -74,10 +74,11 @@ class HotSpotController extends Controller
 	}
 
 	/**
-	* @Route("/addHotspot/{animal}/{name}/{x1}-{y1}-{x2}-{y2}", name="addHotspot")
+	* @Route("/addHotspot/{animal}/{name}", name="addHotspot")
 	*/
-	public function addHotspotAction(Animal $animal, $name, $x1, $y1, $x2, $y2)
+	public function addHotspotAction(Request $r, Animal $animal, $name)
 	{
+		$coords = $r->request->get('coords');
 		$hotspots = $animal->getHotspots();
 		$spot = null;
 		$name = ucfirst(strtolower(str_replace("%20", " ", $name)));
@@ -94,7 +95,7 @@ class HotSpotController extends Controller
 			$spot = new HotSpot();
 		}
 
-		$spot->setName($name)->setX1($x1)->setX2($x2)->setY1($y1)->setY2($y2);
+		$spot->setName($name)->setCoords($coords);
 
 		$animal->addHotspot($spot);
 

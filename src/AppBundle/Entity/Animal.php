@@ -22,11 +22,6 @@ class Animal
   private $id;
 
   /**
-  * @ORM\OneToMany(targetEntity="CaseStudy", mappedBy="animal")
-  */
-  private $cases;
-
-  /**
   * @ORM\Column(type="string", length=80)
   */
   private $name;
@@ -74,25 +69,6 @@ class Animal
     public function getImage()
     {
         return $this->image;
-    }
-
-    public function addCase(\AppBundle\Entity\CaseStudy $case)
-    {
-        $case->setAnimal($this);
-        $this->cases[] = $case;
-
-        return $this;
-    }
-
-    public function removeCase(\AppBundle\Entity\CaseStudy $case)
-    {
-        $case->setAnimal(null);
-        $this->cases->removeElement($case);
-    }
-
-    public function getCases()
-    {
-        return $this->cases;
     }
 
     public function addHotspot(\AppBundle\Entity\HotSpot $hotspot)
