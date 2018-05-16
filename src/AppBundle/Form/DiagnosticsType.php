@@ -20,7 +20,7 @@ class DiagnosticsType extends AbstractType
 				'multiple' => true,
 				'label' => false,
 				'choice_attr' => function(Test $t, $key, $index) {
-					return ['class' => 'test', 'data-cost' => $t->getCost()];
+					return ['class' => 'test', 'data-cost' => $t->getCostPerUnit()];
 				},
 				'group_by' => function($val, $key, $index) {
 					return $val->getGroup();

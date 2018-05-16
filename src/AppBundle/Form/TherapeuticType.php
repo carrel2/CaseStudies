@@ -18,7 +18,7 @@ class TherapeuticType extends AbstractType
         'class' => 'is-large',
       ),
     ))
-      ->add('cost', null, array(
+      ->add('costPerUnit', null, array(
         'attr' => array(
           'pattern' => '[0-9]+',
         ),

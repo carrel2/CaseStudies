@@ -18,9 +18,9 @@ class DiagnosticType extends AbstractType
         'class' => 'is-large',
       ),
     ))
-      ->add('cost', null, array(
+      ->add('costPerUnit', null, array(
         'attr' => array(
-          'pattern' => '[0-9]+',
+          'pattern' => '[0-9]+\.[0-9]{1,2}',
         ),
         'label_attr' => array(
           'class' => 'is-large',
@@ -35,7 +35,7 @@ class DiagnosticType extends AbstractType
       ))
       ->add('group', null, array(
         'required' => false,
-        'empty_data' => 0,
+        'empty_data' => null,
         'label_attr' => array(
           'class' => 'is-large',
         ),

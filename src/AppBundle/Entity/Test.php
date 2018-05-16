@@ -36,7 +36,7 @@ class Test
 	/**
 	 * @ORM\Column(type="string", length=10)
 	 */
-	private $cost;
+	private $costPerUnit;
 
 	/**
 	 * @ORM\Column(type="text", nullable=true)
@@ -54,7 +54,7 @@ class Test
 		if( $array )
 		{
 			$this->name = $array["name"];
-			$this->cost = $array["cost"] === null ? 0 : $array["cost"];
+			$this->costPerUnit = $array["cost"] === null ? 0 : $array["cost"];
 			$this->dGroup = $array["group"] === null ? '' : $array["group"];
 			$this->waitTime = $array["wait time"] === null ? 0 : $array["wait time"];
 			$this->defaultResult = $array["default result"] === null ? '' : $array["default result"];
@@ -90,16 +90,16 @@ class Test
 			return $this->dGroup;
 		}
 
-    public function setCost($cost)
+    public function setCostPerUnit($costPerUnit)
     {
-        $this->cost = $cost;
+        $this->costPerUnit = $costPerUnit;
 
         return $this;
     }
 
-    public function getCost()
+    public function getCostPerUnit()
     {
-        return $this->cost;
+        return $this->costPerUnit;
     }
 
     public function addResult(\AppBundle\Entity\TestResults $result)
