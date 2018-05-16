@@ -70,6 +70,7 @@ class DiagnosticsController extends Controller
 
 		return $this->render('Default/diagnostics.html.twig', array(
 			'form' => $form->createView(),
+			'animal_weight' => $user->getCaseStudy()->getAnimal()->getWeight(),
 		));
 	}
 }

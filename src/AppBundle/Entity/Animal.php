@@ -32,6 +32,11 @@ class Animal
   private $name;
 
   /**
+   * @ORM\Column(type="decimal", scale=2)
+   */
+  private $weight;
+
+  /**
   * @ORM\Column(type="string")
   */
   private $image; // TODO: look into having multiple images associated with an Animal
@@ -62,6 +67,18 @@ class Animal
     public function getName()
     {
         return $this->name;
+    }
+
+    public function setWeight($weight)
+    {
+        $this->weight = $weight;
+
+        return $this;
+    }
+
+    public function getWeight()
+    {
+        return $this->weight;
     }
 
     public function setImage($image)
