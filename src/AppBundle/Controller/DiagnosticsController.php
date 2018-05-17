@@ -26,7 +26,7 @@ class DiagnosticsController extends Controller
 
 		$user->setCurrentProgress('diagnostics');
 
-		$form = $this->createForm( 'AppBundle\Form\DiagnosticsType' );
+		$form = $this->createForm( 'AppBundle\Form\DiagnosticsType', null, array('cs' => $user->getCaseStudy()) );
 
 		$form->handleRequest($r);
 
