@@ -20,7 +20,7 @@ class DiagnosticType extends AbstractType
     ))
       ->add('costPerUnit', null, array(
         'attr' => array(
-          'pattern' => '[0-9]+\.[0-9]{1,2}',
+          'pattern' => '[0-9]+(\.[0-9]{1,2})?',
         ),
         'label_attr' => array(
           'class' => 'is-large',

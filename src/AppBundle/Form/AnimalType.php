@@ -26,6 +26,7 @@ class AnimalType extends AbstractType
         ),
       ))
       ->add('weight', null, array(
+        'label' => 'Weight (kg)',
         'label_attr' => array(
           'class' => 'is-large',
         )
