@@ -35,6 +35,11 @@ class TherapeuticResultsType extends AbstractType
 				'label_attr' => array(
 					'class' => 'is-large',
 				),
+			))
+			->add('cost', null, array(
+				'label_attr' => array(
+					'class' => 'is-large',
+				)
 			));
 	}
 
