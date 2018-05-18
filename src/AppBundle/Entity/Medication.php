@@ -121,6 +121,15 @@ class Medication
         return $this->results;
     }
 
+		public function getResultsByCase(\AppBundle\Entity\CaseStudy $caseStudy)
+		{
+			$collection = $this->results->filter(function($r) use ($caseStudy) {
+				return $r->getDay()->getCaseStudy()->getId() == $caseStudy->getId();
+			});
+
+			return $collection->isEmpty() ? null : $collection->first();
+		}
+
     public function setWaitTime($waitTime)
     {
         $this->waitTime = $waitTime;

@@ -22,7 +22,7 @@ class TherapeuticsController extends Controller
 			return $this->redirectToRoute('default');
 		}
 
-		$form = $this->createForm( 'AppBundle\Form\TherapeuticsType' );
+		$form = $this->createForm( 'AppBundle\Form\TherapeuticsType', null, array('cs' => $user->getCaseStudy()) );
 
 		$form->handleRequest($r);
 
