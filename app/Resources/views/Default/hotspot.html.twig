@@ -95,7 +95,7 @@
 		</div>
 	</div>
 
-	<div id="checked" class="column">
+	<div id="checked" class="column is-half-desktop">
 		{% for spot in checked %}
 			<li><em>{{ spot.hotspot.name }}:</em><span class="info"> {{ spot.info|raw }}</span></li>
 		{% endfor %}
@@ -104,6 +104,20 @@
 			<li>{{ flash }}: No information available</li>
 		{% endfor %}
 	</div>
+
+	{% if app.user.location == "Farm" %}
+		<div class="column is-half-desktop">
+			<label class="label" required>Estimated weight (kg)</label>
+
+			<div class="control has-icons-left">
+				<input class="input" type="text" placeholder="Weight (kg)">
+
+				<span class="icon is-left">
+					<i class="fas fa-weight"></i>
+				</span>
+			</div>
+		</div>
+	{% endif %}
 
 	<div id="modal" class="modal">
 	</div>
