@@ -68,9 +68,11 @@ class DiagnosticsController extends Controller
 
 		$em->flush();
 
+		$weight = $r->getSession()->has('estimated_weight') ? $r->getSession()->get('estimated_weight') : $user->getCaseStudy()->getAnimal()->getWeight();
+
 		return $this->render('Default/diagnostics.html.twig', array(
 			'form' => $form->createView(),
-			'animal_weight' => $user->getCaseStudy()->getAnimal()->getWeight(),
+			'animal_weight' => $weight,
 		));
 	}
 }

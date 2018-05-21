@@ -50,9 +50,11 @@ class TherapeuticsController extends Controller
 			return $this->redirectToRoute('logic');
 		}
 
+		$weight = $r->getSession()->has('estimated_weight') ? $r->getSession()->get('estimated_weight') : $user->getCaseStudy()->getAnimal()->getWeight();
+
 		return $this->render('Default/therapeutics.html.twig', array(
 			'form' => $form->createView(),
-			'animal_weight' => $user->getCaseStudy()->getAnimal()->getWeight(),
+			'animal_weight' => $weight,
 		));
 	}
 }
