@@ -2,12 +2,9 @@ var stack = [];
 
 function updateCase() {
 	var id = $('#default_title').val();
-	var button = $('#default_start').parent().parent().clone();
 
 	$('#case').load('/courses/cs/getDescription/' + id, function(response, status) {
 		$(response).imagesLoaded().always(moveFooter);
-		$('#default_start').parent().parent().remove();
-		$('#case_description').after(button);
 	});
 }
 
@@ -155,12 +152,7 @@ function updateAdminCase(id) {
 function updateHotspots() {
 	$('.hotspot').each(function() {
 		$(this).on('click', function() {
-			var area = this;
-
 			$.get('/courses/cs/update/' + $(this).attr('data-path'), function(data, s) {
-				var coords = area.coords.split(",");
-
-				$('#hotspots').append('<div style="background: rgba(255,255,255,.4);position:absolute;top:' + coords[1] + 'px;left:' + coords[0] + 'px;height:' + (coords[3] - coords[1]) + 'px;width:' + (coords[2] - coords[0]) + 'px;"></div>' );
 				$('#checked').append(data);
 
 				$('#checked').imagesLoaded().always(moveFooter);

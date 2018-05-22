@@ -1,30 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% import _self as i %}
-
 {% block scripts %}
 	{{ parent() }}
 
 	<script>
-		$(function() {
-			updateHotspots();
+		function hotspot(id, coords, color) {
+			this.id = id;
+			this.coords = coords;
+			this.color = color;
+			this.checked = false;
 
-			{% if app.session.get('modalUp', false) %}
-				modal();
-			{% endif %}
+			this.drawDefault = function(ctx = $('#canvas-default')[0].getContext("2d")) {
+				ctx.beginPath();
+				ctx.moveTo(coords[0], coords[1]);
 
-			$(window).resize(function() {
-				{% for spot in animal.hotspots %}
-					$('area.hotspot[data-path="{{ spot.id }}"]').attr('coords', $('#animal').innerWidth() * {{ spot.x1|number_format(2) }} + ',' + $('#animal').innerHeight() * {{ spot.y1|number_format(2) }} + ',' + $('#animal').innerWidth() * {{ spot.x2|number_format(2) }} + ',' + $('#animal').innerHeight() * {{ spot.y2|number_format(2) }} );
-				{% endfor %}
-			});
+				coords.forEach(function(item, index) {
+					if(index % 2 == 0) {
+						ctx.lineTo(coords[index], coords[index+1]);
+					}
+				});
 
-			$('#animal').ready(function() {
-				$(window).resize();
-			});
-		});
+				ctx.closePath();
+				ctx.fillStyle = "rgba(200,200,200,0.5)";
+				ctx.fill();
+			}
 
-		function modal(event=null) {
+			this.drawHidden = function(ctx = $('#canvas-hidden')[0].getContext("2d")) {
+				ctx.beginPath();
+				ctx.moveTo(coords[0], coords[1]);
+
+				coords.forEach(function(item, index) {
+					if(index % 2 == 0) {
+						ctx.lineTo(coords[index], coords[index+1]);
+					}
+				});
+
+				ctx.closePath();
+				ctx.fillStyle = color;
+				ctx.fill();
+			}
+
+			this.draw = function() {
+				this.drawDefault();
+				this.drawHidden();
+			}
+		}
+    
+    function modal(event=null) {
 			if( event ) {
 				event.preventDefault();
 			}
@@ -54,6 +76,61 @@
 				});
 			});
 		}
+
+		var hotspotList = [];
+
+		$(function() {
+      {% if app.session.get('modalUp', false) %}
+				modal();
+			{% endif %}
+      
+			$('body').append('<canvas id="canvas-hidden"></canvas>');
+
+      $('#canvas-hidden').attr({height: $('#canvas-default').height(), width: $('#canvas-default').width(), style: "display: none;"});
+
+			{% for hotspot in animal.hotspots %}
+        var coords{{ hotspot.id }} = {{ "[" ~ hotspot.coords|join(",") ~ "]" }}
+
+        coords{{ hotspot.id }}.forEach(function(item, index) {
+          if( index % 2 ) {
+            coords{{ hotspot.id }}[index] = item * $('canvas').height();
+          } else {
+            coords{{ hotspot.id }}[index] = item * $('canvas').width();
+          }
+        });
+
+        var newHotspot = new hotspot({{ hotspot.id }}, coords{{ hotspot.id }}, "rgb(#,#,#)".replace(/#/g, hotspotList.length + 1));
+
+        hotspotList.push( newHotspot );
+        newHotspot.drawHidden();
+      {% endfor %}
+
+			$.data(document.body, "hotspots", hotspotList);
+
+			$('#canvas-default').on("click", function(e) {
+				var rect = this.getBoundingClientRect();
+				var pos = {
+					x: e.clientX - rect.left,
+					y: e.clientY - rect.top
+				};
+
+				var rgb = document.getElementById("canvas-hidden").getContext("2d").getImageData(pos.x, pos.y, 1, 1);
+				var pos = rgb.data[0];
+
+				if( pos ) {
+					var h = hotspotList[pos - 1];
+
+					if( !h.checked ) {
+						$.get('/symfony/web/app_dev.php/update/' + h.id, function(data, status) {
+							$('#checked').append(data)
+						});
+
+						h.drawDefault();
+						h.checked = true;
+					}
+				}
+			});
+		});
 	</script>
 {% endblock %}
 
@@ -82,23 +159,10 @@
 		{% set class = 'is-2by1' %}
 	{% endif %}
 
-	{% if day.description is not empty %}
-		<div class="column is-full box">{{ day.description|raw }}</div>
-	{% endif %}
-
-	{{ i.instructions(app.user.days|length) }}
-
 	<div class="column is-half-desktop">
-		<div id="hotspots" class="image {{ class }}">
-			<img id="animal" src="{{ asset('images/' ~ animal.image) }}" usemap="#hotspots" />
-
-			<map name="hotspots">
-				{% for spot in animal.hotspots %}
-					<area class="hotspot" shape="rect" data-path="{{ spot.id }}">
-				{% endfor %}
-			</map>
-		</div>
+		<canvas id="canvas-default" height="600" width="900" style="background-image:url({{ asset( 'images/' ~ animal.image ) }}); background-size:contain;"></canvas>
 	</div>
+
 
 	<div id="checked" class="column is-half-desktop">
 		{% for spot in checked %}
@@ -131,22 +195,9 @@
 {% block footer %}
 	<div class="tabs">
 		<ul>
-			<li><a onclick="modal(event)">Continue</a></li>
-			<li><a href="{{ path('review') }}">Review</a></li>
+			<li><a>Continue</a></li>
 		</ul>
 	</div>
 
 	{{ parent() }}
 {% endblock %}
-
-{% macro instructions(i) %}
-  <div class="column is-full">
-    <h1 class="title">Physical Evaluation - Day {{ i }}</h1>
-
-    <div class="tile box">
-      <div class="content">
-        <p>Click the image to perform the physical evaluation</p>
-      </div>
-    </div>
-  </div>
-{% endmacro %}
