@@ -27,6 +27,11 @@ class Animal
   private $name;
 
   /**
+   * @ORM\Column(type="decimal", scale=2)
+   */
+  private $weight;
+
+  /**
   * @ORM\Column(type="string")
   */
   private $image; // TODO: look into having multiple images associated with an Animal
@@ -59,6 +64,18 @@ class Animal
         return $this->name;
     }
 
+    public function setWeight($weight)
+    {
+        $this->weight = $weight;
+
+        return $this;
+    }
+
+    public function getWeight()
+    {
+        return $this->weight;
+    }
+
     public function setImage($image)
     {
         $this->image = $image;
@@ -69,6 +86,25 @@ class Animal
     public function getImage()
     {
         return $this->image;
+    }
+
+    public function addCase(\AppBundle\Entity\CaseStudy $case)
+    {
+        $case->setAnimal($this);
+        $this->cases[] = $case;
+
+        return $this;
+    }
+
+    public function removeCase(\AppBundle\Entity\CaseStudy $case)
+    {
+        $case->setAnimal(null);
+        $this->cases->removeElement($case);
+    }
+
+    public function getCases()
+    {
+        return $this->cases;
     }
 
     public function addHotspot(\AppBundle\Entity\HotSpot $hotspot)

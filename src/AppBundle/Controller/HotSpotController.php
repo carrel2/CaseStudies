@@ -119,6 +119,8 @@ class HotSpotController extends Controller
 	}
 
 	/**
+	 * QUESTION: is this being used?
+	 *
 	* @Route("/getAnimalInfo/{animal}/{type}", name="getAnimalInfo")
 	*/
 	public function getAnimalInfo(Animal $animal, $type = null)
@@ -141,6 +143,11 @@ class HotSpotController extends Controller
 	{
 		$session = $r->getSession();
 		$diff = $r->request->get('explanation');
+		$eWeight = $r->request->has('estimated_weight') ? $r->request->get('estimated_weight') : null;
+
+		if( $eWeight ) {
+			$session->set('estimated_weight', $eWeight);
+		}
 
 		if( $diff && $moveOn ) {
 			$session->set("differentials-{$this->getUser()->getCurrentDay()->getId()}", $diff);

@@ -43,6 +43,11 @@ class MedicationResults
 	 */
 	private $waitTime;
 
+	/**
+	 * @ORM\Column(type="decimal", scale=2)
+	 */
+	private $cost;
+
 	public function __toString()
 	{
 		return sprintf("%s: %s", $this->medication->getName(), $this->results);
@@ -112,4 +117,16 @@ class MedicationResults
     {
         return $this->waitTime;
     }
+
+		public function setCost($cost)
+		{
+				$this->cost = $cost;
+
+				return $this;
+		}
+
+		public function getCost()
+		{
+				return $this->cost;
+		}
 }
