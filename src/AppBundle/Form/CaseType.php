@@ -50,7 +50,7 @@ class CaseType extends AbstractType
 				'onchange' => 'updateSelects("hotspot");',
 			),
 		))
-		->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) use($options) {
+		->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
 			$case = $event->getData();
 			$form = $event->getForm();
 
@@ -67,7 +67,7 @@ class CaseType extends AbstractType
 					'entry_options' => array(
 						'attr' => array(
 							'class' => 'notification',
-							'animal' => array_key_exists('data', $options) ? $options['data']->getAnimal()->getId() : null,
+							'animal' => $case->getAnimal()->getId(),
 						),
 						'label_attr' => array(
 							'class' => 'is-large',

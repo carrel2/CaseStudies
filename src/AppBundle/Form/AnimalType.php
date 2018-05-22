@@ -25,6 +25,12 @@ class AnimalType extends AbstractType
           'class' => 'is-large',
         ),
       ))
+      ->add('weight', null, array(
+        'label' => 'Weight (kg)',
+        'label_attr' => array(
+          'class' => 'is-large',
+        )
+      ))
       ->add('submit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
         'attr' => array('class' => 'is-success'),
       ));

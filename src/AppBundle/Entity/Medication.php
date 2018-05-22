@@ -36,7 +36,7 @@ class Medication
 	/**
 	 * @ORM\Column(type="string", length=10)
 	 */
-	private $cost;
+	private $costPerUnit;
 
 	/**
 	 * @ORM\Column(type="text", nullable=true)
@@ -54,7 +54,7 @@ class Medication
 		if( $array )
 		{
 			$this->name = $array["name"];
-			$this->cost = $array["cost"] === null ? 0 : $array["cost"];
+			$this->costPerUnit = $array["cost"] === null ? 0 : $array["cost"];
 			$this->tGroup = $array["group"] === null ? '' : $array["group"];
 			$this->waitTime = $array["wait time"] === null ? 0 : $array["wait time"];
 			$this->defaultResult = $array["default result"] === null ? '' : $array["default result"];
@@ -90,16 +90,16 @@ class Medication
 			return $this->tGroup;
 		}
 
-    public function setCost($cost)
+    public function setCostPerUnit($costPerUnit)
     {
-        $this->cost = $cost;
+        $this->costPerUnit = $costPerUnit;
 
         return $this;
     }
 
-    public function getCost()
+    public function getCostPerUnit()
     {
-        return $this->cost;
+        return $this->costPerUnit;
     }
 
     public function addResult(\AppBundle\Entity\MedicationResults $result)
@@ -120,6 +120,15 @@ class Medication
     {
         return $this->results;
     }
+
+		public function getResultsByCase(\AppBundle\Entity\CaseStudy $caseStudy)
+		{
+			$collection = $this->results->filter(function($r) use ($caseStudy) {
+				return $r->getDay()->getCaseStudy()->getId() == $caseStudy->getId();
+			});
+
+			return $collection->isEmpty() ? null : $collection->first();
+		}
 
     public function setWaitTime($waitTime)
     {

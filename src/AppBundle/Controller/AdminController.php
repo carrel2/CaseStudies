@@ -410,6 +410,7 @@ class AdminController extends Controller
 			if( $form->isSubmitted() && $form->isValid() )
 			{
 				$em = $this->getDoctrine()->getManager();
+				$test = $form->getData();
 
 				$em->persist($test);
 

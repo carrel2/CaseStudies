@@ -29,8 +29,14 @@
 				event.preventDefault();
 			}
 
+			var eWeight = null;
+
+			if( $("#estimated_weight").val() != undefined ) {
+				eWeight = $("#estimated_weight").val();
+			}
+
 			$('.modal').toggleClass('is-active');
-			$('.modal').load( "{{ path('differentials') }}", function() {
+			$('.modal').load( "{{ path('differentials') }}", {estimated_weight: eWeight}, function() {
 				$('.modal-card-body').prepend( $('#checked').children() );
 
 				$('.delete').on('click', function() {
@@ -40,7 +46,6 @@
 				});
 				$('#continue').on('click', function() {
 					var input = $('#differentials').val();
-
 					if( input.length ) {
 						$.post( "{{ path("differentials", { 'moveOn': true }) }}", {explanation: input}, function(result, status, xhr) {
 							location.href = "{{ path("diagnostics") }}";
@@ -95,7 +100,7 @@
 		</div>
 	</div>
 
-	<div id="checked" class="column">
+	<div id="checked" class="column is-half-desktop">
 		{% for spot in checked %}
 			<li><em>{{ spot.hotspot.name }}:</em><span class="info"> {{ spot.info|raw }}</span></li>
 		{% endfor %}
@@ -104,6 +109,20 @@
 			<li>{{ flash }}: No information available</li>
 		{% endfor %}
 	</div>
+
+	{% if app.user.location == "Farm" and app.user.days|length == 1 %}
+		<div class="column is-half-desktop">
+			<label class="label" required>Estimated weight (kg)</label>
+
+			<div class="control has-icons-left">
+				<input id="estimated_weight" class="input" type="text" placeholder="Weight (kg)">
+
+				<span class="icon is-left">
+					<i class="fas fa-weight"></i>
+				</span>
+			</div>
+		</div>
+	{% endif %}
 
 	<div id="modal" class="modal">
 	</div>

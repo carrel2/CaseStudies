@@ -16,8 +16,14 @@ function addCheckboxListener() {
 		var cb = $(this);
 		var cost = $('#cost');
 
-		var currentCost = Number(cost.text());
-		var cbCost = Number(cb.attr('data-cost'));
+		var currentCost = Number(cost.text()), weight = Number(cost.data('weight'));
+		var cbCost;
+
+		if( cb.data('use-weight') ) {
+			cbCost = Number(cb.attr('data-cost')) * weight;
+		} else {
+			cbCost = Number(cb.attr('data-cost'));
+		}
 
 		var isChecked = cb.prop('checked');
 
