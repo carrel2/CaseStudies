@@ -29,7 +29,7 @@
             points = [];
         }
 
-        $reset = $('<button type="button" class="button is-danger"><span>Reset selection</span><span class="icon"><i class="fa fa-trash-o"></i></span></button>');
+        $reset = $('<button type="button" class="button is-danger"><span>Reset selection</span><span class="icon"><i class="fa fa-eraser"></i></span></button>');
         $canvas = $('<canvas id="canvas-default">');
         ctx = $canvas[0].getContext('2d');
 

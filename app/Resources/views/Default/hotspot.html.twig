@@ -45,7 +45,7 @@
 				this.drawHidden();
 			}
 		}
-    
+
     function modal(event=null) {
 			if( event ) {
 				event.preventDefault();
@@ -83,7 +83,7 @@
       {% if app.session.get('modalUp', false) %}
 				modal();
 			{% endif %}
-      
+
 			$('body').append('<canvas id="canvas-hidden"></canvas>');
 
       $('#canvas-hidden').attr({height: $('#canvas-default').height(), width: $('#canvas-default').width(), style: "display: none;"});
@@ -162,7 +162,6 @@
 	<div class="column is-half-desktop">
 		<canvas id="canvas-default" height="600" width="900" style="background-image:url({{ asset( 'images/' ~ animal.image ) }}); background-size:contain;"></canvas>
 	</div>
-
 
 	<div id="checked" class="column is-half-desktop">
 		{% for spot in checked %}

@@ -13,24 +13,26 @@
 
       $('#canvas-hidden').attr({height: $('#canvas-default').height(), width: $('#canvas-default').width(), style: "display: none;"});
 
-      {% for hotspot in animal.hotspots %}
-        var coords{{ hotspot.id }} = {{ "[" ~ hotspot.coords|join(",") ~ "]" }}
+      {% if animal is not null %}
+        {% for hotspot in animal.hotspots %}
+          var coords{{ hotspot.id }} = {{ "[" ~ hotspot.coords|join(",") ~ "]" }}
 
-        coords{{ hotspot.id }}.forEach(function(item, index) {
-          if( index % 2 ) {
-            coords{{ hotspot.id }}[index] = item * $('canvas').height();
-          } else {
-            coords{{ hotspot.id }}[index] = item * $('canvas').width();
-          }
-        });
+          coords{{ hotspot.id }}.forEach(function(item, index) {
+            if( index % 2 ) {
+              coords{{ hotspot.id }}[index] = item * $('canvas').height();
+            } else {
+              coords{{ hotspot.id }}[index] = item * $('canvas').width();
+            }
+          });
 
-        var newHotspot = new hotspot(coords{{ hotspot.id }}, "rgb(#,#,#)".replace(/#/g, hotspotList.length + 1));
+          var newHotspot = new hotspot(coords{{ hotspot.id }}, "rgb(#,#,#)".replace(/#/g, hotspotList.length + 1));
 
-        hotspotList.push( newHotspot );
-        newHotspot.draw();
-      {% endfor %}
+          hotspotList.push( newHotspot );
+          newHotspot.draw();
+        {% endfor %}
 
-      $.data(document.body, "hotspots", hotspotList);
+        $.data(document.body, "hotspots", hotspotList);
+      {% endif %}
     }
 
     $(function() {
@@ -73,12 +75,6 @@
 
     <div class="column is-half-desktop">
       <textarea class="canvas-area" data-id="{{ animal.id }}" data-image="{{ asset('images/' ~ animal.image) }}" style="display: none;"></textarea>
-    </div>
-
-    <div id="hotspots" class="column is-3-desktop">
-      {% for hotspot in animal.hotspots %}
-        <div class="hotspot {{ hotspot.name|lower|replace({' ': '-'}) }}" id="hotspot-{{ loop.index }}">{{ hotspot.name }} <a href="{{ path('removeHotspot', {'animal': animal.id, 'hotspot': hotspot.id }) }}" onclick="return confirmDelete();">Remove</a></div>
-      {% endfor %}
     </div>
 
     <div class="column is-half is-offset-3-desktop">

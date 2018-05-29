@@ -37,6 +37,11 @@ class Animal
   private $image; // TODO: look into having multiple images associated with an Animal
 
   /**
+  * @ORM\OneToMany(targetEntity="CaseStudy", mappedBy="animal")
+  */
+  private $cases;
+
+  /**
   * @ORM\OneToMany(targetEntity="HotSpot", mappedBy="animal", cascade={"all"}, orphanRemoval=true)
   */
   private $hotspots;

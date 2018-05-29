@@ -18,6 +18,17 @@ class HotSpotInfo
 	private $id;
 
 	/**
+	 * @ORM\ManyToOne(targetEntity="Day", inversedBy="hotspotsInfo")
+	 */
+	private $day;
+
+	/**
+	 * @ORM\ManyToOne(targetEntity="UserDay", inversedBy="hotspotsInfo")
+	 * @ORM\JoinColumn(name="user_day_id", referencedColumnName="id", onDelete="SET NULL")
+	 */
+	private $userDay;
+
+	/**
 	 * @ORM\ManyToOne(targetEntity="HotSpot", inversedBy="info")
 	 */
 	private $hotspot;

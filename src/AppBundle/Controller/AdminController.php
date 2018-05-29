@@ -257,10 +257,15 @@ class AdminController extends Controller
 			if( $form->get('edit')->isClicked() ) {
 				return $this->redirectToRoute('editAnimal', array('id' => $animal->getId()));
 			} else if( $form->get('delete')->isClicked() ) {
-				$em->remove($animal);
-				$em->flush();
+				if( $animal->getCases()->isEmpty() ) {
+					$em->remove($animal);
+					$em->flush();
 
-				$this->addFlash('success', 'Deleted ' . $animal->getName());
+					$this->addFlash('success', 'Deleted ' . $animal->getName());
+				} else {
+					//TODO: give more info about which cases use the animal
+					$this->addFlash('notice', "{$animal->getName()} is being used by at least one case. Please make sure that no cases are using this animal before you delete it.");
+				}
 
 				return $this->redirectToRoute('manageAnimals');
 			}
