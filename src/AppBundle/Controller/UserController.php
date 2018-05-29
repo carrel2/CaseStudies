@@ -6,9 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Form\UserType;
 use AppBundle\Entity\User;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class UserController extends Controller
 {
