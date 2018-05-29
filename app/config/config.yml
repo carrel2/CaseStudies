@@ -52,7 +52,7 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
 
-ivory_ck_editor:
+fos_ck_editor:
   autoload: false
   jquery: true
   default_config: default
