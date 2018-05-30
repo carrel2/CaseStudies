@@ -59,7 +59,6 @@ class DayController extends Controller
 
 		return $this->render('Default/review.html.twig', array(
 			'user' => $user,
-			'finished' => $finished,
 			'form' => $form->createView(),
 		));
 	}

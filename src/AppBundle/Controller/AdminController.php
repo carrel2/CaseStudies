@@ -111,7 +111,6 @@ class AdminController extends Controller
 
 		return $this->render('Ajax/caseInfo.html.twig', array(
 			'form' => $form->createView(),
-			'case' => $case,
 			'id' => $case->getId(),
 		));
 	}
@@ -263,7 +262,6 @@ class AdminController extends Controller
 
 		return $this->render('Admin/manage.html.twig', array(
 			'form' => $form->createView(),
-			'animal' => null,
 			'route' => 'createAnimal',
 		));
 	}
@@ -294,7 +292,6 @@ class AdminController extends Controller
 		return $this->render('Admin/animals.html.twig', array(
 			'form' => $form->createView(),
 			'animal' => null,
-			'route' => null,
 		));
 	}
 
@@ -329,7 +326,6 @@ class AdminController extends Controller
 			 'form' => $form->createView(),
 			 'animal' => $animal,
 			 'size' => getimagesize("./images/{$animal->getImage()}"),
-			 'route' => null,
 		 ));
 	 }
 
