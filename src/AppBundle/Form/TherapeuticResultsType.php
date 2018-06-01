@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityRepository;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use AppBundle\Entity\MedicationResults;
 
@@ -23,7 +23,7 @@ class TherapeuticResultsType extends AbstractType
     		},
 				'label' => false,
 			))
-			->add('results', 'FOS\CKEditorBundle\Form\Type\CKEditorType', array(
+			->add('results', 'Ivory\CKEditorBundle\Form\Type\CKEditorType', array(
 				'label_attr' => array(
 					'class' => 'is-large',
 				),

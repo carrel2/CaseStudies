@@ -8,7 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -26,7 +26,7 @@ class CaseType extends AbstractType
 				'class' => 'is-large',
 			),
 		))
-		->add('description', 'FOS\CKEditorBundle\Form\Type\CKEditorType', array(
+		->add('description', 'Ivory\CKEditorBundle\Form\Type\CKEditorType', array(
 			'label_attr' => array(
 				'class' => 'is-large',
 			),

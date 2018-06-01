@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\EntityRepository;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use AppBundle\Entity\HotSpotInfo;
 
 class HotspotType extends AbstractType
@@ -27,7 +27,7 @@ class HotspotType extends AbstractType
 				),
 				'label' => false,
 			))
-			->add('info', 'FOS\CKEditorBundle\Form\Type\CKEditorType', array(
+			->add('info', 'Ivory\CKEditorBundle\Form\Type\CKEditorType', array(
 				'config' => array(
 					'autoParagraph' => false,
 				)

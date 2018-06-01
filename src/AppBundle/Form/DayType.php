@@ -15,7 +15,7 @@ class DayType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$builder->add('description', 'FOS\CKEditorBundle\Form\Type\CKEditorType', array(
+		$builder->add('description', 'Ivory\CKEditorBundle\Form\Type\CKEditorType', array(
 				'label_attr' => array(
 					'class' => 'is-large',
 				),
