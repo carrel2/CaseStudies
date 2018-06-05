@@ -32,9 +32,11 @@ class AppFixtures implements FixtureInterface
     $testResults = new TestResults();
     $user = new User();
 
+    copy("web/images/StandardbredGelding.jpeg", "web/images/fixtureImage.jpeg");
+
     $animal->setName("Standardbred gelding")
       ->setWeight(485.5)
-      ->setImage(new UploadedFile("web/images/294067bae33387a0ccdf4efa363124ce.jpeg", "image", null, null, null, true));
+      ->setImage(new UploadedFile("web/images/fixtureImage.jpeg", "image", null, null, null, true));
 
     $caseStudy->setTitle("Case 12")
       ->setDescription("This is case 12")
