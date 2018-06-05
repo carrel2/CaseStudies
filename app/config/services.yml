@@ -39,11 +39,6 @@ services:
     app.token_authenticator:
       class: AppBundle\Security\TokenAuthenticator
       arguments: ['@doctrine.orm.entity_manager']
-    #TODO remove on production server
-    app.request_listener:
-      class: AppBundle\EventListener\RequestListener
-      tags:
-        - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 9 }
 
     app.response_listener:
       class: AppBundle\EventListener\ResponseListener
