@@ -44,7 +44,7 @@ class MedicationResults
 	private $waitTime;
 
 	/**
-	 * @ORM\Column(type="decimal", scale=2)
+	 * @ORM\Column(type="decimal", scale=2, nullable=true)
 	 */
 	private $cost;
 

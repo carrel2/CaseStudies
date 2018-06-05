@@ -45,7 +45,6 @@ class Day
 
 	public function __construct()
 	{
-		$this->users = new ArrayCollection();
 		$this->hotspotsInfo = new ArrayCollection();
 		$this->tests = new ArrayCollection();
 		$this->medications = new ArrayCollection();
@@ -171,8 +170,9 @@ class Day
 
     public function addHotspotsInfo(\AppBundle\Entity\HotSpotInfo $hotspotsInfo)
     {
+			// REVIEW
 				if( !$this->getInfoByHotspot($hotspotsInfo->getHotspot()) ) {
-					$hotspotsInfo->setDay($this);
+					//$hotspotsInfo->setDay($this);
 	        $this->hotspotsInfo[] = $hotspotsInfo;
 				}
 
