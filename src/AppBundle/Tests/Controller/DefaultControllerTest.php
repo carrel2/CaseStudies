@@ -9,7 +9,7 @@ class DefaultControllerTest extends WebTestCase
   public function testDefaultAction() {
     $client = static::createClient();
 
-    $crawler = $client->request('GET', '/', array(), array(), array('remote-user' => 'netid'));
+    $crawler = $client->request('GET', '/', array(), array(), array('HTTP_REMOTE_USER' => 'netid'));
 
     system('cat var/logs/test.log');die;
 
