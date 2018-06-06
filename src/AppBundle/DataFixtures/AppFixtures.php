@@ -38,8 +38,8 @@ class AppFixtures implements FixtureInterface
       ->setWeight(485.5)
       ->setImage(new UploadedFile("web/images/fixtureImage.jpeg", "image", null, null, null, true));
 
-    $caseStudy->setTitle("Case 12")
-      ->setDescription("This is case 12")
+    $caseStudy->setTitle("Fixture Case")
+      ->setDescription("This is a barebones example case used for testing purposes")
       ->setEmail("email@example.org");
 
     $day->setDescription("Day 1");
