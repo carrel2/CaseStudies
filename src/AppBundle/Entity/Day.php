@@ -170,7 +170,7 @@ class Day
 
     public function addHotspotsInfo(\AppBundle\Entity\HotSpotInfo $hotspotInfo)
     {
-				if( !$this->hotspotsInfo->contains($hotspotinfo) ) {
+				if( !$this->hotspotsInfo->contains($hotspotInfo) ) {
 					$hotspotInfo->setDay($this);
 					$this->hotspotsInfo->add($hotspotInfo);
 				}
