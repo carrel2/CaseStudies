@@ -188,9 +188,10 @@ class User implements UserInterface, \Serializable
 
 	public function addDay(\AppBundle\Entity\UserDay $day)
 	{
-		$day->setUser($this);
-		$this->days[] = $day;
-
+		if( !$this->days->contains($day) ) {
+			$day->setUser($this);
+			$this->days->add($day);
+		}
 		return $this;
 	}
 
@@ -217,9 +218,10 @@ class User implements UserInterface, \Serializable
 
 	public function addResult(\AppBundle\Entity\Results $result)
 	{
-		$result->setUser($this);
-		$this->results[] = $result;
-
+		if( !$this->results->contains($result) ) {
+			$result->setUser($this);
+			$this->results->add($result);
+		}
 		return $this;
 	}
 
@@ -227,6 +229,8 @@ class User implements UserInterface, \Serializable
 	{
 		$result->setUser(null);
 		$this->results->removeElement($result);
+
+		return $this;
 	}
 
 	public function getResults()

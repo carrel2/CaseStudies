@@ -84,8 +84,10 @@ class UserDay
 
 	public function addHotspotInfo(\AppBundle\Entity\HotSpotInfo $hotspotInfo)
 	{
-		$hotspotInfo->setUserDay($this);
-		$this->hotspotsInfo[] = $hotspotInfo;
+		if( !$this->hotspotsInfo->contains($hotspotInfo) ) {
+			$hotspotInfo->setUserDay($this);
+			$this->hotspotsInfo->add($hotspotInfo);
+		}
 
 		return $this;
 	}
@@ -94,6 +96,8 @@ class UserDay
 	{
 		$hotspotInfo->setUserDay(null);
 		$this->hotspotsInfo->removeElement($hotspotInfo);
+
+		return $this;
 	}
 
 	public function removeHotspotsInfo()
@@ -112,8 +116,10 @@ class UserDay
 
 	public function addTest(\AppBundle\Entity\TestResults $test)
 	{
-		$test->setUserDay($this);
-		$this->tests[] = $test;
+		if( !$this->tests->contains($test) ) {
+			$test->setUserDay($this);
+			$this->tests->add($test);
+		}
 
 		return $this;
 	}
@@ -142,8 +148,10 @@ class UserDay
 
 	public function addMedication(\AppBundle\Entity\MedicationResults $medication)
 	{
-		$medication->setUserDay($this);
-		$this->medications[] = $medication;
+		if( !$this->medications->contains($medication) ) {
+			$medication->setUserDay($this);
+			$this->medications->add($medication);
+		}
 
 		return $this;
 	}
@@ -170,9 +178,12 @@ class UserDay
 		return $this->medications;
 	}
 
-    public function addHotspotsInfo(\AppBundle\Entity\HotSpotInfo $hotspotsInfo)
+    public function addHotspotsInfo(\AppBundle\Entity\HotSpotInfo $hotspotInfo)
     {
-        $this->hotspotsInfo[] = $hotspotsInfo;
+				if( !$this->hotspotsInfo->contains($hotspotInfo) ) {
+					$hotspotInfo->setUserDay($this);
+	        $this->hotspotsInfo->add($hotspotInfo);
+				}
 
         return $this;
     }

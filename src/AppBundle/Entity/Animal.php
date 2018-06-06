@@ -95,8 +95,10 @@ class Animal
 
     public function addCase(\AppBundle\Entity\CaseStudy $case)
     {
-        $case->setAnimal($this);
-        $this->cases[] = $case;
+        if( !$this->cases->contains($case) ) {
+          $case->setAnimal($this);
+          $this->cases->add($case);
+        }
 
         return $this;
     }
@@ -105,6 +107,8 @@ class Animal
     {
         $case->setAnimal(null);
         $this->cases->removeElement($case);
+
+        return $this;
     }
 
     public function getCases()
@@ -114,8 +118,10 @@ class Animal
 
     public function addHotspot(\AppBundle\Entity\HotSpot $hotspot)
     {
-        $hotspot->setAnimal($this);
-        $this->hotspots[] = $hotspot;
+        if( !$this->hotspots->contains($hotspot) ) {
+          $hotspot->setAnimal($this);
+          $this->hotspots->add($hotspot);
+        }
 
         return $this;
     }
@@ -124,6 +130,8 @@ class Animal
     {
         $hotspot->setAnimal(null);
         $this->hotspots->removeElement($hotspot);
+
+        return $this;
     }
 
     public function getHotspots()

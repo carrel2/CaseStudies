@@ -84,32 +84,26 @@ class HotSpot
         return $this->animal;
     }
 
-    public function addHotSpotInfo(\AppBundle\Entity\HotSpotInfo $info)
-    {
-        $this->info[] = $info;
-
-        return $this;
-    }
-
-    public function removeHotSpotInfo(\AppBundle\Entity\HotSpotInfo $info)
-    {
-        $this->info->removeElement($info);
-    }
-
-    public function getInfo()
-    {
-        return $this->info;
-    }
-
     public function addInfo(\AppBundle\Entity\HotSpotInfo $info)
     {
-        $this->info[] = $info;
+				if( !$this->info->contains($info) ) {
+					$info->setHotspot($this);
+					$this->info->add($info);
+				}
 
         return $this;
     }
 
     public function removeInfo(\AppBundle\Entity\HotSpotInfo $info)
     {
+				$info->setHotspot(null);
         $this->info->removeElement($info);
+
+				return $this;
+    }
+
+    public function getInfo()
+    {
+        return $this->info;
     }
 }

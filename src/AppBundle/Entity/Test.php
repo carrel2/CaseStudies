@@ -104,13 +104,16 @@ class Test
 
     public function addResult(\AppBundle\Entity\TestResults $result)
     {
-        $this->results[] = $result;
-
+				if( !$this->results->contains($result) ) {
+					$result->setTest($this);
+	        $this->results->add($result);
+				}
         return $this;
     }
 
     public function removeResult(\AppBundle\Entity\TestResults $result)
     {
+				$result->setTest(null);
         $this->results->removeElement($result);
 
 				return $this;

@@ -98,12 +98,12 @@ class Day
 
     public function addTest(\AppBundle\Entity\TestResults $test)
     {
-				if( !$this->getResultByTest($test->getTest()) ) {
-	        $test->setDay($this);
-	        $this->tests[] = $test;
+				if( !$this->tests->contains($test) ) {
+					$test->setDay($this);
+					$this->tests->add($test);
 				}
 
-        return $this;
+				return $this;
     }
 
     public function removeTest(\AppBundle\Entity\TestResults $test)
@@ -134,12 +134,12 @@ class Day
 
     public function addMedication(\AppBundle\Entity\MedicationResults $medication)
     {
-				if( !$this->getResultByMedication($medication->getMedication()) ) {
-	        $medication->setDay($this);
-	        $this->medications[] = $medication;
+				if( !$this->medications->contains($medication) ) {
+					$medication->setDay($this);
+					$this->medications->add($medication);
 				}
 
-        return $this;
+				return $this;
     }
 
     public function removeMedication(\AppBundle\Entity\MedicationResults $medication)
@@ -168,21 +168,22 @@ class Day
         return $this->medications;
     }
 
-    public function addHotspotsInfo(\AppBundle\Entity\HotSpotInfo $hotspotsInfo)
+    public function addHotspotsInfo(\AppBundle\Entity\HotSpotInfo $hotspotInfo)
     {
-			// REVIEW
-				if( !$this->getInfoByHotspot($hotspotsInfo->getHotspot()) ) {
-					//$hotspotsInfo->setDay($this);
-	        $this->hotspotsInfo[] = $hotspotsInfo;
+				if( !$this->hotspotsInfo->contains($hotspotinfo) ) {
+					$hotspotInfo->setDay($this);
+					$this->hotspotsInfo->add($hotspotInfo);
 				}
 
-        return $this;
+				return $this;
     }
 
-    public function removeHotspotsInfo(\AppBundle\Entity\HotSpotInfo $hotspotsInfo)
+    public function removeHotspotsInfo(\AppBundle\Entity\HotSpotInfo $hotspotInfo)
     {
-				$hotspotsInfo->setDay(null);
-        $this->hotspotsInfo->removeElement($hotspotsInfo);
+				$hotspotInfo->setDay(null);
+        $this->hotspotsInfo->removeElement($hotspotInfo);
+
+				return $this;
     }
 
     public function getHotspotsInfo()

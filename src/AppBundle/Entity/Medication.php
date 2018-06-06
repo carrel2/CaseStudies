@@ -104,13 +104,17 @@ class Medication
 
     public function addResult(\AppBundle\Entity\MedicationResults $result)
     {
-        $this->results[] = $result;
+				if( !$this->results->contains($result) ) {
+					$result->setMedication($this);
+					$this->results->add($result);
+				}
 
         return $this;
     }
 
     public function removeResult(\AppBundle\Entity\MedicationResults $result)
     {
+				$result->setMedication(null);
         $this->results->removeElement($result);
 
 				return $this;

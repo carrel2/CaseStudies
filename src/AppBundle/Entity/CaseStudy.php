@@ -103,8 +103,10 @@ class CaseStudy
 
 	public function addDay(\AppBundle\Entity\Day $day)
 	{
-		$day->setCaseStudy($this);
-		$this->days[] = $day;
+		if( !$this->days->contains($day) ) {
+			$day->setCaseStudy($this);
+			$this->days->add($day);
+		}
 
 		return $this;
 	}
@@ -124,8 +126,10 @@ class CaseStudy
 
 	public function addUser(\AppBundle\Entity\User $user)
 	{
-		$user->setCaseStudy($this);
-		$this->users[] = $user;
+		if( !$this->users->contains($user) ) {
+			$user->setCaseStudy($this);
+			$this->users->add($user);
+		}
 
 		return $this;
 	}

@@ -55,6 +55,30 @@ class HotSpotInfo
         return $this->info;
     }
 
+		public function setDay(\AppBundle\Entity\Day $day)
+		{
+				$this->day = $day;
+
+				return $this;
+		}
+
+		public function getDay()
+		{
+				return $this->day;
+		}
+
+		public function setUserDay(\AppBundle\Entity\UserDay $userDay)
+		{
+				$this->userDay = $userDay;
+
+				return $this;
+		}
+
+		public function getUserDay()
+		{
+				return $this->userDay;
+		}
+
     public function setHotspot(\AppBundle\Entity\HotSpot $hotspot = null)
     {
         $this->hotspot = $hotspot;
