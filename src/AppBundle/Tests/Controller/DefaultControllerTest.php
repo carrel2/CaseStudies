@@ -9,9 +9,7 @@ class DefaultControllerTest extends WebTestCase
   public function testDefaultAction() {
     $client = static::createClient();
 
-    $crawler = $client->request('GET', '/');
-
-    system('cat var/logs/test.log');die;
+    $crawler = $client->request('GET', '/', array(), array(), array('remote-user' => 'netid'));
 
     $this->assertCount(2, $crawler->filter('div.tile.box'));
     $this->assertCount(1, $crawler->filter('button#default_start'));
