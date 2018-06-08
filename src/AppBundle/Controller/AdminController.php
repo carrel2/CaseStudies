@@ -17,16 +17,6 @@ use AppBundle\Entity\Medication;
 class AdminController extends Controller
 {
 	/**
-	 * @Route("/admin", name="admin")
-	 */
-	public function adminAction(Request $r)
-	{
-		return $this->render('admin.html.twig', array(
-			'form' => null,
-		));
-	}
-
-	/**
 	 * @Route("/admin/guides/{guide}", name="guides")
 	 */
 	public function guideAction(Request $r, $guide)

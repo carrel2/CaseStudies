@@ -68,7 +68,8 @@ class AppFixtures implements FixtureInterface
     $testResults->setResults("Results for skin biopsy")
       ->setTest($test);
 
-    $user->setUsername("netid");
+    $user->setUsername("netid")
+      ->setRole("ROLE_ADMIN");
 
     $day->addTest($testResults)
       ->addMedication($medicationResults)

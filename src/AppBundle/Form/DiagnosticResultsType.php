@@ -37,6 +37,7 @@ class DiagnosticResultsType extends AbstractType
 				),
 			))
 			->add('cost', null, array(
+				'required' => false,
 				'label_attr' => array(
 					'class' => 'is-large',
 				)
