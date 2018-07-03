@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use AppBundle\Entity\Test;
+use AppBundle\Entity\DiagnosticProcedure;
 
 class DiagnosticsType extends AbstractType
 {
@@ -17,15 +17,15 @@ class DiagnosticsType extends AbstractType
 
 		$builder
 			->add('test', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
-				'class' => 'AppBundle:Test',
+				'class' => 'AppBundle:DiagnosticProcedure',
 				'choice_label' => 'name',
 				'expanded' => true,
 				'multiple' => true,
 				'label' => false,
-				'choice_attr' => function(Test $t, $key, $index) use ($caseStudy) {
-					$r = $t->getResultsByCase($caseStudy);
+				'choice_attr' => function(DiagnosticProcedure $d, $key, $index) use ($caseStudy) {
+					$r = $d->getResultsByCase($caseStudy);
 
-					return ['class' => 'test', 'data-cost' => $r ? $r->getCost() : $t->getCostPerUnit(), 'data-use-weight' => (int) !((bool) $r)];
+					return ['class' => 'test', 'data-cost' => $r ? $r->getCost() : $d->getPerDayCost(), 'data-use-weight' => (int) !((bool) $r)];
 				},
 				'group_by' => function($val, $key, $index) {
 					return $val->getGroup();

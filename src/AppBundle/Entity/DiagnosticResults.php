@@ -1,14 +1,14 @@
 <?php
-// src/AppBundle/Entity/TestResults.php
+// src/AppBundle/Entity/DiagnosticResults.php
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="TestResults")
+ * @ORM\Table(name="DiagnosticResults")
  */
-class TestResults
+class DiagnosticResults
 {
 	/**
 	 * @ORM\Column(type="integer")
@@ -18,7 +18,7 @@ class TestResults
 	private $id;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="Day", inversedBy="tests")
+	 * @ORM\ManyToOne(targetEntity="Day", inversedBy="diagnosticResults")
 	 */
 	private $day;
 
@@ -29,7 +29,7 @@ class TestResults
 	private $userDay;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="Test", inversedBy="results")
+	 * @ORM\ManyToOne(targetEntity="DiagnosticProcedure", inversedBy="results")
 	 */
 	private $test;
 
@@ -70,14 +70,14 @@ class TestResults
         return $this->results;
     }
 
-    public function setTest(\AppBundle\Entity\Test $test = null)
+    public function setDiagnosticProcedure(\AppBundle\Entity\DiagnosticProcedure $test = null)
     {
         $this->test = $test;
 
         return $this;
     }
 
-    public function getTest()
+    public function getDiagnosticProcedure()
     {
         return $this->test;
     }

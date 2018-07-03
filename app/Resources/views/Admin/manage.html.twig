@@ -11,9 +11,11 @@
 {% extends 'admin.html.twig' %}
 
 {% block body %}
-  {{ form_start(form, {'attr': {'id': 'admin_manage_form'}} ) }}
-  {{ form_widget(form) }}
-  {{ form_end(form) }}
+  <div class="column is-two-thirds-tablet is-half-desktop">
+    {{ form_start(form, {'attr': {'id': 'admin_manage_form'}} ) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+  </div>
 
   {% if route %}
     <a class="button is-primary" style="margin-top: 1rem;" href="{{ path(route) }}">Create</a>

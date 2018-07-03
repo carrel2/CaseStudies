@@ -6,8 +6,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Port\Excel\ExcelReader;
-use AppBundle\Entity\Test;
-use AppBundle\Entity\Medication;
+use AppBundle\Entity\DiagnosticProcedure;
+use AppBundle\Entity\TherapeuticProcedure;
 
 class FileController extends Controller
 {
@@ -21,12 +21,15 @@ class FileController extends Controller
 
     $form = $this->createFormBuilder()
       ->add('type', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
-        'choices' => array('Diagnostic procedures' => 'Test', 'Therapeutic procedures' => 'Medication'),
+        'choices' => array('Diagnostic procedures' => 'DiagnosticProcedure', 'Therapeutic procedures' => 'TherapeuticProcedure'),
         'choices_as_values' => true,
       ))
       ->add('file', 'Symfony\Component\Form\Extension\Core\Type\FileType', array(
         'attr' => array(
           'accept' => 'application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        ),
+        'label_attr' => array(
+          'class' => 'is-large asterisk',
         ),
       ))
       ->add('sheet', 'Symfony\Component\Form\Extension\Core\Type\TextType', array(
@@ -83,11 +86,11 @@ class FileController extends Controller
           }
         } catch( \PHPExcel_Exception $e ) {
           if( $importCount ) {
-            $this->addFlash('success', "Imported $importCount " . ngettext($type == "Medication" ? "Therapeutic procedure" : "Diagnostic procedure",$type == "Medication" ? "Therapeutic procedures" : "Diagnostic procedures", $importCount) . "!");
+            $this->addFlash('success', "Imported $importCount " . ngettext($type == "Therapeutic" ? "Therapeutic procedure" : "Diagnostic procedure",$type == "Therapeutic" ? "Therapeutic procedures" : "Diagnostic procedures", $importCount) . "!");
           }
 
           if( $updateCount ) {
-            $this->addFlash('success', "Updated $updateCount " . ngettext($type == "Medication" ? "Therapeutic procedure" : "Diagnostic procedure",$type == "Medication" ? "Therapeutic procedures" : "Diagnostic procedures", $updateCount) . "!");
+            $this->addFlash('success', "Updated $updateCount " . ngettext($type == "Therapeutic" ? "Therapeutic procedure" : "Diagnostic procedure",$type == "Therapeutic" ? "Therapeutic procedures" : "Diagnostic procedures", $updateCount) . "!");
           }
         }
       }
@@ -114,11 +117,11 @@ class FileController extends Controller
             }
 
             if( $importCount ) {
-              $this->addFlash('success', "Imported $importCount " . ngettext($type == "Medication" ? "Therapeutic procedure" : "Diagnostic procedure",$type == "Medication" ? "Therapeutic procedures" : "Diagnostic procedures", $importCount) . "!");
+              $this->addFlash('success', "Imported $importCount " . ngettext($type == "Therapeutic" ? "Therapeutic procedure" : "Diagnostic procedure",$type == "Therapeutic" ? "Therapeutic procedures" : "Diagnostic procedures", $importCount) . "!");
             }
 
             if( $updateCount ) {
-              $this->addFlash('success', "Updated $updateCount " . ngettext($type == "Medication" ? "Therapeutic procedure" : "Diagnostic procedure",$type == "Medication" ? "Therapeutic procedures" : "Diagnostic procedures", $updateCount) . "!");
+              $this->addFlash('success', "Updated $updateCount " . ngettext($type == "Therapeutic" ? "Therapeutic procedure" : "Diagnostic procedure",$type == "Therapeutic" ? "Therapeutic procedures" : "Diagnostic procedures", $updateCount) . "!");
             }
           } catch( \PHPExcel_Exception $e ) {
             $this->addFlash('error', 'Invalid sheet number');

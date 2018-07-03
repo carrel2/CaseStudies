@@ -11,8 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\CaseStudy;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Animal;
-use AppBundle\Entity\Test;
-use AppBundle\Entity\Medication;
+use AppBundle\Entity\DiagnosticProcedure;
+use AppBundle\Entity\TherapeuticProcedure;
 
 class AdminController extends Controller
 {
@@ -320,7 +320,7 @@ class AdminController extends Controller
 	 }
 
 	 /**
-	  * @Route("/admin/tests", name="manageTests")
+	  * @Route("/admin/tests", name="manageDiagnostics")
 		*/
 		public function testsAction(Request $r)
 		{
@@ -328,10 +328,10 @@ class AdminController extends Controller
 
 			$form = $this->createFormBuilder()
 				->add('tests', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
-					'class' => 'AppBundle:Test',
+					'class' => 'AppBundle:DiagnosticProcedure',
 					'choice_label' => 'name',
 					'expanded' => true,
-					'choice_attr' => function(Test $t, $key, $index) {
+					'choice_attr' => function(DiagnosticProcedure $d, $key, $index) {
 						return ['class' => 'test'];
 					},
 					'group_by' => function($val, $key, $index) {
@@ -362,27 +362,27 @@ class AdminController extends Controller
 				$test = $form->getData()['tests'];
 
 				if( $form->get('edit')->isClicked() ) {
-					return $this->redirectToRoute('editTest', array('id' => $test->getId()));
+					return $this->redirectToRoute('editDiagnosticProcedure', array('id' => $test->getId()));
 				} else if( $form->get('delete')->isClicked() ) {
 					$em->remove($test);
 					$em->flush();
 
 					$this->addFlash('success', 'Deleted ' . $test->getName());
 
-					return $this->redirectToRoute('manageTests');
+					return $this->redirectToRoute('manageDiagnostics');
 				}
 			}
 
 			return $this->render('Admin/manage.html.twig', array(
 				'form' => $form->createView(),
-				'route' => 'createTest',
+				'route' => 'createDiagnosticProcedure',
 			));
 		}
 
 		/**
-		 * @Route("/admin/create/test", name="createTest")
+		 * @Route("/admin/create/test", name="createDiagnosticProcedure")
 		 */
-		public function createTestAction(Request $r)
+		public function createDiagnosticAction(Request $r)
 		{
 			$form = $this->createForm( 'AppBundle\Form\DiagnosticType' );
 
@@ -407,13 +407,13 @@ class AdminController extends Controller
 		}
 
 		/**
-		 * @Route("/admin/edit/tests/{id}", name="editTest")
+		 * @Route("/admin/edit/tests/{id}", name="editDiagnosticProcedure")
 		 */
-		 public function editTestAction(Request $r, Test $test = null)
+		 public function editDiagnosticAction(Request $r, DiagnosticProcedure $test = null)
 		 {
 			 if( $test === null )
 			 {
-				 $test = new Test();
+				 $test = new DiagnosticProcedure();
 			 }
 
 			 $form = $this->createForm( 'AppBundle\Form\DiagnosticType', $test );
@@ -438,7 +438,7 @@ class AdminController extends Controller
 		 }
 
 		/**
-		 * @Route("/admin/medications", name="manageMedications")
+		 * @Route("/admin/medications", name="manageTherapeutics")
 		 */
 		public function medicationsAction(Request $r)
 		{
@@ -446,14 +446,14 @@ class AdminController extends Controller
 
 			$form = $this->createFormBuilder()
 				->add('medications', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
-					'class' => 'AppBundle:Medication',
+					'class' => 'AppBundle:TherapeuticProcedure',
 					'choice_label' => 'name',
 					'expanded' => true,
-					'choice_attr' => function(Medication $t, $key, $index) {
+					'choice_attr' => function(TherapeuticProcedure $t, $key, $index) {
 						return ['class' => 'medication'];
 					},
 					'group_by' => function($val, $key, $index) {
-						return $val->getGroup();
+						return $val->getGroupName();
 					},
 					'label_attr' => array(
 						'class' => 'medications_label is-large',
@@ -480,7 +480,7 @@ class AdminController extends Controller
 				$medication = $form->getData()['medications'];
 
 				if( $form->get('edit')->isClicked() ) {
-					return $this->redirectToRoute('editMedication', array('id' => $medication->getId()));
+					return $this->redirectToRoute('editTherapeuticProcedure', array('id' => $medication->getId()));
 				} else if( $form->get('delete')->isClicked() ) {
 					$em->remove($medication);
 					$em->flush();
@@ -493,14 +493,14 @@ class AdminController extends Controller
 
 			return $this->render('Admin/manage.html.twig', array(
 				'form' => $form->createView(),
-				'route' => 'createMedication',
+				'route' => 'createTherapeuticProcedure',
 			));
 		}
 
 			/**
-			 * @Route("/admin/create/medication", name="createMedication")
+			 * @Route("/admin/create/medication", name="createTherapeuticProcedure")
 			 */
-			public function createMedicationAction(Request $r)
+			public function createTherapeuticAction(Request $r)
 			{
 				$form = $this->createForm( 'AppBundle\Form\TherapeuticType' );
 
@@ -509,6 +509,7 @@ class AdminController extends Controller
 				if( $form->isSubmitted() && $form->isValid() )
 				{
 					$em = $this->getDoctrine()->getManager();
+					$medication = $form->getData();
 
 					$em->persist($medication);
 
@@ -524,13 +525,13 @@ class AdminController extends Controller
 			}
 
 			/**
-			 * @Route("/admin/edit/medications/{id}", name="editMedication")
+			 * @Route("/admin/edit/medications/{id}", name="editTherapeuticProcedure")
 			 */
-			 public function editMedicationAction(Request $r, Medication $medication = null)
+			 public function editTherapeuticAction(Request $r, TherapeuticProcedure $medication = null)
 			 {
 				 if( $medication === null )
 				 {
-					 $medication = new Medication();
+					 $medication = new TherapeuticProcedure();
 				 }
 
 				 $form = $this->createForm( 'AppBundle\Form\TherapeuticType', $medication );

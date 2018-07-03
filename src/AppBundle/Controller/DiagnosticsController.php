@@ -6,7 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use AppBundle\Entity\Test;
+use AppBundle\Entity\DiagnosticProcedure;
 
 class DiagnosticsController extends Controller
 {
@@ -39,10 +39,10 @@ class DiagnosticsController extends Controller
 
 			foreach( $tests as $test )
 			{
-				$results = $day->getResultByTest($test);
+				$results = $day->getResultByDiagnostic($test);
 				if( $results )
 				{
-					$user->getCurrentDay()->addTest($results);
+					$user->getCurrentDay()->addDiagnosticProcedure($results);
 				} else {
 					$this->addFlash('empty-diagnostic-results-' . $user->getCurrentDay()->getId(), $test->getId());
 

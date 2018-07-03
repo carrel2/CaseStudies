@@ -29,12 +29,12 @@ class UserDay
 	private $hotspotsInfo;
 
 	/**
-	* @ORM\OneToMany(targetEntity="TestResults", mappedBy="userDay")
+	* @ORM\OneToMany(targetEntity="DiagnosticResults", mappedBy="userDay")
 	*/
 	private $tests;
 
 	/**
-	* @ORM\OneToMany(targetEntity="MedicationResults", mappedBy="userDay")
+	* @ORM\OneToMany(targetEntity="TherapeuticResults", mappedBy="userDay")
 	*/
 	private $medications;
 
@@ -55,11 +55,11 @@ class UserDay
 		}
 		foreach ($this->tests as $test)
 		{
-			$a["diagnostics"][$test->getTest()->getName()] = $test->getResults();
+			$a["diagnostics"][$test->getDiagnosticProcedure()->getName()] = $test->getResults();
 		}
 		foreach ($this->medications as $medication)
 		{
-			$a["therapeutics"][$medication->getMedication()->getName()] = $medication->getResults();
+			$a["therapeutics"][$medication->getTherapeuticProcedure()->getName()] = $medication->getResults();
 		}
 
 		return $a;
@@ -114,7 +114,7 @@ class UserDay
 		return $this->hotspotsInfo;
 	}
 
-	public function addTest(\AppBundle\Entity\TestResults $test)
+	public function addDiagnosticProcedure(\AppBundle\Entity\DiagnosticResults $test)
 	{
 		if( !$this->tests->contains($test) ) {
 			$test->setUserDay($this);
@@ -124,7 +124,7 @@ class UserDay
 		return $this;
 	}
 
-	public function removeTest(\AppBundle\Entity\TestResults $test)
+	public function removeDiagnosticProcedure(\AppBundle\Entity\DiagnosticResults $test)
 	{
 		$test->setUserDay(null);
 		$this->tests->removeElement($test);
@@ -132,21 +132,21 @@ class UserDay
 		return $this;
 	}
 
-	public function removeTests()
+	public function removeDiagnostics()
 	{
 		foreach( $this->tests as $test ) {
-			$this->removeTest($test);
+			$this->removeDiagnosticProcedure($test);
 		}
 
 		return $this;
 	}
 
-	public function getTests()
+	public function getDiagnostics()
 	{
 		return $this->tests;
 	}
 
-	public function addMedication(\AppBundle\Entity\MedicationResults $medication)
+	public function addTherapeuticProcedure(\AppBundle\Entity\TherapeuticResults $medication)
 	{
 		if( !$this->medications->contains($medication) ) {
 			$medication->setUserDay($this);
@@ -156,7 +156,7 @@ class UserDay
 		return $this;
 	}
 
-	public function removeMedication(\AppBundle\Entity\MedicationResults $medication)
+	public function removeTherapeuticProcedure(\AppBundle\Entity\TherapeuticResults $medication)
 	{
 		$medication->setUserDay(null);
 		$this->medications->removeElement($medication);
@@ -164,16 +164,16 @@ class UserDay
 		return $this;
 	}
 
-	public function removeMedications()
+	public function removeTherapeutics()
 	{
 		foreach( $this->medications as $medication ) {
-			$this->removeMedication($medication);
+			$this->removeTherapeuticProcedure($medication);
 		}
 
 		return $this;
 	}
 
-	public function getMedications()
+	public function getTherapeutics()
 	{
 		return $this->medications;
 	}

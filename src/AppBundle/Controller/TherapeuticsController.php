@@ -34,9 +34,9 @@ class TherapeuticsController extends Controller
 
 			foreach( $medications as $medication )
 			{
-				$results = $day->getResultByMedication($medication);
+				$results = $day->getResultByTherapeutic($medication);
 				if( $results ) {
-					$user->getCurrentDay()->addMedication($results);
+					$user->getCurrentDay()->addTherapeutic($results);
 				} else {
 					$this->addFlash('empty-therapeutic-results-' . $user->getCurrentDay()->getId(), $medication->getId());
 				}

@@ -24,7 +24,7 @@ class Day
 	private $description;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="caseStudy", inversedBy="days")
+	 * @ORM\ManyToOne(targetEntity="CaseStudy", inversedBy="days")
 	 */
 	private $caseStudy;
 
@@ -34,20 +34,20 @@ class Day
 	private $hotspotsInfo;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="TestResults", mappedBy="day", cascade={"persist", "remove"})
+	 * @ORM\OneToMany(targetEntity="DiagnosticResults", mappedBy="day", cascade={"persist", "remove"})
 	 */
-	private $tests;
+	private $diagnosticResults;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="MedicationResults", mappedBy="day", cascade={"persist", "remove"})
+	 * @ORM\OneToMany(targetEntity="TherapeuticResults", mappedBy="day", cascade={"persist", "remove"})
 	 */
-	private $medications;
+	private $therapeuticResults;
 
 	public function __construct()
 	{
 		$this->hotspotsInfo = new ArrayCollection();
-		$this->tests = new ArrayCollection();
-		$this->medications = new ArrayCollection();
+		$this->diagnosticResults = new ArrayCollection();
+		$this->therapeuticResults = new ArrayCollection();
 	}
 
 	public function __toString()
@@ -57,10 +57,10 @@ class Day
 		foreach ($this->hotspotsInfo as $spot) {
 			$s .= sprintf("%s\n", $spot);
 		}
-		foreach ($this->tests as $result) {
+		foreach ($this->diagnosticResults as $result) {
 			$s .= sprintf("%s\n", $result);
 		}
-		foreach ($this->medications as $result) {
+		foreach ($this->therapeuticResults as $result) {
 			$s .= sprintf("%s\n", $result);
 		}
 
@@ -96,34 +96,34 @@ class Day
         return $this->caseStudy;
     }
 
-    public function addTest(\AppBundle\Entity\TestResults $test)
+    public function addDiagnosticResult(\AppBundle\Entity\DiagnosticResults $dr)
     {
-				if( !$this->tests->contains($test) ) {
-					$test->setDay($this);
-					$this->tests->add($test);
+				if( !$this->diagnosticResults->contains($dr) ) {
+					$dr->setDay($this);
+					$this->diagnosticResults->add($dr);
 				}
 
 				return $this;
     }
 
-    public function removeTest(\AppBundle\Entity\TestResults $test)
+    public function removeDiagnosticResult(\AppBundle\Entity\DiagnosticResults $dr)
     {
         $test->setDay(null);
-        $this->tests->removeElement($test);
+        $this->diagnosticResults->removeElement($dr);
 
 				return $this;
     }
 
-    public function getTests()
+    public function getDiagnosticResults()
     {
-        return $this->tests;
+        return $this->diagnosticResults;
     }
 
-    public function getResultByTest(\AppBundle\Entity\Test $test)
+    public function getResultByDiagnosticProcedure(\AppBundle\Entity\DiagnosticProcedure $dp)
     {
-        foreach( $this->tests as $results )
+        foreach( $this->diagnosticResults as $results )
         {
-            if( $results->getTest()->getId() === $test->getId() )
+            if( $results->getDiagnosticProcedure()->getId() === $dp->getId() )
             {
                 return $results;
             }
@@ -132,29 +132,29 @@ class Day
         return null;
     }
 
-    public function addMedication(\AppBundle\Entity\MedicationResults $medication)
+    public function addTherapeuticResult(\AppBundle\Entity\TherapeuticResults $tr)
     {
-				if( !$this->medications->contains($medication) ) {
-					$medication->setDay($this);
-					$this->medications->add($medication);
+				if( !$this->therapeuticResults->contains($tr) ) {
+					$tr->setDay($this);
+					$this->therapeuticResults->add($tr);
 				}
 
 				return $this;
     }
 
-    public function removeMedication(\AppBundle\Entity\MedicationResults $medication)
+    public function removeTherapeuticResult(\AppBundle\Entity\TherapeuticResults $tr)
     {
-        $medication->setDay(null);
-        $this->medications->removeElement($medication);
+        $tr->setDay(null);
+        $this->therapeuticResults->removeElement($tr);
 
 				return $this;
     }
 
-    public function getResultByMedication(\AppBundle\Entity\Medication $medication)
+    public function getResultByTherapeuticProcedure(\AppBundle\Entity\TherapeuticProcedure $tr)
     {
-        foreach( $this->medications as $results )
+        foreach( $this->therapeuticResults as $results )
         {
-            if( $results->getMedication()->getId() === $medication->getId() )
+            if( $results->getTherapeuticProcedure()->getId() === $tr->getId() )
             {
                 return $results;
             }
@@ -163,9 +163,9 @@ class Day
         return null;
     }
 
-    public function getMedications()
+    public function getTherapeuticResults()
     {
-        return $this->medications;
+        return $this->therapeuticResults;
     }
 
     public function addHotspotsInfo(\AppBundle\Entity\HotSpotInfo $hotspotInfo)

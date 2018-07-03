@@ -17,12 +17,12 @@ class AnimalType extends AbstractType
         'data' => '',
         'required' => false,
         'label_attr' => array(
-          'class' => 'is-large',
+          'class' => 'is-large asterisk',
         ),
       ))
       ->add('name', null, array(
         'label_attr' => array(
-          'class' => 'is-large',
+          'class' => 'is-large asterisk',
         ),
       ))
       ->add('weight', null, array(
