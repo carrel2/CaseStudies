@@ -23,6 +23,9 @@ class FileController extends Controller
       ->add('type', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
         'choices' => array('Diagnostic procedures' => 'DiagnosticProcedure', 'Therapeutic procedures' => 'TherapeuticProcedure'),
         'choices_as_values' => true,
+        'label_attr' => array(
+          'class' => 'is-large',
+        )
       ))
       ->add('file', 'Symfony\Component\Form\Extension\Core\Type\FileType', array(
         'attr' => array(
@@ -39,10 +42,14 @@ class FileController extends Controller
           'pattern' => '^[1-9][0-9]*',
           'title' => 'The specific sheet to import data from',
         ),
+        'label_attr' => array(
+          'class' => 'is-large',
+        )
       ))
       ->add('submit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
         'attr' => array(
           'class' => 'button',
+          'style' => 'margin-top: 1rem;',
         )
       ))
       ->getForm();

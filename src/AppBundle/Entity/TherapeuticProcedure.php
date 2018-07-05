@@ -19,7 +19,7 @@ class TherapeuticProcedure extends AbstractProcedure
 	private $id;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="TherapeuticResults", mappedBy="medication")
+	 * @ORM\OneToMany(targetEntity="TherapeuticResults", mappedBy="therapeuticProcedure")
 	 */
 	private $results;
 

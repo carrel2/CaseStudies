@@ -19,7 +19,7 @@ class DiagnosticProcedure extends AbstractProcedure
 	private $id;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="DiagnosticResults", mappedBy="test")
+	 * @ORM\OneToMany(targetEntity="DiagnosticResults", mappedBy="diagnosticProcedure")
 	 */
 	private $results;
 

@@ -39,7 +39,7 @@ class DiagnosticsController extends Controller
 
 			foreach( $tests as $test )
 			{
-				$results = $day->getResultByDiagnostic($test);
+				$results = $day->getResultByDiagnosticProcedure($test);
 				if( $results )
 				{
 					$user->getCurrentDay()->addDiagnosticProcedure($results);

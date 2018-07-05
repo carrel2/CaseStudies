@@ -34,7 +34,7 @@ class TherapeuticsController extends Controller
 
 			foreach( $medications as $medication )
 			{
-				$results = $day->getResultByTherapeutic($medication);
+				$results = $day->getResultByTherapeuticProcedure($medication);
 				if( $results ) {
 					$user->getCurrentDay()->addTherapeutic($results);
 				} else {

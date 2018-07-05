@@ -23,7 +23,7 @@ class TherapeuticResults
 	private $day;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="UserDay", inversedBy="medications")
+	 * @ORM\ManyToOne(targetEntity="UserDay", inversedBy="therapeuticResults")
 	 * @ORM\JoinColumn(name="user_day_id", referencedColumnName="id", onDelete="SET NULL")
 	 */
 	private $userDay;
@@ -31,7 +31,7 @@ class TherapeuticResults
 	/**
 	 * @ORM\ManyToOne(targetEntity="TherapeuticProcedure", inversedBy="results")
 	 */
-	private $medication;
+	private $therapeuticProcedure;
 
 	/**
 	 * @ORM\Column(type="text")
@@ -50,7 +50,7 @@ class TherapeuticResults
 
 	public function __toString()
 	{
-		return sprintf("%s: %s", $this->medication->getName(), $this->results);
+		return sprintf("%s: %s", $this->therapeuticProcedure->getName(), $this->results);
 	}
 
     public function getId()
@@ -70,16 +70,16 @@ class TherapeuticResults
         return $this->results;
     }
 
-    public function setTherapeuticProcedure(\AppBundle\Entity\TherapeuticProcedure $medication = null)
+    public function setTherapeuticProcedure(\AppBundle\Entity\TherapeuticProcedure $therapeuticProcedure = null)
     {
-        $this->medication = $medication;
+        $this->therapeuticProcedure = $therapeuticProcedure;
 
         return $this;
     }
 
     public function getTherapeuticProcedure()
     {
-        return $this->medication;
+        return $this->therapeuticProcedure;
     }
 
     public function setDay(\AppBundle\Entity\Day $day = null)

@@ -23,7 +23,7 @@ class DiagnosticResults
 	private $day;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="UserDay", inversedBy="tests")
+	 * @ORM\ManyToOne(targetEntity="UserDay", inversedBy="diagnosticResults")
 	 * @ORM\JoinColumn(name="user_day_id", referencedColumnName="id", onDelete="SET NULL")
 	 */
 	private $userDay;
@@ -31,7 +31,7 @@ class DiagnosticResults
 	/**
 	 * @ORM\ManyToOne(targetEntity="DiagnosticProcedure", inversedBy="results")
 	 */
-	private $test;
+	private $diagnosticProcedure;
 
 	/**
 	 * @ORM\Column(type="text")
@@ -50,7 +50,7 @@ class DiagnosticResults
 
 	public function __toString()
 	{
-		return sprintf("%s: %s", $this->test->getName(), $this->results);
+		return sprintf("%s: %s", $this->diagnosticProcedure->getName(), $this->results);
 	}
 
     public function getId()
@@ -70,16 +70,16 @@ class DiagnosticResults
         return $this->results;
     }
 
-    public function setDiagnosticProcedure(\AppBundle\Entity\DiagnosticProcedure $test = null)
+    public function setDiagnosticProcedure(\AppBundle\Entity\DiagnosticProcedure $diagnosticProcedure = null)
     {
-        $this->test = $test;
+        $this->diagnosticProcedure = $diagnosticProcedure;
 
         return $this;
     }
 
     public function getDiagnosticProcedure()
     {
-        return $this->test;
+        return $this->diagnosticProcedure;
     }
 
     public function setDay(\AppBundle\Entity\Day $day = null)
