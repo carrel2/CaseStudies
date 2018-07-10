@@ -62,7 +62,7 @@ class FileController extends Controller
       $updateCount = 0;
       $type = $form->getData()['type'];
       $file = $form->getData()['file'];
-      $sheet = $form->getData()['sheet'];
+      $sheet = $form->getData()['sheet'] - 1;
 
       $class = "AppBundle\\Entity\\$type";
 
@@ -74,18 +74,13 @@ class FileController extends Controller
             $reader = new ExcelReader(new \SplFileObject($file->getRealPath()), 0, $i++);
 
             foreach ($reader as $row) {
-              $row = array_change_key_case($row);
-              $obj = $em->getRepository("AppBundle:$type")->findOneByName($row['name']);
+              $obj = $em->getRepository("AppBundle:$type")->findOneByName($row['Name']);
 
-              if( $row['name'] !== null && !$obj ) {
+              if( !$obj ) {
                 $importCount++;
-                $em->persist( new $class($row) );
-              } elseif( $row['name'] !== null && $obj ) {
-                $obj->setName($row['name']);
-                $row['cost'] !== null ? $obj->setCost($row['cost']) : '';
-                $row['group'] !== null ? $obj->setDGroup($row['group']) : '';
-                $row['wait time'] !== null ? $obj->setWaitTime($row['wait time']) : '';
-                $row['default result'] ? $obj->setDefaultResult($row['default result']) : '';
+                $em->persist( $class::createFromArray($row) );
+              } else {
+                $obj->updateFromArray($row);
 
                 $updateCount++;
               }
@@ -106,18 +101,13 @@ class FileController extends Controller
             $reader = new ExcelReader(new \SplFileObject($file->getRealPath()), 0, $sheet);
 
             foreach ($reader as $row) {
-              $row = array_change_key_case($row);
-              $obj = $em->getRepository("AppBundle:$type")->findOneByName($row['name']);
+              $obj = $em->getRepository("AppBundle:$type")->findOneByName($row['Name']);
 
-              if( $row['name'] !== null && !$obj ) {
+              if( !$obj ) {
                 $importCount++;
-                $em->persist( new $class($row) );
-              } elseif( $row['name'] !== null && $obj ) {
-                $obj->setName($row['name']);
-                $row['cost'] !== null ? $obj->setCost($row['cost']) : '';
-                $row['group'] !== null ? $obj->setDGroup($row['group']) : '';
-                $row['wait time'] !== null ? $obj->setWaitTime($row['wait time']) : '';
-                $row['default result'] ? $obj->setDefaultResult($row['default result']) : '';
+                $em->persist( $class::createFromArray($row) );
+              } else {
+                $obj->updateFromArray($row);
 
                 $updateCount++;
               }

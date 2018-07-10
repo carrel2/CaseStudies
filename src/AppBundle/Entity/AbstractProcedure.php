@@ -22,44 +22,50 @@ abstract class AbstractProcedure
 	/**
 	 * @ORM\Column(type="string", length=4)
 	 */
-	protected $waitTime;
+	protected $waitTime = 0;
 
   /**
    * @ORM\Column(type="decimal", scale=2)
    */
-  protected $dosage;
+  protected $dosage = 0;
 
   /**
    * @ORM\Column(type="integer")
    */
-  protected $dosageInterval;
+  protected $dosageInterval = 0;
 
   /**
    * @ORM\Column(type="decimal", scale=2)
    */
-  protected $concentration;
+  protected $concentration = 0;
 
 	/**
 	 * @ORM\Column(type="string", length=10)
 	 */
-	protected $costPerUnit;
+	protected $costPerUnit = "0";
 
 	/**
 	 * @ORM\Column(type="text", nullable=true)
 	 */
 	protected $defaultResult;
 
-  public function __construct(array $array = null)
-  {
-    if( $array )
-    {
-      $this->name = $array["name"];
-      $this->costPerUnit = $array["cost"] === null ? 0 : $array["cost"];
-      $this->groupName = $array["group"] === null ? '' : $array["group"];
-      $this->waitTime = $array["wait time"] === null ? 0 : $array["wait time"];
-      $this->defaultResult = $array["default result"] === null ? '' : $array["default result"];
-    }
-  }
+	public static function createFromArray($array) {
+		$array = array_change_key_case($array);
+		$procedure = new static();
+		$properties = get_class_vars(get_class($procedure));
+
+		foreach( array_keys($array) as $key ) {
+			$prop = lcfirst(implode('', array_map('ucfirst', explode(' ', $key))));
+
+			if( array_key_exists($prop, $properties) && $array[$key] ) {
+				$procedure->$prop = $array[$key];
+			} else {
+
+			}
+		}
+
+		return $procedure;
+	}
 
   public function setName($name)
   {
@@ -152,4 +158,19 @@ abstract class AbstractProcedure
   public function getPerDayCost() {
     return $this->dosage * $this->dosageInterval / $this->concentration * $this->costPerUnit;
   }
+
+	public function updateFromArray($array) {
+		$array = array_change_key_case($array);
+		$properties = get_class_vars(get_class($this));
+
+		foreach( array_keys($array) as $key ) {
+			$prop = lcfirst(implode('', array_map('ucfirst', explode(' ', $key))));
+
+			if( array_key_exists($prop, $properties) ) {
+				$this->$prop = $array[$key];
+			}
+		}
+
+		return $this;
+	}
 }

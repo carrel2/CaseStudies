@@ -23,10 +23,8 @@ class TherapeuticProcedure extends AbstractProcedure
 	 */
 	private $results;
 
-	public function __construct(array $array = null)
+	public function __construct()
 	{
-		parent::__construct($array);
-
 		$this->results = new ArrayCollection();
 	}
 

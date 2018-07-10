@@ -3,8 +3,14 @@
 {% block userNav %}
   <a class="navbar-item is-hidden-touch" href="{{ path('default') }}">Home</a>
 
-  {% if app.user is not null and app.user.hasResults %}
-    <a class="navbar-item" href="{{ path('results') }}">My results</a>
+  {% if app.user is not null %}
+    {% if app.request.attributes.get('_route') == 'default' and app.user.isActive %}
+      <a class="navbar-item" href="{{ path(app.user.currentProgress) }}">Resume {{ app.user.caseStudy.title }}</a>
+    {% endif %}
+
+    {% if app.user.hasResults %}
+      <a class="navbar-item" href="{{ path('results') }}">My results</a>
+    {% endif %}
   {% endif %}
 {% endblock %}
 

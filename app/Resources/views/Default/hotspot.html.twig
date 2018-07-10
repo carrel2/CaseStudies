@@ -116,7 +116,7 @@
 
         hotspotList.push( newHotspot );
 
-				if( $('#hotspot-{{ hotspot.id }}') ) {
+				if( $('#hotspot-{{ hotspot.id }}').length > 0 ) {
 					newHotspot.drawDefault();
 					newHotspot.checked = true;
 				}
