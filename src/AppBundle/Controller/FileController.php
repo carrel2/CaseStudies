@@ -88,11 +88,11 @@ class FileController extends Controller
           }
         } catch( \PHPExcel_Exception $e ) {
           if( $importCount ) {
-            $this->addFlash('success', "Imported $importCount " . ngettext($type == "Therapeutic" ? "Therapeutic procedure" : "Diagnostic procedure",$type == "Therapeutic" ? "Therapeutic procedures" : "Diagnostic procedures", $importCount) . "!");
+            $this->addFlash('success', "Imported $importCount " . ngettext($type == "TherapeuticProcedure" ? "Therapeutic procedure" : "Diagnostic procedure",$type == "TherapeuticProcedure" ? "Therapeutic procedures" : "Diagnostic procedures", $importCount) . "!");
           }
 
           if( $updateCount ) {
-            $this->addFlash('success', "Updated $updateCount " . ngettext($type == "Therapeutic" ? "Therapeutic procedure" : "Diagnostic procedure",$type == "Therapeutic" ? "Therapeutic procedures" : "Diagnostic procedures", $updateCount) . "!");
+            $this->addFlash('success', "Updated $updateCount " . ngettext($type == "TherapeuticProcedure" ? "Therapeutic procedure" : "Diagnostic procedure",$type == "TherapeuticProcedure" ? "Therapeutic procedures" : "Diagnostic procedures", $updateCount) . "!");
           }
         }
       }
@@ -114,11 +114,11 @@ class FileController extends Controller
             }
 
             if( $importCount ) {
-              $this->addFlash('success', "Imported $importCount " . ngettext($type == "Therapeutic" ? "Therapeutic procedure" : "Diagnostic procedure",$type == "Therapeutic" ? "Therapeutic procedures" : "Diagnostic procedures", $importCount) . "!");
+              $this->addFlash('success', "Imported $importCount " . ngettext($type == "TherapeuticProcedure" ? "Therapeutic procedure" : "Diagnostic procedure",$type == "TherapeuticProcedure" ? "Therapeutic procedures" : "Diagnostic procedures", $importCount) . "!");
             }
 
             if( $updateCount ) {
-              $this->addFlash('success', "Updated $updateCount " . ngettext($type == "Therapeutic" ? "Therapeutic procedure" : "Diagnostic procedure",$type == "Therapeutic" ? "Therapeutic procedures" : "Diagnostic procedures", $updateCount) . "!");
+              $this->addFlash('success', "Updated $updateCount " . ngettext($type == "TherapeuticProcedure" ? "Therapeutic procedure" : "Diagnostic procedure",$type == "TherapeuticProcedure" ? "Therapeutic procedures" : "Diagnostic procedures", $updateCount) . "!");
             }
           } catch( \PHPExcel_Exception $e ) {
             $this->addFlash('error', 'Invalid sheet number');
