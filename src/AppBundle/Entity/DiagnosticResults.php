@@ -1,14 +1,14 @@
 <?php
-// src/AppBundle/Entity/TestResults.php
+// src/AppBundle/Entity/DiagnosticResults.php
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="TestResults")
+ * @ORM\Table(name="DiagnosticResults")
  */
-class TestResults
+class DiagnosticResults
 {
 	/**
 	 * @ORM\Column(type="integer")
@@ -18,20 +18,20 @@ class TestResults
 	private $id;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="Day", inversedBy="tests")
+	 * @ORM\ManyToOne(targetEntity="Day", inversedBy="diagnosticResults")
 	 */
 	private $day;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="UserDay", inversedBy="tests")
+	 * @ORM\ManyToOne(targetEntity="UserDay", inversedBy="diagnosticResults")
 	 * @ORM\JoinColumn(name="user_day_id", referencedColumnName="id", onDelete="SET NULL")
 	 */
 	private $userDay;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="Test", inversedBy="results")
+	 * @ORM\ManyToOne(targetEntity="DiagnosticProcedure", inversedBy="results")
 	 */
-	private $test;
+	private $diagnosticProcedure;
 
 	/**
 	 * @ORM\Column(type="text")
@@ -50,7 +50,7 @@ class TestResults
 
 	public function __toString()
 	{
-		return sprintf("%s: %s", $this->test->getName(), $this->results);
+		return sprintf("%s: %s", $this->diagnosticProcedure->getName(), $this->results);
 	}
 
     public function getId()
@@ -70,16 +70,16 @@ class TestResults
         return $this->results;
     }
 
-    public function setTest(\AppBundle\Entity\Test $test = null)
+    public function setDiagnosticProcedure(\AppBundle\Entity\DiagnosticProcedure $diagnosticProcedure = null)
     {
-        $this->test = $test;
+        $this->diagnosticProcedure = $diagnosticProcedure;
 
         return $this;
     }
 
-    public function getTest()
+    public function getDiagnosticProcedure()
     {
-        return $this->test;
+        return $this->diagnosticProcedure;
     }
 
     public function setDay(\AppBundle\Entity\Day $day = null)

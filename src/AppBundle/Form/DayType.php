@@ -16,6 +16,7 @@ class DayType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder->add('description', 'Ivory\CKEditorBundle\Form\Type\CKEditorType', array(
+				'required' => false,
 				'label_attr' => array(
 					'class' => 'is-large',
 				),
@@ -48,7 +49,7 @@ class DayType extends AbstractType
 				'attr' => array(
 					'class' => 'addButton is-success',
 					'onclick' => 'addButtonClickListener(this)',)))
-			->add('tests', 'Symfony\Component\Form\Extension\Core\Type\CollectionType', array(
+			->add('diagnosticResults', 'Symfony\Component\Form\Extension\Core\Type\CollectionType', array(
 				'entry_type' => 'AppBundle\Form\DiagnosticResultsType',
 				'entry_options' => array(
 					'attr' => array(
@@ -72,7 +73,7 @@ class DayType extends AbstractType
 				'attr' => array(
 					'class' => 'addButton is-success',
 					'onclick' => 'addButtonClickListener(this)',)))
-			->add('medications', 'Symfony\Component\Form\Extension\Core\Type\CollectionType', array(
+			->add('therapeuticResults', 'Symfony\Component\Form\Extension\Core\Type\CollectionType', array(
 				'entry_type' => 'AppBundle\Form\TherapeuticResultsType',
 				'entry_options' => array(
 					'attr' => array(

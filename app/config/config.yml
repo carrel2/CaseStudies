@@ -6,6 +6,7 @@ imports:
 parameters:
     locale: en
     image_directory: '%kernel.root_dir%/../web/images'
+    sound_directory: '%kernel.root_dir%/../web/sounds'
 
 framework:
     secret:          "%secret%"
