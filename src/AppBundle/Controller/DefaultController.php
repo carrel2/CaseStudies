@@ -108,12 +108,12 @@ class DefaultController extends Controller
 					$a[$key]["hotspotsInfo"][$flash] = "No results available.";
 				}
 				foreach ($session->getFlashBag()->get('empty-diagnostic-results-' . $id) as $flash) {
-					$dFlash = $em->getRepository("AppBundle:Test")->find($flash);
+					$dFlash = $em->getRepository("AppBundle:DiagnosticProcedure")->find($flash);
 
 					$a[$key]["diagnostics"][$dFlash->getName()] = $dFlash->getDefaultResult();
 				}
 				foreach ($session->getFlashBag()->get('empty-therapeutic-results-' . $id) as $flash) {
-					$tFlash = $em->getRepository("AppBundle:Medication")->find($flash);
+					$tFlash = $em->getRepository("AppBundle:Therapeutic")->find($flash);
 
 					$a[$key]["therapeutics"][$tFlash->getName()] = $tFlash->getDefaultResult();
 				}

@@ -4,7 +4,7 @@ function updateCase() {
 	var id = $('#default_title').val();
 	var button = $('#default_start').parent().parent().clone();
 
-	$('#case').load('/courses/cs/web/getDescription/' + id, function(response, status) {
+	$('#case').load('/getDescription/' + id, function(response, status) {
 		$(response).imagesLoaded().always(moveFooter);
 		$('#default_start').parent().parent().remove();
 		$('#case_description').after(button);
@@ -134,7 +134,7 @@ function updateAdminCase(id) {
 		}
 	});
 
-	$('#caseInfo').load('/courses/cs/admin/getCase/' + id, function(responseTxt, statusTxt, xhr){
+	$('#caseInfo').load('/admin/getCase/' + id, function(responseTxt, statusTxt, xhr){
 		$('.collection > div').each(function(i, e) {
 			var t = $(this).parent().data('type');
 			$(this).append('<button type="button" class="delete remove-button"></button>');
@@ -155,7 +155,7 @@ function updateAdminCase(id) {
 function updateHotspots() {
 	$('.hotspot').each(function() {
 		$(this).on('click', function() {
-			$.get('/courses/cs/update/' + $(this).attr('data-path'), function(data, s) {
+			$.get('/update/' + $(this).attr('data-path'), function(data, s) {
 				$('#checked').append(data);
 
 				$('#checked').imagesLoaded().always(moveFooter);

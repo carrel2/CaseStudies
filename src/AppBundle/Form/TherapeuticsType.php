@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use AppBundle\Entity\Medication;
+use AppBundle\Entity\TherapeuticProcedure;
 
 class TherapeuticsType extends AbstractType
 {
@@ -17,18 +17,18 @@ class TherapeuticsType extends AbstractType
 
 		$builder
 			->add('medication', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
-				'class' => 'AppBundle:Medication',
+				'class' => 'AppBundle:TherapeuticProcedure',
 				'choice_label' => 'name',
 				'expanded' => true,
 				'multiple' => true,
 				'label' => false,
-				'choice_attr' => function(Medication $m, $key, $index) use ($caseStudy) {
-					$r = $m->getResultsByCase($caseStudy);
+				'choice_attr' => function(TherapeuticProcedure $t, $key, $index) use ($caseStudy) {
+					$r = $t->getResultsByCase($caseStudy);
 
-					return ['class' => 'medication', 'data-cost' => $r ? $r->getCost() : $t->getCostPerUnit(), 'data-use-weight' => (int) !((bool) $r)];
+					return ['class' => 'medication', 'data-cost' => $r ? $r->getCost() : $t->getPerDayCost(), 'data-use-weight' => (int) !((bool) $r)];
 				},
 				'group_by' => function($val, $key, $index) {
-					return $val->getGroup();
+					return $val->getGroupName();
 				},
 			))
 			->add('submit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(

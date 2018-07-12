@@ -29,16 +29,16 @@
         <p>Select therapeutic procedures from the list below. <b>Once you submit this page, you cannot come back to change your selections!</b></p>
       </div>
     </div>
+
+    <div class="tile box" style="position: absolute; right: 1.5rem">
+      <b>Total cost: $<span id="cost" data-weight="{{ animal_weight }}">0</span></b>
+    </div>
   </div>
 
   <div class="column">
   	{{ form_start(form) }}
   	{{ form_widget(form) }}
   	{{ form_end(form) }}
-  </div>
-
-  <div class="tile box" style="position: fixed; bottom: 40px; right: 10px">
-    <b>Total cost: $<span id="cost" data-weight="{{ animal_weight }}">0</span></b>
   </div>
 {% endblock %}
 

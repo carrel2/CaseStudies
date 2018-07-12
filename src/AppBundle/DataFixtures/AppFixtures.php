@@ -7,11 +7,11 @@ use AppBundle\Entity\CaseStudy;
 use AppBundle\Entity\Day;
 use AppBundle\Entity\HotSpot;
 use AppBundle\Entity\HotSpotInfo;
-use AppBundle\Entity\Medication;
-use AppBundle\Entity\MedicationResults;
+use AppBundle\Entity\Therapeutic;
+use AppBundle\Entity\TherapeuticResults;
 use AppBundle\Entity\Results;
-use AppBundle\Entity\Test;
-use AppBundle\Entity\TestResults;
+use AppBundle\Entity\Diagnostic;
+use AppBundle\Entity\DiagnosticResults;
 use AppBundle\Entity\User;
 use AppBundle\Entity\UserDay;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -26,10 +26,10 @@ class AppFixtures implements FixtureInterface
     $day = new Day();
     $hotspot = new HotSpot();
     $hotspotInfo = new HotSpotInfo();
-    $medication = new Medication();
-    $medicationResults = new MedicationResults();
-    $test = new Test();
-    $testResults = new TestResults();
+    $medication = new Therapeutic();
+    $medicationResults = new TherapeuticResults();
+    $test = new Diagnostic();
+    $testResults = new DiagnosticResults();
     $user = new User();
 
     copy("web/images/StandardbredGelding.jpeg", "web/images/fixtureImage.jpeg");
@@ -57,7 +57,7 @@ class AppFixtures implements FixtureInterface
       ->setDefaultResult("Default result");
 
     $medicationResults->setResults("Results for penicillin iv")
-      ->setMedication($medication);
+      ->setTherapeutic($medication);
 
     $test->setName("Skin biopsy C/S")
       ->setDGroup("Microbiology")
@@ -66,13 +66,13 @@ class AppFixtures implements FixtureInterface
       ->setDefaultResult("No growth after 48 hours");
 
     $testResults->setResults("Results for skin biopsy")
-      ->setTest($test);
+      ->setDiagnostic($test);
 
     $user->setUsername("netid")
       ->setRole("ROLE_ADMIN");
 
-    $day->addTest($testResults)
-      ->addMedication($medicationResults)
+    $day->addDiagnostic($testResults)
+      ->addTherapeutic($medicationResults)
       ->addHotspotsInfo($hotspotInfo);
 
     $caseStudy->addDay($day);

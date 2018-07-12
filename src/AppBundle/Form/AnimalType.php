@@ -5,9 +5,6 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use AppBundle\Entity\Animal;
 
 class AnimalType extends AbstractType
 {
@@ -17,19 +14,13 @@ class AnimalType extends AbstractType
         'data' => '',
         'required' => false,
         'label_attr' => array(
-          'class' => 'is-large',
+          'class' => 'is-large asterisk',
         ),
       ))
       ->add('name', null, array(
         'label_attr' => array(
-          'class' => 'is-large',
+          'class' => 'is-large asterisk',
         ),
-      ))
-      ->add('weight', null, array(
-        'label' => 'Weight (kg)',
-        'label_attr' => array(
-          'class' => 'is-large',
-        )
       ))
       ->add('submit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
         'attr' => array('class' => 'is-success'),

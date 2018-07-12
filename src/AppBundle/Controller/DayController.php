@@ -32,7 +32,7 @@ class DayController extends Controller
 			->add('diagnosis', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', array(
 				'label' => $finished == 'finished' ? 'Diagnosis' : 'Tentative Diagnosis',
 				'label_attr' => array(
-					'class' => 'is-large',
+					'class' => 'is-large asterisk',
 				),
 			))
 			->add('finish', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
