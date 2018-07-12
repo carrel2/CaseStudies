@@ -16,11 +16,10 @@ class SoundUploadListener
     private $directory;
     private $logger;
 
-    public function __construct(FileUploader $uploader, $directory, LoggerInterface $logger)
+    public function __construct(FileUploader $uploader, $directory)
     {
         $this->uploader = $uploader;
         $this->directory = $directory;
-        $this->logger = $logger;
     }
 
     public function prePersist(LifecycleEventArgs $args)
@@ -34,7 +33,7 @@ class SoundUploadListener
         if( $entity->hasSound() ) {
           $this->removeUpload($entity);
         }
-        
+
         $this->uploadFile($entity);
     }
 
