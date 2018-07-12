@@ -156,7 +156,7 @@ abstract class AbstractProcedure
   }
 
   public function getPerDayCost($weight = null) {
-    return $this->dosage * $this->dosageInterval / $this->concentration * $this->costPerUnit * ($weight ?? 1);
+    return $this->dosage * $this->dosageInterval / $this->concentration * $this->costPerUnit * ($weight ? $weight : 1);
   }
 
 	public function updateFromArray($array) {
