@@ -13,8 +13,6 @@ class DiagnosticsType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$caseStudy = $options['cs'];
-
 		$builder
 			->add('test', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
 				'class' => 'AppBundle:DiagnosticProcedure',
@@ -22,10 +20,8 @@ class DiagnosticsType extends AbstractType
 				'expanded' => true,
 				'multiple' => true,
 				'label' => false,
-				'choice_attr' => function(DiagnosticProcedure $d, $key, $index) use ($caseStudy) {
-					$r = $d->getResultsByCase($caseStudy);
-
-					return ['class' => 'test', 'data-cost' => $r ? $r->getCost() : $d->getPerDayCost(), 'data-use-weight' => (int) !((bool) $r)];
+				'choice_attr' => function(DiagnosticProcedure $d, $key, $index) {
+					return ['class' => 'test', 'data-cost' => $d->getPerDayCost()];
 				},
 				'group_by' => function($val, $key, $index) {
 					return $val->getGroup();

@@ -19,11 +19,7 @@ function addCheckboxListener() {
 		var currentCost = Number(cost.text()), weight = Number(cost.data('weight'));
 		var cbCost;
 
-		if( cb.data('use-weight') ) {
-			cbCost = Number(cb.attr('data-cost')) * weight;
-		} else {
-			cbCost = Number(cb.attr('data-cost'));
-		}
+		cbCost = Number(cb.attr('data-cost')) * weight;
 
 		var isChecked = cb.prop('checked');
 

@@ -13,8 +13,6 @@ class TherapeuticsType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$caseStudy = $options['cs'];
-
 		$builder
 			->add('medication', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
 				'class' => 'AppBundle:TherapeuticProcedure',
@@ -22,10 +20,8 @@ class TherapeuticsType extends AbstractType
 				'expanded' => true,
 				'multiple' => true,
 				'label' => false,
-				'choice_attr' => function(TherapeuticProcedure $t, $key, $index) use ($caseStudy) {
-					$r = $t->getResultsByCase($caseStudy);
-
-					return ['class' => 'medication', 'data-cost' => $r ? $r->getCost() : $t->getPerDayCost(), 'data-use-weight' => (int) !((bool) $r)];
+				'choice_attr' => function(TherapeuticProcedure $t, $key, $index) {
+					return ['class' => 'medication', 'data-cost' => $t->getPerDayCost()];
 				},
 				'group_by' => function($val, $key, $index) {
 					return $val->getGroupName();

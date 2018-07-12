@@ -64,13 +64,11 @@
 				event.preventDefault();
 			}
 
-			var eWeight = null;
+			var eWeight = $("#estimated_weight").val();
 
-			if( $("#estimated_weight").val() == undefined ) {
+			if( !eWeight ) {
 				return;
 			}
-
-			eWeight = $("#estimated_weight").val();
 
 			$('.modal').toggleClass('is-active');
 			$('.modal').load( "{{ path('differentials') }}", {estimated_weight: eWeight}, function() {

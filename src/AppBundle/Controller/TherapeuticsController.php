@@ -21,7 +21,7 @@ class TherapeuticsController extends Controller
 			return $this->redirectToRoute('default');
 		}
 
-		$form = $this->createForm( 'AppBundle\Form\TherapeuticsType', null, array('cs' => $user->getCaseStudy()) );
+		$form = $this->createForm( 'AppBundle\Form\TherapeuticsType' );
 
 		$form->handleRequest($r);
 
@@ -49,7 +49,7 @@ class TherapeuticsController extends Controller
 			return $this->redirectToRoute('logic');
 		}
 
-		$weight = $r->getSession()->has('estimated_weight') ? $r->getSession()->get('estimated_weight') : $user->getCaseStudy()->getAnimal()->getWeight();
+		$weight = $r->getSession()->has('estimated_weight') ? $r->getSession()->get('estimated_weight') : null;
 
 		return $this->render('Default/therapeutics.html.twig', array(
 			'form' => $form->createView(),

@@ -16,15 +16,6 @@ class AnimalTest extends TestCase
     $this->assertEquals("Horse", $animal->getName());
   }
 
-  public function testWeight() {
-    $animal = new Animal();
-
-    $this->assertNull($animal->getWeight());
-
-    $this->assertInstanceOf('\AppBundle\Entity\Animal', $animal->setWeight(356.2));
-    $this->assertEquals(356.2, $animal->getWeight());
-  }
-
   public function testImage() {
     $animal = new Animal();
 

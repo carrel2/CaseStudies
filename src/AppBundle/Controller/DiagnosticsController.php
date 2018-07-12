@@ -25,7 +25,7 @@ class DiagnosticsController extends Controller
 
 		$user->setCurrentProgress('diagnostics');
 
-		$form = $this->createForm( 'AppBundle\Form\DiagnosticsType', null, array('cs' => $user->getCaseStudy()) );
+		$form = $this->createForm( 'AppBundle\Form\DiagnosticsType' );
 
 		$form->handleRequest($r);
 
@@ -67,7 +67,7 @@ class DiagnosticsController extends Controller
 
 		$em->flush();
 
-		$weight = $r->getSession()->has('estimated_weight') ? $r->getSession()->get('estimated_weight') : $user->getCaseStudy()->getAnimal()->getWeight();
+		$weight = $r->getSession()->has('estimated_weight') ? $r->getSession()->get('estimated_weight') : null;
 
 		return $this->render('Default/diagnostics.html.twig', array(
 			'form' => $form->createView(),
