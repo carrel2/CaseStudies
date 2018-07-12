@@ -37,7 +37,7 @@ abstract class AbstractProcedure
   /**
    * @ORM\Column(type="decimal", scale=2)
    */
-  protected $concentration = 0;
+  protected $concentration = 1;
 
 	/**
 	 * @ORM\Column(type="string", length=10)
@@ -155,8 +155,8 @@ abstract class AbstractProcedure
     return $this->concentration;
   }
 
-  public function getPerDayCost() {
-    return $this->dosage * $this->dosageInterval / $this->concentration * $this->costPerUnit;
+  public function getPerDayCost($weight = null) {
+    return $this->dosage * $this->dosageInterval / $this->concentration * $this->costPerUnit * ($weight ?? 1);
   }
 
 	public function updateFromArray($array) {

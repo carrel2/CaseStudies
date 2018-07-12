@@ -14,7 +14,7 @@
 
 {% block scripts %}
   {{ parent() }}
-
+©
   <script>
     $(function() {
       $(".panel-block").on('click', function() {
@@ -118,7 +118,7 @@
                 {% set dFlash = find(flash, "AppBundle:DiagnosticProcedure") %}
 
                 {% if flash is not empty %}
-                  <div class="column is-full"><em>{{ dFlash.name }} (${{ dFlash.cost|number_format }}):</em> {{ dFlash.defaultResult }}</div>
+                  <div class="column is-full"><em>{{ dFlash.name }} (${{ dFlash.getPerDayCost()|number_format }}):</em> {{ dFlash.defaultResult }}</div>
                 {% endif %}
               {% endfor %}
             </div>
@@ -148,7 +148,7 @@
                 {% set tFlash = find(flash, "AppBundle:TherapeuticProcedure") %}
 
                 {% if flash is not empty %}
-                  <div class="column is-full"><em>{{ tFlash.name }} (${{ tFlash.cost|number_format }}):</em> {{ tFlash.defaultResult }}</div>
+                  <div class="column is-full"><em>{{ tFlash.name }} (${{ tFlash.getPerDayCost()|number_format }}):</em> {{ tFlash.defaultResult }}</div>
                 {% endif %}
               {% endfor %}
             </div>

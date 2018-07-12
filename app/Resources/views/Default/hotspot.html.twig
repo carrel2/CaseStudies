@@ -66,9 +66,11 @@
 
 			var eWeight = null;
 
-			if( $("#estimated_weight").val() != undefined ) {
-				eWeight = $("#estimated_weight").val();
+			if( $("#estimated_weight").val() == undefined ) {
+				return;
 			}
+
+			eWeight = $("#estimated_weight").val();
 
 			$('.modal').toggleClass('is-active');
 			$('.modal').load( "{{ path('differentials') }}", {estimated_weight: eWeight}, function() {
@@ -184,7 +186,7 @@
 
 	<div id="checked" class="column is-half-desktop">
 		{% for spot in checked %}
-			<li id="hotspot-{{ spot.id }}"><em>{{ spot.hotspot.name }}:</em><span class="info"> {{ spot.info|raw }}</span></li>
+			<li id="hotspot-{{ spot.id }}">{{ spot.hasSound() ? ("<span><audio controls autoplay src='" ~ asset('sounds/' ~ spot.sound) ~ "'></audio></span>")|raw : "" }}<em>{{ spot.hotspot.name }}:</em><span class="info"> {{ spot.info|raw }}</span></li>
 		{% endfor %}
 
 		{% for flash in app.session.flashBag.peek('hotspot-' ~ userDay.id) %}
@@ -192,7 +194,7 @@
 		{% endfor %}
 	</div>
 
-	{% if app.user.location == "Farm" and app.user.days|length == 1 %}
+	{% if app.user.days|length == 1 %}
 		<div class="column is-half-desktop">
 			<label class="label asterisk" required>Estimated weight (kg)</label>
 

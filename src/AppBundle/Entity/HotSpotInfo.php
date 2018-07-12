@@ -38,6 +38,11 @@ class HotSpotInfo
 	 */
 	private $info;
 
+	/**
+	 * @ORM\Column(type="string")
+	 */
+	private $sound;
+
     public function getId()
     {
         return $this->id;
@@ -90,4 +95,18 @@ class HotSpotInfo
     {
         return $this->hotspot;
     }
+
+		public function getSound() {
+			return $this->sound;
+		}
+
+		public function setSound($sound) {
+			$this->sound = $sound;
+
+			return $this;
+		}
+
+		public function hasSound() {
+			return (bool) $this->sound;
+		}
 }

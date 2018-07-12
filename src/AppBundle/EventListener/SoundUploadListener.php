@@ -6,30 +6,43 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
-use AppBundle\Entity\Animal;
+use AppBundle\Entity\HotSpotInfo;
 use AppBundle\FileUploader;
+use Symfony\Component\HttpKernel\Log\LoggerInterface;
 
-class AnimalImageUploadListener
+class SoundUploadListener
 {
     private $uploader;
     private $directory;
+    private $logger;
 
-    public function __construct(FileUploader $uploader, $directory)
+    public function __construct(FileUploader $uploader, $directory, LoggerInterface $logger)
     {
         $this->uploader = $uploader;
         $this->directory = $directory;
+        $this->logger = $logger;
     }
 
     public function prePersist(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
 
+        if( !$entity instanceof HotSpotInfo ) {
+          return;
+        }
+
+        if( $entity->hasSound() ) {
+          $this->removeUpload($entity);
+        }
+        
         $this->uploadFile($entity);
     }
 
     public function preUpdate(PreUpdateEventArgs $args)
     {
-        $this->checkForImage($args);
+        // if( !empty($args->getEntityChangeSet()) ) {
+        //   $this->checkForSound($args);
+        // }
     }
 
     public function preRemove(LifecycleEventArgs $args)
@@ -39,31 +52,31 @@ class AnimalImageUploadListener
       $this->removeUpload($entity);
     }
 
-    private function checkForImage($args)
+    private function checkForSound($args)
     {
       $entity = $args->getEntity();
 
-      if( !$entity instanceof Animal ) {
+      if( !$entity instanceof HotSpotInfo ) {
         return;
       }
 
-      if( $args->hasChangedField('image') && $args->getNewValue('image') != null ) {
-        $this->removeUpload($args->getOldValue('image'));
+      if( $args->hasChangedField('sound') && $args->getNewValue('sound') != null ) {
+        $this->removeUpload($args->getOldValue('sound'));
 
         $this->uploadFile($entity);
       } else {
-        $args->setNewValue('image', $args->getOldValue('image'));
+        $args->setNewValue('sound', $args->getOldValue('sound'));
       }
     }
 
     private function uploadFile($entity)
     {
-        // upload only works for Animal entities
-        if (!$entity instanceof Animal) {
+        // upload only works for HotSpotInfo entities
+        if (!$entity instanceof HotSpotInfo) {
             return;
         }
 
-        $file = $entity->getImage();
+        $file = $entity->getSound();
 
         // only upload new files
         if (!$file instanceof UploadedFile) {
@@ -71,16 +84,16 @@ class AnimalImageUploadListener
         }
 
         $fileName = $this->uploader->upload($file, $this->directory);
-        $entity->setImage($fileName);
+        $entity->setSound($fileName);
     }
 
     private function removeUpload($entity)
     {
-      if( !$entity instanceof Animal ) {
+      if( !$entity instanceof HotSpotInfo ) {
         return;
       }
 
-      $file = $entity->getImage();
+      $file = $entity->getSound();
 
       $filePath = "{$this->directory}/$file";
 
