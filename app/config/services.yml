@@ -1,36 +1,26 @@
 parameters:
 
 services:
-    ldap:
-        class: Symfony\Component\Ldap\Ldap
-        arguments: ['@adapter']
-
-    adapter:
-        class: Symfony\Component\Ldap\Adapter\ExtLdap\Adapter
-        arguments:
-            -   host: ldap.illinois.edu
-                port: 389
-                encryption: tls
-                options:
-                    protocol_version: 3
-                    referrals: false
-
     app.form.user:
         class: AppBundle\Form\UserType
         arguments: ['@security.token_storage']
         tags:
             - { name: form.type }
 
-    app.logout_handler:
-        class: AppBundle\LogoutHandler
-
     app.file_uploader:
         class: AppBundle\FileUploader
-        arguments: ['%image_directory%']
 
     app.doctrine_animal_listener:
         class: AppBundle\EventListener\AnimalImageUploadListener
-        arguments: ['@app.file_uploader']
+        arguments: ['@app.file_uploader', '%image_directory%']
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }
+            - { name: doctrine.event_listener, event: preRemove }
+
+    app.doctrine_sound_upload_listener:
+        class: AppBundle\EventListener\SoundUploadListener
+        arguments: ['@app.file_uploader', '%sound_directory%']
         tags:
             - { name: doctrine.event_listener, event: prePersist }
             - { name: doctrine.event_listener, event: preUpdate }

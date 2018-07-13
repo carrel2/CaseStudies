@@ -8,14 +8,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityRepository;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use AppBundle\Entity\TestResults;
+use AppBundle\Entity\DiagnosticResults;
 
 class DiagnosticResultsType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder->add('test', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
-				'class' => 'AppBundle:Test',
+				'class' => 'AppBundle:DiagnosticProcedure',
 				'choice_label' => 'name',
 				'query_builder' => function (EntityRepository $er) {
         	return $er->createQueryBuilder('t')
@@ -25,7 +25,7 @@ class DiagnosticResultsType extends AbstractType
 			))
 			->add('results', 'Ivory\CKEditorBundle\Form\Type\CKEditorType', array(
 				'label_attr' => array(
-					'is-large',
+					'class' => 'is-large asterisk',
 				),
 				'config' => array(
 					'autoParagraph' => false,
@@ -33,15 +33,21 @@ class DiagnosticResultsType extends AbstractType
 			))
 			->add('waitTime', null, array(
 				'label_attr' => array(
-					'is-large',
+					'class' => 'is-large',
 				),
+			))
+			->add('cost', null, array(
+				'required' => false,
+				'label_attr' => array(
+					'class' => 'is-large',
+				)
 			));
 	}
 
 	public function configureOptions(OptionsResolver $resolver)
 	{
 		$resolver->setDefaults(array(
-			'data_class' => 'AppBundle\Entity\TestResults',
+			'data_class' => 'AppBundle\Entity\DiagnosticResults',
 			'label' => false,
 		));
 	}

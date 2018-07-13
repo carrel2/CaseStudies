@@ -6,7 +6,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use AppBundle\Form\TherapeuticsType;
 
 class TherapeuticsController extends Controller
 {
@@ -35,9 +34,9 @@ class TherapeuticsController extends Controller
 
 			foreach( $medications as $medication )
 			{
-				$results = $day->getResultByMedication($medication);
+				$results = $day->getResultByTherapeuticProcedure($medication);
 				if( $results ) {
-					$user->getCurrentDay()->addMedication($results);
+					$user->getCurrentDay()->addTherapeutic($results);
 				} else {
 					$this->addFlash('empty-therapeutic-results-' . $user->getCurrentDay()->getId(), $medication->getId());
 				}
@@ -50,8 +49,11 @@ class TherapeuticsController extends Controller
 			return $this->redirectToRoute('logic');
 		}
 
+		$weight = $r->getSession()->has('estimated_weight') ? $r->getSession()->get('estimated_weight') : null;
+
 		return $this->render('Default/therapeutics.html.twig', array(
 			'form' => $form->createView(),
+			'animal_weight' => $weight,
 		));
 	}
 }

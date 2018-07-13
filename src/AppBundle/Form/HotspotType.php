@@ -5,10 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\EntityRepository;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use AppBundle\Entity\HotSpotInfo;
 
 class HotspotType extends AbstractType
 {
@@ -30,6 +27,16 @@ class HotspotType extends AbstractType
 			->add('info', 'Ivory\CKEditorBundle\Form\Type\CKEditorType', array(
 				'config' => array(
 					'autoParagraph' => false,
+				)
+			))
+			->add('sound', 'Symfony\Component\Form\Extension\Core\Type\FileType', array(
+				'data' => '',
+				'required' => false,
+				'attr' => array(
+					'accept' => '.mp3,.wav',
+				),
+				'label_attr' => array(
+					'class' => 'is-medium',
 				)
 			));
 	}

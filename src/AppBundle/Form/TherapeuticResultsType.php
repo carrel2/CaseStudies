@@ -8,14 +8,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityRepository;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use AppBundle\Entity\MedicationResults;
+use AppBundle\Entity\TherapeuticResults;
 
 class TherapeuticResultsType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder->add('medication', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
-				'class' => 'AppBundle:Medication',
+				'class' => 'AppBundle:TherapeuticProcedure',
 				'choice_label' => 'name',
 				'query_builder' => function (EntityRepository $er) {
         	return $er->createQueryBuilder('m')
@@ -25,7 +25,7 @@ class TherapeuticResultsType extends AbstractType
 			))
 			->add('results', 'Ivory\CKEditorBundle\Form\Type\CKEditorType', array(
 				'label_attr' => array(
-					'class' => 'is-large',
+					'class' => 'is-large asterisk',
 				),
 				'config' => array(
 					'autoParagraph' => false,
@@ -35,13 +35,19 @@ class TherapeuticResultsType extends AbstractType
 				'label_attr' => array(
 					'class' => 'is-large',
 				),
+			))
+			->add('cost', null, array(
+				'required' => false,
+				'label_attr' => array(
+					'class' => 'is-large',
+				)
 			));
 	}
 
 	public function configureOptions(OptionsResolver $resolver)
 	{
 		$resolver->setDefaults(array(
-			'data_class' => 'AppBundle\Entity\MedicationResults',
+			'data_class' => 'AppBundle\Entity\TherapeuticResults',
 			'label' => false,));
 	}
 }

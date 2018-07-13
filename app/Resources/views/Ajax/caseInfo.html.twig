@@ -1,3 +1,13 @@
+{#
+/**
+ * Available variables
+ * -------------------
+ *
+ * {{ form }} - AppBundle/Form/CaseType
+ * {{ id }} - AppBundle/Entity/CaseStudy::id
+ */
+#}
+
 {{ form_start(form, {'attr': {'id': 'case'}, 'action': path('caseInfo', {'id': id})}) }}
 {{ form_widget(form) }}
 {{ form_end(form) }}

@@ -1,36 +1,77 @@
-{% extends 'base.html.twig' %}
+{#
+/**
+ * Available variables
+ * -------------------
+ *
+ * {{ animal }} - AppBundle/Entity/Animal
+ * {{ size }} - array( 0 => width, 1 => height, ... )
+ * {{ checked }} Doctrine/Common/Collections/ArrayCollection( AppBundle/Entity/HotSpotInfo )
+ * {{ userDay }} - AppBundle/Entity/UserDay
+ * {{ day }} - AppBundle/Entity/Day
+ */
+#}
 
-{% import _self as i %}
+{% extends 'base.html.twig' %}
 
 {% block scripts %}
 	{{ parent() }}
 
 	<script>
-		$(function() {
-			updateHotspots();
+		function hotspot(id, coords, color) {
+			this.id = id;
+			this.coords = coords;
+			this.color = color;
+			this.checked = false;
 
-			{% if app.session.get('modalUp', false) %}
-				modal();
-			{% endif %}
+			this.drawDefault = function(ctx = $('#canvas-default')[0].getContext("2d")) {
+				ctx.beginPath();
+				ctx.moveTo(coords[0], coords[1]);
 
-			$(window).resize(function() {
-				{% for spot in animal.hotspots %}
-					$('area.hotspot[data-path="{{ spot.id }}"]').attr('coords', $('#animal').innerWidth() * {{ spot.x1|number_format(2) }} + ',' + $('#animal').innerHeight() * {{ spot.y1|number_format(2) }} + ',' + $('#animal').innerWidth() * {{ spot.x2|number_format(2) }} + ',' + $('#animal').innerHeight() * {{ spot.y2|number_format(2) }} );
-				{% endfor %}
-			});
+				coords.forEach(function(item, index) {
+					if(index % 2 == 0) {
+						ctx.lineTo(coords[index], coords[index+1]);
+					}
+				});
 
-			$('#animal').ready(function() {
-				$(window).resize();
-			});
-		});
+				ctx.closePath();
+				ctx.fillStyle = "rgba(200,200,200,0.5)";
+				ctx.fill();
+			}
 
-		function modal(event=null) {
+			this.drawHidden = function(ctx = $('#canvas-hidden')[0].getContext("2d")) {
+				ctx.beginPath();
+				ctx.moveTo(coords[0], coords[1]);
+
+				coords.forEach(function(item, index) {
+					if(index % 2 == 0) {
+						ctx.lineTo(coords[index], coords[index+1]);
+					}
+				});
+
+				ctx.closePath();
+				ctx.fillStyle = color;
+				ctx.fill();
+			}
+
+			this.draw = function() {
+				this.drawDefault();
+				this.drawHidden();
+			}
+		}
+
+    function modal(event=null) {
 			if( event ) {
 				event.preventDefault();
 			}
 
+			var eWeight = $("#estimated_weight").val();
+
+			if( !eWeight ) {
+				return;
+			}
+
 			$('.modal').toggleClass('is-active');
-			$('.modal').load( "{{ path('differentials') }}", function() {
+			$('.modal').load( "{{ path('differentials') }}", {estimated_weight: eWeight}, function() {
 				$('.modal-card-body').prepend( $('#checked').children() );
 
 				$('.delete').on('click', function() {
@@ -40,7 +81,6 @@
 				});
 				$('#continue').on('click', function() {
 					var input = $('#differentials').val();
-
 					if( input.length ) {
 						$.post( "{{ path("differentials", { 'moveOn': true }) }}", {explanation: input}, function(result, status, xhr) {
 							location.href = "{{ path("diagnostics") }}";
@@ -49,6 +89,67 @@
 				});
 			});
 		}
+
+		var hotspotList = [];
+
+		$(function() {
+      {% if app.session.get('modalUp', false) %}
+				modal();
+			{% endif %}
+
+			$('body').append('<canvas id="canvas-hidden"></canvas>');
+
+      $('#canvas-hidden').attr({height: $('#canvas-default').height(), width: $('#canvas-default').width(), style: "display: none;"});
+
+			{% for hotspot in animal.hotspots %}
+        var coords{{ hotspot.id }} = {{ "[" ~ hotspot.coords|join(",") ~ "]" }}
+
+        coords{{ hotspot.id }}.forEach(function(item, index) {
+          if( index % 2 ) {
+            coords{{ hotspot.id }}[index] = item * $('canvas').height();
+          } else {
+            coords{{ hotspot.id }}[index] = item * $('canvas').width();
+          }
+        });
+
+        var newHotspot = new hotspot({{ hotspot.id }}, coords{{ hotspot.id }}, "rgb(#,#,#)".replace(/#/g, hotspotList.length + 1));
+
+        hotspotList.push( newHotspot );
+
+				if( $('#hotspot-{{ hotspot.id }}').length > 0 ) {
+					newHotspot.drawDefault();
+					newHotspot.checked = true;
+				}
+
+        newHotspot.drawHidden();
+      {% endfor %}
+
+			$.data(document.body, "hotspots", hotspotList);
+
+			$('#canvas-default').on("click", function(e) {
+				var rect = this.getBoundingClientRect();
+				var pos = {
+					x: e.clientX - rect.left,
+					y: e.clientY - rect.top
+				};
+
+				var rgb = document.getElementById("canvas-hidden").getContext("2d").getImageData(pos.x, pos.y, 1, 1);
+				var pos = rgb.data[0];
+
+				if( pos ) {
+					var h = hotspotList[pos - 1];
+
+					if( !h.checked ) {
+						$.get('/update/' + h.id, function(data, status) {
+							$('#checked').append(data)
+						});
+
+						h.drawDefault();
+						h.checked = true;
+					}
+				}
+			});
+		});
 	</script>
 {% endblock %}
 
@@ -77,33 +178,33 @@
 		{% set class = 'is-2by1' %}
 	{% endif %}
 
-	{% if day.description is not empty %}
-		<div class="column is-full box">{{ day.description|raw }}</div>
-	{% endif %}
-
-	{{ i.instructions(app.user.days|length) }}
-
 	<div class="column is-half-desktop">
-		<div id="hotspots" class="image {{ class }}">
-			<img id="animal" src="{{ asset('images/' ~ animal.image) }}" usemap="#hotspots" />
-
-			<map name="hotspots">
-				{% for spot in animal.hotspots %}
-					<area class="hotspot" shape="rect" data-path="{{ spot.id }}">
-				{% endfor %}
-			</map>
-		</div>
+		<canvas id="canvas-default" height="600" width="900" style="background-image:url({{ asset( 'images/' ~ animal.image ) }}); background-size:contain;"></canvas>
 	</div>
 
-	<div id="checked" class="column">
+	<div id="checked" class="column is-half-desktop">
 		{% for spot in checked %}
-			<li><em>{{ spot.hotspot.name }}:</em><span class="info"> {{ spot.info|raw }}</span></li>
+			<li id="hotspot-{{ spot.id }}">{{ spot.hasSound() ? ("<span><audio controls autoplay src='" ~ asset('sounds/' ~ spot.sound) ~ "'></audio></span>")|raw : "" }}<em>{{ spot.hotspot.name }}:</em><span class="info"> {{ spot.info|raw }}</span></li>
 		{% endfor %}
 
 		{% for flash in app.session.flashBag.peek('hotspot-' ~ userDay.id) %}
-			<li>{{ flash }}: No information available</li>
+			<li id="hotspot-{{ spot.id }}">{{ flash }}: No information available</li>
 		{% endfor %}
 	</div>
+
+	{% if app.user.days|length == 1 %}
+		<div class="column is-half-desktop">
+			<label class="label asterisk" required>Estimated weight (kg)</label>
+
+			<div class="control has-icons-left">
+				<input id="estimated_weight" class="input" type="text" placeholder="Weight (kg)">
+
+				<span class="icon is-left">
+					<i class="fas fa-weight"></i>
+				</span>
+			</div>
+		</div>
+	{% endif %}
 
 	<div id="modal" class="modal">
 	</div>
@@ -113,21 +214,8 @@
 	<div class="tabs">
 		<ul>
 			<li><a onclick="modal(event)">Continue</a></li>
-			<li><a href="{{ path('review') }}">Review</a></li>
 		</ul>
 	</div>
 
 	{{ parent() }}
 {% endblock %}
-
-{% macro instructions(i) %}
-  <div class="column is-full">
-    <h1 class="title">Physical Evaluation - Day {{ i }}</h1>
-
-    <div class="tile box">
-      <div class="content">
-        <p>Click the image to perform the physical evaluation</p>
-      </div>
-    </div>
-  </div>
-{% endmacro %}

@@ -4,7 +4,7 @@ function updateCase() {
 	var id = $('#default_title').val();
 	var button = $('#default_start').parent().parent().clone();
 
-	$('#case').load('/courses/cs/getDescription/' + id, function(response, status) {
+	$('#case').load('/getDescription/' + id, function(response, status) {
 		$(response).imagesLoaded().always(moveFooter);
 		$('#default_start').parent().parent().remove();
 		$('#case_description').after(button);
@@ -16,8 +16,10 @@ function addCheckboxListener() {
 		var cb = $(this);
 		var cost = $('#cost');
 
-		var currentCost = Number(cost.text());
-		var cbCost = Number(cb.attr('data-cost'));
+		var currentCost = Number(cost.text()), weight = Number(cost.data('weight'));
+		var cbCost;
+
+		cbCost = Number(cb.attr('data-cost')) * weight;
 
 		var isChecked = cb.prop('checked');
 
@@ -26,6 +28,28 @@ function addCheckboxListener() {
 		} else {
 			cost.text((currentCost - cbCost).toFixed(2));
 		}
+	});
+}
+
+function addHoverListener() {
+	$('input[type=checkbox]').parent().hover(function() {
+		if($('#popup').length) {
+			return;
+		}
+		
+		var dose, interval, cost;
+
+		dose = $(this).children().data('dosage');
+		interval = $(this).children().data('interval');
+		cost = parseFloat($(this).children().data('cost')) * parseFloat($('#cost').data('weight'));
+
+		$(this).after('<div id="popup" class="box is-italic" style="display:none;"><div><span class="has-text-weight-semibold">Dosage:</span> ' + dose + '</div><div><span class="has-text-weight-semibold">Interval:</span> ' + interval + '</div><div><span class="has-text-weight-semibold">Client cost per day:</span> ' + cost.toFixed(2) + '</div></div>');
+
+		$('#popup').slideDown();
+	}, function() {
+		$('#popup').slideUp(function() {
+			$(this).remove();
+		});
 	});
 }
 
@@ -128,7 +152,7 @@ function updateAdminCase(id) {
 		}
 	});
 
-	$('#caseInfo').load('/courses/cs/admin/getCase/' + id, function(responseTxt, statusTxt, xhr){
+	$('#caseInfo').load('/admin/getCase/' + id, function(responseTxt, statusTxt, xhr){
 		$('.collection > div').each(function(i, e) {
 			var t = $(this).parent().data('type');
 			$(this).append('<button type="button" class="delete remove-button"></button>');
@@ -149,12 +173,7 @@ function updateAdminCase(id) {
 function updateHotspots() {
 	$('.hotspot').each(function() {
 		$(this).on('click', function() {
-			var area = this;
-
-			$.get('/courses/cs/update/' + $(this).attr('data-path'), function(data, s) {
-				var coords = area.coords.split(",");
-
-				$('#hotspots').append('<div style="background: rgba(255,255,255,.4);position:absolute;top:' + coords[1] + 'px;left:' + coords[0] + 'px;height:' + (coords[3] - coords[1]) + 'px;width:' + (coords[2] - coords[0]) + 'px;"></div>' );
+			$.get('/update/' + $(this).attr('data-path'), function(data, s) {
 				$('#checked').append(data);
 
 				$('#checked').imagesLoaded().always(moveFooter);

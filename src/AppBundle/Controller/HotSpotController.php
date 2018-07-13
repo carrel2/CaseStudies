@@ -40,7 +40,7 @@ class HotSpotController extends Controller
 	}
 
 	/**
-	* @Route("/update/{id}", name="update")
+	* @Route("/update/{id}", name="update", condition="request.isXMLHttpRequest()")
 	* @Security("has_role('ROLE_USER')")
 	*/
 	public function updatePageAction(Request $r, HotSpot $hotspot)
@@ -57,7 +57,13 @@ class HotSpotController extends Controller
 
 				$em->flush();
 
-				return new Response('<li><em>' . $hotspot->getName() . ':</em><span class="info"> ' . $info->getInfo() . '</span></li>');
+				$audio = "";
+
+				if( $info->hasSound() ) {
+					$audio = "<span><audio controls autoplay src='{$this->container->getParameter('sound_directory')}/{$info->getSound()}'></audio></span>";
+				}
+
+				return new Response('<li>' . $audio . '<em>' . $hotspot->getName() . ':</em><span class="info"> ' . $info->getInfo() . '</span></li>');
 			} else if( $info->getHotspot()->getId() == $hotspot->getId() && $user->getCurrentDay()->getHotspotsInfo()->contains($info) ) {
 				return new Response('');
 			}
@@ -74,10 +80,11 @@ class HotSpotController extends Controller
 	}
 
 	/**
-	* @Route("/addHotspot/{animal}/{name}/{x1}-{y1}-{x2}-{y2}", name="addHotspot")
+	* @Route("/addHotspot/{animal}/{name}", name="addHotspot")
 	*/
-	public function addHotspotAction(Animal $animal, $name, $x1, $y1, $x2, $y2)
+	public function addHotspotAction(Request $r, Animal $animal, $name)
 	{
+		$coords = $r->request->get('coords');
 		$hotspots = $animal->getHotspots();
 		$spot = null;
 		$name = ucfirst(strtolower(str_replace("%20", " ", $name)));
@@ -94,7 +101,7 @@ class HotSpotController extends Controller
 			$spot = new HotSpot();
 		}
 
-		$spot->setName($name)->setX1($x1)->setX2($x2)->setY1($y1)->setY2($y2);
+		$spot->setName($name)->setCoords($coords);
 
 		$animal->addHotspot($spot);
 
@@ -118,6 +125,8 @@ class HotSpotController extends Controller
 	}
 
 	/**
+	 * QUESTION: is this being used?
+	 *
 	* @Route("/getAnimalInfo/{animal}/{type}", name="getAnimalInfo")
 	*/
 	public function getAnimalInfo(Animal $animal, $type = null)
@@ -140,6 +149,11 @@ class HotSpotController extends Controller
 	{
 		$session = $r->getSession();
 		$diff = $r->request->get('explanation');
+		$eWeight = $r->request->has('estimated_weight') ? $r->request->get('estimated_weight') : null;
+
+		if( $eWeight ) {
+			$session->set('estimated_weight', $eWeight);
+		}
 
 		if( $diff && $moveOn ) {
 			$session->set("differentials-{$this->getUser()->getCurrentDay()->getId()}", $diff);

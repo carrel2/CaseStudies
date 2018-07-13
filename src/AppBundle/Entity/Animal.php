@@ -22,11 +22,6 @@ class Animal
   private $id;
 
   /**
-  * @ORM\OneToMany(targetEntity="CaseStudy", mappedBy="animal")
-  */
-  private $cases;
-
-  /**
   * @ORM\Column(type="string", length=80)
   */
   private $name;
@@ -35,6 +30,11 @@ class Animal
   * @ORM\Column(type="string")
   */
   private $image; // TODO: look into having multiple images associated with an Animal
+
+  /**
+  * @ORM\OneToMany(targetEntity="CaseStudy", mappedBy="animal")
+  */
+  private $cases;
 
   /**
   * @ORM\OneToMany(targetEntity="HotSpot", mappedBy="animal", cascade={"all"}, orphanRemoval=true)
@@ -78,8 +78,10 @@ class Animal
 
     public function addCase(\AppBundle\Entity\CaseStudy $case)
     {
-        $case->setAnimal($this);
-        $this->cases[] = $case;
+        if( !$this->cases->contains($case) ) {
+          $case->setAnimal($this);
+          $this->cases->add($case);
+        }
 
         return $this;
     }
@@ -88,6 +90,8 @@ class Animal
     {
         $case->setAnimal(null);
         $this->cases->removeElement($case);
+
+        return $this;
     }
 
     public function getCases()
@@ -97,8 +101,10 @@ class Animal
 
     public function addHotspot(\AppBundle\Entity\HotSpot $hotspot)
     {
-        $hotspot->setAnimal($this);
-        $this->hotspots[] = $hotspot;
+        if( !$this->hotspots->contains($hotspot) ) {
+          $hotspot->setAnimal($this);
+          $this->hotspots->add($hotspot);
+        }
 
         return $this;
     }
@@ -107,6 +113,8 @@ class Animal
     {
         $hotspot->setAnimal(null);
         $this->hotspots->removeElement($hotspot);
+
+        return $this;
     }
 
     public function getHotspots()

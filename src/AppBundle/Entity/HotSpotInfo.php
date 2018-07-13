@@ -38,6 +38,11 @@ class HotSpotInfo
 	 */
 	private $info;
 
+	/**
+	 * @ORM\Column(type="string")
+	 */
+	private $sound;
+
     public function getId()
     {
         return $this->id;
@@ -55,29 +60,29 @@ class HotSpotInfo
         return $this->info;
     }
 
-    public function setDay(\AppBundle\Entity\Day $day = null)
-    {
-        $this->day = $day;
+		public function setDay(\AppBundle\Entity\Day $day)
+		{
+				$this->day = $day;
 
-        return $this;
-    }
+				return $this;
+		}
 
-    public function getDay()
-    {
-        return $this->day;
-    }
+		public function getDay()
+		{
+				return $this->day;
+		}
 
-    public function setUserDay(\AppBundle\Entity\UserDay $userDay = null)
-    {
-        $this->userDay = $userDay;
+		public function setUserDay(\AppBundle\Entity\UserDay $userDay)
+		{
+				$this->userDay = $userDay;
 
-        return $this;
-    }
+				return $this;
+		}
 
-    public function getUserDay()
-    {
-        return $this->userDay;
-    }
+		public function getUserDay()
+		{
+				return $this->userDay;
+		}
 
     public function setHotspot(\AppBundle\Entity\HotSpot $hotspot = null)
     {
@@ -90,4 +95,18 @@ class HotSpotInfo
     {
         return $this->hotspot;
     }
+
+		public function getSound() {
+			return $this->sound;
+		}
+
+		public function setSound($sound) {
+			$this->sound = $sound;
+
+			return $this;
+		}
+
+		public function hasSound() {
+			return (bool) $this->sound;
+		}
 }

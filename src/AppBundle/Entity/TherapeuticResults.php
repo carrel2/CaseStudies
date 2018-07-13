@@ -1,14 +1,14 @@
 <?php
-// src/AppBundle/Entity/MedicationResults.php
+// src/AppBundle/Entity/TherapeuticResults.php
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="MedicationResults")
+ * @ORM\Table(name="TherapeuticResults")
  */
-class MedicationResults
+class TherapeuticResults
 {
 	/**
 	 * @ORM\Column(type="integer")
@@ -18,20 +18,20 @@ class MedicationResults
 	private $id;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="Day", inversedBy="medications")
+	 * @ORM\ManyToOne(targetEntity="Day", inversedBy="therapeuticResults")
 	 */
 	private $day;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="UserDay", inversedBy="medications")
+	 * @ORM\ManyToOne(targetEntity="UserDay", inversedBy="therapeuticResults")
 	 * @ORM\JoinColumn(name="user_day_id", referencedColumnName="id", onDelete="SET NULL")
 	 */
 	private $userDay;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="Medication", inversedBy="results")
+	 * @ORM\ManyToOne(targetEntity="TherapeuticProcedure", inversedBy="results")
 	 */
-	private $medication;
+	private $therapeuticProcedure;
 
 	/**
 	 * @ORM\Column(type="text")
@@ -43,9 +43,14 @@ class MedicationResults
 	 */
 	private $waitTime;
 
+	/**
+	 * @ORM\Column(type="decimal", scale=2, nullable=true)
+	 */
+	private $cost;
+
 	public function __toString()
 	{
-		return sprintf("%s: %s", $this->medication->getName(), $this->results);
+		return sprintf("%s: %s", $this->therapeuticProcedure->getName(), $this->results);
 	}
 
     public function getId()
@@ -65,16 +70,16 @@ class MedicationResults
         return $this->results;
     }
 
-    public function setMedication(\AppBundle\Entity\Medication $medication = null)
+    public function setTherapeuticProcedure(\AppBundle\Entity\TherapeuticProcedure $therapeuticProcedure = null)
     {
-        $this->medication = $medication;
+        $this->therapeuticProcedure = $therapeuticProcedure;
 
         return $this;
     }
 
-    public function getMedication()
+    public function getTherapeuticProcedure()
     {
-        return $this->medication;
+        return $this->therapeuticProcedure;
     }
 
     public function setDay(\AppBundle\Entity\Day $day = null)
@@ -112,4 +117,16 @@ class MedicationResults
     {
         return $this->waitTime;
     }
+
+		public function setCost($cost)
+		{
+				$this->cost = $cost;
+
+				return $this;
+		}
+
+		public function getCost()
+		{
+				return $this->cost;
+		}
 }

@@ -12,10 +12,12 @@ use AppBundle\FileUploader;
 class AnimalImageUploadListener
 {
     private $uploader;
+    private $directory;
 
-    public function __construct(FileUploader $uploader)
+    public function __construct(FileUploader $uploader, $directory)
     {
         $this->uploader = $uploader;
+        $this->directory = $directory;
     }
 
     public function prePersist(LifecycleEventArgs $args)
@@ -68,7 +70,7 @@ class AnimalImageUploadListener
             return;
         }
 
-        $fileName = $this->uploader->upload($file);
+        $fileName = $this->uploader->upload($file, $this->directory);
         $entity->setImage($fileName);
     }
 
@@ -80,7 +82,7 @@ class AnimalImageUploadListener
 
       $file = $entity->getImage();
 
-      $filePath = "{$this->uploader->getTargetDir()}/$file";
+      $filePath = "{$this->directory}/$file";
 
       if( file_exists($filePath) ) {
         unlink($filePath);

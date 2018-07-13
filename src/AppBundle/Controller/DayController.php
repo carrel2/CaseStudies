@@ -9,8 +9,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use AppBundle\Entity\UserDay;
 
 class DayController extends Controller
@@ -34,7 +32,7 @@ class DayController extends Controller
 			->add('diagnosis', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', array(
 				'label' => $finished == 'finished' ? 'Diagnosis' : 'Tentative Diagnosis',
 				'label_attr' => array(
-					'class' => 'is-large',
+					'class' => 'is-large asterisk',
 				),
 			))
 			->add('finish', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
@@ -61,7 +59,6 @@ class DayController extends Controller
 
 		return $this->render('Default/review.html.twig', array(
 			'user' => $user,
-			'finished' => $finished,
 			'form' => $form->createView(),
 		));
 	}

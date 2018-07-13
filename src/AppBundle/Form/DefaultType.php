@@ -46,7 +46,7 @@ class DefaultType extends AbstractType
 					->add('location', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
 						'label' => 'Choose your location',
 						'label_attr' => array(
-							'class' => 'is-large',
+							'class' => 'is-large asterisk',
 						),
 						'choices' => array(
 							'Farm' => 'Farm',

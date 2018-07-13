@@ -23,12 +23,12 @@ class CaseType extends AbstractType
 		$builder
 		->add('title', 'Symfony\Component\Form\Extension\Core\Type\TextType', array(
 			'label_attr' => array(
-				'class' => 'is-large',
+				'class' => 'is-large asterisk',
 			),
 		))
 		->add('description', 'Ivory\CKEditorBundle\Form\Type\CKEditorType', array(
 			'label_attr' => array(
-				'class' => 'is-large',
+				'class' => 'is-large asterisk',
 			),
 			'config' => array(
 				'autoParagraph' => false,
@@ -37,7 +37,7 @@ class CaseType extends AbstractType
 		))
 		->add('email', 'Symfony\Component\Form\Extension\Core\Type\EmailType', array(
 			'label_attr' => array(
-				'class' => 'is-large',
+				'class' => 'is-large asterisk',
 			),
 		))
 		->add('animal', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
@@ -50,7 +50,7 @@ class CaseType extends AbstractType
 				'onchange' => 'updateSelects("hotspot");',
 			),
 		))
-		->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) use($options) {
+		->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
 			$case = $event->getData();
 			$form = $event->getForm();
 
@@ -67,7 +67,7 @@ class CaseType extends AbstractType
 					'entry_options' => array(
 						'attr' => array(
 							'class' => 'notification',
-							'animal' => array_key_exists('data', $options) ? $options['data']->getAnimal()->getId() : null,
+							'animal' => $case->getAnimal()->getId(),
 						),
 						'label_attr' => array(
 							'class' => 'is-large',

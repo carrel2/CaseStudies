@@ -6,8 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use AppBundle\Entity\Test;
-use AppBundle\Form\DiagnosticsType;
+use AppBundle\Entity\DiagnosticProcedure;
 
 class DiagnosticsController extends Controller
 {
@@ -40,10 +39,10 @@ class DiagnosticsController extends Controller
 
 			foreach( $tests as $test )
 			{
-				$results = $day->getResultByTest($test);
+				$results = $day->getResultByDiagnosticProcedure($test);
 				if( $results )
 				{
-					$user->getCurrentDay()->addTest($results);
+					$user->getCurrentDay()->addDiagnosticProcedure($results);
 				} else {
 					$this->addFlash('empty-diagnostic-results-' . $user->getCurrentDay()->getId(), $test->getId());
 
@@ -68,8 +67,11 @@ class DiagnosticsController extends Controller
 
 		$em->flush();
 
+		$weight = $r->getSession()->has('estimated_weight') ? $r->getSession()->get('estimated_weight') : null;
+
 		return $this->render('Default/diagnostics.html.twig', array(
 			'form' => $form->createView(),
+			'animal_weight' => $weight,
 		));
 	}
 }
