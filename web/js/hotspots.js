@@ -71,7 +71,7 @@ $(function(){
 				}
 			});
 
-			$.post('/addHotspot/' + $('textarea.canvas-area').data('id') + '/' + name.replace(/ /g, "%20"), {coords: coords}, function(r, s, x) {
+			$.post('/courses/cs/addHotspot/' + $('textarea.canvas-area').data('id') + '/' + name.replace(/ /g, "%20"), {coords: coords}, function(r, s, x) {
 				var hotspotDiv = $("#hotspots").find("div.hotspot." + name.replace(/ /g, '-'));
 				var hList = $.data(document.body, "hotspots");
 

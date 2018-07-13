@@ -4,7 +4,7 @@ function updateCase() {
 	var id = $('#default_title').val();
 	var button = $('#default_start').parent().parent().clone();
 
-	$('#case').load('/getDescription/' + id, function(response, status) {
+	$('#case').load('/courses/cs/getDescription/' + id, function(response, status) {
 		$(response).imagesLoaded().always(moveFooter);
 		$('#default_start').parent().parent().remove();
 		$('#case_description').after(button);
@@ -36,7 +36,7 @@ function addHoverListener() {
 		if($('#popup').length) {
 			return;
 		}
-		
+
 		var dose, interval, cost;
 
 		dose = $(this).children().data('dosage');
@@ -152,7 +152,7 @@ function updateAdminCase(id) {
 		}
 	});
 
-	$('#caseInfo').load('/admin/getCase/' + id, function(responseTxt, statusTxt, xhr){
+	$('#caseInfo').load('/courses/cs/admin/getCase/' + id, function(responseTxt, statusTxt, xhr){
 		$('.collection > div').each(function(i, e) {
 			var t = $(this).parent().data('type');
 			$(this).append('<button type="button" class="delete remove-button"></button>');
@@ -173,7 +173,7 @@ function updateAdminCase(id) {
 function updateHotspots() {
 	$('.hotspot').each(function() {
 		$(this).on('click', function() {
-			$.get('/update/' + $(this).attr('data-path'), function(data, s) {
+			$.get('/courses/cs/update/' + $(this).attr('data-path'), function(data, s) {
 				$('#checked').append(data);
 
 				$('#checked').imagesLoaded().always(moveFooter);
