@@ -21,7 +21,7 @@ class DiagnosticsType extends AbstractType
 				'multiple' => true,
 				'label' => false,
 				'choice_attr' => function(DiagnosticProcedure $d, $key, $index) {
-					return ['class' => 'test', 'data-cost' => $d->getPerDayCost()];
+					return ['class' => 'test', 'data-cost' => $d->getPerDayCost(), 'data-dosage' => $d->getDosage(), 'data-interval' => $d->getDosageInterval()];
 				},
 				'group_by' => function($val, $key, $index) {
 					return $val->getGroup();
@@ -33,13 +33,6 @@ class DiagnosticsType extends AbstractType
 					'class' => 'is-success',
 					'style' => 'margin-top: 1rem;',
 				),
-			));
-	}
-
-	public function configureOptions(OptionsResolver $resolver)
-	{
-	    $resolver->setDefaults(array(
-				'cs' => null,
 			));
 	}
 }

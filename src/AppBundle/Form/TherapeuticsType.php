@@ -4,7 +4,6 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use AppBundle\Entity\TherapeuticProcedure;
@@ -21,7 +20,7 @@ class TherapeuticsType extends AbstractType
 				'multiple' => true,
 				'label' => false,
 				'choice_attr' => function(TherapeuticProcedure $t, $key, $index) {
-					return ['class' => 'medication', 'data-cost' => $t->getPerDayCost()];
+					return ['class' => 'medication', 'data-cost' => $t->getPerDayCost(), 'data-dosage' => $t->getDosage(), 'data-interval' => $t->getDosageInterval()];
 				},
 				'group_by' => function($val, $key, $index) {
 					return $val->getGroupName();
@@ -33,13 +32,6 @@ class TherapeuticsType extends AbstractType
 					'class' => 'is-success',
 					'style' => 'margin-top: 1rem;',
 				),
-			));
-	}
-
-	public function configureOptions(OptionsResolver $resolver)
-	{
-	    $resolver->setDefaults(array(
-				'cs' => null,
 			));
 	}
 }

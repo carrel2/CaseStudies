@@ -16,3 +16,5 @@
 /vendor/
 /web/bundles/
 /web/.sass-cache/
+/web/images/
+/web/sounds/

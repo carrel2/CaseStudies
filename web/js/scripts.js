@@ -31,6 +31,28 @@ function addCheckboxListener() {
 	});
 }
 
+function addHoverListener() {
+	$('input[type=checkbox]').parent().hover(function() {
+		if($('#popup').length) {
+			return;
+		}
+		
+		var dose, interval, cost;
+
+		dose = $(this).children().data('dosage');
+		interval = $(this).children().data('interval');
+		cost = parseFloat($(this).children().data('cost')) * parseFloat($('#cost').data('weight'));
+
+		$(this).after('<div id="popup" class="box is-italic" style="display:none;"><div><span class="has-text-weight-semibold">Dosage:</span> ' + dose + '</div><div><span class="has-text-weight-semibold">Interval:</span> ' + interval + '</div><div><span class="has-text-weight-semibold">Client cost per day:</span> ' + cost.toFixed(2) + '</div></div>');
+
+		$('#popup').slideDown();
+	}, function() {
+		$('#popup').slideUp(function() {
+			$(this).remove();
+		});
+	});
+}
+
 function addRemoveButtonClickListener() {
 	$('.remove-button').each(function() {
 		$(this).off("click mouseout mouseover");
