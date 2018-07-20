@@ -14,7 +14,7 @@ class TherapeuticResultsType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$builder->add('medication', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
+		$builder->add('therapeuticProcedure', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
 				'class' => 'AppBundle:TherapeuticProcedure',
 				'choice_label' => 'name',
 				'query_builder' => function (EntityRepository $er) {
