@@ -60,30 +60,6 @@
   </div>
 
   {% if animal %}
-    {% set class = '' %}
-    {% set closest = 3 %}
-    {% set ratio = (size[0] / size[1])|number_format(3) %}
-
-    {% if (1.00 - ratio)|abs < closest %}
-      {% set class = 'is-1by1' %}
-      {% set closest = (1.33 - ratio)|abs %}
-    {% endif %}
-    {% if (1.33 - ratio)|abs < closest %}
-      {% set class = 'is-4by3' %}
-      {% set closest = (1.33 - ratio)|abs %}
-    {% endif %}
-    {% if (1.50 - ratio)|abs < closest %}
-      {% set class = 'is-3by2' %}
-      {% set closest = (1.50 - ratio)|abs %}
-    {% endif %}
-    {% if (1.77 - ratio)|abs < closest %}
-      {% set class = 'is-16by9' %}
-      {% set closest = (1.77 - ratio)|abs %}
-    {% endif %}
-    {% if (2 - ratio)|abs < closest %}
-      {% set class = 'is-2by1' %}
-    {% endif %}
-
     <div class="column is-half-desktop">
       <textarea class="canvas-area" data-id="{{ animal.id }}" data-image="{{ asset('images/' ~ animal.image) }}" style="display: none;"></textarea>
     </div>
