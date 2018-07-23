@@ -21,7 +21,7 @@ class DiagnosticsType extends AbstractType
 				'multiple' => true,
 				'label' => false,
 				'choice_attr' => function(DiagnosticProcedure $d, $key, $index) {
-					return ['class' => 'test', 'data-cost' => $d->getPerDayCost(), 'data-dosage' => $d->getDosage(), 'data-interval' => $d->getDosageInterval()];
+					return ['class' => 'test', 'data-cost' => $d->getCost()];
 				},
 				'group_by' => function($val, $key, $index) {
 					return $val->getGroup();

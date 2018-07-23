@@ -13,6 +13,30 @@ class TherapeuticType extends AbstractType
     $builder->add('therapeuticProcedure', 'AppBundle\Form\AbstractProcedureType', array(
         'label' => false,
         'data_class' => 'AppBundle\Entity\TherapeuticProcedure',
+      ))
+      ->add('dosage', null, array(
+        'label_attr' => array(
+          'class' => 'is-large asterisk',
+        ),
+      ))
+      ->add('dosageInterval', null, array(
+        'label_attr' => array(
+          'class' => 'is-large asterisk',
+        ),
+      ))
+      ->add('concentration', null, array(
+        'label_attr' => array(
+          'class' => 'is-large asterisk',
+        ),
+      ))
+      ->add('costPerUnit', null, array(
+        'required' => false,
+        'attr' => array(
+          'pattern' => '[0-9]+(\.[0-9]{1,2})?',
+        ),
+        'label_attr' => array(
+          'class' => 'is-large',
+        ),
       ));
   }
 
