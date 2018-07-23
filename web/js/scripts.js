@@ -33,21 +33,21 @@ function addCheckboxListener() {
 
 function addHoverListener() {
 	$('input[type=checkbox]').parent().hover(function() {
-		if($('#popup').length) {
+		if($(this).next().length) {
 			return;
 		}
-		
+
 		var dose, interval, cost;
 
 		dose = $(this).children().data('dosage');
 		interval = $(this).children().data('interval');
 		cost = parseFloat($(this).children().data('cost')) * parseFloat($('#cost').data('weight'));
 
-		$(this).after('<div id="popup" class="box is-italic" style="display:none;"><div><span class="has-text-weight-semibold">Dosage:</span> ' + dose + '</div><div><span class="has-text-weight-semibold">Interval:</span> ' + interval + '</div><div><span class="has-text-weight-semibold">Client cost per day:</span> ' + cost.toFixed(2) + '</div></div>');
+		$(this).after('<div class="box is-italic" style="display:none;"><div><span class="has-text-weight-semibold">Dosage:</span> ' + dose + '</div><div><span class="has-text-weight-semibold">Interval:</span> ' + interval + '</div><div><span class="has-text-weight-semibold">Client cost per day:</span> $' + cost.toFixed(2) + '</div></div>');
 
-		$('#popup').slideDown();
+		$(this).next().slideDown();
 	}, function() {
-		$('#popup').slideUp(function() {
+		$(this).next().slideUp(function() {
 			$(this).remove();
 		});
 	});
@@ -167,6 +167,8 @@ function updateAdminCase(id) {
 		moveSubmits();
 
 		addRemoveButtonClickListener();
+
+		checkForFileInputs();
 	});
 }
 
@@ -211,6 +213,17 @@ function updateSelects(type) {
 	});
 }
 
+function checkForFileInputs() {
+	try {
+		var file = document.querySelectorAll('input[type=file]')[0];
+		file.onchange = function(){
+			if( file.files.length > 0 ) {
+				document.getElementById('filename').innerHTML = file.files[0].name;
+			}
+		}
+	} catch (e) {}
+}
+
 function confirmDelete() {
 	return confirm("This action cannot be undone!\n\nPress 'Ok' to continue.");
 }
@@ -220,15 +233,6 @@ $(function() {
 		$(this).toggleClass('is-active');
 		$('.navbar-menu').toggleClass('is-active');
 	});
-
-	try {
-		var file = document.querySelectorAll('input[type=file]')[0];
-		file.onchange = function(){
-			if( file.files.length > 0 ) {
-				document.getElementById('filename').innerHTML = file.files[0].name;
-			}
-		}
-	} catch (e) {}
 
 	$("body").imagesLoaded().always(moveFooter);
 });
