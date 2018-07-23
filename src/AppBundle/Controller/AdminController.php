@@ -335,7 +335,7 @@ class AdminController extends Controller
 						return ['class' => 'diagnosticProcedure'];
 					},
 					'group_by' => function($val, $key, $index) {
-						return $val->getGroup();
+						return $val->getGroupName();
 					},
 					'label_attr' => array(
 						'class' => ' diagnostics_label is-large',
