@@ -24,7 +24,7 @@ class DiagnosticsType extends AbstractType
 					return ['class' => 'test', 'data-cost' => $d->getCost()];
 				},
 				'group_by' => function($val, $key, $index) {
-					return $val->getGroup();
+					return $val->getGroupName();
 				},
 			))
 			->add('submit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
