@@ -5,9 +5,13 @@ function updateCase() {
 	var button = $('#default_start').parent().parent().clone();
 
 	$('#case').load('/courses/cs/getDescription/' + id, function(response, status) {
-		$(response).imagesLoaded().always(moveFooter);
-		$('#default_start').parent().parent().remove();
-		$('#case_description').after(button);
+		if( status == "success" ) {
+			$(response).imagesLoaded().always(moveFooter);
+			$('#default_start').parent().parent().remove();
+			$('#case_description').after(button);
+		} else {
+			$('.icon i').removeClass('fa-spinner fa-pulse').addClass('fa-exclamation-triangle');
+		}
 	});
 }
 
