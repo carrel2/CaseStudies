@@ -33,7 +33,13 @@ function addCheckboxListener() {
 
 function addHoverListener() {
 	$('input[type=checkbox]').parent().hover(function() {
-		if($(this).next().length) {
+		if( $("#popup").length ) {
+			return;
+		}
+
+		if( $(this).next("#popup").length ) {
+			$("#popup").show();
+
 			return;
 		}
 
@@ -43,13 +49,21 @@ function addHoverListener() {
 		interval = $(this).children().data('interval');
 		cost = parseFloat($(this).children().data('cost')) * parseFloat($('#cost').data('weight'));
 
-		$(this).after('<div class="box is-italic" style="display:none;"><div><span class="has-text-weight-semibold">Dosage:</span> ' + dose + '</div><div><span class="has-text-weight-semibold">Interval:</span> ' + interval + '</div><div><span class="has-text-weight-semibold">Client cost per day:</span> $' + cost.toFixed(2) + '</div></div>');
+		$(this).after('<div id="popup" class="box is-italic" style="display:none;margin-top:0.75rem;position:absolute;z-index:1;"></div>');
 
-		$(this).next().slideDown();
+		if(dose) {
+			$("#popup").append('<div><span class="has-text-weight-semibold">Dosage:</span> ' + dose + '</div>');
+		}
+
+		if(interval) {
+			$("#popup").append('<div><span class="has-text-weight-semibold">Interval:</span> ' + interval + '</div>');
+		}
+
+		$("#popup").append('<div><span class="has-text-weight-semibold">Client cost per day:</span> $' + cost.toFixed(2) + '</div>');
+
+		$("#popup").show();
 	}, function() {
-		$(this).next().slideUp(function() {
-			$(this).remove();
-		});
+		$("#popup").remove();
 	});
 }
 
@@ -152,24 +166,25 @@ function updateAdminCase(id) {
 		}
 	});
 
-	$('#caseInfo').load('/courses/cs/admin/getCase/' + id, function(responseTxt, statusTxt, xhr){
-		$('.collection > div').each(function(i, e) {
-			var t = $(this).parent().data('type');
-			$(this).append('<button type="button" class="delete remove-button"></button>');
+	$('#caseInfo').html("<div style='display:flex;justify-content:center;align-items:center;height:200px;'><span class='icon'><i class='fas fa-spinner fa-pulse'></i></span></div>")
+		.load('/courses/cs/admin/getCase/' + id, function(responseTxt, statusTxt, xhr){
+			$('.collection > div').each(function(i, e) {
+				var t = $(this).parent().data('type');
+				$(this).append('<button type="button" class="delete remove-button"></button>');
+			});
+
+			$('.collection.days > label').each(function() {
+				$(this).text( "Day " + ( 1 + parseInt($(this).text()) ) );
+			});
+
+			$(responseTxt).imagesLoaded().always(moveFooter);
+
+			moveSubmits();
+
+			addRemoveButtonClickListener();
+
+			checkForFileInputs();
 		});
-
-		$('.collection.days > label').each(function() {
-			$(this).text( "Day " + ( 1 + parseInt($(this).text()) ) );
-		});
-
-		$(responseTxt).imagesLoaded().always(moveFooter);
-
-		moveSubmits();
-
-		addRemoveButtonClickListener();
-
-		checkForFileInputs();
-	});
 }
 
 function updateHotspots() {
