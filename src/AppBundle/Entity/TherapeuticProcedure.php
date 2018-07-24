@@ -19,6 +19,26 @@ class TherapeuticProcedure extends AbstractProcedure
 	private $id;
 
 	/**
+   * @ORM\Column(type="decimal", scale=2)
+   */
+  protected $dosage = 0;
+
+  /**
+   * @ORM\Column(type="integer")
+   */
+  protected $dosageInterval = 0;
+
+  /**
+   * @ORM\Column(type="decimal", scale=2)
+   */
+  protected $concentration = 1;
+
+	/**
+	 * @ORM\Column(type="string", length=10)
+	 */
+	protected $costPerUnit = "0";
+
+	/**
 	 * @ORM\OneToMany(targetEntity="TherapeuticResults", mappedBy="therapeuticProcedure")
 	 */
 	private $results;
@@ -31,6 +51,52 @@ class TherapeuticProcedure extends AbstractProcedure
 	public function getId() {
 		return $this->id;
 	}
+
+	public function setDosage($dosage) {
+    $this->dosage = $dosage;
+
+    return $this;
+  }
+
+  public function getDosage() {
+    return $this->dosage;
+  }
+
+  public function setDosageInterval($dosageInterval) {
+    $this->dosageInterval = $dosageInterval;
+
+    return $this;
+  }
+
+  public function getDosageInterval() {
+    return $this->dosageInterval;
+  }
+
+  public function setConcentration($concentration) {
+    $this->concentration = $concentration;
+
+    return $this;
+  }
+
+  public function getConcentration() {
+    return $this->concentration;
+  }
+
+	public function setCostPerUnit($costPerUnit)
+  {
+    $this->costPerUnit = $costPerUnit;
+
+    return $this;
+  }
+
+  public function getCostPerUnit()
+  {
+    return $this->costPerUnit;
+  }
+
+  public function getPerDayCost($weight = null) {
+    return $this->dosage * $this->dosageInterval / $this->concentration * $this->costPerUnit * ($weight ? $weight : 1);
+  }
 
   public function addResult(\AppBundle\Entity\TherapeuticResults $result)
   {
