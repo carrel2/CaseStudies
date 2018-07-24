@@ -11,7 +11,7 @@ function updateCase() {
 	});
 }
 
-function addCheckboxListener() {
+function addCheckboxListener(useWeight=false) {
 	$('input[type=checkbox]').on('change', function() {
 		var cb = $(this);
 		var cost = $('#cost');
@@ -19,7 +19,11 @@ function addCheckboxListener() {
 		var currentCost = Number(cost.text()), weight = Number(cost.data('weight'));
 		var cbCost;
 
-		cbCost = Number(cb.attr('data-cost')) * weight;
+		cbCost = Number(cb.attr('data-cost'));
+
+		if(useWeight) {
+			cbCost *= weight;
+		}
 
 		var isChecked = cb.prop('checked');
 
@@ -31,7 +35,7 @@ function addCheckboxListener() {
 	});
 }
 
-function addHoverListener() {
+function addHoverListener(useWeight=false) {
 	$('input[type=checkbox]').parent().hover(function() {
 		if( $("#popup").length ) {
 			return;
@@ -47,7 +51,11 @@ function addHoverListener() {
 
 		dose = $(this).children().data('dosage');
 		interval = $(this).children().data('interval');
-		cost = parseFloat($(this).children().data('cost')) * parseFloat($('#cost').data('weight'));
+		cost = parseFloat($(this).children().data('cost'));
+
+		if(useWeight) {
+			cost *= parseFloat($('#cost').data('weight'));
+		}
 
 		$(this).after('<div id="popup" class="box is-italic" style="display:none;margin-top:0.75rem;position:absolute;z-index:1;"></div>');
 
