@@ -24,25 +24,10 @@ abstract class AbstractProcedure
 	 */
 	protected $waitTime = 0;
 
-  /**
-   * @ORM\Column(type="decimal", scale=2)
-   */
-  protected $dosage = 0;
-
-  /**
-   * @ORM\Column(type="integer")
-   */
-  protected $dosageInterval = 0;
-
-  /**
-   * @ORM\Column(type="decimal", scale=2)
-   */
-  protected $concentration = 1;
-
 	/**
 	 * @ORM\Column(type="string", length=10)
 	 */
-	protected $costPerUnit = "0";
+	protected $cost = "0";
 
 	/**
 	 * @ORM\Column(type="text", nullable=true)
@@ -91,16 +76,16 @@ abstract class AbstractProcedure
     return $this->groupName;
   }
 
-  public function setCostPerUnit($costPerUnit)
+  public function setCost($cost)
   {
-    $this->costPerUnit = $costPerUnit;
+    $this->cost = $cost;
 
     return $this;
   }
 
-  public function getCostPerUnit()
+  public function getCost()
   {
-    return $this->costPerUnit;
+    return $this->cost;
   }
 
   public function setWaitTime($waitTime)
@@ -123,40 +108,6 @@ abstract class AbstractProcedure
     $this->defaultResult = $defaultResult;
 
     return $this;
-  }
-
-  public function setDosage($dosage) {
-    $this->dosage = $dosage;
-
-    return $this;
-  }
-
-  public function getDosage() {
-    return $this->dosage;
-  }
-
-  public function setDosageInterval($dosageInterval) {
-    $this->dosageInterval = $dosageInterval;
-
-    return $this;
-  }
-
-  public function getDosageInterval() {
-    return $this->dosageInterval;
-  }
-
-  public function setConcentration($concentration) {
-    $this->concentration = $concentration;
-
-    return $this;
-  }
-
-  public function getConcentration() {
-    return $this->concentration;
-  }
-
-  public function getPerDayCost($weight = null) {
-    return $this->dosage * $this->dosageInterval / $this->concentration * $this->costPerUnit * ($weight ? $weight : 1);
   }
 
 	public function updateFromArray($array) {
