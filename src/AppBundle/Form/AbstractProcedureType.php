@@ -22,22 +22,7 @@ class AbstractProcedureType extends AbstractType
           'class' => 'is-large',
         ),
       ))
-      ->add('dosage', null, array(
-        'label_attr' => array(
-          'class' => 'is-large asterisk',
-        ),
-      ))
-      ->add('dosageInterval', null, array(
-        'label_attr' => array(
-          'class' => 'is-large asterisk',
-        ),
-      ))
-      ->add('concentration', null, array(
-        'label_attr' => array(
-          'class' => 'is-large asterisk',
-        ),
-      ))
-      ->add('costPerUnit', null, array(
+      ->add('cost', null, array(
         'required' => false,
         'attr' => array(
           'pattern' => '[0-9]+(\.[0-9]{1,2})?',
