@@ -21,6 +21,8 @@ class TherapeuticsController extends Controller
 			return $this->redirectToRoute('default');
 		}
 
+		$weight = $r->getSession()->has('estimated_weight') ? $r->getSession()->get('estimated_weight') : null;
+
 		$form = $this->createForm( 'AppBundle\Form\TherapeuticsType' );
 
 		$form->handleRequest($r);
@@ -32,6 +34,8 @@ class TherapeuticsController extends Controller
 
 			$day = $user->getCaseStudy()->getDays()[count($user->getDays()) - 1];
 
+			$tCost = 0;
+
 			foreach( $medications as $medication )
 			{
 				$results = $day->getResultByTherapeuticProcedure($medication);
@@ -39,8 +43,12 @@ class TherapeuticsController extends Controller
 					$user->getCurrentDay()->addTherapeutic($results);
 				} else {
 					$this->addFlash('empty-therapeutic-results-' . $user->getCurrentDay()->getId(), $medication->getId());
+
+					$tCost += $medication->getPerDayCost($weight);
 				}
 			}
+
+			$this->addFlash('therapeutic-cost-' . $user->getCurrentDay()->getId(), $tCost);
 
 			$user->setCurrentProgress('review');
 
@@ -48,8 +56,6 @@ class TherapeuticsController extends Controller
 
 			return $this->redirectToRoute('logic');
 		}
-
-		$weight = $r->getSession()->has('estimated_weight') ? $r->getSession()->get('estimated_weight') : null;
 
 		return $this->render('Default/therapeutics.html.twig', array(
 			'form' => $form->createView(),
