@@ -49,34 +49,44 @@
     {%- endif -%}
 
     {%- set attr = attr|merge({class: (attr.class|default('') ~ ' control')|trim}) -%}
+    {% set ungrouped = [] %}
     <div {{ block('widget_container_attributes') }}>
       {% for group_label,group in choices %}
-        <div class="field control columns is-multiline">
-          {%- if group is iterable -%}
-              <div class="column is-full">
-                <label class="label title is-4"><u>{{ group_label|trans({}, translation_domain) }}</u></label>
-              </div>
+        {%- if group is iterable -%}
+          <div class="field control columns is-multiline">
+            <div class="column is-full">
+              <label class="label title is-4"><u>{{ group_label|trans({}, translation_domain) }}</u></label>
+            </div>
 
-              {%- for key,choice in group -%}
-                <div class="column is-one-quarter-desktop is-half">
-                  {{- form_widget(form[key], {
-                      inline_choice: inline_choice|default(false),
-                      translation_domain: choice_translation_domain,
-                  }) -}}
-                </div>
-              {%- endfor -%}
-          {% else %}
-            {%- for child in form -%}
+            {%- for key,choice in group -%}
               <div class="column is-one-quarter-desktop is-half">
-                {{- form_widget(child, {
+                {{- form_widget(form[key], {
                     inline_choice: inline_choice|default(false),
                     translation_domain: choice_translation_domain,
                 }) -}}
               </div>
             {%- endfor -%}
-          {% endif %}
-        </div>
+          </div>
+        {% else %}
+          {% set ungrouped = ungrouped|merge([form[group.data.id]]) %}
+        {% endif %}
       {% endfor %}
+
+      <div class="field control columns is-multiline">
+        <div class="column is-full">
+          <label class="label title is-4"><u>Ungrouped</u></label>
+        </div>
+
+        {% for child in ungrouped %}
+          <div class="column is-one-quarter-desktop is-half">
+            {{- form_widget(child, {
+                inline_choice: inline_choice|default(false),
+                translation_domain: choice_translation_domain,
+            }) -}}
+          </div>
+        {% endfor %}
+      </div>
+
       {{- block('form_errors') -}}
     </div>
 
