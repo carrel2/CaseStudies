@@ -76,10 +76,10 @@ class FileController extends Controller
             foreach ($reader as $row) {
               $obj = $em->getRepository("AppBundle:$type")->findOneByName($row['Name']);
 
-              if( !$obj ) {
+              if( !$obj && $row['Name'] ) {
                 $importCount++;
                 $em->persist( $class::createFromArray($row) );
-              } else {
+              } elseif( $row['Name'] ) {
                 $obj->updateFromArray($row);
 
                 $updateCount++;
@@ -103,10 +103,10 @@ class FileController extends Controller
             foreach ($reader as $row) {
               $obj = $em->getRepository("AppBundle:$type")->findOneByName($row['Name']);
 
-              if( !$obj ) {
+              if( !$obj && $row['Name'] ) {
                 $importCount++;
                 $em->persist( $class::createFromArray($row) );
-              } else {
+              } elseif( $row['Name'] ) {
                 $obj->updateFromArray($row);
 
                 $updateCount++;
