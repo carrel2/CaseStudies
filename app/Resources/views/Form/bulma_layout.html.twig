@@ -72,20 +72,22 @@
         {% endif %}
       {% endfor %}
 
-      <div class="field control columns is-multiline">
-        <div class="column is-full">
-          <label class="label title is-4"><u>Ungrouped</u></label>
-        </div>
-
-        {% for child in ungrouped %}
-          <div class="column is-one-quarter-desktop is-half">
-            {{- form_widget(child, {
-                inline_choice: inline_choice|default(false),
-                translation_domain: choice_translation_domain,
-            }) -}}
+      {% if ungrouped is not empty %}
+        <div class="field control columns is-multiline">
+          <div class="column is-full">
+            <label class="label title is-4"><u>Ungrouped</u></label>
           </div>
-        {% endfor %}
-      </div>
+
+          {% for child in ungrouped %}
+            <div class="column is-one-quarter-desktop is-half">
+              {{- form_widget(child, {
+                  inline_choice: inline_choice|default(false),
+                  translation_domain: choice_translation_domain,
+              }) -}}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
 
       {{- block('form_errors') -}}
     </div>
