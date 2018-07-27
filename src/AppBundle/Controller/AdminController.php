@@ -431,6 +431,8 @@ class AdminController extends Controller
 				 $em->flush();
 
 				 $this->addFlash('success', 'Updated ' . $dp->getName());
+
+				 return $this->redirectToRoute('manageDiagnostics');
 			 }
 
 			 return $this->render('Admin/manage.html.twig', array(
@@ -551,6 +553,8 @@ class AdminController extends Controller
 					 $em->flush();
 
 					 $this->addFlash('success', 'Updated ' . $tp->getName());
+
+					 return $this->redirectToRoute('manageTherapeutics');
 				 }
 
 				 return $this->render('Admin/manage.html.twig', array(
