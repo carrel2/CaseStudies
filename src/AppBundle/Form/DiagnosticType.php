@@ -13,6 +13,12 @@ class DiagnosticType extends AbstractType
     $builder->add('diagnosticProcedure', 'AppBundle\Form\AbstractProcedureType', array(
         'label' => false,
         'data_class' => 'AppBundle\Entity\DiagnosticProcedure',
+      ))
+      ->add('submit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
+        'attr' => array(
+          'class' => 'is-success',
+          'style' => 'margin-top: 1rem;',
+        ),
       ));
   }
 
