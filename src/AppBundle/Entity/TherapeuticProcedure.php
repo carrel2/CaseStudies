@@ -95,7 +95,11 @@ class TherapeuticProcedure extends AbstractProcedure
   }
 
   public function getPerDayCost($weight = null) {
-    return $this->dosage * $this->dosageInterval / $this->concentration * $this->costPerUnit * ($weight ? $weight : 1);
+		if( $this->concentration == 0 ) {
+			return 0;
+		}
+
+		return ( $this->dosage * $this->dosageInterval / $this->concentration ) * $this->costPerUnit * ($weight ? $weight : 1);
   }
 
   public function addResult(\AppBundle\Entity\TherapeuticResults $result)
