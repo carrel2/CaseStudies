@@ -30,7 +30,7 @@ class TherapeuticsController extends Controller
 		if( $form->isSubmitted() && $form->isValid() )
 		{
 			$em = $this->getDoctrine()->getManager();
-			$medications = $form->getData()['medication'];
+			$medications = $form->getData()['therapeuticProcedure'];
 
 			$day = $user->getCaseStudy()->getDays()[count($user->getDays()) - 1];
 

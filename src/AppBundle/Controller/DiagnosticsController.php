@@ -31,7 +31,7 @@ class DiagnosticsController extends Controller
 
 		if( $form->isSubmitted() && $form->isValid() )
 		{
-			$tests = $form->getData()['test'];
+			$tests = $form->getData()['diagnosticProcedure'];
 
 			$day = $user->getCaseStudy()->getDays()[count($user->getDays()) - 1];
 
