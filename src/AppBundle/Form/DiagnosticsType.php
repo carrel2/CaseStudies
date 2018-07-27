@@ -14,7 +14,7 @@ class DiagnosticsType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-			->add('test', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
+			->add('diagnosticProcedure', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
 				'class' => 'AppBundle:DiagnosticProcedure',
 				'choice_label' => 'name',
 				'expanded' => true,
