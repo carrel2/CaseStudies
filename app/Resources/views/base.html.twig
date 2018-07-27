@@ -5,7 +5,12 @@
 
   {% if app.user is not null %}
     {% if app.request.attributes.get('_route') == 'default' and app.user.isActive %}
-      <a class="navbar-item" href="{{ path(app.user.currentProgress) }}">Resume {{ app.user.caseStudy.title }}</a>
+      {% set route = app.user.currentProgress %}
+      {% if route == "finished" %}
+        {% set route = "review" %}
+      {% endif %}
+
+      <a class="navbar-item" href="{{ path(route) }}">Resume {{ app.user.caseStudy.title }}</a>
     {% endif %}
 
     {% if app.user.hasResults %}
