@@ -37,6 +37,12 @@ class TherapeuticType extends AbstractType
         'label_attr' => array(
           'class' => 'is-large',
         ),
+      ))
+      ->add('submit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
+        'attr' => array(
+          'class' => 'is-success',
+          'style' => 'margin-top: 1rem;',
+        ),
       ));
   }
 
