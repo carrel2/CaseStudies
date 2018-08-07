@@ -60,7 +60,7 @@ class HotSpotController extends Controller
 				$audio = "";
 
 				if( $info->hasSound() ) {
-					$audio = "<span><audio controls autoplay src='{$this->container->getParameter('sound_directory')}/{$info->getSound()}'></audio></span>";
+					$audio = "<span class='icon has-text-success'><audio src='{$this->container->getParameter('sound_directory')}/{$info->getSound()}'></audio><i class='far fa-play-circle'></i></span>";
 				}
 
 				return new Response('<li>' . $audio . '<em>' . $hotspot->getName() . ':</em><span class="info"> ' . $info->getInfo() . '</span></li>');
@@ -71,7 +71,7 @@ class HotSpotController extends Controller
 
 		if( false === array_search($hotspot->getName(), $session->getFlashBag()->peek('hotspot-' . $user->getCurrentDay()->getId())) )
 		{
-			$this->addFlash('hotspot-' . $user->getCurrentDay()->getId(), $hotspot->getName());
+			$this->addFlash('hotspot-' . $user->getCurrentDay()->getId(), array('id' => $hotspot->getId(), 'name' => $hotspot->getName()));
 
 			return new Response('<li><em>' . $hotspot->getName() . ':</em> No information available.</li>');
 		}

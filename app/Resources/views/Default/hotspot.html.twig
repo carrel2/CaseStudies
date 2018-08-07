@@ -23,13 +23,17 @@
 			this.color = color;
 			this.checked = false;
 
-			this.drawDefault = function(ctx = $('#canvas-default')[0].getContext("2d")) {
+			this.drawDefault = function(canvas = $('#canvas-default'), ctx = canvas[0].getContext("2d")) {
+				var width = canvas.width(), height = canvas.height();
+
 				ctx.beginPath();
-				ctx.moveTo(coords[0], coords[1]);
+				ctx.moveTo(coords[0] * width, coords[1] * height);
 
 				coords.forEach(function(item, index) {
 					if(index % 2 == 0) {
-						ctx.lineTo(coords[index], coords[index+1]);
+						var x = coords[index] * width, y = coords[index+1] * height;
+						console.log(x,y);
+						ctx.lineTo(x, y);
 					}
 				});
 
@@ -38,13 +42,15 @@
 				ctx.fill();
 			}
 
-			this.drawHidden = function(ctx = $('#canvas-hidden')[0].getContext("2d")) {
+			this.drawHidden = function(canvas = $('#canvas-hidden'), ctx = canvas[0].getContext("2d")) {
+				var width = canvas.width(), height = canvas.height();
+
 				ctx.beginPath();
-				ctx.moveTo(coords[0], coords[1]);
+				ctx.moveTo(coords[0] * width, coords[1] * height);
 
 				coords.forEach(function(item, index) {
 					if(index % 2 == 0) {
-						ctx.lineTo(coords[index], coords[index+1]);
+						ctx.lineTo(coords[index] * width, coords[index+1] * height);
 					}
 				});
 
@@ -90,6 +96,13 @@
 			});
 		}
 
+		function resizeCanvas() {
+			var c = $('#canvas-default'), p = c.parent();
+			var targetHeight = c.width() / {{ size[0] / size[1] }};
+
+			p.css('height', p.innerHeight() - p.height() + targetHeight + "px");
+		}
+
 		var hotspotList = [];
 
 		$(function() {
@@ -97,27 +110,19 @@
 				modal();
 			{% endif %}
 
-			$('body').append('<canvas id="canvas-hidden"></canvas>');
+			$(window).resize(resizeCanvas);
+			$(window).resize();
 
-      $('#canvas-hidden').attr({height: $('#canvas-default').height(), width: $('#canvas-default').width(), style: "display: none;"});
+			$('body').append('<canvas id="canvas-hidden" height="{{ size[1] }}" width="{{ size[0] }}" style="display:none;"></canvas>');
 
 			{% for hotspot in animal.hotspots %}
-        var coords{{ hotspot.id }} = {{ "[" ~ hotspot.coords|join(",") ~ "]" }}
-
-        coords{{ hotspot.id }}.forEach(function(item, index) {
-          if( index % 2 ) {
-            coords{{ hotspot.id }}[index] = item * $('canvas').height();
-          } else {
-            coords{{ hotspot.id }}[index] = item * $('canvas').width();
-          }
-        });
-
+        var coords{{ hotspot.id }} = {{ "[" ~ hotspot.coords|join(",") ~ "]" }};
         var newHotspot = new hotspot({{ hotspot.id }}, coords{{ hotspot.id }}, "rgb(#,#,#)".replace(/#/g, hotspotList.length + 1));
 
         hotspotList.push( newHotspot );
 
 				if( $('#hotspot-{{ hotspot.id }}').length > 0 ) {
-					newHotspot.drawDefault();
+					//newHotspot.drawDefault();
 					newHotspot.checked = true;
 				}
 
@@ -129,22 +134,22 @@
 			$('#canvas-default').on("click", function(e) {
 				var rect = this.getBoundingClientRect();
 				var pos = {
-					x: e.clientX - rect.left,
-					y: e.clientY - rect.top
+					x: (e.clientX - rect.left) / $('#canvas-default').width() * $('#canvas-hidden').width(),
+					y: (e.clientY - rect.top) / $('#canvas-default').height() * $('#canvas-hidden').height()
 				};
 
-				var rgb = document.getElementById("canvas-hidden").getContext("2d").getImageData(pos.x, pos.y, 1, 1);
+				var rgb = document.getElementById("canvas-hidden").getContext("2d").getImageData(pos.x.toFixed(0), pos.y.toFixed(0), 1, 1);
 				var pos = rgb.data[0];
 
 				if( pos ) {
 					var h = hotspotList[pos - 1];
 
 					if( !h.checked ) {
-						$.get('/courses/cs/update/' + h.id, function(data, status) {
+						$.get('/update/' + h.id, function(data, status) {
 							$('#checked').append(data)
 						});
 
-						h.drawDefault();
+						//h.drawDefault();
 						h.checked = true;
 					}
 				}
@@ -154,17 +159,23 @@
 {% endblock %}
 
 {% block body %}
+	<div class="column is-full">
+		<div class="box">
+			<p>Click the image below to perform a physical examination. Some results have soundbytes, click the <span class="icon has-text-success"><i class="far fa-play-circle"></i></span> to play them.</p>
+		</div>
+	</div>
+
 	<div class="column is-half-desktop">
-		<canvas id="canvas-default" height="600" width="900" style="background-image:url({{ asset( 'images/' ~ animal.image ) }}); background-size:contain;"></canvas>
+		<canvas id="canvas-default" style="background-image:url({{ asset( 'images/' ~ animal.image ) }}); background-size:contain;height:100%;width:100%;"></canvas>
 	</div>
 
 	<div id="checked" class="column is-half-desktop">
 		{% for spot in checked %}
-			<li id="hotspot-{{ spot.id }}">{{ spot.hasSound() ? ("<span><audio controls autoplay src='" ~ asset('sounds/' ~ spot.sound) ~ "'></audio></span>")|raw : "" }}<em>{{ spot.hotspot.name }}:</em><span class="info"> {{ spot.info|raw }}</span></li>
+			<li id="hotspot-{{ spot.id }}">{{ spot.hasSound() ? ("<span class='icon has-text-success' onclick='this.firstChild.play()'><audio src='" ~ asset('sounds/' ~ spot.sound) ~ "'></audio><i class='far fa-play-circle'></i></span>")|raw : "" }}<em>{{ spot.hotspot.name }}:</em><span class="info"> {{ spot.info|raw }}</span></li>
 		{% endfor %}
 
 		{% for flash in app.session.flashBag.peek('hotspot-' ~ userDay.id) %}
-			<li id="hotspot-{{ spot.id }}">{{ flash }}: No information available</li>
+			<li id="hotspot-{{ flash.id }}">{{ flash.name }}: No information available</li>
 		{% endfor %}
 	</div>
 

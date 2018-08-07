@@ -14,7 +14,7 @@
 
 {% block scripts %}
   {{ parent() }}
-  
+
   <script>
     $(function() {
       $(".panel-block").on('click', function() {
@@ -82,7 +82,7 @@
             {% endfor %}
 
             {% for flash in app.session.flashBag.peek('hotspot-' ~ day.id) %}
-              <div><em>{{ flash }}:</em> No information available</div>
+              <div><em>{{ flash.name }}:</em> No information available</div>
             {% endfor %}
 
             {% if app.session.has('differentials-' ~ day.id) %}

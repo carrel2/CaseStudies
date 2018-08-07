@@ -27,15 +27,6 @@
       {% if animal is not null %}
         {% for hotspot in animal.hotspots %}
           var coords{{ hotspot.id }} = {{ "[" ~ hotspot.coords|join(",") ~ "]" }}
-
-          coords{{ hotspot.id }}.forEach(function(item, index) {
-            if( index % 2 ) {
-              coords{{ hotspot.id }}[index] = item * $('canvas').height();
-            } else {
-              coords{{ hotspot.id }}[index] = item * $('canvas').width();
-            }
-          });
-
           var newHotspot = new hotspot(coords{{ hotspot.id }}, "rgb(#,#,#)".replace(/#/g, hotspotList.length + 1));
 
           hotspotList.push( newHotspot );
@@ -47,7 +38,7 @@
     }
 
     $(function() {
-      $("#image").imagesLoaded({background:true}).done(onImagesDone);
+      $("#canvas-default").imagesLoaded({background:true}).done(onImagesDone);
     });
   </script>
 {% endblock %}
