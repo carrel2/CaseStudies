@@ -145,7 +145,7 @@
 					var h = hotspotList[pos - 1];
 
 					if( !h.checked ) {
-						$.get('/update/' + h.id, function(data, status) {
+						$.get('/courses/cs/update/' + h.id, function(data, status) {
 							$('#checked').append(data)
 						});
 
