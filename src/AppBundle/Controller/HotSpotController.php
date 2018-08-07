@@ -60,7 +60,7 @@ class HotSpotController extends Controller
 				$audio = "";
 
 				if( $info->hasSound() ) {
-					$audio = "<span class='icon has-text-success'><audio src='{$this->container->getParameter('sound_directory')}/{$info->getSound()}'></audio><i class='far fa-play-circle'></i></span>";
+					$audio = "<span class='icon has-text-success' onclick='this.firstChild.play();'><audio src='{$this->get('templating.helper.assets')->getUrl('sounds/' . $info->getSound())}'></audio><i class='far fa-play-circle'></i></span>";
 				}
 
 				return new Response('<li>' . $audio . '<em>' . $hotspot->getName() . ':</em><span class="info"> ' . $info->getInfo() . '</span></li>');

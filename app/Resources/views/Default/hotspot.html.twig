@@ -171,7 +171,7 @@
 
 	<div id="checked" class="column is-half-desktop">
 		{% for spot in checked %}
-			<li id="hotspot-{{ spot.id }}">{{ spot.hasSound() ? ("<span class='icon has-text-success' onclick='this.firstChild.play()'><audio src='" ~ asset('sounds/' ~ spot.sound) ~ "'></audio><i class='far fa-play-circle'></i></span>")|raw : "" }}<em>{{ spot.hotspot.name }}:</em><span class="info"> {{ spot.info|raw }}</span></li>
+			<li id="hotspot-{{ spot.id }}">{{ spot.hasSound() ? ("<span class='icon has-text-success' onclick='this.firstChild.load();this.firstChild.play()'><audio src='" ~ asset('sounds/' ~ spot.sound) ~ "'></audio><i class='far fa-play-circle'></i></span>")|raw : "" }}<em>{{ spot.hotspot.name }}:</em><span class="info"> {{ spot.info|raw }}</span></li>
 		{% endfor %}
 
 		{% for flash in app.session.flashBag.peek('hotspot-' ~ userDay.id) %}
