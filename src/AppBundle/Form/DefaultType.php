@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -35,6 +36,11 @@ class DefaultType extends AbstractType
 				$form->add('title', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
 						'class' => 'AppBundle:CaseStudy',
 						'label' => 'Case Study',
+						'query_builder' => function(EntityRepository $er) {
+							$qb = $er->createQueryBuilder('cs');
+
+							return $qb->orderBy('cs.title', 'DESC');
+						},
 						'label_attr' => array(
 							'class' => 'is-large',
 						),
