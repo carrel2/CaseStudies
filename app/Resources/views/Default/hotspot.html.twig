@@ -85,7 +85,7 @@
 
 			var eWeight = $("#estimated_weight").val();
 
-			if( !eWeight ) {
+			if( {{ app.user.days|length == 1 ? "true" : "false" }} && !eWeight ) {
 				promptWeight();
 				return;
 			}
