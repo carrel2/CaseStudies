@@ -130,8 +130,8 @@
 
             <div class="message-body">
               <div class="columns is-multiline">
-                {% for test, result in day.diagnostics %}
-                  <div class="column is-3"><em>{{ test }}:</em></div><div class="column is-9 content">{{ result|raw }}</div>
+                {% for dProcedure in day.diagnostics %}
+                  <div class="column is-3"><em>{{ dProcedure.name }} (${{ dProcedure.cost|number_format }}):</em></div><div class="column is-9 content">{{ dProcedure.results|raw }}</div>
                 {% endfor %}
               </div>
             </div>
@@ -144,8 +144,8 @@
 
             <div class="message-body">
               <div class="columns is-multiline">
-                {% for medication, result in day.therapeutics %}
-                  <div class="column is-3"><em>{{ medication }}:</em></div><div class="column is-9 content">{{ result|raw }}</div>
+                {% for tProcedure in day.therapeutics %}
+                  <div class="column is-3"><em>{{ tProcedure.name }} (${{ tProcedure.cost|number_format }}):</em></div><div class="column is-9 content">{{ tProcedure.results|raw }}</div>
                 {% endfor %}
               </div>
             </div>

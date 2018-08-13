@@ -55,11 +55,21 @@ class UserDay
 		}
 		foreach ($this->diagnosticResults as $dr)
 		{
-			$a["diagnostics"][$dr->getDiagnosticProcedure()->getName()] = $dr->getResults();
+			$did = $dr->getId();
+			$dp = $dr->getDiagnosticProcedure();
+
+			$a["diagnostics"][$did]["name"] = $dp->getName();
+			$a["diagnostics"][$did]["results"] = $dr->getResults();
+			$a["diagnostics"][$did]["cost"] = $dp->getCost();
 		}
 		foreach ($this->therapeuticResults as $tr)
 		{
-			$a["therapeutics"][$tr->getTherapeuticProcedure()->getName()] = $tr->getResults();
+			$tid = $tr->getId();
+			$tp = $tr->getTherapeuticProcedure();
+
+			$a["therapeutics"][$tid]["name"] = $tp->getName();
+			$a["therapeutics"][$tid]["results"] = $tr->getResults();
+			$a["therapeutics"][$tid]["cost"] = $tp->getPerDayCost();
 		}
 
 		return $a;

@@ -23,7 +23,8 @@
 
 {% block body %}
   <div class="column is-full">
-    <h1 class="title">Diagnostics - Day {{ app.user.days|length }}</h1>
+    <p class="title is-2">{{ app.user.caseStudy.title }}</p>
+    <p class="subtitle is-4">Diagnostics - Day {{ app.user.days|length }}</p>
 
     <div class="tile box">
       <div class="content">
