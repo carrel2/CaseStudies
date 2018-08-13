@@ -92,6 +92,7 @@ class DefaultController extends Controller
 		if( $session->has('diagnosis-' . $user->getCurrentDay()->getId()) && $user->getCurrentProgress() == "finished" )
 		{
 			$results = new Results();
+			$weight = $session->get('estimated_weight');
 
 			$user->addResult($results);
 			$results->setCaseStudy($case->getTitle());
@@ -99,6 +100,8 @@ class DefaultController extends Controller
 			foreach($user->getDays() as $key => $day)
 			{
 				$id = $day->getId();
+				$dCost = 0;
+				$tCost = 0;
 
 				$results->add($day->toArray());
 
@@ -109,14 +112,30 @@ class DefaultController extends Controller
 				}
 				foreach ($session->getFlashBag()->get('empty-diagnostic-results-' . $id) as $flash) {
 					$dFlash = $em->getRepository("AppBundle:DiagnosticProcedure")->find($flash);
+					$did = $dFlash->getId();
+					$c = $dFlash->getCost();
 
-					$a[$key]["diagnostics"][$dFlash->getName()] = $dFlash->getDefaultResult();
+					$a[$key]["diagnostics"][$did]["name"] = $dFlash->getName();
+					$a[$key]["diagnostics"][$did]["results"] = $dFlash->getDefaultResult();
+					$a[$key]["diagnostics"][$did]["cost"] = $c;
+
+					$dCost += $c;
 				}
 				foreach ($session->getFlashBag()->get('empty-therapeutic-results-' . $id) as $flash) {
 					$tFlash = $em->getRepository("AppBundle:TherapeuticProcedure")->find($flash);
+					$tid = $tFlash->getId();
+					$c = $tFlash->getPerDayCost($weight);
 
-					$a[$key]["therapeutics"][$tFlash->getName()] = $tFlash->getDefaultResult();
+					$a[$key]["therapeutics"][$tid]["name"] = $tFlash->getName();
+					$a[$key]["therapeutics"][$tid]["results"] = $tFlash->getDefaultResult();
+					$a[$key]["therapeutics"][$tid]["cost"] = $c;
+
+					$tCost += $c;
 				}
+
+				$a[$key]["diagnostics"]["totalCost"] = $dCost;
+				$a[$key]["therapeutics"]["totalCost"] = $tCost;
+				$a[$key]["totalCost"] = $dCost + $tCost;
 
 				if( $session->get('diagnosis-' . $id) ) {
 					$a[$key]["diagnosis"] = $session->remove('diagnosis-' . $id);
