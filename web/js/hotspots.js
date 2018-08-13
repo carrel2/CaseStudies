@@ -1,9 +1,12 @@
-function hotspot(coords, color) {
+function hotspot(id, coords, color) {
+	this.id = id;
 	this.coords = coords;
 	this.color = color;
 	this.active = false;
 
 	this.drawDefault = function(ctx) {
+		var width = ctx.canvas.width, height = ctx.canvas.height;
+
 		ctx.beginPath();
 		ctx.moveTo(coords[0], coords[1]);
 
@@ -26,6 +29,8 @@ function hotspot(coords, color) {
 	}
 
 	this.drawHidden = function(ctx) {
+		var width = ctx.canvas.width, height = ctx.canvas.height;
+
 		ctx.beginPath();
 		ctx.moveTo(coords[0], coords[1]);
 
@@ -74,10 +79,9 @@ $(function(){
 			$.post('/courses/cs/addHotspot/' + $('textarea.canvas-area').data('id') + '/' + name.replace(/ /g, "%20"), {coords: coords}, function(r, s, x) {
 				var hotspotDiv = $("#hotspots").find("div.hotspot." + name.replace(/ /g, '-'));
 				var hList = $.data(document.body, "hotspots");
+				var id = $(r).find("#hotspot-id").text();
 
 				if( hotspotDiv.length ) {
-					var id = hotspotDiv.attr("id").split('-')[1];
-
 					coords.forEach(function(item, index) {
 	          if( index % 2 ) {
 	            coords[index] = item * $('canvas').height();
@@ -86,17 +90,23 @@ $(function(){
 	          }
 	        });
 
-					hList[id - 1] = new hotspot(coords,"rgb(#,#,#)".replace(/#/g, id));
+					var index;
+					var h = hList.find(function(spot, i) {
+						index = i;
+						return spot.id == id;
+					});
 
-					hList[id - 1].draw();
+					hList[index] = new hotspot(id,coords,"rgb(#,#,#)".replace(/#/g, index));
+
+					hList[index].draw();
 				} else {
-					var h = new hotspot(coords,"rgb(#,#,#)".replace(/#/g, hList.length + 1));
+					var h = new hotspot(id, coords,"rgb(#,#,#)".replace(/#/g, hList.length + 1));
 
 					hList.push(h);
 					h.draw();
 
 					$("#hotspots").html(r);
-					hotspotDiv.attr("id", "hotspot-" + hList.length);
+					hotspotDiv.attr("id", "hotspot-" + id);
 				}
 
 				$.data(document.body, "hotspots", hList);
@@ -119,8 +129,8 @@ $(function(){
 
 			h.active = true;
 
-			$("div.hotspot").not("#hotspot-" + id).css("border", "none");
-			$("#hotspot-" + id).css("border", "solid 2px");
+			$("div.hotspot").not("#hotspot-" + h.id).css("border", "none");
+			$("#hotspot-" + h.id).css("border", "solid 2px");
 		} else {
 			$("div.hotspot").css("border", "none");
 		}

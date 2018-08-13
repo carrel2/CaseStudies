@@ -222,10 +222,13 @@
             ctx.fill();
             ctx.stroke();
 
-            $.data(document.body, "hotspots").forEach(function(item, index) {
-              item.draw();
-            });
+            var hList = $.data(document.body, "hotspots");
 
+            if( hList ) {
+              hList.forEach(function(item, index) {
+                item.draw();
+              });
+            }
         };
 
         record = function () {
