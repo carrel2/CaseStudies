@@ -109,6 +109,7 @@ class HotSpotController extends Controller
 
 		return $this->render('Ajax/hotspots.html.twig', array(
 			'animal' => $animal,
+			'hId' => $spot->getId(),
 		));
 	}
 

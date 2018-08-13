@@ -27,10 +27,21 @@
       {% if animal is not null %}
         {% for hotspot in animal.hotspots %}
           var coords{{ hotspot.id }} = {{ "[" ~ hotspot.coords|join(",") ~ "]" }}
-          var newHotspot = new hotspot(coords{{ hotspot.id }}, "rgb(#,#,#)".replace(/#/g, hotspotList.length + 1));
+
+          coords{{ hotspot.id }}.forEach(function(item, index) {
+    				if( index % 2 ) {
+    					coords{{ hotspot.id }}[index] = item * $('canvas').height();
+    				} else {
+    					coords{{ hotspot.id }}[index] = item * $('canvas').width();
+    				}
+    			});
+
+          var newHotspot = new hotspot({{ hotspot.id }}, coords{{ hotspot.id }}, "rgb(#,#,#)".replace(/#/g, hotspotList.length + 1));
 
           hotspotList.push( newHotspot );
           newHotspot.draw();
+
+          $('#hotspots').append('<div id="hotspot-{{ hotspot.id }}" class="hotspot {{ hotspot.name|lower|replace({' ': '-'}) }}">{{ hotspot.name }} <a href="{{ path("removeHotspot", {'animal': animal.id, 'hotspot': hotspot.id}) }}" onclick="return confirmDelete();"><span class="icon has-text-danger"><i class="fas fa-trash"></i></span></a></div>');
         {% endfor %}
 
         $.data(document.body, "hotspots", hotspotList);
@@ -51,11 +62,20 @@
   </div>
 
   {% if animal %}
-    <div class="column is-half-desktop">
+    <div class="column is-full">
+      <div class="box">
+        Define hotspots by clicking on the image below. The reset button clears any points on the image.
+      </div>
+    </div>
+
+    <div class="column is-full">
       <textarea class="canvas-area" data-id="{{ animal.id }}" data-image="{{ asset('images/' ~ animal.image) }}" style="display: none;"></textarea>
     </div>
 
-    <div class="column is-half is-offset-3-desktop">
+    <div id="hotspots" class="column is-3"></div>
+    <div class="column is-9"></div>
+
+    <div class="column is-half">
       <input type="text" id="name" class="input"></input>
       <button id="addHotspot" class="button is-success">Save</button>
     </div>
