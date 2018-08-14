@@ -40,7 +40,7 @@ class DefaultType extends AbstractType
 							return $er->createQueryBuilder('cs')
 								->leftJoin('cs.days', 'd')
 								->where('d.caseStudy is not null')
-								->orderBy('cs.title', 'DESC');
+								->orderBy('cs.title', 'ASC');
 						},
 						'label_attr' => array(
 							'class' => 'is-large',
