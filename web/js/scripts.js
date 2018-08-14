@@ -141,6 +141,51 @@ function addButtonClickListener(e) {
 	moveFooter();
 }
 
+function scrollToView(element){
+    var offset = element.offset().top;
+    if(!element.is(":visible")) {
+        element.css({"visibility":"hidden"}).show();
+        var offset = element.offset().top;
+        element.css({"visibility":"", "display":""});
+    }
+
+    var visible_area_start = $(window).scrollTop();
+    var visible_area_end = visible_area_start + window.innerHeight;
+
+    if(offset < visible_area_start || offset > visible_area_end){
+         // Not in view so scroll to it
+         $('html,body').animate({scrollTop: offset - window.innerHeight/3}, 1000);
+         return false;
+    }
+    return true;
+}
+
+function checkForCKEDITORNotEmpty() {
+	var emptyInstances = [];
+	var container;
+
+	for( instance in window.CKEDITOR.instances ) {
+		instance = window.CKEDITOR.instances[instance];
+
+		if( !instance.getData().length ) {
+			emptyInstances.push(instance);
+
+			container = $(instance.container.$);
+
+			if( !container.prev('.has-text-danger').length ) {
+				container.before('<div class="has-text-danger">This field is required.</div>');
+			}
+		}
+	}
+
+	if( emptyInstances.length ) {
+		scrollToView($(emptyInstances[0].container.$));
+		emptyInstances[0].focus();
+
+		return false;
+	}
+}
+
 function updateAdminCase(id) {
 	if( id === undefined ) {
 		id = $('#admin_case').val();

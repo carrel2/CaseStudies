@@ -95,6 +95,7 @@ class CaseType extends AbstractType
 						'attr' => array(
 							'form' => 'case',
 							'class' => 'is-success',
+							'onclick' => 'return checkForCKEDITORNotEmpty();',
 						),
 					))
 					->add('delete', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
