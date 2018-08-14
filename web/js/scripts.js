@@ -166,14 +166,13 @@ function checkForCKEDITORNotEmpty() {
 
 	for( instance in window.CKEDITOR.instances ) {
 		instance = window.CKEDITOR.instances[instance];
+		container = $(instance.container.$);
 
-		if( !instance.getData().length ) {
+		if( container.prevAll('label.required').length && !instance.getData().length ) {
 			emptyInstances.push(instance);
 
-			container = $(instance.container.$);
-
 			if( !container.prev('.has-text-danger').length ) {
-				container.before('<div class="has-text-danger">This field is required.</div>');
+				container.before('<div class="is-size-7 has-text-weight-bold has-text-danger">This field is required.</div>');
 			}
 		}
 	}

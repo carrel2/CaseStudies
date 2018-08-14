@@ -25,6 +25,9 @@ class HotspotType extends AbstractType
 				'label' => false,
 			))
 			->add('info', 'Ivory\CKEditorBundle\Form\Type\CKEditorType', array(
+				'label_attr' => array(
+					'class' => 'asterisk',
+				),
 				'config' => array(
 					'autoParagraph' => false,
 				)
