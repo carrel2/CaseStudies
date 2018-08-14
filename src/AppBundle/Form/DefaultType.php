@@ -37,9 +37,10 @@ class DefaultType extends AbstractType
 						'class' => 'AppBundle:CaseStudy',
 						'label' => 'Case Study',
 						'query_builder' => function(EntityRepository $er) {
-							$qb = $er->createQueryBuilder('cs');
-
-							return $qb->orderBy('cs.title', 'DESC');
+							return $er->createQueryBuilder('cs')
+								->leftJoin('cs.days', 'd')
+								->where('d.caseStudy is not null')
+								->orderBy('cs.title', 'DESC');
 						},
 						'label_attr' => array(
 							'class' => 'is-large',
