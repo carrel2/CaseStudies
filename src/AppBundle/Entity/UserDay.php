@@ -29,14 +29,34 @@ class UserDay
 	private $hotspotsInfo;
 
 	/**
+	 * @ORM\Column(type="array")
+	 */
+	private $emptyHotspotsInfo = array();
+
+	/**
 	* @ORM\OneToMany(targetEntity="DiagnosticResults", mappedBy="userDay")
 	*/
 	private $diagnosticResults;
 
 	/**
+	 * @ORM\Column(type="array")
+	 */
+	private $emptyDiagnosticResults = array();
+
+	/**
 	* @ORM\OneToMany(targetEntity="TherapeuticResults", mappedBy="userDay")
 	*/
 	private $therapeuticResults;
+
+	/**
+	 * @ORM\Column(type="array")
+	 */
+	private $emptyTherapeuticResults = array();
+
+	/**
+	 * @ORM\Column(type="text", nullable=true)
+	 */
+	private $differentials;
 
 	public function __construct()
 	{
@@ -124,6 +144,16 @@ class UserDay
 		return $this->hotspotsInfo;
 	}
 
+	public function addEmptyHotspotsInfo($emptyHotspotInfo) {
+		$this->emptyHotspotsInfo[] = $emptyHotspotInfo;
+
+		return $this;
+	}
+
+	public function getEmptyHotspotsInfo() {
+		return $this->emptyHotspotsInfo;
+	}
+
 	public function addDiagnosticProcedure(\AppBundle\Entity\DiagnosticResults $dr)
 	{
 		if( !$this->diagnosticResults->contains($dr) ) {
@@ -156,6 +186,18 @@ class UserDay
 		return $this->diagnosticResults;
 	}
 
+	public function addEmptyDiagnosticResults($emptyDiagnosticResult) {
+		if( !in_array($emptyDiagnosticResult, $this->emptyDiagnosticResults) ) {
+			$this->emptyDiagnosticResults[] = $emptyDiagnosticResult;
+		}
+
+		return $this;
+	}
+
+	public function getEmptyDiagnosticResults() {
+		return $this->emptyDiagnosticResults;
+	}
+
 	public function addTherapeuticProcedure(\AppBundle\Entity\TherapeuticResults $tr)
 	{
 		if( !$this->therapeuticResults->contains($tr) ) {
@@ -186,6 +228,28 @@ class UserDay
 	public function getTherapeuticResults()
 	{
 		return $this->therapeuticResults;
+	}
+
+	public function addEmptyTherapeuticResults($emptyTherapeuticResult) {
+		if( !in_array($emptyTherapeuticResult, $this->emptyTherapeuticResults) ) {
+			$this->emptyTherapeuticResults[] = $emptyTherapeuticResult;
+		}
+
+		return $this;
+	}
+
+	public function getEmptyTherapeuticResults() {
+		return $this->emptyTherapeuticResults;
+	}
+
+	public function setDifferentials($differentials) {
+		$this->differentials = $differentials;
+
+		return $this;
+	}
+
+	public function getDifferentials() {
+		return $this->differentials;
 	}
 
     public function addHotspotsInfo(\AppBundle\Entity\HotSpotInfo $hotspotInfo)

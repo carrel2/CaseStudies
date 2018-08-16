@@ -18,6 +18,7 @@ class DiagnosticsController extends Controller
 	{
 		$em = $this->getDoctrine()->getManager();
 		$user = $this->getUser();
+		$currentDay = $user->getCurrentDay();
 
 		if( !$user->getIsActive() || !in_array($user->getCurrentProgress(), ['evaluation', 'diagnostics']) ) {
 			return $this->redirectToRoute('default');
@@ -42,15 +43,11 @@ class DiagnosticsController extends Controller
 				$results = $day->getResultByDiagnosticProcedure($test);
 				if( $results )
 				{
-					$user->getCurrentDay()->addDiagnosticProcedure($results);
+					$currentDay->addDiagnosticProcedure($results);
 				} else {
-					$this->addFlash('empty-diagnostic-results-' . $user->getCurrentDay()->getId(), $test->getId());
-
-					$dCost += $test->getCost();
+					$currentDay->addEmptyDiagnosticResults($test);
 				}
 			}
-
-			$this->addFlash('diagnostic-cost-' . $user->getCurrentDay()->getId(), $dCost);
 
 			$user->setCurrentProgress('therapeutics');
 

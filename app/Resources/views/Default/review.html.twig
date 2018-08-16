@@ -81,15 +81,15 @@
               <div><em>{{ spot.hotspot.name }}:</em><span class="info"> {{ spot.info|raw }}</span></div>
             {% endfor %}
 
-            {% for flash in app.session.flashBag.peek('hotspot-' ~ day.id) %}
-              <div><em>{{ flash.name }}:</em> No information available</div>
+            {% for emptySpot in day.emptyHotspotsInfo %}
+              <div><em>{{ emptySpot.name }}:</em> No information available</div>
             {% endfor %}
 
-            {% if app.session.has('differentials-' ~ day.id) %}
+            {% if day.differentials %}
               <div id="differentials-{{ day.id }}">
                 <p class="subtitle is-5"><u>Differentials</u></p>
 
-                <div>{{ app.session.get('differentials-' ~ day.id) }}</div>
+                <div>{{ day.differentials }}</div>
               </div>
             {% endif %}
           </div>
@@ -114,11 +114,9 @@
                 {% endif %}
               {% endfor %}
 
-              {% for flash in app.session.flashBag.peek('empty-diagnostic-results-' ~ day.id) %}
-                {% set dFlash = find(flash, "AppBundle:DiagnosticProcedure") %}
-
-                {% if flash is not empty %}
-                  <div class="column is-full"><em>{{ dFlash.name }} (${{ dFlash.getCost()|number_format }}):</em> {{ dFlash.defaultResult }}</div>
+              {% for emptyDiagnosticResult in day.emptyDiagnosticResults %}
+                {% if emptyDiagnosticResult is not empty %}
+                  <div class="column is-full"><em>{{ emptyDiagnosticResult.name }} (${{ emptyDiagnosticResult.getCost()|number_format }}):</em> {{ emptyDiagnosticResult.defaultResult }}</div>
                 {% endif %}
               {% endfor %}
             </div>
@@ -134,21 +132,19 @@
             <div class="columns is-multiline">
               {% for therapeuticResult in day.therapeuticResults %}
                 {% if therapeuticResult.waitTime and ( elapsed - therapeuticResult.waitTime == 0 or therapeuticResult.waitTime < elapsed ) %}
-                  <div class="column is-3">{{ elapsed - therapeuticResult.waitTime == 0 ? m.tag('New results', 'is-success') : '' }}<em>{{ therapeuticResult.therapeuticProcedure.name }} (${{ therapeuticResult.therapeuticProcedure.getPerDayCost(animal_weight)|number_format }}):</em></div><div class="column is-9 content"><span class="info"> {{ therapeuticResult.results|raw }}</span></div>
+                  <div class="column is-3">{{ elapsed - therapeuticResult.waitTime == 0 ? m.tag('New results', 'is-success') : '' }}<em>{{ therapeuticResult.therapeuticProcedure.name }} (${{ therapeuticResult.therapeuticProcedure.getPerDayCost(app.user.estimatedWeight)|number_format }}):</em></div><div class="column is-9 content"><span class="info"> {{ therapeuticResult.results|raw }}</span></div>
                 {% elseif elapsed - therapeuticResult.therapeuticProcedure.waitTime == 0 or therapeuticResult.therapeuticProcedure.waitTime < elapsed %}
-                  <div class="column is-3">{{ elapsed - therapeuticResult.therapeuticProcedure.waitTime == 0 ? m.tag('New results', 'is-success') : '' }}<em>{{ therapeuticResult.therapeuticProcedure.name }} (${{ therapeuticResult.therapeuticProcedure.getPerDayCost(animal_weight)|number_format }}):</em></div><div class="column is-9 content"><span class="info"> {{ therapeuticResult.results|raw }}</span></div>
+                  <div class="column is-3">{{ elapsed - therapeuticResult.therapeuticProcedure.waitTime == 0 ? m.tag('New results', 'is-success') : '' }}<em>{{ therapeuticResult.therapeuticProcedure.name }} (${{ therapeuticResult.therapeuticProcedure.getPerDayCost(app.user.estimatedWeight)|number_format }}):</em></div><div class="column is-9 content"><span class="info"> {{ therapeuticResult.results|raw }}</span></div>
                 {% elseif user.currentProgress == "finished" %}
-                  <div class="column is-3"><em>{{ therapeuticResult.therapeuticProcedure.name }} (${{ therapeuticResult.therapeuticProcedure.getPerDayCost(animal_weight)|number_format }}):</em></div><div class="column is-9 content"><span class="info"> {{ therapeuticResult.results|raw }}</span></div>
+                  <div class="column is-3"><em>{{ therapeuticResult.therapeuticProcedure.name }} (${{ therapeuticResult.therapeuticProcedure.getPerDayCost(app.user.estimatedWeight)|number_format }}):</em></div><div class="column is-9 content"><span class="info"> {{ therapeuticResult.results|raw }}</span></div>
                 {% else %}
                   <div class="column is-full">{{ m.tag('Pending results', 'is-info') }}<em>{{ therapeuticResult.therapeuticProcedure.name }}:</em><span> ...</span></div>
                 {% endif %}
               {% endfor %}
 
-              {% for flash in app.session.flashBag.peek('empty-therapeutic-results-' ~ day.id) %}
-                {% set tFlash = find(flash, "AppBundle:TherapeuticProcedure") %}
-
-                {% if flash is not empty %}
-                  <div class="column is-full"><em>{{ tFlash.name }} (${{ tFlash.getPerDayCost(animal_weight)|number_format }}):</em> {{ tFlash.defaultResult }}</div>
+              {% for emptyTherapeuticResult in day.emptyTherapeuticResults %}
+                {% if emptyTherapeuticResult is not empty %}
+                  <div class="column is-full"><em>{{ emptyTherapeuticResult.name }} (${{ emptyTherapeuticResult.getPerDayCost(app.user.estimatedWeight)|number_format }}):</em> {{ emptyTherapeuticResult.defaultResult }}</div>
                 {% endif %}
               {% endfor %}
             </div>
@@ -179,15 +175,19 @@
               {% set diagnosticCost = diagnosticCost + diagnosticResult.diagnosticProcedure.getCost() %}
             {% endfor %}
 
-            {% set diagnosticCost = diagnosticCost + app.session.flashBag.peek('diagnostic-cost-' ~ day.id)|first %}
+            {% for emptyDiagnosticResult in day.emptyDiagnosticResults %}
+              {% set diagnosticCost = diagnosticCost + emptyDiagnosticResult.cost %}
+            {% endfor %}
 
             <div>Diagnostic cost: ${{ diagnosticCost|number_format }}</div>
 
             {% for therapeuticResult in day.therapeuticResults %}
-              {% set medCost = medCost + therapeuticResult.therapeuticProcedure.getPerDayCost(animal_weight) %}
+              {% set medCost = medCost + therapeuticResult.therapeuticProcedure.getPerDayCost(app.user.estimatedWeight) %}
             {% endfor %}
 
-            {% set medCost = medCost + app.session.flashBag.peek('therapeutic-cost-' ~ day.id)|first %}
+            {% for emptyTherapeuticResult in day.emptyTherapeuticResults %}
+              {% set medCost = medCost + emptyTherapeuticResult.getPerDayCost(app.user.estimatedWeight) %}
+            {% endfor %}
 
             <div>Therapeutic cost: ${{ medCost|number_format }}</div>
 

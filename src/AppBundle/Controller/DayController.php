@@ -57,12 +57,9 @@ class DayController extends Controller
 			return $this->redirectToRoute('nextDay');
 		}
 
-		$weight = $r->getSession()->has('estimated_weight') ? $r->getSession()->get('estimated_weight') : null;
-
 		return $this->render('Default/review.html.twig', array(
 			'user' => $user,
 			'form' => $form->createView(),
-			'animal_weight' => $weight,
 		));
 	}
 

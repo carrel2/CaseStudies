@@ -60,7 +60,7 @@ class HotSpotInfo
         return $this->info;
     }
 
-		public function setDay(\AppBundle\Entity\Day $day)
+		public function setDay(\AppBundle\Entity\Day $day = null)
 		{
 				$this->day = $day;
 
@@ -72,7 +72,7 @@ class HotSpotInfo
 				return $this->day;
 		}
 
-		public function setUserDay(\AppBundle\Entity\UserDay $userDay)
+		public function setUserDay(\AppBundle\Entity\UserDay $userDay = null)
 		{
 				$this->userDay = $userDay;
 

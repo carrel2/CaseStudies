@@ -55,6 +55,11 @@ class User implements UserInterface, \Serializable
   private $currentProgress;
 
 	/**
+	 * @ORM\Column(type="string", length=8, nullable=true)
+	 */
+	private $estimatedWeight;
+
+	/**
 	* @ORM\Column(name="is_active", type="boolean")
 	*/
 	private $isActive;
@@ -159,6 +164,16 @@ class User implements UserInterface, \Serializable
 	public function getCurrentProgress()
 	{
 		return $this->currentProgress;
+	}
+
+	public function setEstimatedWeight($weight) {
+		$this->estimatedWeight = $weight;
+
+		return $this;
+	}
+
+	public function getEstimatedWeight() {
+		return $this->estimatedWeight;
 	}
 
 	public function setIsActive($isActive)

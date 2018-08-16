@@ -193,8 +193,8 @@
 			<li id="hotspot-{{ spot.id }}">{{ spot.hasSound() ? ("<span class='icon has-text-success' onclick='this.firstChild.play()'><audio src='" ~ asset('sounds/' ~ spot.sound) ~ "'></audio><i class='far fa-play-circle'></i></span>")|raw : "" }}<em>{{ spot.hotspot.name }}:</em><span class="info"> {{ spot.info|raw }}</span></li>
 		{% endfor %}
 
-		{% for flash in app.session.flashBag.peek('hotspot-' ~ userDay.id) %}
-			<li id="hotspot-{{ flash.id }}">{{ flash.name }}: No information available</li>
+		{% for emptyHotspotInfo in userDay.emptyHotspotsInfo %}
+			<li id="hotspot-{{ emptyHotspotInfo.id }}">{{ emptyHotspotInfo.name }}: No information available</li>
 		{% endfor %}
 	</div>
 

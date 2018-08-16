@@ -16,12 +16,13 @@ class TherapeuticsController extends Controller
 	public function showPageAction(Request $r)
 	{
 		$user = $this->getUser();
+		$currentDay = $user->getCurrentDay();
 
 		if( !$user->getIsActive() || $user->getCurrentProgress() != 'therapeutics' ) {
 			return $this->redirectToRoute('default');
 		}
 
-		$weight = $r->getSession()->has('estimated_weight') ? $r->getSession()->get('estimated_weight') : null;
+		$weight = $user->getEstimatedWeight();
 
 		$form = $this->createForm( 'AppBundle\Form\TherapeuticsType' );
 
@@ -40,15 +41,11 @@ class TherapeuticsController extends Controller
 			{
 				$results = $day->getResultByTherapeuticProcedure($medication);
 				if( $results ) {
-					$user->getCurrentDay()->addTherapeutic($results);
+					$currentDay->addTherapeutic($results);
 				} else {
-					$this->addFlash('empty-therapeutic-results-' . $user->getCurrentDay()->getId(), $medication->getId());
-
-					$tCost += $medication->getPerDayCost($weight);
+					$currentDay->addEmptyTherapeuticResults($medication);
 				}
 			}
-
-			$this->addFlash('therapeutic-cost-' . $user->getCurrentDay()->getId(), $tCost);
 
 			$user->setCurrentProgress('review');
 

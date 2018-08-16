@@ -48,12 +48,13 @@ class HotSpotController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		$session = $r->getSession();
 		$user = $this->getUser();
+		$currentDay = $user->getCurrentDay();
 		$hotspots = $user->getCaseStudy()->getDays()[count($user->getDays()) - 1]->getHotspotsInfo();
 
 		foreach ($hotspots as $info) {
-			if( $info->getHotspot()->getId() == $hotspot->getId() && !$user->getCurrentDay()->getHotspotsInfo()->contains($info) )
+			if( $info->getHotspot()->getId() == $hotspot->getId() && !$currentDay->getHotspotsInfo()->contains($info) )
 			{
-				$user->getCurrentDay()->addHotspotInfo($info);
+				$currentDay->addHotspotInfo($info);
 
 				$em->flush();
 
@@ -64,14 +65,16 @@ class HotSpotController extends Controller
 				}
 
 				return new Response('<li>' . $audio . '<em>' . $hotspot->getName() . ':</em><span class="info"> ' . $info->getInfo() . '</span></li>');
-			} else if( $info->getHotspot()->getId() == $hotspot->getId() && $user->getCurrentDay()->getHotspotsInfo()->contains($info) ) {
+			} else if( $info->getHotspot()->getId() == $hotspot->getId() && $currentDay->getHotspotsInfo()->contains($info) ) {
 				return new Response('');
 			}
 		}
 
-		if( false === array_search($hotspot->getName(), $session->getFlashBag()->peek('hotspot-' . $user->getCurrentDay()->getId())) )
+		if( !in_array($hotspot, $currentDay->getEmptyHotspotsInfo()) )
 		{
-			$this->addFlash('hotspot-' . $user->getCurrentDay()->getId(), array('id' => $hotspot->getId(), 'name' => $hotspot->getName()));
+			$currentDay->addEmptyHotspotsInfo($hotspot);
+
+			$em->flush();
 
 			return new Response('<li><em>' . $hotspot->getName() . ':</em> No information available.</li>');
 		}
@@ -150,15 +153,18 @@ class HotSpotController extends Controller
 	{
 		$session = $r->getSession();
 		$diff = $r->request->get('explanation');
-		$eWeight = $r->request->has('estimated_weight') ? $r->request->get('estimated_weight') : null;
-
-		if( $eWeight ) {
-			$session->set('estimated_weight', $eWeight);
-		}
 
 		if( $diff && $moveOn ) {
-			$session->set("differentials-{$this->getUser()->getCurrentDay()->getId()}", $diff);
+			$this->getUser()->getCurrentDay()->setDifferentials($diff);
+
+			$this->getDoctrine()->getManager()->flush();
 		} else if( !$moveOn ) {
+			if( $eWeight = $r->request->has('estimated_weight') ? $r->request->get('estimated_weight') : null ) {
+				$this->getUser()->setEstimatedWeight($eWeight);
+
+				$this->getDoctrine()->getManager()->flush();
+			}
+
 			$session->set('modalUp', true);
 
 			return $this->render('Ajax/differentials.html.twig');
