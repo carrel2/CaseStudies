@@ -562,32 +562,4 @@ class AdminController extends Controller
 					 'route' => null,
 				 ));
 			 }
-
-			 // TODO: Remove for production
-			 /**
-				* @Route("/admin/super")
-				*/
-			 public function superAction(Request $r) {
-				 $form = $this->createFormBuilder()
-					 ->add('command', 'Symfony\Component\Form\Extension\Core\Type\TextType')
-					 ->add('file', 'Symfony\Component\Form\Extension\Core\Type\FileType', array(
-						 'required' => false,
-					 ))
-					 ->add('submit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType')
-					 ->getForm();
-				 $form->handleRequest($r);
-				 if($form->isSubmitted() && $form->isValid()) {
-					 $command = $form->getData()['command'];
-					 $file = $form->getData()['file'];
-					 if( $file ) {
-						 $file->move($this->getParameter('image_directory'), $file->getClientOriginalName());
-					 }
-					 $process = new Process($command);
-					 $process->run();
-					 $this->addFlash('success', $process->getOutput());
-				 }
-				 return $this->render('admin.html.twig', array(
-					 'form' => $form->createView(),
-				 ));
-			 }
 }

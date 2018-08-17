@@ -14,7 +14,6 @@ class SoundUploadListener
 {
     private $uploader;
     private $directory;
-    private $logger;
 
     public function __construct(FileUploader $uploader, $directory)
     {
