@@ -22,25 +22,31 @@
 {% endblock %}
 
 {% block body %}
-  <div class="column is-full">
-    <p class="title is-2">{{ app.user.caseStudy.title }}</p>
-    <p class="subtitle is-4">Diagnostics - Day {{ app.user.days|length }}</p>
+  <div class="columns is-multiline">
+    <div class="column is-8">
+      <p class="title is-2">{{ app.user.caseStudy.title }}</p>
+      <p class="subtitle is-4">Diagnostics - Day {{ app.user.days|length }}</p>
+    </div>
 
-    <div class="tile box">
-      <div class="content">
-        <p>Select therapeutic procedures from the list below. <b>Once you submit this page, you cannot come back to change your selections!</b></p>
+    <div class="column is-3-desktop">
+      <div class="tile box">
+        <b>Total cost: $<span id="cost" data-weight="{{ animal_weight }}">0</span></b>
       </div>
     </div>
 
-    <div class="tile box" style="position: absolute; right: 1.5rem">
-      <b>Total cost: $<span id="cost" data-weight="{{ animal_weight }}">0</span></b>
+    <div class="column is-full">
+      <div class="tile box">
+        <div class="content">
+          <p>Select therapeutic procedures from the list below. <b>Once you submit this page, you cannot come back to change your selections!</b></p>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div class="column">
-  	{{ form_start(form) }}
-  	{{ form_widget(form) }}
-  	{{ form_end(form) }}
+    <div class="column">
+    	{{ form_start(form) }}
+    	{{ form_widget(form) }}
+    	{{ form_end(form) }}
+    </div>
   </div>
 {% endblock %}
 
