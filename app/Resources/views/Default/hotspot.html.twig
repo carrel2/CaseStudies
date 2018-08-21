@@ -85,7 +85,7 @@
 
 			var eWeight = $("#estimated_weight").val();
 
-			if( {{ app.user.days|length == 1 and app.user.location == "Farm" ? "true" : "false" }} && !eWeight ) {
+			if( {{ app.user.days|length == 1 ? "true" : "false" }} && !eWeight ) {
 				promptWeight();
 				return;
 			}
@@ -200,7 +200,7 @@
 
 	{% if app.user.days|length == 1 %}
 		<div class="column is-half-desktop">
-			<label class="label{{ app.user.location == "Farm" ? ' asterisk' }}" style="position: relative;" required>Estimated weight (kg)</label>
+			<label class="label asterisk" style="position: relative;" required>Estimated weight (kg)</label>
 
 			<div class="control has-icons-left">
 				<input id="estimated_weight" class="input" type="text" placeholder="Weight (kg)">
