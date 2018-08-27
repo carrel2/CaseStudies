@@ -15,7 +15,7 @@ function updateCase() {
 	});
 }
 
-function addCheckboxListener(useWeight=false) {
+function addCheckboxListener() {
 	$('input[type=checkbox]').on('change', function() {
 		var cb = $(this);
 		var cost = $('#cost');
@@ -25,7 +25,7 @@ function addCheckboxListener(useWeight=false) {
 
 		cbCost = Number(cb.attr('data-cost'));
 
-		if(useWeight) {
+		if(cb.data('use-weight') == 1) {
 			cbCost *= weight;
 		}
 
@@ -39,7 +39,7 @@ function addCheckboxListener(useWeight=false) {
 	});
 }
 
-function addHoverListener(useWeight=false) {
+function addHoverListener() {
 	$('input[type=checkbox]').parent().hover(function() {
 		if( $("#popup").length ) {
 			return;
@@ -57,7 +57,7 @@ function addHoverListener(useWeight=false) {
 		interval = $(this).children().data('interval');
 		cost = parseFloat($(this).children().data('cost'));
 
-		if(useWeight) {
+		if($(this).children().data('use-weight') == 1) {
 			cost *= parseFloat($('#cost').data('weight'));
 		}
 
