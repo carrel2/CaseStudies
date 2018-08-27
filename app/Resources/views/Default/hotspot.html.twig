@@ -180,7 +180,7 @@
 
 	{% if day.description %}
 		<div class="column is-full">
-			<p class="content">{{ day.description }}</p>
+			<p class="content">{{ day.description|raw }}</p>
 		</div>
 	{% endif %}
 
