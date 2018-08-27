@@ -95,6 +95,10 @@ class TherapeuticProcedure extends AbstractProcedure
   }
 
   public function getPerDayCost($weight = null) {
+		if( $this->cost ) {
+			return $this->cost;
+		}
+		
 		if( $this->concentration == 0 ) {
 			return 0;
 		}
