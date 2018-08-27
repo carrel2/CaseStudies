@@ -71,6 +71,12 @@
       {% set elapsed = loop.length - loop.index %}
 
       <div data-id="day-{{ day.id }}"{% if not loop.last %} class=" is-hidden"{% endif %}>
+        {% if user.caseStudy.days[loop.index0].description %}
+          <div class="box">
+            <p class="content">{{ user.caseStudy.days[loop.index0].description }}</p>
+          </div>
+        {% endif %}
+
         <div class="message">
           <div class="message-header">
             <h2 class="title is-5 has-text-white">Physical examination results - Day {{ loop.index }}</h2>

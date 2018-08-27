@@ -178,6 +178,12 @@
 		<p class="subtitle is-4">Physical Examination - Day {{ app.user.days|length }}</p>
 	</div>
 
+	{% if day.description %}
+		<div class="column is-full">
+			<p class="content">{{ day.description }}</p>
+		</div>
+	{% endif %}
+
 	<div class="column is-full">
 		<div class="box">
 			<p>Click the image below to perform a physical examination. Some results have soundbytes, click the <span class="icon has-text-success"><i class="far fa-play-circle"></i></span> to play them.</p>
