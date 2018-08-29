@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
 * @ORM\Entity
+* @ORM\EntityListeners({"AppBundle\EventListener\AnimalImageUploadListener"})
 * @ORM\Table(name="Animals")
 * @UniqueEntity(fields="name", message="This animal already exists")
 */

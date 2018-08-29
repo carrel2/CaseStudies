@@ -92,10 +92,11 @@ class DefaultController extends Controller
 		if( $session->has('diagnosis-' . $user->getCurrentDay()->getId()) && $user->getCurrentProgress() == "finished" )
 		{
 			$results = new Results();
-			$weight = $session->get('estimated_weight');
+			$weight = $user->getEstimatedWeight();
 
 			$user->addResult($results);
 			$results->setCaseStudy($case->getTitle());
+			$results->setEstimatedWeight($weight);
 
 			foreach($user->getDays() as $key => $day)
 			{
@@ -103,46 +104,12 @@ class DefaultController extends Controller
 				$dCost = 0;
 				$tCost = 0;
 
-				$results->add($day->toArray());
+				$results->add($day->toArray($weight));
 
 				$a = $results->getResults();
 
-				foreach ($session->getFlashBag()->get('hotspot-' . $id) as $flash) {
-					$a[$key]["hotspotsInfo"][$flash["name"]] = "No results available.";
-				}
-				foreach ($session->getFlashBag()->get('empty-diagnostic-results-' . $id) as $flash) {
-					$dFlash = $em->getRepository("AppBundle:DiagnosticProcedure")->find($flash);
-					$did = $dFlash->getId();
-					$c = $dFlash->getCost();
-
-					$a[$key]["diagnostics"][$did]["name"] = $dFlash->getName();
-					$a[$key]["diagnostics"][$did]["results"] = $dFlash->getDefaultResult();
-					$a[$key]["diagnostics"][$did]["cost"] = $c;
-
-					$dCost += $c;
-				}
-				foreach ($session->getFlashBag()->get('empty-therapeutic-results-' . $id) as $flash) {
-					$tFlash = $em->getRepository("AppBundle:TherapeuticProcedure")->find($flash);
-					$tid = $tFlash->getId();
-					$c = $tFlash->getPerDayCost($weight);
-
-					$a[$key]["therapeutics"][$tid]["name"] = $tFlash->getName();
-					$a[$key]["therapeutics"][$tid]["results"] = $tFlash->getDefaultResult();
-					$a[$key]["therapeutics"][$tid]["cost"] = $c;
-
-					$tCost += $c;
-				}
-
-				$a[$key]["diagnostics"]["totalCost"] = $dCost;
-				$a[$key]["therapeutics"]["totalCost"] = $tCost;
-				$a[$key]["totalCost"] = $dCost + $tCost;
-
 				if( $session->get('diagnosis-' . $id) ) {
 					$a[$key]["diagnosis"] = $session->remove('diagnosis-' . $id);
-				}
-
-				if( $session->get('differentials-' . $id) ) {
-					$a[$key]["differentials"] = $session->remove('differentials-' . $id);
 				}
 
 				$results->setResults($a);
@@ -152,18 +119,18 @@ class DefaultController extends Controller
 
 			$em->persist($results);
 
-			$message = \Swift_Message::newInstance()
-				->setSubject("Case Study results: {$user->getCaseStudy()->getTitle()}")
-				->setFrom('casestudies@vetmed.illinois.edu')
-				->setTo($case->getEmail())
-				->setBody(
-					$this->renderView('Emails/email.html.twig', array(
-						'results' => $results,
-					)),
-					'text/html'
-				);
-
-			$this->get('mailer')->send($message);
+			// $message = \Swift_Message::newInstance()
+			// 	->setSubject("Case Study results: {$user->getCaseStudy()->getTitle()}")
+			// 	->setFrom('casestudies@vetmed.illinois.edu')
+			// 	->setTo($case->getEmail())
+			// 	->setBody(
+			// 		$this->renderView('Emails/email.html.twig', array(
+			// 			'results' => $results,
+			// 		)),
+			// 		'text/html'
+			// 	);
+			//
+			// $this->get('mailer')->send($message);
 
 			$addFlash = true;
 		}

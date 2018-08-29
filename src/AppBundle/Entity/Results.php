@@ -37,6 +37,10 @@ class Results
   */
   private $location;
 
+  /**
+  * @ORM\Column(type="string", length=8)
+  */
+  private $estimatedWeight;
 
     public function getId()
     {
@@ -96,5 +100,17 @@ class Results
     public function getLocation()
     {
         return $this->location;
+    }
+
+    public function setEstimatedWeight($weight)
+    {
+      $this->estimatedWeight = $weight;
+
+      return $this;
+    }
+
+    public function getEstimatedWeight()
+    {
+      return $this->estimatedWeight;
     }
 }

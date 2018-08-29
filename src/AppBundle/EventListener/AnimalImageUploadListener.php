@@ -20,50 +20,35 @@ class AnimalImageUploadListener
         $this->directory = $directory;
     }
 
-    public function prePersist(LifecycleEventArgs $args)
+    public function prePersist(Animal $animal, LifecycleEventArgs $args)
     {
-        $entity = $args->getEntity();
-
-        $this->uploadFile($entity);
+        $this->uploadFile($animal);
     }
 
-    public function preUpdate(PreUpdateEventArgs $args)
+    public function preUpdate(Animal $animal, PreUpdateEventArgs $args)
     {
-        $this->checkForImage($args);
+        $this->checkForImage($animal, $args);
     }
 
-    public function preRemove(LifecycleEventArgs $args)
+    public function preRemove(Animal $animal, LifecycleEventArgs $args)
     {
-      $entity = $args->getEntity();
-
-      $this->removeUpload($entity);
+      $this->removeUpload($animal->getImage());
     }
 
-    private function checkForImage($args)
+    private function checkForImage($animal, $args)
     {
-      $entity = $args->getEntity();
-
-      if( !$entity instanceof Animal ) {
-        return;
-      }
-
       if( $args->hasChangedField('image') && $args->getNewValue('image') != null ) {
         $this->removeUpload($args->getOldValue('image'));
 
-        $this->uploadFile($entity);
+        $this->uploadFile($animal);
       } else {
         $args->setNewValue('image', $args->getOldValue('image'));
       }
     }
 
-    private function uploadFile($entity)
+    private function uploadFile($animal)
     {
-        // upload only works for Animal entities
-        if (!$entity instanceof Animal) {
-            return;
-        }
-
-        $file = $entity->getImage();
+        $file = $animal->getImage();
 
         // only upload new files
         if (!$file instanceof UploadedFile) {
@@ -71,17 +56,11 @@ class AnimalImageUploadListener
         }
 
         $fileName = $this->uploader->upload($file, $this->directory);
-        $entity->setImage($fileName);
+        $animal->setImage($fileName);
     }
 
-    private function removeUpload($entity)
+    private function removeUpload($file)
     {
-      if( !$entity instanceof Animal ) {
-        return;
-      }
-
-      $file = $entity->getImage();
-
       $filePath = "{$this->directory}/$file";
 
       if( file_exists($filePath) ) {

@@ -14,17 +14,13 @@ services:
         class: AppBundle\EventListener\AnimalImageUploadListener
         arguments: ['@app.file_uploader', '%image_directory%']
         tags:
-            - { name: doctrine.event_listener, event: prePersist }
-            - { name: doctrine.event_listener, event: preUpdate }
-            - { name: doctrine.event_listener, event: preRemove }
+            - { name: doctrine.orm.entity_listener }
 
     app.doctrine_sound_upload_listener:
         class: AppBundle\EventListener\SoundUploadListener
         arguments: ['@app.file_uploader', '%sound_directory%']
         tags:
-            - { name: doctrine.event_listener, event: prePersist }
-            - { name: doctrine.event_listener, event: preUpdate }
-            - { name: doctrine.event_listener, event: preRemove }
+            - { name: doctrine.orm.entity_listener }
 
     app.token_authenticator:
       class: AppBundle\Security\TokenAuthenticator

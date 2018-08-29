@@ -94,10 +94,32 @@
 
   <div class="column is-two-thirds-desktop">
     {% for result in results %}
-      <div id="details" class="message{% if not loop.first %} is-hidden{% endif %}" data-result="result-{{ result.id }}">
-        <div class="message-body">
-          <h1 class="title">Location</h1><h2 class="subtitle">{{ result.location }}</h2>
-          <h1 class="title">Diagnosis</h1><h2 class="subtitle">{{ result.results|last.diagnosis }}</h2>
+      <div id="details" class="{% if not loop.first %} is-hidden{% endif %}" data-result="result-{{ result.id }}">
+        <div class="message">
+          <div class="message-body">
+            <h1 class="title">Location</h1><h2 class="subtitle">{{ result.location }}</h2>
+            <h1 class="title">Diagnosis</h1><h2 class="subtitle">{{ result.results|last.diagnosis }}</h2>
+            <h1 class="title">Estimated Weight</h1><h2 class="subtitle">{{ result.estimatedWeight }}</h2>
+          </div>
+        </div>
+
+        <div class="message">
+          <div class="message-header">
+            <h2 class="title is-5 has-text-white">Cost breakdown</h2>
+          </div>
+
+          <div class="message-body">
+            {% for day in result.results %}
+                <h4 class="subtitle is-5"><u>Day {{ loop.index }}</u></h4>
+
+                <h5 class="subtitle is-6 is-spaced">
+                  <div>Diagnostic cost: ${{ day.cost.diagnostics|number_format }}</div>
+                  <div>Therapeutic cost: ${{ day.cost.therapeutics|number_format }}</div>
+                </h5>
+
+                <h4 class="subtitle is-5">Total Cost: ${{ day.totalCost|number_format }}</h4>
+            {% endfor %}
+          </div>
         </div>
       </div>
 

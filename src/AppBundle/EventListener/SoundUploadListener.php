@@ -8,7 +8,6 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use AppBundle\Entity\HotSpotInfo;
 use AppBundle\FileUploader;
-use Symfony\Component\HttpKernel\Log\LoggerInterface;
 
 class SoundUploadListener
 {
@@ -21,60 +20,33 @@ class SoundUploadListener
         $this->directory = $directory;
     }
 
-    public function prePersist(LifecycleEventArgs $args)
+    public function prePersist(HotSpotInfo $info, LifecycleEventArgs $args)
     {
-        $entity = $args->getEntity();
-
-        if( !$entity instanceof HotSpotInfo ) {
-          return;
-        }
-
-        if( $entity->hasSound() ) {
-          $this->removeUpload($entity);
-        }
-
-        $this->uploadFile($entity);
+        $this->uploadFile($info);
     }
 
-    public function preUpdate(PreUpdateEventArgs $args)
+    public function preUpdate(HotSpotInfo $info, PreUpdateEventArgs $args)
     {
-        // if( !empty($args->getEntityChangeSet()) ) {
-        //   $this->checkForSound($args);
-        // }
+        $this->checkForSound($info, $args);
     }
 
-    public function preRemove(LifecycleEventArgs $args)
+    public function preRemove(HotSpotInfo $info, LifecycleEventArgs $args)
     {
-      $entity = $args->getEntity();
-
-      $this->removeUpload($entity);
+      $this->removeUpload($info->getSound());
     }
 
-    private function checkForSound($args)
+    private function checkForSound($info, $args)
     {
-      $entity = $args->getEntity();
-
-      if( !$entity instanceof HotSpotInfo ) {
-        return;
-      }
-
       if( $args->hasChangedField('sound') && $args->getNewValue('sound') != null ) {
         $this->removeUpload($args->getOldValue('sound'));
 
-        $this->uploadFile($entity);
-      } else {
-        $args->setNewValue('sound', $args->getOldValue('sound'));
+        $this->uploadFile($info);
       }
     }
 
-    private function uploadFile($entity)
+    private function uploadFile($info)
     {
-        // upload only works for HotSpotInfo entities
-        if (!$entity instanceof HotSpotInfo) {
-            return;
-        }
-
-        $file = $entity->getSound();
+        $file = $info->getSound();
 
         // only upload new files
         if (!$file instanceof UploadedFile) {
@@ -82,17 +54,11 @@ class SoundUploadListener
         }
 
         $fileName = $this->uploader->upload($file, $this->directory);
-        $entity->setSound($fileName);
+        $info->setSound($fileName);
     }
 
-    private function removeUpload($entity)
+    private function removeUpload($file)
     {
-      if( !$entity instanceof HotSpotInfo ) {
-        return;
-      }
-
-      $file = $entity->getSound();
-
       $filePath = "{$this->directory}/$file";
 
       if( file_exists($filePath) ) {

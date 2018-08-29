@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ * @ORM\EntityListeners({"AppBundle\EventListener\SoundUploadListener"})
  * @ORM\Table(name="HotSpotsInfo")
  */
 class HotSpotInfo

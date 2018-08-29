@@ -36,8 +36,6 @@ class DiagnosticsController extends Controller
 
 			$day = $user->getCaseStudy()->getDays()[count($user->getDays()) - 1];
 
-			$dCost = 0;
-
 			foreach( $tests as $test )
 			{
 				$results = $day->getResultByDiagnosticProcedure($test);

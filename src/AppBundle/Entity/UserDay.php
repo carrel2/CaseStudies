@@ -65,32 +65,60 @@ class UserDay
 		$this->therapeuticResults = new ArrayCollection();
 	}
 
-	public function toArray()
+	public function toArray($weight)
 	{
-		$a = array("hotspotsInfo" => array(), "diagnostics" => array(), "therapeutics" => array(), "diagnosis" => "");
+		$a = array("hotspotsInfo" => array(), "diagnostics" => array(), "therapeutics" => array(), "cost" => array("diagnostics" => 0, "therapeutics" => 0), "diagnosis" => "");
 
 		foreach($this->hotspotsInfo as $spot)
 		{
 			$a["hotspotsInfo"][$spot->getHotspot()->getName()] = $spot->getInfo();
 		}
+		foreach ($this->emptyHotspotsInfo as $ehf) {
+			$a["hotspotsInfo"][$ehf->getName()] = "No results available";
+		}
 		foreach ($this->diagnosticResults as $dr)
 		{
-			$did = $dr->getId();
 			$dp = $dr->getDiagnosticProcedure();
+			$did = $dp->getId();
 
 			$a["diagnostics"][$did]["name"] = $dp->getName();
 			$a["diagnostics"][$did]["results"] = $dr->getResults();
 			$a["diagnostics"][$did]["cost"] = $dp->getCost();
+
+			$a["cost"]["diagnostics"] += $dp->getCost();
+		}
+		foreach ($this->emptyDiagnosticResults as $edr) {
+			$did = $edr->getId();
+
+			$a["diagnostics"][$did]["name"] = $edr->getName();
+			$a["diagnostics"][$did]["results"] = $edr->getDefaultResult();
+			$a["diagnostics"][$did]["cost"] = $edr->getCost();
+
+			$a["cost"]["diagnostics"] += $edr->getCost();
 		}
 		foreach ($this->therapeuticResults as $tr)
 		{
-			$tid = $tr->getId();
 			$tp = $tr->getTherapeuticProcedure();
+			$tid = $tp->getId();
 
 			$a["therapeutics"][$tid]["name"] = $tp->getName();
 			$a["therapeutics"][$tid]["results"] = $tr->getResults();
-			$a["therapeutics"][$tid]["cost"] = $tp->getPerDayCost();
+			$a["therapeutics"][$tid]["cost"] = $tp->getPerDayCost($weight);
+
+			$a["cost"]["therapeutics"] += $tp->getCost();
 		}
+		foreach ($this->emptyTherapeuticResults as $etr) {
+			$tid = $etr->getId();
+
+			$a["therapeutics"][$tid]["name"] = $etr->getName();
+			$a["therapeutics"][$tid]["results"] = $etr->getDefaultResult();
+			$a["therapeutics"][$tid]["cost"] = $etr->getPerDayCost($weight);
+
+			$a["cost"]["therapeutics"] += $etr->getCost();
+		}
+
+		$a["totalCost"] = $a["cost"]["diagnostics"] + $a["cost"]["therapeutics"];
+		$a["differentials"] = $this->differentials;
 
 		return $a;
 	}
