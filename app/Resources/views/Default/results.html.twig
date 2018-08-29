@@ -18,32 +18,27 @@
 
   <script>
     $(function() {
-      $(".panel-tabs a").on('click', function() {
-        if( !$(this).hasClass('is-active') ) {
-          $("[data-result='" + $(".panel-tabs a.is-active").attr('id') + "']").each(function() {
-            var id = $(this).attr("id");
-            $(this).addClass('is-hidden');
+      $(".panel-block select").on('change', function() {
+        $("[data-result='" + $(":not(:selected)", this).attr('id') + "']").each(function() {
+          var id = $(this).attr("id");
+          $(this).addClass('is-hidden');
 
-            $("[data-id='" + id + "']").addClass('is-hidden');
-          });
+          $("[data-id='" + id + "']").addClass('is-hidden');
+        });
 
-          $('.panel-tabs a.is-active').removeClass('is-active');
-          $(this).addClass('is-active');
+        $('[data-result="' + $("option:selected", this).attr('id') + '"]').each(function() {
+          var id = $(this).attr("id");
+          $(this).removeClass('is-hidden');
 
-          $('[data-result="' + $(this).attr('id') + '"]').each(function() {
-            var id = $(this).attr("id");
-            $(this).removeClass('is-hidden');
+          if( $(this).hasClass('is-active') ) {
+            $('[data-id="' + id + '"]').removeClass('is-hidden');
+          }
+        });
 
-            if( $(this).hasClass('is-active') ) {
-              $('[data-id="' + id + '"]').removeClass('is-hidden');
-            }
-          });
-
-          moveFooter();
-        }
+        moveFooter();
       });
 
-      $(".panel-block").on('click', function() {
+      $(".panel-block.days").on('click', function() {
         if( !$(this).hasClass('is-active') && !$(this).hasClass('is-danger') ) {
           var resultid = $(this).attr("data-result");
           var id = $(this).attr("id");
@@ -69,15 +64,19 @@
   	<nav class="panel">
       <p class="panel-heading">Results{% if user is defined %} for {{ user.username }}{% endif %}</p>
 
-      <div class="panel-tabs">
-        {% for result in results %}
-          <a id="result-{{ result.id }}" {% if loop.first %}class="is-active"{% endif %}>{{ result.caseStudy }}</a>
-        {% endfor %}
+      <div class="panel-block">
+        <div class="select">
+          <select>
+            {% for result in results %}
+              <option id="result-{{ result.id }}" {% if loop.first %}class="is-active"{% endif %}>{{ result.caseStudy }}</option>
+            {% endfor %}
+          </select>
+        </div>
       </div>
 
       {% for result in results %}
         {% for day in result.results %}
-          <a id="result-{{ result.id }}-day-{{ loop.index }}" class="panel-block{% if loop.first %} is-active{% endif %}{% if not loop.parent.loop.first %} is-hidden{% endif %}" data-result="result-{{ result.id }}">
+          <a id="result-{{ result.id }}-day-{{ loop.index }}" class="days panel-block{% if loop.first %} is-active{% endif %}{% if not loop.parent.loop.first %} is-hidden{% endif %}" data-result="result-{{ result.id }}">
             <span class="panel-icon">
               <i class="fa fa-folder{% if loop.first %}-open{% endif %}"></i>
             </span>
@@ -99,7 +98,7 @@
           <div class="message-body">
             <h1 class="title">Location</h1><h2 class="subtitle">{{ result.location }}</h2>
             <h1 class="title">Diagnosis</h1><h2 class="subtitle">{{ result.results|last.diagnosis }}</h2>
-            <h1 class="title">Estimated Weight</h1><h2 class="subtitle">{{ result.estimatedWeight }}</h2>
+            <h1 class="title">Estimated Weight</h1><h2 class="subtitle">{{ result.estimatedWeight }}kg</h2>
           </div>
         </div>
 
