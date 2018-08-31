@@ -86,6 +86,13 @@
 
         {% if user is defined and is_granted('ROLE_ADMIN') %}
           <a href="/courses/cs/removeResult/{{ result.id }}" class="panel-block is-danger{% if not loop.first %} is-hidden{% endif %}" data-result="result-{{ result.id }}" onclick="return confirmDelete();">Remove</a>
+        {% else %}
+          <a href="{{ path("resultsToPdf", {"results": result.id}) }}" target="_blank" class="panel-block is-info{% if not loop.first %} is-hidden{% endif %}" data-result="result-{{ result.id }}">
+            <span class="panel-icon">
+              <i class="fas fa-file-pdf"></i>
+            </span>
+            View as PDF
+          </a>
         {% endif %}
       {% endfor %}
     </nav>
@@ -95,6 +102,10 @@
     {% for result in results %}
       <div id="details" class="{% if not loop.first %} is-hidden{% endif %}" data-result="result-{{ result.id }}">
         <div class="message">
+          <div class="message-header">
+            <p class="title is-2 has-text-white">{{ result.caseStudy }}</p>
+          </div>
+
           <div class="message-body">
             <h1 class="title">Location</h1><h2 class="subtitle">{{ result.location }}</h2>
             <h1 class="title">Diagnosis</h1><h2 class="subtitle">{{ result.results|last.diagnosis }}</h2>
