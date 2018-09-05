@@ -15,6 +15,9 @@
 	<script>
 		$(function(){
 			updateAdminCase({{ app.session.remove('case') }});
+
+			$('body').append('<div id="link_tab" style="position: fixed;top: 3.5rem;left: 0;border-radius: 0 30px 30px 0;height: 90px;width: 25px;background: lightgrey;box-shadow: 0px 0px 20px 0px black;"></div>')
+			$('#link_tab').append('<div style="position: absolute;height: 25px; width: 50px;right: 0;top: 70px;text-align: center;transform: rotate(90deg);transform-origin: top right 0;">Links</div>')
 		});
 	</script>
 {% endblock %}

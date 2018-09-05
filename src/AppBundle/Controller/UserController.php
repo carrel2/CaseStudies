@@ -38,6 +38,6 @@ class UserController extends Controller
 			'result' => $results,
 		)), 2);
 
-		return new PDFResponse($pdf->Output('tmp.pdf', \Mpdf\Output\Destination::STRING_RETURN));
+		return new PDFResponse($pdf->Output("{$this->getUser()->getUsername()}-{$results->getCaseStudy()}.pdf", \Mpdf\Output\Destination::STRING_RETURN));
 	}
 }

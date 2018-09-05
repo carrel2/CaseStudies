@@ -23,11 +23,13 @@ class CaseType extends AbstractType
 		$builder
 		->add('title', 'Symfony\Component\Form\Extension\Core\Type\TextType', array(
 			'label_attr' => array(
+				'id' => 'case_title_label',
 				'class' => 'is-large asterisk',
 			),
 		))
 		->add('description', 'Ivory\CKEditorBundle\Form\Type\CKEditorType', array(
 			'label_attr' => array(
+				'id' => 'case_description_label',
 				'class' => 'is-large asterisk',
 			),
 			'config' => array(
@@ -37,12 +39,14 @@ class CaseType extends AbstractType
 		))
 		->add('email', 'Symfony\Component\Form\Extension\Core\Type\EmailType', array(
 			'label_attr' => array(
+				'id' => 'case_email_label',
 				'class' => 'is-large asterisk',
 			),
 		))
 		->add('animal', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
 			'class' => 'AppBundle:Animal',
 			'label_attr' => array(
+				'id' => 'case_animal_label',
 				'class' => 'is-large',
 			),
 			'choice_label' => 'name',

@@ -240,6 +240,8 @@ function updateAdminCase(id) {
 			addRemoveButtonClickListener();
 
 			checkForFileInputs();
+
+			generateLinkHierarchy();
 		});
 }
 
@@ -293,6 +295,26 @@ function checkForFileInputs() {
 			}
 		}
 	} catch (e) {}
+}
+
+function generateLinkHierarchy() {
+	$('section').append('<div id="links" class="menu" style="position: fixed; left: 0px; top: 0px; width: 200px; height: 100%; background: lightgrey; padding: 0.5rem; z-index: 35; display: none;"><ul class="menu-list"></ul></div>');
+
+	$('#link_tab').on('click', function() {
+		$('#links').toggle();
+
+		$(this).css('left', function(i, v) {
+			if( v == '0px' ) {
+				return '200px';
+			}
+
+			return 0;
+		});
+	});
+
+	$('section .columns.is-multiline').find('label[id]').each(function() {
+		$('#links .menu-list').append('<li><a href="#' + $(this).attr('id') + '">' + $(this).text().replace(/_label/, '') + '</a></li>');
+	});
 }
 
 function confirmDelete() {
