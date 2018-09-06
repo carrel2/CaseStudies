@@ -26,6 +26,7 @@ class HotspotType extends AbstractType
 			))
 			->add('info', 'Ivory\CKEditorBundle\Form\Type\CKEditorType', array(
 				'label_attr' => array(
+					'id' => 'day_Z_info_Z_label',
 					'class' => 'asterisk',
 				),
 				'config' => array(
@@ -39,6 +40,7 @@ class HotspotType extends AbstractType
 					'accept' => '.mp3,.wav',
 				),
 				'label_attr' => array(
+					'id' => 'day_Z_sound_Z_label',
 					'class' => 'is-medium',
 				)
 			));

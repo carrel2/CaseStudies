@@ -25,6 +25,7 @@ class DiagnosticResultsType extends AbstractType
 			))
 			->add('results', 'Ivory\CKEditorBundle\Form\Type\CKEditorType', array(
 				'label_attr' => array(
+					'id' => 'day_Z_diagnostic_results_Z_label',
 					'class' => 'is-large asterisk',
 				),
 				'config' => array(
@@ -33,12 +34,14 @@ class DiagnosticResultsType extends AbstractType
 			))
 			->add('waitTime', null, array(
 				'label_attr' => array(
+					'id' => 'day_Z_diagnostic_wait_time_Z_label',
 					'class' => 'is-large',
 				),
 			))
 			->add('cost', null, array(
 				'required' => false,
 				'label_attr' => array(
+					'id' => 'day_Z_diagnostic_cost_Z_label',
 					'class' => 'is-large',
 				)
 			));

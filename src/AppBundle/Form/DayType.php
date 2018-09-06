@@ -18,6 +18,7 @@ class DayType extends AbstractType
 		$builder->add('description', 'Ivory\CKEditorBundle\Form\Type\CKEditorType', array(
 				'required' => false,
 				'label_attr' => array(
+					'id' => 'day_Z_description_Z_label',
 					'class' => 'is-large',
 				),
 				'config' => array(
@@ -38,6 +39,7 @@ class DayType extends AbstractType
 				'prototype_name' => '__hotspot__',
 				'label' => 'Hotspots',
 				'label_attr' => array(
+					'id' => 'day_Z_hotspots',
 					'class' => 'is-large',
 				),
 				'attr' => array(
@@ -62,6 +64,7 @@ class DayType extends AbstractType
 				'prototype_name' => '__diagnostic-result__',
 				'label' => 'Diagnostics',
 				'label_attr' => array(
+					'id' => 'day_Z_diagnostics',
 					'class' => 'is-large',
 				),
 				'attr' => array(
@@ -86,6 +89,7 @@ class DayType extends AbstractType
 				'prototype_name' => '__therapeutic-result__',
 				'label' => 'Therapeutics',
 				'label_attr' => array(
+					'id' => 'day_Z_therapeutics',
 					'class' => 'is-large',
 				),
 				'attr' => array(

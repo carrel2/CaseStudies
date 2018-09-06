@@ -74,6 +74,7 @@ class CaseType extends AbstractType
 							'animal' => $case->getAnimal()->getId(),
 						),
 						'label_attr' => array(
+							'id' => 'day_Z_label',
 							'class' => 'is-large',
 						),
 					),

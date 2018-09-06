@@ -241,7 +241,7 @@ function updateAdminCase(id) {
 
 			checkForFileInputs();
 
-			generateLinkHierarchy();
+			createLinkHierarchy();
 		});
 }
 
@@ -297,23 +297,58 @@ function checkForFileInputs() {
 	} catch (e) {}
 }
 
-function generateLinkHierarchy() {
-	$('section').append('<div id="links" class="menu" style="position: fixed; left: 0px; top: 0px; width: 200px; height: 100%; background: lightgrey; padding: 0.5rem; z-index: 35; display: none;"><ul class="menu-list"></ul></div>');
+function addLinksToHierarchy() {
+	$('label[id=day_Z_label]').each(function(index) {
+		var dIndex = index + 1;
+		var id = $(this).attr('id');
+
+		id = id[0].toUpperCase() + id.substring(1).replace('Z', dIndex);
+
+		$(this).attr('id', id);
+
+		$('#links').append('<p class="menu-label is-size-4">' + id.replace('_label', '').replace('_', ' ') + '</p><ul class="menu-list" data-id=' + id + '></ul>');
+
+		var nestedLabels = $(this).next().children('label');
+
+		if( nestedLabels.length != 0 ) {
+			nestedLabels.each(function() {
+				var nid = $(this).attr('id');
+
+				nid = nid.replace('Z', dIndex);
+				$(this).attr('id', nid);
+
+				$('[data-id=' + id + ']').append('<li data-id=' + nid + '><a href=#' + $(this).attr('id') + '>' + $(this).text() + '</a></li>');
+
+				$('[data-id=' + nid + ']').append('<ul></ul>');
+
+				$(this).next().find('label[id]').each(function(i) {
+						var val = $(this).parent().find('option:selected').text();
+
+						$(this).attr('id', $(this).attr('id').replace('Z', dIndex).replace('Z', (i + 1)))
+
+						$('[data-id=' + nid + '] ul').append('<li><a href=#' + $(this).attr('id') + '>' + val + ' ' + $(this).text() + '</a></li>');
+				});
+			});
+		}
+	});
+}
+
+function createLinkHierarchy() {
+	$('#links').remove();
+	$('section').append('<div id="links" class="menu" style="position: fixed; left: 0px; top: 0px; width: 200px; height: 100%; background: lightgrey; padding: 0.5rem; overflow: scroll; z-index: 35; display: none;"><ul class="menu-list"></ul></div>');
+
+	addLinksToHierarchy();
 
 	$('#link_tab').on('click', function() {
-		$('#links').toggle();
+		$('#links').toggle('fast');
 
-		$(this).css('left', function(i, v) {
-			if( v == '0px' ) {
-				return '200px';
-			}
+		var left = $(this).css('left');
 
-			return 0;
-		});
-	});
-
-	$('section .columns.is-multiline').find('label[id]').each(function() {
-		$('#links .menu-list').append('<li><a href="#' + $(this).attr('id') + '">' + $(this).text().replace(/_label/, '') + '</a></li>');
+		if( left == '0px' ) {
+			$(this).animate({left: '200px'}, 'fast');
+		} else {
+			$(this).animate({left: '0px'}, 'fast');
+		}
 	});
 }
 
