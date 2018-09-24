@@ -338,18 +338,6 @@ function createLinkHierarchy() {
 	$('section').append('<div id="links" class="menu" style="position: fixed; left: 0px; top: 0px; width: 200px; height: 100%; background: lightgrey; padding: 0.5rem; overflow: scroll; z-index: 35; display: none;"><ul class="menu-list"></ul></div>');
 
 	addLinksToHierarchy();
-
-	$('#link_tab').on('click', function() {
-		$('#links').toggle('fast');
-
-		var left = $(this).css('left');
-
-		if( left == '0px' ) {
-			$(this).animate({left: '200px'}, 'fast');
-		} else {
-			$(this).animate({left: '0px'}, 'fast');
-		}
-	});
 }
 
 function confirmDelete() {
