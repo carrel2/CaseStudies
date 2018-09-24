@@ -336,6 +336,7 @@ function addLinksToHierarchy() {
 function createLinkHierarchy() {
 	$('#links').remove();
 	$('section').append('<div id="links" class="menu" style="position: fixed; left: 0px; top: 0px; width: 200px; height: 100%; background: lightgrey; padding: 0.5rem; overflow: scroll; z-index: 35; display: none;"><ul class="menu-list"></ul></div>');
+	$('#link_tab').animate({left: '0px'}, 'fast');
 
 	addLinksToHierarchy();
 }
