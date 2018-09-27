@@ -18,7 +18,7 @@ class DayType extends AbstractType
 		$builder->add('description', 'Ivory\CKEditorBundle\Form\Type\CKEditorType', array(
 				'required' => false,
 				'label_attr' => array(
-					'id' => 'day_Z_description_Z_label',
+					'id' => 'day_Z_description_label',
 					'class' => 'is-large',
 				),
 				'config' => array(

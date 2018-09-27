@@ -19,14 +19,21 @@
   <script>
     $(function() {
       $(".panel-block select").on('change', function() {
-        $("[data-result='" + $(":not(:selected)", this).attr('id') + "']").each(function() {
-          var id = $(this).attr("id");
-          $(this).addClass('is-hidden');
+        var notSelected = $(":not(:selected)", this);
 
-          $("[data-id='" + id + "']").addClass('is-hidden');
+        notSelected.each(function() {
+          var notSelectedResults = $("[data-result='" + $(this).attr('id') + "']");
+          notSelectedResults.each(function() {
+            var id = $(this).attr("id");
+            $(this).addClass('is-hidden');
+
+            $("[data-id='" + id + "']").addClass('is-hidden');
+          });
         });
 
-        $('[data-result="' + $("option:selected", this).attr('id') + '"]').each(function() {
+        var selected = $("option:selected", this);
+        var selectedResults = $('[data-result="' + selected.attr('id') + '"]');
+        selectedResults.each(function() {
           var id = $(this).attr("id");
           $(this).removeClass('is-hidden');
 
