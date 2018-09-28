@@ -288,10 +288,21 @@ function updateSelects(type) {
 
 function checkForFileInputs() {
 	try {
-		var file = document.querySelectorAll('input[type=file]')[0];
-		file.onchange = function(){
-			if( file.files.length > 0 ) {
-				document.getElementById('filename').innerHTML = file.files[0].name;
+		var file = document.querySelectorAll('input[type=file]');
+
+		for( var i = 0; i < file.length; i++ ) {
+			var f = file[i];
+
+			if( f.onchange == null ) {
+				f.onchange = function(){
+					if( this.files.length > 0 ) {
+						this.parentNode.parentNode.lastChild.previousSibling.innerHTML = this.files[0].name;
+					}
+				}
+			}
+
+			if( f.dataset.sound ) {
+				f.parentNode.parentNode.lastChild.previousSibling.innerHTML = f.dataset.sound;
 			}
 		}
 	} catch (e) {}

@@ -5,6 +5,8 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Doctrine\ORM\EntityRepository;
 
 class HotspotType extends AbstractType
@@ -33,17 +35,41 @@ class HotspotType extends AbstractType
 					'autoParagraph' => false,
 				)
 			))
-			->add('sound', 'Symfony\Component\Form\Extension\Core\Type\FileType', array(
-				'data' => '',
-				'required' => false,
-				'attr' => array(
-					'accept' => '.mp3,.wav',
-				),
-				'label_attr' => array(
-					'id' => 'day_Z_sound_Z_label',
-					'class' => 'is-medium',
-				)
-			));
+			->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
+				$info = $event->getData();
+				$form = $event->getForm();
+
+				$form->add('sound', 'Symfony\Component\Form\Extension\Core\Type\FileType', array(
+					'data' => '',
+					'required' => false,
+					'empty_data' => $info ? $info->getSound() : "",
+					'attr' => array(
+						'accept' => '.mp3,.wav',
+						'data-sound' => $info ? $info->getSound() : "",
+					),
+					'label_attr' => array(
+						'id' => 'day_Z_sound_Z_label',
+						'class' => 'is-medium',
+					)
+				));
+
+				if( $info && $info->hasSound() ) {
+					$form->add('deleteSound', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array(
+						'required' => false,
+						'mapped' => false,
+					));
+				}
+			})
+			->addEventListener(FormEvents::SUBMIT, function(FormEvent $event) {
+				$info = $event->getData();
+				$form = $event->getForm();
+
+				if( $form->has('deleteSound') && $form->get('deleteSound')->getData() === true ) {
+					$info->setSound(null);
+
+					$event->setData($info);
+				}
+			});
 	}
 
 	public function configureOptions(OptionsResolver $resolver)

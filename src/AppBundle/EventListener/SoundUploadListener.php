@@ -37,10 +37,15 @@ class SoundUploadListener
 
     private function checkForSound($info, $args)
     {
-      if( $args->hasChangedField('sound') && $args->getNewValue('sound') != null ) {
-        $this->removeUpload($args->getOldValue('sound'));
+      if( $args->hasChangedField('sound') ) {
+        $old = $args->getOldValue('sound');
+        $new = $args->getNewValue('sound');
 
-        $this->uploadFile($info);
+        $this->removeUpload($old);
+
+        if( $new != null ) {
+          $this->uploadFile($info);
+        }
       }
     }
 
@@ -61,7 +66,7 @@ class SoundUploadListener
     {
       $filePath = "{$this->directory}/$file";
 
-      if( file_exists($filePath) ) {
+      if( file_exists($filePath) && is_file($filePath) ) {
         unlink($filePath);
       }
     }
