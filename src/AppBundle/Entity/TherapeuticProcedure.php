@@ -39,6 +39,11 @@ class TherapeuticProcedure extends AbstractProcedure
 	protected $costPerUnit = "0";
 
 	/**
+  * @ORM\ManyToOne(targetEntity="Category", inversedBy="therapeutics")
+  */
+  private $category;
+
+	/**
 	 * @ORM\OneToMany(targetEntity="TherapeuticResults", mappedBy="therapeuticProcedure")
 	 */
 	private $results;
@@ -98,13 +103,23 @@ class TherapeuticProcedure extends AbstractProcedure
 		if( $this->cost ) {
 			return $this->cost;
 		}
-		
+
 		if( $this->concentration == 0 ) {
 			return 0;
 		}
 
 		return ( $this->dosage * $this->dosageInterval / $this->concentration ) * $this->costPerUnit * ($weight ? $weight : 1);
   }
+
+	public function setCategory($category) {
+		$this->category = $category;
+
+		return $this;
+	}
+
+	public function getCategory() {
+		return $this->category;
+	}
 
   public function addResult(\AppBundle\Entity\TherapeuticResults $result)
   {

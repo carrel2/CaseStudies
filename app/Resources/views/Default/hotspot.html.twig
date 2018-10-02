@@ -184,50 +184,56 @@
 		</div>
 	{% endif %}
 
-	<div class="column is-full">
-		<div class="box">
-			<p>Click the image below to perform a physical examination. Some results have soundbytes, click the <span class="icon has-text-success"><i class="far fa-play-circle"></i></span> to play them.</p>
-		</div>
-	</div>
-
-	<div class="column is-half-desktop">
-		<canvas id="canvas-default" style="background-image:url({{ asset( 'images/' ~ animal.image ) }}); background-size:contain;height:100%;width:100%;"></canvas>
-	</div>
-
-	<div id="checked" class="column is-half-desktop">
-		{% for spot in checked %}
-			<li id="hotspot-{{ spot.id }}">{{ spot.hasSound() ? ("<span class='icon has-text-success' onclick='this.firstChild.play()'><audio src='" ~ asset('sounds/' ~ spot.sound) ~ "'></audio><i class='far fa-play-circle'></i></span>")|raw : "" }}<em>{{ spot.hotspot.name }}:</em><span class="info"> {{ spot.info|raw }}</span></li>
-		{% endfor %}
-
-		{% for emptyHotspotInfo in userDay.emptyHotspotsInfo %}
-			<li id="hotspot-{{ emptyHotspotInfo.id }}">{{ emptyHotspotInfo.name }}: No information available</li>
-		{% endfor %}
-	</div>
-
-	{% if app.user.days|length == 1 %}
-		<div class="column is-half-desktop">
-			<label class="label asterisk" style="position: relative;" required>Estimated weight (kg)</label>
-
-			<div class="control has-icons-left">
-				<input id="estimated_weight" class="input" type="number" placeholder="Weight (kg)">
-
-				<span class="icon is-left">
-					<i class="fas fa-weight"></i>
-				</span>
+	{% if day.skip %}
+		<a class="button" href="{{ path('skipDay') }}">Continue</a>
+	{% else %}
+		<div class="column is-full">
+			<div class="box">
+				<p>Click the image below to perform a physical examination. Some results have soundbytes, click the <span class="icon has-text-success"><i class="far fa-play-circle"></i></span> to play them.</p>
 			</div>
 		</div>
-	{% endif %}
 
-	<div id="modal" class="modal">
-	</div>
+		<div class="column is-half-desktop">
+			<canvas id="canvas-default" style="background-image:url({{ asset( 'images/' ~ animal.image ) }}); background-size:contain;height:100%;width:100%;"></canvas>
+		</div>
+
+		<div id="checked" class="column is-half-desktop">
+			{% for spot in checked %}
+				<li id="hotspot-{{ spot.id }}">{{ spot.hasSound() ? ("<span class='icon has-text-success' onclick='this.firstChild.play()'><audio src='" ~ asset('sounds/' ~ spot.sound) ~ "'></audio><i class='far fa-play-circle'></i></span>")|raw : "" }}<em>{{ spot.hotspot.name }}:</em><span class="info"> {{ spot.info|raw }}</span></li>
+			{% endfor %}
+
+			{% for emptyHotspotInfo in userDay.emptyHotspotsInfo %}
+				<li id="hotspot-{{ emptyHotspotInfo.id }}">{{ emptyHotspotInfo.name }}: No information available</li>
+			{% endfor %}
+		</div>
+
+		{% if app.user.days|length == 1 %}
+			<div class="column is-half-desktop">
+				<label class="label asterisk" style="position: relative;" required>Estimated weight (kg)</label>
+
+				<div class="control has-icons-left">
+					<input id="estimated_weight" class="input" type="number" placeholder="Weight (kg)">
+
+					<span class="icon is-left">
+						<i class="fas fa-weight"></i>
+					</span>
+				</div>
+			</div>
+		{% endif %}
+
+		<div id="modal" class="modal">
+		</div>
+	{% endif %}
 {% endblock %}
 
 {% block footer %}
-	<div class="tabs">
-		<ul>
-			<li><a onclick="modal(event)">Continue</a></li>
-		</ul>
-	</div>
+	{% if not day.skip %}
+		<div class="tabs">
+			<ul>
+				<li><a onclick="modal(event)">Continue</a></li>
+			</ul>
+		</div>
+	{% endif %}
 
 	{{ parent() }}
 {% endblock %}

@@ -97,4 +97,14 @@ class DayController extends Controller
 
 		return $this->redirectToRoute('evaluation');
 	}
+
+	/**
+	 * @Route("/skipDay", name="skipDay")
+	 */
+	public function skipDayAction(Request $r) {
+		$this->getUser()->setCurrentProgress('review');
+		$this->getDoctrine()->getManager()->flush();
+
+		return $this->redirectToRoute('logic');
+	}
 }

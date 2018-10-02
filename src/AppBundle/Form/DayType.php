@@ -26,6 +26,12 @@ class DayType extends AbstractType
 					'disallowedContent' => 'button embed form iframe input link meta textarea video script',
 				),
 			))
+			->add('skip', null, array(
+				'label' => 'Skip day',
+				'label_attr' => array(
+					'class' => 'is-large',
+				)
+			))
 			->add('hotspotsinfo', 'Symfony\Component\Form\Extension\Core\Type\CollectionType', array(
 				'entry_type' => 'AppBundle\Form\HotspotType',
 				'entry_options' => array(

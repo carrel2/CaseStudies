@@ -35,7 +35,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         $username = $credentials['token'];
- 
+
         if (null === $username) {
             return;
         }

@@ -24,6 +24,11 @@ class Day
 	private $description;
 
 	/**
+	 * @ORM\Column(type="boolean")
+	 */
+	private $skip;
+
+	/**
 	 * @ORM\ManyToOne(targetEntity="CaseStudy", inversedBy="days")
 	 */
 	private $caseStudy;
@@ -82,6 +87,16 @@ class Day
 		$this->description = $description;
 
 		return $this;
+	}
+
+	public function setSkip($bool) {
+		$this->skip = $bool;
+
+		return $this;
+	}
+
+	public function getSkip() {
+		return $this->skip;
 	}
 
     public function setCaseStudy(\AppBundle\Entity\CaseStudy $caseStudy = null)

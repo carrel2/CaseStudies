@@ -33,6 +33,11 @@ class Animal
   private $image; // TODO: look into having multiple images associated with an Animal
 
   /**
+  * @ORM\ManyToOne(targetEntity="Category", inversedBy="animals")
+  */
+  private $category;
+
+  /**
   * @ORM\OneToMany(targetEntity="CaseStudy", mappedBy="animal")
   */
   private $cases;
@@ -75,6 +80,16 @@ class Animal
     public function getImage()
     {
         return $this->image;
+    }
+
+    public function setCategory($category) {
+      $this->category = $category;
+
+      return $this;
+    }
+
+    public function getCategory() {
+      return $this->category;
     }
 
     public function addCase(\AppBundle\Entity\CaseStudy $case)

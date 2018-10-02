@@ -278,12 +278,86 @@ function moveFooter() {
 	}
 }
 
-function updateSelects(type) {
-	$('select.' + type).each(function() {
-		var v = $(this).find(':selected').val();
+function submitNewCategory() {
+	if( this.previousSibling.value == "" ) { return; }
 
-		$('select.' + type + ' option[value="' + val + '"').addClass('is-hidden');
-	});
+	var xhttp = new XMLHttpRequest();
+
+	xhttp.onreadystatechange = function() {
+		if( this.readyState == 4 && this.status == 200 ) {
+			var selectContainer, holder;
+
+			selectContainer = document.getElementById("animal_category").parentNode;
+			holder = document.createElement("span");
+
+			holder.innerHTML = this.responseText;
+			selectContainer.innerHTML = holder.firstChild.firstChild.innerHTML;
+
+			selectContainer.style.display = "";
+			document.getElementById("add_category_container").style.display = "none";
+
+			updateSelect();
+		}
+	}
+
+	xhttp.open("GET", "/courses/cs/admin/category/add/" + this.previousSibling.value, true);
+	xhttp.send();
+
+	this.previousSibling.value = "";
+}
+
+function addNewCategory() {
+	if( this.value != "add" ) { return; }
+
+	this.parentNode.style.display = "none";
+	this.value = this.options[0].value;
+
+  var container = document.getElementById("add_category_container");
+
+  if( container == null ) {
+		container = document.createElement("DIV");
+		container.id = "add_category_container";
+
+		var input, submit, cancel;
+
+		input = document.createElement("INPUT");
+		input.type = "text";
+		input.className = "input";
+
+		submit = document.createElement("A");
+		submit.className = "button";
+		submit.innerHTML = "<span class='icon'><i class='fas fa-check'></i></span>";
+		submit.onclick = submitNewCategory;
+
+		cancel = document.createElement("A");
+		cancel.className = "button";
+		cancel.innerHTML = "<span class='icon'><i class='fas fa-times'></i></span>";
+		cancel.onclick = function() {
+			document.getElementById("add_category_container").style.display = "none";
+			document.querySelectorAll("[data-id=category]")[0].parentNode.style.display = "";
+			this.previousSibling.previousSibling.value = "";
+		}
+
+		container.appendChild(input);
+		container.appendChild(submit);
+		container.appendChild(cancel);
+
+		this.parentNode.parentNode.appendChild(container);
+	} else {
+		container.style.display = "block";
+	}
+}
+
+function updateSelect() {
+	var select = document.querySelectorAll("[data-id=category]")[0];
+	var option = document.createElement("OPTION");
+
+	option.value = "add";
+	option.innerHTML = "Add new category";
+
+	select.appendChild(option);
+
+	select.onchange = addNewCategory;
 }
 
 function checkForFileInputs() {

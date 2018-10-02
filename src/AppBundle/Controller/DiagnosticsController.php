@@ -19,6 +19,7 @@ class DiagnosticsController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		$user = $this->getUser();
 		$currentDay = $user->getCurrentDay();
+		$day = $user->getCaseStudy()->getDays()[count($user->getDays()) - 1];
 
 		if( !$user->getIsActive() || !in_array($user->getCurrentProgress(), ['evaluation', 'diagnostics']) ) {
 			return $this->redirectToRoute('default');
@@ -26,15 +27,13 @@ class DiagnosticsController extends Controller
 
 		$user->setCurrentProgress('diagnostics');
 
-		$form = $this->createForm( 'AppBundle\Form\DiagnosticsType' );
+		$form = $this->createForm( 'AppBundle\Form\DiagnosticsType', null, array('category' => $day->getCaseStudy()->getAnimal()->getCategory()->getId()) );
 
 		$form->handleRequest($r);
 
 		if( $form->isSubmitted() && $form->isValid() )
 		{
 			$tests = $form->getData()['diagnosticProcedure'];
-
-			$day = $user->getCaseStudy()->getDays()[count($user->getDays()) - 1];
 
 			foreach( $tests as $test )
 			{

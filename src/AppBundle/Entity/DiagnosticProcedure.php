@@ -19,6 +19,11 @@ class DiagnosticProcedure extends AbstractProcedure
 	private $id;
 
 	/**
+  * @ORM\ManyToOne(targetEntity="Category", inversedBy="diagnostics")
+  */
+  private $category;
+
+	/**
 	 * @ORM\OneToMany(targetEntity="DiagnosticResults", mappedBy="diagnosticProcedure")
 	 */
 	private $results;
@@ -32,6 +37,16 @@ class DiagnosticProcedure extends AbstractProcedure
   {
     return $this->id;
   }
+
+	public function setCategory($category) {
+		$this->category = $category;
+
+		return $this;
+	}
+
+	public function getCategory() {
+		return $this->category;
+	}
 
   public function addResult(\AppBundle\Entity\DiagnosticResults $result)
   {

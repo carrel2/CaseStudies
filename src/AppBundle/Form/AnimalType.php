@@ -22,6 +22,13 @@ class AnimalType extends AbstractType
           'class' => 'is-large asterisk',
         ),
       ))
+      ->add('category', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
+        'class' => 'AppBundle:Category',
+        'choice_label' => 'name',
+        'attr' => array(
+          'data-id' => 'category',
+        ),
+      ))
       ->add('submit', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
         'attr' => array('class' => 'is-success'),
       ));

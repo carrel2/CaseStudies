@@ -17,6 +17,7 @@ class TherapeuticsController extends Controller
 	{
 		$user = $this->getUser();
 		$currentDay = $user->getCurrentDay();
+		$day = $user->getCaseStudy()->getDays()[count($user->getDays()) - 1];
 
 		if( !$user->getIsActive() || $user->getCurrentProgress() != 'therapeutics' ) {
 			return $this->redirectToRoute('default');
@@ -24,7 +25,7 @@ class TherapeuticsController extends Controller
 
 		$weight = $user->getEstimatedWeight();
 
-		$form = $this->createForm( 'AppBundle\Form\TherapeuticsType' );
+		$form = $this->createForm( 'AppBundle\Form\TherapeuticsType', null, array('category' => $day->getCaseStudy()->getAnimal()->getCategory()->getId()) );
 
 		$form->handleRequest($r);
 
@@ -32,8 +33,6 @@ class TherapeuticsController extends Controller
 		{
 			$em = $this->getDoctrine()->getManager();
 			$medications = $form->getData()['therapeuticProcedure'];
-
-			$day = $user->getCaseStudy()->getDays()[count($user->getDays()) - 1];
 
 			$tCost = 0;
 
@@ -58,5 +57,19 @@ class TherapeuticsController extends Controller
 			'form' => $form->createView(),
 			'animal_weight' => $weight,
 		));
+	}
+
+	/**
+	 * @Route("/updateTherapeutics")
+	 */
+	function updateTherapeuticsAction(Request $r) {
+		$category = $this->getDoctrine()->getManager()->getRepository("AppBundle:Category")->findOneById(1);
+		foreach ($this->getDoctrine()->getManager()->getRepository("AppBundle:TherapeuticProcedure")->findAll() as $t) {
+			$t->setCategory($category);
+		}
+
+		$this->getDoctrine()->getManager()->flush();
+
+		return $this->redirectToRoute('default');
 	}
 }
