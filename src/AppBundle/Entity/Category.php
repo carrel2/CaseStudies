@@ -30,12 +30,12 @@ class Category
   private $animals;
 
   /**
-  * @ORM\OneToMany(targetEntity="DiagnosticProcedure", mappedBy="category")
+  * @ORM\ManyToMany(targetEntity="DiagnosticProcedure", mappedBy="categories")
   */
   private $diagnostics;
 
   /**
-  * @ORM\OneToMany(targetEntity="TherapeuticProcedure", mappedBy="category")
+  * @ORM\ManyToMany(targetEntity="TherapeuticProcedure", mappedBy="categories")
   */
   private $therapeutics;
 

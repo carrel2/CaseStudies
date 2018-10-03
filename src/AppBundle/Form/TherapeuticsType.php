@@ -23,7 +23,7 @@ class TherapeuticsType extends AbstractType
 				'label' => false,
 				'query_builder' => function(EntityRepository $er) use ($category) {
 					return $er->createQueryBuilder('t')
-					  ->where('t.category = :c')
+					  ->where(':c member of t.categories')
 						->setParameter('c', $category);
 				},
 				'choice_attr' => function(TherapeuticProcedure $t, $key, $index) {

@@ -10,8 +10,9 @@ class AbstractProcedureType extends AbstractType
 {
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
-    $builder->add('category', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
+    $builder->add('categories', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
       'class' => 'AppBundle:Category',
+      'multiple' => true,
       'choice_label' => 'name',
       'attr' => array(
         'data-id' => 'category',

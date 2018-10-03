@@ -19,9 +19,9 @@ class DiagnosticProcedure extends AbstractProcedure
 	private $id;
 
 	/**
-  * @ORM\ManyToOne(targetEntity="Category", inversedBy="diagnostics")
+  * @ORM\ManyToMany(targetEntity="Category", inversedBy="diagnostics")
   */
-  private $category;
+  private $categories;
 
 	/**
 	 * @ORM\OneToMany(targetEntity="DiagnosticResults", mappedBy="diagnosticProcedure")
@@ -38,14 +38,28 @@ class DiagnosticProcedure extends AbstractProcedure
     return $this->id;
   }
 
-	public function setCategory($category) {
-		$this->category = $category;
+	public function setCategories($categories) {
+		$this->categories = $categories;
 
 		return $this;
 	}
 
-	public function getCategory() {
-		return $this->category;
+	public function addCategory(\AppBundle\Entity\Category $category) {
+		if( !$this->categories->contains($category) ) {
+			$this->categories->add($category);
+		}
+
+		return $this;
+	}
+
+	public function removeCategory(\AppBundle\Entity\Category $category) {
+		$this->categories->removeElement($category);
+
+		return $this;
+	}
+
+	public function getCategories() {
+		return $this->categories;
 	}
 
   public function addResult(\AppBundle\Entity\DiagnosticResults $result)

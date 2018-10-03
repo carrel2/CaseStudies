@@ -39,9 +39,9 @@ class TherapeuticProcedure extends AbstractProcedure
 	protected $costPerUnit = "0";
 
 	/**
-  * @ORM\ManyToOne(targetEntity="Category", inversedBy="therapeutics")
+  * @ORM\ManyToMany(targetEntity="Category", inversedBy="therapeutics")
   */
-  private $category;
+  private $categories;
 
 	/**
 	 * @ORM\OneToMany(targetEntity="TherapeuticResults", mappedBy="therapeuticProcedure")
@@ -50,6 +50,7 @@ class TherapeuticProcedure extends AbstractProcedure
 
 	public function __construct()
 	{
+		$this->categories = new ArrayCollection();
 		$this->results = new ArrayCollection();
 	}
 
@@ -111,14 +112,28 @@ class TherapeuticProcedure extends AbstractProcedure
 		return ( $this->dosage * $this->dosageInterval / $this->concentration ) * $this->costPerUnit * ($weight ? $weight : 1);
   }
 
-	public function setCategory($category) {
-		$this->category = $category;
+	public function setCategories($categories) {
+		$this->categories = $categories;
 
 		return $this;
 	}
 
-	public function getCategory() {
-		return $this->category;
+	public function addCategory(\AppBundle\Entity\Category $category) {
+		if( !$this->categories->contains($category) ) {
+			$this->categories->add($category);
+		}
+
+		return $this;
+	}
+
+	public function removeCategory(\AppBundle\Entity\Category $category) {
+		$this->categories->removeElement($category);
+
+		return $this;
+	}
+
+	public function getCategories() {
+		return $this->categories;
 	}
 
   public function addResult(\AppBundle\Entity\TherapeuticResults $result)

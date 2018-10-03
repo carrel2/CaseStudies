@@ -23,7 +23,7 @@ class DiagnosticsType extends AbstractType
 				'label' => false,
 				'query_builder' => function(EntityRepository $er) use ($category) {
 					return $er->createQueryBuilder('d')
-					  ->where('d.category = :c')
+					  ->where(':c member of d.categories')
 						->setParameter('c', $category);
 				},
 				'choice_attr' => function(DiagnosticProcedure $d, $key, $index) {

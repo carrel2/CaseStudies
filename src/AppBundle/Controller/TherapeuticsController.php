@@ -65,7 +65,7 @@ class TherapeuticsController extends Controller
 	function updateTherapeuticsAction(Request $r) {
 		$category = $this->getDoctrine()->getManager()->getRepository("AppBundle:Category")->findOneById(1);
 		foreach ($this->getDoctrine()->getManager()->getRepository("AppBundle:TherapeuticProcedure")->findAll() as $t) {
-			$t->setCategory($category);
+			$t->addCategory($category);
 		}
 
 		$this->getDoctrine()->getManager()->flush();

@@ -68,4 +68,18 @@ class DiagnosticsController extends Controller
 			'animal_weight' => $weight,
 		));
 	}
+
+	/**
+	 * @Route("/updateDiagnostics")
+	 */
+	function updateDiagnosticsAction(Request $r) {
+		$category = $this->getDoctrine()->getManager()->getRepository("AppBundle:Category")->findOneById(1);
+		foreach ($this->getDoctrine()->getManager()->getRepository("AppBundle:DiagnosticProcedure")->findAll() as $d) {
+			$d->setCategory($category);
+		}
+
+		$this->getDoctrine()->getManager()->flush();
+
+		return $this->redirectToRoute('default');
+	}
 }
