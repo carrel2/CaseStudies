@@ -75,7 +75,7 @@ class DiagnosticsController extends Controller
 	function updateDiagnosticsAction(Request $r) {
 		$category = $this->getDoctrine()->getManager()->getRepository("AppBundle:Category")->findOneById(1);
 		foreach ($this->getDoctrine()->getManager()->getRepository("AppBundle:DiagnosticProcedure")->findAll() as $d) {
-			$d->setCategory($category);
+			$d->addCategory($category);
 		}
 
 		$this->getDoctrine()->getManager()->flush();
